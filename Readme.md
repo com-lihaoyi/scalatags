@@ -1,7 +1,9 @@
 ScalaTags
 =========
 
-ScalaTags is a tiny XML/HTML construction library for Scala. The core library is less than 200 lines of code, and the HTML-specific shortcuts add another 400 lines or so. XML fragments are represented in pure Scala, which means you have the full power of Scala to use in your templates, for better or for worse.
+ScalaTags is a small XML/HTML construction library for [Scala](http://www.scala-lang.org/). The core functionality of Scalatags is less than 200 lines of code, and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx).
+
+It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent is all yourself when you have someone else who has done it before you.
 
 ScalaTags takes fragments looking like this:
 
@@ -20,7 +22,6 @@ ScalaTags takes fragments looking like this:
             )
         )
     )
-
 
 And turns them into (X)HTML like this:
 
@@ -41,21 +42,12 @@ And turns them into (X)HTML like this:
 Why ScalaTags
 =============
 
-ScalaTags brings the following advantages:
+ScalaTags is inspired by the Play! Framework's [Twirl templates](https://github.com/spray/twirl), and ASP.NET's [Razor templates](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx). Like those, it takes the view that it is better to re-use the host language in your templates, rather than try to invent your own mini-language. Unlike Twirl and Razor, ScalaTags is an embedded DSL, not requiring any special parser or build step.
 
-- Extremely lightweight and no-magic
-- Tool support anywhere you have Scala support
-- Full power of Scala in your XML fragments
-- Statically typed: no more malformed HTML!
-- XSS free
-- Extremely Concise
-
-ScalaTags is inspired by the Play! Framework's Twirl templates, and ASP.NET's Razor templates. Like those, it takes the view that it is better to re-use the host language in your templates, rather than try to invent your own mini-language. Unlike Twirl and Razor, ScalaTags is an embedded DSL, not requiring any special parser or build step.
-
-The core of ScalaTags is less than 200 lines of Scala code. If you look at the fragment, it's actually really simple
+The core of ScalaTags is less than 200 lines of Scala code. If you look at the some tags from that fragment, it's actually really simple
 
     // div is a function-like object, whose apply() method taking
-    // multiple XML Node children  and returns an XML Node
+    // multiple XML Node children and returns an XML Node
     div(
         h1.id("title")("This is a title"),
     //	^	^		    ^
@@ -71,17 +63,21 @@ The core of ScalaTags is less than 200 lines of Scala code. If you look at the f
 
 Anyone who understands Scala should already understand all the concepts involved. This is in contrast to [some](http://jinja.pocoo.org/docs/templates/#) [other](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) templating systems, which have manuals dozens of pages long going over such specialized new concepts as [if statements](http://jinja.pocoo.org/docs/templates/#if), [loops](http://jinja.pocoo.org/docs/templates/#loop-controls) and [functions](http://jinja.pocoo.org/docs/templates/#macros).
 
-Since ScalaTags is pure Scala. This means that any IDE which understands Scala will understand ScalaTags. This means you get code completion:
+The functionality of these templating languages don't just end there, but grow to encompass their own special implementations of [inheritance](http://jinja.pocoo.org/docs/templates/#template-inheritance), [imports](http://jinja.pocoo.org/docs/templates/#import), [file loaders](http://jinja.pocoo.org/docs/api/#loaders). By that point, you may aswell use a full-fledged programming language, and receive tool support and all the other benefits that using a standard programming language gives you.
 
-!CodeCompletion.png
+Since ScalaTags is pure Scala. This means that any IDE which understands Scala will understand ScalaTags. This means you get syntax highlighting:
 
-and Error highlighting:
+![Code Completion in IntelliJ IDEA](https://github.com/lihaoyi/scalatags/blob/master/SyntaxHighlighting.png?raw=true)
 
-!ErrorHighlighting.png
+and Code Completion:
 
-And all the other good things you're used to in a statically typed language. No more messing around in templates which mess up the code completion of your HTML editor, or waiting months for the correct plugin to materialize.
+![Code Completion in IntelliJ IDEA](https://github.com/lihaoyi/scalatags/blob/master/ErrorHighlighting.png?raw=true)
 
-All strings (including variables) which are placed into the Scalatags are treated as strings, and automatically escaped when printed. This is 99% of the time what you want. The other 1% of the time, you simply use Scala's
+and Error Highlighting:
+
+![Error Highlighting in IntelliJ IDEA](https://github.com/lihaoyi/scalatags/blob/master/ErrorHighlighting.png?raw=true)
+
+And all the other good things (*jump to definition*, *extract method*, etc.) you're used to in a statically typed language. No more messing around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
 
 Examples
 ========
@@ -110,7 +106,7 @@ Hello World
     println(prettier.format(frag.toXML))
 
 
-Is a complete, executable scala script. executing it prints out:
+Is a complete, executable Scala script. executing it prints out:
 
     <html>
         <head>
@@ -354,8 +350,7 @@ prints
 Unsanitized Input
 -----------------
 
-If you *really* want, for whatever reason, to put unsanitized input into your
-XML, simply use scala's Unparsed function:
+If you *really* want, for whatever reason, to put unsanitized input into your XML, simply use scala's Unparsed function:
 
     import scalatags.XTags._
     import xml.Unparsed
@@ -374,6 +369,7 @@ XML, simply use scala's Unparsed function:
 
     val prettier = new scala.xml.PrettyPrinter(80, 4)
     println(prettier.format(frag.toXML))
+
 prints
 
     <html>
@@ -386,4 +382,53 @@ prints
         </body>
     </html>
 
-This makes it easy to accidentally open up XSS holes and what not, but if you know what you're doing, then go ahead.
+Although this makes it easy to open up XSS holes, if you know what you're doing, go ahead.
+
+Inheritance
+-----------
+
+Although most of the time, functions are sufficient to keep things DRY, if you for some reason want to use inheritance to structure your code, you probably already know how to do so. It's just Scala, and it behaves as you'd expect.
+
+    import scalatags.XTags._
+
+    class Parent{
+      def render = html(
+        headFrag,
+        bodyFrag
+
+      )
+      def headFrag = head(
+        script("some script")
+      )
+      def bodyFrag = body(
+        h1("This is my title"),
+        div(
+          p("This is my first paragraph"),
+          p("This is my second paragraph")
+        )
+      )
+    }
+
+    class Child extends Parent{
+      override def headFrag = head(
+        script("some other script")
+      )
+    }
+
+    val prettier = new scala.xml.PrettyPrinter(80, 4)
+    println(prettier.format(new Child().render.toXML))
+
+prints
+
+    <html>
+        <head>
+            <script>some other script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <p>This is my first paragraph</p>
+                <p>This is my second paragraph</p>
+            </div>
+        </body>
+    </html>
