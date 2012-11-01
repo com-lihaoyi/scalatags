@@ -455,7 +455,9 @@ It looks pretty terrible. This is due to two reasons:
 - ScalaTags excels at use cases where there is a lot of repetitive structural XML/HTML tags to DRY up, since you have the full power of Scala's language constructs to refactor and extract common patterns in your code. However, in prose, you usually only have a minimal amount of tag duplication, so this benefit doesn't apply.
 - Since it is implemented in pure Scala, it is the *text* which needs to be quoted, in contrast to XML where it's the *tags* which need to be marked out by `< >`. This means that the syntax is *lighter* when you have lots of tags, but *heavier* when you have lots of fragments of text.
 
-This means that ScalaTags will naturally be more verbose when trying to express text-heavy things like blogs or wikis. The solution? Use [Markdown](http://en.wikipedia.org/wiki/Markdown) or [Textile](http://en.wikipedia.org/wiki/Textile_(markup_language)) to mark up those sections, and save ScalaTags for the heavy structural parts.
+This means that ScalaTags will naturally be more verbose when trying to express text-heavy things like blogs or wikis. Furthermore, because ScalaTags is pure Scala, running untrusted ScalaTags is a big security hole, and the need to compile it every time makes it unfeasible to use it for user-editable content.
+
+The solution? Use [Markdown](http://en.wikipedia.org/wiki/Markdown) or [Textile](http://en.wikipedia.org/wiki/Textile_(markup_language)) or even plain XML to mark up those sections, and save ScalaTags for the heavy structural parts where you can really enjoy the benefits in static checking and DRY.
 
 
 
