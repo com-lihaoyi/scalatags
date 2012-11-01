@@ -1,9 +1,6 @@
 h1. ScalaTags 
 
-ScalaTags is a tiny XML/HTML construction library for Scala. The core library 
-is less than 200 lines of code, and the HTML-specific shortcuts add another 
-400 lines or so. XML fragments are represented in pure Scala, which means you
-have the full power of Scala to use in your templates, for better or for worse.
+ScalaTags is a tiny XML/HTML construction library for Scala. The core library is less than 200 lines of code, and the HTML-specific shortcuts add another 400 lines or so. XML fragments are represented in pure Scala, which means you have the full power of Scala to use in your templates, for better or for worse.
 
 ScalaTags takes fragments looking like this:
 
@@ -52,14 +49,9 @@ ScalaTags brings the following advantages:
 - XSS free
 - Extremely Concise
 
-ScalaTags is inspired by the Play! Framework's Twirl templates, and ASP.NET's 
-Razor templates. Like those, it takes the view that it is better to re-use the
-host language in your templates, rather than try to invent your own 
-mini-language. Unlike Twirl and Razor, ScalaTags is an embedded DSL, not
-requiring any special parser or build step.
+ScalaTags is inspired by the Play! Framework's Twirl templates, and ASP.NET's Razor templates. Like those, it takes the view that it is better to re-use the host language in your templates, rather than try to invent your own mini-language. Unlike Twirl and Razor, ScalaTags is an embedded DSL, not requiring any special parser or build step.
 
-The core of ScalaTags is less than 200 lines of Scala code. If you look at the 
-fragment, it's actually really simple
+The core of ScalaTags is less than 200 lines of Scala code. If you look at the fragment, it's actually really simple
 
 <pre><code>
 
@@ -80,16 +72,9 @@ fragment, it's actually really simple
 
 </code></pre>
 
-Anyone who understands Scala should already understand all the concepts 
-involved. This is in contrast to "some":http://jinja.pocoo.org/docs/templates/#
-"other":http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts
-templating systems, which have manuals dozens of pages long going over such
-specialized new concepts as "if statements":http://jinja.pocoo.org/docs/templates/#if,
-"loops":http://jinja.pocoo.org/docs/templates/#loop-controls and
-"functions":http://jinja.pocoo.org/docs/templates/#macros.
+Anyone who understands Scala should already understand all the concepts involved. This is in contrast to "some":http://jinja.pocoo.org/docs/templates/# "other":http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts templating systems, which have manuals dozens of pages long going over such specialized new concepts as "if statements":http://jinja.pocoo.org/docs/templates/#if, "loops":http://jinja.pocoo.org/docs/templates/#loop-controls and "functions":http://jinja.pocoo.org/docs/templates/#macros.
 
-Since ScalaTags is pure Scala. This means that any IDE which understands Scala will 
-understand ScalaTags. This means you get code completion:
+Since ScalaTags is pure Scala. This means that any IDE which understands Scala will understand ScalaTags. This means you get code completion:
 
 !CodeCompletion.png
 
@@ -97,13 +82,9 @@ and Error highlighting:
 
 !ErrorHighlighting.png
 
-And all the other good things you're used to in a statically typed language.
-No more messing around in templates which mess up the code completion of your
-HTML editor, or waiting months for the correct plugin to materialize.
+And all the other good things you're used to in a statically typed language. No more messing around in templates which mess up the code completion of your HTML editor, or waiting months for the correct plugin to materialize.
 
-All strings (including variables) which are placed into the Scalatags are
-treated as strings, and automatically escaped when printed. This is 99% of the
-time what you want. The other 1% of the time, you simply use Scala's
+All strings (including variables) which are placed into the Scalatags are treated as strings, and automatically escaped when printed. This is 99% of the time what you want. The other 1% of the time, you simply use Scala's
 
 h1. Examples
 
@@ -174,8 +155,7 @@ h2. Variables
     println(prettier.format(frag.toXML))
 </code></pre>
 
-Variables can be inserted into the templates as Strings, simply by adding them
-to an element's children. This prints
+Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints
 
 <pre><code>
     <html>
@@ -194,11 +174,7 @@ to an element's children. This prints
 
 h2. Control Flow
 
-Like most other XML templating languages, ScalaTags contains control flow
-statements like `if` and `for`. Unlike other templating languages which have
-their own "crufty little programming language embedded inside them for control
-flow":http://jinja.pocoo.org/docs/templates/#list-of-control-structures,
-you probably already know how to use ScalaTags' control flow syntax:
+Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own "crufty little programming language embedded inside them for control flow":http://jinja.pocoo.org/docs/templates/#list-of-control-structures, you probably already know how to use ScalaTags' control flow syntax:
 
 <pre><code>
     import scalatags.XTags._
@@ -264,11 +240,7 @@ This prints out:
 
 h2. Functions
 
-Many other templating systems define
-"incredibly":http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials
-"roundabout":http://jinja.pocoo.org/docs/templates/#macros ways of creating
-re-usable parts of the template. In ScalaTags, we don't need to re-invent the
-wheel, because scala has these amazing things called *functions*:
+Many other templating systems define "incredibly":http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials "roundabout":http://jinja.pocoo.org/docs/templates/#macros ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because scala has these amazing things called *functions*:
 
 <pre><code>
     import scalatags.XTags._
@@ -336,10 +308,7 @@ prints
 
 h2. Layouts
 
-Again, this is something that many other templating languages have their own
-"special":http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts
-"implementations":http://jinja.pocoo.org/docs/templates/#template-inheritance of.
-In ScalaTags, this can be done simply by just using functions:
+Again, this is something that many other templating languages have their own "special":http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts "implementations":http://jinja.pocoo.org/docs/templates/#template-inheritance of. In ScalaTags, this can be done simply by just using functions:
 
 <pre><code>
     import scalatags.XTags._
@@ -431,5 +400,4 @@ prints
     </html>
 </code></pre>
 
-This makes it easy to accidentally open up XSS holes and what not, but if you
-know what you're doing, then go ahead.
+This makes it easy to accidentally open up XSS holes and what not, but if you know what you're doing, then go ahead.
