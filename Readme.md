@@ -69,7 +69,7 @@ The core of ScalaTags is less than 200 lines of Scala code. If you look at the f
         p("This is a big paragraph of text")
     )
 
-Anyone who understands Scala should already understand all the concepts involved. This is in contrast to "some":http://jinja.pocoo.org/docs/templates/# "other":http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts templating systems, which have manuals dozens of pages long going over such specialized new concepts as "if statements":http://jinja.pocoo.org/docs/templates/#if, "loops":http://jinja.pocoo.org/docs/templates/#loop-controls and "functions":http://jinja.pocoo.org/docs/templates/#macros.
+Anyone who understands Scala should already understand all the concepts involved. This is in contrast to [some](http://jinja.pocoo.org/docs/templates/#) [other](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) templating systems, which have manuals dozens of pages long going over such specialized new concepts as [if statements](http://jinja.pocoo.org/docs/templates/#if), [loops](http://jinja.pocoo.org/docs/templates/#loop-controls) and [functions](http://jinja.pocoo.org/docs/templates/#macros).
 
 Since ScalaTags is pure Scala. This means that any IDE which understands Scala will understand ScalaTags. This means you get code completion:
 
@@ -170,7 +170,7 @@ Variables can be inserted into the templates as Strings, simply by adding them t
 Control Flow
 ------------
 
-Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own "crufty little programming language embedded inside them for control flow":http://jinja.pocoo.org/docs/templates/#list-of-control-structures, you probably already know how to use ScalaTags' control flow syntax:
+Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own [crufty little programming language embedded inside them for control flow](http://jinja.pocoo.org/docs/templates/#list-of-control-structures), you probably already know how to use ScalaTags' control flow syntax:
 
     import scalatags.XTags._
 
@@ -234,7 +234,7 @@ This prints out:
 Functions
 ---------
 
-Many other templating systems define "incredibly":http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials "roundabout":http://jinja.pocoo.org/docs/templates/#macros ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because scala has these amazing things called *functions*:
+Many other templating systems define [incredibly](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials) [roundabout](http://jinja.pocoo.org/docs/templates/#macros) ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because scala has these amazing things called *functions*:
 
     import scalatags.XTags._
 
@@ -301,7 +301,7 @@ prints
 Layouts
 -------
 
-Again, this is something that many other templating languages have their own "special":http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts "implementations":http://jinja.pocoo.org/docs/templates/#template-inheritance of. In ScalaTags, this can be done simply by just using functions:
+Again, this is something that many other templating languages have their own [special](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) [implementations](http://jinja.pocoo.org/docs/templates/#template-inheritance) of. In ScalaTags, this can be done simply by just using functions:
 
     import scalatags.XTags._
 
