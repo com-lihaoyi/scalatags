@@ -16,7 +16,7 @@ val frag =
     ),
     Seq(
       p("This is the first ", b("image"), " displayed on the ", a("site")),
-      img("www.myImage.com/image.jpg"),
+      img.src("www.myImage.com/image.jpg"),
       p("blah blah blah i am text")
     )
   )

@@ -82,7 +82,7 @@ And all the other good things (<em>jump to definition</em>, *extract method*, et
 Examples
 ========
 
-These are a bunch of simple examples to get you started using ScalaTags
+This is a bunch of simple examples to get you started using ScalaTags. Essentially, each fragment has a `.toXML` method, which turns it into a normal scala XML data structure. You can serialize it, prettyprint it, and in general do whatever you want. It's just XML.
 
 Hello World
 -----------
@@ -317,7 +317,7 @@ Again, this is something that many other templating languages have their own [sp
         ),
         Seq(
           p("This is the first ", b("image"), " displayed on the ", a("site")),
-          img("www.myImage.com/image.jpg"),
+          img.src("www.myImage.com/image.jpg"),
           p("blah blah blah i am text")
         )
       )
@@ -341,7 +341,7 @@ prints
                     displayed on the
                     <a>site</a>
                 </p>
-                <img>www.myImage.com/image.jpg</img>
+                <img src="www.myImage.com/image.jpg"/>
                 <p>blah blah blah i am text</p>
             </div>
         </body>
