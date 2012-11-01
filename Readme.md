@@ -438,17 +438,17 @@ What ScalaTags is Bad at
 
 ScalaTags is pretty terrible to use for marking up prose, for example to use in a blog:
 
-  p(
-    "A long ", b("long"), "time ago, in a galaxy", br(),
-    "far far away...."
-  ),
-  h1("STAR WARS"),
-  h2("Episode VI"),
-  p(
-    "It is a period of ", em("civil war"), ". Rebel spaceships, striking",
-    "from a hidden base, have won their first victory against",
-    "the ", i("evil"), " galactic empire"
-  )
+    p(
+      "A long ", b("long"), "time ago, in a galaxy", br(),
+      "far far away...."
+    ),
+    h1("STAR WARS"),
+    h2("Episode VI"),
+    p(
+      "It is a period of ", em("civil war"), ". Rebel spaceships, striking",
+      "from a hidden base, have won their first victory against",
+      "the ", i("evil"), " galactic empire"
+    )
 
 It looks pretty terrible. This is due to two reasons:
 
