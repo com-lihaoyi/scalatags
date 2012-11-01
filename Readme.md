@@ -457,4 +457,4 @@ It looks pretty terrible. This is due to two reasons:
 
 This means that ScalaTags will naturally be more verbose when trying to express text-heavy things like blogs or wikis. Furthermore, because ScalaTags is pure Scala, running untrusted ScalaTags is a big security hole, and the need to compile it every time makes it unfeasible to use it for user-editable content.
 
-The solution? Use [Markdown](http://en.wikipedia.org/wiki/Markdown) or [Textile](http://en.wikipedia.org/wiki/Textile_(markup_language)) or even plain XML to mark up those sections, and save ScalaTags for the heavy structural parts where you can really enjoy the benefits in static checking and DRY.
+The solution? Use [Markdown](http://en.wikipedia.org/wiki/Markdown) or [Textile](http://en.wikipedia.org/wiki/Textile_(markup_language) ) or even plain XML to mark up those sections, and save ScalaTags for the heavy structural parts where you can really enjoy the benefits in static checking and DRY.
