@@ -71,7 +71,7 @@ Since ScalaTags is pure Scala. This means that any IDE which understands Scala w
 
 and Code Completion:
 
-![Code Completion in IntelliJ IDEA](https://github.com/lihaoyi/scalatags/blob/master/ErrorHighlighting.png?raw=true)
+![Code Completion in IntelliJ IDEA](https://github.com/lihaoyi/scalatags/blob/master/CodeCompletion.png?raw=true)
 
 and Error Highlighting:
 
