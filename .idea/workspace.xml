@@ -94,10 +94,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Readme.textile" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Readme.textile">
+      <file leaf-file-name="Readme.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="384" column="7" selection-start="10116" selection-end="10304" vertical-scroll-proportion="0.8953975">
+            <state line="369" column="8" selection-start="10651" selection-end="10651" vertical-scroll-proportion="0.47698745">
               <folding />
             </state>
           </provider>
@@ -164,6 +164,7 @@
         <option value="$PROJECT_DIR$/examples/HigherOrderFunctions.scala" />
         <option value="$PROJECT_DIR$/examples/Unparsed.scala" />
         <option value="$PROJECT_DIR$/Readme.textile" />
+        <option value="$PROJECT_DIR$/Readme.md" />
       </list>
     </option>
   </component>
@@ -806,9 +807,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Readme.textile">
+    <entry file="file://$PROJECT_DIR$/Readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="384" column="7" selection-start="10116" selection-end="10304" vertical-scroll-proportion="0.8953975">
+        <state line="369" column="8" selection-start="10651" selection-end="10651" vertical-scroll-proportion="0.47698745">
           <folding />
         </state>
       </provider>
