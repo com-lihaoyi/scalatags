@@ -7,7 +7,7 @@ have the full power of Scala to use in your templates, for better or for worse.
 
 ScalaTags takes fragments looking like this:
 
-<pre>
+.bc
 	html(
 		head(
 			script.src("..."),
