@@ -3,7 +3,7 @@ ScalaTags
 
 ScalaTags is a small XML/HTML construction library for [Scala](http://www.scala-lang.org/). The core functionality of Scalatags is less than 200 lines of code, and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx).
 
-It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent is all yourself when you have someone else who has done it before you.
+It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent them all yourself when you have someone else who has done it before you.
 
 ScalaTags takes fragments looking like this:
 
@@ -61,7 +61,7 @@ The core of ScalaTags is less than 200 lines of Scala code. If you look at the s
         p("This is a big paragraph of text")
     )
 
-Anyone who understands Scala should already understand all the concepts involved. This is in contrast to [some](http://jinja.pocoo.org/docs/templates/#) [other](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) templating systems, which have manuals dozens of pages long going over such specialized new concepts as [if statements](http://jinja.pocoo.org/docs/templates/#if), [loops](http://jinja.pocoo.org/docs/templates/#loop-controls) and [functions](http://jinja.pocoo.org/docs/templates/#macros).
+Anyone who understands Scala should already understand all the concepts involved. This is in contrast to [some](http://jinja.pocoo.org/docs/templates/#) [other](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) templating systems, which have manuals dozens of pages long going over their own special implementations of concepts as [if statements](http://jinja.pocoo.org/docs/templates/#if), [loops](http://jinja.pocoo.org/docs/templates/#loop-controls) and [functions](http://jinja.pocoo.org/docs/templates/#macros).
 
 The functionality of these templating languages don't just end there, but grow to encompass their own special implementations of [inheritance](http://jinja.pocoo.org/docs/templates/#template-inheritance), [imports](http://jinja.pocoo.org/docs/templates/#import), [file loaders](http://jinja.pocoo.org/docs/api/#loaders). By that point, you may aswell use a full-fledged programming language, and receive tool support and all the other benefits that using a standard programming language gives you.
 
@@ -77,7 +77,7 @@ and Error Highlighting:
 
 ![Error Highlighting in IntelliJ IDEA](https://github.com/lihaoyi/scalatags/blob/master/ErrorHighlighting.png?raw=true)
 
-And all the other good things (*jump to definition*, *extract method*, etc.) you're used to in a statically typed language. No more messing around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
+And all the other good things (<em>jump to definition</em>, *extract method*, etc.) you're used to in a statically typed language. No more messing around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
 
 Examples
 ========
@@ -230,7 +230,7 @@ This prints out:
 Functions
 ---------
 
-Many other templating systems define [incredibly](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials) [roundabout](http://jinja.pocoo.org/docs/templates/#macros) ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because scala has these amazing things called *functions*:
+Many other templating systems define [incredibly](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials) [roundabout](http://jinja.pocoo.org/docs/templates/#macros) ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because Scala has these amazing things called *functions*:
 
     import scalatags.XTags._
 
@@ -432,3 +432,32 @@ prints
             </div>
         </body>
     </html>
+
+What ScalaTags is Bad at
+========================
+
+ScalaTags is pretty terrible to use for marking up prose, for example to use in a blog:
+
+  p(
+    "A long ", b("long"), "time ago, in a galaxy", br(),
+    "far far away...."
+  ),
+  h1("STAR WARS"),
+  h2("Episode VI"),
+  p(
+    "It is a period of ", em("civil war"), ". Rebel spaceships, striking",
+    "from a hidden base, have won their first victory against",
+    "the ", i("evil"), " galactic empire"
+  )
+
+It looks pretty terrible. This is due to two reasons:
+
+- ScalaTags excels at use cases where there is a lot of repetitive structural XML/HTML tags to DRY up, since you have the full power of Scala's language constructs to refactor and extract common patterns in your code. However, in prose, you usually only have a minimal amount of tag duplication, so this benefit doesn't apply.
+- Since it is implemented in pure Scala, it is the *text* which needs to be quoted, in contrast to XML where it's the *tags* which need to be marked out by `< >`. This means that the syntax is *lighter* when you have lots of tags, but *heavier* when you have lots of fragments of text.
+
+This means that ScalaTags will naturally be more verbose when trying to express text-heavy things like blogs or wikis. The solution? Use [Markdown](http://en.wikipedia.org/wiki/Markdown) or [Textile](http://en.wikipedia.org/wiki/Textile_(markup_language)) to mark up those sections, and save ScalaTags for the heavy structural parts.
+
+
+
+This is
+
