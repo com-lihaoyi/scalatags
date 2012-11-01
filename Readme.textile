@@ -7,7 +7,7 @@ have the full power of Scala to use in your templates, for better or for worse.
 
 ScalaTags takes fragments looking like this:
 
-.bc
+<pre>
 	html(
 		head(
 			script.src("..."),
@@ -61,6 +61,8 @@ requiring any special parser or build step.
 The core of ScalaTags is less than 200 lines of Scala code. If you look at the 
 fragment, it's actually really simple
 
+<pre><code>
+
 	// div is a function-like object, whose apply() method taking
 	// multiple XML Node children  and returns an XML Node
     div( 
@@ -75,6 +77,8 @@ fragment, it's actually really simple
 	//	| h1 is also a function-like object, just like div
 		p("This is a big paragraph of text")
 	)
+
+</code></pre>
 
 Anyone who understands Scala should already understand all the concepts 
 involved. This is in contrast to "some":http://jinja.pocoo.org/docs/templates/#
@@ -107,6 +111,7 @@ These are a bunch of simple examples to get you started using ScalaTags
 
 h2. Hello World
 
+<pre><code>
     import scalatags.XTags._
 
     val frag = html(
@@ -124,9 +129,11 @@ h2. Hello World
 
     val prettier = new scala.xml.PrettyPrinter(80, 4)
     println(prettier.format(frag.toXML))
+</code></pre>
 
 Is a complete, executable scala script. executing it prints out:
 
+<pre><code>
     <html>
         <head>
             <script>some script</script>
@@ -139,9 +146,11 @@ Is a complete, executable scala script. executing it prints out:
             </div>
         </body>
     </html>
+</code></pre>
 
 h2. Variables
 
+<pre><code>
     import scalatags.XTags._
 
     val title = "title"
@@ -163,10 +172,12 @@ h2. Variables
 
     val prettier = new scala.xml.PrettyPrinter(80, 4)
     println(prettier.format(frag.toXML))
+</code></pre>
 
 Variables can be inserted into the templates as Strings, simply by adding them
 to an element's children. This prints
 
+<pre><code>
     <html>
         <head>
             <script>some script</script>
@@ -179,6 +190,7 @@ to an element's children. This prints
             </div>
         </body>
     </html>
+</code></pre>
 
 h2. Control Flow
 
@@ -188,6 +200,7 @@ their own "crufty little programming language embedded inside them for control
 flow":http://jinja.pocoo.org/docs/templates/#list-of-control-structures,
 you probably already know how to use ScalaTags' control flow syntax:
 
+<pre><code>
     import scalatags.XTags._
 
     val numVisitors = 1023
@@ -220,9 +233,11 @@ you probably already know how to use ScalaTags' control flow syntax:
 
     val prettier = new scala.xml.PrettyPrinter(80, 4)
     println(prettier.format(frag.toXML))
+</code></pre>
 
 This prints out:
 
+<pre><code>
     <html>
         <head>
             <script>some script</script>
@@ -245,6 +260,7 @@ This prints out:
             <p>No more posts!</p>
         </body>
     </html>
+</code></pre>
 
 h2. Functions
 
@@ -254,6 +270,7 @@ Many other templating systems define
 re-usable parts of the template. In ScalaTags, we don't need to re-invent the
 wheel, because scala has these amazing things called *functions*:
 
+<pre><code>
     import scalatags.XTags._
 
     val numVisitors = 1023
@@ -287,9 +304,11 @@ wheel, because scala has these amazing things called *functions*:
 
     val prettier = new scala.xml.PrettyPrinter(80, 4)
     println(prettier.format(frag.toXML))
+</code></pre>
 
 prints
 
+<pre><code>
     <html>
         <head>
             <script>some script</script>
@@ -313,6 +332,7 @@ prints
             </div>
         </body>
     </html>
+</code></pre>
 
 h2. Layouts
 
@@ -321,6 +341,7 @@ Again, this is something that many other templating languages have their own
 "implementations":http://jinja.pocoo.org/docs/templates/#template-inheritance of.
 In ScalaTags, this can be done simply by just using functions:
 
+<pre><code>
     import scalatags.XTags._
 
     def page(scripts: Seq[XNode], content: Seq[XNode]) =
@@ -346,9 +367,11 @@ In ScalaTags, this can be done simply by just using functions:
 
     val prettier = new scala.xml.PrettyPrinter(80, 4)
     println(prettier.format(frag.toXML))
+</code></pre>
 
 prints
 
+<pre><code>
     <html>
         <head>
             <script>some script</script>
@@ -367,12 +390,14 @@ prints
             </div>
         </body>
     </html>
+</code></pre>
 
 h2. Unsanitized Input
 
 If you *really* want, for whatever reason, to put unsanitized input into your
 XML, simply use scala's Unparsed function:
 
+<pre><code>
     import scalatags.XTags._
     import xml.Unparsed
 
@@ -387,9 +412,11 @@ XML, simply use scala's Unparsed function:
         Unparsed(input)
       )
     )
+</code></pre>
 
 prints
 
+<pre><code>
     val prettier = new scala.xml.PrettyPrinter(80, 4)
     println(prettier.format(frag.toXML))
 
@@ -402,6 +429,7 @@ prints
             <p>i am a cow</p>
         </body>
     </html>
+</code></pre>
 
 This makes it easy to accidentally open up XSS holes and what not, but if you
 know what you're doing, then go ahead.
