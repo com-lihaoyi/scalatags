@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="org.scalatest:scalatest_2.10.0-M7:2.0.M4-2.10.0-M7-B1" type="repository">
+    <properties maven-id="org.scalatest:scalatest_2.10.0-M7:2.0.M4-2.10.0-M7-B1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/scalatest_2.10.0-M7-2.0.M4-2.10.0-M7-B1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-library-2.10.0-M7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/scalatest_2.10.0-M7-2.0.M4-2.10.0-M7-B1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-library-2.10.0-M7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/scalatest_2.10.0-M7-2.0.M4-2.10.0-M7-B1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-library-2.10.0-M7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
