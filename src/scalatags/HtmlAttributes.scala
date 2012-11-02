@@ -59,6 +59,7 @@ trait HtmlAttributes{ this: XTags.type =>
     def cursor(v: String) = css("cursor" -> v)
     def display(v: String) = css("display" -> v)
     def float(v: String) = css("float" -> v)
+    def opacity(v: Double) = css("opacity" -> v.toString)
     def opacity(v: String) = css("opacity" -> v)
     def z_index(v: String) = css("z-index" -> v)
     def clear(v: String) = css("clear" -> v)
@@ -119,4 +120,6 @@ trait HtmlAttributes{ this: XTags.type =>
     def w(v: Dim) = width(v)
 
     def center = this.margin_left("auto").margin_right("auto")  }
+
+
 }

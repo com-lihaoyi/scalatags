@@ -433,6 +433,132 @@ prints
         </body>
     </html>
 
+Attributes
+----------
+
+You may already have noticed some use of `.id()` and `.src()` methods in the previous code. In general, any attribute can be set on a tag via the `.attr()` method:
+
+    import scalatags.XTags._
+
+    val frag = html(
+      head(
+        script("some script")
+      ),
+      body(
+        h1("This is my title"),
+        div(
+          p.attr("onclick" -> "... do some js")(
+            "This is my first paragraph"
+          ),
+          a.attr("href" -> "www.google.com")(
+            p("Goooogle")
+          )
+        )
+      )
+    )
+
+    val prettier = new scala.xml.PrettyPrinter(80, 4)
+    println(prettier.format(frag.toXML))
+
+However, the most common HTML attributes all have shortcut methods. For example, `.id(...)` is the shortcut for `.attr("id"->...)`, and helps reduce the verbosity and ensure correctness (typos won't compile) for the common use case. So the following is identical:
+
+    import scalatags.XTags._
+
+    val frag = html(
+      head(
+        script("some script")
+      ),
+      body(
+        h1("This is my title"),
+        div(
+          p.onclick("... do some js")(
+            "This is my first paragraph"
+          ),
+          a.href("www.google.com")(
+            p("Goooogle")
+          )
+        )
+      )
+    )
+
+    val prettier = new scala.xml.PrettyPrinter(80, 4)
+    println(prettier.format(frag.toXML))
+
+Both of these print the same thing:
+
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <p onclick="... do some js">This is my first paragraph</p>
+                <a href="www.google.com">
+                    <p>Goooogle</p>
+                </a>
+            </div>
+        </body>
+    </html>
+
+CSS & Classes
+-------------
+
+In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style). This means that it is handy to have more operations than just *set class to something*.
+
+Scalatags thus provides the following methods on all tags:
+
+- `.cls(s: String*)`: append the given class(es) onto the existing list of classes
+- `.css(s: (String, String)*)`: append the given tuple(s) onto the list of styles
+
+Furthermore, just as ScalaTags provides shortcut methods for all common attributes, it also provides shortcut methods for all common css styles. For example
+
+- .opacity(s: String)
+- .position(s: String)
+
+to save typing and add static checking in the common case. There are also some overloads for the numeric css styles (e.g. `.opacity(d: Double)`). So the following:
+
+import scalatags.XTags._
+
+    val frag = html(
+      head(
+        script("some script")
+      ),
+      body(
+        h1.css("color" -> "red", "background-color" -> "blue")("This is my title"),
+        div.color("red").background_color("blue")(
+          p.cls("contentpara", "first")(
+            "This is my first paragraph"
+          ),
+          a.opacity(0.9)(
+            p.cls("contentpara")("Goooogle")
+          )
+        )
+      )
+    )
+
+    val prettier = new scala.xml.PrettyPrinter(80, 4)
+    println(prettier.format(frag.toXML))
+
+prints
+
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1 style="background-color:blue">This is my title</h1>
+            <div style="color:red background-color:blue">
+                <p class="contentpara first">This is my first paragraph</p>
+                <a style="opacity:0.9">
+                    <p class="contentpara">Goooogle</p>
+                </a>
+            </div>
+        </body>
+    </html>
+
+A full list of the shortcut methods (for both attributes and styles) can be found in `HtmlAttributes.scala`
+
 What ScalaTags is Bad at
 ========================
 

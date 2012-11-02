@@ -80,40 +80,7 @@ class XTagsTest extends FreeSpec{
       </html>
     )
   }
-  "lazy tags" in {
-    var n = 0
-    var s = "lol"
-    val tree = html(
-      head(
-        script(
-          () => s
-        )
-      ),
-      body(
-        () => n.toString
-      )
-    )
-    xmlCheck(
-      tree,
-      <html>
-        <head>
-          <script>lol</script>
-        </head>
-        <body>0</body>
-      </html>
-    )
-    n = 10
-    s = "omg"
-    xmlCheck(
-      tree,
-      <html>
-        <head>
-          <script>omg</script>
-        </head>
-        <body>10</body>
-      </html>
-    )
-  }
+
 
   /**
    * This test uses XTags to generate a large block of HTML. The

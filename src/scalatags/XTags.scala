@@ -3,7 +3,7 @@ package scalatags
 
 
 import scala.xml._
-object XTags extends HtmlAttributes with HtmlTags{
+object XTags extends HtmlAttributes with HtmlTags with HtmlHelpers{
 
   trait XNode{
     def toXML(): NodeSeq
@@ -23,7 +23,6 @@ object XTags extends HtmlAttributes with HtmlTags{
   def flattenChildren(c: Seq[XNode]) = c.flatMap(_.toXML()).foldLeft(Seq[Node]()){ (l, r) =>
     (l, r) match {
       case (rest :+ (lt: Text), rt: Text) =>
-        println("COMBINE")
         rest :+ Text(lt.text + rt.text)
       case _ => l :+ r
     }
@@ -46,9 +45,6 @@ object XTags extends HtmlAttributes with HtmlTags{
     }
   }
 
-
-
-
   implicit class SymbolToNode(S: Symbol){
     def x = new HtmlNode(S.name)
   }
@@ -65,35 +61,5 @@ object XTags extends HtmlAttributes with HtmlTags{
   implicit class StringXNode(x: String) extends XNode{
     def toXML() = scala.xml.Text(x)
   }
-  implicit class StringFuncXNode[A <% XNode](x: () => A) extends XNode{
-    def toXML() = (x(): XNode).toXML()
-  }
-
-
-  def raw(s: String) = scala.xml.Unparsed(s)
-
-  def javascript(origin: String = "") =
-    script.attr("type" -> "text/javascript").src(origin)
-
-  def js(jcontents: String, args: Any*): XNode ={
-    script.attr("type" -> "text/javascript")(
-      raw(
-        "$(function(){" +
-          jcontents.format(
-            args.map( x =>
-              x
-            ):_*
-          ) +
-          "});"
-      )
-    )
-  }
-
-  def jsFor(jcontents: String, elemCls: String, args: Any*): XNode =
-    js("(function(elem, elemCls){" + jcontents + "})($('.%s'), '%s')".format(elemCls, elemCls), args: _*)
-
-
-  def stylesheet(origin: String = "") = link.rel("stylesheet").href(origin)
-
 
 }
