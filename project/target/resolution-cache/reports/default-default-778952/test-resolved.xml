@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="default"
+		module="default-778952"
+		revision="0.1-SNAPSHOT"
+		extra-sbtVersion="0.12"
+		extra-scalaVersion="2.9.2"
+		conf="test"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom"
+		date="20121120001504"/>
+	<dependencies>
+		<module organisation="com.github.mpeltonen" name="sbt-idea">
+			<revision name="1.1.0" status="release" pubdate="20120804081309" resolver="public" artresolver="public" homepage="http://your.project.url" extra-sbtVersion="0.12" extra-scalaVersion="2.9.2" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="0">
+				<license name="BSD-style" url="http://www.opensource.org/licenses/BSD-3-Clause"/>
+				<metadata-artifact status="no" details="" size="3024" time="0" location="C:\Users\Haoyi\.ivy2\cache\scala_2.9.2\sbt_0.12\com.github.mpeltonen\sbt-idea\ivy-1.1.0.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/com/github/mpeltonen/sbt-idea_2.9.2_0.12/1.1.0/sbt-idea-1.1.0.pom"/>
+				<caller organisation="default" name="default-778952" conf="test, compile, runtime" rev="1.1.0" rev-constraint-default="1.1.0" rev-constraint-dynamic="1.1.0" callerrev="0.1-SNAPSHOT" extra-sbtVersion="0.12" extra-scalaVersion="2.9.2"/>
+				<artifacts>
+					<artifact name="sbt-idea" type="jar" ext="jar" status="no" details="" size="282353" time="0" location="C:\Users\Haoyi\.ivy2\cache\scala_2.9.2\sbt_0.12\com.github.mpeltonen\sbt-idea\jars\sbt-idea-1.1.0.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/com/github/mpeltonen/sbt-idea_2.9.2_0.12/1.1.0/sbt-idea-1.1.0.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="commons-io" name="commons-io">
+			<revision name="2.0.1" status="release" pubdate="20101226121931" resolver="public" artresolver="public" homepage="http://commons.apache.org/io/" downloaded="false" searched="false" default="false" conf="compile, master(*), runtime, compile(*), runtime(*), master" position="1">
+				<metadata-artifact status="no" details="" size="6299" time="0" location="C:\Users\Haoyi\.ivy2\cache\commons-io\commons-io\ivy-2.0.1.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/commons-io/commons-io/2.0.1/commons-io-2.0.1.pom"/>
+				<caller organisation="com.github.mpeltonen" name="sbt-idea" conf="default, compile, runtime, master" rev="2.0.1" rev-constraint-default="2.0.1" rev-constraint-dynamic="2.0.1" callerrev="1.1.0"/>
+				<artifacts>
+					<artifact name="commons-io" type="jar" ext="jar" status="no" details="" size="159509" time="0" location="C:\Users\Haoyi\.ivy2\cache\commons-io\commons-io\jars\commons-io-2.0.1.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>
