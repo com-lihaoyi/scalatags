@@ -81,6 +81,12 @@ class XTagsTest extends FreeSpec{
     )
   }
 
+  "css chaining" in {
+    xmlCheck(
+      div.fL.color("red"),
+      <div style="float: left; color: red; "></div>
+    )
+  }
 
   /**
    * This test uses XTags to generate a large block of HTML. The

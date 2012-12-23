@@ -51,10 +51,11 @@ trait HtmlAttributes{ this: XTags.type =>
     def cls(k: String*) = x.attr("class" -> k.toList.fold(x.attrs("class"))(_ + " " + _).trim)
     def placeholder(v: String) = x.attr("placeholder" -> v)
     def value(v: String) = x.attr("value" -> v)
-    def css(kv: (String, String)*): HtmlNode = kv.foldLeft(x: HtmlNode){ (n, kv) =>      val (k, v) = kv
-      val newStyle = (x.attrs("style") + " " + k + ":" + v + ";").trim
-      val newStyle2 = if (newStyle.last == ';') newStyle.dropRight(1) else newStyle
-      n.style(newStyle2)
+
+    def css(kv: (String, String)*): HtmlNode = {
+      x.style(
+        x.attrs("style") + kv.map{case (k, v) => s"$k: $v; "}.mkString
+      )
     }
     def cursor(v: String) = css("cursor" -> v)
     def display(v: String) = css("display" -> v)
