@@ -101,14 +101,14 @@ trait HtmlAttributes{ this: XTags.type =>
     def margin_bottom(v: Dim) = css("margin-bottom" -> v.s)
     def margin_left(v: Dim) = css("margin-left" -> v.s)
     def margin_right(v: Dim) = css("margin-right" -> v.s)
-    def margin[A <% Dim](v: A, x: A, y: A, z: A) = css("margin" -> (s"$v.s $x.s %y.s %.z.s"))
+    def margin[A <% Dim](v: A, x: A, y: A, z: A) = css("margin" -> (s"${v.s} ${x.s} ${y.s} ${z.s}"))
 
 
     def padding_top(v: Dim) = css("padding-top" -> v.s)
     def padding_bottom(v: Dim) = css("padding-bottom" -> v.s)
     def padding_left(v: Dim) = css("padding-left" -> v.s)
     def padding_right(v: Dim) = css("padding-right" -> v.s)
-    def padding[A <% Dim](v: A, x: A, y: A, z: A) = css("padding" -> (s"$v.s $x.s %y.s %.z.s"))
+    def padding[A <% Dim](v: A, x: A, y: A, z: A) = css("padding" -> (s"${v.s} ${x.s} ${y.s} ${z.s}"))
 
     def fL = float("left")
     def fR = float("right")
