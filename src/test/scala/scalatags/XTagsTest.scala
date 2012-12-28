@@ -2,10 +2,10 @@ package scalatags
 
 import org.scalatest._
 import scala.xml._
-import XTags._
+import ScalaTags._
 class XTagsTest extends FreeSpec{
 
-  def xmlCheck(x: XNode, ns: NodeSeq) = {
+  def xmlCheck(x: STag, ns: NodeSeq) = {
 
     def canonicalize(n: NodeSeq) = scala.xml.Utility.trim(n(0)).toString
     assert(
@@ -89,7 +89,7 @@ class XTagsTest extends FreeSpec{
   }
 
   /**
-   * This test uses XTags to generate a large block of HTML. The
+   * This test uses ScalaTags to generate a large block of HTML. The
    * target HTML was taken from the Dropbox Developers API Reference
    * at:
    *
@@ -163,8 +163,8 @@ class XTagsTest extends FreeSpec{
           " and/or ", code("user_error"), " fields (where applicable)."
         )
       ),
-      <div id="api-specification" class="section" >
-        <h1 style="margin-top:9px">REST API</h1>
+      <div class="section " id="api-specification">
+        <h1 style="margin-top: 9px; ">REST API</h1>
         <p>The REST API is the underlying interface for all of our official
           <a target="_blank" href="/mobile">Dropbox mobile apps</a> and our
           <a href="/developers/reference/sdk">SDKs</a>. It's the most direct
@@ -172,11 +172,11 @@ class XTagsTest extends FreeSpec{
           interested in developing for platforms not supported by the SDKs or
           for those interested in exploring API features in detail.</p>
 
-        <div id="general-notes" class="api-method"></div>
-        <h2 id="general-notes" style="margin-top:28px">General notes</h2>
-        <a href="#general-notes" class="headerlink"></a>
+        <div class="api-method " id="general-notes"></div>
+        <h2 style="margin-top: 28px; " id="general-notes">General notes</h2>
+        <a class="headerlink " href="#general-notes" ></a>
 
-        <h3 style="margin-top:9px">SSL only</h3>
+        <h3 style="margin-top: 9px; ">SSL only</h3>
         <p>We require that all requests are done over SSL.</p>
 
         <h3>App folder access type</h3>
@@ -201,13 +201,13 @@ class XTagsTest extends FreeSpec{
         <div id="date-format">
           <h3>Date format</h3>
           <p>All dates in the API are strings in the following format:</p>
-          <pre class="literal-block">"Sat, 21 Aug 2010 22:31:20 +0000"</pre>
+          <pre class="literal-block ">"Sat, 21 Aug 2010 22:31:20 +0000"</pre>
           <p>In code format, which can be used in all programming languages
             that support <code>strftime</code> or <code>strptime</code>:</p>
-          <pre class="literal-block">"%a, %d %b %Y %H:%M:%S %z"</pre>
+          <pre class="literal-block ">"%a, %d %b %Y %H:%M:%S %z"</pre>
         </div>
 
-        <div id="param.locale" class="api-method"></div>
+        <div class="api-method " id="param.locale"></div>
         <h3>Locale global request parameter</h3>
         <p>Dropbox uses the <code>locale</code> parameter to specify language
           settings of content responses. If your app supports any language

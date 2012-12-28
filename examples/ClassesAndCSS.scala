@@ -1,4 +1,4 @@
-import scalatags.XTags._
+import scalatags.ScalaTags._
 
 val frag = html(
   head(

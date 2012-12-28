@@ -1,4 +1,4 @@
-import scalatags.XTags._
+import scalatags.ScalaTags._
 import xml.Unparsed
 
 val input = "<p>i am a cow</p>"

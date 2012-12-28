@@ -1,4 +1,4 @@
-import scalatags.XTags._
+import scalatags.ScalaTags._
 
 def page(scripts: Seq[XNode], content: Seq[XNode]) =
   html(

@@ -1,4 +1,4 @@
-import scalatags.XTags._
+import scalatags.ScalaTags._
 
 val numVisitors = 1023
 val posts = Seq(
