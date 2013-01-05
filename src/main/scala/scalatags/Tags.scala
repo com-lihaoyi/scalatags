@@ -9,7 +9,7 @@ package scalatags
  *
  * https://developer.mozilla.org/en-US/docs/HTML/HTML5/HTML5_element_list
  */
-trait Tags{ this: ScalaTags.type =>
+trait Tags{ this: ScalaTags =>
 
 
   // Root Element

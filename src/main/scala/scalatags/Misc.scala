@@ -1,31 +1,35 @@
 package scalatags
 
 import xml.Unparsed
+import util.Random
 
-trait Misc {this: ScalaTags.type =>
+trait Misc {this: ScalaTags =>
 
-/*
+
   def javascript(origin: String = "") =
-    script.attr("type" -> "text/javascript").src(origin)
+    script.attr("type" -> "text/javascript").src(origin)("")
 
-  def js(jcontents: String, args: Any*): XNode ={
+  def stylesheet(origin: String = "") =
+    link.rel("stylesheet").ctype("text/css").href(origin)
+
+  def js(contents: Any, id: String = ""): HtmlTag ={
     script.attr("type" -> "text/javascript")(
-      Unparsed(
-        "$(function(){" +
-          jcontents.format(
-            args.map( x =>
-              x
-            ):_*
-          ) +
-          "});"
+      Raw(
+        contents,
+        x => s"(function(self){$x})($id);"
       )
     )
   }
-
-  def jsFor(jcontents: String, elemCls: String, args: Any*): XNode =
-    js("(function(elem, elemCls){" + jcontents + "})($('.%s'), '%s')".format(elemCls, elemCls), args: _*)*/
-
-
-  def stylesheet(origin: String = "") = link.rel("stylesheet").href(origin)
-
+  implicit class pimpedSTag(s: HtmlTag){
+    def withJs(contents: Any) = {
+      val uuid = genUUID
+      Seq(s.cls(uuid), js(contents, id = s"$$('.$uuid')"))
+    }
+  }
+  implicit class cssNum(n: Int){
+    def px = n + "px"
+    def em = n + "em"
+    def pct = n + "%"
+    def pt = n + "pt"
+  }
 }

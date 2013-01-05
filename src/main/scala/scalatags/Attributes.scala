@@ -8,16 +8,9 @@ package scalatags
  * tuple to the `attr` function.
  *
  */
-trait Attributes{ this: ScalaTags.type =>
+trait Attributes{ this: ScalaTags =>
 
-  class Dim(val s: String)
-
-  implicit class StringAsDim(s: String) extends Dim(s){
-    assert ("\\d+px|\\d+%".r.findFirstMatchIn(s).isDefined)
-  }
-  implicit class IntAsDim(i: Int) extends Dim(i + "px")
-
-  implicit class HtmlTrait[T <% STag](x: T){
+  implicit class HtmlTrait[T <% HtmlTag](x: T){
 
     def href(v: Any) = x.attr("href" -> v)
     def action(v: Any) = x.attr("action" -> v)
@@ -50,7 +43,7 @@ trait Attributes{ this: ScalaTags.type =>
     def title(v: Any) = x.attr("title" -> v)
     def ctype(v: Any) = x.attr("type" -> v)
     def xmlns(v: Any) = x.attr("xmlns" -> v)
-    def cls(k: String*) = x.copy(classes = x.classes ++ k)
+    def cls(k: Any*) = x.copy(classes = x.classes ++ k)
     def placeholder(v: Any) = x.attr("placeholder" -> v)
     def value(v: Any) = x.attr("value" -> v)
 
@@ -72,16 +65,16 @@ trait Attributes{ this: ScalaTags.type =>
     def visibility(v: Any) = css("visibility" -> v)
     def white_space(v: Any) = css("white-space" -> v)
 
-    def top(v: Dim) = css("top" -> v.s)
-    def left(v: Dim) = css("left" -> v.s)
-    def bottom(v: Dim) = css("bottom" -> v.s)
-    def right(v: Dim) = css("right" -> v.s)
+    def top(v: Any) = css("top" -> v)
+    def left(v: Any) = css("left" -> v)
+    def bottom(v: Any) = css("bottom" -> v)
+    def right(v: Any) = css("right" -> v)
 
-    def height(v: Dim) = css("height" -> v.s)
-    def width(v: Dim) = css("width" -> v.s)
+    def height(v: Any) = css("height" -> v)
+    def width(v: Any) = css("width" -> v)
 
-    def max_height(v: Dim) = css("max-height" -> v.s)
-    def max_width(v: Dim) = css("max-width" -> v.s)
+    def max_height(v: Any) = css("max-height" -> v)
+    def max_width(v: Any) = css("max-width" -> v)
 
     def background(v: Any) = css("background" -> v)
     def background_attachment(v: Any) = css("background-attachment" -> v)
@@ -95,31 +88,31 @@ trait Attributes{ this: ScalaTags.type =>
     def bordercolor(v: Any) = css("border-color" -> v)
     def border_spacing(v: Any) = css("border-spacing" -> v)
     def border_style(v: Any) = css("border-style" -> v)
-    def border_width(v: Dim) = css("border-width" -> v.s)
+    def border_width(v: Any) = css("border-width" -> v)
 
 
-    def margin_top(v: Dim) = css("margin-top" -> v.s)
-    def margin_bottom(v: Dim) = css("margin-bottom" -> v.s)
-    def margin_left(v: Dim) = css("margin-left" -> v.s)
-    def margin_right(v: Dim) = css("margin-right" -> v.s)
-    def margin[A <% Dim](v: A, x: A, y: A, z: A) = css("margin" -> (s"${v.s} ${x.s} ${y.s} ${z.s}"))
+    def margin_top(v: Any) = css("margin-top" -> v)
+    def margin_bottom(v: Any) = css("margin-bottom" -> v)
+    def margin_left(v: Any) = css("margin-left" -> v)
+    def margin_right(v: Any) = css("margin-right" -> v)
+    def margin(v: Any, x: Any, y: Any, z: Any) = css("margin" -> (s"$v $x $y $z"))
 
 
-    def padding_top(v: Dim) = css("padding-top" -> v.s)
-    def padding_bottom(v: Dim) = css("padding-bottom" -> v.s)
-    def padding_left(v: Dim) = css("padding-left" -> v.s)
-    def padding_right(v: Dim) = css("padding-right" -> v.s)
-    def padding[A <% Dim](v: A, x: A, y: A, z: A) = css("padding" -> (s"${v.s} ${x.s} ${y.s} ${z.s}"))
+    def padding_top(v: Any) = css("padding-top" -> v)
+    def padding_bottom(v: Any) = css("padding-bottom" -> v)
+    def padding_left(v: Any) = css("padding-left" -> v)
+    def padding_right(v: Any) = css("padding-right" -> v)
+    def padding(v: Any, x: Any, y: Any, z: Any) = css("padding" -> (s"$v $x $y $z"))
 
     def fL = float("left")
     def fR = float("right")
 
-    def mL(v: Dim) = margin_left(v)
-    def mR(v: Dim) = margin_right(v)
-    def mT(v: Dim) = margin_top(v)
-    def mB(v: Dim) = margin_bottom(v)
-    def h(v: Dim) = height(v)
-    def w(v: Dim) = width(v)
+    def mL(v: Any) = margin_left(v)
+    def mR(v: Any) = margin_right(v)
+    def mT(v: Any) = margin_top(v)
+    def mB(v: Any) = margin_bottom(v)
+    def h(v: Any) = height(v)
+    def w(v: Any) = width(v)
 
     def center = this.margin_left("auto").margin_right("auto")  }
 
