@@ -21,8 +21,7 @@ trait Misc {this: ScalaTags =>
     )
   }
   implicit class pimpedSTag(s: HtmlTag){
-    def withJs(contents: Any) = {
-      val uuid = genUUID
+    def withJs(uuid: String)(contents: Any) = {
       Seq(s.cls(uuid), js(contents, id = s"$$('.$uuid')"))
     }
   }
@@ -32,4 +31,9 @@ trait Misc {this: ScalaTags =>
     def pct = n + "%"
     def pt = n + "pt"
   }
+
+  def rgba(r: Int, g: Int, b: Int, a: Double) = {
+    s"rgba($r, $g, $b, $a)"
+  }
+
 }

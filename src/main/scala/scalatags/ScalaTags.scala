@@ -6,11 +6,8 @@ extends Attributes
 with Tags
 with Misc{
 
-  def genUUID = genUUIDx
-
   implicit class SymbolToNode(S: Symbol){ def x = new HtmlTag(S.name) }
   implicit class StringToNode(S: String){ def x = new HtmlTag(S) }
-
   implicit class SeqXNode[A <% STag](x: Seq[A]) extends STag{
     def toXML() = x.flatMap(n => n.toXML())
     def children = x.map(x => x: STag)
@@ -38,8 +35,10 @@ trait STag{
   def children: Seq[STag]
   def searchable: Seq[Any]
 
-  def find[T](filter: PartialFunction[Any, T]): Seq[T] =
-    this.children.flatMap(x => x.find(filter)) ++ this.searchable.flatMap(x => filter.lift(x))
+  def findSTag[T](filter: PartialFunction[STag, T]): Seq[T] =
+    this.children.flatMap(_.findSTag(filter)) ++ filter.lift(this)
+  def findAttached[T](filter: PartialFunction[Any, T]): Seq[T] =
+    this.children.flatMap(x => x.findAttached(filter)) ++ this.searchable.flatMap(x => filter.lift(x))
 }
 
 case class HtmlTag(tag: String = "",
