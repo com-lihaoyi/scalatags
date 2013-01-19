@@ -9,8 +9,9 @@ with Misc{
   implicit class SymbolToNode(S: Symbol){ def x = new HtmlTag(S.name) }
   implicit class StringToNode(S: String){ def x = new HtmlTag(S) }
   implicit class SeqXNode[A <% STag](x: Seq[A]) extends STag{
-    def toXML() = x.flatMap(n => n.toXML())
+    def toXML(path: List[Int] = Nil) = x.zipWithIndex.flatMap{case (n, i) => n.toXML(i::path)}
     def children = x.map(x => x: STag)
+    override def thisTag: Any = x
     def searchable = Nil
   }
 
@@ -20,23 +21,27 @@ with Misc{
   implicit def Tuple5XNode[A <% STag, B <% STag, C <% STag, D <% STag, E <% STag](x: (A, B, C, D, E)) = SeqXNode(Seq[STag](x._1, x._2, x._3, x._4, x._5))
 
   implicit class XmlXNode(x: NodeSeq) extends STag{
-    def toXML() = x
+    def toXML(path: List[Int] = Nil) = x
     def children = Nil
+    override def thisTag: Any = x
     def searchable = Nil
   }
   implicit class StringXNode(x: Any) extends STag{
-    def toXML() = scala.xml.Text(x.toString)
+    def toXML(path: List[Int] = Nil) = scala.xml.Text(x.toString)
     def children = Nil
-    def searchable = Seq(x)
+    override def thisTag: Any = x
+    def searchable = Nil
   }
 }
 trait STag{
-  def toXML(): NodeSeq
+  def toXML(path: List[Int] = Nil): NodeSeq
   def children: Seq[STag]
+  def thisTag: Any = this
   def searchable: Seq[Any]
 
-  def findSTag[T](filter: PartialFunction[STag, T]): Seq[T] =
-    this.children.flatMap(_.findSTag(filter)) ++ filter.lift(this)
+  def findSTag[T](filter: PartialFunction[Any, T]): Seq[T] =
+    this.children.flatMap(_.findSTag(filter)) ++ filter.lift(thisTag)
+
   def findAttached[T](filter: PartialFunction[Any, T]): Seq[T] =
     this.children.flatMap(x => x.findAttached(filter)) ++ this.searchable.flatMap(x => filter.lift(x))
 }
@@ -53,8 +58,8 @@ case class HtmlTag(tag: String = "",
     copy(attrMap = t.foldLeft(attrMap)(_+_))
   }
 
-  def toXML(): NodeSeq = {
-    val c = flattenChildren(children)
+  def toXML(path: List[Int] = Nil): NodeSeq = {
+    val c = children.zipWithIndex.flatMap{case (n, i) => n.toXML(i::path)}
     var newAttrMap = attrMap
     if (classes != Nil) newAttrMap = newAttrMap.updated("class", attrMap("class") + classes.map(_.toString + " ").mkString)
     if (styles != Map.empty) newAttrMap = newAttrMap.updated("style", attrMap("style") + styles.map{case (k, v) => k + ": " + v + "; "}.mkString)
@@ -65,12 +70,9 @@ case class HtmlTag(tag: String = "",
 
   def searchable = (attrMap.values ++ classes ++ styles.values).toList
 
-  def flattenChildren(c: Seq[STag]) =
-    c.flatMap(_.toXML())
-
 }
 case class Raw(content: Any, processor: String => String = x => x) extends STag{
-  def toXML() = Unparsed(processor(content.toString))
+  def toXML(path: List[Int] = Nil) = Unparsed(processor(content.toString))
   def children = Nil
   def searchable = List(content)
 }

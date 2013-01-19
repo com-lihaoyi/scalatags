@@ -11,7 +11,7 @@ class MiscTests extends FreeSpec{
 
     def canonicalize(n: NodeSeq) = scala.xml.Utility.trim(n(0)).toString
     assert(
-      canonicalize(x.toXML) === canonicalize(ns)
+      canonicalize(x.toXML()) === canonicalize(ns)
     )
   }
 
@@ -34,8 +34,8 @@ class MiscTests extends FreeSpec{
       )
     )
 
-    assert (view.find{case x if x == first => x} === Seq(first))
-    assert (view.find{case x if x == second => x} === Seq(second, second))
+    assert (view.findSTag{case x if x == first => x} === Seq(first))
+    assert (view.findSTag{case x if x == second => x} === Seq(second, second))
   }
 
   "finding attribute elements" in {
@@ -55,8 +55,8 @@ class MiscTests extends FreeSpec{
         ).cls(first)
       )
     )
-    assert( view.find { case x if x == first => x } === Seq(first, first, first) )
-    assert( view.find { case x if x == second => x } === Seq(second) )
+    assert( view.findAttached { case x if x == first => x } === Seq(first, first, first) )
+    assert( view.findAttached { case x if x == second => x } === Seq(second) )
   }
 
   "css length converters" in {

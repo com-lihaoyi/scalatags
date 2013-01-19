@@ -10,7 +10,7 @@ class XTagsTest extends FreeSpec{
 
     def canonicalize(n: NodeSeq) = scala.xml.Utility.trim(n(0)).toString
     assert(
-      canonicalize(x.toXML) === canonicalize(ns)
+      canonicalize(x.toXML()) === canonicalize(ns)
     )
   }
 
@@ -19,10 +19,10 @@ class XTagsTest extends FreeSpec{
    * the tags on the fly from Symbols and Strings
    */
   "basic tag creation" in {
-    assert(a.toXML === <a/>)
-    assert(html.toXML === <html/>)
-    assert('this_is_an_unusual_tag.x.toXML === <this_is_an_unusual_tag/>)
-    assert("this-is-a-string-with-dashes".x.toXML === <this-is-a-string-with-dashes/>)
+    assert(a.toXML() === <a/>)
+    assert(html.toXML() === <html/>)
+    assert('this_is_an_unusual_tag.x.toXML() === <this_is_an_unusual_tag/>)
+    assert("this-is-a-string-with-dashes".x.toXML() === <this-is-a-string-with-dashes/>)
   }
 
   /**
