@@ -2,11 +2,11 @@ package scalatags
 
 import org.scalatest._
 import xml.NodeSeq
+import ScalaTags._
 
 
 class MiscTests extends FreeSpec{
 
-  import default._
   def xmlCheck(x: HtmlTag, ns: NodeSeq) = {
 
     def canonicalize(n: NodeSeq) = scala.xml.Utility.trim(n(0)).toString

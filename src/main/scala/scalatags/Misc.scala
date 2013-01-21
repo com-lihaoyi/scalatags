@@ -3,7 +3,7 @@ package scalatags
 import xml.Unparsed
 import util.Random
 
-trait Misc {this: ScalaTags =>
+trait Misc {this: ScalaTags.type =>
 
 
   def javascript(origin: String = "") =
@@ -20,11 +20,7 @@ trait Misc {this: ScalaTags =>
       )
     )
   }
-  implicit class pimpedSTag(s: HtmlTag){
-    def withJs(uuid: String)(contents: Any) = {
-      Seq(s.cls(uuid), js(contents, id = s"$$('.$uuid')"))
-    }
-  }
+
   implicit class cssNum(n: Int){
     def px = n + "px"
     def em = n + "em"

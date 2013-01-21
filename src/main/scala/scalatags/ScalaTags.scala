@@ -1,7 +1,8 @@
 package scalatags
 
 import scala.xml._
-class ScalaTags(genUUIDx: => String = scala.util.Random.alphanumeric.take(6).mkString)
+
+object ScalaTags
 extends Attributes
 with Tags
 with Misc{

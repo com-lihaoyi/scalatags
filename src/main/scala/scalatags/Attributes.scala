@@ -8,7 +8,7 @@ package scalatags
  * tuple to the `attr` function.
  *
  */
-trait Attributes{ this: ScalaTags =>
+trait Attributes{ this: ScalaTags.type =>
 
   implicit class HtmlTrait[T <% HtmlTag](x: T){
 
