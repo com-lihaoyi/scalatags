@@ -11,7 +11,7 @@ class MiscTests extends FreeSpec{
 
     def canonicalize(n: NodeSeq) = scala.xml.Utility.trim(n(0)).toString
     assert(
-      canonicalize(x.toXML()) === canonicalize(ns)
+      canonicalize(x.toXML) === canonicalize(ns)
     )
   }
 
