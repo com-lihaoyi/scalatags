@@ -69,26 +69,30 @@ Hello World
 -----------
 
 ```scala
-import scalatags.XTags._
+import scalatags._
 
 val frag = html(
-  head(
-    script("some script")
-  ),
-  body(
-    h1("This is my title"),
-    div(
-      p("This is my first paragraph"),
-      p("This is my second paragraph")
-    )
-  )
+ head(
+   script("some script")
+ ),
+ body(
+   h1("This is my title"),
+   div(
+     p("This is my first paragraph"),
+     p("This is my second paragraph")
+   )
+ )
 )
+```
 
+Creates a HTML fragment. In order to render it to HTML, simply use:
+
+```scala
 val prettier = new scala.xml.PrettyPrinter(80, 4)
 println(prettier.format(frag.toXML))
 ```
 
-Is a complete, executable Scala script. executing it prints out:
+executing that prints out:
 
 ```html
 <html>
@@ -109,12 +113,10 @@ Variables
 =========
 
 ```scala
-import scalatags.XTags._
-
 val title = "title"
 val numVisitors = 1023
 
-val frag = html(
+html(
   head(
     script("some script")
   ),
@@ -125,11 +127,7 @@ val frag = html(
       p("you are the ", numVisitors.toString, "th visitor!")
     )
   )
-
 )
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
 ```
 
 Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints
@@ -155,8 +153,6 @@ Control Flow
 Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own [crufty little programming language embedded inside them for control flow](http://jinja.pocoo.org/docs/templates/#list-of-control-structures), you probably already know how to use ScalaTags' control flow syntax:
 
 ```scala
-import scalatags.XTags._
-
 val numVisitors = 1023
 val posts = Seq(
   ("alice", "i like pie"),
@@ -164,7 +160,7 @@ val posts = Seq(
   ("charlie", "i like pie and pie is evil, i hat myself")
 )
 
-val frag = html(
+html(
   head(
     script("some script")
   ),
@@ -176,17 +172,14 @@ val frag = html(
         h2("Post by ", name),
         p(text)
       )
-    ),
+      ),
     if(numVisitors > 100)(
       p("No more posts!")
-    )else(
+      )else(
       p("Please post below...")
-    )
+      )
   )
 )
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
 ```
 
 This prints out:
@@ -222,15 +215,6 @@ Functions
 Many other templating systems define [incredibly](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials) [roundabout](http://jinja.pocoo.org/docs/templates/#macros) ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because Scala has these amazing things called *functions*:
 
 ```scala
-import scalatags.XTags._
-
-val numVisitors = 1023
-val posts = Seq(
-  ("alice", "i like pie"),
-  ("bob", "pie is evil i hate you"),
-  ("charlie", "i like pie and pie is evil, i hat myself")
-)
-
 def imgBox(src: String, text: String) =
   div(
     img.src(src),
@@ -239,7 +223,7 @@ def imgBox(src: String, text: String) =
     )
   )
 
-val frag = html(
+html(
   head(
     script("some script")
   ),
@@ -252,9 +236,6 @@ val frag = html(
     )
   )
 )
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
 ```
 
 prints
@@ -285,165 +266,13 @@ prints
 </html>
 ```
 
-Layouts
--------
-
-Again, this is something that many other templating languages have their own [special](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) [implementations](http://jinja.pocoo.org/docs/templates/#template-inheritance) of. In ScalaTags, this can be done simply by just using functions:
-
-```scala
-import scalatags.XTags._
-
-def page(scripts: Seq[XNode], content: Seq[XNode]) =
-  html(
-    head(scripts),
-    body(
-      h1("This is my title"),
-      div.cls("content")(content)
-    )
-  )
-
-val frag =
-  page(
-    Seq(
-      script("some script")
-    ),
-    Seq(
-      p("This is the first ", b("image"), " displayed on the ", a("site")),
-      img.src("www.myImage.com/image.jpg"),
-      p("blah blah blah i am text")
-    )
-  )
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
-```
-
-prints
-
-```html
-<html>
-    <head>
-        <script>some script</script>
-    </head>
-    <body>
-        <h1>This is my title</h1>
-        <div class="content">
-            <p>
-                This is the first
-                <b>image</b>
-                displayed on the
-                <a>site</a>
-            </p>
-            <img src="www.myImage.com/image.jpg"/>
-            <p>blah blah blah i am text</p>
-        </div>
-    </body>
-</html>
-```
-
-Unsanitized Input
------------------
-
-If you *really* want, for whatever reason, to put unsanitized input into your XML, simply use scala's Unparsed function:
-
-```scala
-import scalatags.XTags._
-import xml.Unparsed
-
-val input = "<p>i am a cow</p>"
-
-val frag = html(
-  head(
-    script("some script")
-  ),
-  body(
-    h1("This is my title"),
-    Unparsed(input)
-  )
-)
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
-```
-
-prints
-
-```html
-<html>
-    <head>
-        <script>some script</script>
-    </head>
-    <body>
-        <h1>This is my title</h1>
-        <p>i am a cow</p>
-    </body>
-</html>
-```
-
-Although this makes it easy to open up XSS holes, if you know what you're doing, go ahead.
-
-Inheritance
------------
-
-Although most of the time, functions are sufficient to keep things DRY, if you for some reason want to use inheritance to structure your code, you probably already know how to do so. It's just Scala, and it behaves as you'd expect.
-
-```scala
-import scalatags.XTags._
-
-class Parent{
-  def render = html(
-    headFrag,
-    bodyFrag
-
-  )
-  def headFrag = head(
-    script("some script")
-  )
-  def bodyFrag = body(
-    h1("This is my title"),
-    div(
-      p("This is my first paragraph"),
-      p("This is my second paragraph")
-    )
-  )
-}
-
-class Child extends Parent{
-  override def headFrag = head(
-    script("some other script")
-  )
-}
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(new Child().render.toXML))
-```
-
-prints
-
-```html
-<html>
-    <head>
-        <script>some other script</script>
-    </head>
-    <body>
-        <h1>This is my title</h1>
-        <div>
-            <p>This is my first paragraph</p>
-            <p>This is my second paragraph</p>
-        </div>
-    </body>
-</html>
-```
-
 Attributes
 ----------
 
 You may already have noticed some use of `.id()` and `.src()` methods in the previous code. In general, any attribute can be set on a tag via the `.attr()` method:
 
 ```scala
-import scalatags.XTags._
-
-val frag = html(
+html(
   head(
     script("some script")
   ),
@@ -459,17 +288,12 @@ val frag = html(
     )
   )
 )
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
 ```
 
 However, the most common HTML attributes all have shortcut methods. For example, `.id(...)` is the shortcut for `.attr("id"->...)`, and helps reduce the verbosity and ensure correctness (typos won't compile) for the common use case. So the following is identical:
 
 ```scala
-import scalatags.XTags._
-
-val frag = html(
+html(
   head(
     script("some script")
   ),
@@ -485,9 +309,6 @@ val frag = html(
     )
   )
 )
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
 ```
 
 Both of these print the same thing:
@@ -527,9 +348,7 @@ Furthermore, just as ScalaTags provides shortcut methods for all common attribut
 to save typing and add static checking in the common case. There are also some overloads for the numeric css styles (e.g. `.opacity(d: Double)`). So the following:
 
 ```scala
-import scalatags.XTags._
-
-val frag = html(
+html(
   head(
     script("some script")
   ),
@@ -545,9 +364,6 @@ val frag = html(
     )
   )
 )
-
-val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
 ```
 
 prints
@@ -570,6 +386,145 @@ prints
 ```
 
 A full list of the shortcut methods (for both attributes and styles) can be found in `HtmlAttributes.scala`
+
+Layouts
+-------
+
+Again, this is something that many other templating languages have their own [special](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) [implementations](http://jinja.pocoo.org/docs/templates/#template-inheritance) of. In ScalaTags, this can be done simply by just using functions:
+
+```scala
+def page(scripts: Seq[STag], content: Seq[STag]) =
+  html(
+    head(scripts),
+    body(
+      h1("This is my title"),
+      div.cls("content")(content)
+    )
+  )
+
+
+page(
+  Seq(
+    script("some script")
+  ),
+  Seq(
+    p("This is the first ", b("image"), " displayed on the ", a("site")),
+    img.src("www.myImage.com/image.jpg"),
+    p("blah blah blah i am text")
+  )
+)
+```
+
+prints
+
+```html
+<html>
+    <head>
+        <script>some script</script>
+    </head>
+    <body>
+        <h1>This is my title</h1>
+        <div class="content">
+            <p>
+                This is the first
+                <b>image</b>
+                displayed on the
+                <a>site</a>
+            </p>
+            <img src="www.myImage.com/image.jpg"/>
+            <p>blah blah blah i am text</p>
+        </div>
+    </body>
+</html>
+```
+
+
+
+Inheritance
+-----------
+
+Although most of the time, functions are sufficient to keep things DRY, if you for some reason want to use inheritance to structure your code, you probably already know how to do so. It's just Scala, and it behaves as you'd expect.
+
+```scala
+class Parent{
+  def render = html(
+    headFrag,
+    bodyFrag
+
+  )
+  def headFrag = head(
+    script("some script")
+  )
+  def bodyFrag = body(
+    h1("This is my title"),
+    div(
+      p("This is my first paragraph"),
+      p("This is my second paragraph")
+    )
+  )
+}
+
+object Child extends Parent{
+  override def headFrag = head(
+    script("some other script")
+  )
+}
+
+Child.render
+```
+
+prints
+
+```html
+<html>
+    <head>
+        <script>some other script</script>
+    </head>
+    <body>
+        <h1>This is my title</h1>
+        <div>
+            <p>This is my first paragraph</p>
+            <p>This is my second paragraph</p>
+        </div>
+    </body>
+</html>
+```
+
+Unsanitized Input
+-----------------
+
+If you *really* want, for whatever reason, to put unsanitized input into your XML, simply use scala's Unparsed function:
+
+```scala
+val input = "<p>i am a cow</p>"
+
+html(
+  head(
+    script("some script")
+  ),
+  body(
+    h1("This is my title"),
+    Unparsed(input)
+  )
+)
+```
+
+prints
+
+```html
+<html>
+    <head>
+        <script>some script</script>
+    </head>
+    <body>
+        <h1>This is my title</h1>
+        <p>i am a cow</p>
+    </body>
+</html>
+```
+
+Although this makes it easy to open up XSS holes, if you know what you're doing, go ahead.
+
 
 What ScalaTags is Bad at
 ========================

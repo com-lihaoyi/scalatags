@@ -9,8 +9,7 @@ package scalatags
  *
  * https://developer.mozilla.org/en-US/docs/HTML/HTML5/HTML5_element_list
  */
-trait Tags{ this: ScalaTags.type =>
-
+trait Tags{
 
   // Root Element
   val html = 'html.x

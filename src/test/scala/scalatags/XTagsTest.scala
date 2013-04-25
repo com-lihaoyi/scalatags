@@ -2,16 +2,10 @@ package scalatags
 
 import org.scalatest._
 import scala.xml._
-import ScalaTags._
+import Util._
 
 class XTagsTest extends FreeSpec{
-  def xmlCheck(x: HtmlTag, ns: NodeSeq) = {
 
-    def canonicalize(n: NodeSeq) = scala.xml.Utility.trim(n(0)).toString
-    assert(
-      canonicalize(x.toXML) === canonicalize(ns)
-    )
-  }
 
   /**
    * Tests the usage of the pre-defined tags, as well as creating
@@ -42,11 +36,12 @@ class XTagsTest extends FreeSpec{
       ),
       <html>
         <head>
-          <script/><string-tag/>
+          <script></script>
+          <string-tag></string-tag>
         </head>
         <body>
           <div>
-            <p/>
+            <p></p>
           </div>
         </body>
       </html>
@@ -69,7 +64,7 @@ class XTagsTest extends FreeSpec{
       <html>
         <head>
           <script>Stuff Inside</script>
-          <link/>
+          <link></link>
         </head>
         <body>
           <div>

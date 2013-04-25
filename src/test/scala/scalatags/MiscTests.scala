@@ -2,18 +2,9 @@ package scalatags
 
 import org.scalatest._
 import xml.NodeSeq
-import ScalaTags._
-
-
+import Util._
 class MiscTests extends FreeSpec{
 
-  def xmlCheck(x: HtmlTag, ns: NodeSeq) = {
-
-    def canonicalize(n: NodeSeq) = scala.xml.Utility.trim(n(0)).toString
-    assert(
-      canonicalize(x.toXML) === canonicalize(ns)
-    )
-  }
 
   /**
    * Tests the usage of the pre-defined tags, as well as creating
@@ -24,13 +15,13 @@ class MiscTests extends FreeSpec{
     val second = new Object()
     val view = html(
       head(
-        first
+        first.toSTag
       ),
       body(
         div(
-          second
+          second.toSTag
         ),
-        second
+        second.toSTag
       )
     )
 
@@ -77,9 +68,7 @@ class MiscTests extends FreeSpec{
         <head></head>
         <body>
           <div style="padding: 15px 15px 20px 20px; ">
-            <p style="width: 90%; height: 50%; ">
-              i am cow
-            </p>
+            <p style="width: 90%; height: 50%; ">i am cow</p>
           </div>
         </body>
       </html>
