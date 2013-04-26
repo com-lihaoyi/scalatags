@@ -6,7 +6,7 @@ import util.Random
 /**
  * Misc helper functions
  */
-trait Misc{
+private[scalatags] trait Misc{
   /**
    * Shorthand to generate a <script type="text/javascript" src="..."></script> tag
    */
@@ -18,22 +18,5 @@ trait Misc{
    */
   def stylesheet(origin: String = "") =
     link.rel("stylesheet").ctype("text/css").href(origin)
-
-  /**
-   * Shorthand syntax for creating CSS strings from integers
-   */
-  implicit class cssNum(n: Int){
-    def px = n + "px"
-    def em = n + "em"
-    def pct = n + "%"
-    def pt = n + "pt"
-  }
-
-  /**
-   * Shorthand syntax for creating css "rgba(r, g, b, a)" strings
-   */
-  def rgba(r: Int, g: Int, b: Int, a: Double) = {
-    s"rgba($r, $g, $b, $a)"
-  }
 
 }

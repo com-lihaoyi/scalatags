@@ -2,18 +2,18 @@ package scalatags
 import scala.xml._
 
 /**
- * A general interfact for all types which can appear in a ScalaTags fragment.
+ * A general interface for all types which can appear in a ScalaTags fragment.
  */
 trait STag{
+  /**
+   * Converts an ScalaTag fragment into a `scala.xml.NodeSeq`
+   */
   def toXML(): NodeSeq
-  def children: Seq[STag]
-  def searchable: Seq[Any]
-  def thisTag: Any
 
-  def findSTag[T](filter: PartialFunction[Any, T]): Seq[T] =
-    this.children.flatMap(_.findSTag(filter)) ++ filter.lift(this.thisTag)
-  def findAttached[T](filter: PartialFunction[Any, T]): Seq[T] =
-    this.children.flatMap(x => x.findAttached(filter)) ++ this.searchable.flatMap(x => filter.lift(x))
+  /**
+   * The children of a ScalaTag node
+   */
+  def children: Seq[STag]
 }
 
 /**
@@ -47,8 +47,6 @@ case class HtmlTag(tag: String = "",
     )
   }
 
-  def searchable = (attrMap.values ++ classes ++ styles.values).toList
-  def thisTag = this
   def flattenChildren(c: Seq[STag]) =
     c.flatMap(_.toXML())
 

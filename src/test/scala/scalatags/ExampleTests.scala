@@ -4,6 +4,10 @@ import org.scalatest._
 import scala.xml._
 
 import Util._
+
+/**
+ * A set of examples used in the documentation.
+ */
 class ExampleTests extends FreeSpec{
   "Hello World" in xmlCheck(
     html(
@@ -376,4 +380,32 @@ class ExampleTests extends FreeSpec{
       </html>
   )
 
+  "Inline XML" in {
+    xmlCheck(
+      html(
+        head(
+          <script>Stuff Inside</script>,
+          link()
+        ),
+        body(
+          <div>
+            <h1>Title</h1>
+            <p>Stuff</p>
+          </div>
+        )
+      ),
+      <html>
+        <head>
+          <script>Stuff Inside</script>
+          <link></link>
+        </head>
+        <body>
+          <div>
+            <h1>Title</h1>
+            <p>Stuff</p>
+          </div>
+        </body>
+      </html>
+    )
+  }
 }

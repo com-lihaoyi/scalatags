@@ -9,7 +9,7 @@ package scalatags
  *
  * https://developer.mozilla.org/en-US/docs/HTML/HTML5/HTML5_element_list
  */
-trait Tags{
+private[scalatags] trait Tags{
 
   // Root Element
   val html = 'html.x

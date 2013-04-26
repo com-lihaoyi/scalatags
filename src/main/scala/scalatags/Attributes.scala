@@ -8,7 +8,7 @@ package scalatags
  * tuple to the `attr` function.
  *
  */
-trait HtmlTrait{this: HtmlTag => 
+private[scalatags] trait HtmlTrait{this: HtmlTag =>
 
   def href(v: Any) = attr("href" -> v)
   def action(v: Any) = attr("action" -> v)

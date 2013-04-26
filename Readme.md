@@ -65,6 +65,8 @@ Examples
 
 This is a bunch of simple examples to get you started using ScalaTags. Essentially, each fragment has a `.toXML` method, which turns it into a normal scala XML data structure. You can serialize it, prettyprint it, and in general do whatever you want. It's just XML.
 
+These examples are all in the [unit tests](src/test/scala/scalatags/ExampleTests).
+
 Hello World
 -----------
 
@@ -525,6 +527,44 @@ prints
 
 Although this makes it easy to open up XSS holes, if you know what you're doing, go ahead.
 
+Inline XML
+----------
+
+If, for some reason, you want to include XML within your ScalaTags fragment, you can easily do so:
+
+```scala
+html(
+  head(
+    <script>Stuff Inside</script>,
+    link()
+  ),
+  body(
+    <div>
+      <h1>Title</h1>
+      <p>Stuff</p>
+    </div>
+  )
+)
+```
+
+gets converted to
+
+```html
+<html>
+    <head>
+        <script>Stuff Inside</script>
+        <link></link>
+    </head>
+    <body>
+        <div>
+            <h1>Title</h1>
+            <p>Stuff</p>
+        </div>
+    </body>
+</html>
+```
+
+As you can see, it just works.
 
 What ScalaTags is Bad at
 ========================
@@ -553,3 +593,4 @@ It looks pretty terrible. This is due to two reasons:
 This means that ScalaTags will naturally be more verbose when trying to express text-heavy things like blogs or wikis. Furthermore, because ScalaTags is pure Scala, running untrusted ScalaTags is a big security hole, and the need to compile it every time makes it unfeasible to use it for user-editable content.
 
 The solution? Use [Markdown](http://en.wikipedia.org/wiki/Markdown) or [Textile](http://redcloth.org/textile) or even plain XML to mark up those sections, and save ScalaTags for the heavy structural parts where you can really enjoy the benefits in static checking and DRY.
+

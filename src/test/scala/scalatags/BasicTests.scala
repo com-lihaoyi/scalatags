@@ -4,7 +4,7 @@ import org.scalatest._
 import scala.xml._
 import Util._
 
-class XTagsTest extends FreeSpec{
+class BasicTests extends FreeSpec{
 
 
   /**
@@ -47,34 +47,7 @@ class XTagsTest extends FreeSpec{
       </html>
     )
   }
-  "mixing tags and xml" in {
-    xmlCheck(
-      html(
-        head(
-          <script>Stuff Inside</script>,
-          link()
-        ),
-        body(
-          <div>
-            <h1>Title</h1>
-            <p>Stuff</p>
-          </div>
-        )
-      ),
-      <html>
-        <head>
-          <script>Stuff Inside</script>
-          <link></link>
-        </head>
-        <body>
-          <div>
-            <h1>Title</h1>
-            <p>Stuff</p>
-          </div>
-        </body>
-      </html>
-    )
-  }
+
 
   "css chaining" in {
     xmlCheck(
