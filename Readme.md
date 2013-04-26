@@ -41,6 +41,17 @@ And turns them into (X)HTML like this:
 </html>
 ```
 
+Getting Started
+===============
+
+ScalaTags is hosted on [Maven Central](); to get started, simply add the following to your `build.sbt`:
+
+```scala
+libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.1.1"
+```
+
+And you're good to go! simply open up a `sbt console`, and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
+
 Why ScalaTags
 =============
 

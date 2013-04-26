@@ -24,13 +24,13 @@ with Misc{
     /**
      * Extension class to easily convert `Any`s to STags
      */
-    implicit class objXNodeable(x: Any){
+    implicit class ObjectToSTagable(x: Any){
       def toSTag = ObjectSTag(x)
     }
   }
   implicit lazy val stringToNodeable = Implicits.StringToNodeable _
   implicit lazy val symbolToNodeable = Implicits.SymbolToNodeable _
-  implicit lazy val objectToNodeable = Implicits.objXNodeable _
+  implicit lazy val objectToNodeable = Implicits.ObjectToSTagable _
   /**
    * A STag node which contains a sequence of STags.
    */
@@ -40,10 +40,10 @@ with Misc{
   }
 
 
-  implicit def Tuple2XNode[A <% STag, B <% STag](x: (A, B)) = SeqSTag(Seq[STag](x._1, x._2))
-  implicit def Tuple3XNode[A <% STag, B <% STag, C <% STag](x: (A, B, C)) = SeqSTag(Seq(x._1: STag, x._2: STag, x._3: STag))
-  implicit def Tuple4XNode[A <% STag, B <% STag, C <% STag, D <% STag](x: (A, B, C, D)) = SeqSTag(Seq[STag](x._1, x._2, x._3, x._4))
-  implicit def Tuple5XNode[A <% STag, B <% STag, C <% STag, D <% STag, E <% STag](x: (A, B, C, D, E)) = SeqSTag(Seq[STag](x._1, x._2, x._3, x._4, x._5))
+  implicit def Tuple2STag[A <% STag, B <% STag](x: (A, B)) = SeqSTag(Seq[STag](x._1, x._2))
+  implicit def Tuple3STag[A <% STag, B <% STag, C <% STag](x: (A, B, C)) = SeqSTag(Seq(x._1: STag, x._2: STag, x._3: STag))
+  implicit def Tuple4STag[A <% STag, B <% STag, C <% STag, D <% STag](x: (A, B, C, D)) = SeqSTag(Seq[STag](x._1, x._2, x._3, x._4))
+  implicit def Tuple5STag[A <% STag, B <% STag, C <% STag, D <% STag, E <% STag](x: (A, B, C, D, E)) = SeqSTag(Seq[STag](x._1, x._2, x._3, x._4, x._5))
 
   /**
    * A STag node which contains an XML fragment.
@@ -70,7 +70,7 @@ with Misc{
    * garbage collected.
    */
   case class ObjectSTag(obj: Any) extends STag{
-    def toXML() = scala.xml.Text(x.toString)
+    def toXML() = scala.xml.Text(obj.toString)
     def children = Nil
   }
 }
