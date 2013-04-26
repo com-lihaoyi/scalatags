@@ -65,10 +65,11 @@ Examples
 
 This is a bunch of simple examples to get you started using ScalaTags. Essentially, each fragment has a `.toXML` method, which turns it into a normal scala XML data structure. You can serialize it, prettyprint it, and in general do whatever you want. It's just XML.
 
-These examples are all in the [unit tests](src/test/scala/scalatags/ExampleTests).
+These examples are all in the [unit tests](https://github.com/lihaoyi/scalatags/blob/master/src/test/scala/scalatags/ExampleTests.scala).
 
 Hello World
 -----------
+The core of ScalaTags is a way to generate (X)HTML fragments using plain Scala. Below is a simple "hello world" example:
 
 ```scala
 import scalatags._
@@ -87,7 +88,13 @@ val frag = html(
 )
 ```
 
-Creates a HTML fragment. In order to render it to HTML, simply use:
+Creates a ScalaTag fragment. We could do many things with a fragment: store it, return it, but eventually you will want to convert it into HTML. In order to render the fragment to HTML, simply use:
+
+```scala
+frag.toXML
+```
+
+Which will give you a `scala.xml.NodeSeq` XML data structure. If we want to view it nicely, we could prettyprint it:
 
 ```scala
 val prettier = new scala.xml.PrettyPrinter(80, 4)
@@ -110,6 +117,8 @@ executing that prints out:
     </body>
 </html>
 ```
+
+The following examples will simply show the initial ScalaTag fragment and the final prettyprinted HTML, skipping the intermediate steps.
 
 Variables
 =========
@@ -174,12 +183,12 @@ html(
         h2("Post by ", name),
         p(text)
       )
-      ),
+    ),
     if(numVisitors > 100)(
       p("No more posts!")
-      )else(
+    )else(
       p("Please post below...")
-      )
+    )
   )
 )
 ```
@@ -566,8 +575,32 @@ gets converted to
 
 As you can see, it just works.
 
-What ScalaTags is Bad at
-========================
+Design Considerations
+=====================
+Below are some of the design considerations that went into the ~400 lines of code that make up the ScalaTags library.
+
+An Internal DSL
+---------------
+ScalaTags is an *internal* [DSL](http://en.wikipedia.org/wiki/Domain-specific_language). That means that rather than reading in the ScalaTags templates as a string, and parsing it into the XML data structure, ScalaTags uses the syntax and semantics of the host language in order to generate the data structure directly.
+
+This means that ScalaTags is limited in what it can look like: it can only look like Scala. This means leaving out a few things I would have liked:
+
+- **Significant Whitespace**: many other templating languages like [Jade](http://jade-lang.com/) or [Haml](http://haml.info/) use significant whitespace to great effect, making their HTML templates look extremely clean. ScalaTags can't have any of that.
+- **Commas**: unlike languages like [F#](http://fsharp.org/) and [CoffeeScript](http://coffeescript.org/), Scala does not allow you to omit the `,` between elements of a list on separate lines. Thus, tags in a ScalaTag fragment have to be separated by commas.
+- **Compilation**: ScalaTags templates have to be compiled before being executed, and the Scala compiler is really slow making the view-modify-reload feedback loop slower than I would have liked.
+
+However, in return for these, ScalaTags gains a whole lot of things from being an internal DSL:
+
+- **Syntax Highlighting**, **Code Completion**, **IDE Support**, all for free. Not to mention a compiler which spots common errors before the template has been executed.
+- **Clean integration with the host language**: passing variables into a ScalaTags fragment is the easiest thing in the world, compared to other templating languages where you need to pass in a dictionary or jump through hoops.
+- **Re-use of Scala constructs**: As shown above, ScalaTags does not need to invent its own if-statement, or loops, or partials, or inheritence system in order to provide code-reuse and keep things DRY. It can just use the normal Scala control-flow constructs that everyone is already used to. This means that you already know how everything works, including all the edge cases: want to put an anonymous inner class inside your ScalaTag fragment? Go ahead, it'll just work!
+- **Limited Dependencies**: many other templating systems, which load their templates from external files, often end up doing things like directly loading the requested templates from the filesystem (for convenience), maintaining a global in-memory cache, and all sorts of other complex operations. One may ask: why should my templating library be able to grab at things all over my filesystem or maintain global state? ScalaTags doesn't do any of that; it just spits out HTML. This also means that ScalaTags can be easily used to generate HTML in places where you don't want to set up the global dependencies of a traditional templating system
+- **Small footprint**: at ~400 lines of code, it'd be hard to find a HTML templating engine that does so much, for so little code!
+
+Overall, I think that being an internal DSL has been a big win for ScalaTags, despite the limitations it brings.
+
+What ScalaTags is bad at
+------------------------
 
 ScalaTags is pretty terrible to use for marking up prose, for example to use in a blog:
 
