@@ -34,7 +34,7 @@ And turns them into (X)HTML like this:
     </head>
     <body>
         <div>
-            <h1>This is a title</h1>
+            <h1 id="title">This is a title</h1>
             <p>This is a big paragraph of text</p>
         </div>
     </body>
