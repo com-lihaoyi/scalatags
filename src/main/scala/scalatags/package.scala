@@ -34,7 +34,7 @@ with Misc{
   /**
    * A STag node which contains a sequence of STags.
    */
-  implicit class SeqSTag[A <% STag](x: Seq[A]) extends STag{
+  implicit class SeqSTag[A <% STag](val x: Seq[A]) extends STag{
     def toXML() = x.flatMap(n => n.toXML())
     def children = x.map(x => x: STag)
   }
@@ -48,7 +48,7 @@ with Misc{
   /**
    * A STag node which contains an XML fragment.
    */
-  implicit class XmlSTag(x: NodeSeq) extends STag{
+  implicit class XmlSTag(val x: NodeSeq) extends STag{
     def toXML() = x
     def children = Nil
   }
@@ -56,7 +56,7 @@ with Misc{
   /**
    * A STag node which contains a String.
    */
-  implicit class StringSTag(x: String) extends STag{
+  implicit class StringSTag(val x: String) extends STag{
     def toXML() = scala.xml.Text(x)
     def children = Nil
   }
