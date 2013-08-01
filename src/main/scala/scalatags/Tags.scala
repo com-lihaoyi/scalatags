@@ -86,7 +86,7 @@ private[scalatags] trait Tags{
   val bdi = 'bdi.x
   val bdo = 'bdo.x
   val span = 'span.x
-  val br = 'bar.x
+  val br = 'br.x
   val wbr = 'wbr.x
 
   // Edits
