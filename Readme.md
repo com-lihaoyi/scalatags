@@ -1,3 +1,5 @@
+_NOTE_: this repo contains an alternative sbt project (on folder scalatags-js) to be used with [Scala.js](http://www.scala-js.org/). To use it with a Scala.js project, just include the dependency to the project found on ```scalatags/scalatags-js```.
+
 ScalaTags
 =========
 
