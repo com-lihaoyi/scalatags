@@ -8,6 +8,12 @@ package scalatags
  * list was taken from:
  *
  * https://developer.mozilla.org/en-US/docs/HTML/HTML5/HTML5_element_list
+ * 
+ * To be used with Scala.js, an alternative version of this file can be
+ * found on scalatag-js/src/main/scala/scalatags/TagsJS.scala
+ * The problem is that Scala.js doesn't support symbols, so the alternate
+ * version uses strings (ie: val head = "head".x).
+ * Any changes to this file should be translated into the alternate version.
  */
 private[scalatags] trait Tags{
 
