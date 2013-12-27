@@ -1,14 +1,13 @@
 package scalatags
-import scala.xml._
 
 /**
  * A general interface for all types which can appear in a ScalaTags fragment.
  */
 trait STag{
   /**
-   * Converts an ScalaTag fragment into a `scala.xml.NodeSeq`
+   * Converts an ScalaTag fragment into an html string
    */
-  def toXML(): NodeSeq
+  def toString(): String
 
   /**
    * The children of a ScalaTag node
@@ -37,17 +36,25 @@ case class HtmlTag(tag: String = "",
     copy(attrMap = t.foldLeft(attrMap)(_+_))
   }
 
-  def toXML(): Elem = {
-    val c = flattenChildren(children)
-    var newAttrMap = attrMap
-    if (classes != Nil) newAttrMap = newAttrMap.updated("class", attrMap.getOrElse("class", "") + classes.map(_.toString + " ").mkString)
-    if (styles != Map.empty) newAttrMap = newAttrMap.updated("style", attrMap.getOrElse("style", "") + styles.map{case (k, v) => k + ": " + v + "; "}.mkString)
-    newAttrMap.foldLeft(new Elem(null, tag, Null, TopScope, false, c: _*))(
-      (e, k) => e % new UnprefixedAttribute(k._1, k._2.toString, Null)
-    )
-  }
+  override def toString(): String = 
+    "<" + tag + classString + attrString + stylesString +
+      (if(children == Nil)
+        "/>"
+      else
+        ">" + children.foldLeft("")(_ + _.toString()) + "</" + tag + ">")
 
-  def flattenChildren(c: Seq[STag]) =
-    c.flatMap(_.toXML())
+  private def classString: String =
+    if(classes == Nil)
+      ""
+    else
+      " class=\"" + classes.mkString(" ") + "\""
 
+  private def attrString: String =
+    attrMap.foldLeft("")((s, a) => s + " " + a._1 + "=\"" + a._2.toString + "\"")
+
+  private def stylesString: String =
+    if(styles.isEmpty)
+      ""
+    else
+      " style=\"" + styles.foldLeft("")((s, a) => s + a._1 + ":" + a._2.toString + ";") + "\""
 }

@@ -9,7 +9,7 @@ import Util._
  * A set of examples used in the documentation.
  */
 class ExampleTests extends FreeSpec{
-  "Hello World" in xmlCheck(
+  "Hello World" in strCheck(
     html(
       head(
         script("some script")
@@ -22,20 +22,9 @@ class ExampleTests extends FreeSpec{
         )
       )
     ),
-    <html>
-      <head>
-        <script>some script</script>
-      </head>
-      <body>
-        <h1>This is my title</h1>
-        <div>
-          <p>This is my first paragraph</p>
-          <p>This is my second paragraph</p>
-        </div>
-      </body>
-    </html>
+    "<html><head><script>some script</script></head><body><h1>This is my title</h1><div><p>This is my first paragraph</p><p>This is my second paragraph</p></div></body></html>"
   )
-  "Variables" in xmlCheck(
+/*  "Variables" in xmlCheck(
     {
       val title = "title"
       val numVisitors = 1023
@@ -408,4 +397,5 @@ class ExampleTests extends FreeSpec{
       </html>
     )
   }
+ */
 }

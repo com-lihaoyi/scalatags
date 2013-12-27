@@ -1,6 +1,5 @@
 package scalatags
 
-import xml.Unparsed
 import util.Random
 
 /**

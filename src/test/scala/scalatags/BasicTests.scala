@@ -12,17 +12,17 @@ class BasicTests extends FreeSpec{
    * the tags on the fly from Symbols and Strings
    */
   "basic tag creation" in {
-    assert(a.toXML === <a/>)
-    assert(html.toXML === <html/>)
-    assert('this_is_an_unusual_tag.x.toXML === <this_is_an_unusual_tag/>)
-    assert("this-is-a-string-with-dashes".x.toXML === <this-is-a-string-with-dashes/>)
+    assert(a.toString === "<a/>")
+    assert(html.toString === "<html/>")
+    assert("this_is_an_unusual_tag".x.toString === "<this_is_an_unusual_tag/>")
+    assert("this-is-a-string-with-dashes".x.toString === "<this-is-a-string-with-dashes/>")
   }
 
   /**
    * Tests nesting tags in a simple hierarchy
    */
   "structured tags" in {
-    xmlCheck(
+    strCheck(
       html(
         head(
           script(),
@@ -33,26 +33,14 @@ class BasicTests extends FreeSpec{
             p()
           )
         )
-      ),
-      <html>
-        <head>
-          <script></script>
-          <string-tag></string-tag>
-        </head>
-        <body>
-          <div>
-            <p></p>
-          </div>
-        </body>
-      </html>
+      ), "<html><head><script/><string-tag/></head><body><div><p/></div></body></html>"
     )
   }
 
 
   "css chaining" in {
-    xmlCheck(
-      div.fL.color("red"),
-      <div style="float: left; color: red; "></div>
+    strCheck(
+      div.fL.color("red"), "<div style=\"float:left;color:red;\"/>"
     )
   }
 

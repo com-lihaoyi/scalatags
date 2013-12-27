@@ -8,7 +8,6 @@ object Build extends sbt.Build {
     .settings(
       name := "scalatags-js",
       version := "0.1.4",
-      unmanagedSourceDirectories in Compile += baseDirectory.value / ".." / "src" / "main", // test sources are omitted from js build
-      excludeFilter in Compile := "Tags.scala" // ommit the original file (symbols version), will compile TagsJS.scala instead
+      unmanagedSourceDirectories in Compile += baseDirectory.value / ".." / "src" / "main" // test sources are omitted from js build
     )
 }
