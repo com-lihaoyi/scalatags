@@ -8,6 +8,7 @@ object Build extends sbt.Build {
     .settings(
       name := "scalatags-js",
       version := "0.1.4",
-      unmanagedSourceDirectories in Compile += baseDirectory.value / ".." / "src" / "main" // test sources are omitted from js build
+      unmanagedSourceDirectories in Compile += baseDirectory.value / ".." / "src" / "main", // test sources are omitted from js build
+      libraryDependencies += "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.1-SNAPSHOT"
     )
 }
