@@ -1,7 +1,6 @@
 package scalatags
 
 import org.scalatest._
-import scala.xml._
 import Util._
 
 class BasicTests extends FreeSpec{
@@ -33,7 +32,17 @@ class BasicTests extends FreeSpec{
             p()
           )
         )
-      ), "<html><head><script/><string-tag/></head><body><div><p/></div></body></html>"
+      ), """<html>
+              <head>
+                <script/>
+                <string-tag/>
+              </head>
+              <body>
+                <div>
+                  <p/>
+                </div>
+              </body>
+            </html>"""
     )
   }
 
@@ -53,7 +62,7 @@ class BasicTests extends FreeSpec{
    */
   /*"large sample" in {
 
-    xmlCheck(
+    strCheck(
       div.cls("section").id("api-specification")(
         h1.margin_top("9px")("REST API"),
         p(

@@ -1,5 +1,7 @@
 package scalatags
 
+import scala.collection.mutable.StringBuilder
+
 /**
  * A general interface for all types which can appear in a ScalaTags fragment.
  */
@@ -7,7 +9,18 @@ trait STag{
   /**
    * Converts an ScalaTag fragment into an html string
    */
-  def toString(): String
+  override def toString() = {
+    val strb = new StringBuilder
+    appendToStringBuilder(strb)
+    strb.toString
+  }
+
+  /**
+   * Appends the textual representation of the ScalaTag fragment to the
+   * 'strb' StringBuilder, so StringBuilder can be passed to childrens.
+   * Used to optimize the toString() operation.
+   */
+  def appendToStringBuilder(strb: StringBuilder): Unit
 
   /**
    * The children of a ScalaTag node
@@ -36,25 +49,27 @@ case class HtmlTag(tag: String = "",
     copy(attrMap = t.foldLeft(attrMap)(_+_))
   }
 
-  override def toString(): String = 
-    "<" + tag + classString + attrString + stylesString +
-      (if(children == Nil)
-        "/>"
-      else
-        ">" + children.foldLeft("")(_ + _.toString()) + "</" + tag + ">")
+  def appendToStringBuilder(strb: StringBuilder): Unit = {
+    // tag
+    strb ++= "<" ++= tag
+    // classes
+    if(classes != Nil)
+      strb ++= " class=\"" ++= classes.mkString(" ") ++= "\""
+    // attributes
+    attrMap.foreach(a => strb ++= " " ++= a._1 ++= "=\"" ++= a._2.toString ++= "\"")
+    // styles
+    if(!styles.isEmpty) {
+      strb ++= " style=\""
+      styles.foreach(s => strb ++= s._1 ++= ":" ++= s._2.toString ++= ";")
+      strb ++= "\""
+    }
+    if(children == Nil)
+      strb ++= "/>"
+    else {
+      strb ++= ">"
+      children.foreach(_.appendToStringBuilder(strb))
+      strb ++= "</" ++= tag ++= ">"
+    }
+  }
 
-  private def classString: String =
-    if(classes == Nil)
-      ""
-    else
-      " class=\"" + classes.mkString(" ") + "\""
-
-  private def attrString: String =
-    attrMap.foldLeft("")((s, a) => s + " " + a._1 + "=\"" + a._2.toString + "\"")
-
-  private def stylesString: String =
-    if(styles.isEmpty)
-      ""
-    else
-      " style=\"" + styles.foldLeft("")((s, a) => s + a._1 + ":" + a._2.toString + ";") + "\""
 }
