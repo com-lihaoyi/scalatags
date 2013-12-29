@@ -1,4 +1,4 @@
-_NOTE_: this repo contains an alternative sbt project (on folder scalatags-js) to be used with [Scala.js](http://www.scala-js.org/). To use it with a Scala.js project, just include the dependency to the project found on ```scalatags/scalatags-js```.
+_NOTE:_ this repo contains an alternative sbt project (on folder scalatags-js) to be used with [Scala.js](http://www.scala-js.org/). To use it with a Scala.js project, just include the dependency to the project found on ```scalatags/scalatags-js```. Now also has been removed the dependency on ```scala-xml```, so there is no ```toXML``` method. To get the html now you do a ```toString```.
 
 ScalaTags
 =========
