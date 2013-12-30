@@ -11,7 +11,7 @@ trait STag{
    */
   override def toString() = {
     val strb = new StringBuilder
-    appendToStringBuilder(strb)
+    writeTo(strb)
     strb.toString
   }
 
@@ -20,7 +20,7 @@ trait STag{
    * 'strb' StringBuilder, so StringBuilder can be passed to childrens.
    * Used to optimize the toString() operation.
    */
-  def appendToStringBuilder(strb: StringBuilder): Unit
+  def writeTo(strb: StringBuilder): Unit
 
   /**
    * The children of a ScalaTag node
@@ -49,7 +49,7 @@ case class HtmlTag(tag: String = "",
     copy(attrMap = t.foldLeft(attrMap)(_+_))
   }
 
-  def appendToStringBuilder(strb: StringBuilder): Unit = {
+  def writeTo(strb: StringBuilder): Unit = {
     // tag
     strb ++= "<" ++= tag
     // classes
@@ -64,10 +64,13 @@ case class HtmlTag(tag: String = "",
       strb ++= "\""
     }
     if(children == Nil)
+      // No children - close tag
       strb ++= "/>"
     else {
       strb ++= ">"
-      children.foreach(_.appendToStringBuilder(strb))
+      // Childrens
+      children.foreach(_.writeTo(strb))
+      // Closing tag
       strb ++= "</" ++= tag ++= ">"
     }
   }

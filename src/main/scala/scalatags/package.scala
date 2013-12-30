@@ -33,8 +33,8 @@ with Misc{
    * A STag node which contains a sequence of STags.
    */
   implicit class SeqSTag[A <% STag](val x: Seq[A]) extends STag{
-    def appendToStringBuilder(strb: StringBuilder): Unit = {
-      x.foreach(_.appendToStringBuilder(strb))
+    def writeTo(strb: StringBuilder): Unit = {
+      x.foreach(_.writeTo(strb))
     }
     def children = x.map(x => x: STag)
   }
@@ -49,7 +49,7 @@ with Misc{
    * A STag node which contains a String.
    */
   implicit class StringSTag(val x: String) extends STag{
-    def appendToStringBuilder(strb: StringBuilder): Unit = strb ++= x
+    def writeTo(strb: StringBuilder): Unit = strb ++= x
     def children = Nil
   }
 
@@ -62,7 +62,7 @@ with Misc{
    * garbage collected.
    */
   case class ObjectSTag(obj: Any) extends STag{
-    def appendToStringBuilder(strb: StringBuilder): Unit = strb ++= obj.toString
+    def writeTo(strb: StringBuilder): Unit = strb ++= obj.toString
     def children = Nil
   }
 }

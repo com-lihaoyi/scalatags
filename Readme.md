@@ -1,5 +1,3 @@
-_NOTE:_ this repo contains an alternative sbt project (on folder scalatags-js) to be used with [Scala.js](http://www.scala-js.org/). To use it with a Scala.js project, just include the dependency to the project found on ```scalatags/scalatags-js```. Now also has been removed the dependency on ```scala-xml```, so there is no ```toXML``` method. To get the html now you do a ```toString```.
-
 ScalaTags
 =========
 
@@ -51,6 +49,7 @@ ScalaTags is hosted on [Maven Central](); to get started, simply add the followi
 ```scala
 libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.1.4"
 ```
+(this is for old version which uses ```scala-xml``` -[here](https://github.com/lihaoyi/scalatags/tree/b505a303dc5cdf7664b11158dd2cbd371c39cf48)-, for the current version just clone the repo and reference it on your sbt project)
 
 And you're good to go! simply open up a `sbt console`, and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
 
@@ -76,7 +75,7 @@ And all the other good things (<em>jump to definition</em>, *extract method*, et
 Examples
 ========
 
-This is a bunch of simple examples to get you started using ScalaTags. Essentially, each fragment has a `.toXML` method, which turns it into a normal scala XML data structure. You can serialize it, prettyprint it, and in general do whatever you want. It's just XML.
+This is a bunch of simple examples to get you started using ScalaTags. Essentially, each fragment has a `.toString` method, which turns it into a HTML string.
 
 These examples are all in the [unit tests](https://github.com/lihaoyi/scalatags/blob/master/src/test/scala/scalatags/ExampleTests.scala).
 
@@ -104,14 +103,20 @@ val frag = html(
 Creates a ScalaTag fragment. We could do many things with a fragment: store it, return it, but eventually you will want to convert it into HTML. In order to render the fragment to HTML, simply use:
 
 ```scala
-frag.toXML
+frag.toString
 ```
 
-Which will give you a `scala.xml.NodeSeq` XML data structure. If we want to view it nicely, we could prettyprint it:
+Which will give you a String containing the HTML representation:
+
+```html
+<html><head><script>some script</script></head><body><h1>This is my title</h1><div><p>This is my first paragraph</p><p>This is my second paragraph</p></div></body></html>
+```
+
+This representation omits unnecesary whitespace. To improve readability we could pretty print it using some XML processing:
 
 ```scala
 val prettier = new scala.xml.PrettyPrinter(80, 4)
-println(prettier.format(frag.toXML))
+println(prettier.format(scala.xml.XML.loadString(frag.toString)))
 ```
 
 executing that prints out:
@@ -398,10 +403,10 @@ prints
         <script>some script</script>
     </head>
     <body>
-        <h1 style="background-color:blue">This is my title</h1>
-        <div style="color:red background-color:blue">
+        <h1 style="background-color:blue;">This is my title</h1>
+        <div style="color:red;background-color:blue;">
             <p class="contentpara first">This is my first paragraph</p>
-            <a style="opacity:0.9">
+            <a style="opacity:0.9;">
                 <p class="contentpara">Goooogle</p>
             </a>
         </div>
@@ -517,7 +522,7 @@ prints
 Unsanitized Input
 -----------------
 
-If you *really* want, for whatever reason, to put unsanitized input into your XML, simply use scala's Unparsed function:
+If you *really* want, for whatever reason, to put unsanitized input into your HTML, simply put the string:
 
 ```scala
 val input = "<p>i am a cow</p>"
@@ -528,7 +533,7 @@ html(
   ),
   body(
     h1("This is my title"),
-    Unparsed(input)
+    input
   )
 )
 ```
@@ -548,45 +553,6 @@ prints
 ```
 
 Although this makes it easy to open up XSS holes, if you know what you're doing, go ahead.
-
-Inline XML
-----------
-
-If, for some reason, you want to include XML within your ScalaTags fragment, you can easily do so:
-
-```scala
-html(
-  head(
-    <script>Stuff Inside</script>,
-    link()
-  ),
-  body(
-    <div>
-      <h1>Title</h1>
-      <p>Stuff</p>
-    </div>
-  )
-)
-```
-
-gets converted to
-
-```html
-<html>
-    <head>
-        <script>Stuff Inside</script>
-        <link></link>
-    </head>
-    <body>
-        <div>
-            <h1>Title</h1>
-            <p>Stuff</p>
-        </div>
-    </body>
-</html>
-```
-
-As you can see, it just works.
 
 Design Considerations
 =====================
@@ -639,6 +605,19 @@ It looks pretty terrible. This is due to two reasons:
 This means that ScalaTags will naturally be more verbose when trying to express text-heavy things like blogs or wikis. Furthermore, because ScalaTags is pure Scala, running untrusted ScalaTags is a big security hole, and the need to compile it every time makes it unfeasible to use it for user-editable content.
 
 The solution? Use [Markdown](http://en.wikipedia.org/wiki/Markdown) or [Textile](http://redcloth.org/textile) or even plain XML to mark up those sections, and save ScalaTags for the heavy structural parts where you can really enjoy the benefits in static checking and DRY.
+
+Scala.js
+========
+
+ScalaTags now works out-of-the-box with [Scala.js](http://www.scala-js.org/). The folder ```scalatags-js``` includes an alternate SBT project that builds with Scala.js. Just put a dependency on it from your own project.
+
+Scala.js tools
+--------------
+
+The Scala.js version includes an additional object ```scalajs.JSUtils``` which adds two implicit methods to interact with the DOM:
+
+- ```.toJSDynamic```: converts the fragment into a DOM node and returns it as a js.Dynamic object.
+- ```.toDOMNode```: converts the fragment into a DOM node and returns it as a org.scalajs.dom.Node object.
 
 License
 =======
