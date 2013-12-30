@@ -614,7 +614,7 @@ ScalaTags now works out-of-the-box with [Scala.js](http://www.scala-js.org/). Th
 Scala.js tools
 --------------
 
-The Scala.js version includes an additional object ```scalajs.JSUtils``` which adds two implicit methods to interact with the DOM:
+The Scala.js version includes an additional object ```scalatags.JSUtils``` which adds two implicit methods to interact with the DOM:
 
 - ```.toJSDynamic```: converts the fragment into a DOM node and returns it as a js.Dynamic object.
 - ```.toDOMNode```: converts the fragment into a DOM node and returns it as a org.scalajs.dom.Node object.
