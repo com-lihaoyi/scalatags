@@ -1,12 +1,10 @@
 package scalatags
 
-import scala.xml.Node
-
 object Util extends org.scalatest.FreeSpec{
-  val prettier = new scala.xml.PrettyPrinter(80, 4)
-  def xmlCheck(x: HtmlTag, ns: Node) = {
+  val pattern = ">\\s+<".r
+  def strCheck(x: HtmlTag, s: String) = {
     assert(
-      prettier.format(x.toXML) === prettier.format(ns)
+      x.toString === pattern.replaceAllIn(s, "><")
     )
   }
 }

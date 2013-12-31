@@ -1,5 +1,3 @@
-import scala.xml._
-
 /**
  * ScalaTags is a small XML/HTML construction library for Scala. See
  * [[https://github.com/lihaoyi/scalatags the Github page]] for an introduction
@@ -35,7 +33,9 @@ with Misc{
    * A STag node which contains a sequence of STags.
    */
   implicit class SeqSTag[A <% STag](val x: Seq[A]) extends STag{
-    def toXML() = x.flatMap(n => n.toXML())
+    def writeTo(strb: StringBuilder): Unit = {
+      x.foreach(_.writeTo(strb))
+    }
     def children = x.map(x => x: STag)
   }
 
@@ -46,18 +46,10 @@ with Misc{
   implicit def Tuple5STag[A <% STag, B <% STag, C <% STag, D <% STag, E <% STag](x: (A, B, C, D, E)) = SeqSTag(Seq[STag](x._1, x._2, x._3, x._4, x._5))
 
   /**
-   * A STag node which contains an XML fragment.
-   */
-  implicit class XmlSTag(val x: NodeSeq) extends STag{
-    def toXML() = x
-    def children = Nil
-  }
-
-  /**
    * A STag node which contains a String.
    */
   implicit class StringSTag(val x: String) extends STag{
-    def toXML() = scala.xml.Text(x)
+    def writeTo(strb: StringBuilder): Unit = strb ++= x
     def children = Nil
   }
 
@@ -70,7 +62,7 @@ with Misc{
    * garbage collected.
    */
   case class ObjectSTag(obj: Any) extends STag{
-    def toXML() = scala.xml.Text(obj.toString)
+    def writeTo(strb: StringBuilder): Unit = strb ++= obj.toString
     def children = Nil
   }
 }

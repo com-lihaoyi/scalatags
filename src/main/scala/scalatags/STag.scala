@@ -1,14 +1,26 @@
 package scalatags
-import scala.xml._
+
+import scala.collection.mutable.StringBuilder
 
 /**
  * A general interface for all types which can appear in a ScalaTags fragment.
  */
 trait STag{
   /**
-   * Converts an ScalaTag fragment into a `scala.xml.NodeSeq`
+   * Converts an ScalaTag fragment into an html string
    */
-  def toXML(): NodeSeq
+  override def toString() = {
+    val strb = new StringBuilder
+    writeTo(strb)
+    strb.toString
+  }
+
+  /**
+   * Appends the textual representation of the ScalaTag fragment to the
+   * 'strb' StringBuilder, so StringBuilder can be passed to childrens.
+   * Used to optimize the toString() operation.
+   */
+  def writeTo(strb: StringBuilder): Unit
 
   /**
    * The children of a ScalaTag node
@@ -37,17 +49,30 @@ case class HtmlTag(tag: String = "",
     copy(attrMap = t.foldLeft(attrMap)(_+_))
   }
 
-  def toXML(): Elem = {
-    val c = flattenChildren(children)
-    var newAttrMap = attrMap
-    if (classes != Nil) newAttrMap = newAttrMap.updated("class", attrMap.getOrElse("class", "") + classes.map(_.toString + " ").mkString)
-    if (styles != Map.empty) newAttrMap = newAttrMap.updated("style", attrMap.getOrElse("style", "") + styles.map{case (k, v) => k + ": " + v + "; "}.mkString)
-    newAttrMap.foldLeft(new Elem(null, tag, Null, TopScope, false, c: _*))(
-      (e, k) => e % new UnprefixedAttribute(k._1, k._2.toString, Null)
-    )
+  def writeTo(strb: StringBuilder): Unit = {
+    // tag
+    strb ++= "<" ++= tag
+    // classes
+    if(classes != Nil)
+      strb ++= " class=\"" ++= classes.mkString(" ") ++= "\""
+    // attributes
+    attrMap.foreach(a => strb ++= " " ++= a._1 ++= "=\"" ++= a._2.toString ++= "\"")
+    // styles
+    if(!styles.isEmpty) {
+      strb ++= " style=\""
+      styles.foreach(s => strb ++= s._1 ++= ":" ++= s._2.toString ++= ";")
+      strb ++= "\""
+    }
+    if(children == Nil)
+      // No children - close tag
+      strb ++= "/>"
+    else {
+      strb ++= ">"
+      // Childrens
+      children.foreach(_.writeTo(strb))
+      // Closing tag
+      strb ++= "</" ++= tag ++= ">"
+    }
   }
-
-  def flattenChildren(c: Seq[STag]) =
-    c.flatMap(_.toXML())
 
 }
