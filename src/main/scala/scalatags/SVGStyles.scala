@@ -280,7 +280,7 @@ class SVGStyles {
    * every vertex other than the first and last vertex of the given <path>
    *   element or basic shape.
    */
-  object markerMid extends OpenStyle("markerMid", "marker-mid"){
+  object markerMid extends OpenStyle[String]("markerMid", "marker-mid"){
     /**
      * Indicates that no marker symbol shall be drawn at the given vertex.
      */
@@ -300,11 +300,18 @@ class SVGStyles {
    * keyword currentColor and ICC colors can be specified in the same manner as
    * within a <paint> specification for the fill and stroke attributes.
    */
-  object floodColor extends OpenStyle[Color]("floodColor", "floodColor"){
+  object floodColor extends OpenStyle[Color]("floodColor", "flood-color"){
     val currentColor = this ~~ "currentColor"
   }
 
-
+  /**
+   * The stop-color attribute indicates what color to use at that gradient stop.
+   * The keyword currentColor and ICC colors can be specified in the same manner
+   * as within a <paint> specification for the fill and stroke attributes.
+   */
+  object stopColor extends OpenStyle[Color]("stopColor", "stop-color"){
+    val currentColor = this ~~ "currentColor"
+  }
   /**
    * The color-interpolation-filters attribute specifies the color space for
    * imaging operations performed via filter effects.
