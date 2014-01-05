@@ -1,3 +1,5 @@
+import scala.collection.mutable
+
 /**
  * ScalaTags is a small XML/HTML construction library for Scala. See
  * [[https://github.com/lihaoyi/scalatags the Github page]] for an introduction
@@ -13,22 +15,33 @@ with Misc{
   type Length = String
   type Number = String
 
-  implicit class NodeTagger(v: Node) extends Mods{
-    def modify(tag: HtmlTag): HtmlTag = tag.copy(children = tag.children :+ v)
+  implicit class NodeTagger(v: Node) extends Mod{
+    def modify(children: mutable.Buffer[Node],
+               attrs: mutable.Map[String, String],
+               classes: mutable.Buffer[String],
+               styles: mutable.Map[String, String]) = {
+      children.append(v)
+    }
   }
 
-  implicit class StringTagger(v: String) extends Mods{
-    def modify(tag: HtmlTag): HtmlTag = tag.copy(children = tag.children :+ new StringNode(v))
+  implicit class StringTagger(v: String) extends Mod{
+    def modify(children: mutable.Buffer[Node],
+               attrs: mutable.Map[String, String],
+               classes: mutable.Buffer[String],
+               styles: mutable.Map[String, String]) = {
+      children.append(new StringNode(v))
+    }
   }
 
   /**
    * A STag node which contains a sequence of STags.
    */
-  implicit class SeqSTag[A <% Mods](val xs: Seq[A]) extends Mods{
-    def modify(tag: HtmlTag): HtmlTag = {
-      xs.foldLeft(tag)((tag, tagger) => tagger.modify(tag))
+  implicit class SeqTagger[A <% Mod](xs: Seq[A]) extends Mod{
+    def modify(children: mutable.Buffer[Node],
+               attrs: mutable.Map[String, String],
+               classes: mutable.Buffer[String],
+               styles: mutable.Map[String, String]) = {
+      for(x <- xs) x.modify(children, attrs, classes, styles)
     }
   }
-
-
 }

@@ -81,17 +81,12 @@ class ExampleTests extends FreeSpec{
         body(
           h1("This is my title"),
           div("posts"),
-          for ((name, text) <- posts) yield (
-            div(
+          for ((name, text) <- posts) yield div(
               h2("Post by ", name),
               p(text)
-            )
           ),
-          if(numVisitors > 100)(
-            p("No more posts!")
-          )else(
-            p("Please post below...")
-          )
+          if(numVisitors > 100) p("No more posts!")
+          else p("Please post below...")
         )
       )
     },
@@ -127,7 +122,6 @@ class ExampleTests extends FreeSpec{
             p(text)
           )
         )
-
       html(
         head(
           script("some script")
@@ -149,7 +143,7 @@ class ExampleTests extends FreeSpec{
          <body>
            <h1>This is my title</h1>
            <div>
-             <img src="www.mysite.com/imageOne.png"/>
+             <img src="www.mysite.com/imageOne.png" />
              <div>
                <p>This is the first image displayed on the site</p>
              </div>
@@ -157,7 +151,7 @@ class ExampleTests extends FreeSpec{
            <div class="content">
              <p>blah blah blah i am text</p>
              <div>
-               <img src="www.mysite.com/imageTwo.png"/>
+               <img src="www.mysite.com/imageTwo.png" />
                <div>
                  <p>This image is very interesting</p>
                </div>
@@ -252,10 +246,10 @@ class ExampleTests extends FreeSpec{
            <script>some script</script>
          </head>
          <body>
-           <h1 style="color:red;background-color:blue;">This is my title</h1>
-           <div style="color:red;background-color:blue;">
+           <h1 style="background-color: blue; color: red;">This is my title</h1>
+           <div style="background-color: blue; color: red;">
              <p class="contentpara first">This is my first paragraph</p>
-             <a style="opacity:0.9;">
+             <a style="opacity: 0.9;">
                <p class="contentpara">Goooogle</p>
              </a>
            </div>
@@ -296,7 +290,7 @@ class ExampleTests extends FreeSpec{
          <h1>This is my title</h1>
          <div class="content">
            <p>This is the first <b>image</b> displayed on the <a>site</a></p>
-           <img src="www.myImage.com/image.jpg"/>
+           <img src="www.myImage.com/image.jpg" />
            <p>blah blah blah i am text</p>
          </div>
        </body>

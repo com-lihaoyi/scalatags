@@ -20,64 +20,59 @@ class BasicTests extends FreeSpec{
   /**
    * Tests nesting tags in a simple hierarchy
    */
-  "structured tags" in {
-    strCheck(
-      html(
-        head(
-          script(""),
-          "string-tag".x
-        ),
-        body(
-          div(
-            p
-          )
+  "structured tags" in strCheck(
+    html(
+      head(
+        script(""),
+        "string-tag".x
+      ),
+      body(
+        div(
+          p
         )
-      ),
-      """
-      <html>
-          <head>
-              <script></script>
-              <string-tag />
-          </head>
-          <body>
-              <div>
-                  <p />
-              </div>
-          </body>
-      </html>
-      """
-    )
-  }
+      )
+    ),
+    """
+    <html>
+        <head>
+            <script></script>
+            <string-tag />
+        </head>
+        <body>
+            <div>
+                <p />
+            </div>
+        </body>
+    </html>
+    """
+  )
 
 
-  "css chaining" in {
-    strCheck(
-      div(
-        float.left,
-        color~"red"
-      ),
-      """<div style="float: left; color: red;" />"""
-    )
-  }
+  "css chaining" in strCheck(
+    div(
+      float.left,
+      color~"red"
+    ),
+    """<div style="color: red; float: left;" />"""
+  )
 
-  "attribute chaining" in {
-    strCheck(
-      div(
-        id~"cow",
-        `class`~"thing lol"
-      ),
-      """<div id="cow" class="thing lol" />"""
-    )
-  }
 
-  "mixing attributes and styles and children" in {
-    strCheck(
-      div(
-        id~"cow",
-        float.left,
-        p("i am a cow")
-      ),
-      """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
-    )
-  }
+  "attribute chaining" in strCheck(
+    div(
+      id~"cow",
+      `class`~"thing lol"
+    ),
+    """<div class="thing lol" id="cow" />"""
+  )
+
+
+  "mixing attributes and styles and children" in strCheck(
+    div(
+      id~"cow",
+      float.left,
+      p("i am a cow")
+    ),
+    """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
+  )
+
 }

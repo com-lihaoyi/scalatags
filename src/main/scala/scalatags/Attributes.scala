@@ -1,14 +1,19 @@
 package scalatags
 
+import scala.collection.mutable
+
 class Attr(k: String){
   def ~(v: String) = this -> v
   override def toString = k
 }
 trait Attributes{
-  implicit class AttrTagger(kv: (Attr, String)) extends Mods{
-    def modify(tag: HtmlTag) = {
+  implicit class AttrTagger(kv: (Attr, String)) extends Mod{
+    def modify(children: mutable.Buffer[Node],
+               attrs: mutable.Map[String, String],
+               classes: mutable.Buffer[String],
+               styles: mutable.Map[String, String]) = {
       val (k, v) = kv
-      tag.copy(attrs = tag.attrs.updated(k.toString, v))
+      attrs(k.toString) = v
     }
   }
 
