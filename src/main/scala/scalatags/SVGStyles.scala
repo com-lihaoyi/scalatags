@@ -1,13 +1,22 @@
+/**
+ * Documentation marked "MDN" is thanks to Mozilla Contributors
+ * at https://developer.mozilla.org/en-US/docs/Web/API and available
+ * under the Creative Commons Attribution-ShareAlike v2.5 or later.
+ * http://creativecommons.org/licenses/by-sa/2.5/
+ *
+ * Everything else is under the MIT License
+ * http://opensource.org/licenses/MIT
+ */
 package scalatags
 
 
 class CurrentColor(jsName: String, cssName: String) extends OpenStyle[Color](jsName, cssName){
-  val currentColor = this ~~ "currentColor"
-  def rgb(r: Int, g: Int, b: Int) = this ~~ s"rgb($r, $g, $b)"
-  def rgba(r: Int, g: Int, b: Int, a: Double) = this ~~ s"rgb($r, $g, $b, $a)"
-  def hex(s: String) = this ~~ s"#$s"
-  def hsl(h: Int, s: Int, l: Int) = this ~~ s"hsl($h, $s%, $l%)"
-  def hsla(h: Int, s: Int, l: Int, a: Double) = this ~~ s"hsl($h, $s%, $l%, $a)"
+  val currentColor = this -> "currentColor"
+  def rgb(r: Int, g: Int, b: Int) = this -> s"rgb($r, $g, $b)"
+  def rgba(r: Int, g: Int, b: Int, a: Double) = this -> s"rgb($r, $g, $b, $a)"
+  def hex(s: String) = this -> s"#$s"
+  def hsl(h: Int, s: Int, l: Int) = this -> s"hsl($h, $s%, $l%)"
+  def hsla(h: Int, s: Int, l: Int, a: Double) = this -> s"hsl($h, $s%, $l%, $a)"
 
 
 }
@@ -15,18 +24,18 @@ class CurrentColor(jsName: String, cssName: String) extends OpenStyle[Color](jsN
 class SVGStyles {
 
   trait Baseline{ self: OpenStyle[String] =>
-    val auto = this.~("auto")
+    val auto = this.->("auto")
 
-    val `before-edge` = this.~("before-edge")
-    val `text-before-edge` = this.~("text-before-edge")
-    val middle = this.~("middle")
-    val central = this.~("central")
-    val `after-edge` = this.~("after-edge")
-    val `text-after-edge` = this.~("text-after-edge")
-    val ideographic = this.~("ideographic")
-    val alphabetic = this.~("alphabetic")
-    val hanging = this.~("hanging")
-    val mathematical = this.~("mathematical")
+    val `before-edge` = this.->("before-edge")
+    val `text-before-edge` = this.->("text-before-edge")
+    val middle = this.->("middle")
+    val central = this.->("central")
+    val `after-edge` = this.->("after-edge")
+    val `text-after-edge` = this.->("text-after-edge")
+    val ideographic = this.->("ideographic")
+    val alphabetic = this.->("alphabetic")
+    val hanging = this.->("hanging")
+    val mathematical = this.->("mathematical")
   }
   /**
    * This property specifies which baseline of this element is to be aligned
@@ -40,7 +49,7 @@ class SVGStyles {
   object alignmentBaseline
     extends OpenStyle[String]("alignmentBaseline", "alignment-baseline")
     with Baseline{
-    val baseline = this.~("baseline")
+    val baseline = this -> "baseline"
   }
 
   /**
@@ -68,10 +77,10 @@ class SVGStyles {
    * MDN
    */
   object baselineShift extends OpenStyle[Length]("baselineShift", "baseline-shift") {
-    val auto = this.~("auto")
-    val baseline = this.~("baseline")
-    val sup = this.~("sup")
-    val sub = this.~("sub")
+    val auto = this.->("auto")
+    val baseline = this.->("baseline")
+    val sup = this.->("sup")
+    val sub = this.->("sub")
   }
 
   /**
@@ -91,7 +100,7 @@ class SVGStyles {
      *
      * MDN
      */
-    val start = this.~("start")
+    val start = this.->("start")
     /**
      * The rendered characters are aligned such that the middle of the text
      * string is at the current text position. (For text on a path, conceptually
@@ -102,7 +111,7 @@ class SVGStyles {
      *
      * MDN
      */
-    val middle = this.~("middle")
+    val middle = this.->("middle")
     /**
      * The rendered characters are aligned such that the end of the text string
      * is at the initial current text position.For Latin in its usual orientation
@@ -112,7 +121,7 @@ class SVGStyles {
      *
      * MDN
      */
-    val end = this.~("end")
+    val end = this.->("end")
   }
 
   /**
@@ -145,7 +154,7 @@ class SVGStyles {
      *
      * MDN
      */
-    val nonzero = this ~~ "nonzero"
+    val nonzero = this -> "nonzero"
     /**
      * This value determines the "insideness" of a point in the shape by drawing
      * a ray from that point to infinity in any direction and counting the number
@@ -154,7 +163,7 @@ class SVGStyles {
      *
      * MDN
      */
-    val evenodd = this ~~ "evenodd"
+    val evenodd = this -> "evenodd"
   }
   /**
    * The fill-rule attribute indicates the algorithm which is to be used to
@@ -196,9 +205,9 @@ class SVGStyles {
   object dominantBaseline
     extends OpenStyle[String]("dominantBaseline", "dominant-baseline")
     with Baseline{
-      val `use-script` = this ~ "user-script"
-      val `no-change` = this ~ "no-change"
-      val `reset-size` = this ~ "reset-size"
+      val `use-script` = this -> "user-script"
+      val `no-change` = this -> "no-change"
+      val `reset-size` = this -> "reset-size"
   }
 
   /**
@@ -218,8 +227,8 @@ class SVGStyles {
    * MDN
    */
   object fill extends OpenStyle[String]("fill", "fill"){
-    val remove = this.~("remove")
-    val freeze = this.~("freeze")
+    val remove = this.->("remove")
+    val freeze = this.->("freeze")
   }
 
   /**
@@ -237,9 +246,9 @@ class SVGStyles {
    * MDN
    */
   object strokeLinejoin extends Style("strokeLinejoin", "stroke-linejoin"){
-    val miter = this ~~ "miter"
-    val round = this ~~ "round"
-    val bevel = this ~~ "bevel"
+    val miter = this -> "miter"
+    val round = this -> "round"
+    val bevel = this -> "bevel"
   }
 
   /**
@@ -294,9 +303,9 @@ class SVGStyles {
    * MDN
    */
   object strokeLinecap extends Style("strokeLinecap", "stroke-linecap"){
-    val butt = this ~~ "butt"
-    val round = this ~~ "round"
-    val square = this ~~ "square"
+    val butt = this -> "butt"
+    val round = this -> "round"
+    val square = this -> "square"
   }
 
   /**
@@ -368,20 +377,20 @@ class SVGStyles {
      *
      * MDN
      */
-    val auto = this ~~ "auto"
+    val auto = this -> "auto"
     /**
      * Indicates that color interpolation should occur in the sRGB color space.
      *
      * MDN
      */
-    val sRGB = this ~~ "sRGB"
+    val sRGB = this -> "sRGB"
     /**
      * Indicates that color interpolation should occur in the linearized RGB
      * color space as described in the sRGB specification.
      *
      * MDN
      */
-    val linearRGB = this ~~ "linearRGB"
+    val linearRGB = this -> "linearRGB"
   }
 
   /**

@@ -51,7 +51,7 @@ class BasicTests extends FreeSpec{
   "css chaining" in strCheck(
     div(
       float.left,
-      color~"red"
+      color->"red"
     ),
     """<div style="color: red; float: left;" />"""
   )
@@ -59,8 +59,8 @@ class BasicTests extends FreeSpec{
 
   "attribute chaining" in strCheck(
     div(
-      id~"cow",
-      `class`~"thing lol"
+      id->"cow",
+      `class`->"thing lol"
     ),
     """<div class="thing lol" id="cow" />"""
   )
@@ -68,11 +68,16 @@ class BasicTests extends FreeSpec{
 
   "mixing attributes and styles and children" in strCheck(
     div(
-      id~"cow",
+      id->"cow",
       float.left,
       p("i am a cow")
     ),
     """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
   )
 
+  "css helpers tests" in {
+    assert(10.px == "10px")
+    assert(10.em == "10em")
+    assert(10.pt == "10pt")
+  }
 }

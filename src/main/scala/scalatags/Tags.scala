@@ -1,3 +1,12 @@
+/**
+ * Documentation marked "MDN" is thanks to Mozilla Contributors
+ * at https://developer.mozilla.org/en-US/docs/Web/API and available
+ * under the Creative Commons Attribution-ShareAlike v2.5 or later.
+ * http://creativecommons.org/licenses/by-sa/2.5/
+ *
+ * Everything else is under the MIT License
+ * http://opensource.org/licenses/MIT
+ */
 package scalatags
 
 /**
@@ -5,15 +14,6 @@ package scalatags
  * giving you nice autocomplete and error-checking by the compiler. Tags
  * which aren't on this list can be easily be created using Symbols, although
  * the syntax is slightly less nice (`"head".x` instead of just `head`).
- *
- * The list was taken from:
- *
- * https://developer.mozilla.org/en-US/docs/HTML/HTML5/HTML5_element_list
- * 
- * Documentation marked "MDN" is thanks to Mozilla Contributors
- * at https://developer.mozilla.org/en-US/docs/Web/API and available
- * under the Creative Commons Attribution-ShareAlike v2.5 or later.
- * http://creativecommons.org/licenses/by-sa/2.5/
  */
 private[scalatags] trait Tags{
 

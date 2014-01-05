@@ -3,9 +3,6 @@ import scala.collection.{SortedMap, mutable}
 trait Core{
 
 
-  implicit class NodeableString(s: String){
-    def x = new HtmlTag(s)
-  }
 
   /**
    * A STag node which contains a String.

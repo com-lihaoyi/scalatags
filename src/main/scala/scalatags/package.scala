@@ -15,33 +15,32 @@ with Misc{
   type Length = String
   type Number = String
 
-  implicit class NodeTagger(v: Node) extends Mod{
-    def modify(children: mutable.Buffer[Node],
-               attrs: mutable.Map[String, String],
-               classes: mutable.Buffer[String],
-               styles: mutable.Map[String, String]) = {
-      children.append(v)
-    }
-  }
-
-  implicit class StringTagger(v: String) extends Mod{
-    def modify(children: mutable.Buffer[Node],
-               attrs: mutable.Map[String, String],
-               classes: mutable.Buffer[String],
-               styles: mutable.Map[String, String]) = {
-      children.append(new StringNode(v))
-    }
-  }
+  /**
+   * Allows you to modify a HtmlNode by adding a Node to its list of children
+   */
+  implicit class NodeMod(v: Node) extends QuickMod(
+    (children, attrs, classes, styles) => children.append(v)
+  )
 
   /**
-   * A STag node which contains a sequence of STags.
+   * Allows you to modify a HtmlNode by adding a String to its list of children
    */
-  implicit class SeqTagger[A <% Mod](xs: Seq[A]) extends Mod{
-    def modify(children: mutable.Buffer[Node],
-               attrs: mutable.Map[String, String],
-               classes: mutable.Buffer[String],
-               styles: mutable.Map[String, String]) = {
-      for(x <- xs) x.modify(children, attrs, classes, styles)
-    }
+  implicit class StringMod(v: String) extends QuickMod(
+    (children, attrs, classes, styles) => children.append(new StringNode(v))
+  )
+
+  /**
+   * Allows you to modify a HtmlNode by adding a Seq containing other mod-able
+   * objects to its list of children.
+   */
+  implicit class SeqMod[A <% Mod](xs: Seq[A])extends QuickMod(
+    (children, attrs, classes, styles) => for(x <- xs) x.modify(children, attrs, classes, styles)
+  )
+
+  implicit class NodeableString(s: String){
+    def x = new HtmlTag(s)
+    def attr = new Attr(s)
+    def attrTyped[T] = new TypedAttr[T](s)
+    def style = new Style(s, s)
   }
 }

@@ -21,18 +21,20 @@ class ExampleTests extends FreeSpec{
         )
       )
     ),
-    """<html>
-         <head>
-           <script>some script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <div>
-             <p>This is my first paragraph</p>
-             <p>This is my second paragraph</p>
-           </div>
-         </body>
-       </html>"""
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <p>This is my first paragraph</p>
+                <p>This is my second paragraph</p>
+            </div>
+        </body>
+    </html>
+    """
   )
   "Variables" in strCheck(
     {
@@ -117,7 +119,7 @@ class ExampleTests extends FreeSpec{
     {
       def imgBox(source: String, text: String) =
         div(
-          img(src~source),
+          img(src->source),
           div(
             p(text)
           )
@@ -129,7 +131,7 @@ class ExampleTests extends FreeSpec{
         body(
           h1("This is my title"),
           imgBox("www.mysite.com/imageOne.png", "This is the first image displayed on the site"),
-          div(`class`~"content")(
+          div(`class`->"content")(
             p("blah blah blah i am text"),
             imgBox("www.mysite.com/imageTwo.png", "This image is very interesting")
           )
@@ -168,10 +170,10 @@ class ExampleTests extends FreeSpec{
       body(
         h1("This is my title"),
         div(
-          p(onclick~"... do some js")(
+          p(onclick->"... do some js")(
             "This is my first paragraph"
           ),
-          a(href~"www.google.com")(
+          a(href->"www.google.com")(
             p("Goooogle")
           )
         )
@@ -200,10 +202,10 @@ class ExampleTests extends FreeSpec{
       body(
         h1("This is my title"),
         div(
-          p(onclick~"... do some js")(
+          p(onclick->"... do some js")(
             "This is my first paragraph"
           ),
-          a(href~"www.google.com")(
+          a(href->"www.google.com")(
             p("Goooogle")
           )
         )
@@ -230,12 +232,12 @@ class ExampleTests extends FreeSpec{
         script("some script")
       ),
       body(
-        h1(color~"red", backgroundColor~"blue")("This is my title"),
-        div(color~"red", backgroundColor~"blue")(
+        h1(color->"red", backgroundColor->"blue")("This is my title"),
+        div(color->"red", backgroundColor->"blue")(
           p.cls("contentpara", "first")(
             "This is my first paragraph"
           ),
-          a(opacity~0.9)(
+          a(opacity->0.9)(
             p.cls("contentpara")("Goooogle")
           )
         )
@@ -276,7 +278,7 @@ class ExampleTests extends FreeSpec{
       ),
       Seq(
         p("This is the first ", b("image"), " displayed on the ", a("site")),
-        img(src~"www.myImage.com/image.jpg"),
+        img(src->"www.myImage.com/image.jpg"),
         p("blah blah blah i am text")
       )
     )
@@ -296,8 +298,6 @@ class ExampleTests extends FreeSpec{
        </body>
      </html>"""
   )
-
-
 
   "Inheritence" in strCheck(
     {
@@ -357,14 +357,30 @@ class ExampleTests extends FreeSpec{
         )
       )
     },
-    """<html>
-         <head>
-           <script>some script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <p>i am a cow</p>
-         </body>
-       </html>"""
+  """
+  <html>
+      <head>
+          <script>some script</script>
+      </head>
+      <body>
+          <h1>This is my title</h1>
+          <p>i am a cow</p>
+      </body>
+  </html>
+  """
+  )
+  "Typesafe CSS" in strCheck(
+
+    div(
+      zIndex->10
+    ),
+    """<div style="z-index: 10;" />"""
+  )
+  "Custom attributes and styles" in strCheck(
+    div(
+      "data-app-key".attr->"YOUR_APP_KEY",
+      "-moz-border-radius".style->10.px
+    ),
+    """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;" />"""
   )
 }
