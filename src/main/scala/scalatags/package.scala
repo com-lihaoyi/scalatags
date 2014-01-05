@@ -6,6 +6,10 @@
 package object scalatags
 extends Tags
 with Misc{
+  type Color = String
+  type Length = String
+  type Number = String
+
   object Implicits{
     /**
      * Extension class to provide a nice syntax to convert a String into an

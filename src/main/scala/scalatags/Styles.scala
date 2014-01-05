@@ -4,27 +4,49 @@ package scalatags
  * A Style that only has a fixed set of possible values, provided by its members.
  */
 class FixedStyle(jsName: String, cssName: String) {
-  def ~~(value: String) = new StyleValue(this, value)
+  def ~~(value: String) = (this, value)
 }
 
 /**
  * A Style that takes any value of type T as a parameter
  */
 class OpenStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+  def ~(value: T) = (this, value.toString)
+}
 
-  def ~(value: T) = new StyleValue(this, value)
+/**
+ * A Style that takes any value of type T as a parameter and has an auto value
+ */
+class AutoStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+  def ~(value: T) = (this, value.toString)
+  val auto = this ~~ "auto"
+}
+/**
+ * A Style that takes any value of type T as a parameter and has an none value
+ */
+class NoneOpenStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+  def ~(value: T) = (this, value.toString)
+  val none = this ~~ "none"
+}
 
+/**
+ * A Style that takes any value of type T as a parameter and has an none value
+ */
+class NormalOpenStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+  def ~(value: T) = (this, value.toString)
+  val normal = this ~~ "normal"
 }
 
 class StyleValue[T](s: FixedStyle, value: T)
 
+/**
+ * List of almost all common CSS styles
+ */
 trait Styles {
-  type Color = String
-  type Length = String
-  type Number = String
+
   type Time = String
 
-  trait Outline extends FixedStyle {
+  class OutlineStyle(jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
     /**
      * Displays a series of rounded dots. The spacing of the dots are not
      * defined by the specification and are implementation-specific. The radius
@@ -69,7 +91,7 @@ trait Styles {
     val outset = this ~~ "outset"
   }
 
-  trait BorderStyle extends FixedStyle with Outline {
+  class BorderStyle(jsName: String, cssName: String) extends OutlineStyle(jsName, cssName){
     /**
      * Like for the hidden keyword, displays no border. In that case, except if
      * a background image is set, the calculated values of border-right-width
@@ -90,7 +112,7 @@ trait Styles {
 
   }
 
-  trait Overflow extends FixedStyle {
+  class Overflow(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
     /**
      * Default value. Content is not clipped, it may be rendered outside the
      * content box.
@@ -114,7 +136,7 @@ trait Styles {
     val auto = this ~~ "auto"
   }
 
-  trait PageBreak extends FixedStyle {
+  class PageBreak(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
     /**
      * Initial value. Automatic page breaks (neither forced nor forbidden).
      */
@@ -140,7 +162,7 @@ trait Styles {
   }
 
 
-  trait BorderRadius extends FixedStyle {
+  class BorderRadius(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
     def ~(r1: String, r2: String = "") = this ~~ s"$r1 $r2"
   }
 
@@ -149,7 +171,7 @@ trait Styles {
    * The animation-direction CSS property indicates whether the animation should
    * play in reverse on alternate cycles.
    */
-  object animationDirection extends OpenStyle[String]("animationDirection", "animation-direction")
+  val animationDirection = new OpenStyle[String]("animationDirection", "animation-direction")
 
   /**
    * The animation-duration CSS property specifies the length of time that an
@@ -158,26 +180,26 @@ trait Styles {
    * A value of 0s, which is the default value, indicates that no animation should
    * occur.
    */
-  object animationDuration extends OpenStyle[String]("animationDuration", "animation-duration")
+  val animationDuration = new OpenStyle[String]("animationDuration", "animation-duration")
 
   /**
    * The animation-name CSS property specifies a list of animations that should
    * be applied to the selected element. Each name indicates a @keyframes at-rule
    * that defines the property values for the animation sequence.
    */
-  object animationName extends OpenStyle[String]("animationName", "animation-name")
+  val animationName = new OpenStyle[String]("animationName", "animation-name")
 
   /**
    * The animation-fill-mode CSS property specifies how a CSS animation should
    * apply styles to its target before and after it is executing.
    */
-  object animationFillMode extends OpenStyle[String]("animationFillMode", "animation-fill-mode")
+  val animationFillMode = new OpenStyle[String]("animationFillMode", "animation-fill-mode")
 
   /**
    * The animation-iteration-count CSS property defines the number of times an
    * animation cycle should be played before stopping.
    */
-  object animationIterationCount extends OpenStyle[String]("animationIterationCount", "animation-iteration-count")
+  val animationIterationCount = new OpenStyle[String]("animationIterationCount", "animation-iteration-count")
 
 
   /**
@@ -200,10 +222,11 @@ trait Styles {
    * value is implicit, the starting value is taken from the moment the animation
    * is applied to the element.
    */
-  object animationDelay extends FixedStyle("animationDelay", "animation-delay") {
+  val animationDelay = new MultiTimeStyle("animationDelay", "animation-delay")
+
+  class MultiTimeStyle(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
     def ~(times: Time*) = this ~~ times.mkString(", ")
   }
-
   /**
    * The CSS animation-timing-function property specifies how a CSS animation
    * should progress over the duration of each cycle. The possible values are
@@ -217,7 +240,7 @@ trait Styles {
    * keyframe; otherwise. If no timing function is specified for the keyframe,
    * the timing function specified for the overall animation is used.
    */
-  object animationTimingFunction extends OpenStyle[String]("animationTimingFunction", "animation-timing-function")
+  val animationTimingFunction = new OpenStyle[String]("animationTimingFunction", "animation-timing-function")
 
 
   /**
@@ -230,13 +253,13 @@ trait Styles {
    * at the time it was paused, rather than starting over from the beginning of
    * the animation sequence.
    */
-  object animationPlayState extends OpenStyle[String]("animationPlayState", "animation-play-state")
+  val animationPlayState = new OpenStyle[String]("animationPlayState", "animation-play-state")
   /**
    * The animation CSS property is a shorthand property for animation-name,
    * animation-duration, animation-timing-function, animation-delay,
    * animation-iteration-count and animation-direction.
    */
-  object animation extends OpenStyle[String]("animation", "animation")
+  val animation = new OpenStyle[String]("animation", "animation")
 
   /**
    * If a background-image is specified, the background-attachment CSS
@@ -270,9 +293,7 @@ trait Styles {
    * background-image, background-origin, background-position, background-repeat,
    * background-size, and background-attachment.
    */
-  object background extends OpenStyle[String]("background", "background") {
-
-  }
+  val background = new OpenStyle[String]("background", "background")
 
   /**
    * The background-repeat CSS property defines how background images are repeated.
@@ -283,7 +304,7 @@ trait Styles {
    * the different tiles can instead be re-sized, or space can be inserted
    * between the tiles.
    */
-  object backgroundRepeat extends OpenStyle[String]("backgroundRepeat", "background-repeat")
+  val backgroundRepeat = new OpenStyle[String]("backgroundRepeat", "background-repeat")
 
 
   /**
@@ -291,13 +312,13 @@ trait Styles {
    * the background position layer defined by background-origin for each defined
    * background image.
    */
-  object backgroundPosition extends OpenStyle[String]("backgroundPosition", "background-position")
+  val backgroundPosition = new OpenStyle[String]("backgroundPosition", "background-position")
 
   /**
    * The background-color CSS property sets the background color of an element,
    * either through a color value or the keyword transparent.
    */
-  object backgroundColor extends OpenStyle[Color]("backgroundColor", "backgroundColor")
+  val backgroundColor = new OpenStyle[Color]("backgroundColor", "backgroundColor")
 
 
   /**
@@ -380,9 +401,7 @@ trait Styles {
    * borders of the element are then drawn on top of them, and the background-color
    * is drawn beneath them.
    */
-  object backgroundImage extends OpenStyle[String]("backgroundImage", "background-image") {
-
-  }
+  val backgroundImage = new OpenStyle[String]("backgroundImage", "background-image")
 
 
   /**
@@ -390,48 +409,38 @@ trait Styles {
    * element. Note that in many cases the shorthand CSS properties border-color
    * or border-top are more convenient and preferable.
    */
-  object borderTopColor extends OpenStyle[Color]("borderTopColor", "border-top-color")
+  val borderTopColor = new OpenStyle[Color]("borderTopColor", "border-top-color")
 
   /**
    * The border-style CSS property is a shorthand property for setting the line
    * style for all four sides of the elements border.
    */
-  object borderStyle extends OpenStyle[String]("borderStyle", "border-style")
+  val borderStyle = new OpenStyle[String]("borderStyle", "border-style")
 
   /**
    * The border-top-style CSS property sets the line style of the top border of a box.
    */
-  object borderTopStyle
-    extends FixedStyle("borderTopStyle", "border-top-style")
-    with BorderStyle
+  val borderTopStyle = new BorderStyle("borderTopStyle", "border-top-style")
 
 
   /**
    * The border-right-style CSS property sets the line style of the right border
    * of a box.
    */
-  object borderRightStyle
-    extends FixedStyle("bocrderRightStyle", "border-right-style")
-    with BorderStyle
+  val borderRightStyle = new BorderStyle("bocrderRightStyle", "border-right-style")
 
   /**
    * The border-right-width CSS property sets the width of the right border of
    * a box.
    */
-  object borderRightWidth extends OpenStyle[Length]("borderRightWidth", "border-right-width") {
-    val thin = this ~~ "thin"
-    val medium = this ~~ "medium"
-    val thick = this ~~ "thick"
-  }
+  val borderRightWidth = new BorderWidth("borderRightWidth", "border-right-width")
 
   /**
    * The border-top-right-radius CSS property sets the rounding of the top-right
    * corner of the element. The rounding can be a circle or an ellipse, or if
    * one of the value is 0 no rounding is done and the corner is square.
    */
-  object borderTopRightRadius
-    extends FixedStyle("borderTopRightRadius", "border-top-right-radius")
-    with BorderRadius
+  val borderTopRightRadius = new BorderRadius("borderTopRightRadius", "border-top-right-radius")
 
   /**
    * The border-bottom-left-radius CSS property sets the rounding of the
@@ -439,54 +448,53 @@ trait Styles {
    * ellipse, or if one of the value is 0 no rounding is done and the corner is
    * square.
    */
-  object borderBottomLeftRadius
-    extends FixedStyle("borderBottomLeftRadius", "border-bottom-left-radius")
-    with BorderRadius
+  val borderBottomLeftRadius = new BorderRadius("borderBottomLeftRadius", "border-bottom-left-radius")
 
   /**
    * The border-right-color CSS property sets the color of the top border of an
    * element. Note that in many cases the shorthand CSS properties border-color
    * or border-right are more convenient and preferable.
    */
-  object borderRightColor extends OpenStyle[Color]("borderRightColor", "border-top-color")
+  val borderRightColor = new OpenStyle[Color]("borderRightColor", "border-top-color")
 
   /**
    * The border-bottom CSS property is a shorthand that sets the values of
    * border-bottom-color, border-bottom-style, and border-bottom-width. These
    * properties describe the bottom border of elements.
    */
-  object borderBottom extends OpenStyle[String]("borderBottom", "border-bottom")
+  val borderBottom = new OpenStyle[String]("borderBottom", "border-bottom")
   /**
    * The border CSS property is a shorthand property for setting the individual
    * border property values in a single place in the style sheet. border can be
    * used to set the values for one or more of: border-width, border-style,
    * border-color.
    */
-  object border extends OpenStyle[String]("border", "border")
+  val border = new OpenStyle[String]("border", "border")
 
-  /**
-   * The border-bottom-width CSS property sets the width of the bottom border of
-   * a box.
-   */
-  object borderBottomWidth extends OpenStyle[Number]("borderBottomWidth", "border-bottom-width") {
+  class BorderWidth(jsName: String, cssName: String)  extends OpenStyle[Number](jsName, cssName){
     val thin = this ~~ "thin"
     val medium = this ~~ "medium"
     val thick = this ~~ "thick"
   }
+  /**
+   * The border-bottom-width CSS property sets the width of the bottom border of
+   * a box.
+   */
+  val borderBottomWidth = new BorderWidth("borderBottomWidth", "border-bottom-width")
 
   /**
    * The border-right-color CSS property sets the color of the right border of
    * an element. Note that in many cases the shorthand CSS properties
    * border-color or border-right are more convenient and preferable.
    */
-  object borderLeftColor extends OpenStyle[Color]("borderLeftColor", "border-left-color")
+  val borderLeftColor = new OpenStyle[Color]("borderLeftColor", "border-left-color")
 
   /**
    * The border-bottom-color CSS property sets the color of the bottom border of
    * an element. Note that in many cases the shorthand CSS properties border-color
    * or border-bottom are more convenient and preferable.
    */
-  object borderBottomColor extends OpenStyle[Color]("borderBottomColor", "border-bottom-color")
+  val borderBottomColor = new OpenStyle[Color]("borderBottomColor", "border-bottom-color")
 
   /**
    * The border-collapse CSS property selects a table's border model. This has
@@ -519,38 +527,34 @@ trait Styles {
    * The border-left-style CSS property sets the line style of the left border
    * of a box.
    */
-  object borderLeftStyle
-    extends FixedStyle("borderLeftStyle", "border-left-style")
-    with BorderStyle
+  val borderLeftStyle = new BorderStyle("borderLeftStyle", "border-left-style")
 
   /**
    * The border-right CSS property is a shorthand that sets the values of
    * border-right-color, border-right-style, and border-right-width. These
    * properties describe the right border of elements.
    */
-  object borderRight extends OpenStyle[String]("borderRight", "border-right")
+  val borderRight = new OpenStyle[String]("borderRight", "border-right")
 
   /**
    * The border-bottom-style CSS property sets the line style of the bottom
    * border of a box.
    */
-  object borderBottomStyle
-    extends FixedStyle("borderBottomStyle", "border-bottom-style")
-    with BorderStyle
+  val borderBottomStyle = new BorderStyle("borderBottomStyle", "border-bottom-style")
   /**
    * The border-left-width CSS property sets the width of the left border of a box.
    */
-  object borderLeftWidth extends OpenStyle[Length]("borderLeftWidth", "border-left-width")
+  val borderLeftWidth = new BorderWidth("borderLeftWidth", "border-left-width")
   /**
    * The border-top-width CSS property sets the width of the top border of a box.
    */
-  object borderTopWidth extends OpenStyle[Length]("borderTopWidth", "border-top-width")
+  val borderTopWidth = new BorderWidth("borderTopWidth", "border-top-width")
   /**
    * The border-top CSS property is a shorthand that sets the values of
    * border-top-color, border-top-style, and border-top-width. These
    * properties describe the top border of elements.
    */
-  object borderTop extends OpenStyle[String]("borderTop", "border-top")
+  val borderTop = new OpenStyle[String]("borderTop", "border-top")
   /**
    * The border-spacing CSS property specifies the distance between the borders
    * of adjacent cells (only for the separated borders model). This is equivalent
@@ -569,15 +573,13 @@ trait Styles {
    * border corners are. The curve of each corner is defined using one or two
    * radii, defining its shape: circle or ellipse.
    */
-  object borderRadius extends OpenStyle[String]("borderRadius", "border-radius")
+  val borderRadius = new OpenStyle[String]("borderRadius", "border-radius")
 
   /**
    * The border-width CSS property sets the width of the border of a box. Using
    * the shorthand property border is often more convenient.
    */
-  object borderWidth extends FixedStyle("borderWidth", "border-width") {
-
-  }
+  val borderWidth = new OpenStyle[String]("borderWidth", "border-width")
 
   /**
    * The border-bottom-right-radius CSS property sets the rounding of the
@@ -585,9 +587,7 @@ trait Styles {
    * ellipse, or if one of the value is 0 no rounding is done and the corner is
    * square.
    */
-  object borderBottomRightRadius
-    extends FixedStyle("borderBottomRightRadius", "border-bottom-right-radius")
-    with BorderRadius
+  val borderBottomRightRadius = new BorderRadius("borderBottomRightRadius", "border-bottom-right-radius")
 
   /**
    * The border-top-left-radius CSS property sets the rounding of the
@@ -595,9 +595,7 @@ trait Styles {
    * ellipse, or if one of the value is 0 no rounding is done and the corner is
    * square.
    */
-  object borderTopLeftRadius
-    extends FixedStyle("borderTopLeftRadius", "border-top-left-radius")
-    with BorderRadius
+  val borderTopLeftRadius = new BorderRadius("borderTopLeftRadius", "border-top-left-radius")
 
   /**
    * The border-color CSS property is a shorthand for setting the color of the
@@ -641,9 +639,7 @@ trait Styles {
    * the element; it should really be called text-color and would have been
    * named so, save for historical reasons and its appearance in CSS Level 1.
    */
-  object color extends OpenStyle[Color]("color", "color") {
-    val currentColor = this ~~ "currentColor"
-  }
+  val color = new CurrentColor("color", "color")
 
   /**
    * The columns CSS property is a shorthand property allowing to set both the
@@ -658,13 +654,7 @@ trait Styles {
   /**
    * The column-count CSS property describes the number of columns of the element.
    */
-  object columnCount extends OpenStyle[Int]("columnCount", "column-count") {
-    /**
-     * Is a keyword indicating that the number of columns should be determined
-     * by other CSS properties, like column-width.
-     */
-    val auto = this ~~ "auto"
-  }
+  val columnCount = new AutoStyle[Int]("columnCount", "column-count")
 
   /**
    * The column-fill CSS property controls how contents are partitioned into
@@ -688,14 +678,7 @@ trait Styles {
    * The column-gap CSS property sets the size of the gap between columns for
    * elements which are specified to display as a multi-column element.
    */
-  object columnGap extends OpenStyle[Length]("columnGap", "column-gap") {
-    /**
-     * use the browser-defined default spacing between columns. The specification,
-     * and most modern browsers follow it, recommends this keyword to be equal
-     * to a length of 1em.
-     */
-    val normal = this ~~ "normal"
-  }
+  val columnGap = new NormalOpenStyle[Length]("columnGap", "column-gap")
 
   /**
    * In multi-column layouts, the column-rule CSS property specifies a straight
@@ -703,7 +686,7 @@ trait Styles {
    * shorthand to avoid setting each of the individual column-rule-* properties
    * separately : column-rule-width, column-rule-style and column-rule-color.
    */
-  object columnRule extends OpenStyle[String]("columnRule", "column-rule")
+  val columnRule = new OpenStyle[String]("columnRule", "column-rule")
 
   /**
    * The column-span CSS property makes it possible for an element to span across
@@ -734,19 +717,13 @@ trait Styles {
    * values must be specified. In horizontal text these are width, column-width,
    * column-gap, and column-rule-width
    */
-  object columnWidth extends OpenStyle[Length]("columnWidth", "column-width") {
-    /**
-     * Is a keyword indicating that the width of the column should be determined
-     * by other CSS properties, like column-count.
-     */
-    val auto = this ~~ "auto"
-  }
+  val columnWidth = new AutoStyle[Length]("columnWidth", "column-width")
 
   /**
    * The column-rule-color CSS property lets you set the color of the rule drawn
    * between columns in multi-column layouts.
    */
-  object columnRuleColor extends OpenStyle[Color]("columnRuleColor", "column-rule-color")
+  val columnRuleColor = new OpenStyle[Color]("columnRuleColor", "column-rule-color")
 
   /**
    * The column-rule-width CSS property lets you set the width of the rule drawn
@@ -763,8 +740,7 @@ trait Styles {
    * between columns in multi-column layouts.
    */
   object columnRuleStyle
-    extends FixedStyle("columnRuleStyle", "column-rule-style")
-    with Outline {
+    extends OutlineStyle("columnRuleStyle", "column-rule-style"){
     val hidden = this ~~ "hidden"
   }
 
@@ -774,7 +750,7 @@ trait Styles {
    * Counters by a given value. The counter's value can be reset using the
    * counter-reset CSS property.
    */
-  object counterIncrement extends OpenStyle[String]("counterIncrement", "counter-increment")
+  val counterIncrement = new OpenStyle[String]("counterIncrement", "counter-increment")
 
   /**
    * The clip CSS property defines what portion of an element is visible. The
@@ -1088,7 +1064,7 @@ trait Styles {
    * container that must be left at the bottom of the page. This property is
    * normally used to control how page breaks occur.
    */
-  object orphans extends OpenStyle[Int]("orphans", "orphans")
+  val orphans = new OpenStyle[Int]("orphans", "orphans")
 
 
   /**
@@ -1182,7 +1158,7 @@ trait Styles {
    * list item marker. It is often more convenient to use the shorthand
    * list-style.
    */
-  object listStyleImage extends OpenStyle[String]("listStyleImage", "list-style-image")
+  val listStyleImage = new OpenStyle[String]("listStyleImage", "list-style-image")
 
 
   /**
@@ -1228,7 +1204,7 @@ trait Styles {
    * Using this property with a value different than 1 places the element in a
    * new stacking context.
    */
-  object opacity extends OpenStyle[Number]("opacity", "opacity")
+  val opacity = new OpenStyle[Number]("opacity", "opacity")
 
 
   /**
@@ -1238,7 +1214,7 @@ trait Styles {
    *
    * max-width overrides width, but min-width overrides max-width.
    */
-  object maxWidth extends OpenStyle[Length]("maxWidth", "max-width")
+  val maxWidth = new OpenStyle[Length]("maxWidth", "max-width")
 
 
   /**
@@ -1284,7 +1260,7 @@ trait Styles {
    * The overflow CSS property specifies whether to clip content, render scroll
    * bars or display overflow content of a block-level element.
    */
-  object overflow extends FixedStyle("overflow", "overflow") with Overflow
+  object overflow extends Overflow("overflow", "overflow")
 
   /**
    * If the value is a URI value, the element pointed to by the URI is used as
@@ -1322,12 +1298,8 @@ trait Styles {
    *
    * The min-height and max-height properties override height.
    */
-  object height extends OpenStyle[Length]("height", "height") {
-    /**
-     * The browser will calculate and select a width for the specified element.
-     */
-    val auto = this ~~ "auto"
-  }
+  val height = new AutoStyle[Length]("height", "height")
+
 
   /**
    * The padding-right CSS property of an element sets the padding space
@@ -1335,7 +1307,7 @@ trait Styles {
    * between the content of the element and its border. Negative values are not
    * allowed.
    */
-  object paddingRight extends OpenStyle[Length]("paddingRight", "padding-right")
+  val paddingRight = new OpenStyle[Length]("paddingRight", "padding-right")
 
   /**
    * The padding-top CSS property of an element sets the padding space required
@@ -1343,14 +1315,14 @@ trait Styles {
    * of the element and its border. Contrary to margin-top values, negative
    * values of padding-top are invalid.
    */
-  object paddingTop extends OpenStyle[Length]("paddingTop", "padding-top")
+  val paddingTop = new OpenStyle[Length]("paddingTop", "padding-top")
 
   /**
    * The padding-left CSS property of an element sets the padding space required
    * on the left side of an element. The padding area is the space between the
    * content of the element and it's border. A negative value is not allowed.
    */
-  object paddingLeft extends OpenStyle[Length]("paddingLeft", "padding-left")
+  val paddingLeft = new OpenStyle[Length]("paddingLeft", "padding-left")
 
   /**
    * The padding CSS property sets the required padding space on all sides of an
@@ -1360,7 +1332,7 @@ trait Styles {
    * The padding property is a shorthand to avoid setting each side separately
    * (padding-top, padding-right, padding-bottom, padding-left).
    */
-  object padding extends OpenStyle[String]("padding", "padding")
+  val padding = new OpenStyle[String]("padding", "padding")
 
   /**
    * The padding-bottom CSS property of an element sets the height of the padding
@@ -1368,7 +1340,7 @@ trait Styles {
    * content of the element and it's border. Contrary to margin-bottom values,
    * negative values of padding-bottom are invalid.
    */
-  object paddingBottom extends OpenStyle[Length]("paddingBottom", "padding-bottom")
+  val paddingBottom = new OpenStyle[Length]("paddingBottom", "padding-bottom")
 
   /**
    * The right CSS property specifies part of the position of positioned elements.
@@ -1386,9 +1358,7 @@ trait Styles {
    * the container is right-to-left (that is that the left computed value is set
    * to -right).
    */
-  object right extends OpenStyle[Length]("right", "right") {
-    val auto = this ~~ "auto"
-  }
+  val right = new AutoStyle[Length]("right", "right")
 
 
 
@@ -1400,7 +1370,7 @@ trait Styles {
    *
    * On a non-paged media, like screen, the widows CSS property has no effect.
    */
-  object widows extends OpenStyle[Number]("widows", "widows")
+  val widows = new OpenStyle[Number]("widows", "widows")
 
   /**
    * On block level elements, the line-height CSS property specifies the minimal
@@ -1411,9 +1381,7 @@ trait Styles {
    *
    * On replaced inline elements, like buttons or other input element, line-height has no effect.
    */
-  object lineHeight extends OpenStyle[Length]("lineHeight", "lineheight") {
-    val normal = this ~~ "normal"
-  }
+  val lineHeight = new NormalOpenStyle[Length]("lineHeight", "lineheight")
 
   /**
    * The left CSS property specifies part of the position of positioned elements.
@@ -1422,9 +1390,8 @@ trait Styles {
    * position: fixed), it specifies the distance between the left margin edge of
    * the element and the left edge of its containing block.
    */
-  object left extends OpenStyle[Length]("left", "left") {
-    val auto = this ~~ "auto"
-  }
+  val left = new AutoStyle[Length]("left", "left")
+
 
 
 
@@ -1568,14 +1535,14 @@ trait Styles {
    * The list-style CSS property is a shorthand property for setting
    * list-style-type, list-style-image and list-style-position.
    */
-  object listStyle extends OpenStyle[String]("listStyle", "list-style")
+  val listStyle = new OpenStyle[String]("listStyle", "list-style")
 
   /**
    * The overflow-y CSS property specifies whether to clip content, render a
    * scroll bar, or display overflow content of a block-level element, when it
    * overflows at the top and bottom edges.
    */
-  object overflowY extends FixedStyle("overflowY", "overflow-y") with Overflow
+  val overflowY = new Overflow("overflowY", "overflow-y")
 
   /**
    * The caption-side CSS property positions the content of a table's <caption>
@@ -1600,7 +1567,7 @@ trait Styles {
    * of multiple box shadows is the same as multiple text shadows (the first
    * specified shadow is on top).
    */
-  object boxShadow extends OpenStyle[String]("boxShadow", "box-shadow")
+  val boxShadow = new OpenStyle[String]("boxShadow", "box-shadow")
 
   object quotes extends FixedStyle("quotes", "quotes") {
     /**
@@ -1700,7 +1667,7 @@ trait Styles {
    * unavailable and its replacement has a significantly different aspect ratio
    * (the ratio of the size of lowercase letters to the size of the font).
    */
-  object fontSizeAdjust extends OpenStyle[Number]("fontSizeAdjust", "font-size-adjust")
+  val fontSizeAdjust = new OpenStyle[Number]("fontSizeAdjust", "font-size-adjust")
 
   /**
    * The font-family CSS property allows for a prioritized list of font family
@@ -1710,7 +1677,7 @@ trait Styles {
    * list that is installed on the computer, or that can be downloaded using the
    * information provided by a @font-face at-rule.
    */
-  object fontFamily extends OpenStyle[String]("fontFamily", "font-family")
+  val fontFamily = new OpenStyle[String]("fontFamily", "font-family")
 
 
   /**
@@ -1752,13 +1719,13 @@ trait Styles {
    * font-variant, font-weight, font-size, line-height and font-family, or a way
    * to set the element's font to a system font, using specific keywords.
    */
-  object font extends OpenStyle[String]("font", "font")
+  val font = new OpenStyle[String]("font", "font")
 
   /**
    * The font-feature-settings CSS property allows control over advanced
    * typographic features in OpenType fonts.
    */
-  object fontFeatureSettings extends OpenStyle[String]("fontFeatureSettings", "font-feature-settings")
+  val fontFeatureSettings = new OpenStyle[String]("fontFeatureSettings", "font-feature-settings")
 
   /**
    * The font-style CSS property allows italic or oblique faces to be selected
@@ -1809,12 +1776,12 @@ trait Styles {
    * to generate content in an element. Objects inserted using the content
    * property are anonymous replaced elements.
    */
-  object content extends OpenStyle[String]("content", "content")
+  val content = new OpenStyle[String]("content", "content")
   /**
    * The counter-reset CSS property is used to reset CSS Counters to a given
    * value.
    */
-  object counterReset extends OpenStyle[String]("counterReset", "counter-reset")
+  val counterReset = new OpenStyle[String]("counterReset", "counter-reset")
 
   /**
    * The outline-width CSS property is used to set the width of the outline of
@@ -1840,31 +1807,20 @@ trait Styles {
    * The margin-bottom CSS property of an element sets the margin space required
    * on the bottom of an element. A negative value is also allowed.
    */
-  object marginBottom extends OpenStyle[Length]("marginBottom", "margin-bottom") {
-    /**
-     * auto is replaced by some suitable value, e.g. it can be used for
-     * centering of blocks.
-     */
-    val auto = this ~~ "auto"
-  }
-
+  val marginBottom = new AutoStyle[Length]("marginBottom", "margin-bottom")
 
   /**
    * The margin-right CSS property of an element sets the margin space required
    * on the bottom of an element. A negative value is also allowed.
    */
-  object marginRight
-    extends OpenStyle[Length]("marginRight", "margin-right")
-    with MarginAuto
+  val marginRight = new OpenStyle[Length]("marginRight", "margin-right") with MarginAuto
 
 
   /**
    * The margin-top CSS property of an element sets the margin space required on
    * the top of an element. A negative value is also allowed.
    */
-  object marginTop
-    extends OpenStyle[Length]("marginTop", "margin-top")
-    with MarginAuto
+  val marginTop = new OpenStyle[Length]("marginTop", "margin-top") with MarginAuto
 
 
   /**
@@ -1875,9 +1831,7 @@ trait Styles {
    * The vertical margins of two adjacent boxes may fuse. This is called margin
    * collapsing.
    */
-  object marginLeft
-    extends OpenStyle[Length]("marginLeft", "margin-left")
-    with MarginAuto
+  val marginLeft = new OpenStyle[Length]("marginLeft", "margin-left") with MarginAuto
   /**
    * The margin CSS property sets the margin for all four sides. It is a
    * shorthand to avoid setting each side separately with the other margin
@@ -1948,18 +1902,7 @@ trait Styles {
    * over-constrained and the top property has precedence: the computed value
    * of bottom is set to -top, while its specified value is ignored.
    */
-  object top extends OpenStyle[Length]("top", "top") {
-    /**
-     * Is a keyword that represents:
-     * - for absolutely positioned elements, the position the element based on
-     * the bottom property and treat height: auto as a height based on the
-     * content.
-     * - for relatively positioned elements, the offset the element from its
-     * original position based on the bottom property, or if bottom is also
-     * auto, do not offset it at all.
-     */
-    val auto = this ~~ "auto"
-  }
+  val top = new AutoStyle[Length]("top", "top")
 
 
   /**
@@ -1968,37 +1911,20 @@ trait Styles {
    *
    * The min-width and max-width properties override width.
    */
-  object width extends OpenStyle[Length]("width", "width") {
-    /**
-     * The browser will calculate and select a width for the specified element.
-     */
-    val auto = this ~~ "auto"
-
-
-  }
+  val width = new AutoStyle[Length]("width", "width")
 
   /**
    * The page-break-after CSS property adjusts page breaks after the current
    * element.
    */
-  object pageBreakAfter
-    extends FixedStyle("pageBreakAfter", "page-break-after")
-    with PageBreak
+  val pageBreakAfter = new PageBreak("pageBreakAfter", "page-break-after")
 
   /**
    * The page-break-inside CSS property adjusts page breaks inside the current
    * element.
    */
-  object pageBreakInside extends FixedStyle("pageBreakInside", "page-break-inside") {
-    /**
-     * Initial value. Automatic page breaks (neither forced nor forbidden).
-     */
-    val auto = this ~~ "auto"
-    /**
-     * Avoid page breaks inside the element
-     */
-    val avoid = this ~~ "avoid"
-  }
+  val pageBreakInside = new PageBreak("pageBreakInside", "page-break-inside")
+
 
   /**
    * The page-break-before CSS property adjusts page breaks before the current
@@ -2007,9 +1933,7 @@ trait Styles {
    * This properties applies to block elements that generate a box. It won't
    * apply on an empty <div> that won't generate a box.
    */
-  object pageBreakBefore
-    extends FixedStyle("pageBreakBefore", "page-break-before")
-    with PageBreak
+  val pageBreakBefore = new PageBreak("pageBreakBefore", "page-break-before")
 
 
   /**
@@ -2027,25 +1951,16 @@ trait Styles {
    * auto, the computed value of bottom is the negative of the computed value of
    * top.
    */
-  object bottom extends OpenStyle[Length]("bottom", "bottom") {
-    /**
-     * Is a keyword that represents:
-     * - for absolutely positioned elements, the position the element based on
-     * the top property and treat height: auto as a height based on the
-     * content.
-     * - for relatively positioned elements, the offset the element from its
-     * original position based on the top property, or if top is also auto,
-     * do not offset it at
-     */
-    def auto = this ~~ "auto"
-  }
+  val bottom = new AutoStyle[Length]("bottom", "bottom")
 
 
 
-
-  object outlineStyle
-    extends FixedStyle("outlineStyle", "outlineStyle")
-    with Outline
+  /**
+   * The outline-style CSS property is used to set the style of the outline of
+   * an element. An outline is a line that is drawn around elements, outside the
+   * border edge, to make the element stand out.
+   */
+  val outlineStyle = new OutlineStyle("outlineStyle", "outline-style")
 
 
   /**
@@ -2072,20 +1987,14 @@ trait Styles {
    *
    * Outlines do not take up space, they are drawn above the content.
    */
-  object outline extends OpenStyle[String]("outline", "outline")
+  val outline = new OpenStyle[String]("outline", "outline")
 
 
   /**
    * The word-spacing CSS property specifies spacing behavior between tags and
    * words.
    */
-  object wordSpacing extends OpenStyle[Length]("wordSpacing", "word-spacing") {
-    /**
-     * The normal inter-word space, as defined by the current font and/or the
-     * browser.
-     */
-    val normal = this ~~ "normal"
-  }
+  val wordSpacing = new NormalOpenStyle[Length]("wordSpacing", "word-spacing")
 
   /**
    * The max-height CSS property is used to set the maximum height of a given
@@ -2094,23 +2003,13 @@ trait Styles {
    *
    * max-height overrides height, but min-height overrides max-height.
    */
-  object maxHeight extends OpenStyle[Length]("maxHeight", "max-height") {
-    /**
-     * No limit on the height of the box.
-     */
-    val none = this ~~ "none"
-  }
+  val maxHeight = new NoneOpenStyle[Length]("maxHeight", "max-height")
 
   /**
    * The letter-spacing CSS property specifies spacing behavior between text
    * characters.
    */
-  object letterSpacing extends OpenStyle[Length]("letterSpacing", "letter-spacing") {
-    /**
-     * The spacing is the normal spacing for the current font.
-     */
-    val normal = this ~~ "normal"
-  }
+  val letterSpacing = new NormalOpenStyle[Length]("letterSpacing", "letter-spacing")
 
   /**
    * The white-space CSS property is used to to describe how whitespace inside
@@ -2152,7 +2051,7 @@ trait Styles {
    *
    * The value of min-width overrides both max-width and width.
    */
-  object minWidth extends OpenStyle[Length]("minWidth", "minWidth")
+  val minWidth = new OpenStyle[Length]("minWidth", "minWidth")
 
 
 
@@ -2164,7 +2063,7 @@ trait Styles {
    *
    * The value of min-height overrides both max-height and height.
    */
-  object minHeight extends OpenStyle[Length]("minHeight", "min-height")
+  val minHeight = new OpenStyle[Length]("minHeight", "min-height")
 
 
   /**
@@ -2173,21 +2072,14 @@ trait Styles {
    * other. An element with a larger z-index generally covers an element with a
    * lower one.
    */
-  object zIndex extends OpenStyle[Int]("zIndex", "z-index") {
-    /**
-     * The box does not establish a new local stacking context. The stack level
-     * of the generated box in the current stacking context is the same as its
-     * parent's box.
-     */
-    val auto = this ~~ "auto"
-  }
+  val zIndex = new AutoStyle[Int]("zIndex", "z-index")
 
   /**
    * The overflow-x CSS property specifies whether to clip content, render a
    * scroll bar or display overflow content of a block-level element, when it
    * overflows at the left and right edges.
    */
-  object overflowX extends FixedStyle("overflowX", "overflow-x") with Overflow
+  val overflowX = new Overflow("overflowX", "overflow-x")
 
 
   /**
@@ -2226,9 +2118,7 @@ trait Styles {
    * more delays, the list is simply truncated to the right size. In both case
    * the CSS declaration stays valid.
    */
-  object transitionDelay extends FixedStyle("transitionDelay", "transition-delay") {
-    def ~(times: Time*) = this ~~ times.mkString(", ")
-  }
+  val transitionDelay = new MultiTimeStyle("transitionDelay", "transition-delay")
 
   /**
    * The CSS transition property is a shorthand property for transition-property,
@@ -2237,7 +2127,7 @@ trait Styles {
    * states may be defined using pseudo-classes like :hover or :active or
    * dynamically set using JavaScript.
    */
-  object transition extends OpenStyle[String]("transition", "transition")
+  val transition = new OpenStyle[String]("transition", "transition")
 
   /**
    * The CSS transition-timing-function property is used to describe how the
@@ -2245,7 +2135,7 @@ trait Styles {
    * effect are calculated. This in essence lets you establish an acceleration
    * curve, so that the speed of the transition can vary over its duration.
    */
-  object transitionTimingFunction extends OpenStyle[String]("transitionTimingFunction", "transition-timing-function")
+  val transitionTimingFunction = new OpenStyle[String]("transitionTimingFunction", "transition-timing-function")
 
   /**
    * The transition-duration CSS property specifies the number of seconds or
@@ -2259,15 +2149,13 @@ trait Styles {
    * more durations, the list is simply truncated to the right size. In both
    * case the CSS declaration stays valid.
    */
-  object transitionDuration extends FixedStyle("transitionDuration", "transition-duration") {
-    def ~(times: Time*) = this ~~ times.mkString(", ")
-  }
+  val transitionDuration = new MultiTimeStyle("transitionDuration", "transition-duration")
 
   /**
    * The transition-property CSS property is used to specify the names of CSS
    * properties to which a transition effect should be applied.
    */
-  object transitionProperty extends OpenStyle[String]("transitionProperty", "transition-property")
+  val transitionProperty = new OpenStyle[String]("transitionProperty", "transition-property")
 
   /**
    * The CSS transform property lets you modify the coordinate space of the CSS
@@ -2278,7 +2166,7 @@ trait Styles {
    * created. In that case the object will act as a containing block for
    * position: fixed elements that it contains.
    */
-  object transform extends OpenStyle[String]("transform", "transform")
+  val transform = new OpenStyle[String]("transform", "transform")
 
 
   /**
@@ -2290,7 +2178,7 @@ trait Styles {
    *
    * Not explicitely set values are reset to their corresponding values.
    */
-  object transformOrigin extends OpenStyle[String]("transformOrigin", "transform-origin")
+  val transformOrigin = new OpenStyle[String]("transformOrigin", "transform-origin")
   /**
    * The transform-style CSS property determines if the children of the element
    * are positioned in the 3D-space or are flattened in the plane of the element.
@@ -2317,67 +2205,20 @@ trait Styles {
    * smaller. The strength of the effect is determined by the value of this
    * property.
    */
-  object perspective extends OpenStyle[Length]("perspective", "perspective") {
-    /**
-     * No perspective transform has to be appied
-     */
-    val none = this ~~ "none"
-  }
+  val perspective = new NoneOpenStyle[Length]("perspective", "perspective")
 
   /**
    * The perspective-origin CSS property determines the position the viewer is
    * looking at. It is used as the vanishing point by the perspective property.
    */
-  object perspectiveOrigin extends OpenStyle[String]("perspectiveOrigin", "perspective-origin")
-
-
-
+  val perspectiveOrigin = new OpenStyle[String]("perspectiveOrigin", "perspective-origin")
 
   /**
    * The text-align-last CSS property describes how the last line of a block or
    * a line, right before a forced line break, is aligned.
    */
-  object textAlignLast extends FixedStyle("textAlignLast", "text-align-last") {
-    /**
-     * The affected line is aligned per the value of text-align, unless
-     * text-align is justify, in which case the effect is the same as setting
-     * text-align-last to left.
-     */
-    val auto = this ~~ "auto"
-    /**
-     * The same as left if direction is left-to-right and right if direction
-     * is right-to-left.
-     */
-    val start = this ~~ "start"
-    /**
-     * The same as right if direction is left-to-right and left if direction
-     * is right-to-left.
-     */
-    val end = this ~~ "end"
-    /**
-     * The inline contents are aligned to the left edge of the line box.
-     */
-    val left = this ~~ "left"
-    /**
-     * The inline contents are aligned to the right edge of the line box.
-     */
-    val right = this ~~ "right"
-    /**
-     * The inline contents are centered within the line box.
-     */
-    val center = this ~~ "center"
-    /**
-     * The text is justified. Text should line up their left and right edges to
-     * the left and right content edges of the paragraph.
-     */
-    val justify = this ~~ "justify"
-  }
-  /**
-   * The text-align CSS property describes how inline content like text is
-   * aligned in its parent block element. text-align does not control the
-   * alignment of block elements itself, only their inline content.
-   */
-  object textAlign extends FixedStyle("textAlign", "text-align") {
+  val textAlignLast = new FixedStyle("textAlignLast", "text-align-last") with TextAlign
+  trait TextAlign extends FixedStyle{
     /**
      * The same as left if direction is left-to-right and right if direction is
      * right-to-left.
@@ -2407,6 +2248,12 @@ trait Styles {
     val justify = this ~~ "justify"
   }
   /**
+   * The text-align CSS property describes how inline content like text is
+   * aligned in its parent block element. text-align does not control the
+   * alignment of block elements itself, only their inline content.
+   */
+  val textAlign = new FixedStyle("textAlign", "text-align") with TextAlign
+  /**
    * The text-decoration CSS property is used to set the text formatting to
    * underline, overline, line-through or blink.
    */
@@ -2431,9 +2278,11 @@ trait Styles {
 
   /**
    * The text-indent CSS property specifies how much horizontal space should be
-   * left before the beginning of the first line of the text content of an element. Horizontal spacing is with respect to the left (or right, for right-to-left layout) edge of the containing block element's box.
+   * left before the beginning of the first line of the text content of an element.
+   * Horizontal spacing is with respect to the left (or right, for right-to-left
+   * layout) edge of the containing block element's box.
    */
-  object textIndent extends OpenStyle[Length]("textIndent", "text-indent")
+  val textIndent = new OpenStyle[Length]("textIndent", "text-indent")
 
 
 
@@ -2530,12 +2379,7 @@ trait Styles {
    * Multiple shadows are applied front-to-back, with the first-specified shadow
    * on top.
    */
-  object textShadow extends OpenStyle[String]("textShadow", "text-shadow") {
-    /**
-     * No shadow; this is the default.
-     */
-    val none = this ~~ "none"
-  }
+  val textShadow = new NoneOpenStyle[String]("textShadow", "text-shadow")
 
   object visibility extends FixedStyle("visibility", "visibility") {
     /**

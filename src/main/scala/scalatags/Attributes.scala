@@ -1,6 +1,9 @@
 package scalatags
 
-
+class Attribute(s: String)
+trait Attributes{
+  object href extends Attribute("href")
+}
 /**
  * Module containing static definitions for all the common HTML5 attributes,
  * giving you nice autocomplete and error-checking by the compiler. attributes
@@ -14,7 +17,7 @@ private[scalatags] trait HtmlTrait{this: HtmlTag =>
   def action(v: Any) = attr("action" -> v)
   def id(v: Any) = attr("id" -> v)
   def link(v: Any) = attr("link" -> v)
-  def target (v: Any) = attr("target" -> v)
+  def target(v: Any) = attr("target" -> v)
   def name(v: Any) = attr("name" -> v)
 
   def onblur(v: Any) = attr("onblur" -> v)

@@ -1,12 +1,12 @@
 package scalatags
 
-/**
- * Created by haoyi on 1/4/14.
- */
+
+class CurrentColor(jsName: String, cssName: String) extends OpenStyle[Color](jsName, cssName){
+  val currentColor = this ~~ "currentColor"
+}
+
 class SVGStyles {
-  type Color = String
-  type Length = String
-  type Number = String
+
   trait Baseline{ self: OpenStyle[String] =>
     val auto = this.~("auto")
 
@@ -37,25 +37,19 @@ class SVGStyles {
   }
 
   /**
-   * SVG ONLY
-   *
    * When two line segments meet at a sharp angle and miter joins have been
    * specified for stroke-linejoin, it is possible for the miter to extend far
    * beyond the thickness of the line stroking the path. The stroke-miterlimit
    * imposes a limit on the ratio of the miter length to the stroke-width. When
    * the limit is exceeded, the join is converted from a miter to a bevel.
    */
-  object strokeMiterlimit extends OpenStyle[Number]("strokeMiterlimit", "stroke-miterlimit")
+  val strokeMiterlimit = new OpenStyle[Number]("strokeMiterlimit", "stroke-miterlimit")
 
   /**
-   * SVG ONLY
-   *
    * The stop-opacity attribute defines the opacity of a given gradient stop.
    */
-  object stopOpacity extends OpenStyle[Number]("stopOpacity", "stop-opacity")
+  val stopOpacity = new OpenStyle[Number]("stopOpacity", "stop-opacity")
   /**
-   * SVG ONLY
-   *
    * The baseline-shift attribute allows repositioning of the dominant-baseline
    * relative to the dominant-baseline of the parent text content element. The
    * shifted object might be a sub- or superscript.
@@ -68,8 +62,6 @@ class SVGStyles {
   }
 
   /**
-   * SVG ONLY
-   *
    * The text-anchor attribute is used to align (start-, middle- or end-alignment)
    * a string of text relative to a given point.
    */
@@ -103,24 +95,20 @@ class SVGStyles {
   }
 
   /**
-   * SVG ONLY
-   *
    * the stroke-dasharray attribute controls the pattern of dashes and gaps used
    * to stroke paths.
    */
-  object strokeDasharray extends OpenStyle[String]("strokeDasharray", "stroke-dasharray")
+  val strokeDasharray = new OpenStyle[String]("strokeDasharray", "stroke-dasharray")
 
   /**
-   * SVG ONLY
-   *
    * the stroke-width attribute specifies the width of the outline on the current
    * object. Its default value is 1. If a <percentage> is used, the value
    * represents a percentage of the current viewport. If a value of 0 is used
    * the outline will never be drawn.
    */
-  object strokeWidth extends OpenStyle[Length]("strokeWidth", "stroke-width")
+  val strokeWidth = new OpenStyle[Length]("strokeWidth", "stroke-width")
 
-  trait ClipFillRule extends FixedStyle{
+  class ClipFillRule(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
     /**
      * This value determines the "insideness" of a point in the shape by drawing
      * a ray from that point to infinity in any direction and then examining the
@@ -140,8 +128,6 @@ class SVGStyles {
     val evenodd = this ~~ "evenodd"
   }
   /**
-   * SVG ONLY
-   *
    * The fill-rule attribute indicates the algorithm which is to be used to
    * determine what side of a path is inside the shape. For a simple,
    * non-intersecting path, it is intuitively clear what region lies "inside";
@@ -149,11 +135,9 @@ class SVGStyles {
    * where one subpath encloses another, the interpretation of "inside" is not
    * so obvious.
    */
-  object fillRule extends FixedStyle("fillRule", "fill-rule") with ClipFillRule
+  val fillRule = new ClipFillRule("fillRule", "fill-rule")
 
   /**
-   * SVG ONLY
-   *
    * The marker-end defines the arrowhead or polymarker that will be drawn at
    * the final vertex of the given <path> element or basic shape. Note that for
    * a <path> element which ends with a closed sub-path, the last vertex is the
@@ -163,7 +147,7 @@ class SVGStyles {
    * marker-end to none. (Note that the same comment applies to <polygon>
    * elements.)
    */
-  object markerEnd extends OpenStyle[String]("markerEnd", "marker-end")
+  val markerEnd = new OpenStyle[String]("markerEnd", "marker-end")
 
   /**
    * The dominant-baseline attribute is used to determine or re-determine a 
@@ -205,7 +189,7 @@ class SVGStyles {
    * the stroke-dashoffset attribute specifies the distance into the dash
    * pattern to start the dash.
    */
-  object strokeDashoffset extends OpenStyle[Length]("strokeDashoffset", "stroke-dashoffset")
+  val strokeDashoffset = new OpenStyle[Length]("strokeDashoffset", "stroke-dashoffset")
 
   /**
    * The stroke-linejoin attribute specifies the shape to be used at the corners
@@ -222,7 +206,7 @@ class SVGStyles {
    * Conceptually, any parts of the drawing that lie outside of the region
    * bounded by the currently active clipping path are not drawn.
    */
-  object clipPath extends OpenStyle[String]("clipPath", "clip-path")
+  val clipPath = new OpenStyle[String]("clipPath", "clip-path")
 
 
   /**
@@ -231,26 +215,26 @@ class SVGStyles {
    * enable auto-kerning) or instead disable auto-kerning and instead set
    * inter-character spacing to a specific length (typically, zero).
    */
-  object kerning extends OpenStyle[Length]("kerning", "kerning")
+  val kerning = new OpenStyle[Length]("kerning", "kerning")
 
   /**
    * the stroke-opacity attribute specifies the opacity of the outline on the
    * current object. Its default value is 1.
    */
-  object strokeOpacity extends OpenStyle[Double]("strokeOpacity", "stroke-opacity")
+  val strokeOpacity = new OpenStyle[Double]("strokeOpacity", "stroke-opacity")
 
   /**
    * The marker-start attribute defines the arrowhead or polymarker that will be
    * drawn at the first vertex of the given <path> element or basic shape.
    */
-  object markerStart extends OpenStyle[String]("markerStart", "marker-start")
+  val markerStart = new OpenStyle[String]("markerStart", "marker-start")
 
   /**
    * The clip-rule attribute only applies to graphics elements that are contained
    * within a <clippath> element. The clip-rule attribute basically works as the
    * fill-rule attribute, except that it applies to <clippath> definitions.
    */
-  object clipRule extends FixedStyle("clipRule", "clip-rule") with ClipFillRule
+  val clipRule = new ClipFillRule("clipRule", "clip-rule")
 
   /**
    * The stroke-linecap attribute specifies the shape to be used at the end of
@@ -266,33 +250,29 @@ class SVGStyles {
    * This attribute specifies the opacity of the color or the content the current
    * object is filled with.
    */
-  object fillOpacity extends OpenStyle[Double]("fillOpacity", "fill-opacity")
+  val fillOpacity = new OpenStyle[Double]("fillOpacity", "fill-opacity")
 
   /**
    * The marker element defines the graphics that is to be used for drawing
    * arrowheads or polymarkers on a given <path>, <line>, <polyline> or
    * <polygon> element.
    */
-  object marker extends OpenStyle[String]("marker", "marker")
+  val marker = new OpenStyle[String]("marker", "marker")
 
   /**
    * The marker-mid defines the arrowhead or polymarker that shall be drawn at
    * every vertex other than the first and last vertex of the given <path>
    *   element or basic shape.
    */
-  object markerMid extends OpenStyle[String]("markerMid", "marker-mid"){
-    /**
-     * Indicates that no marker symbol shall be drawn at the given vertex.
-     */
-    val none = this ~~ "none"
-  }
+  val markerMid = new NoneOpenStyle[String]("markerMid", "marker-mid")
+
 
   /**
    * the stroke attribute is a presentation attribute that define the color of
    * the outline of the given graphical element. The default value for the stroke
    * attribute is none which mean that the outline is never drawn.
    */
-  object stroke extends OpenStyle[String]("stroke", "stroke")
+  val stroke = new OpenStyle[String]("stroke", "stroke")
 
   /**
    * The flood-color attribute indicates what color to use to flood the current
@@ -300,18 +280,15 @@ class SVGStyles {
    * keyword currentColor and ICC colors can be specified in the same manner as
    * within a <paint> specification for the fill and stroke attributes.
    */
-  object floodColor extends OpenStyle[Color]("floodColor", "flood-color"){
-    val currentColor = this ~~ "currentColor"
-  }
+  val floodColor = new CurrentColor("floodColor", "flood-color")
 
   /**
    * The stop-color attribute indicates what color to use at that gradient stop.
    * The keyword currentColor and ICC colors can be specified in the same manner
    * as within a <paint> specification for the fill and stroke attributes.
    */
-  object stopColor extends OpenStyle[Color]("stopColor", "stop-color"){
-    val currentColor = this ~~ "currentColor"
-  }
+  val stopColor = new CurrentColor("stopColor", "stop-color")
+
   /**
    * The color-interpolation-filters attribute specifies the color space for
    * imaging operations performed via filter effects.
@@ -338,13 +315,12 @@ class SVGStyles {
    * The lighting-color attribute defines the color of the light source for
    * filter primitives elements <fediffuselighting> and <fespecularlighting>.
    */
-  object lightingColor extends OpenStyle[Color]("lightingColor", "lighting-color"){
-    val currentColor = this ~~ "currentColor"
-  }
+  val lightingColor = new CurrentColor("lightingColor", "lighting-color")
+
 
   /**
    * The flood-opacity attribute indicates the opacity value to use across the
    * current filter primitive subregion defined through the <feflood> element.
    */
-  object floodOpacity extends OpenStyle[Double]("floodOpacity", "flood-opacity")
+  val floodOpacity = new OpenStyle[Double]("floodOpacity", "flood-opacity")
 }
