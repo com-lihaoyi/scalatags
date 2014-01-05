@@ -3,28 +3,29 @@ package scalatags
 /**
  * A Style that only has a fixed set of possible values, provided by its members.
  */
-class FixedStyle(jsName: String, cssName: String) {
+class Style(jsName: String, cssName: String) {
   def ~~(value: String) = (this, value)
+  override def toString = cssName
 }
 
 /**
  * A Style that takes any value of type T as a parameter
  */
-class OpenStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+class OpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ~(value: T) = (this, value.toString)
 }
 
 /**
  * A Style that takes any value of type T as a parameter and has an auto value
  */
-class AutoStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+class AutoStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ~(value: T) = (this, value.toString)
   val auto = this ~~ "auto"
 }
 /**
  * A Style that takes any value of type T as a parameter and has an none value
  */
-class NoneOpenStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ~(value: T) = (this, value.toString)
   val none = this ~~ "none"
 }
@@ -32,21 +33,24 @@ class NoneOpenStyle[T](jsName: String, cssName: String) extends FixedStyle(jsNam
 /**
  * A Style that takes any value of type T as a parameter and has an none value
  */
-class NormalOpenStyle[T](jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+class NormalOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ~(value: T) = (this, value.toString)
   val normal = this ~~ "normal"
 }
-
-class StyleValue[T](s: FixedStyle, value: T)
 
 /**
  * List of almost all common CSS styles
  */
 trait Styles {
-
+  implicit class StyleTagger(kv: (Style, String)) extends Mods{
+    def modify(tag: HtmlTag) = {
+      val (k, v) = kv
+      tag.copy(styles = tag.styles.updated(k.toString, v))
+    }
+  }
   type Time = String
 
-  class OutlineStyle(jsName: String, cssName: String) extends FixedStyle(jsName, cssName) {
+  class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
     /**
      * Displays a series of rounded dots. The spacing of the dots are not
      * defined by the specification and are implementation-specific. The radius
@@ -112,7 +116,7 @@ trait Styles {
 
   }
 
-  class Overflow(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
+  class Overflow(jsName: String, cssName: String) extends Style(jsName, cssName){
     /**
      * Default value. Content is not clipped, it may be rendered outside the
      * content box.
@@ -136,7 +140,7 @@ trait Styles {
     val auto = this ~~ "auto"
   }
 
-  class PageBreak(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
+  class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName){
     /**
      * Initial value. Automatic page breaks (neither forced nor forbidden).
      */
@@ -162,7 +166,7 @@ trait Styles {
   }
 
 
-  class BorderRadius(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
+  class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName){
     def ~(r1: String, r2: String = "") = this ~~ s"$r1 $r2"
   }
 
@@ -224,7 +228,7 @@ trait Styles {
    */
   val animationDelay = new MultiTimeStyle("animationDelay", "animation-delay")
 
-  class MultiTimeStyle(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
+  class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName){
     def ~(times: Time*) = this ~~ times.mkString(", ")
   }
   /**
@@ -266,7 +270,7 @@ trait Styles {
    * property determines whether that image's position is fixed within
    * the viewport, or scrolls along with its containing block.
    */
-  object backgroundAttachment extends FixedStyle("backgroundAttachment", "background-attachment") {
+  object backgroundAttachment extends Style("backgroundAttachment", "background-attachment") {
     /**
      * This keyword means that the background image will scroll within the
      * viewport along with the block the image is contained within.
@@ -328,7 +332,7 @@ trait Styles {
    *
    * Note that background-origin is ignored when background-attachment is fixed.
    */
-  object backgroundOrigin extends FixedStyle("backgroundOrigin", "background-origin") {
+  object backgroundOrigin extends Style("backgroundOrigin", "background-origin") {
     /**
      * The background extends to the outside edge of the border (but underneath
      * the border in z-ordering).
@@ -353,7 +357,7 @@ trait Styles {
    * the border has transparent regions (because of border-style) or partially
    * opaque regions; otherwise the border covers up the difference.
    */
-  object backgroundClip extends FixedStyle("backgroundClip", "background-clip") {
+  object backgroundClip extends Style("backgroundClip", "background-clip") {
     /**
      * The background extends to the outside edge of the border (but underneath
      * the border in z-ordering).
@@ -500,7 +504,7 @@ trait Styles {
    * The border-collapse CSS property selects a table's border model. This has
    * a big influence on the look and style of the table cells.
    */
-  object borderCollapse extends FixedStyle("borderCollapse", "border-collapse") {
+  object borderCollapse extends Style("borderCollapse", "border-collapse") {
     /**
      * Is a keyword requesting the use of the separated-border table rendering
      * model. It is the default value.
@@ -520,7 +524,7 @@ trait Styles {
    * The three values of the shorthand property can be specified in any order,
    * and one or two of them may be omitted.
    */
-  object borderLeft extends FixedStyle("borderLeft", "border-left") {
+  object borderLeft extends Style("borderLeft", "border-left") {
     def ~(width: Length, style: String, color: Color) = this ~~ s"$width $style $color"
   }
   /**
@@ -561,7 +565,7 @@ trait Styles {
    * to the cellspacing attribute in presentational HTML, but an optional second
    * value can be used to set different horizontal and vertical spacing.
    */
-  object borderSpacing extends FixedStyle("borderSpacing", "border-spacing") {
+  object borderSpacing extends Style("borderSpacing", "border-spacing") {
     def ~(length: Length) = this ~~ length
 
     def ~(horizontal: Length, vertical: Length) = this ~~ s"$horizontal $vertical"
@@ -602,7 +606,7 @@ trait Styles {
    * four sides of an element's border: border-top-color, border-right-color,
    * border-bottom-color, border-left-color
    */
-  object borderColor extends FixedStyle("borderColor", "border-color") {
+  object borderColor extends Style("borderColor", "border-color") {
     def ~(color: Color) = this ~~ color
 
     def ~(horizontal: Color, vertical: Color) = this ~~ s"$horizontal $vertical"
@@ -618,7 +622,7 @@ trait Styles {
    * property to emulate the behavior of browsers that do not correctly support
    * the CSS box model specification.
    */
-  object boxSizing extends FixedStyle("boxSizing", "box-sizing") {
+  object boxSizing extends Style("boxSizing", "box-sizing") {
     /**
      * This is the default style as specified by the CSS standard. The width and
      * height properties are measured including only the content, but not the
@@ -645,7 +649,7 @@ trait Styles {
    * The columns CSS property is a shorthand property allowing to set both the
    * column-width and the column-count properties at the same time.
    */
-  object columns extends FixedStyle("columns", "columns") {
+  object columns extends Style("columns", "columns") {
     def ~(number: Int) = this ~~ number.toString
 
     def ~(number: Int, width: Length) = this ~~ s"$number $width"
@@ -662,7 +666,7 @@ trait Styles {
    * columns will have the same height or, when using auto, just take up the
    * room the content needs.
    */
-  object columnFill extends FixedStyle("columnFill", "column-fill") {
+  object columnFill extends Style("columnFill", "column-fill") {
     /**
      * Is a keyword indicating that columns are filled sequentially.
      */
@@ -693,7 +697,7 @@ trait Styles {
    * all columns when its value is set to all. An element that spans more than
    * one column is called a spanning element.
    */
-  object columnSpan extends FixedStyle("columnSpan", "column-span") {
+  object columnSpan extends Style("columnSpan", "column-span") {
     /**
      * The element does not span multiple columns.
      */
@@ -756,7 +760,7 @@ trait Styles {
    * The clip CSS property defines what portion of an element is visible. The
    * clip property applies only to elements with position:absolute.
    */
-  object clip extends FixedStyle("clip", "clip") {
+  object clip extends Style("clip", "clip") {
     def ~(top: Length, right: Length, bottom: Length, left: Length) =
       this ~~ s"rect($top, $right, $bottom, $left)"
 
@@ -768,7 +772,7 @@ trait Styles {
    * The cursor CSS property specifies the mouse cursor displayed when the mouse
    * pointer is over an element.
    */
-  object cursor extends FixedStyle("cursor", "cursor") {
+  object cursor extends Style("cursor", "cursor") {
     /**
      * The browser determines the cursor to display based on the current context.
      * E.g. equivalent to text when hovering text.
@@ -916,7 +920,7 @@ trait Styles {
    * text and inline elements will wrap around it. A floating element is one
    * where the computed value of float is not none.
    */
-  object cssFloat extends FixedStyle("cssFloat", "float") {
+  object float extends Style("cssFloat", "float") {
     /**
      * Is a keyword indicating that the element must float on the left side of
      * its containing block.
@@ -953,7 +957,7 @@ trait Styles {
    * The direction and unicode-bidi properties are the two only properties which
    * are not affected by the all shorthand.
    */
-  object direction extends FixedStyle("direction", "direction") {
+  object direction extends Style("direction", "direction") {
     /**
      * The initial value of direction (that is, if not otherwise specified). Text
      * and other elements go from left to right.
@@ -976,7 +980,7 @@ trait Styles {
    * elements also have their display turned off. The document is rendered as
    * though the element doesn't exist in the document tree.
    */
-  object display extends FixedStyle("display", "display") {
+  object display extends Style("display", "display") {
     /**
      * Turns off the display of an element (it has no effect on layout); all
      * descendant elements also have their display turned off. The document is
@@ -1077,7 +1081,7 @@ trait Styles {
    * the value none instructs the mouse event to go "through" the element and
    * target whatever is "underneath" that element instead.
    */
-  object pointerEvents extends FixedStyle("pointerEvents", "pointer-events") {
+  object pointerEvents extends Style("pointerEvents", "pointer-events") {
     /**
      * The element behaves as it would if the pointer-events property was not
      * specified. In SVG content, this value and the value visiblePainted have
@@ -1166,7 +1170,7 @@ trait Styles {
    * box in the principal block box. It is often more convenient to use the
    * shortcut list-style.
    */
-  object listStylePosition extends FixedStyle("listStylePosition", "list-style-position") {
+  object listStylePosition extends Style("listStylePosition", "list-style-position") {
     /**
      * The marker box is outside the principal block box.
      */
@@ -1178,7 +1182,7 @@ trait Styles {
     val inside = this ~~ "inside"
   }
 
-  object wordWrap extends FixedStyle("wordWrap", "word-wrap") {
+  object wordWrap extends Style("wordWrap", "word-wrap") {
     /**
      * Indicates that lines may only break at normal word break points.
      */
@@ -1204,7 +1208,7 @@ trait Styles {
    * Using this property with a value different than 1 places the element in a
    * new stacking context.
    */
-  val opacity = new OpenStyle[Number]("opacity", "opacity")
+  val opacity = new OpenStyle[Double]("opacity", "opacity")
 
 
   /**
@@ -1266,7 +1270,7 @@ trait Styles {
    * If the value is a URI value, the element pointed to by the URI is used as
    * an SVG mask.
    */
-  object mask extends FixedStyle("mask", "mask") {
+  object mask extends Style("mask", "mask") {
     val none = this ~~ "none"
 
     def uri(s: String) = this ~~ s"uri($s)"
@@ -1278,7 +1282,7 @@ trait Styles {
    * he empty-cells CSS property specifies how user agents should render borders
    * and backgrounds around cells that have no visible content.
    */
-  object emptyCells extends FixedStyle("emptyCells", "empty-cells") {
+  object emptyCells extends Style("emptyCells", "empty-cells") {
     /**
      * Is a keyword indicating that borders and backgrounds should be drawn like
      * in a normal cells.
@@ -1403,7 +1407,7 @@ trait Styles {
    * As it is the only one who defaults to display:list-item, this is usually a
    * <li> element, but can be any element with this display value.
    */
-  object listStyleType extends FixedStyle("listStyleType", "list-style-type") {
+  object listStyleType extends Style("listStyleType", "list-style-type") {
     /**
      * No item marker is shown
      */
@@ -1500,7 +1504,7 @@ trait Styles {
    * The position CSS property chooses alternative rules for positioning elements,
    * designed to be useful for scripted animation effects.
    */
-  object position extends FixedStyle("position", "position") {
+  object position extends Style("position", "position") {
     /**
      * This keyword let the element use the normal behavior, that is it is laid
      * out in its current position in the flow.  The top, right, bottom, and left
@@ -1548,7 +1552,7 @@ trait Styles {
    * The caption-side CSS property positions the content of a table's <caption>
    * on the specified side.
    */
-  object captionSide extends FixedStyle("captionSide", "caption-side") {
+  object captionSide extends Style("captionSide", "caption-side") {
     /**
      * The caption box will be above the table.
      */
@@ -1569,7 +1573,7 @@ trait Styles {
    */
   val boxShadow = new OpenStyle[String]("boxShadow", "box-shadow")
 
-  object quotes extends FixedStyle("quotes", "quotes") {
+  object quotes extends Style("quotes", "quotes") {
     /**
      * The open-quote and close-quote values of the content property produce no
      * quotation marks.
@@ -1582,7 +1586,7 @@ trait Styles {
 
   }
 
-  object tableLayout extends FixedStyle("tableLayout", "table-layout") {
+  object tableLayout extends Style("tableLayout", "table-layout") {
     /**
      * An automatic table layout algorithm is commonly used by most browsers for
      * table layout. The width of the table and its cells depends on the content
@@ -1605,7 +1609,7 @@ trait Styles {
    * text. This property overrides this algorithm and allows the developer to
    * control the text embedding.
    */
-  object unicodeBidi extends FixedStyle("unicodeBidi", "unicode-bidi") {
+  object unicodeBidi extends Style("unicodeBidi", "unicode-bidi") {
     /**
      * The element does not offer a additional level of embedding with respect
      * to the bidirectional algorithm. For inline elements implicit reordering
@@ -1731,7 +1735,7 @@ trait Styles {
    * The font-style CSS property allows italic or oblique faces to be selected
    * within a font-family.
    */
-  object fontStyle extends FixedStyle("fontStyle", "font-style"){
+  object fontStyle extends Style("fontStyle", "font-style"){
     /**
      * Selects a font that is classified as normal within a font-family
      */
@@ -1752,7 +1756,7 @@ trait Styles {
    *
    * The clear property applies to both floating and non-floating elements.
    */
-  object clear extends FixedStyle("clear", "clear") {
+  object clear extends Style("clear", "clear") {
     /**
      * The element is not moved down to clear past floating elements.
      */
@@ -1839,7 +1843,7 @@ trait Styles {
    *
    * Negative values are also allowed.
    */
-  object margin extends FixedStyle("margin", "margin") {
+  object margin extends Style("margin", "margin") {
     /**
      * auto is replaced by some suitable value, e.g. it can be used for
      * centering of blocks.
@@ -1856,7 +1860,7 @@ trait Styles {
   }
 
 
-  trait MarginAuto extends FixedStyle {
+  trait MarginAuto extends Style {
     /**
      * auto is replaced by some suitable value, e.g. it can be used for
      * centering of blocks.
@@ -1870,7 +1874,7 @@ trait Styles {
    * The word-break CSS property is used to specify how (or if) to break lines
    * within words.
    */
-  object wordBreak extends FixedStyle("wordBreak", "word-break") {
+  object wordBreak extends Style("wordBreak", "word-break") {
     /**
      * Use the default line break rule.
      */
@@ -2015,7 +2019,7 @@ trait Styles {
    * The white-space CSS property is used to to describe how whitespace inside
    * the element is handled.
    */
-  object whiteSpace extends FixedStyle("whiteSpace", "white-space"){
+  object whiteSpace extends Style("whiteSpace", "white-space"){
     /**
      * Sequences of whitespace are collapsed. Newline characters in the source
      * are handled as other whitespace. Breaks lines as necessary to fill line
@@ -2088,7 +2092,7 @@ trait Styles {
    * element always is a transparent background, letting, when visible, a mirror
    * image of the front face be displayed.
    */
-  object backfaceVisibility extends FixedStyle("backfaceVisibility", "backface-visibility") {
+  object backfaceVisibility extends Style("backfaceVisibility", "backface-visibility") {
     /**
      * The back face is visible.
      */
@@ -2183,7 +2187,7 @@ trait Styles {
    * The transform-style CSS property determines if the children of the element
    * are positioned in the 3D-space or are flattened in the plane of the element.
    */
-  object transformStyle extends FixedStyle("transformStyle", "transform-style") {
+  object transformStyle extends Style("transformStyle", "transform-style") {
     /**
      * Indicates that the children of the element should be positioned in the
      * 3D-space.
@@ -2217,8 +2221,8 @@ trait Styles {
    * The text-align-last CSS property describes how the last line of a block or
    * a line, right before a forced line break, is aligned.
    */
-  val textAlignLast = new FixedStyle("textAlignLast", "text-align-last") with TextAlign
-  trait TextAlign extends FixedStyle{
+  val textAlignLast = new Style("textAlignLast", "text-align-last") with TextAlign
+  trait TextAlign extends Style{
     /**
      * The same as left if direction is left-to-right and right if direction is
      * right-to-left.
@@ -2252,12 +2256,12 @@ trait Styles {
    * aligned in its parent block element. text-align does not control the
    * alignment of block elements itself, only their inline content.
    */
-  val textAlign = new FixedStyle("textAlign", "text-align") with TextAlign
+  val textAlign = new Style("textAlign", "text-align") with TextAlign
   /**
    * The text-decoration CSS property is used to set the text formatting to
    * underline, overline, line-through or blink.
    */
-  object textDecoration extends FixedStyle("textDecoration", "text-decoration") {
+  object textDecoration extends Style("textDecoration", "text-decoration") {
     /**
      * Produces no text decoration.
      */
@@ -2291,7 +2295,7 @@ trait Styles {
    * not displayed is signaled to the users. It can be clipped, or display an
    * ellipsis ('…', U+2026 HORIZONTAL ELLIPSIS) or a Web author-defined string.
    */
-  object textOverflow extends FixedStyle("textOverflow", "text-overflow") {
+  object textOverflow extends Style("textOverflow", "text-overflow") {
     /**
      * This keyword value indicates to truncate the text at the limit of the
      * content area, therefore the truncation can happen in the middle of a
@@ -2315,7 +2319,7 @@ trait Styles {
    * This property inherits and is not reset by the text-decoration shorthand,
    * allowing to easily set it globally for a given document.
    */
-  object textUnderlinePosition extends FixedStyle("textUnderlinePosition", "text-underline-position") {
+  object textUnderlinePosition extends Style("textUnderlinePosition", "text-underline-position") {
     /**
      * This keyword allows the browser to use an algorithm to choose between
      * under and alphabetic.
@@ -2348,7 +2352,7 @@ trait Styles {
    * text. It can be used to make text appear in all-uppercase or all-lowercase,
    * or with each word capitalized.
    */
-  object textTransform extends FixedStyle("textTransform", "text-transform") {
+  object textTransform extends Style("textTransform", "text-transform") {
     /**
      * Forces the first letter of each word to be converted to
      * uppercase. Other characters are unchanged.
@@ -2381,7 +2385,7 @@ trait Styles {
    */
   val textShadow = new NoneOpenStyle[String]("textShadow", "text-shadow")
 
-  object visibility extends FixedStyle("visibility", "visibility") {
+  object visibility extends Style("visibility", "visibility") {
     /**
      * Default value, the box is visible
      */

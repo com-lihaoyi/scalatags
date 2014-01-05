@@ -11,10 +11,10 @@ class BasicTests extends FreeSpec{
    * the tags on the fly from Symbols and Strings
    */
   "basic tag creation" in {
-    assert(a.toString === "<a/>")
-    assert(html.toString === "<html/>")
-    assert("this_is_an_unusual_tag".x.toString === "<this_is_an_unusual_tag/>")
-    assert("this-is-a-string-with-dashes".x.toString === "<this-is-a-string-with-dashes/>")
+    assert(a.toString === "<a />")
+    assert(html.toString === "<html />")
+    assert("this_is_an_unusual_tag".x.toString === "<this_is_an_unusual_tag />")
+    assert("this-is-a-string-with-dashes".x.toString === "<this-is-a-string-with-dashes />")
   }
 
   /**
@@ -24,32 +24,60 @@ class BasicTests extends FreeSpec{
     strCheck(
       html(
         head(
-          script(),
-          "string-tag".x()
+          script(""),
+          "string-tag".x
         ),
         body(
           div(
-            p()
+            p
           )
         )
-      ), """<html>
-              <head>
-                <script/>
-                <string-tag/>
-              </head>
-              <body>
-                <div>
-                  <p/>
-                </div>
-              </body>
-            </html>"""
+      ),
+      """
+      <html>
+          <head>
+              <script></script>
+              <string-tag />
+          </head>
+          <body>
+              <div>
+                  <p />
+              </div>
+          </body>
+      </html>
+      """
     )
   }
 
 
   "css chaining" in {
     strCheck(
-      div.fL.color("red"), "<div style=\"float:left;color:red;\"/>"
+      div(
+        float.left,
+        color~"red"
+      ),
+      """<div style="float: left; color: red;" />"""
+    )
+  }
+
+  "attribute chaining" in {
+    strCheck(
+      div(
+        id~"cow",
+        `class`~"thing lol"
+      ),
+      """<div id="cow" class="thing lol" />"""
+    )
+  }
+
+  "mixing attributes and styles and children" in {
+    strCheck(
+      div(
+        id~"cow",
+        float.left,
+        p("i am a cow")
+      ),
+      """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
     )
   }
 }

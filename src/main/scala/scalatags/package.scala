@@ -4,69 +4,31 @@
  * and documentation.
  */
 package object scalatags
-extends Tags
+extends Core
+with Tags
+with Styles
+with Attributes
 with Misc{
   type Color = String
   type Length = String
   type Number = String
 
-  object Implicits{
-    /**
-     * Extension class to provide a nice syntax to convert a String into an
-     * STags tag: `"tag-name".x`.
-     */
-    implicit class StringToNodeable(S: String){ def x = new HtmlTag(S) }
-
-    /**
-     * Extension class to provide a nice syntax to convert a Symbolinto an
-     * STags tag: `'tagname.x`.
-     */
-    implicit class SymbolToNodeable(S: Symbol){ def x = new HtmlTag(S.name) }
-
-    /**
-     * Extension class to easily convert `Any`s to STags
-     */
-    implicit class ObjectToSTagable(x: Any){
-      def toSTag = ObjectSTag(x)
-    }
+  implicit class NodeTagger(v: Node) extends Mods{
+    def modify(tag: HtmlTag): HtmlTag = tag.copy(children = tag.children :+ v)
   }
-  implicit lazy val stringToNodeable = Implicits.StringToNodeable _
-  implicit lazy val symbolToNodeable = Implicits.SymbolToNodeable _
-  implicit lazy val objectToNodeable = Implicits.ObjectToSTagable _
+
+  implicit class StringTagger(v: String) extends Mods{
+    def modify(tag: HtmlTag): HtmlTag = tag.copy(children = tag.children :+ new StringNode(v))
+  }
+
   /**
    * A STag node which contains a sequence of STags.
    */
-  implicit class SeqSTag[A <% STag](val x: Seq[A]) extends STag{
-    def writeTo(strb: StringBuilder): Unit = {
-      x.foreach(_.writeTo(strb))
+  implicit class SeqSTag[A <% Mods](val xs: Seq[A]) extends Mods{
+    def modify(tag: HtmlTag): HtmlTag = {
+      xs.foldLeft(tag)((tag, tagger) => tagger.modify(tag))
     }
-    def children = x.map(x => x: STag)
   }
 
 
-  implicit def Tuple2STag[A <% STag, B <% STag](x: (A, B)) = SeqSTag(Seq[STag](x._1, x._2))
-  implicit def Tuple3STag[A <% STag, B <% STag, C <% STag](x: (A, B, C)) = SeqSTag(Seq(x._1: STag, x._2: STag, x._3: STag))
-  implicit def Tuple4STag[A <% STag, B <% STag, C <% STag, D <% STag](x: (A, B, C, D)) = SeqSTag(Seq[STag](x._1, x._2, x._3, x._4))
-  implicit def Tuple5STag[A <% STag, B <% STag, C <% STag, D <% STag, E <% STag](x: (A, B, C, D, E)) = SeqSTag(Seq[STag](x._1, x._2, x._3, x._4, x._5))
-
-  /**
-   * A STag node which contains a String.
-   */
-  implicit class StringSTag(val x: String) extends STag{
-    def writeTo(strb: StringBuilder): Unit = strb ++= x
-    def children = Nil
-  }
-
-
-  /**
-   * A STag node which contains an arbitrary Object.
-   *
-   * [[ObjectSTag]]s are generally equivalent to [[StringSTag]]s, except that
-   * they maintain a reference to the original object and prevent it from being
-   * garbage collected.
-   */
-  case class ObjectSTag(obj: Any) extends STag{
-    def writeTo(strb: StringBuilder): Unit = strb ++= obj.toString
-    def children = Nil
-  }
 }

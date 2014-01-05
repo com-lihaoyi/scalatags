@@ -16,11 +16,11 @@ private[scalatags] trait Tags{
 
   // Document Metadata
   val head = "head".x
-  val title = "title".x
+//  val title = "title".x
   val base = "base".x
   val link = "link".x
   val meta = "meta".x
-  val style = "style".x
+//  val style = "style".x
 
   // Scripting
   val script = "script".x

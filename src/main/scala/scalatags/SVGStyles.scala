@@ -3,6 +3,13 @@ package scalatags
 
 class CurrentColor(jsName: String, cssName: String) extends OpenStyle[Color](jsName, cssName){
   val currentColor = this ~~ "currentColor"
+  def rgb(r: Int, g: Int, b: Int) = this ~~ s"rgb($r, $g, $b)"
+  def rgba(r: Int, g: Int, b: Int, a: Double) = this ~~ s"rgb($r, $g, $b, $a)"
+  def hex(s: String) = this ~~ s"#$s"
+  def hsl(h: Int, s: Int, l: Int) = this ~~ s"hsl($h, $s%, $l%)"
+  def hsla(h: Int, s: Int, l: Int, a: Double) = this ~~ s"hsl($h, $s%, $l%, $a)"
+
+
 }
 
 class SVGStyles {
@@ -108,7 +115,7 @@ class SVGStyles {
    */
   val strokeWidth = new OpenStyle[Length]("strokeWidth", "stroke-width")
 
-  class ClipFillRule(jsName: String, cssName: String) extends FixedStyle(jsName, cssName){
+  class ClipFillRule(jsName: String, cssName: String) extends Style(jsName, cssName){
     /**
      * This value determines the "insideness" of a point in the shape by drawing
      * a ray from that point to infinity in any direction and then examining the
@@ -195,7 +202,7 @@ class SVGStyles {
    * The stroke-linejoin attribute specifies the shape to be used at the corners
    * of paths or basic shapes when they are stroked.
    */
-  object strokeLinejoin extends FixedStyle("strokeLinejoin", "stroke-linejoin"){
+  object strokeLinejoin extends Style("strokeLinejoin", "stroke-linejoin"){
     val miter = this ~~ "miter"
     val round = this ~~ "round"
     val bevel = this ~~ "bevel"
@@ -240,7 +247,7 @@ class SVGStyles {
    * The stroke-linecap attribute specifies the shape to be used at the end of
    * open subpaths when they are stroked.
    */
-  object strokeLinecap extends FixedStyle("strokeLinecap", "stroke-linecap"){
+  object strokeLinecap extends Style("strokeLinecap", "stroke-linecap"){
     val butt = this ~~ "butt"
     val round = this ~~ "round"
     val square = this ~~ "square"
@@ -293,7 +300,7 @@ class SVGStyles {
    * The color-interpolation-filters attribute specifies the color space for
    * imaging operations performed via filter effects.
    */
-  object colorInterpolationFilters extends FixedStyle("colorInterpolationFilters", "color-interpolation-filters"){
+  object colorInterpolationFilters extends Style("colorInterpolationFilters", "color-interpolation-filters"){
     /**
      * Indicates that the user agent can choose either the sRGB or linearRGB
      * spaces for color interpolation. This option indicates that the author

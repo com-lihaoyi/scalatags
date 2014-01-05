@@ -86,12 +86,12 @@ class ExampleTests extends FreeSpec{
               h2("Post by ", name),
               p(text)
             )
-            ),
+          ),
           if(numVisitors > 100)(
             p("No more posts!")
-            )else(
+          )else(
             p("Please post below...")
-            )
+          )
         )
       )
     },
@@ -120,9 +120,9 @@ class ExampleTests extends FreeSpec{
   )
   "Functions" in strCheck(
     {
-      def imgBox(src: String, text: String) =
+      def imgBox(source: String, text: String) =
         div(
-          img.src(src),
+          img(src~source),
           div(
             p(text)
           )
@@ -135,7 +135,7 @@ class ExampleTests extends FreeSpec{
         body(
           h1("This is my title"),
           imgBox("www.mysite.com/imageOne.png", "This is the first image displayed on the site"),
-          div.cls("content")(
+          div(`class`~"content")(
             p("blah blah blah i am text"),
             imgBox("www.mysite.com/imageTwo.png", "This image is very interesting")
           )
@@ -174,10 +174,10 @@ class ExampleTests extends FreeSpec{
       body(
         h1("This is my title"),
         div(
-          p.attr("onclick" -> "... do some js")(
+          p(onclick~"... do some js")(
             "This is my first paragraph"
           ),
-          a.attr("href" -> "www.google.com")(
+          a(href~"www.google.com")(
             p("Goooogle")
           )
         )
@@ -206,10 +206,10 @@ class ExampleTests extends FreeSpec{
       body(
         h1("This is my title"),
         div(
-          p.onclick("... do some js")(
+          p(onclick~"... do some js")(
             "This is my first paragraph"
           ),
-          a.href("www.google.com")(
+          a(href~"www.google.com")(
             p("Goooogle")
           )
         )
@@ -230,18 +230,18 @@ class ExampleTests extends FreeSpec{
          </body>
        </html>"""
   )
-  "Classes an CSS" in strCheck(
+  "Classes and CSS" in strCheck(
     html(
       head(
         script("some script")
       ),
       body(
-        h1.css("color" -> "red", "background-color" -> "blue")("This is my title"),
-        div.color("red").background_color("blue")(
+        h1(color~"red", backgroundColor~"blue")("This is my title"),
+        div(color~"red", backgroundColor~"blue")(
           p.cls("contentpara", "first")(
             "This is my first paragraph"
           ),
-          a.opacity(0.9)(
+          a(opacity~0.9)(
             p.cls("contentpara")("Goooogle")
           )
         )
@@ -266,7 +266,7 @@ class ExampleTests extends FreeSpec{
 
   "Layouts" in strCheck(
   {
-    def page(scripts: Seq[STag], content: Seq[STag]) =
+    def page(scripts: Seq[Node], content: Seq[Node]) =
       html(
         head(scripts),
         body(
@@ -282,7 +282,7 @@ class ExampleTests extends FreeSpec{
       ),
       Seq(
         p("This is the first ", b("image"), " displayed on the ", a("site")),
-        img.src("www.myImage.com/image.jpg"),
+        img(src~"www.myImage.com/image.jpg"),
         p("blah blah blah i am text")
       )
     )
