@@ -249,20 +249,23 @@ class ExampleTests extends FreeSpec{
         )
       )
     ),
-    """<html>
-         <head>
-           <script>some script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <div>
-             <p onclick="... do some js">This is my first paragraph</p>
-             <a href="www.google.com">
-               <p>Goooogle</p>
-             </a>
-           </div>
-         </body>
-       </html>"""
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <p onclick="... do some js">
+                    This is my first paragraph</p>
+                <a href="www.google.com">
+                    <p>Goooogle</p>
+                </a>
+            </div>
+        </body>
+    </html>
+    """
   )
   "Classes and CSS" in strCheck(
   {
@@ -336,7 +339,46 @@ class ExampleTests extends FreeSpec{
     </html>
     """
   )
-
+  "Non-String Attributes and Styles" in strCheck(
+    div(
+      p(float.left)(
+        "This is my first paragraph"
+      ),
+      a(tabindex:=10)(
+        p("Goooogle")
+      ),
+      input(disabled:=true)
+    ),
+    """
+    <div>
+        <p style="float: left;">This is my first paragraph</p>
+        <a tabindex="10">
+            <p>Goooogle</p>
+        </a>
+        <input disabled="true" />
+    </div>
+    """
+  )
+  "Force-Stringifying Attributes and Styles" in strCheck(
+    div(
+      p(float~="left")(
+        "This is my first paragraph"
+      ),
+      a(tabindex~="10")(
+        p("Goooogle")
+      ),
+      input(disabled~="true")
+    ),
+    """
+    <div>
+        <p style="float: left;">This is my first paragraph</p>
+        <a tabindex="10">
+            <p>Goooogle</p>
+        </a>
+        <input disabled="true" />
+    </div>
+    """
+  )
 
   "Layouts" in strCheck(
   {

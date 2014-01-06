@@ -50,7 +50,7 @@ ScalaTags is hosted on [Maven Central](http://search.maven.org/#artifactdetails%
 libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.0"
 ```
 
-And you're good to go! simply open up a `sbt console`, and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
+And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
 
 ScalaJS
 =======
@@ -90,6 +90,8 @@ Although other templating systems also perform static validation, Scalatags is a
 Making them fail to compile if you accidentally pass the wrong thing in:
 
 ![CSS Compilation Error 2]()
+
+Take a look at the [prior work](#prior-work) section for a more detailed analysis of Scalatags in comparison to other popular libraries.
 
 Basic Examples
 ==============
@@ -176,7 +178,7 @@ html(
 )
 ```
 
-In Scalatags, each attribute has an associated value which can be used to set it. This example shows you the `onclick` and `href` attributes.
+In Scalatags, each attribute has an associated value which can be used to set it. This example shows you set the `onclick` and `href` attributes with the `:=` operator.
 
 The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by Scalatags. This can be done with the `.attr` method that Scalatags adds to Strings:
 
@@ -209,7 +211,9 @@ If you wish to, you can also take the result of the `.attr` call and assign it t
     <body>
         <h1>This is my title</h1>
         <div>
-            <p onclick="... do some js">This is my first paragraph</p>
+            <p onclick="... do some js">
+                This is my first paragraph
+            </p>
             <a href="www.google.com">
                 <p>Goooogle</p>
             </a>
@@ -248,7 +252,7 @@ Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `
 
 Scalatags also provides a way of setting styles dynamically as strings. This example shows how to define your own styles or css classes inline:
 
-```
+```scala
 html(
   head(
     script("some script")
@@ -287,6 +291,53 @@ Again, you can take the result of `.style` or `.cls` and assign them to variable
 ```
 
 A full list of the shortcut methods (for both attributes and styles) provided by ScalaTags can be found in [HtmlAttributes.scala](src/main/scala/scalatags/HtmlAttributes.scala) and [Styles.scala](src/main/scala/scalatags/Styles.scala). This of course won't include any which you define yourself.
+
+Non-String Attributes and Styles
+================================
+
+```scala
+div(
+  p(float.left)(
+    "This is my first paragraph"
+  ),
+  a(tabindex:=10)(
+    p("Goooogle")
+  ),
+  input(disabled:=true)
+)
+```
+
+Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above. Attempts to pass in strings to `float:=`, `tabindex:=` or `disabled:=` result in compile errors.
+
+If you for some reason really need to pass in a special value for one of these attributes or styles (e.g. you have a Javascript library that parses these values and does some magic) you can either use the `.attr` and `.style` extensions shown earlier to create versions of `float`, `tabindex` or `disabled` which takes Strings, or you can use the `~=` operator to force assignment:
+
+```scala
+div(
+  p(float~="left")(
+    "This is my first paragraph"
+  ),
+  a(tabindex~="10")(
+    p("Goooogle")
+  ),
+  input(disabled~="true")
+)
+```
+
+Both of these print the same thing:
+
+```html
+<div>
+    <p style="float: left;">This is my first paragraph</p>
+    <a tabindex="10">
+        <p>Goooogle</p>
+    </a>
+    <input disabled="true" />
+</div>
+```
+
+In general, the `~=` operator should need need to be used very often, as only a conservative subset of attributes and styles provide non-string typechecking, those that take a well-defined set of values that falls nicely within some other data-type. Nonetheless, it is there as an escape hatch should you need it.
+
+Currently only a small number of attributes and styles provide this kind of non-string typechecking; that number will increase as better ways are found of rigorously typing the CSS syntax.
 
 Variables
 =========
@@ -532,7 +583,7 @@ page(
   ),
   Seq(
     p("This is the first ", b("image"), " displayed on the ", a("site")),
-    img(src:=`"www.myImage.com/image.jpg"),
+    img(src:="www.myImage.com/image.jpg"),
     p("blah blah blah i am text")
   )
 )
@@ -715,7 +766,6 @@ And that's why I created Scalatags:
 
 On top of fixing all the old problems, Scalatags targets some new ones:
 
-- Speed; compiled Scala is pretty fast compared to doubly-interpreted Python.
 - Typesafe-ish access to HTML tags, attributes and CSS classes and styles. No more weird bugs due to typos like `flaot: left` or `<dvi>`.
 - Cross compiles to run on both JVM and Javascript via [ScalaJS](https://github.com/scala-js/scala-js), which is a property few other engines (e.g. [Mustache](http://mustache.github.io/)) have.
 

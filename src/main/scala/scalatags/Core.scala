@@ -156,7 +156,9 @@ class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
   }
 }
 
-
+/**
+ * A key value pair representing the assignment of an attribute to a value.
+ */
 case class AttrPair(attr: Attr[_], value: String) extends Nested{
   def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
     attrs(attr.name) = value
@@ -175,7 +177,15 @@ class Attr[T](val name: String){
     )
 
   override def toString = name
+  /**
+   * Force-assigns a typed attribute to a string even if its type would not
+   * normally allow it.
+   */
   def ~=(v: String) = AttrPair(this, v)
+
+  /**
+   * Assign an attribute to some value of the correct type.
+   */
   def :=(v: T) = AttrPair(this, v.toString)
 }
 
@@ -183,10 +193,17 @@ class Attr[T](val name: String){
  * A Style that only has a fixed set of possible values, provided by its members.
  */
 class Style(val jsName: String, val cssName: String) {
+  /**
+   * Force-assigns a typed style to a string even if its type would not normally
+   * .allow it
+   */
   def ~=(value: String) = StylePair(this, value)
   override def toString = cssName
 }
 
+/**
+ * A key value pair representing the assignment of a style to a value.
+ */
 case class StylePair(style: Style, value: String) extends Nested{
   def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
     val str = style.cssName + ": " + value + ";"
@@ -199,6 +216,9 @@ case class StylePair(style: Style, value: String) extends Nested{
  * more concise and pseudo-typesafe use of that style.
  */
 class TypedStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+  /**
+   * Assign this style to some value of the correct type.
+   */
   def :=(value: T) = StylePair(this, value.toString)
 }
 

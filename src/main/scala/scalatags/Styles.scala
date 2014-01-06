@@ -23,7 +23,7 @@ private[scalatags] class NoneOpenStyle[T](jsName: String, cssName: String) exten
 }
 
 /**
- * A Style that takes any value of type T as a parameter and has an none value
+ * A Style that takes any value of type T as a parameter and has an normal value
  */
 private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) extends TypedStyle[T](jsName, cssName) {
   val normal = this ~= "normal"
