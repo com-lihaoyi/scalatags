@@ -8,6 +8,36 @@ import Util._
  * A set of examples used in the documentation.
  */
 class ExampleTests extends FreeSpec{
+  "Splash example" in strCheck(
+    html(
+      head(
+        script(src->"..."),
+        script(
+          "alert('Hello World')"
+        )
+      ),
+      body(
+        div(
+          h1(id->"title", "This is a title"),
+          p("This is a big paragraph of text")
+        )
+      )
+    ),
+    """
+    <html>
+        <head>
+            <script src="..." />
+            <script>alert('Hello World')</script>
+        </head>
+        <body>
+            <div>
+                <h1 id="title">This is a title</h1>
+                <p>This is a big paragraph of text</p>
+            </div>
+        </body>
+    </html>
+    """
+  )
   "Hello World" in strCheck(
     html(
       head(
@@ -54,18 +84,20 @@ class ExampleTests extends FreeSpec{
         )
       )
     },
-    """<html>
-         <head>
+    """
+    <html>
+        <head>
             <script>some script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <div>
-             <p>This is my first paragraph</p>
-             <p>you are the 1023th visitor!</p>
-           </div>
-         </body>
-       </html>"""
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <p>This is my first paragraph</p>
+                <p>you are the 1023th visitor!</p>
+            </div>
+        </body>
+    </html>
+    """
   )
   "Control Flow" in strCheck(
     {
@@ -92,38 +124,40 @@ class ExampleTests extends FreeSpec{
         )
       )
     },
-    """<html>
-         <head>
-           <script>some script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <div>posts</div>
-           <div>
-             <h2>Post by alice</h2>
-             <p>i like pie</p>
-           </div>
-           <div>
-             <h2>Post by bob</h2>
-             <p>pie is evil i hate you</p>
-           </div>
-           <div>
-             <h2>Post by charlie</h2>
-             <p>i like pie and pie is evil, i hat myself</p>
-           </div>
-           <p>No more posts!</p>
-         </body>
-       </html>"""
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>posts</div>
+            <div>
+                <h2>Post by alice</h2>
+                <p>i like pie</p>
+            </div>
+            <div>
+                <h2>Post by bob</h2>
+                <p>pie is evil i hate you</p>
+            </div>
+            <div>
+                <h2>Post by charlie</h2>
+                <p>i like pie and pie is evil, i hat myself</p>
+            </div>
+            <p>No more posts!</p>
+        </body>
+    </html>
+    """
   )
   "Functions" in strCheck(
     {
-      def imgBox(source: String, text: String) =
+      def imgBox(source: String, text: String) = div(
+        img(src->source),
         div(
-          img(src->source),
-          div(
-            p(text)
-          )
+          p(text)
         )
+      )
+
       html(
         head(
           script("some script")
@@ -138,29 +172,31 @@ class ExampleTests extends FreeSpec{
         )
       )
     },
-    """<html>
-         <head>
-           <script>some script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <div>
-             <img src="www.mysite.com/imageOne.png" />
-             <div>
-               <p>This is the first image displayed on the site</p>
-             </div>
-           </div>
-           <div class="content">
-             <p>blah blah blah i am text</p>
-             <div>
-               <img src="www.mysite.com/imageTwo.png" />
-               <div>
-                 <p>This image is very interesting</p>
-               </div>
-             </div>
-           </div>
-         </body>
-       </html>"""
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <img src="www.mysite.com/imageOne.png" />
+                <div>
+                    <p>This is the first image displayed on the site</p>
+                </div>
+            </div>
+            <div class="content">
+                <p>blah blah blah i am text</p>
+                <div>
+                    <img src="www.mysite.com/imageTwo.png" />
+                <div>
+                    <p>This image is very interesting</p>
+                </div>
+                </div>
+            </div>
+        </body>
+    </html>
+    """
   )
   "Custom Attributes" in strCheck(
     html(
@@ -170,29 +206,31 @@ class ExampleTests extends FreeSpec{
       body(
         h1("This is my title"),
         div(
-          p(onclick->"... do some js")(
+          p("onclick".attr->"... do some js")(
             "This is my first paragraph"
           ),
-          a(href->"www.google.com")(
+          a("href".attr->"www.google.com")(
             p("Goooogle")
           )
         )
       )
     ),
-    """<html>
-         <head>
-           <script>some script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <div>
-             <p onclick="... do some js">This is my first paragraph</p>
-             <a href="www.google.com">
-               <p>Goooogle</p>
-             </a>
-           </div>
-         </body>
-       </html>"""
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <p onclick="... do some js">This is my first paragraph</p>
+                <a href="www.google.com">
+                    <p>Goooogle</p>
+                </a>
+            </div>
+        </body>
+    </html>
+    """
   )
   "Attributes" in strCheck(
     html(
@@ -227,36 +265,76 @@ class ExampleTests extends FreeSpec{
        </html>"""
   )
   "Classes and CSS" in strCheck(
+  {
+    val contentpara = "contentpara".cls
+    val first = "first".cls
     html(
       head(
         script("some script")
       ),
       body(
-        h1(color->"red", backgroundColor->"blue")("This is my title"),
-        div(color->"red", backgroundColor->"blue")(
-          p.cls("contentpara", "first")(
+        h1(backgroundColor->"blue", color->"red")("This is my title"),
+        div(backgroundColor->"blue", color->"red")(
+          p(contentpara, first)(
             "This is my first paragraph"
           ),
           a(opacity->0.9)(
-            p.cls("contentpara")("Goooogle")
+            p("contentpara".cls)("Goooogle")
+          )
+        )
+      )
+    )
+  },
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1 style="background-color: blue; color: red;">This is my title</h1>
+            <div style="background-color: blue; color: red;">
+            <p class="contentpara first">This is my first paragraph</p>
+            <a style="opacity: 0.9;">
+                <p class="contentpara">Goooogle</p>
+            </a>
+            </div>
+        </body>
+    </html>
+    """
+  )
+  "Classes and CSS Custom" in strCheck(
+    html(
+      head(
+        script("some script")
+      ),
+      body(
+        h1("background-color".style->"blue", "color".style->"red")("This is my title"),
+        div("background-color".style->"blue", "color".style->"red")(
+          p("contentpara".cls, "first".cls)(
+            "This is my first paragraph"
+          ),
+          a("opacity".style->"0.9")(
+            p("contentpara".cls)("Goooogle")
           )
         )
       )
     ),
-    """<html>
-         <head>
-           <script>some script</script>
-         </head>
-         <body>
-           <h1 style="background-color: blue; color: red;">This is my title</h1>
-           <div style="background-color: blue; color: red;">
-             <p class="contentpara first">This is my first paragraph</p>
-             <a style="opacity: 0.9;">
-               <p class="contentpara">Goooogle</p>
-             </a>
-           </div>
-         </body>
-       </html>"""
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1 style="background-color: blue; color: red;">This is my title</h1>
+            <div style="background-color: blue; color: red;">
+            <p class="contentpara first">This is my first paragraph</p>
+            <a style="opacity: 0.9;">
+                <p class="contentpara">Goooogle</p>
+            </a>
+            </div>
+        </body>
+    </html>
+    """
   )
 
 
@@ -267,7 +345,7 @@ class ExampleTests extends FreeSpec{
         head(scripts),
         body(
           h1("This is my title"),
-          div.cls("content")(content)
+          div("content".cls)(content)
         )
       )
 
@@ -282,21 +360,22 @@ class ExampleTests extends FreeSpec{
         p("blah blah blah i am text")
       )
     )
-
   },
-  """<html>
-       <head>
-         <script>some script</script>
-       </head>
-       <body>
-         <h1>This is my title</h1>
-         <div class="content">
-           <p>This is the first <b>image</b> displayed on the <a>site</a></p>
-           <img src="www.myImage.com/image.jpg" />
-           <p>blah blah blah i am text</p>
-         </div>
-       </body>
-     </html>"""
+  """
+  <html>
+      <head>
+          <script>some script</script>
+      </head>
+      <body>
+          <h1>This is my title</h1>
+              <div class="content">
+              <p>This is the first <b>image</b> displayed on the <a>site</a></p>
+                  <img src="www.myImage.com/image.jpg" />
+              <p>blah blah blah i am text</p>
+          </div>
+      </body>
+  </html>
+  """
   )
 
   "Inheritence" in strCheck(
@@ -327,25 +406,62 @@ class ExampleTests extends FreeSpec{
 
       Child.render
     },
-    """<html>
-         <head>
-           <script>some other script</script>
-         </head>
-         <body>
-           <h1>This is my title</h1>
-           <div>
-             <p>This is my first paragraph</p>
-             <p>This is my second paragraph</p>
-           </div>
-         </body>
-       </html>"""
+    """
+    <html>
+        <head>
+            <script>some other script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <div>
+                <p>This is my first paragraph</p>
+                <p>This is my second paragraph</p>
+            </div>
+        </body>
+    </html>
+    """
   )
 
 
 
-  "Unparsed" in strCheck(
+  "Proper Escaping" in strCheck(
     {
-      val input = "<p>i am a cow</p>"
+      val evilInput1 = "\"><script>alert('hello!')</script>"
+      val evilInput2 = "<script>alert('hello!')</script>"
+
+      val x = html(
+        head(
+          script("some script")
+        ),
+        body(
+          h1(
+            title->evilInput1,
+            "This is my title"
+          ),
+          evilInput2
+        )
+      )
+      println(x.toString)
+      x
+    },
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1 title="&quot;&gt;&lt;script&gt;alert('hello!')&lt;/script&gt;">
+                This is my title
+            </h1>
+            &lt;script&gt;alert('hello!')&lt;/script&gt;
+        </body>
+    </html>
+    """
+  )
+
+  "Unsanitized Input" in strCheck(
+    {
+      val evilInput = "<script>alert('hello!')</script>"
 
       html(
         head(
@@ -353,34 +469,36 @@ class ExampleTests extends FreeSpec{
         ),
         body(
           h1("This is my title"),
-          input
+          raw(evilInput)
         )
       )
     },
-  """
-  <html>
-      <head>
-          <script>some script</script>
-      </head>
-      <body>
-          <h1>This is my title</h1>
-          <p>i am a cow</p>
-      </body>
-  </html>
-  """
+    """
+    <html>
+        <head>
+            <script>some script</script>
+        </head>
+        <body>
+            <h1>This is my title</h1>
+            <script>alert('hello!')</script>
+        </body>
+    </html>
+    """
   )
-  "Typesafe CSS" in strCheck(
 
-    div(
-      zIndex->10
-    ),
+  "Typesafe CSS" in strCheck(
+    div(zIndex->10),
     """<div style="z-index: 10;" />"""
   )
   "Custom attributes and styles" in strCheck(
-    div(
-      "data-app-key".attr->"YOUR_APP_KEY",
-      "-moz-border-radius".style->10.px
-    ),
+    {
+      val dataAppKey = "data-app-key".attr
+      val mozBorderRadius = "-moz-border-radius".style
+      div(
+        dataAppKey->"YOUR_APP_KEY",
+        mozBorderRadius->10.px
+      )
+    },
     """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;" />"""
   )
 }

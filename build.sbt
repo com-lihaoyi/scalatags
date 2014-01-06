@@ -2,12 +2,12 @@ organization  := "com.scalatags"
 
 name          := "scalatags"
 
-version       := "0.1.4"
+version       := "0.2.0"
 
 scalaVersion  := "2.10.0"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test"
+  "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
 )
 
 publishMavenStyle := true
@@ -15,11 +15,7 @@ publishMavenStyle := true
 publishArtifact in Test := false
 
 publishTo <<= version { (v: String) =>
-  val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT"))
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+  Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
 }
 
 pomExtra := (
@@ -40,4 +36,5 @@ pomExtra := (
       <name>Li Haoyi</name>
       <url>https://github.com/lihaoyi</url>
     </developer>
-  </developers>)
+  </developers>
+)

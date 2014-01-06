@@ -13,8 +13,8 @@ class BasicTests extends FreeSpec{
   "basic tag creation" in {
     assert(a.toString === "<a />")
     assert(html.toString === "<html />")
-    assert("this_is_an_unusual_tag".x.toString === "<this_is_an_unusual_tag />")
-    assert("this-is-a-string-with-dashes".x.toString === "<this-is-a-string-with-dashes />")
+    assert("this_is_an_unusual_tag".tag.toString === "<this_is_an_unusual_tag />")
+    assert("this-is-a-string-with-dashes".tag.toString === "<this-is-a-string-with-dashes />")
   }
 
   /**
@@ -24,7 +24,7 @@ class BasicTests extends FreeSpec{
     html(
       head(
         script(""),
-        "string-tag".x
+        "string-tag".tag
       ),
       body(
         div(
@@ -53,7 +53,7 @@ class BasicTests extends FreeSpec{
       float.left,
       color->"red"
     ),
-    """<div style="color: red; float: left;" />"""
+    """<div style="float: left; color: red;" />"""
   )
 
 
@@ -79,5 +79,37 @@ class BasicTests extends FreeSpec{
     assert(10.px == "10px")
     assert(10.em == "10em")
     assert(10.pt == "10pt")
+  }
+
+  "class/style after attr appends, but attr after class/style overwrites" in strCheck(
+    div(
+      float.left,
+      style->"background-color: red;",
+      `class`->"my-class",
+      "other-class".cls,
+      p("i am a cow")
+    ),
+    """<div class="my-class other-class" style="background-color: red;"><p>i am a cow</p></div>"""
+  )
+
+  ".style converts things to camelcase" in {
+    assert("i-am-a-cow".style.jsName == "iAmACow")
+  }
+
+  "list of classes is generated properly" in {
+    val frag = div(
+      `class`->"my-class",
+      "other-class".cls
+    )
+    assert(frag.classes == Seq("my-class", "other-class"))
+  }
+  "list of styles is generated properly" in {
+    val frag = div(
+
+      style->"background-color: red;",
+      float.left,
+      height->10.px
+    )
+    assert(frag.styles == Seq("background-color" -> "red", "float" -> "left", "height" -> "10px"))
   }
 }

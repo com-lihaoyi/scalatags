@@ -17,23 +17,25 @@ class Style(val jsName: String, val cssName: String) {
 }
 
 /**
- * A Style that takes any value of type T as a parameter
+ * A Style that takes any value of type T as a parameter; overloads the ->
+ * operator to also accept values of that type to convert to strings, allowing
+ * more concise and pseudo-typesafe use of that style.
  */
-class OpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+class TypedStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ->(value: T) = (this, value.toString)
 }
 
 /**
  * A Style that takes any value of type T as a parameter and has an auto value
  */
-class AutoStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+private[scalatags] class AutoStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ->(value: T) = (this, value.toString)
   val auto = this -> "auto"
 }
 /**
  * A Style that takes any value of type T as a parameter and has an none value
  */
-class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+private[scalatags] class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ->(value: T) = (this, value.toString)
   val none = this -> "none"
 }
@@ -41,182 +43,203 @@ class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cs
 /**
  * A Style that takes any value of type T as a parameter and has an none value
  */
-class NormalOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
   def ->(value: T) = (this, value.toString)
   val normal = this -> "normal"
+}
+
+private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  /**
+   * Displays a series of rounded dots. The spacing of the dots are not
+   * defined by the specification and are implementation-specific. The radius
+   * of the dots is half the calculated border-right-width.
+   *
+   * MDN
+   */
+  val dotted = this -> "dotted"
+  /**
+   * Displays a series of short square-ended dashes or line segments. The exact
+   * size and length of the segments are not defined by the specification and
+   * are implementation-specific.
+   *
+   * MDN
+   */
+  val dashed = this -> "dashed"
+  /**
+   * Displays a single, straight, solid line.
+   *
+   * MDN
+   */
+  val solid = this -> "solid"
+  /**
+   * Displays two straight lines that add up to the pixel amount defined as
+   * border-width or border-right-width.
+   *
+   * MDN
+   */
+  val double = this -> "double"
+  /**
+   * Displays a border leading to a carved effect. It is the opposite of ridge.
+   *
+   * MDN
+   */
+  val groove = this -> "groove"
+  /**
+   * Displays a border with a 3D effect, like if it is coming out of the page.
+   * It is the opposite of groove.
+   *
+   * MDN
+   */
+  val ridge = this -> "ridge"
+  /**
+   * Displays a border that makes the box appear embedded. It is the opposite
+   * of outset. When applied to a table cell with border-collapse set to
+   * collapsed, this value behaves like groove.
+   *
+   * MDN
+   */
+  val inset = this -> "inset"
+  /**
+   * Displays a border that makes the box appear in 3D, embossed. It is the
+   * opposite of inset. When applied to a table cell with border-collapse set
+   * to collapsed, this value behaves like ridge.
+   *
+   * MDN
+   */
+  val outset = this -> "outset"
+}
+
+private[scalatags] class BorderStyle(jsName: String, cssName: String) extends OutlineStyle(jsName, cssName){
+  /**
+   * Like for the hidden keyword, displays no border. In that case, except if
+   * a background image is set, the calculated values of border-right-width
+   * will be 0, even if specified otherwise through the property. In case of
+   * table cell and border collapsing, the none value has the lowest priority:
+   * it means that if any other conflicting border is set, it will be
+   * displayed.
+   *
+   * MDN
+   */
+  val none = this -> "none"
+  /**
+   * Like for the none keyword, displays no border. In that case, except if a
+   * background image is set, the calculated values of border-right-width will
+   * be 0, even if specified otherwise through the property. In case of table
+   * cell and border collapsing, the hidden value has the highest priority: it
+   * means that if any other conflicting border is set, it won't be displayed.
+   *
+   * MDN
+   */
+  val hidden = this -> "hidden"
+
+}
+
+private[scalatags] class Overflow(jsName: String, cssName: String) extends Style(jsName, cssName){
+  /**
+   * Default value. Content is not clipped, it may be rendered outside the
+   * content box.
+   *
+   * MDN
+   */
+  val visible = this -> "visible"
+  /**
+   * The content is clipped and no scrollbars are provided.
+   *
+   * MDN
+   */
+  val hidden = this -> "hidden"
+  /**
+   * The content is clipped and desktop browsers use scrollbars, whether or
+   * not any content is clipped. This avoids any problem with scrollbars
+   * appearing and disappearing in a dynamic environment. Printers may print
+   * overflowing content.
+   *
+   * MDN
+   */
+  val scroll = this -> "scroll"
+  /**
+   * Depends on the user agent. Desktop browsers like Firefox provide
+   * scrollbars if content overflows.
+   *
+   * MDN
+   */
+  val auto = this -> "auto"
+}
+
+private[scalatags] class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName){
+  /**
+   * Initial value. Automatic page breaks (neither forced nor forbidden).
+   *
+   * MDN
+   */
+  val auto = this -> "auto"
+  /**
+   * Always force page breaks.
+   *
+   * MDN
+   */
+  val always = this -> "always"
+  /**
+   * Avoid page breaks.
+   *
+   * MDN
+   */
+  val avoid = this -> "avoid"
+  /**
+   * Force page breaks so that the next page is formatted
+   * as a left page.
+   *
+   * MDN
+   */
+  val left = this -> "left"
+  /**
+   * Force page breaks so that the next page is formatted
+   * as a right page.
+   *
+   * MDN
+   */
+  val right = this -> "right"
+}
+
+
+private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName){
+  def ~(r1: String, r2: String = "") = this -> s"$r1 $r2"
+}
+
+private[scalatags] trait MarginAuto extends Style {
+  /**
+   * auto is replaced by some suitable value, e.g. it can be used for
+   * centering of blocks.
+   *
+   * MDN
+   */
+  val auto = this -> "auto"
+
+}
+private[scalatags] class BorderWidth(jsName: String, cssName: String)  extends TypedStyle[Number](jsName, cssName){
+  val thin = this -> "thin"
+  val medium = this -> "medium"
+  val thick = this -> "thick"
+}
+
+private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName){
+  def ~(times: String*) = this -> times.mkString(", ")
 }
 
 /**
  * List of almost all common CSS styles
  */
-trait Styles {
+private[scalatags] trait Styles {
 
   /**
    *
    * @param kv
    */
-  implicit class StyleTagger(kv: (Style, String)) extends QuickMod(
-    (children, attrs, classes, styles) => styles(kv._1.cssName) = kv._2
-  )
-  type Time = String
+  implicit class StyleNested(kv: (Style, String)) extends Nested({(children, attrs) =>
+    val str = kv._1.cssName + ": " + kv._2 + ";"
+    attrs("style") = attrs.get("style").fold(str)(_ + " " + str)
+  })
 
-  class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
-    /**
-     * Displays a series of rounded dots. The spacing of the dots are not
-     * defined by the specification and are implementation-specific. The radius
-     * of the dots is half the calculated border-right-width.
-     *
-     * MDN
-     */
-    val dotted = this -> "dotted"
-    /**
-     * Displays a series of short square-ended dashes or line segments. The exact
-     * size and length of the segments are not defined by the specification and
-     * are implementation-specific.
-     *
-     * MDN
-     */
-    val dashed = this -> "dashed"
-    /**
-     * Displays a single, straight, solid line.
-     *
-     * MDN
-     */
-    val solid = this -> "solid"
-    /**
-     * Displays two straight lines that add up to the pixel amount defined as
-     * border-width or border-right-width.
-     *
-     * MDN
-     */
-    val double = this -> "double"
-    /**
-     * Displays a border leading to a carved effect. It is the opposite of ridge.
-     *
-     * MDN
-     */
-    val groove = this -> "groove"
-    /**
-     * Displays a border with a 3D effect, like if it is coming out of the page.
-     * It is the opposite of groove.
-     *
-     * MDN
-     */
-    val ridge = this -> "ridge"
-    /**
-     * Displays a border that makes the box appear embedded. It is the opposite
-     * of outset. When applied to a table cell with border-collapse set to
-     * collapsed, this value behaves like groove.
-     *
-     * MDN
-     */
-    val inset = this -> "inset"
-    /**
-     * Displays a border that makes the box appear in 3D, embossed. It is the
-     * opposite of inset. When applied to a table cell with border-collapse set
-     * to collapsed, this value behaves like ridge.
-     *
-     * MDN
-     */
-    val outset = this -> "outset"
-  }
-
-  class BorderStyle(jsName: String, cssName: String) extends OutlineStyle(jsName, cssName){
-    /**
-     * Like for the hidden keyword, displays no border. In that case, except if
-     * a background image is set, the calculated values of border-right-width
-     * will be 0, even if specified otherwise through the property. In case of
-     * table cell and border collapsing, the none value has the lowest priority:
-     * it means that if any other conflicting border is set, it will be
-     * displayed.
-     *
-     * MDN
-     */
-    val none = this -> "none"
-    /**
-     * Like for the none keyword, displays no border. In that case, except if a
-     * background image is set, the calculated values of border-right-width will
-     * be 0, even if specified otherwise through the property. In case of table
-     * cell and border collapsing, the hidden value has the highest priority: it
-     * means that if any other conflicting border is set, it won't be displayed.
-     *
-     * MDN
-     */
-    val hidden = this -> "hidden"
-
-  }
-
-  class Overflow(jsName: String, cssName: String) extends Style(jsName, cssName){
-    /**
-     * Default value. Content is not clipped, it may be rendered outside the
-     * content box.
-     *
-     * MDN
-     */
-    val visible = this -> "visible"
-    /**
-     * The content is clipped and no scrollbars are provided.
-     *
-     * MDN
-     */
-    val hidden = this -> "hidden"
-    /**
-     * The content is clipped and desktop browsers use scrollbars, whether or
-     * not any content is clipped. This avoids any problem with scrollbars
-     * appearing and disappearing in a dynamic environment. Printers may print
-     * overflowing content.
-     *
-     * MDN
-     */
-    val scroll = this -> "scroll"
-    /**
-     * Depends on the user agent. Desktop browsers like Firefox provide
-     * scrollbars if content overflows.
-     *
-     * MDN
-     */
-    val auto = this -> "auto"
-  }
-
-  class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName){
-    /**
-     * Initial value. Automatic page breaks (neither forced nor forbidden).
-     *
-     * MDN
-     */
-    val auto = this -> "auto"
-    /**
-     * Always force page breaks.
-     *
-     * MDN
-     */
-    val always = this -> "always"
-    /**
-     * Avoid page breaks.
-     *
-     * MDN
-     */
-    val avoid = this -> "avoid"
-    /**
-     * Force page breaks so that the next page is formatted
-     * as a left page.
-     *
-     * MDN
-     */
-    val left = this -> "left"
-    /**
-     * Force page breaks so that the next page is formatted
-     * as a right page.
-     *
-     * MDN
-     */
-    val right = this -> "right"
-  }
-
-
-  class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName){
-    def ~(r1: String, r2: String = "") = this -> s"$r1 $r2"
-  }
 
 
   /**
@@ -225,7 +248,7 @@ trait Styles {
    *
    * MDN
    */
-  val animationDirection = new OpenStyle[String]("animationDirection", "animation-direction")
+  val animationDirection = new TypedStyle[String]("animationDirection", "animation-direction")
 
   /**
    * The animation-duration CSS property specifies the length of time that an
@@ -236,7 +259,7 @@ trait Styles {
    *
    * MDN
    */
-  val animationDuration = new OpenStyle[String]("animationDuration", "animation-duration")
+  val animationDuration = new TypedStyle[String]("animationDuration", "animation-duration")
 
   /**
    * The animation-name CSS property specifies a list of animations that should
@@ -245,7 +268,7 @@ trait Styles {
    *
    * MDN
    */
-  val animationName = new OpenStyle[String]("animationName", "animation-name")
+  val animationName = new TypedStyle[String]("animationName", "animation-name")
 
   /**
    * The animation-fill-mode CSS property specifies how a CSS animation should
@@ -253,7 +276,7 @@ trait Styles {
    *
    * MDN
    */
-  val animationFillMode = new OpenStyle[String]("animationFillMode", "animation-fill-mode")
+  val animationFillMode = new TypedStyle[String]("animationFillMode", "animation-fill-mode")
 
   /**
    * The animation-iteration-count CSS property defines the number of times an
@@ -261,7 +284,7 @@ trait Styles {
    *
    * MDN
    */
-  val animationIterationCount = new OpenStyle[String]("animationIterationCount", "animation-iteration-count")
+  val animationIterationCount = new TypedStyle[String]("animationIterationCount", "animation-iteration-count")
 
 
   /**
@@ -288,9 +311,6 @@ trait Styles {
    */
   val animationDelay = new MultiTimeStyle("animationDelay", "animation-delay")
 
-  class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName){
-    def ~(times: Time*) = this -> times.mkString(", ")
-  }
   /**
    * The CSS animation-timing-function property specifies how a CSS animation
    * should progress over the duration of each cycle. The possible values are
@@ -306,7 +326,7 @@ trait Styles {
    *
    * MDN
    */
-  val animationTimingFunction = new OpenStyle[String]("animationTimingFunction", "animation-timing-function")
+  val animationTimingFunction = new TypedStyle[String]("animationTimingFunction", "animation-timing-function")
 
 
   /**
@@ -321,7 +341,7 @@ trait Styles {
    *
    * MDN
    */
-  val animationPlayState = new OpenStyle[String]("animationPlayState", "animation-play-state")
+  val animationPlayState = new TypedStyle[String]("animationPlayState", "animation-play-state")
   /**
    * The animation CSS property is a shorthand property for animation-name,
    * animation-duration, animation-timing-function, animation-delay,
@@ -329,7 +349,7 @@ trait Styles {
    *
    * MDN
    */
-  val animation = new OpenStyle[String]("animation", "animation")
+  val animation = new TypedStyle[String]("animation", "animation")
 
   /**
    * If a background-image is specified, the background-attachment CSS
@@ -373,7 +393,7 @@ trait Styles {
    *
    * MDN
    */
-  val background = new OpenStyle[String]("background", "background")
+  val background = new TypedStyle[String]("background", "background")
 
   /**
    * The background-repeat CSS property defines how background images are repeated.
@@ -386,7 +406,7 @@ trait Styles {
    *
    * MDN
    */
-  val backgroundRepeat = new OpenStyle[String]("backgroundRepeat", "background-repeat")
+  val backgroundRepeat = new TypedStyle[String]("backgroundRepeat", "background-repeat")
 
 
   /**
@@ -396,7 +416,7 @@ trait Styles {
    *
    * MDN
    */
-  val backgroundPosition = new OpenStyle[String]("backgroundPosition", "background-position")
+  val backgroundPosition = new TypedStyle[String]("backgroundPosition", "background-position")
 
   /**
    * The background-color CSS property sets the background color of an element,
@@ -404,7 +424,7 @@ trait Styles {
    *
    * MDN
    */
-  val backgroundColor = new OpenStyle[Color]("backgroundColor", "background-color")
+  val backgroundColor = new TypedStyle[Color]("backgroundColor", "background-color")
 
 
   /**
@@ -478,7 +498,7 @@ trait Styles {
    *
    * MDN
    */
-  object backgroundSize extends OpenStyle[Length]("backgroundSize", "background-size") {
+  object backgroundSize extends TypedStyle[Length]("backgroundSize", "background-size") {
     /**
      * The auto keyword that scales the background image in the corresponding
      * direction such that its intrinsic proportion is maintained.
@@ -513,7 +533,7 @@ trait Styles {
    *
    * MDN
    */
-  val backgroundImage = new OpenStyle[String]("backgroundImage", "background-image")
+  val backgroundImage = new TypedStyle[String]("backgroundImage", "background-image")
 
 
   /**
@@ -523,7 +543,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderTopColor = new OpenStyle[Color]("borderTopColor", "border-top-color")
+  val borderTopColor = new TypedStyle[Color]("borderTopColor", "border-top-color")
 
   /**
    * The border-style CSS property is a shorthand property for setting the line
@@ -531,7 +551,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderStyle = new OpenStyle[String]("borderStyle", "border-style")
+  val borderStyle = new TypedStyle[String]("borderStyle", "border-style")
 
   /**
    * The border-top-style CSS property sets the line style of the top border of a box.
@@ -583,7 +603,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderRightColor = new OpenStyle[Color]("borderRightColor", "border-top-color")
+  val borderRightColor = new TypedStyle[Color]("borderRightColor", "border-top-color")
 
   /**
    * The border-bottom CSS property is a shorthand that sets the values of
@@ -592,7 +612,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderBottom = new OpenStyle[String]("borderBottom", "border-bottom")
+  val borderBottom = new TypedStyle[String]("borderBottom", "border-bottom")
   /**
    * The border CSS property is a shorthand property for setting the individual
    * border property values in a single place in the style sheet. border can be
@@ -601,13 +621,9 @@ trait Styles {
    *
    * MDN
    */
-  val border = new OpenStyle[String]("border", "border")
+  val border = new TypedStyle[String]("border", "border")
 
-  class BorderWidth(jsName: String, cssName: String)  extends OpenStyle[Number](jsName, cssName){
-    val thin = this -> "thin"
-    val medium = this -> "medium"
-    val thick = this -> "thick"
-  }
+
   /**
    * The border-bottom-width CSS property sets the width of the bottom border of
    * a box.
@@ -623,7 +639,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderLeftColor = new OpenStyle[Color]("borderLeftColor", "border-left-color")
+  val borderLeftColor = new TypedStyle[Color]("borderLeftColor", "border-left-color")
 
   /**
    * The border-bottom-color CSS property sets the color of the bottom border of
@@ -632,7 +648,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderBottomColor = new OpenStyle[Color]("borderBottomColor", "border-bottom-color")
+  val borderBottomColor = new TypedStyle[Color]("borderBottomColor", "border-bottom-color")
 
   /**
    * The border-collapse CSS property selects a table's border model. This has
@@ -684,7 +700,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderRight = new OpenStyle[String]("borderRight", "border-right")
+  val borderRight = new TypedStyle[String]("borderRight", "border-right")
 
   /**
    * The border-bottom-style CSS property sets the line style of the bottom
@@ -712,7 +728,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderTop = new OpenStyle[String]("borderTop", "border-top")
+  val borderTop = new TypedStyle[String]("borderTop", "border-top")
   /**
    * The border-spacing CSS property specifies the distance between the borders
    * of adjacent cells (only for the separated borders model). This is equivalent
@@ -735,7 +751,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderRadius = new OpenStyle[String]("borderRadius", "border-radius")
+  val borderRadius = new TypedStyle[String]("borderRadius", "border-radius")
 
   /**
    * The border-width CSS property sets the width of the border of a box. Using
@@ -743,7 +759,7 @@ trait Styles {
    *
    * MDN
    */
-  val borderWidth = new OpenStyle[String]("borderWidth", "border-width")
+  val borderWidth = new TypedStyle[String]("borderWidth", "border-width")
 
   /**
    * The border-bottom-right-radius CSS property sets the rounding of the
@@ -878,7 +894,7 @@ trait Styles {
    *
    * MDN
    */
-  val columnRule = new OpenStyle[String]("columnRule", "column-rule")
+  val columnRule = new TypedStyle[String]("columnRule", "column-rule")
 
   /**
    * The column-span CSS property makes it possible for an element to span across
@@ -925,7 +941,7 @@ trait Styles {
    *
    * MDN
    */
-  val columnRuleColor = new OpenStyle[Color]("columnRuleColor", "column-rule-color")
+  val columnRuleColor = new TypedStyle[Color]("columnRuleColor", "column-rule-color")
 
   /**
    * The column-rule-width CSS property lets you set the width of the rule drawn
@@ -933,7 +949,7 @@ trait Styles {
    *
    * MDN
    */
-  object columnRuleWidth extends OpenStyle[Length]("columnRuleWidth", "column-rule-width") {
+  object columnRuleWidth extends TypedStyle[Length]("columnRuleWidth", "column-rule-width") {
     val thin = this -> "thin"
     val medium = this -> "medium"
     val thick = this -> "thick"
@@ -958,7 +974,7 @@ trait Styles {
    *
    * MDN
    */
-  val counterIncrement = new OpenStyle[String]("counterIncrement", "counter-increment")
+  val counterIncrement = new TypedStyle[String]("counterIncrement", "counter-increment")
 
   /**
    * The clip CSS property defines what portion of an element is visible. The
@@ -1308,62 +1324,62 @@ trait Styles {
     val `inline-block` = this -> "inline-block"
     /**
      * The inline-table value does not have a direct mapping in HTML. It behaves
-     * like a <table> HTML element, but as an inline box, rather than a
+     * like a `<table>` HTML element, but as an inline box, rather than a
      * block-level box. Inside the table box is a block-level context
      *
      * MDN
      */
     val `inline-table` = this -> "inline-table"
     /**
-     * Behaves like the <table> HTML element. It defines a block-level box.
+     * Behaves like the `<table>` HTML element. It defines a block-level box.
      *
      * MDN
      */
     val table = this -> "table"
     /**
-     * Behaves like the <caption> HTML element.
+     * Behaves like the `<caption>` HTML element.
      *
      * MDN
      */
     val `table-caption` = this -> "table-caption"
     /**
-     * Behaves like the <td> HTML element
+     * Behaves like the `<td>` HTML element
      *
      * MDN
      */
     val `table-cell` = this -> "table-cell"
     /**
-     * These elements behave like the corresponding <col> HTML elements.
+     * These elements behave like the corresponding `<col>` HTML elements.
      *
      * MDN
      */
     val `table-column` = this -> "table-column"
     /**
-     * These elements behave like the corresponding <colgroup> HTML elements.
+     * These elements behave like the corresponding `<colgroup>` HTML elements.
      *
      * MDN
      */
     val `table-column-group` = this -> "table-column-group"
     /**
-     * These elements behave like the corresponding <tfoot> HTML elements
+     * These elements behave like the corresponding `<tfoot>` HTML elements
      *
      * MDN
      */
     val `table-footer-group` = this -> "table-footer-group"
     /**
-     * These elements behave like the corresponding <thead> HTML elements
+     * These elements behave like the corresponding `<thead>` HTML elements
      *
      * MDN
      */
     val `table-header-group` = this -> "table-header-group"
     /**
-     * Behaves like the <tr> HTML element
+     * Behaves like the `<tr>` HTML element
      *
      * MDN
      */
     val `table-row` = this -> "table-row"
     /**
-     * These elements behave like the corresponding <tbody> HTML elements
+     * These elements behave like the corresponding `<tbody>` HTML elements
      *
      * MDN
      */
@@ -1392,7 +1408,7 @@ trait Styles {
    *
    * MDN
    */
-  val orphans = new OpenStyle[Int]("orphans", "orphans")
+  val orphans = new TypedStyle[Int]("orphans", "orphans")
 
 
   /**
@@ -1510,7 +1526,7 @@ trait Styles {
    *
    * MDN
    */
-  val listStyleImage = new OpenStyle[String]("listStyleImage", "list-style-image")
+  val listStyleImage = new TypedStyle[String]("listStyleImage", "list-style-image")
 
 
   /**
@@ -1568,7 +1584,7 @@ trait Styles {
    *
    * MDN
    */
-  val opacity = new OpenStyle[Double]("opacity", "opacity")
+  val opacity = new TypedStyle[Double]("opacity", "opacity")
 
 
   /**
@@ -1580,7 +1596,7 @@ trait Styles {
    *
    * MDN
    */
-  val maxWidth = new OpenStyle[Length]("maxWidth", "max-width")
+  val maxWidth = new TypedStyle[Length]("maxWidth", "max-width")
 
 
   /**
@@ -1589,10 +1605,10 @@ trait Styles {
    *
    * MDN
    */
-  object verticalAlign extends OpenStyle[Length]("verticalAlign", "vertical-align") {
+  object verticalAlign extends TypedStyle[Length]("verticalAlign", "vertical-align") {
     /**
      * Aligns the baseline of the element with the baseline of its parent. The
-     * baseline of some replaced elements, like <textarea> is not specified by
+     * baseline of some replaced elements, like `<textarea>` is not specified by
      * the HTML specification, meaning that their behavior with this keyword may
      * change from one browser to the other.
      *
@@ -1701,7 +1717,7 @@ trait Styles {
    *
    * MDN
    */
-  val paddingRight = new OpenStyle[Length]("paddingRight", "padding-right")
+  val paddingRight = new TypedStyle[Length]("paddingRight", "padding-right")
 
   /**
    * The padding-top CSS property of an element sets the padding space required
@@ -1711,7 +1727,7 @@ trait Styles {
    *
    * MDN
    */
-  val paddingTop = new OpenStyle[Length]("paddingTop", "padding-top")
+  val paddingTop = new TypedStyle[Length]("paddingTop", "padding-top")
 
   /**
    * The padding-left CSS property of an element sets the padding space required
@@ -1720,7 +1736,7 @@ trait Styles {
    *
    * MDN
    */
-  val paddingLeft = new OpenStyle[Length]("paddingLeft", "padding-left")
+  val paddingLeft = new TypedStyle[Length]("paddingLeft", "padding-left")
 
   /**
    * The padding CSS property sets the required padding space on all sides of an
@@ -1732,7 +1748,7 @@ trait Styles {
    *
    * MDN
    */
-  val padding = new OpenStyle[String]("padding", "padding")
+  val padding = new TypedStyle[String]("padding", "padding")
 
   /**
    * The padding-bottom CSS property of an element sets the height of the padding
@@ -1742,7 +1758,7 @@ trait Styles {
    *
    * MDN
    */
-  val paddingBottom = new OpenStyle[Length]("paddingBottom", "padding-bottom")
+  val paddingBottom = new TypedStyle[Length]("paddingBottom", "padding-bottom")
 
   /**
    * The right CSS property specifies part of the position of positioned elements.
@@ -1776,7 +1792,7 @@ trait Styles {
    *
    * MDN
    */
-  val widows = new OpenStyle[Number]("widows", "widows")
+  val widows = new TypedStyle[Number]("widows", "widows")
 
   /**
    * On block level elements, the line-height CSS property specifies the minimal
@@ -1811,7 +1827,7 @@ trait Styles {
   /**
    * The list-style-type CSS property specifies appearance of a list item element.
    * As it is the only one who defaults to display:list-item, this is usually a
-   * <li> element, but can be any element with this display value.
+   * `<li>` element, but can be any element with this display value.
    *
    * MDN
    */
@@ -2001,7 +2017,7 @@ trait Styles {
    *
    * MDN
    */
-  val listStyle = new OpenStyle[String]("listStyle", "list-style")
+  val listStyle = new TypedStyle[String]("listStyle", "list-style")
 
   /**
    * The overflow-y CSS property specifies whether to clip content, render a
@@ -2013,7 +2029,7 @@ trait Styles {
   val overflowY = new Overflow("overflowY", "overflow-y")
 
   /**
-   * The caption-side CSS property positions the content of a table's <caption>
+   * The caption-side CSS property positions the content of a table's `<caption>`
    * on the specified side.
    *
    * MDN
@@ -2043,7 +2059,7 @@ trait Styles {
    *
    * MDN
    */
-  val boxShadow = new OpenStyle[String]("boxShadow", "box-shadow")
+  val boxShadow = new TypedStyle[String]("boxShadow", "box-shadow")
 
   object quotes extends Style("quotes", "quotes") {
     /**
@@ -2127,7 +2143,7 @@ trait Styles {
    *
    * MDN
    */
-  object fontSize extends OpenStyle[Length]("fontSize", "font-size") {
+  object fontSize extends TypedStyle[Length]("fontSize", "font-size") {
     val `xx-small` = this -> "xx-small"
     val `x-small` = this -> "x-small"
     val small = this -> "small"
@@ -2165,7 +2181,7 @@ trait Styles {
    *
    * MDN
    */
-  val fontSizeAdjust = new OpenStyle[Number]("fontSizeAdjust", "font-size-adjust")
+  val fontSizeAdjust = new TypedStyle[Number]("fontSizeAdjust", "font-size-adjust")
 
   /**
    * The font-family CSS property allows for a prioritized list of font family
@@ -2177,7 +2193,7 @@ trait Styles {
    *
    * MDN
    */
-  val fontFamily = new OpenStyle[String]("fontFamily", "font-family")
+  val fontFamily = new TypedStyle[String]("fontFamily", "font-family")
 
 
   /**
@@ -2195,7 +2211,7 @@ trait Styles {
    *
    * MDN
    */
-  object fontWeight extends OpenStyle[Int]("fontWeight", "font-weight") {
+  object fontWeight extends TypedStyle[Int]("fontWeight", "font-weight") {
     /**
      * Normal font weight. Same as 400.
      *
@@ -2231,7 +2247,7 @@ trait Styles {
    *
    * MDN
    */
-  val font = new OpenStyle[String]("font", "font")
+  val font = new TypedStyle[String]("font", "font")
 
   /**
    * The font-feature-settings CSS property allows control over advanced
@@ -2239,7 +2255,7 @@ trait Styles {
    *
    * MDN
    */
-  val fontFeatureSettings = new OpenStyle[String]("fontFeatureSettings", "font-feature-settings")
+  val fontFeatureSettings = new TypedStyle[String]("fontFeatureSettings", "font-feature-settings")
 
   /**
    * The font-style CSS property allows italic or oblique faces to be selected
@@ -2310,14 +2326,14 @@ trait Styles {
    *
    * MDN
    */
-  val content = new OpenStyle[String]("content", "content")
+  val content = new TypedStyle[String]("content", "content")
   /**
    * The counter-reset CSS property is used to reset CSS Counters to a given
    * value.
    *
    * MDN
    */
-  val counterReset = new OpenStyle[String]("counterReset", "counter-reset")
+  val counterReset = new TypedStyle[String]("counterReset", "counter-reset")
 
   /**
    * The outline-width CSS property is used to set the width of the outline of
@@ -2326,7 +2342,7 @@ trait Styles {
    *
    * MDN
    */
-  object outlineWidth extends OpenStyle[Length]("outlineWidth", "outline-width") {
+  object outlineWidth extends TypedStyle[Length]("outlineWidth", "outline-width") {
     /**
      * Typically 1px in desktop browsers like Firefox.
      *
@@ -2361,7 +2377,7 @@ trait Styles {
    *
    * MDN
    */
-  val marginRight = new OpenStyle[Length]("marginRight", "margin-right") with MarginAuto
+  val marginRight = new TypedStyle[Length]("marginRight", "margin-right") with MarginAuto
 
 
   /**
@@ -2370,7 +2386,7 @@ trait Styles {
    *
    * MDN
    */
-  val marginTop = new OpenStyle[Length]("marginTop", "margin-top") with MarginAuto
+  val marginTop = new TypedStyle[Length]("marginTop", "margin-top") with MarginAuto
 
 
   /**
@@ -2383,7 +2399,7 @@ trait Styles {
    *
    * MDN
    */
-  val marginLeft = new OpenStyle[Length]("marginLeft", "margin-left") with MarginAuto
+  val marginLeft = new TypedStyle[Length]("marginLeft", "margin-left") with MarginAuto
   /**
    * The margin CSS property sets the margin for all four sides. It is a
    * shorthand to avoid setting each side separately with the other margin
@@ -2410,19 +2426,6 @@ trait Styles {
 
     def ~(top: Length, right: Length, bottom: Length, left: Length) = this -> s"$top $right $bottom $left"
   }
-
-
-  trait MarginAuto extends Style {
-    /**
-     * auto is replaced by some suitable value, e.g. it can be used for
-     * centering of blocks.
-     *
-     * MDN
-     */
-    val auto = this -> "auto"
-
-  }
-
 
   /**
    * The word-break CSS property is used to specify how (or if) to break lines
@@ -2505,7 +2508,7 @@ trait Styles {
    * element.
    *
    * This properties applies to block elements that generate a box. It won't
-   * apply on an empty <div> that won't generate a box.
+   * apply on an empty `<div>` that won't generate a box.
    *
    * MDN
    */
@@ -2550,7 +2553,7 @@ trait Styles {
    *
    * MDN
    */
-  object outlineColor extends OpenStyle[Color]("outlineColor", "outline-color") {
+  object outlineColor extends TypedStyle[Color]("outlineColor", "outline-color") {
     /**
      * To ensure the outline is visible, performs a color inversion of the
      * background. This makes the focus border more salient, regardless of the
@@ -2573,7 +2576,7 @@ trait Styles {
    *
    * MDN
    */
-  val outline = new OpenStyle[String]("outline", "outline")
+  val outline = new TypedStyle[String]("outline", "outline")
 
 
   /**
@@ -2627,21 +2630,21 @@ trait Styles {
     val nowrap = this -> "nowrap"
     /**
      * Sequences of whitespace are preserved, lines are only broken at newline
-     * characters in the source and at <br> elements.
+     * characters in the source and at `<br>` elements.
      *
      * MDN
      */
     val pre = this -> "pre"
     /**
      * Sequences of whitespace are preserved. Lines are broken at newline
-     * characters, at <br>, and as necessary to fill line boxes.
+     * characters, at `<br>`, and as necessary to fill line boxes.
      *
      * MDN
      */
     val `pre-wrap` = this -> "pre-wrap"
     /**
      * Sequences of whitespace are collapsed. Lines are broken at newline
-     * characters, at <br>, and as necessary to fill line boxes.
+     * characters, at `<br>`, and as necessary to fill line boxes.
      *
      * MDN
      */
@@ -2657,7 +2660,7 @@ trait Styles {
    *
    * MDN
    */
-  val minWidth = new OpenStyle[Length]("minWidth", "minWidth")
+  val minWidth = new TypedStyle[Length]("minWidth", "minWidth")
 
 
 
@@ -2671,7 +2674,7 @@ trait Styles {
    *
    * MDN
    */
-  val minHeight = new OpenStyle[Length]("minHeight", "min-height")
+  val minHeight = new TypedStyle[Length]("minHeight", "min-height")
 
 
   /**
@@ -2749,7 +2752,7 @@ trait Styles {
    *
    * MDN
    */
-  val transition = new OpenStyle[String]("transition", "transition")
+  val transition = new TypedStyle[String]("transition", "transition")
 
   /**
    * The CSS transition-timing-function property is used to describe how the
@@ -2759,7 +2762,7 @@ trait Styles {
    *
    * MDN
    */
-  val transitionTimingFunction = new OpenStyle[String]("transitionTimingFunction", "transition-timing-function")
+  val transitionTimingFunction = new TypedStyle[String]("transitionTimingFunction", "transition-timing-function")
 
   /**
    * The transition-duration CSS property specifies the number of seconds or
@@ -2783,7 +2786,7 @@ trait Styles {
    *
    * MDN
    */
-  val transitionProperty = new OpenStyle[String]("transitionProperty", "transition-property")
+  val transitionProperty = new TypedStyle[String]("transitionProperty", "transition-property")
 
   /**
    * The CSS transform property lets you modify the coordinate space of the CSS
@@ -2796,7 +2799,7 @@ trait Styles {
    *
    * MDN
    */
-  val transform = new OpenStyle[String]("transform", "transform")
+  val transform = new TypedStyle[String]("transform", "transform")
 
 
   /**
@@ -2810,7 +2813,7 @@ trait Styles {
    *
    * MDN
    */
-  val transformOrigin = new OpenStyle[String]("transformOrigin", "transform-origin")
+  val transformOrigin = new TypedStyle[String]("transformOrigin", "transform-origin")
   /**
    * The transform-style CSS property determines if the children of the element
    * are positioned in the 3D-space or are flattened in the plane of the element.
@@ -2853,7 +2856,7 @@ trait Styles {
    *
    * MDN
    */
-  val perspectiveOrigin = new OpenStyle[String]("perspectiveOrigin", "perspective-origin")
+  val perspectiveOrigin = new TypedStyle[String]("perspectiveOrigin", "perspective-origin")
 
   /**
    * The text-align-last CSS property describes how the last line of a block or
@@ -2952,7 +2955,7 @@ trait Styles {
    *
    * MDN
    */
-  val textIndent = new OpenStyle[Length]("textIndent", "text-indent")
+  val textIndent = new TypedStyle[Length]("textIndent", "text-indent")
 
 
 

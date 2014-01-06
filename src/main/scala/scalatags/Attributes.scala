@@ -9,20 +9,34 @@
  */
 package scalatags
 
-class Attr(val k: String){
-  override def toString = k
+/**
+ * Wraps up a HTML attribute in a statically-typed value
+ */
+class Attr(val name: String){
+  if (!Escaping.validAttrName(name))
+    throw new IllegalArgumentException(
+      s"Illegal attribute name: $tag is not a valid XML attribute name"
+    )
+
+  override def toString = name
 }
-class TypedAttr[T](k: String) extends Attr(k){
+
+/**
+ * Wraps up a HTML attribute in a statically-typed value with an associated
+ * type; overloads the -> operator to also accept values of that type to convert
+ * to strings, allowing more concise and pseudo-typesafe use of that attribute.
+ */
+class TypedAttr[T](name: String) extends Attr(name){
   def ->(v: T) = (this, v)
 }
 
-trait Attributes{
+private[scalatags] trait Attributes{
   /**
    * Allows you to modify a HtmlNode by adding attribute key-value pairs to
    * its list of children
    */
-  implicit class AttrTagger(kv: (Attr, String)) extends QuickMod(
-    (children, attrs, classes, styles) => attrs(kv._1.k) = kv._2
+  implicit class AttrNested(kv: (Attr, String)) extends Nested(
+    (children, attrs) => attrs(kv._1.name) = kv._2
   )
 
   /**
@@ -39,8 +53,8 @@ trait Attributes{
   val href = "href".attr
   /**
    * The URI of a program that processes the information submitted via the form.
-   * This value can be overridden by a formaction attribute on a <button> or
-   * <input> element.
+   * This value can be overridden by a formaction attribute on a `<button>` or
+   * `<input>` element.
    *
    * MDN
    */
@@ -73,7 +87,7 @@ trait Attributes{
    *   context (that is, the browsing context that is an ancestor of the current
    *   one, and has no parent). If there is no parent, this option behaves the
    *   same way as _self.
-   * - iframename: The response is displayed in a named <iframe>.
+   * - iframename: The response is displayed in a named `<iframe>`.
    */
   val target = "target".attr
   /**
@@ -98,7 +112,7 @@ trait Attributes{
    */
   val onblur = "onblur".attr
   /**
-   * The change event is fired for <input>, <select>, and <textarea> elements
+   * The change event is fired for `<input>`, `<select>`, and `<textarea>` elements
    * when a change to the element's value is committed by the user.
    *
    * MDN
@@ -206,7 +220,7 @@ trait Attributes{
   /**
    * This attribute contains CSS styling declarations to be applied to the
    * element. Note that it is recommended for styles to be defined in a separate
-   * file or files. This attribute and the <style> element have mainly the
+   * file or files. This attribute and the `<style>` element have mainly the
    * purpose of allowing for quick styling, for example for testing purposes.
    *
    * MDN

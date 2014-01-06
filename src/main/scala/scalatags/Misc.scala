@@ -1,6 +1,9 @@
 package scalatags
 
-import util.Random
+/**
+ * Represents a single CSS class.
+ */
+class Cls(val name: String)
 
 /**
  * Misc helper functions
@@ -79,7 +82,7 @@ private[scalatags] trait Misc extends Attributes{
 
     /**
      * This unit represents the font-size of the root element (e.g. the font-size
-     * of the <html> element). When used on the font-size on this root element,
+     * of the `<html>` element). When used on the font-size on this root element,
      * it represents its initial value.
      */
     def rem = x + "rem"
