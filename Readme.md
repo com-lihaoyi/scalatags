@@ -624,12 +624,12 @@ By writing custom `Nested` objects with your own `build` method, you can create 
 Prior Work
 ==========
 
-Scalatags was made after experience with a broad range of HTML generation systems. Here is a review of what I found good and bad about existing work:
+Scalatags was made after experience with a broad range of HTML generation systems. This experience (with both the pros and cons of existing systems) informed the design of Scalatags.
 
 Old-school Templates
 --------------------
 
-[Jinja2]()http://jinja.pocoo.org/docs/ is the templating engine that comes bundled with [Flask](http://flask.pocoo.org/), and a similar (but somewhat weaker) system comes bundled with [Django](https://docs.djangoproject.com/en/dev/topics/templates/), and another system in a similar vein is [Ruby on Rail's ERB](http://guides.rubyonrails.org/layouts_and_rendering.html) rendering engine. This spread more-or-less represents the old-school way of rendering HTML, in that they:
+[Jinja2](http://jinja.pocoo.org/docs/) is the templating engine that comes bundled with [Flask](http://flask.pocoo.org/), and a similar (but somewhat weaker) system comes bundled with [Django](https://docs.djangoproject.com/en/dev/topics/templates/), and another system in a similar vein is [Ruby on Rail's ERB](http://guides.rubyonrails.org/layouts_and_rendering.html) rendering engine. This spread more-or-less represents the old-school way of rendering HTML, in that they:
 
 - Are effectively string-based
 - Use special syntax for both interpolating variables as well as for basic control flow logic
@@ -639,10 +639,11 @@ Old-school Templates
 They also showcase many of the weaknesses of this style of templating system:
 
 - The fact that it's string based means it's vulnerable to XSS injections, or plain-old malformed HTML output.
-- The one-template-per-file rule discourages you from building your page from small re-usable fragments, because who wants to keep track of hundreds of individual files. People are reluctant to make a file with 3-5 lines in it, which is unfortunate because factoring templates into re-usable 3-5 line snippets is a good way of staying sane.
-- The API is complex and novel: Jinja2 for example contains logic around file-loading & caching, as well as custom Jinja2-specific ways of doing [loops](http://jinja.pocoo.org/docs/templates/#for), [conditionals](http://jinja.pocoo.org/docs/templates/#if), [functions](http://jinja.pocoo.org/docs/templates/#macros), [comments](http://jinja.pocoo.org/docs/templates/#comments), [inheritance](http://jinja.pocoo.org/docs/templates/#template-inheritance), [scoping](http://jinja.pocoo.org/docs/templates/#block-nesting-and-scope), [imports](http://jinja.pocoo.org/docs/templates/#import-context-behavior) and other things. All these are things you would have to learn.
+- The one-template-per-file rule discourages you from building your page from small re-usable fragments, because who wants to keep track of hundreds of individual files. People are reluctant to make a file with 3-5 lines in it, which is understandable but unfortunate because factoring templates into re-usable 3-5 line snippets is a good way of staying sane.
+- The API is complex and novel: Jinja2 for example contains logic around [file-loading](http://jinja.pocoo.org/docs/api/#loaders) & [caching](http://jinja.pocoo.org/docs/api/#bytecode-cache), as well as custom Jinja2-specific ways of doing [loops](http://jinja.pocoo.org/docs/templates/#for), [conditionals](http://jinja.pocoo.org/docs/templates/#if), [functions](http://jinja.pocoo.org/docs/templates/#macros), [comments](http://jinja.pocoo.org/docs/templates/#comments), [inheritance](http://jinja.pocoo.org/docs/templates/#template-inheritance), [scoping](http://jinja.pocoo.org/docs/templates/#block-nesting-and-scope), [imports](http://jinja.pocoo.org/docs/templates/#import-context-behavior) and other things. All these are things you would have to learn.
 - The syntax is completely new; finding a editor that properly supports all the quirks and semantics (or even simply highlighting things properly) is hard. You could hack together something quick and extremely fragile, or you could wait ages for a solid plugin to materialize.
 - Abstraction is clunky: inbuilt tags are used via `<div />`, while user-defined components are called e.g. by `{{ component() }}`. You're left with a choice between not using much abstraction and mainly sticking to inbuilt tags, or creating components and accepting the fact that your templates will basically be totally composed of `{{ curly braces }}`. Neither choice is satisfying.
+- Have no sort of static checking at all; you're just passing dicts around, and waiting for silly mistakes to blow up at run-time so you can fix them.
 
 Razor and Play Templates
 ------------------------
@@ -651,18 +652,27 @@ Razor and Play Templates
 - Are statically-compiled
 - Re-use large chunks of the host language
 
-Both templating systems generally use `@` to delimit "code"; e.g. `@for(...)` declares a for-loop, not the word "for". One nice thing is that the API is far simpler: all the custom control-flow/programming-language-features basically collapses into the simple statement "do it the way C#/Scala does it".
+Both templating systems generally use `@` to delimit "code"; e.g. `@for(...){...}` declares a for-loop. Nice things are:
+
+- The API is far simpler: all the custom control-flow/logic/syntax basically collapses into the simple statement "do it the way C#/Scala does it".
+- Static checking in templates is nice.
 
 However, they still have their downsides:
 
-- The one-template-per-file rule is still there.
-- Abstractions are less clunky than in old-school templates, e.g. `@func()` rather than `{{ component() }}`, but still not ideal.
-- The syntax still poses a problem for editors; both HTML editors and C#/Scala editors won't want to work with these templates, so you still end up with sub-par support.
-- You still end up with weird [edge](http://stackoverflow.com/questions/13973009/complex-pattern-matching-on-templace-using-scala-play) [cases](http://stackoverflow.com/questions/12070625/compilation-error-of-play-framework-templates) due to the fact that you're squashing together two completely unrelated parsers/syntaxes.
+- Abstractions are less clunky to use than in old-school templates, e.g. `@component()` rather than `{{ component() }}`, but still not ideal.
+- The one-template-per-file rule is still there, making abstractions clunky to define.
+- The syntax still poses a problem for editors; both HTML editors and C#/Scala editors won't want to work with these templates, so you still end up with sub-par support or waiting for plugins.
+- You still end up with weird [edge](http://stackoverflow.com/questions/13973009/complex-pattern-matching-on-templace-using-scala-play) [cases](http://stackoverflow.com/questions/12070625/compilation-error-of-play-framework-templates) due to the fact that you're squashing together two completely unrelated syntaxes.
 
 XHP and Pyxl
 ------------
-[XHP](https://github.com/facebook/xhp) and [Pyxl](https://github.com/dropbox/pyxl) are HTML generation systems used at Facebook and Dropbox. In short, they allow you to embed sections of your HTML as literals within your PHP and Python code, allowing you to reference them as objects (e.g. calling methods and modifying fields) as well as providing a way to interpolate values and combine them. e.g. the Pyxl homepage provides this illustrative example:
+[XHP](https://github.com/facebook/xhp) and [Pyxl](https://github.com/dropbox/pyxl) are HTML generation systems used at Facebook and Dropbox. In short, they allow you to:
+
+- Embed sections of your HTML as literals within your PHP and Python code
+- Reference them as objects (e.g. calling methods and modifying fields)
+- Provide a way to interpolate values and combine them.
+
+The Pyxl homepage provides this example:
 
 ```python
 image_name = "bolton.png"
@@ -675,19 +685,19 @@ element_list = [image, text]
 block2 = <div>{element_list}</div>
 ```
 
-These libraries are basically the same thing, and have some nice properties:
+Which shows how you can generate HTML directly in your python code, using your python variables. These libraries are basically the same thing, and have some nice properties:
 
 - The one-template-per-file rule is gone! This encourages you to make more, smaller fragments and then compose them, which is great.
 - They're no longer string-based, so you won't have problems with XSS or malformed output.
-- The API is really simple; maybe 10 different things you need to remember, and the rest is bog-standard. They don't need to load templates from the filesystem anymore (with all the associated discovery/loading/caching logic) since it's all just in your code.
-- The syntax is completely familiar too; apart from maybe one new rule (using `{}` to interpolate values) the rest of your templates and logic are bog-standard HTML/Python/PHP.
+- The API is really simple; maybe a dozen different things you need to remember, and the rest is "just use Python/PHP". E.g. they don't need to load templates from the filesystem any more (with all the associated discovery/loading/caching logic) since it's all just in your code.
+- The syntax is completely familiar too; apart from maybe one new rule (using `{...}` to interpolate values) the rest of your templates and logic are bog-standard HTML/Python/PHP.
 - Abstraction is almost seamless; both systems allow you to define custom components and have them called via `<component arg="..." />`
 
 But they're not quite there:
 
 - Although the syntax is familiar to you, it's not familiar to your editor, and probably will mess up your syntax highlighting (and other tooling) in your Python/PHP files.
 - Defining custom components (e.g. in [Pyxl](https://github.com/dropbox/pyxl#ui-modules)) is much more verbose/tedious than it needs to be. Most of the time, all you want is a function; very rarely do you want a fragment that is long lived and has mutable state, which is where classes/objects are really necessary.
-- Even using custom components gets tedious; at some scale, everything you pass into a component will be a structured Python value rather than a string, and you end up with code like `<component arg1="{value1}" arg2="{value2}" arg3="{value3}" arg4="{value4}" />`. It's nice to have inbuilt/custom components behave uniformly, but you wonder what the XML syntax is really buying you.
+- Even using custom components gets tedious; at some scale, everything you pass into a component will be a structured Python value rather than a string, and you end up with code like `<component arg1="{value1}" arg2="{value2}" arg3="{value3}" arg4="{value4}" />`. It's nice to have inbuilt/custom components behave uniformly, but you wonder what the XML syntax is really buying you other than forcing you to only use keyword-arguments and to wrap arguments in `"{...}"`.
 - It's still XML! People spend [a lot](https://github.com/visionmedia/jade) [of time](http://haml.info/) trying to get XML out of their templates; it seems odd to spend just as much time trying to put it into your source code.
 
 Scalatags
@@ -695,9 +705,9 @@ Scalatags
 
 And that's why I created Scalatags:
 
-- Structured and immune to malformed output/XSS
+- Structured and immune to malformed output/XSS.
 - No more one-template-per-file rule; make small templates to your hearts content!
-- Dead-simple API, which re-uses 100% of what you know about Scala's language and libraries
+- Dead-simple API, which re-uses 100% of what you know about Scala's language and libraries.
 - 100% Scala syntax; no more bumping into weird edge cases with the parser.
 - Syntax highlighting, error-highlighting, jump-to-definition, in-editor-documentation, and all the other nice IDE features out of the box. No more waiting for plugins!
 - Inbuilt and custom tags are uniformly just function calls (e.g. `div("hello world")`)
@@ -709,8 +719,7 @@ On top of fixing all the old problems, Scalatags targets some new ones:
 - Typesafe-ish access to HTML tags, attributes and CSS classes and styles. No more weird bugs due to typos like `flaot: left` or `<dvi>`.
 - Cross compiles to run on both JVM and Javascript via [ScalaJS](https://github.com/scala-js/scala-js), which is a property few other engines (e.g. [Mustache](http://mustache.github.io/)) have.
 
-
-Hopefully this motivates why a new HTML generation library
+Scalatags is still a work in progress, but I think I've hit most of the pain points I was feeling with the old systems, and hope to continually improve it over time. Pull requests welcome!
 
 License
 =======
