@@ -11,14 +11,14 @@ class ExampleTests extends FreeSpec{
   "Splash example" in strCheck(
     html(
       head(
-        script(src->"..."),
+        script(src:="..."),
         script(
           "alert('Hello World')"
         )
       ),
       body(
         div(
-          h1(id->"title", "This is a title"),
+          h1(id:="title", "This is a title"),
           p("This is a big paragraph of text")
         )
       )
@@ -152,7 +152,7 @@ class ExampleTests extends FreeSpec{
   "Functions" in strCheck(
     {
       def imgBox(source: String, text: String) = div(
-        img(src->source),
+        img(src:=source),
         div(
           p(text)
         )
@@ -165,7 +165,7 @@ class ExampleTests extends FreeSpec{
         body(
           h1("This is my title"),
           imgBox("www.mysite.com/imageOne.png", "This is the first image displayed on the site"),
-          div(`class`->"content")(
+          div(`class`:="content")(
             p("blah blah blah i am text"),
             imgBox("www.mysite.com/imageTwo.png", "This image is very interesting")
           )
@@ -206,10 +206,10 @@ class ExampleTests extends FreeSpec{
       body(
         h1("This is my title"),
         div(
-          p("onclick".attr->"... do some js")(
+          p("onclick".attr:="... do some js")(
             "This is my first paragraph"
           ),
-          a("href".attr->"www.google.com")(
+          a("href".attr:="www.google.com")(
             p("Goooogle")
           )
         )
@@ -240,10 +240,10 @@ class ExampleTests extends FreeSpec{
       body(
         h1("This is my title"),
         div(
-          p(onclick->"... do some js")(
+          p(onclick:="... do some js")(
             "This is my first paragraph"
           ),
-          a(href->"www.google.com")(
+          a(href:="www.google.com")(
             p("Goooogle")
           )
         )
@@ -273,12 +273,12 @@ class ExampleTests extends FreeSpec{
         script("some script")
       ),
       body(
-        h1(backgroundColor->"blue", color->"red")("This is my title"),
-        div(backgroundColor->"blue", color->"red")(
+        h1(backgroundColor:="blue", color:="red")("This is my title"),
+        div(backgroundColor:="blue", color:="red")(
           p(contentpara, first)(
             "This is my first paragraph"
           ),
-          a(opacity->0.9)(
+          a(opacity:=0.9)(
             p("contentpara".cls)("Goooogle")
           )
         )
@@ -308,12 +308,12 @@ class ExampleTests extends FreeSpec{
         script("some script")
       ),
       body(
-        h1("background-color".style->"blue", "color".style->"red")("This is my title"),
-        div("background-color".style->"blue", "color".style->"red")(
+        h1("background-color".style:="blue", "color".style:="red")("This is my title"),
+        div("background-color".style:="blue", "color".style:="red")(
           p("contentpara".cls, "first".cls)(
             "This is my first paragraph"
           ),
-          a("opacity".style->"0.9")(
+          a("opacity".style:="0.9")(
             p("contentpara".cls)("Goooogle")
           )
         )
@@ -356,7 +356,7 @@ class ExampleTests extends FreeSpec{
       ),
       Seq(
         p("This is the first ", b("image"), " displayed on the ", a("site")),
-        img(src->"www.myImage.com/image.jpg"),
+        img(src~="www.myImage.com/image.jpg"),
         p("blah blah blah i am text")
       )
     )
@@ -435,7 +435,7 @@ class ExampleTests extends FreeSpec{
         ),
         body(
           h1(
-            title->evilInput1,
+            title:=evilInput1,
             "This is my title"
           ),
           evilInput2
@@ -487,7 +487,7 @@ class ExampleTests extends FreeSpec{
   )
 
   "Typesafe CSS" in strCheck(
-    div(zIndex->10),
+    div(zIndex:=10),
     """<div style="z-index: 10;" />"""
   )
   "Custom attributes and styles" in strCheck(
@@ -495,8 +495,8 @@ class ExampleTests extends FreeSpec{
       val dataAppKey = "data-app-key".attr
       val mozBorderRadius = "-moz-border-radius".style
       div(
-        dataAppKey->"YOUR_APP_KEY",
-        mozBorderRadius->10.px
+        dataAppKey:="YOUR_APP_KEY",
+        mozBorderRadius:=10.px
       )
     },
     """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;" />"""

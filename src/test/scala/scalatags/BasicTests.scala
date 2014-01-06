@@ -51,7 +51,7 @@ class BasicTests extends FreeSpec{
   "css chaining" in strCheck(
     div(
       float.left,
-      color->"red"
+      color:="red"
     ),
     """<div style="float: left; color: red;" />"""
   )
@@ -59,8 +59,8 @@ class BasicTests extends FreeSpec{
 
   "attribute chaining" in strCheck(
     div(
-      id->"cow",
-      `class`->"thing lol"
+      id:="cow",
+      `class`:="thing lol"
     ),
     """<div class="thing lol" id="cow" />"""
   )
@@ -68,7 +68,7 @@ class BasicTests extends FreeSpec{
 
   "mixing attributes and styles and children" in strCheck(
     div(
-      id->"cow",
+      id:="cow",
       float.left,
       p("i am a cow")
     ),
@@ -84,8 +84,8 @@ class BasicTests extends FreeSpec{
   "class/style after attr appends, but attr after class/style overwrites" in strCheck(
     div(
       float.left,
-      style->"background-color: red;",
-      `class`->"my-class",
+      style:="background-color: red;",
+      `class`:="my-class",
       "other-class".cls,
       p("i am a cow")
     ),
@@ -98,17 +98,16 @@ class BasicTests extends FreeSpec{
 
   "list of classes is generated properly" in {
     val frag = div(
-      `class`->"my-class",
+      `class`:="my-class",
       "other-class".cls
     )
     assert(frag.classes == Seq("my-class", "other-class"))
   }
   "list of styles is generated properly" in {
     val frag = div(
-
-      style->"background-color: red;",
+      style:="background-color: red;",
       float.left,
-      height->10.px
+      height:=10.px
     )
     assert(frag.styles == Seq("background-color" -> "red", "float" -> "left", "height" -> "10px"))
   }

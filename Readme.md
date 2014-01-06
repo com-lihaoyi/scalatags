@@ -1,23 +1,19 @@
 ScalaTags
 =========
 
-ScalaTags is a small XML/HTML construction library for [Scala](http://www.scala-lang.org/). The core functionality of Scalatags is less than 200 lines of code, and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx).
-
-It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent them all yourself when you have someone else who has done it before you.
-
-ScalaTags takes fragments looking like this:
+ScalaTags is a small XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
 
 ```scala
 html(
   head(
-    script(src->"..."),
+    script(src:="..."),
     script(
       "alert('Hello World')"
     )
-  ),
+   ),
   body(
     div(
-      h1(id->"title", "This is a title"),
+      h1(id:="title", "This is a title"),
       p("This is a big paragraph of text")
     )
   )
@@ -40,6 +36,10 @@ And turns them into HTML like this:
     </body>
 </html>
 ```
+
+The core functionality of Scalatags is less than 500 lines of code, and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx).
+
+It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent them all yourself when you have someone else who has done it before you.
 
 Getting Started
 ===============
@@ -83,12 +83,10 @@ Making them fail to compile if you accidentally pass the wrong thing in:
 
 ![CSS Compilation Error 2]()
 
-Examples
-========
+Basic Examples
+==============
 
-This is a bunch of simple examples to get you started using ScalaTags. Essentially, each fragment has a `.toString` method, which turns it into a HTML string.
-
-These examples are all in the [unit tests](https://github.com/lihaoyi/scalatags/blob/master/src/test/scala/scalatags/ExampleTests.scala).
+This is a bunch of simple examples to get you started using ScalaTags. These examples are all in the [unit tests](https://github.com/lihaoyi/scalatags/blob/master/src/test/scala/scalatags/ExampleTests.scala).
 
 Hello World
 -----------
@@ -148,6 +146,140 @@ executing that prints out:
 ```
 
 The following examples will simply show the initial ScalaTag fragment and the final prettyprinted HTML, skipping the intermediate steps.
+
+Attributes
+----------
+
+You may already have noticed some use of `id` and `src` methods in the previous code. In general, each attribute has an associated value which can be used to set it. This example shows you the `onclick` and `href` attributes:
+
+```scala
+html(
+  head(
+    script("some script")
+  ),
+  body(
+    h1("This is my title"),
+    div(
+      p(onclick:="... do some js")(
+        "This is my first paragraph"
+      ),
+      a(href:="www.google.com")(
+        p("Goooogle")
+      )
+    )
+  )
+)
+```
+
+The most common HTML attributes all have shortcut methods. This keeps things concise and statically checked. However, inevitably you'll want to set some attribtue which isn't in the initial list defined by Scalatags. This can be done with the `.attr` method:
+
+```scala
+html(
+  head(
+    script("some script")
+  ),
+  body(
+    h1("This is my title"),
+    div(
+      p("onclick".attr:="... do some js")(
+        "This is my first paragraph"
+      ),
+      a("href".attr:="www.google.com")(
+        p("Goooogle")
+      )
+    )
+  )
+)
+```
+
+Both of these print the same thing:
+
+```html
+<html>
+    <head>
+        <script>some script</script>
+    </head>
+    <body>
+        <h1>This is my title</h1>
+        <div>
+            <p onclick="... do some js">This is my first paragraph</p>
+            <a href="www.google.com">
+                <p>Goooogle</p>
+            </a>
+        </div>
+    </body>
+</html>
+```
+
+CSS & Classes
+-------------
+
+In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a large but finite number of styles, and not any arbitrary string can be a style. The following example shows how CSS classes and inline-styles are typically set:
+
+```scala
+val contentpara = "contentpara".cls
+val first = "first".cls
+html(
+  head(
+    script("some script")
+  ),
+  body(
+    h1(backgroundColor:="blue", color:="red")("This is my title"),
+    div(backgroundColor:="blue", color:="red")(
+      p(contentpara, first)(
+        "This is my first paragraph"
+      ),
+      a(opacity:=0.9)(
+        p("contentpara".cls)("Goooogle")
+      )
+    )
+  )
+)
+```
+
+Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](https://github.com/lihaoyi/scalatags/blob/0.2/src/main/scala/scalatags/Styles.scala).
+
+Scalatags also provides a way of setting styles dynamically as strings. This example shows how to define your own styles or css classes inline:
+
+```
+html(
+  head(
+    script("some script")
+  ),
+  body(
+    h1("background-color".style:="blue", "color".style:="red")("This is my title"),
+    div("background-color".style:="blue", "color".style:="red")(
+      p("contentpara".cls, "first".cls)(
+        "This is my first paragraph"
+      ),
+      a("opacity".style:="0.9")(
+        p("contentpara".cls)("Goooogle")
+      )
+    )
+  )
+)
+```
+
+Both of these print the same thing:
+
+```html
+<html>
+    <head>
+        <script>some script</script>
+    </head>
+    <body>
+        <h1 style="background-color: blue; color: red;">This is my title</h1>
+        <div style="background-color: blue; color: red;">
+        <p class="contentpara first">This is my first paragraph</p>
+        <a style="opacity: 0.9;">
+            <p class="contentpara">Goooogle</p>
+        </a>
+        </div>
+    </body>
+</html>
+```
+
+A full list of the shortcut methods (for both attributes and styles) can be found in `HtmlAttributes.scala`
 
 Variables
 =========
@@ -251,7 +383,7 @@ Many other templating systems define [incredibly](http://guides.rubyonrails.org/
 
 ```scala
 def imgBox(source: String, text: String) = div(
-  img(src->source),
+  img(src:=source),
   div(
     p(text)
   )
@@ -264,7 +396,7 @@ html(
   body(
     h1("This is my title"),
     imgBox("www.mysite.com/imageOne.png", "This is the first image displayed on the site"),
-    div(`class`->"content")(
+    div(`class`:="content")(
       p("blah blah blah i am text"),
       imgBox("www.mysite.com/imageTwo.png", "This image is very interesting")
     )
@@ -300,238 +432,6 @@ prints
 </html>
 ```
 
-Attributes
-----------
-
-You may already have noticed some use of `id` and `src` methods in the previous code. In general, any attribute can be set on a tag via the `.attr` method:
-
-```scala
-html(
-  head(
-    script("some script")
-  ),
-  body(
-    h1("This is my title"),
-    div(
-      p("onclick".attr->"... do some js")(
-        "This is my first paragraph"
-      ),
-      a("href".attr->"www.google.com")(
-        p("Goooogle")
-      )
-    )
-  )
-)
-```
-
-However, the most common HTML attributes all have shortcut methods. For example, `.id(...)` is the shortcut for `.attr("id"->...)`, and helps reduce the verbosity and ensure correctness (typos won't compile) for the common use case. So the following is identical:
-
-```scala
-html(
-  head(
-    script("some script")
-  ),
-  body(
-    h1("This is my title"),
-    div(
-      p(onclick->"... do some js")(
-        "This is my first paragraph"
-      ),
-      a(href->"www.google.com")(
-        p("Goooogle")
-      )
-    )
-  )
-)
-```
-
-Both of these print the same thing:
-
-```html
-<html>
-    <head>
-        <script>some script</script>
-    </head>
-    <body>
-        <h1>This is my title</h1>
-        <div>
-            <p onclick="... do some js">This is my first paragraph</p>
-            <a href="www.google.com">
-                <p>Goooogle</p>
-            </a>
-        </div>
-    </body>
-</html>
-```
-
-CSS & Classes
--------------
-
-In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a finite number of styles.
-
-```scala
-val contentpara = "contentpara".cls
-val first = "first".cls
-html(
-  head(
-    script("some script")
-  ),
-  body(
-    h1(backgroundColor->"blue", color->"red")("This is my title"),
-    div(backgroundColor->"blue", color->"red")(
-      p(contentpara, first)(
-        "This is my first paragraph"
-      ),
-      a(opacity->0.9)(
-        p("contentpara".cls)("Goooogle")
-      )
-    )
-  )
-)
-```
-
-Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](https://github.com/lihaoyi/scalatags/blob/0.2/src/main/scala/scalatags/Styles.scala).
-
-Scalatags also provides a way of setting styles dynamically as strings:
-
-```
-html(
-  head(
-    script("some script")
-  ),
-  body(
-    h1("background-color".style->"blue", "color".style->"red")("This is my title"),
-    div("background-color".style->"blue", "color".style->"red")(
-      p("contentpara".cls, "first".cls)(
-        "This is my first paragraph"
-      ),
-      a("opacity".style->"0.9")(
-        p("contentpara".cls)("Goooogle")
-      )
-    )
-  )
-)
-```
-
-This example shows how to define your own styles or css classes inline.
-
-```html
-<html>
-    <head>
-        <script>some script</script>
-    </head>
-    <body>
-        <h1 style="background-color: blue; color: red;">This is my title</h1>
-        <div style="background-color: blue; color: red;">
-        <p class="contentpara first">This is my first paragraph</p>
-        <a style="opacity: 0.9;">
-            <p class="contentpara">Goooogle</p>
-        </a>
-        </div>
-    </body>
-</html>
-```
-
-A full list of the shortcut methods (for both attributes and styles) can be found in `HtmlAttributes.scala`
-
-Layouts
--------
-
-Again, this is something that many other templating languages have their own [special](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) [implementations](http://jinja.pocoo.org/docs/templates/#template-inheritance) of. In ScalaTags, this can be done simply by just using functions:
-
-```scala
-def page(scripts: Seq[Node], content: Seq[Node]) =
-  html(
-    head(scripts),
-    body(
-      h1("This is my title"),
-      div("content".cls)(content)
-    )
-  )
-
-
-page(
-  Seq(
-    script("some script")
-  ),
-  Seq(
-    p("This is the first ", b("image"), " displayed on the ", a("site")),
-    img(src->"www.myImage.com/image.jpg"),
-    p("blah blah blah i am text")
-  )
-)
-```
-
-prints
-
-```html
-<html>
-    <head>
-        <script>some script</script>
-    </head>
-    <body>
-        <h1>This is my title</h1>
-            <div class="content">
-            <p>This is the first <b>image</b> displayed on the <a>site</a></p>
-                <img src="www.myImage.com/image.jpg" />
-            <p>blah blah blah i am text</p>
-        </div>
-    </body>
-</html>
-```
-
-
-
-Inheritance
------------
-
-Although most of the time, functions are sufficient to keep things DRY, if you for some reason want to use inheritance to structure your code, you probably already know how to do so. It's just Scala, and it behaves as you'd expect.
-
-```scala
-class Parent{
-  def render = html(
-    headFrag,
-    bodyFrag
-
-  )
-  def headFrag = head(
-    script("some script")
-  )
-  def bodyFrag = body(
-    h1("This is my title"),
-    div(
-      p("This is my first paragraph"),
-      p("This is my second paragraph")
-    )
-  )
-}
-
-object Child extends Parent{
-  override def headFrag = head(
-    script("some other script")
-  )
-}
-
-Child.render
-```
-
-prints
-
-```html
-<html>
-    <head>
-        <script>some other script</script>
-    </head>
-    <body>
-        <h1>This is my title</h1>
-        <div>
-            <p>This is my first paragraph</p>
-            <p>This is my second paragraph</p>
-        </div>
-    </body>
-</html>
-```
-
 Auto-escaping and unsanitized Input
 -----------------------------------
 
@@ -547,7 +447,7 @@ html(
   ),
   body(
     h1(
-      title->evilInput1,
+      title:=evilInput1,
       "This is my title"
     ),
     evilInput2
@@ -607,10 +507,124 @@ As you can see, the `<script>` tags in `evilInput` have been passed through to t
 
 There isn't any way to put unescaped text inside tag names, attribute names, or attribute values.
 
-Scala.js
-========
+Layouts
+-------
 
-ScalaTags now works out-of-the-box with [Scala.js](http://www.scala-js.org/). The folder ```scalatags-js``` includes an alternate SBT project that builds with Scala.js. Just put a dependency on it from your own project.
+Again, this is something that many other templating languages have their own [special](http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts) [implementations](http://jinja.pocoo.org/docs/templates/#template-inheritance) of. In ScalaTags, this can be done simply by just using functions:
+
+```scala
+def page(scripts: Seq[Node], content: Seq[Node]) =
+  html(
+    head(scripts),
+    body(
+      h1("This is my title"),
+      div("content".cls)(content)
+    )
+  )
+
+
+page(
+  Seq(
+    script("some script")
+  ),
+  Seq(
+    p("This is the first ", b("image"), " displayed on the ", a("site")),
+    img(src:=`"www.myImage.com/image.jpg"),
+    p("blah blah blah i am text")
+  )
+)
+```
+
+prints
+
+```html
+<html>
+    <head>
+        <script>some script</script>
+    </head>
+    <body>
+        <h1>This is my title</h1>
+            <div class="content">
+            <p>This is the first <b>image</b> displayed on the <a>site</a></p>
+                <img src="www.myImage.com/image.jpg" />
+            <p>blah blah blah i am text</p>
+        </div>
+    </body>
+</html>
+```
+
+Inheritance
+-----------
+
+Although most of the time, functions are sufficient to keep things DRY, if you for some reason want to use inheritance to structure your code, you probably already know how to do so. Again, unlike [other](http://wsgiarea.pocoo.org/jinja/docs/inheritance.html) [frameworks](http://docs.makotemplates.org/en/latest/inheritance.html) that have implemented complex inheritance systems themselves, Scalatags is just Scala, and it behaves as you'd expect.
+
+```scala
+class Parent{
+  def render = html(
+    headFrag,
+    bodyFrag
+
+  )
+  def headFrag = head(
+    script("some script")
+  )
+  def bodyFrag = body(
+    h1("This is my title"),
+    div(
+      p("This is my first paragraph"),
+      p("This is my second paragraph")
+    )
+  )
+}
+
+object Child extends Parent{
+  override def headFrag = head(
+    script("some other script")
+  )
+}
+
+Child.toString
+```
+
+prints
+
+```html
+<html>
+    <head>
+        <script>some other script</script>
+    </head>
+    <body>
+        <h1>This is my title</h1>
+        <div>
+            <p>This is my first paragraph</p>
+            <p>This is my second paragraph</p>
+        </div>
+    </body>
+</html>
+```
+
+ScalaJS
+=======
+
+ScalaTags now works out-of-the-box with [Scala.js](http://www.scala-js.org/). The folder ```scalatags-js``` includes an alternate SBT project that builds with ScalaJS.
+
+To use Scalatags with a ScalaJS project, check out this project Just put a source dependency on the the `/scalatags-js` folder from your own project. This manual process should improve when ScalaJS's package management story is more mature.
+
+Internals
+=========
+
+The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](), with most of the implicit extensions and conversions living in [package.scala]().
+
+The rough architecture is as follows:
+
+- Every node is effectively-immutable, and contains a list of `Nested` objects within it. Calling the node's apply method (e.g. `div(..., ...)`) creates a new node with the new `Nested` objects appended.
+- A `Nested` can be a child-node, a attribute binding, a style binding, a css class, a `String`, or something that you define yourself.
+- When a node is rendered, the list of `Nested` objects is traversed and used to populate a `children` list and `attrs` map, which are then used to render the HTML string. Each `Nested` has a `build` method that it uses to populate those data structures during rendering time. This also happens lazily when either `children` or `attrs` is called directly.
+- After rendering, `children` and `attrs` are cached and the node remains effectively immutable after.
+
+The goal of this is to avoid the performance penalty of building the data structure completely immutably, while also avoiding the correctness problems when the mutability is externally visible. By lazily deferring the actual construction until the value is needed, and then using mutation to speed things up, Scalatags optimizes for the most common use case where a tag is only rendered once, after it has finished construction, while still preserving the illusion of immutability to any external observers.
+
+By writing custom `Nested` objects with your own `build` method, you can create "tags" that when placed into the contents of a tag, manipulates the `children` and `attrs` structures in interesting ways. Possible uses include validating that `attrs` only contains valid values for that element, or binding a [reactive variable](https://github.com/lihaoyi/scala.rx) to an attribute with enough scaffolding to propagate changes to the attribute after the page has rendered.
 
 License
 =======

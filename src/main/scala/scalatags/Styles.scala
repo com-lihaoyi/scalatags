@@ -10,42 +10,23 @@
 package scalatags
 
 /**
- * A Style that only has a fixed set of possible values, provided by its members.
- */
-class Style(val jsName: String, val cssName: String) {
-  override def toString = cssName
-}
-
-/**
- * A Style that takes any value of type T as a parameter; overloads the ->
- * operator to also accept values of that type to convert to strings, allowing
- * more concise and pseudo-typesafe use of that style.
- */
-class TypedStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
-  def ->(value: T) = (this, value.toString)
-}
-
-/**
  * A Style that takes any value of type T as a parameter and has an auto value
  */
-private[scalatags] class AutoStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
-  def ->(value: T) = (this, value.toString)
-  val auto = this -> "auto"
+private[scalatags] class AutoStyle[T](jsName: String, cssName: String) extends TypedStyle[T](jsName, cssName) {
+  val auto = this ~= "auto"
 }
 /**
  * A Style that takes any value of type T as a parameter and has an none value
  */
-private[scalatags] class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
-  def ->(value: T) = (this, value.toString)
-  val none = this -> "none"
+private[scalatags] class NoneOpenStyle[T](jsName: String, cssName: String) extends TypedStyle[T](jsName, cssName) {
+  val none = this ~= "none"
 }
 
 /**
  * A Style that takes any value of type T as a parameter and has an none value
  */
-private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
-  def ->(value: T) = (this, value.toString)
-  val normal = this -> "normal"
+private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) extends TypedStyle[T](jsName, cssName) {
+  val normal = this ~= "normal"
 }
 
 private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
@@ -56,7 +37,7 @@ private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends S
    *
    * MDN
    */
-  val dotted = this -> "dotted"
+  val dotted = this ~= "dotted"
   /**
    * Displays a series of short square-ended dashes or line segments. The exact
    * size and length of the segments are not defined by the specification and
@@ -64,33 +45,33 @@ private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends S
    *
    * MDN
    */
-  val dashed = this -> "dashed"
+  val dashed = this ~= "dashed"
   /**
    * Displays a single, straight, solid line.
    *
    * MDN
    */
-  val solid = this -> "solid"
+  val solid = this ~= "solid"
   /**
    * Displays two straight lines that add up to the pixel amount defined as
    * border-width or border-right-width.
    *
    * MDN
    */
-  val double = this -> "double"
+  val double = this ~= "double"
   /**
    * Displays a border leading to a carved effect. It is the opposite of ridge.
    *
    * MDN
    */
-  val groove = this -> "groove"
+  val groove = this ~= "groove"
   /**
    * Displays a border with a 3D effect, like if it is coming out of the page.
    * It is the opposite of groove.
    *
    * MDN
    */
-  val ridge = this -> "ridge"
+  val ridge = this ~= "ridge"
   /**
    * Displays a border that makes the box appear embedded. It is the opposite
    * of outset. When applied to a table cell with border-collapse set to
@@ -98,7 +79,7 @@ private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends S
    *
    * MDN
    */
-  val inset = this -> "inset"
+  val inset = this ~= "inset"
   /**
    * Displays a border that makes the box appear in 3D, embossed. It is the
    * opposite of inset. When applied to a table cell with border-collapse set
@@ -106,7 +87,7 @@ private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends S
    *
    * MDN
    */
-  val outset = this -> "outset"
+  val outset = this ~= "outset"
 }
 
 private[scalatags] class BorderStyle(jsName: String, cssName: String) extends OutlineStyle(jsName, cssName){
@@ -120,7 +101,7 @@ private[scalatags] class BorderStyle(jsName: String, cssName: String) extends Ou
    *
    * MDN
    */
-  val none = this -> "none"
+  val none = this ~= "none"
   /**
    * Like for the none keyword, displays no border. In that case, except if a
    * background image is set, the calculated values of border-right-width will
@@ -130,7 +111,7 @@ private[scalatags] class BorderStyle(jsName: String, cssName: String) extends Ou
    *
    * MDN
    */
-  val hidden = this -> "hidden"
+  val hidden = this ~= "hidden"
 
 }
 
@@ -141,13 +122,13 @@ private[scalatags] class Overflow(jsName: String, cssName: String) extends Style
    *
    * MDN
    */
-  val visible = this -> "visible"
+  val visible = this ~= "visible"
   /**
    * The content is clipped and no scrollbars are provided.
    *
    * MDN
    */
-  val hidden = this -> "hidden"
+  val hidden = this ~= "hidden"
   /**
    * The content is clipped and desktop browsers use scrollbars, whether or
    * not any content is clipped. This avoids any problem with scrollbars
@@ -156,14 +137,14 @@ private[scalatags] class Overflow(jsName: String, cssName: String) extends Style
    *
    * MDN
    */
-  val scroll = this -> "scroll"
+  val scroll = this ~= "scroll"
   /**
    * Depends on the user agent. Desktop browsers like Firefox provide
    * scrollbars if content overflows.
    *
    * MDN
    */
-  val auto = this -> "auto"
+  val auto = this ~= "auto"
 }
 
 private[scalatags] class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName){
@@ -172,38 +153,38 @@ private[scalatags] class PageBreak(jsName: String, cssName: String) extends Styl
    *
    * MDN
    */
-  val auto = this -> "auto"
+  val auto = this ~= "auto"
   /**
    * Always force page breaks.
    *
    * MDN
    */
-  val always = this -> "always"
+  val always = this ~= "always"
   /**
    * Avoid page breaks.
    *
    * MDN
    */
-  val avoid = this -> "avoid"
+  val avoid = this ~= "avoid"
   /**
    * Force page breaks so that the next page is formatted
    * as a left page.
    *
    * MDN
    */
-  val left = this -> "left"
+  val left = this ~= "left"
   /**
    * Force page breaks so that the next page is formatted
    * as a right page.
    *
    * MDN
    */
-  val right = this -> "right"
+  val right = this ~= "right"
 }
 
 
 private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName){
-  def ~(r1: String, r2: String = "") = this -> s"$r1 $r2"
+  def ~(r1: String, r2: String = "") = this ~= s"$r1 $r2"
 }
 
 private[scalatags] trait MarginAuto extends Style {
@@ -213,34 +194,20 @@ private[scalatags] trait MarginAuto extends Style {
    *
    * MDN
    */
-  val auto = this -> "auto"
+  val auto = this ~= "auto"
 
 }
 private[scalatags] class BorderWidth(jsName: String, cssName: String)  extends TypedStyle[Number](jsName, cssName){
-  val thin = this -> "thin"
-  val medium = this -> "medium"
-  val thick = this -> "thick"
+  val thin = this ~= "thin"
+  val medium = this ~= "medium"
+  val thick = this ~= "thick"
 }
 
 private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName){
-  def ~(times: String*) = this -> times.mkString(", ")
+  def ~(times: String*) = this ~= times.mkString(", ")
 }
 
-/**
- * List of almost all common CSS styles
- */
 private[scalatags] trait Styles {
-
-  /**
-   *
-   * @param kv
-   */
-  implicit class StyleNested(kv: (Style, String)) extends Nested({(children, attrs) =>
-    val str = kv._1.cssName + ": " + kv._2 + ";"
-    attrs("style") = attrs.get("style").fold(str)(_ + " " + str)
-  })
-
-
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -365,14 +332,14 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val scroll = this -> "scroll"
+    val scroll = this ~= "scroll"
     /**
      * This keyword means that the background image will not scroll with its
      * containing element, instead remaining stationary within the viewport.
      *
      * MDN
      */
-    val fixed = this -> "fixed"
+    val fixed = this ~= "fixed"
     /**
      * This keyword means that the background image will not scroll with its
      * containing element, but will scroll when the element's content scrolls:
@@ -380,7 +347,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val local = this -> "local"
+    val local = this ~= "local"
   }
 
 
@@ -443,20 +410,20 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `border-box` = this -> "border-box"
+    val `border-box` = this ~= "border-box"
     /**
      * No background is drawn below the border (background extends to the
      * outside edge of the padding).
      *
      * MDN
      */
-    val `padding-box` = this -> "border-box"
+    val `padding-box` = this ~= "border-box"
     /**
      * The background is painted within (clipped to) the content box.
      *
      * MDN
      */
-    val `content-box` = this -> "content-box"
+    val `content-box` = this ~= "content-box"
   }
 
   /**
@@ -476,20 +443,20 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `border-box` = this -> "border-box"
+    val `border-box` = this ~= "border-box"
     /**
      * No background is drawn below the border (background extends to the
      * outside edge of the padding).
      *
      * MDN
      */
-    val `padding-box` = this -> "padding-box"
+    val `padding-box` = this ~= "padding-box"
     /**
      * The background is painted within (clipped to) the content box.
      *
      * MDN
      */
-    val `content-box` = this -> "content-box"
+    val `content-box` = this ~= "content-box"
   }
   /**
    * The background-size CSS property specifies the size of the background
@@ -505,7 +472,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val auto = this -> "auto"
+    val auto = this ~= "auto"
     /**
      * This keyword specifies that the background image should be scaled to be
      * as small as possible while ensuring both its dimensions are greater than
@@ -514,7 +481,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val cover = this -> "cover"
+    val cover = this ~= "cover"
     /**
      * This keyword specifies that the background image should be scaled to be
      * as large as possible while ensuring both its dimensions are less than or
@@ -522,7 +489,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val contain = this -> "contain"
+    val contain = this ~= "contain"
   }
   /**
    * The CSS background-image property sets one or several background images for
@@ -663,14 +630,14 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val separate = this -> "separate"
+    val separate = this ~= "separate"
     /**
      * Is a keyword requesting the use of the collapsed-border table rendering
      * model.
      *
      * MDN
      */
-    val collapse = this -> "collapse"
+    val collapse = this ~= "collapse"
   }
   /**
    * The border-left CSS property is a shorthand that sets the values of
@@ -683,7 +650,7 @@ private[scalatags] trait Styles {
    * MDN
    */
   object borderLeft extends Style("borderLeft", "border-left") {
-    def ~(width: Length, style: String, color: Color) = this -> s"$width $style $color"
+    def ~(width: Length, style: String, color: Color) = this ~= s"$width $style $color"
   }
   /**
    * The border-left-style CSS property sets the line style of the left border
@@ -738,9 +705,9 @@ private[scalatags] trait Styles {
    * MDN
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
-    def ~(length: Length) = this -> length
+    def ~(length: Length) = this ~= length
 
-    def ~(horizontal: Length, vertical: Length) = this -> s"$horizontal $vertical"
+    def ~(horizontal: Length, vertical: Length) = this ~= s"$horizontal $vertical"
   }
 
 
@@ -789,13 +756,13 @@ private[scalatags] trait Styles {
    * MDN
    */
   object borderColor extends Style("borderColor", "border-color") {
-    def ~(color: Color) = this -> color
+    def ~(color: Color) = this ~= color
 
-    def ~(horizontal: Color, vertical: Color) = this -> s"$horizontal $vertical"
+    def ~(horizontal: Color, vertical: Color) = this ~= s"$horizontal $vertical"
 
-    def ~(top: Color, vertical: Color, bottom: Color) = this -> s"$top $vertical $bottom"
+    def ~(top: Color, vertical: Color, bottom: Color) = this ~= s"$top $vertical $bottom"
 
-    def ~(top: Color, right: Color, bottom: Color, left: Color) = this -> s"$top $right $bottom $left"
+    def ~(top: Color, right: Color, bottom: Color, left: Color) = this ~= s"$top $right $bottom $left"
   }
 
   /**
@@ -814,7 +781,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `content-box` = this -> "content-box"
+    val `content-box` = this ~= "content-box"
     /**
      * The width and height properties include the padding and border, but not
      * the margin. This is the box model used by Internet Explorer when the
@@ -822,7 +789,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `border-box` = this -> "border-box"
+    val `border-box` = this ~= "border-box"
   }
 
   /**
@@ -842,9 +809,9 @@ private[scalatags] trait Styles {
    * MDN
    */
   object columns extends Style("columns", "columns") {
-    def ~(number: Int) = this -> number.toString
+    def ~(number: Int) = this ~= number.toString
 
-    def ~(number: Int, width: Length) = this -> s"$number $width"
+    def ~(number: Int, width: Length) = this ~= s"$number $width"
   }
 
   /**
@@ -868,14 +835,14 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val auto = this -> "auto"
+    val auto = this ~= "auto"
 
     /**
      * Is a keyword indicating that content is equally divided between columns.
      *
      * MDN
      */
-    val balance = this -> "balance"
+    val balance = this ~= "balance"
   }
 
   /**
@@ -909,7 +876,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
     /**
      * The element spans across all columns. Content in the normal flow that
      * appears before the element is automatically balanced across all columns
@@ -918,7 +885,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val all = this -> "all"
+    val all = this ~= "all"
   }
 
 
@@ -950,9 +917,9 @@ private[scalatags] trait Styles {
    * MDN
    */
   object columnRuleWidth extends TypedStyle[Length]("columnRuleWidth", "column-rule-width") {
-    val thin = this -> "thin"
-    val medium = this -> "medium"
-    val thick = this -> "thick"
+    val thin = this ~= "thin"
+    val medium = this ~= "medium"
+    val thick = this ~= "thick"
   }
 
   /**
@@ -963,7 +930,7 @@ private[scalatags] trait Styles {
    */
   object columnRuleStyle
     extends OutlineStyle("columnRuleStyle", "column-rule-style"){
-    val hidden = this -> "hidden"
+    val hidden = this ~= "hidden"
   }
 
 
@@ -984,9 +951,9 @@ private[scalatags] trait Styles {
    */
   object clip extends Style("clip", "clip") {
     def ~(top: Length, right: Length, bottom: Length, left: Length) =
-      this -> s"rect($top, $right, $bottom, $left)"
+      this ~= s"rect($top, $right, $bottom, $left)"
 
-    def auto = this -> "auto"
+    def auto = this ~= "auto"
   }
 
 
@@ -1003,202 +970,202 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val auto = this -> "auto"
+    val auto = this ~= "auto"
     /**
      * Default cursor, typically an arrow.
      *
      * MDN
      */
-    val default = this -> "default"
+    val default = this ~= "default"
     /**
      * No cursor is rendered.
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
     /**
      * A context menu is available under the cursor.
      *
      * MDN
      */
-    val `context-menu` = this -> "context-menu"
+    val `context-menu` = this ~= "context-menu"
     /**
      * Indicating help is available.
      *
      * MDN
      */
-    val help = this -> "help"
+    val help = this ~= "help"
     /**
      * E.g. used when hovering over links, typically a hand.
      *
      * MDN
      */
-    val pointer = this -> "pointer"
+    val pointer = this ~= "pointer"
     /**
      * The program is busy in the background but the user can still interact
      * with the interface (unlike for wait).
      *
      * MDN
      */
-    val progress = this -> "progress"
+    val progress = this ~= "progress"
     /**
      * The program is busy (sometimes an hourglass or a watch).
      *
      * MDN
      */
-    val cssWait = this -> "wait"
+    val cssWait = this ~= "wait"
     /**
      * Indicating that cells can be selected.
      *
      * MDN
      */
-    val cell = this -> "cell"
+    val cell = this ~= "cell"
     /**
      * Cross cursor, often used to indicate selection in a bitmap.
      *
      * MDN
      */
-    val crosshair = this -> "crosshair"
+    val crosshair = this ~= "crosshair"
     /**
      * Indicating text can be selected, typically an I-beam.
      *
      * MDN
      */
-    val text = this -> "text"
+    val text = this ~= "text"
     /**
      * Indicating that vertical text can be selected, typically a sideways I-beam
      *
      * MDN
      */
-    val `vertical-text` = this -> "vertical-text"
+    val `vertical-text` = this ~= "vertical-text"
     /**
      * Indicating an alias or shortcut is to be created.
      *
      * MDN
      */
-    val alias = this -> "alias"
+    val alias = this ~= "alias"
     /**
      * Indicating that something can be copied
      *
      * MDN
      */
-    val copy = this -> "copy"
+    val copy = this ~= "copy"
     /**
      * The hoevered object may be moved.
      *
      * MDN
      */
-    val move = this -> "move"
+    val move = this ~= "move"
     /**
      * Cursor showing that a drop is not allowed at the current location.
      *
      * MDN
      */
-    val `no-drop` = this -> "no-drop"
+    val `no-drop` = this ~= "no-drop"
     /**
      * Cursor showing that something cannot be done.
      *
      * MDN
      */
-    val `not-allowed` = this -> "not-allowed"
+    val `not-allowed` = this ~= "not-allowed"
     /**
      * Cursor showing that something can be scrolled in any direction (panned).
      *
      * MDN
      */
-    val `all-scroll` = this -> "all-scroll"
+    val `all-scroll` = this ~= "all-scroll"
     /**
      * The item/column can be resized horizontally. Often rendered as arrows
      * pointing left and right with a vertical separating.
      *
      * MDN
      */
-    val `col-resize` = this -> "col-resize"
+    val `col-resize` = this ~= "col-resize"
     /**
      * The item/row can be resized vertically. Often rendered as arrows pointing
      * up and down with a horizontal bar separating them.
      *
      * MDN
      */
-    val `row-resize` = this -> "row-resize"
+    val `row-resize` = this ~= "row-resize"
     /**
      * The top edge is to be moved.
      *
      * MDN
      */
-    val `n-resize` = this -> "n-resize"
+    val `n-resize` = this ~= "n-resize"
     /**
      * The right edge is to be moved.
      *
      * MDN
      */
-    val `e-resize` = this -> "e-resize"
+    val `e-resize` = this ~= "e-resize"
     /**
      * The bottom edge is to be moved.
      *
      * MDN
      */
-    val `s-resize` = this -> "s-resize"
+    val `s-resize` = this ~= "s-resize"
     /**
      * The left edge is to be moved.
      *
      * MDN
      */
-    val `w-resize` = this -> "w-resize"
+    val `w-resize` = this ~= "w-resize"
     /**
      * The top-right corner is to be moved.
      *
      * MDN
      */
-    val `ne-resize` = this -> "ne-resize"
+    val `ne-resize` = this ~= "ne-resize"
     /**
      * The top-left corner is to be moved.
      *
      * MDN
      */
-    val `nw-resize` = this -> "nw-resize"
+    val `nw-resize` = this ~= "nw-resize"
     /**
      * The bottom-right corner is to be moved.
      *
      * MDN
      */
-    val `se-resize` = this -> "se-resize"
+    val `se-resize` = this ~= "se-resize"
     /**
      * The bottom-left corner is to be moved.
      *
      * MDN
      */
-    val `sw-resize` = this -> "sw-resize"
+    val `sw-resize` = this ~= "sw-resize"
 
-    val `ew-resize` = this -> "ew-resize"
-    val `ns-resize` = this -> "ns-resize"
-    val `nesw-resize` = this -> "nesw-resize"
-    val `nwse-resize` = this -> "nwse-resize"
+    val `ew-resize` = this ~= "ew-resize"
+    val `ns-resize` = this ~= "ns-resize"
+    val `nesw-resize` = this ~= "nesw-resize"
+    val `nwse-resize` = this ~= "nwse-resize"
 
     /**
      * Indicates that something can be zoomed (magnified) in.
      *
      * MDN
      */
-    val `zoom-in` = this -> "zoom-in"
+    val `zoom-in` = this ~= "zoom-in"
     /**
      * Indicates that something can be zoomed (magnified) out.
      *
      * MDN
      */
-    val `zoom-out` = this -> "zoom-out"
+    val `zoom-out` = this ~= "zoom-out"
     /**
      * Indicates that something can be grabbed (dragged to be moved).
      *
      * MDN
      */
-    val grab = this -> "grab"
+    val grab = this ~= "grab"
     /**
      * Indicates that something can be grabbed (dragged to be moved).
      *
      * MDN
      */
-    val grabbing = this -> "grabbing"
+    val grabbing = this ~= "grabbing"
   }
 
 
@@ -1217,20 +1184,20 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val left = this -> "left"
+    val left = this ~= "left"
     /**
      * Is a keyword indicating that the element must float on the right side of
      * its containing block.
      *
      * MDN
      */
-    val right = this -> "right"
+    val right = this ~= "right"
     /**
      * Is a keyword indicating that the element must not float
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
   }
 
 
@@ -1262,13 +1229,13 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val ltr = this -> "ltr"
+    val ltr = this ~= "ltr"
     /**
      * Text and other elements go from right to left
      *
      * MDN
      */
-    val rtl = this -> "rtl"
+    val rtl = this ~= "rtl"
   }
 
   /**
@@ -1295,33 +1262,33 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
     /**
      * The element generates one or more inline element boxes.
      *
      * MDN
      */
-    val inline = this -> "inline"
+    val inline = this ~= "inline"
     /**
      * The element generates a block element box.
      *
      * MDN
      */
-    val block = this -> "block"
+    val block = this ~= "block"
     /**
      * The element generates a block box for the content and a separate
      * list-item inline box.
      *
      * MDN
      */
-    val `list-item` = this -> "list-item"
+    val `list-item` = this ~= "list-item"
     /**
      * The element generates a block element box that will be flowed with
      * surrounding content as if it were a single inline box.
      *
      * MDN
      */
-    val `inline-block` = this -> "inline-block"
+    val `inline-block` = this ~= "inline-block"
     /**
      * The inline-table value does not have a direct mapping in HTML. It behaves
      * like a `<table>` HTML element, but as an inline box, rather than a
@@ -1329,75 +1296,75 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `inline-table` = this -> "inline-table"
+    val `inline-table` = this ~= "inline-table"
     /**
      * Behaves like the `<table>` HTML element. It defines a block-level box.
      *
      * MDN
      */
-    val table = this -> "table"
+    val table = this ~= "table"
     /**
      * Behaves like the `<caption>` HTML element.
      *
      * MDN
      */
-    val `table-caption` = this -> "table-caption"
+    val `table-caption` = this ~= "table-caption"
     /**
      * Behaves like the `<td>` HTML element
      *
      * MDN
      */
-    val `table-cell` = this -> "table-cell"
+    val `table-cell` = this ~= "table-cell"
     /**
      * These elements behave like the corresponding `<col>` HTML elements.
      *
      * MDN
      */
-    val `table-column` = this -> "table-column"
+    val `table-column` = this ~= "table-column"
     /**
      * These elements behave like the corresponding `<colgroup>` HTML elements.
      *
      * MDN
      */
-    val `table-column-group` = this -> "table-column-group"
+    val `table-column-group` = this ~= "table-column-group"
     /**
      * These elements behave like the corresponding `<tfoot>` HTML elements
      *
      * MDN
      */
-    val `table-footer-group` = this -> "table-footer-group"
+    val `table-footer-group` = this ~= "table-footer-group"
     /**
      * These elements behave like the corresponding `<thead>` HTML elements
      *
      * MDN
      */
-    val `table-header-group` = this -> "table-header-group"
+    val `table-header-group` = this ~= "table-header-group"
     /**
      * Behaves like the `<tr>` HTML element
      *
      * MDN
      */
-    val `table-row` = this -> "table-row"
+    val `table-row` = this ~= "table-row"
     /**
      * These elements behave like the corresponding `<tbody>` HTML elements
      *
      * MDN
      */
-    val `table-row-group` = this -> "table-row-group"
+    val `table-row-group` = this ~= "table-row-group"
     /**
      * The element behaves like a block element and lays out its content according
      * to the flexbox model.
      *
      * MDN
      */
-    val flex = this -> "flex"
+    val flex = this ~= "flex"
     /**
      * The element behaves like an inline element and lays out its content
      * according to the flexbox model.
      *
      * MDN
      */
-    val `inline-flex` = this -> "inline-flex"
+    val `inline-flex` = this ~= "inline-flex"
   }
 
 
@@ -1431,7 +1398,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val auto = this -> "auto"
+    val auto = this ~= "auto"
     /**
      * The element is never the target of mouse events; however, mouse events
      * may target its descendant elements if those descendants have pointer-events
@@ -1441,7 +1408,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * visibility property is set to visible and when the mouse cursor is over
@@ -1452,7 +1419,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val visiblePainted = this -> "visiblePainted"
+    val visiblePainted = this ~= "visiblePainted"
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * visibility property is set to visible and when the mouse cursor is over
@@ -1461,7 +1428,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val visibleFill = this -> "visibleFill"
+    val visibleFill = this ~= "visibleFill"
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * visibility property is set to visible and when the mouse cursor is over
@@ -1470,7 +1437,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val visibleStroke = this -> "visibleStroke"
+    val visibleStroke = this ~= "visibleStroke"
     /**
      * SVG only. The element can be the target of a mouse event when the
      * visibility property is set to visible and the mouse cursor is over either
@@ -1479,7 +1446,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val visible = this -> "visible"
+    val visible = this ~= "visible"
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * mouse cursor is over the interior (i.e., 'fill') of the element and the
@@ -1490,7 +1457,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val painted = this -> "painted"
+    val painted = this ~= "painted"
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * pointer is over the interior (i.e., fill) of the element. The values of
@@ -1498,7 +1465,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val fill = this -> "fill"
+    val fill = this ~= "fill"
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * pointer is over the perimeter (i.e., stroke) of the element. The values
@@ -1506,7 +1473,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val stroke = this -> "stroke"
+    val stroke = this ~= "stroke"
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * pointer is over the interior (i.e., fill) or the perimeter (i.e., stroke)
@@ -1515,7 +1482,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val all = this -> "all"
+    val all = this ~= "all"
   }
 
 
@@ -1542,14 +1509,14 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val outside = this -> "outside"
+    val outside = this ~= "outside"
     /**
      * The marker box is the first inline box in the principal block box, after
      * which the element's content flows.
      *
      * MDN
      */
-    val inside = this -> "inside"
+    val inside = this ~= "inside"
   }
 
   object wordWrap extends Style("wordWrap", "word-wrap") {
@@ -1558,14 +1525,14 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val normal = this -> "normal"
+    val normal = this ~= "normal"
     /**
      * Indicates that normally unbreakable words may be broken at arbitrary
      * points if there are no otherwise acceptable break points in the line.
      *
      * MDN
      */
-    val `break-word` = this -> "break-word"
+    val `break-word` = this ~= "break-word"
   }
 
 
@@ -1614,41 +1581,41 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val baseline = this -> "baseline"
+    val baseline = this ~= "baseline"
     /**
      * Aligns the baseline of the element with the subscript-baseline of its
      * parent.
      *
      * MDN
      */
-    val sub = this -> "sub"
+    val sub = this ~= "sub"
     /**
      * Aligns the baseline of the element with the superscript-baseline of its
      * parent.
      *
      * MDN
      */
-    val `super` = this -> "super"
+    val `super` = this ~= "super"
     /**
      * Aligns the top of the element with the top of the parent element's font.
      *
      * MDN
      */
-    val `text-top` = this -> "text-top"
+    val `text-top` = this ~= "text-top"
     /**
      * Aligns the bottom of the element with the bottom of the parent element's
      * font.
      *
      * MDN
      */
-    val `text-bottom` = this -> "text-bottom"
+    val `text-bottom` = this ~= "text-bottom"
     /**
      * Aligns the middle of the element with the middle of lowercase letters in
      * the parent.
      *
      * MDN
      */
-    val middle = this -> "middle"
+    val middle = this ~= "middle"
   }
 
 
@@ -1667,9 +1634,9 @@ private[scalatags] trait Styles {
    * MDN
    */
   object mask extends Style("mask", "mask") {
-    val none = this -> "none"
+    val none = this ~= "none"
 
-    def uri(s: String) = this -> s"uri($s)"
+    def uri(s: String) = this ~= s"uri($s)"
   }
 
 
@@ -1687,13 +1654,13 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val show = this -> "show"
+    val show = this ~= "show"
     /**
      * Is a keyword indicating that no border or backgrounds should be drawn.
      *
      * MDN
      */
-    val hide = this -> "hide"
+    val hide = this ~= "hide"
   }
 
 
@@ -1837,109 +1804,109 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
     /**
      * A filled circle (default value)
      *
      * MDN
      */
-    val disc = this -> "disc"
+    val disc = this ~= "disc"
     /**
      * A hollow circle
      *
      * MDN
      */
-    val circle = this -> "circle"
+    val circle = this ~= "circle"
     /**
      * A filled square
      *
      * MDN
      */
-    val square = this -> "square"
+    val square = this ~= "square"
     /**
      * Decimal numbers begining with 1
      *
      * MDN
      */
-    val decimal = this -> "decimal"
+    val decimal = this ~= "decimal"
     /**
      * Han decimal numbers
      *
      * MDN
      */
-    val `cjk-decimal` = this -> "cjk-decimal"
+    val `cjk-decimal` = this ~= "cjk-decimal"
     /**
      * Decimal numbers padded by initial zeros
      *
      * MDN
      */
-    val `decimal-leading-zero` = this -> "decimal-leading-zero"
+    val `decimal-leading-zero` = this ~= "decimal-leading-zero"
     /**
      * Lowercase roman numerals
      *
      * MDN
      */
-    val `lower-roman` = this -> "lower-roman"
+    val `lower-roman` = this ~= "lower-roman"
     /**
      * Uppercase roman numerals
      *
      * MDN
      */
-    val `upper-roman` = this -> "upper-roman"
+    val `upper-roman` = this ~= "upper-roman"
     /**
      * Lowercase classical greek
      *
      * MDN
      */
-    val `lower-greek` = this -> "lower-greek"
+    val `lower-greek` = this ~= "lower-greek"
     /**
      * Lowercase ASCII letters
      *
      * MDN
      */
-    val `lower-alpha` = this -> "lower-alpha"
+    val `lower-alpha` = this ~= "lower-alpha"
     /**
      * Lowercase ASCII letters
      *
      * MDN
      */
-    val `lower-latin` = this -> "lower-latin"
+    val `lower-latin` = this ~= "lower-latin"
     /**
      * Uppercase ASCII letters
      *
      * MDN
      */
-    val `upper-alpha` = this -> "upper-alpha"
+    val `upper-alpha` = this ~= "upper-alpha"
     /**
      * Uppercase ASCII letters
      *
      * MDN
      */
-    val `upper-latin` = this -> "upper-latin"
+    val `upper-latin` = this ~= "upper-latin"
     /**
      * Traditional Armenian numbering
      *
      * MDN
      */
-    val armenian = this -> "armenian"
+    val armenian = this ~= "armenian"
     /**
      * Traditional Georgian numbering
      *
      * MDN
      */
-    val georgian = this -> "georgian"
+    val georgian = this ~= "georgian"
     /**
      * Traditional Hebrew numbering
      *
      * MDN
      */
-    val hebrew = this -> "hebrew"
+    val hebrew = this ~= "hebrew"
     /**
      * Japanese Hiragana
      *
      * MDN
      */
-    val hiragana = this -> "hiragana"
+    val hiragana = this ~= "hiragana"
     /**
      * Japanese Hiragana
      *
@@ -1947,13 +1914,13 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `hiragana-iroha` = this -> "hiragana-iroha"
+    val `hiragana-iroha` = this ~= "hiragana-iroha"
     /**
      * Japanese Katakana
      *
      * MDN
      */
-    val katakana = this -> "katakana"
+    val katakana = this ~= "katakana"
     /**
      * Japanese Katakana
      *
@@ -1961,7 +1928,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `katakana-iroha` = this -> "katakana-iroha"
+    val `katakana-iroha` = this ~= "katakana-iroha"
   }
 
 
@@ -1980,7 +1947,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val static = this -> "static"
+    val static = this ~= "static"
     /**
      * This keyword lays out all elements as though the element were not
      * positioned, and then adjust the element's position, without changing
@@ -1991,7 +1958,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val relative = this -> "relative"
+    val relative = this ~= "relative"
     /**
      * Do not leave space for the element. Instead, position it at a specified
      * position relative to its closest positioned ancestor or to the containing
@@ -2000,7 +1967,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val absolute = this -> "absolute"
+    val absolute = this ~= "absolute"
     /**
      * Do not leave space for the element. Instead, position it at a specified
      * position relative to the screen's viewport and doesn't move when scrolled.
@@ -2008,7 +1975,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val fixed = this -> "fixed"
+    val fixed = this ~= "fixed"
   }
 
   /**
@@ -2040,13 +2007,13 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val top = this -> "top"
+    val top = this ~= "top"
     /**
      * The caption box will be below the table.
      *
      * MDN
      */
-    val bottom = this -> "bottom"
+    val bottom = this ~= "bottom"
   }
 
   /**
@@ -2068,10 +2035,10 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
 
     def ~(pairs: (String, String)*) = {
-      this -> pairs.flatMap(x => Seq(x._1, x._2)).map('"' + _ + '"').mkString(" ")
+      this ~= pairs.flatMap(x => Seq(x._1, x._2)).map('"' + _ + '"').mkString(" ")
     }
 
   }
@@ -2084,7 +2051,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val auto = this -> "auto"
+    val auto = this ~= "auto"
     /**
      * Table and column widths are set by the widths of table and col elements
      * or by the width of the first row of cells. Cells in subsequent rows do
@@ -2092,7 +2059,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val fixed = this -> "fixed"
+    val fixed = this ~= "fixed"
   }
 
   /**
@@ -2113,7 +2080,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val normal = this -> "normal"
+    val normal = this ~= "normal"
     /**
      * If the element is inline, this value opens an additional level of
      * embedding with respect to the bidirectional algorithm. The direction of
@@ -2121,7 +2088,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val embed = this -> "embed"
+    val embed = this ~= "embed"
     /**
      * For inline elements this creates an override. For block container elements
      * this creates an override for inline-level descendants not within another
@@ -2131,7 +2098,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `bidi-override` = this -> "bidi-override"
+    val `bidi-override` = this ~= "bidi-override"
   }
 
 
@@ -2144,27 +2111,27 @@ private[scalatags] trait Styles {
    * MDN
    */
   object fontSize extends TypedStyle[Length]("fontSize", "font-size") {
-    val `xx-small` = this -> "xx-small"
-    val `x-small` = this -> "x-small"
-    val small = this -> "small"
-    val medium = this -> "medium"
-    val large = this -> "large"
-    val `x-large` = this -> "x-large"
-    val `xx-large` = this -> "xx-large"
+    val `xx-small` = this ~= "xx-small"
+    val `x-small` = this ~= "x-small"
+    val small = this ~= "small"
+    val medium = this ~= "medium"
+    val large = this ~= "large"
+    val `x-large` = this ~= "x-large"
+    val `xx-large` = this ~= "xx-large"
     /**
      * Larger than the parent element's font size, by roughly the ratio used to
      * separate the absolute size keywords above.
      *
      * MDN
      */
-    val larger = this -> "larger"
+    val larger = this ~= "larger"
     /**
      * Smaller than the parent element's font size, by roughly the ratio used to
      * separate the absolute size keywords above.
      *
      * MDN
      */
-    val smaller = this -> "smaller"
+    val smaller = this ~= "smaller"
   }
 
 
@@ -2217,27 +2184,27 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val normal = this -> "normal"
+    val normal = this ~= "normal"
     /**
      * Bold font weight. Same as 700.
      *
      * MDN
      */
-    val bold = this -> "bold"
+    val bold = this ~= "bold"
     /**
      * One font weight lighter than the parent element (among the available
      * weights of the font).
      *
      * MDN
      */
-    val lighter = this -> "lighter"
+    val lighter = this ~= "lighter"
     /**
      * One font weight darker than the parent element (among the available
      * weights of the font)
      *
      * MDN
      */
-    val bolder = this -> "bolder"
+    val bolder = this ~= "bolder"
 
   }
   /**
@@ -2269,19 +2236,19 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val normal = this -> "normal"
+    val normal = this ~= "normal"
     /**
      * Selects a font that is labeled italic, if that is not available, one labeled oblique
      *
      * MDN
      */
-    val italic = this -> "italic"
+    val italic = this ~= "italic"
     /**
      * Selects a font that is labeled oblique
      *
      * MDN
      */
-    val oblique = this -> "oblique"
+    val oblique = this ~= "oblique"
   }
 
   /**
@@ -2298,25 +2265,25 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
     /**
      * The element is moved down to clear past left floats.
      *
      * MDN
      */
-    val left = this -> "left"
+    val left = this ~= "left"
     /**
      * The element is moved down to clear past right floats.
      *
      * MDN
      */
-    val right = this -> "right"
+    val right = this ~= "right"
     /**
      * The element is moved down to clear past both left and right floats.
      *
      * MDN
      */
-    val both = this -> "both"
+    val both = this ~= "both"
   }
 
   /**
@@ -2348,19 +2315,19 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val thin = this -> "thin"
+    val thin = this ~= "thin"
     /**
      * Typically 3px in desktop browsers like Firefox.
      *
      * MDN
      */
-    val medium = this -> "medium"
+    val medium = this ~= "medium"
     /**
      * Typically 5px in desktop browsers like Firefox.
      *
      * MDN
      */
-    val thick = this -> "thick"
+    val thick = this ~= "thick"
   }
 
   /**
@@ -2416,15 +2383,15 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val auto = this -> "auto"
+    val auto = this ~= "auto"
 
-    def ~(allSides: Length) = this -> allSides
+    def ~(allSides: Length) = this ~= allSides
 
-    def ~(vertical: Length, horizontal: Length) = this -> s"$vertical $horizontal"
+    def ~(vertical: Length, horizontal: Length) = this ~= s"$vertical $horizontal"
 
-    def ~(top: Length, horizontal: Length, bottom: Length) = this -> s"$top $horizontal $bottom"
+    def ~(top: Length, horizontal: Length, bottom: Length) = this ~= s"$top $horizontal $bottom"
 
-    def ~(top: Length, right: Length, bottom: Length, left: Length) = this -> s"$top $right $bottom $left"
+    def ~(top: Length, right: Length, bottom: Length, left: Length) = this ~= s"$top $right $bottom $left"
   }
 
   /**
@@ -2439,21 +2406,21 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val normal = this -> "normal"
+    val normal = this ~= "normal"
     /**
      * Word breaks may be inserted between any character for non-CJK
      * (Chinese/Japanese/Korean) text.
      *
      * MDN
      */
-    val `break-all` = this -> "break-all"
+    val `break-all` = this ~= "break-all"
     /**
      * Don't allow word breaks for CJK text.  Non-CJK text behavior is same
      * as normal.
      *
      * MDN
      */
-    val `keep-all` = this -> "keep-all"
+    val `keep-all` = this ~= "keep-all"
   }
 
   /**
@@ -2562,7 +2529,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val invert = this -> "invert"
+    val invert = this ~= "invert"
   }
 
 
@@ -2620,35 +2587,35 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val normal = this -> "normal"
+    val normal = this ~= "normal"
     /**
      * Collapses whitespace as for normal, but suppresses line breaks (text
      * wrapping) within text.
      *
      * MDN
      */
-    val nowrap = this -> "nowrap"
+    val nowrap = this ~= "nowrap"
     /**
      * Sequences of whitespace are preserved, lines are only broken at newline
      * characters in the source and at `<br>` elements.
      *
      * MDN
      */
-    val pre = this -> "pre"
+    val pre = this ~= "pre"
     /**
      * Sequences of whitespace are preserved. Lines are broken at newline
      * characters, at `<br>`, and as necessary to fill line boxes.
      *
      * MDN
      */
-    val `pre-wrap` = this -> "pre-wrap"
+    val `pre-wrap` = this ~= "pre-wrap"
     /**
      * Sequences of whitespace are collapsed. Lines are broken at newline
      * characters, at `<br>`, and as necessary to fill line boxes.
      *
      * MDN
      */
-    val `pre-line` = this -> "pre-line"
+    val `pre-line` = this ~= "pre-line"
   }
 
   /**
@@ -2711,13 +2678,13 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val visible = this -> "visible"
+    val visible = this ~= "visible"
     /**
      * The back face is not visible.
      *
      * MDN
      */
-    val hidden = this -> "hidden"
+    val hidden = this ~= "hidden"
   }
 
 
@@ -2827,14 +2794,14 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val `preserve-3d` = this -> "preserve-3d"
+    val `preserve-3d` = this ~= "preserve-3d"
     /**
      * Indicates that the children of the element are lying in the plane of the
      * element itself.
      *
      * MDN
      */
-    val flat = this -> "flat"
+    val flat = this ~= "flat"
   }
 
 
@@ -2872,39 +2839,39 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val start = this -> "start"
+    val start = this ~= "start"
     /**
      * The same as right if direction is left-to-right and left if direction is
      * right-to-left.
      *
      * MDN
      */
-    val end = this -> "end"
+    val end = this ~= "end"
     /**
      * The inline contents are aligned to the left edge of the line box.
      *
      * MDN
      */
-    val left = this -> "left"
+    val left = this ~= "left"
     /**
      * The inline contents are aligned to the right edge of the line box.
      *
      * MDN
      */
-    val right = this -> "right"
+    val right = this ~= "right"
     /**
      * The inline contents are centered within the line box.
      *
      * MDN
      */
-    val center = this -> "center"
+    val center = this ~= "center"
     /**
      * The text is justified. Text should line up their left and right edges to
      * the left and right content edges of the paragraph.
      *
      * MDN
      */
-    val justify = this -> "justify"
+    val justify = this ~= "justify"
   }
   /**
    * The text-align CSS property describes how inline content like text is
@@ -2926,25 +2893,25 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
     /**
      * Each line of text is underlined.
      *
      * MDN
      */
-    val underline = this -> "underline"
+    val underline = this ~= "underline"
     /**
      * Each line of text has a line above it.
      *
      * MDN
      */
-    val overline = this -> "overline"
+    val overline = this ~= "overline"
     /**
      * Each line of text has a line through the middle.
      *
      * MDN
      */
-    val `line-through` = this -> "line-through"
+    val `line-through` = this ~= "line-through"
   }
 
   /**
@@ -2976,7 +2943,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val clip = this -> "clip"
+    val clip = this ~= "clip"
     /**
      * This keyword value indicates to display an ellipsis ('…', U+2026 HORIZONTAL
      * ELLIPSIS) to represent clipped text. The ellipsis is displayed inside the
@@ -2985,7 +2952,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val ellipsis = this -> "ellipsis"
+    val ellipsis = this ~= "ellipsis"
   }
   /**
    * The CSS text-underline-position property specifies the position of the
@@ -3003,7 +2970,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val auto = this -> "auto"
+    val auto = this ~= "auto"
     /**
      * This keyword forces the line to be set below the alphabetic baseline, at
      * a position where it won't cross any descender. This is useful to prevent
@@ -3012,7 +2979,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val under = this -> "under"
+    val under = this ~= "under"
     /**
      * In vertical writing-modes, this keyword forces the line to be placed on
      * the left of the characters. In horizontal writing-modes, it is a synonym
@@ -3020,7 +2987,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val left = this -> "left"
+    val left = this ~= "left"
     /**
      * In vertical writing-modes, this keyword forces the line to be placed on
      * the right of the characters. In horizontal writing-modes, it is a synonym
@@ -3028,9 +2995,9 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val right = this -> "right"
-    val `under left` = this -> "under left"
-    val `under right` = this -> "under right"
+    val right = this ~= "right"
+    val `under left` = this ~= "under left"
+    val `under right` = this ~= "under right"
   }
   /**
    * The text-transform CSS property specifies how to capitalize an element's
@@ -3046,25 +3013,25 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val capitalize = this -> "capitalize"
+    val capitalize = this ~= "capitalize"
     /**
      * Forces all characters to be converted to uppercase.
      *
      * MDN
      */
-    val uppercase = this -> "uppercase"
+    val uppercase = this ~= "uppercase"
     /**
      * Forces all characters to be converted to lowercase.
      *
      * MDN
      */
-    val lowercase = this -> "lowercase"
+    val lowercase = this ~= "lowercase"
     /**
      * Prevents the case of all characters from being changed
      *
      * MDN
      */
-    val none = this -> "none"
+    val none = this ~= "none"
   }
 
 
@@ -3088,7 +3055,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val visible = this -> "visible"
+    val visible = this ~= "visible"
     /**
      * The box is invisible (fully transparent, nothing is drawn), but still
      * affects layout.  Descendants of the element will be visible if they have
@@ -3096,7 +3063,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val hidden = this -> "hidden"
+    val hidden = this ~= "hidden"
     /**
      * For table rows, columns, column groups, and row groups the row(s) or
      * column(s) are hidden and the space they would have occupied is (as if
@@ -3104,7 +3071,7 @@ private[scalatags] trait Styles {
      *
      * MDN
      */
-    val collapse = this -> "collapse"
+    val collapse = this ~= "collapse"
   }
 
 }

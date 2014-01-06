@@ -1,4 +1,8 @@
 /**
+ * This file contains static bindings for the bulk of standardized HTML tags.
+ * The commonly used tags get imported by default, while the less commonly used
+ * tags are placed inside the `tag` object.
+ *
  * Documentation marked "MDN" is thanks to Mozilla Contributors
  * at https://developer.mozilla.org/en-US/docs/Web/API and available
  * under the Creative Commons Attribution-ShareAlike v2.5 or later.

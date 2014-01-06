@@ -9,35 +9,9 @@
  */
 package scalatags
 
-/**
- * Wraps up a HTML attribute in a statically-typed value
- */
-class Attr(val name: String){
-  if (!Escaping.validAttrName(name))
-    throw new IllegalArgumentException(
-      s"Illegal attribute name: $tag is not a valid XML attribute name"
-    )
 
-  override def toString = name
-}
-
-/**
- * Wraps up a HTML attribute in a statically-typed value with an associated
- * type; overloads the -> operator to also accept values of that type to convert
- * to strings, allowing more concise and pseudo-typesafe use of that attribute.
- */
-class TypedAttr[T](name: String) extends Attr(name){
-  def ->(v: T) = (this, v)
-}
 
 private[scalatags] trait Attributes{
-  /**
-   * Allows you to modify a HtmlNode by adding attribute key-value pairs to
-   * its list of children
-   */
-  implicit class AttrNested(kv: (Attr, String)) extends Nested(
-    (children, attrs) => attrs(kv._1.name) = kv._2
-  )
 
   /**
    * This is the single required attribute for anchors defining a hypertext

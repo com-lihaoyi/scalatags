@@ -1,9 +1,13 @@
 package scalatags
-
+import collection.mutable
 /**
  * Represents a single CSS class.
  */
-class Cls(val name: String)
+class Cls(val name: String) extends Nested{
+  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
+    attrs("class") = attrs.get("class").fold(name)(_ + " " + name)
+  }
+}
 
 /**
  * Misc helper functions
@@ -13,13 +17,13 @@ private[scalatags] trait Misc extends Attributes{
    * Shorthand to generate a <script type="text/javascript" src="..."></script> tag
    */
   def javascript(origin: String = "") =
-    script(`type`->"text/javascript", src->origin)
+    script(`type`:="text/javascript", src:=origin)
 
   /**
    * Shorthand to generate a <style rel="stylesheet" type="text/css" href="..."></style> tag
    */
   def stylesheet(origin: String = "") =
-    link(rel->"stylesheet", `type`->"text/css", href->origin)
+    link(rel:="stylesheet", `type`:="text/css", href:=origin)
 
   /**
    * Extends numbers to provide a bunch of useful methods, allowing you to write

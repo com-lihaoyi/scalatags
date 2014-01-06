@@ -1,6 +1,7 @@
 package scalatags
 import scala.collection.{SortedMap, mutable}
 
+
 /**
  * A Node which contains a String.
  */
@@ -16,10 +17,11 @@ class RawNode(val v: String) extends Node{
   def writeTo(strb: StringBuilder): Unit = strb ++= v
   def children = Nil
 }
+
 /**
  * A general interface for all types which can appear in a ScalaTags fragment.
  */
-trait Node{
+trait Node extends Nested{
   /**
    * Converts an ScalaTag fragment into an html string
    */
@@ -40,14 +42,19 @@ trait Node{
    * The children of a ScalaTag node
    */
   def children: Seq[Node]
-}
 
+  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
+    children.append(this)
+  }
+}
 /**
  * Represents a value that can be nested within a Node. This can be another
  * node, but can also be a CSS style or HTML attribute binding, which will
  * add itself to the node's attributes.
  */
-class Nested(val build: (mutable.Buffer[Node], mutable.Map[String, String]) => Unit)
+trait Nested{
+  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]): Unit
+}
 
 /**
  * A single HTML tag.
@@ -148,3 +155,50 @@ class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
     }
   }
 }
+
+
+case class AttrPair(attr: Attr[_], value: String) extends Nested{
+  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
+    attrs(attr.name) = value
+  }
+}
+
+/**
+ * Wraps up a HTML attribute in a statically-typed value with an associated
+ * type; overloads the ~= operator to also accept values of that type to convert
+ * to strings, allowing more concise and pseudo-typesafe use of that attribute.
+ */
+class Attr[T](val name: String){
+  if (!Escaping.validAttrName(name))
+    throw new IllegalArgumentException(
+      s"Illegal attribute name: $tag is not a valid XML attribute name"
+    )
+
+  override def toString = name
+  def ~=(v: String) = AttrPair(this, v)
+  def :=(v: T) = AttrPair(this, v.toString)
+}
+
+/**
+ * A Style that only has a fixed set of possible values, provided by its members.
+ */
+class Style(val jsName: String, val cssName: String) {
+  def ~=(value: String) = StylePair(this, value)
+  override def toString = cssName
+}
+
+case class StylePair(style: Style, value: String) extends Nested{
+  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
+    val str = style.cssName + ": " + value + ";"
+    attrs("style") = attrs.get("style").fold(str)(_ + " " + str)
+  }
+}
+/**
+ * A Style that takes any value of type T as a parameter; overloads the ~=
+ * operator to also accept values of that type to convert to strings, allowing
+ * more concise and pseudo-typesafe use of that style.
+ */
+class TypedStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+  def :=(value: T) = StylePair(this, value.toString)
+}
+
