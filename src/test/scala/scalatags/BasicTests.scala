@@ -111,4 +111,11 @@ class BasicTests extends FreeSpec{
     )
     assert(frag.styles == Seq("background-color" -> "red", "float" -> "left", "height" -> "10px"))
   }
+  "Seq of strings" in strCheck(
+    div(
+      h1("Hello"),
+      for(i <- 0 until 5) yield "" + i
+    ),
+    """<div><h1>Hello</h1>01234</div>"""
+  )
 }
