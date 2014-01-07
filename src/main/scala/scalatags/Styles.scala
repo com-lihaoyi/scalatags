@@ -8,7 +8,7 @@
  * http://opensource.org/licenses/MIT
  */
 package scalatags
-
+import DataTypes._
 /**
  * A Style that takes any value of type T as a parameter and has an auto value
  */
@@ -29,6 +29,13 @@ private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) ext
   val normal = this ~= "normal"
 }
 
+private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extends TypedStyle[Nothing](jsName, cssName) {
+  def :=(image: Image, images: Image*) = {
+    this ~= (image +: images).mkString(", ")
+  }
+}
+
+
 private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
   /**
    * Displays a series of rounded dots. The spacing of the dots are not
@@ -40,7 +47,7 @@ private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends S
   val dotted = this ~= "dotted"
   /**
    * Displays a series of short square-ended dashes or line segments. The exact
-   * size and length of the segments are not defined by the specification and
+   * size and Length of the segments are not defined by the specification and
    * are implementation-specific.
    *
    * MDN
@@ -204,7 +211,7 @@ private[scalatags] class BorderWidth(jsName: String, cssName: String)  extends T
 }
 
 private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName){
-  def ~(times: String*) = this ~= times.mkString(", ")
+  def ~(times: Time*) = this ~= times.mkString(", ")
 }
 
 private[scalatags] trait Styles {
@@ -218,7 +225,7 @@ private[scalatags] trait Styles {
   val animationDirection = new TypedStyle[String]("animationDirection", "animation-direction")
 
   /**
-   * The animation-duration CSS property specifies the length of time that an
+   * The animation-duration CSS property specifies the Length of time that an
    * animation should take to complete one cycle.
    *
    * A value of 0s, which is the default value, indicates that no animation should
@@ -500,7 +507,7 @@ private[scalatags] trait Styles {
    *
    * MDN
    */
-  val backgroundImage = new TypedStyle[String]("backgroundImage", "background-image")
+  val backgroundImage = new MultiImageStyle("backgroundImage", "background-image")
 
 
   /**
@@ -570,7 +577,7 @@ private[scalatags] trait Styles {
    *
    * MDN
    */
-  val borderRightColor = new TypedStyle[Color]("borderRightColor", "border-top-color")
+  val borderRightColor = new TypedStyle[Color]("borderRightColor", "border-right-color")
 
   /**
    * The border-bottom CSS property is a shorthand that sets the values of
@@ -705,9 +712,9 @@ private[scalatags] trait Styles {
    * MDN
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
-    def ~(length: Length) = this ~= length
+    def :=(length: Length) = this ~= length.toString
 
-    def ~(horizontal: Length, vertical: Length) = this ~= s"$horizontal $vertical"
+    def :=(horizontal: Length, vertical: Length) = this ~= s"$horizontal $vertical"
   }
 
 
@@ -756,7 +763,7 @@ private[scalatags] trait Styles {
    * MDN
    */
   object borderColor extends Style("borderColor", "border-color") {
-    def ~(color: Color) = this ~= color
+    def ~(color: Color) = this ~= color.toString
 
     def ~(horizontal: Color, vertical: Color) = this ~= s"$horizontal $vertical"
 
@@ -894,7 +901,7 @@ private[scalatags] trait Styles {
    * a absolute value but a mere hint. Browser will adjust the width of the
    * column around that suggested value, allowing to achieve scalable designs
    * that fit different screen size. Especially in presence of the column-count
-   * CSS property which has precedence, to set an exact column width, all length
+   * CSS property which has precedence, to set an exact column width, all Length
    * values must be specified. In horizontal text these are width, column-width,
    * column-gap, and column-rule-width
    *
@@ -950,7 +957,7 @@ private[scalatags] trait Styles {
    * MDN
    */
   object clip extends Style("clip", "clip") {
-    def ~(top: Length, right: Length, bottom: Length, left: Length) =
+    def rect(top: Length, right: Length, bottom: Length, left: Length) =
       this ~= s"rect($top, $right, $bottom, $left)"
 
     def auto = this ~= "auto"
@@ -963,7 +970,8 @@ private[scalatags] trait Styles {
    *
    * MDN
    */
-  object cursor extends Style("cursor", "cursor") {
+  object cursor extends TypedStyle[Url]("cursor", "cursor") {
+
     /**
      * The browser determines the cursor to display based on the current context.
      * E.g. equivalent to text when hovering text.
@@ -1493,7 +1501,10 @@ private[scalatags] trait Styles {
    *
    * MDN
    */
-  val listStyleImage = new TypedStyle[String]("listStyleImage", "list-style-image")
+  object listStyleImage extends TypedStyle[Url]("listStyleImage", "list-style-image"){
+
+    def none = this ~= "none"
+  }
 
 
   /**
@@ -2106,7 +2117,7 @@ private[scalatags] trait Styles {
    * The font-size CSS property specifies the size of the font – specifically
    * the desired height of glyphs from the font. Setting the font size may, in
    * turn, change the size of other items, since it is used to compute the value
-   * of em and ex length units.
+   * of em and ex Length units.
    *
    * MDN
    */
@@ -2385,7 +2396,7 @@ private[scalatags] trait Styles {
      */
     val auto = this ~= "auto"
 
-    def ~(allSides: Length) = this ~= allSides
+    def ~(allSides: Length) = this ~= allSides.toString
 
     def ~(vertical: Length, horizontal: Length) = this ~= s"$vertical $horizontal"
 

@@ -9,10 +9,8 @@ package object scalatags
 extends Tags
 with Styles
 with Attributes
+with DataTypes
 with Misc{
-  private[scalatags] type Color = String
-  private[scalatags] type Length = String
-  private[scalatags] type Number = String
 
   /**
    * Mark the given string as "raw", meaning it will not get escaped when the

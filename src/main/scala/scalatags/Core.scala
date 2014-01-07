@@ -1,6 +1,14 @@
 package scalatags
 import scala.collection.{SortedMap, mutable}
 
+/**
+ * Represents a single CSS class.
+ */
+class Cls(val name: String) extends Nested{
+  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
+    attrs("class") = attrs.get("class").fold(name)(_ + " " + name)
+  }
+}
 
 /**
  * A Node which contains a String.

@@ -51,7 +51,7 @@ class BasicTests extends FreeSpec{
   "css chaining" in strCheck(
     div(
       float.left,
-      color:="red"
+      color~="red"
     ),
     """<div style="float: left; color: red;" />"""
   )
@@ -76,9 +76,11 @@ class BasicTests extends FreeSpec{
   )
 
   "css helpers tests" in {
-    assert(10.px == "10px")
-    assert(10.em == "10em")
-    assert(10.pt == "10pt")
+
+    assert(10.px.toString == "10px")
+    assert(10.0.px.toString == "10px")
+    assert(10.em.toString == "10em")
+    assert(10.pt.toString == "10pt")
   }
 
   "class/style after attr appends, but attr after class/style overwrites" in strCheck(
@@ -118,4 +120,29 @@ class BasicTests extends FreeSpec{
     ),
     """<div><h1>Hello</h1>01234</div>"""
   )
+
+  "Colors and Images" in strCheck(
+    div(
+      div(backgroundColor:=hex"ababab"),
+      div(color:=rgb(0, 255, 255)),
+      div(borderRightColor:=hsla(100, 0, 50, 0.5)),
+      div(backgroundImage:=radialGradient(hex"f00", hex"0f0"~50.pct, hex"00f")),
+      div(backgroundImage:=url("www.picture.com/my_picture")),
+      div(backgroundImage:=(
+        radialGradient(45.px, 45.px, "ellipse farthest-corner", hex"f00", hex"0f0"~500.px, hex"00f"),
+        linearGradient("to top left", hex"f00", hex"0f0"~10.px, hex"00f")
+      ))
+    ),
+    """
+    <div>
+      <div style="background-color: #ababab;" />
+      <div style="color: rgb(0, 255, 255);" />
+      <div style="border-right-color: hsla(100, 0, 50, 0.5);" />
+      <div style="background-image: radial-gradient(#f00, #0f0 50%, #00f);" />
+      <div style="background-image: url(www.picture.com/my_picture);" />
+      <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);" />
+    </div>
+    """
+  )
+
 }

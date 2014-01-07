@@ -276,8 +276,8 @@ class ExampleTests extends FreeSpec{
         script("some script")
       ),
       body(
-        h1(backgroundColor:="blue", color:="red")("This is my title"),
-        div(backgroundColor:="blue", color:="red")(
+        h1(backgroundColor~="blue", color~="red")("This is my title"),
+        div(backgroundColor~="blue", color~="red")(
           p(contentpara, first)(
             "This is my first paragraph"
           ),
@@ -538,7 +538,7 @@ class ExampleTests extends FreeSpec{
       val mozBorderRadius = "-moz-border-radius".style
       div(
         dataAppKey:="YOUR_APP_KEY",
-        mozBorderRadius:=10.px
+        mozBorderRadius:="10px"
       )
     },
     """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;" />"""

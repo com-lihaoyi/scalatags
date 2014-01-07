@@ -8,17 +8,10 @@
  * http://opensource.org/licenses/MIT
  */
 package scalatags
-
+import DataTypes._
 
 private[scalatags] class CurrentColor(jsName: String, cssName: String) extends TypedStyle[Color](jsName, cssName){
   val currentColor = this -> "currentColor"
-  def rgb(r: Int, g: Int, b: Int) = this -> s"rgb($r, $g, $b)"
-  def rgba(r: Int, g: Int, b: Int, a: Double) = this -> s"rgb($r, $g, $b, $a)"
-  def hex(s: String) = this -> s"#$s"
-  def hsl(h: Int, s: Int, l: Int) = this -> s"hsl($h, $s%, $l%)"
-  def hsla(h: Int, s: Int, l: Int, a: Double) = this -> s"hsl($h, $s%, $l%, $a)"
-
-
 }
 
 private[scalatags] trait Baseline{ self: TypedStyle[String] =>
@@ -86,7 +79,7 @@ object svgStyles{
    * When two line segments meet at a sharp angle and miter joins have been
    * specified for stroke-linejoin, it is possible for the miter to extend far
    * beyond the thickness of the line stroking the path. The stroke-miterlimit
-   * imposes a limit on the ratio of the miter length to the stroke-width. When
+   * imposes a limit on the ratio of the miter Length to the stroke-width. When
    * the limit is exceeded, the join is converted from a miter to a bevel.
    *
    * MDN
@@ -273,7 +266,7 @@ object svgStyles{
    * The kerning attribute indicates whether the browser should adjust inter-glyph
    * spacing based on kerning tables that are included in the relevant font (i.e.,
    * enable auto-kerning) or instead disable auto-kerning and instead set
-   * inter-character spacing to a specific length (typically, zero).
+   * inter-character spacing to a specific Length (typically, zero).
    *
    * MDN
    */
