@@ -6,10 +6,17 @@ package scalatags
  */
 object Escaping {
 
-  private[this] val tagRegex = "\\A(?!XML)[a-z][\\w0-9-]*".r
+  private[this] val tagRegex = "^[a-z][\\w0-9-]*$".r
+
+  /**
+   * Uses a regex to check if something is a valid tag name.
+   */
   def validTag(s: String) = tagRegex.unapplySeq(s).isDefined
 
-  private[this] val attrNameRegex = "[a-zA-Z_:][-a-zA-Z0-9_:.]*".r
+  private[this] val attrNameRegex = "^[a-zA-Z_:][-a-zA-Z0-9_:.]*$".r
+  /**
+   * Uses a regex to check if something is a valid attribute name.
+   */
   def validAttrName(s: String) = attrNameRegex.unapplySeq(s).isDefined
 
   /**

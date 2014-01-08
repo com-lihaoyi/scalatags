@@ -543,4 +543,30 @@ class ExampleTests extends FreeSpec{
     },
     """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;" />"""
   )
+
+  "Different ways of static typing" in strCheck(
+    div(
+      div(backgroundColor:=##"ababab"),
+      div(color:=rgb(0, 255, 255)),
+      div(color.red),
+      div(borderRightColor:=hsla(100, 0, 50, 0.5)),
+      div(backgroundImage:=radialGradient(##"f00", ##"0f0"~50.pct, ##"00f")),
+      div(backgroundImage:=url("www.picture.com/my_picture")),
+      div(backgroundImage:=(
+        radialGradient(45.px, 45.px, "ellipse farthest-corner", ##"f00", ##"0f0"~500.px, ##"00f"),
+        linearGradient("to top left", ##"f00", ##"0f0"~10.px, ##"00f")
+        ))
+    ),
+    """
+    <div>
+      <div style="background-color: #ababab;" />
+      <div style="color: rgb(0, 255, 255);" />
+      <div style="color: red;" />
+      <div style="border-right-color: hsla(100, 0, 50, 0.5);" />
+      <div style="background-image: radial-gradient(#f00, #0f0 50%, #00f);" />
+      <div style="background-image: url(www.picture.com/my_picture);" />
+      <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);" />
+    </div>
+    """
+  )
 }

@@ -807,7 +807,24 @@ private[scalatags] trait Styles {
    *
    * MDN
    */
-  val color = new CurrentColor("color", "color")
+  object color extends CurrentColor("color", "color"){
+    val black = this ~= "black"
+    val silver = this ~= "silver"
+    val gray = this ~= "gray"
+    val white = this ~= "white"
+    val maroon = this ~= "maroon"
+    val red = this ~= "red"
+    val purple = this ~= "purple"
+    val fuschia = this ~= "fuschia"
+    val green = this ~= "green"
+    val lime = this ~= "lime"
+    val olive = this ~= "olive"
+    val yellow = this ~= "yellow"
+    val navy = this ~= "navy"
+    val blue = this ~= "blue"
+    val teal = this ~= "teal"
+    val aqua = this ~= "aqua"
+  }
 
   /**
    * The columns CSS property is a shorthand property allowing to set both the

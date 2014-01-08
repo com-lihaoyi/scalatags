@@ -292,6 +292,53 @@ Again, you can take the result of `.style` or `.cls` and assign them to variable
 
 A full list of the shortcut methods (for both attributes and styles) provided by ScalaTags can be found in [HtmlAttributes.scala](src/main/scala/scalatags/HtmlAttributes.scala) and [Styles.scala](src/main/scala/scalatags/Styles.scala). This of course won't include any which you define yourself.
 
+More ways of representing Attributes and Styles
+===============================================
+
+```scala
+div(
+  div(backgroundColor:=hex"ababab"),
+  div(color:=rgb(0, 255, 255)),
+  div(color.red),
+  div(borderRightColor:=hsla(100, 0, 50, 0.5)),
+  div(backgroundImage:=radialGradient(hex"f00", hex"0f0"~50.pct, hex"00f")),
+  div(backgroundImage:=url("www.picture.com/my_picture")),
+  div(backgroundImage:=(
+    radialGradient(45.px, 45.px, "ellipse farthest-corner", hex"f00", hex"0f0"~500.px, hex"00f"),
+    linearGradient("to top left", hex"f00", hex"0f0"~10.px, hex"00f")
+  ))
+)
+```
+
+Due to the irregular nature of CSS syntax, Scalatag's static bindings are not always
+uniform. The above snippet shows an spread of the static bindings Scalatags provides:
+
+- `hex"..."` to define colors
+- `color.red` syntax, similar to `float.left` used elsewhere in this document
+  to define bindings to enum values.
+- The `hsla`, `url` and other functions, which provide a concise and
+  typesafe wrappers for their respective CSS declarations
+
+In general, this is the range of techniques to try when you want to define a
+CSS rule and don't know how. Many of the more complex rules still take `String`s
+in their `:=` method, meaning they don't have any typesafe bindings written for
+them. Even for the rules which have a typesafe `:=`, if you find you need
+something not provided by the typesafe wrappers, you can always use `~=` to as
+an escape hatch to fall back to strings.
+
+The above snippet renders the following HTML:
+
+```html
+<div>
+    <div style="background-color: #ababab;" />
+    <div style="color: rgb(0, 255, 255);" />
+    <div style="color: red;" />
+    <div style="border-right-color: hsla(100, 0, 50, 0.5);" />
+    <div style="background-image: radial-gradient(#f00, #0f0 50%, #00f);" />
+    <div style="background-image: url(www.picture.com/my_picture);" />
+    <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);" />
+</div>
+```
 Non-String Attributes and Styles
 ================================
 
