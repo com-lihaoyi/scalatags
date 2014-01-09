@@ -344,9 +344,13 @@ class ExampleTests extends FreeSpec{
       p(float.left)(
         "This is my first paragraph"
       ),
-      a(tabindex:=10)(
+
+
+      a(tabi)(
         p("Goooogle")
       ),
+
+
       input(disabled:=true)
     ),
     """
