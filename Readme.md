@@ -81,7 +81,7 @@ And all the other good things (<em>jump to definition</em>, *extract method*, et
 
 Although other templating systems also perform static validation, Scalatags is able to statically check the templates to a much greater degree than any external templating engine. For example, we can apply static constraints to a number of HTML attributes and CSS rules:
 
-![CSS Compilation Error](docs/TypesafeCss.png)
+![CSS Compilation Error](docs/TypesafeCSS.png)
 
 Making them fail to compile if you accidentally pass the wrong thing in:
 
