@@ -57,7 +57,7 @@ private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends S
  * Contains CSS styles which are only used for SVG. These are not imported by
  * default to avoid namespace pollution.
  */
-object svgStyles{
+object SvgStyles{
 
 
   /**

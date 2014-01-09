@@ -214,7 +214,11 @@ private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends
   def ~(times: Time*) = this ~= times.mkString(", ")
 }
 
-private[scalatags] trait Styles {
+/**
+ * Contains CSS styles which are used less frequently. These are not imported by
+ * default to avoid namespace pollution.
+ */
+object Styles{
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -325,6 +329,443 @@ private[scalatags] trait Styles {
    */
   val animation = new TypedStyle[String]("animation", "animation")
 
+
+  /**
+   * The CSS backface-visibility property determines whether or not the back
+   * face of the element is visible when facing the user. The back face of an
+   * element always is a transparent background, letting, when visible, a mirror
+   * image of the front face be displayed.
+   *
+   * MDN
+   */
+  object backfaceVisibility extends Style("backfaceVisibility", "backface-visibility") {
+    /**
+     * The back face is visible.
+     *
+     * MDN
+     */
+    val visible = this ~= "visible"
+    /**
+     * The back face is not visible.
+     *
+     * MDN
+     */
+    val hidden = this ~= "hidden"
+  }
+
+
+
+  /**
+   * The columns CSS property is a shorthand property allowing to set both the
+   * column-width and the column-count properties at the same time.
+   *
+   * MDN
+   */
+  object columns extends Style("columns", "columns") {
+    def ~(number: Int) = this ~= number.toString
+
+    def ~(number: Int, width: Length) = this ~= s"$number $width"
+  }
+
+  /**
+   * The column-count CSS property describes the number of columns of the element.
+   *
+   * MDN
+   */
+  val columnCount = new AutoStyle[Int]("columnCount", "column-count")
+
+  /**
+   * The column-fill CSS property controls how contents are partitioned into
+   * columns. Contents are either balanced, which means that contents in all
+   * columns will have the same height or, when using auto, just take up the
+   * room the content needs.
+   *
+   * MDN
+   */
+  object columnFill extends Style("columnFill", "column-fill") {
+    /**
+     * Is a keyword indicating that columns are filled sequentially.
+     *
+     * MDN
+     */
+    val auto = this ~= "auto"
+
+    /**
+     * Is a keyword indicating that content is equally divided between columns.
+     *
+     * MDN
+     */
+    val balance = this ~= "balance"
+  }
+
+  /**
+   * The column-gap CSS property sets the size of the gap between columns for
+   * elements which are specified to display as a multi-column element.
+   *
+   * MDN
+   */
+  val columnGap = new NormalOpenStyle[Length]("columnGap", "column-gap")
+
+  /**
+   * In multi-column layouts, the column-rule CSS property specifies a straight
+   * line, or "rule", to be drawn between each column. It is a convenient
+   * shorthand to avoid setting each of the individual column-rule-* properties
+   * separately : column-rule-width, column-rule-style and column-rule-color.
+   *
+   * MDN
+   */
+  val columnRule = new TypedStyle[String]("columnRule", "column-rule")
+
+  /**
+   * The column-span CSS property makes it possible for an element to span across
+   * all columns when its value is set to all. An element that spans more than
+   * one column is called a spanning element.
+   *
+   * MDN
+   */
+  object columnSpan extends Style("columnSpan", "column-span") {
+    /**
+     * The element does not span multiple columns.
+     *
+     * MDN
+     */
+    val none = this ~= "none"
+    /**
+     * The element spans across all columns. Content in the normal flow that
+     * appears before the element is automatically balanced across all columns
+     * before the element appears. The element establishes a new block formatting
+     * context.
+     *
+     * MDN
+     */
+    val all = this ~= "all"
+  }
+
+
+  /**
+   * The column-width CSS property suggests an optimal column width. This is not
+   * a absolute value but a mere hint. Browser will adjust the width of the
+   * column around that suggested value, allowing to achieve scalable designs
+   * that fit different screen size. Especially in presence of the column-count
+   * CSS property which has precedence, to set an exact column width, all Length
+   * values must be specified. In horizontal text these are width, column-width,
+   * column-gap, and column-rule-width
+   *
+   * MDN
+   */
+  val columnWidth = new AutoStyle[Length]("columnWidth", "column-width")
+
+  /**
+   * The column-rule-color CSS property lets you set the color of the rule drawn
+   * between columns in multi-column layouts.
+   *
+   * MDN
+   */
+  val columnRuleColor = new TypedStyle[Color]("columnRuleColor", "column-rule-color")
+
+  /**
+   * The column-rule-width CSS property lets you set the width of the rule drawn
+   * between columns in multi-column layouts.
+   *
+   * MDN
+   */
+  object columnRuleWidth extends TypedStyle[Length]("columnRuleWidth", "column-rule-width") {
+    val thin = this ~= "thin"
+    val medium = this ~= "medium"
+    val thick = this ~= "thick"
+  }
+
+  /**
+   * The column-rule-style CSS property lets you set the style of the rule drawn
+   * between columns in multi-column layouts.
+   *
+   * MDN
+   */
+  object columnRuleStyle
+    extends OutlineStyle("columnRuleStyle", "column-rule-style"){
+    val hidden = this ~= "hidden"
+  }
+
+
+  /**
+   * The counter-increment CSS property is used to increase the value of CSS
+   * Counters by a given value. The counter's value can be reset using the
+   * counter-reset CSS property.
+   *
+   * MDN
+   */
+  val counterIncrement = new TypedStyle[String]("counterIncrement", "counter-increment")
+
+  /**
+   * The counter-reset CSS property is used to reset CSS Counters to a given
+   * value.
+   *
+   * MDN
+   */
+  val counterReset = new TypedStyle[String]("counterReset", "counter-reset")
+
+
+  /**
+   * The orphans CSS property refers to the minimum number of lines in a block
+   * container that must be left at the bottom of the page. This property is
+   * normally used to control how page breaks occur.
+   *
+   * MDN
+   */
+  val orphans = new TypedStyle[Int]("orphans", "orphans")
+
+
+  /**
+   * The widows CSS property defines how many minimum lines must be left on top
+   * of a new page, on a paged media. In typography, a widow is the last line of
+   * a paragraph appearing alone at the top of a page. Setting the widows property
+   * allows to prevent widows to be left.
+   *
+   * On a non-paged media, like screen, the widows CSS property has no effect.
+   *
+   * MDN
+   */
+  val widows = new TypedStyle[Number]("widows", "widows")
+
+
+  /**
+   * The page-break-after CSS property adjusts page breaks after the current
+   * element.
+   *
+   * MDN
+   */
+  val pageBreakAfter = new PageBreak("pageBreakAfter", "page-break-after")
+
+  /**
+   * The page-break-inside CSS property adjusts page breaks inside the current
+   * element.
+   *
+   * MDN
+   */
+  val pageBreakInside = new PageBreak("pageBreakInside", "page-break-inside")
+
+
+  /**
+   * The page-break-before CSS property adjusts page breaks before the current
+   * element.
+   *
+   * This properties applies to block elements that generate a box. It won't
+   * apply on an empty `<div>` that won't generate a box.
+   *
+   * MDN
+   */
+  val pageBreakBefore = new PageBreak("pageBreakBefore", "page-break-before")
+
+
+  /**
+   * The perspective CSS property determines the distance between the z=0 plane
+   * and the user in order to give to the 3D-positioned element some perspective.
+   * Each 3D element with z>0 becomes larger; each 3D-element with z<0 becomes
+   * smaller. The strength of the effect is determined by the value of this
+   * property.
+   *
+   * MDN
+   */
+  val perspective = new NoneOpenStyle[Length]("perspective", "perspective")
+
+  /**
+   * The perspective-origin CSS property determines the position the viewer is
+   * looking at. It is used as the vanishing point by the perspective property.
+   *
+   * MDN
+   */
+  val perspectiveOrigin = new TypedStyle[String]("perspectiveOrigin", "perspective-origin")
+
+
+  /**
+   * The transition-delay CSS property specifies the amount of time to wait
+   * between a change being requested to a property that is to be transitioned
+   * and the start of the transition effect.
+   *
+   * A value of 0s, or 0ms, indicates that the property will begin to animate its
+   * transition immediately when the value changes; positive values will delay
+   * the start of the transition effect for the corresponding number of seconds.
+   * Negative values cause the transition to begin immediately, but to cause the
+   * transition to seem to begin partway through the animation effect.
+   *
+   * You may specify multiple delays; each delay will be applied to the
+   * corresponding property as specified by the transition-property property,
+   * which acts as a master list. If there are fewer delays specified than in the
+   * master list, missing values are set to the initial value (0s). If there are
+   * more delays, the list is simply truncated to the right size. In both case
+   * the CSS declaration stays valid.
+   *
+   * MDN
+   */
+  val transitionDelay = new MultiTimeStyle("transitionDelay", "transition-delay")
+
+  /**
+   * The CSS transition property is a shorthand property for transition-property,
+   * transition-duration, transition-timing-function, and transition-delay. It
+   * allows to define the transition between two states of an element. Different
+   * states may be defined using pseudo-classes like :hover or :active or
+   * dynamically set using JavaScript.
+   *
+   * MDN
+   */
+  val transition = new TypedStyle[String]("transition", "transition")
+
+  /**
+   * The CSS transition-timing-function property is used to describe how the
+   * intermediate values of the CSS properties being affected by a transition
+   * effect are calculated. This in essence lets you establish an acceleration
+   * curve, so that the speed of the transition can vary over its duration.
+   *
+   * MDN
+   */
+  val transitionTimingFunction = new TypedStyle[String]("transitionTimingFunction", "transition-timing-function")
+
+  /**
+   * The transition-duration CSS property specifies the number of seconds or
+   * milliseconds a transition animation should take to complete. By default,
+   * the value is 0s, meaning that no animation will occur.
+   *
+   * You may specify multiple durations; each duration will be applied to the
+   * corresponding property as specified by the transition-property property,
+   * which acts as a master list. If there are fewer durations specified than in
+   * the master list, the user agent repeat the list of durations. If there are
+   * more durations, the list is simply truncated to the right size. In both
+   * case the CSS declaration stays valid.
+   *
+   * MDN
+   */
+  val transitionDuration = new MultiTimeStyle("transitionDuration", "transition-duration")
+
+  /**
+   * The transition-property CSS property is used to specify the names of CSS
+   * properties to which a transition effect should be applied.
+   *
+   * MDN
+   */
+  val transitionProperty = new TypedStyle[String]("transitionProperty", "transition-property")
+
+  /**
+   * The CSS transform property lets you modify the coordinate space of the CSS
+   * visual formatting model. Using it, elements can be translated, rotated,
+   * scaled, and skewed according to the values set.
+   *
+   * If the property has a value different than none, a stacking context will be
+   * created. In that case the object will act as a containing block for
+   * position: fixed elements that it contains.
+   *
+   * MDN
+   */
+  val transform = new TypedStyle[String]("transform", "transform")
+
+
+  /**
+   * The transform-origin CSS property lets you modify the origin for
+   * transformations of an element. For example, the transform-origin of the
+   * rotate() function is the centre of rotation. (This property is applied by
+   * first translating the element by the negated value of the property, then
+   * applying the element's transform, then translating by the property value.)
+   *
+   * Not explicitely set values are reset to their corresponding values.
+   *
+   * MDN
+   */
+  val transformOrigin = new TypedStyle[String]("transformOrigin", "transform-origin")
+  /**
+   * The transform-style CSS property determines if the children of the element
+   * are positioned in the 3D-space or are flattened in the plane of the element.
+   *
+   * MDN
+   */
+  object transformStyle extends Style("transformStyle", "transform-style") {
+    /**
+     * Indicates that the children of the element should be positioned in the
+     * 3D-space.
+     *
+     * MDN
+     */
+    val `preserve-3d` = this ~= "preserve-3d"
+    /**
+     * Indicates that the children of the element are lying in the plane of the
+     * element itself.
+     *
+     * MDN
+     */
+    val flat = this ~= "flat"
+  }
+
+  /**
+   * The unicode-bidi CSS property together with the direction property relates
+   * to the handling of bidirectional text in a document. For example, if a block
+   * of text contains both left-to-right and right-to-left text then the
+   * user-agent uses a complex Unicode algorithm to decide how to display the
+   * text. This property overrides this algorithm and allows the developer to
+   * control the text embedding.
+   *
+   * MDN
+   */
+  object unicodeBidi extends Style("unicodeBidi", "unicode-bidi") {
+    /**
+     * The element does not offer a additional level of embedding with respect
+     * to the bidirectional algorithm. For inline elements implicit reordering
+     * works across element boundaries.
+     *
+     * MDN
+     */
+    val normal = this ~= "normal"
+    /**
+     * If the element is inline, this value opens an additional level of
+     * embedding with respect to the bidirectional algorithm. The direction of
+     * this embedding level is given by the direction property.
+     *
+     * MDN
+     */
+    val embed = this ~= "embed"
+    /**
+     * For inline elements this creates an override. For block container elements
+     * this creates an override for inline-level descendants not within another
+     * block container element. This means that inside the element, reordering
+     * is strictly in sequence according to the direction property; the implicit
+     * part of the bidirectional algorithm is ignored.
+     *
+     * MDN
+     */
+    val `bidi-override` = this ~= "bidi-override"
+  }
+
+
+
+  /**
+   * The word-break CSS property is used to specify how (or if) to break lines
+   * within words.
+   *
+   * MDN
+   */
+  object wordBreak extends Style("wordBreak", "word-break") {
+    /**
+     * Use the default line break rule.
+     *
+     * MDN
+     */
+    val normal = this ~= "normal"
+    /**
+     * Word breaks may be inserted between any character for non-CJK
+     * (Chinese/Japanese/Korean) text.
+     *
+     * MDN
+     */
+    val `break-all` = this ~= "break-all"
+    /**
+     * Don't allow word breaks for CJK text.  Non-CJK text behavior is same
+     * as normal.
+     *
+     * MDN
+     */
+    val `keep-all` = this ~= "keep-all"
+  }
+
+
+}
+private[scalatags] trait Styles {
   /**
    * If a background-image is specified, the background-attachment CSS
    * property determines whether that image's position is fixed within
@@ -826,146 +1267,7 @@ private[scalatags] trait Styles {
     val aqua = this ~= "aqua"
   }
 
-  /**
-   * The columns CSS property is a shorthand property allowing to set both the
-   * column-width and the column-count properties at the same time.
-   *
-   * MDN
-   */
-  object columns extends Style("columns", "columns") {
-    def ~(number: Int) = this ~= number.toString
 
-    def ~(number: Int, width: Length) = this ~= s"$number $width"
-  }
-
-  /**
-   * The column-count CSS property describes the number of columns of the element.
-   *
-   * MDN
-   */
-  val columnCount = new AutoStyle[Int]("columnCount", "column-count")
-
-  /**
-   * The column-fill CSS property controls how contents are partitioned into
-   * columns. Contents are either balanced, which means that contents in all
-   * columns will have the same height or, when using auto, just take up the
-   * room the content needs.
-   *
-   * MDN
-   */
-  object columnFill extends Style("columnFill", "column-fill") {
-    /**
-     * Is a keyword indicating that columns are filled sequentially.
-     *
-     * MDN
-     */
-    val auto = this ~= "auto"
-
-    /**
-     * Is a keyword indicating that content is equally divided between columns.
-     *
-     * MDN
-     */
-    val balance = this ~= "balance"
-  }
-
-  /**
-   * The column-gap CSS property sets the size of the gap between columns for
-   * elements which are specified to display as a multi-column element.
-   *
-   * MDN
-   */
-  val columnGap = new NormalOpenStyle[Length]("columnGap", "column-gap")
-
-  /**
-   * In multi-column layouts, the column-rule CSS property specifies a straight
-   * line, or "rule", to be drawn between each column. It is a convenient
-   * shorthand to avoid setting each of the individual column-rule-* properties
-   * separately : column-rule-width, column-rule-style and column-rule-color.
-   *
-   * MDN
-   */
-  val columnRule = new TypedStyle[String]("columnRule", "column-rule")
-
-  /**
-   * The column-span CSS property makes it possible for an element to span across
-   * all columns when its value is set to all. An element that spans more than
-   * one column is called a spanning element.
-   *
-   * MDN
-   */
-  object columnSpan extends Style("columnSpan", "column-span") {
-    /**
-     * The element does not span multiple columns.
-     *
-     * MDN
-     */
-    val none = this ~= "none"
-    /**
-     * The element spans across all columns. Content in the normal flow that
-     * appears before the element is automatically balanced across all columns
-     * before the element appears. The element establishes a new block formatting
-     * context.
-     *
-     * MDN
-     */
-    val all = this ~= "all"
-  }
-
-
-  /**
-   * The column-width CSS property suggests an optimal column width. This is not
-   * a absolute value but a mere hint. Browser will adjust the width of the
-   * column around that suggested value, allowing to achieve scalable designs
-   * that fit different screen size. Especially in presence of the column-count
-   * CSS property which has precedence, to set an exact column width, all Length
-   * values must be specified. In horizontal text these are width, column-width,
-   * column-gap, and column-rule-width
-   *
-   * MDN
-   */
-  val columnWidth = new AutoStyle[Length]("columnWidth", "column-width")
-
-  /**
-   * The column-rule-color CSS property lets you set the color of the rule drawn
-   * between columns in multi-column layouts.
-   *
-   * MDN
-   */
-  val columnRuleColor = new TypedStyle[Color]("columnRuleColor", "column-rule-color")
-
-  /**
-   * The column-rule-width CSS property lets you set the width of the rule drawn
-   * between columns in multi-column layouts.
-   *
-   * MDN
-   */
-  object columnRuleWidth extends TypedStyle[Length]("columnRuleWidth", "column-rule-width") {
-    val thin = this ~= "thin"
-    val medium = this ~= "medium"
-    val thick = this ~= "thick"
-  }
-
-  /**
-   * The column-rule-style CSS property lets you set the style of the rule drawn
-   * between columns in multi-column layouts.
-   *
-   * MDN
-   */
-  object columnRuleStyle
-    extends OutlineStyle("columnRuleStyle", "column-rule-style"){
-    val hidden = this ~= "hidden"
-  }
-
-
-  /**
-   * The counter-increment CSS property is used to increase the value of CSS
-   * Counters by a given value. The counter's value can be reset using the
-   * counter-reset CSS property.
-   *
-   * MDN
-   */
-  val counterIncrement = new TypedStyle[String]("counterIncrement", "counter-increment")
 
   /**
    * The clip CSS property defines what portion of an element is visible. The
@@ -1393,15 +1695,6 @@ private[scalatags] trait Styles {
   }
 
 
-  /**
-   * The orphans CSS property refers to the minimum number of lines in a block
-   * container that must be left at the bottom of the page. This property is
-   * normally used to control how page breaks occur.
-   *
-   * MDN
-   */
-  val orphans = new TypedStyle[Int]("orphans", "orphans")
-
 
   /**
    * The CSS property pointer-events allows authors to control under what
@@ -1778,18 +2071,6 @@ private[scalatags] trait Styles {
 
 
   /**
-   * The widows CSS property defines how many minimum lines must be left on top
-   * of a new page, on a paged media. In typography, a widow is the last line of
-   * a paragraph appearing alone at the top of a page. Setting the widows property
-   * allows to prevent widows to be left.
-   *
-   * On a non-paged media, like screen, the widows CSS property has no effect.
-   *
-   * MDN
-   */
-  val widows = new TypedStyle[Number]("widows", "widows")
-
-  /**
    * On block level elements, the line-height CSS property specifies the minimal
    * height of line boxes within the element.
    *
@@ -1962,51 +2243,6 @@ private[scalatags] trait Styles {
 
 
   /**
-   * The position CSS property chooses alternative rules for positioning elements,
-   * designed to be useful for scripted animation effects.
-   *
-   * MDN
-   */
-  object position extends Style("position", "position") {
-    /**
-     * This keyword let the element use the normal behavior, that is it is laid
-     * out in its current position in the flow.  The top, right, bottom, and left
-     * properties do not apply.
-     *
-     * MDN
-     */
-    val static = this ~= "static"
-    /**
-     * This keyword lays out all elements as though the element were not
-     * positioned, and then adjust the element's position, without changing
-     * layout (and thus leaving a gap for the element where it would have been
-     * had it not been positioned). The effect of position:relative on
-     * table-*-group, table-row, table-column, table-cell, and table-caption
-     * elements is undefined.
-     *
-     * MDN
-     */
-    val relative = this ~= "relative"
-    /**
-     * Do not leave space for the element. Instead, position it at a specified
-     * position relative to its closest positioned ancestor or to the containing
-     * block. Absolutely positioned boxes can have margins, they do not collapse
-     * with any other margins.
-     *
-     * MDN
-     */
-    val absolute = this ~= "absolute"
-    /**
-     * Do not leave space for the element. Instead, position it at a specified
-     * position relative to the screen's viewport and doesn't move when scrolled.
-     * When printing, position it at that fixed position on every page.
-     *
-     * MDN
-     */
-    val fixed = this ~= "fixed"
-  }
-
-  /**
    * The list-style CSS property is a shorthand property for setting
    * list-style-type, list-style-image and list-style-position.
    *
@@ -2056,6 +2292,53 @@ private[scalatags] trait Styles {
    */
   val boxShadow = new TypedStyle[String]("boxShadow", "box-shadow")
 
+
+  /**
+   * The position CSS property chooses alternative rules for positioning elements,
+   * designed to be useful for scripted animation effects.
+   *
+   * MDN
+   */
+  object position extends Style("position", "position") {
+    /**
+     * This keyword let the element use the normal behavior, that is it is laid
+     * out in its current position in the flow.  The top, right, bottom, and left
+     * properties do not apply.
+     *
+     * MDN
+     */
+    val static = this ~= "static"
+    /**
+     * This keyword lays out all elements as though the element were not
+     * positioned, and then adjust the element's position, without changing
+     * layout (and thus leaving a gap for the element where it would have been
+     * had it not been positioned). The effect of position:relative on
+     * table-*-group, table-row, table-column, table-cell, and table-caption
+     * elements is undefined.
+     *
+     * MDN
+     */
+    val relative = this ~= "relative"
+    /**
+     * Do not leave space for the element. Instead, position it at a specified
+     * position relative to its closest positioned ancestor or to the containing
+     * block. Absolutely positioned boxes can have margins, they do not collapse
+     * with any other margins.
+     *
+     * MDN
+     */
+    val absolute = this ~= "absolute"
+    /**
+     * Do not leave space for the element. Instead, position it at a specified
+     * position relative to the screen's viewport and doesn't move when scrolled.
+     * When printing, position it at that fixed position on every page.
+     *
+     * MDN
+     */
+    val fixed = this ~= "fixed"
+  }
+
+
   object quotes extends Style("quotes", "quotes") {
     /**
      * The open-quote and close-quote values of the content property produce no
@@ -2088,45 +2371,6 @@ private[scalatags] trait Styles {
      * MDN
      */
     val fixed = this ~= "fixed"
-  }
-
-  /**
-   * The unicode-bidi CSS property together with the direction property relates
-   * to the handling of bidirectional text in a document. For example, if a block
-   * of text contains both left-to-right and right-to-left text then the
-   * user-agent uses a complex Unicode algorithm to decide how to display the
-   * text. This property overrides this algorithm and allows the developer to
-   * control the text embedding.
-   *
-   * MDN
-   */
-  object unicodeBidi extends Style("unicodeBidi", "unicode-bidi") {
-    /**
-     * The element does not offer a additional level of embedding with respect
-     * to the bidirectional algorithm. For inline elements implicit reordering
-     * works across element boundaries.
-     *
-     * MDN
-     */
-    val normal = this ~= "normal"
-    /**
-     * If the element is inline, this value opens an additional level of
-     * embedding with respect to the bidirectional algorithm. The direction of
-     * this embedding level is given by the direction property.
-     *
-     * MDN
-     */
-    val embed = this ~= "embed"
-    /**
-     * For inline elements this creates an override. For block container elements
-     * this creates an override for inline-level descendants not within another
-     * block container element. This means that inside the element, reordering
-     * is strictly in sequence according to the direction property; the implicit
-     * part of the bidirectional algorithm is ignored.
-     *
-     * MDN
-     */
-    val `bidi-override` = this ~= "bidi-override"
   }
 
 
@@ -2235,6 +2479,7 @@ private[scalatags] trait Styles {
     val bolder = this ~= "bolder"
 
   }
+
   /**
    * The font CSS property is either a shorthand property for setting font-style,
    * font-variant, font-weight, font-size, line-height and font-family, or a way
@@ -2322,41 +2567,7 @@ private[scalatags] trait Styles {
    * MDN
    */
   val content = new TypedStyle[String]("content", "content")
-  /**
-   * The counter-reset CSS property is used to reset CSS Counters to a given
-   * value.
-   *
-   * MDN
-   */
-  val counterReset = new TypedStyle[String]("counterReset", "counter-reset")
 
-  /**
-   * The outline-width CSS property is used to set the width of the outline of
-   * an element. An outline is a line that is drawn around elements, outside the
-   * border edge, to make the element stand out.
-   *
-   * MDN
-   */
-  object outlineWidth extends TypedStyle[Length]("outlineWidth", "outline-width") {
-    /**
-     * Typically 1px in desktop browsers like Firefox.
-     *
-     * MDN
-     */
-    val thin = this ~= "thin"
-    /**
-     * Typically 3px in desktop browsers like Firefox.
-     *
-     * MDN
-     */
-    val medium = this ~= "medium"
-    /**
-     * Typically 5px in desktop browsers like Firefox.
-     *
-     * MDN
-     */
-    val thick = this ~= "thick"
-  }
 
   /**
    * The margin-bottom CSS property of an element sets the margin space required
@@ -2422,34 +2633,6 @@ private[scalatags] trait Styles {
     def ~(top: Length, right: Length, bottom: Length, left: Length) = this ~= s"$top $right $bottom $left"
   }
 
-  /**
-   * The word-break CSS property is used to specify how (or if) to break lines
-   * within words.
-   *
-   * MDN
-   */
-  object wordBreak extends Style("wordBreak", "word-break") {
-    /**
-     * Use the default line break rule.
-     *
-     * MDN
-     */
-    val normal = this ~= "normal"
-    /**
-     * Word breaks may be inserted between any character for non-CJK
-     * (Chinese/Japanese/Korean) text.
-     *
-     * MDN
-     */
-    val `break-all` = this ~= "break-all"
-    /**
-     * Don't allow word breaks for CJK text.  Non-CJK text behavior is same
-     * as normal.
-     *
-     * MDN
-     */
-    val `keep-all` = this ~= "keep-all"
-  }
 
   /**
    * The top CSS property specifies part of the position of positioned elements.
@@ -2482,35 +2665,6 @@ private[scalatags] trait Styles {
   val width = new AutoStyle[Length]("width", "width")
 
   /**
-   * The page-break-after CSS property adjusts page breaks after the current
-   * element.
-   *
-   * MDN
-   */
-  val pageBreakAfter = new PageBreak("pageBreakAfter", "page-break-after")
-
-  /**
-   * The page-break-inside CSS property adjusts page breaks inside the current
-   * element.
-   *
-   * MDN
-   */
-  val pageBreakInside = new PageBreak("pageBreakInside", "page-break-inside")
-
-
-  /**
-   * The page-break-before CSS property adjusts page breaks before the current
-   * element.
-   *
-   * This properties applies to block elements that generate a box. It won't
-   * apply on an empty `<div>` that won't generate a box.
-   *
-   * MDN
-   */
-  val pageBreakBefore = new PageBreak("pageBreakBefore", "page-break-before")
-
-
-  /**
    * The bottom CSS property participates in specifying the position of
    * positioned elements.
    *
@@ -2529,7 +2683,61 @@ private[scalatags] trait Styles {
    */
   val bottom = new AutoStyle[Length]("bottom", "bottom")
 
+  /**
+   * The letter-spacing CSS property specifies spacing behavior between text
+   * characters.
+   *
+   * MDN
+   */
+  val letterSpacing = new NormalOpenStyle[Length]("letterSpacing", "letter-spacing")
 
+
+  /**
+   * The max-height CSS property is used to set the maximum height of a given
+   * element. It prevents the used value of the height property from becoming
+   * larger than the value specified for max-height.
+   *
+   * max-height overrides height, but min-height overrides max-height.
+   *
+   * MDN
+   */
+  val maxHeight = new NoneOpenStyle[Length]("maxHeight", "max-height")
+
+  /**
+   * The min-width CSS property is used to set the minimum width of a given
+   * element. It prevents the used value of the width property from becoming
+   * smaller than the value specified for min-width.
+   *
+   * The value of min-width overrides both max-width and width.
+   *
+   * MDN
+   */
+  val minWidth = new TypedStyle[Length]("minWidth", "minWidth")
+
+
+  /**
+   * The min-height CSS property is used to set the minimum height of a given
+   * element. It prevents the used value of the height property from becoming
+   * smaller than the value specified for min-height.
+   *
+   * The value of min-height overrides both max-height and height.
+   *
+   * MDN
+   */
+  val minHeight = new TypedStyle[Length]("minHeight", "min-height")
+
+
+  /**
+   * The CSS outline property is a shorthand property for setting one or more of
+   * the individual outline properties outline-style, outline-width and
+   * outline-color in a single rule. In most cases the use of this shortcut is
+   * preferable and more convenient.
+   *
+   * Outlines do not take up space, they are drawn above the content.
+   *
+   * MDN
+   */
+  val outline = new TypedStyle[String]("outline", "outline")
 
   /**
    * The outline-style CSS property is used to set the style of the outline of
@@ -2540,6 +2748,33 @@ private[scalatags] trait Styles {
    */
   val outlineStyle = new OutlineStyle("outlineStyle", "outline-style")
 
+  /**
+   * The outline-width CSS property is used to set the width of the outline of
+   * an element. An outline is a line that is drawn around elements, outside the
+   * border edge, to make the element stand out.
+   *
+   * MDN
+   */
+  object outlineWidth extends TypedStyle[Length]("outlineWidth", "outline-width") {
+    /**
+     * Typically 1px in desktop browsers like Firefox.
+     *
+     * MDN
+     */
+    val thin = this ~= "thin"
+    /**
+     * Typically 3px in desktop browsers like Firefox.
+     *
+     * MDN
+     */
+    val medium = this ~= "medium"
+    /**
+     * Typically 5px in desktop browsers like Firefox.
+     *
+     * MDN
+     */
+    val thick = this ~= "thick"
+  }
 
   /**
    * The outline-color CSS property sets the color of the outline of an element.
@@ -2562,127 +2797,6 @@ private[scalatags] trait Styles {
 
 
   /**
-   * The CSS outline property is a shorthand property for setting one or more of
-   * the individual outline properties outline-style, outline-width and
-   * outline-color in a single rule. In most cases the use of this shortcut is
-   * preferable and more convenient.
-   *
-   * Outlines do not take up space, they are drawn above the content.
-   *
-   * MDN
-   */
-  val outline = new TypedStyle[String]("outline", "outline")
-
-
-  /**
-   * The word-spacing CSS property specifies spacing behavior between tags and
-   * words.
-   *
-   * MDN
-   */
-  val wordSpacing = new NormalOpenStyle[Length]("wordSpacing", "word-spacing")
-
-  /**
-   * The max-height CSS property is used to set the maximum height of a given
-   * element. It prevents the used value of the height property from becoming
-   * larger than the value specified for max-height.
-   *
-   * max-height overrides height, but min-height overrides max-height.
-   *
-   * MDN
-   */
-  val maxHeight = new NoneOpenStyle[Length]("maxHeight", "max-height")
-
-  /**
-   * The letter-spacing CSS property specifies spacing behavior between text
-   * characters.
-   *
-   * MDN
-   */
-  val letterSpacing = new NormalOpenStyle[Length]("letterSpacing", "letter-spacing")
-
-  /**
-   * The white-space CSS property is used to to describe how whitespace inside
-   * the element is handled.
-   *
-   * MDN
-   */
-  object whiteSpace extends Style("whiteSpace", "white-space"){
-    /**
-     * Sequences of whitespace are collapsed. Newline characters in the source
-     * are handled as other whitespace. Breaks lines as necessary to fill line
-     * boxes.
-     *
-     * MDN
-     */
-    val normal = this ~= "normal"
-    /**
-     * Collapses whitespace as for normal, but suppresses line breaks (text
-     * wrapping) within text.
-     *
-     * MDN
-     */
-    val nowrap = this ~= "nowrap"
-    /**
-     * Sequences of whitespace are preserved, lines are only broken at newline
-     * characters in the source and at `<br>` elements.
-     *
-     * MDN
-     */
-    val pre = this ~= "pre"
-    /**
-     * Sequences of whitespace are preserved. Lines are broken at newline
-     * characters, at `<br>`, and as necessary to fill line boxes.
-     *
-     * MDN
-     */
-    val `pre-wrap` = this ~= "pre-wrap"
-    /**
-     * Sequences of whitespace are collapsed. Lines are broken at newline
-     * characters, at `<br>`, and as necessary to fill line boxes.
-     *
-     * MDN
-     */
-    val `pre-line` = this ~= "pre-line"
-  }
-
-  /**
-   * The min-width CSS property is used to set the minimum width of a given
-   * element. It prevents the used value of the width property from becoming
-   * smaller than the value specified for min-width.
-   *
-   * The value of min-width overrides both max-width and width.
-   *
-   * MDN
-   */
-  val minWidth = new TypedStyle[Length]("minWidth", "minWidth")
-
-
-
-
-  /**
-   * The min-height CSS property is used to set the minimum height of a given
-   * element. It prevents the used value of the height property from becoming
-   * smaller than the value specified for min-height.
-   *
-   * The value of min-height overrides both max-height and height.
-   *
-   * MDN
-   */
-  val minHeight = new TypedStyle[Length]("minHeight", "min-height")
-
-
-  /**
-   * The z-index CSS property specifies the z-order of an element and its
-   * descendants. When elements overlap, z-order determines which one covers the
-   * other. An element with a larger z-index generally covers an element with a
-   * lower one.
-   *
-   * MDN
-   */
-  val zIndex = new AutoStyle[Int]("zIndex", "z-index")
-
-  /**
    * The overflow-x CSS property specifies whether to clip content, render a
    * scroll bar or display overflow content of a block-level element, when it
    * overflows at the left and right edges.
@@ -2691,167 +2805,6 @@ private[scalatags] trait Styles {
    */
   val overflowX = new Overflow("overflowX", "overflow-x")
 
-
-  /**
-   * The CSS backface-visibility property determines whether or not the back
-   * face of the element is visible when facing the user. The back face of an
-   * element always is a transparent background, letting, when visible, a mirror
-   * image of the front face be displayed.
-   *
-   * MDN
-   */
-  object backfaceVisibility extends Style("backfaceVisibility", "backface-visibility") {
-    /**
-     * The back face is visible.
-     *
-     * MDN
-     */
-    val visible = this ~= "visible"
-    /**
-     * The back face is not visible.
-     *
-     * MDN
-     */
-    val hidden = this ~= "hidden"
-  }
-
-
-  /**
-   * The transition-delay CSS property specifies the amount of time to wait
-   * between a change being requested to a property that is to be transitioned
-   * and the start of the transition effect.
-   *
-   * A value of 0s, or 0ms, indicates that the property will begin to animate its
-   * transition immediately when the value changes; positive values will delay
-   * the start of the transition effect for the corresponding number of seconds.
-   * Negative values cause the transition to begin immediately, but to cause the
-   * transition to seem to begin partway through the animation effect.
-   *
-   * You may specify multiple delays; each delay will be applied to the
-   * corresponding property as specified by the transition-property property,
-   * which acts as a master list. If there are fewer delays specified than in the
-   * master list, missing values are set to the initial value (0s). If there are
-   * more delays, the list is simply truncated to the right size. In both case
-   * the CSS declaration stays valid.
-   *
-   * MDN
-   */
-  val transitionDelay = new MultiTimeStyle("transitionDelay", "transition-delay")
-
-  /**
-   * The CSS transition property is a shorthand property for transition-property,
-   * transition-duration, transition-timing-function, and transition-delay. It
-   * allows to define the transition between two states of an element. Different
-   * states may be defined using pseudo-classes like :hover or :active or
-   * dynamically set using JavaScript.
-   *
-   * MDN
-   */
-  val transition = new TypedStyle[String]("transition", "transition")
-
-  /**
-   * The CSS transition-timing-function property is used to describe how the
-   * intermediate values of the CSS properties being affected by a transition
-   * effect are calculated. This in essence lets you establish an acceleration
-   * curve, so that the speed of the transition can vary over its duration.
-   *
-   * MDN
-   */
-  val transitionTimingFunction = new TypedStyle[String]("transitionTimingFunction", "transition-timing-function")
-
-  /**
-   * The transition-duration CSS property specifies the number of seconds or
-   * milliseconds a transition animation should take to complete. By default,
-   * the value is 0s, meaning that no animation will occur.
-   *
-   * You may specify multiple durations; each duration will be applied to the
-   * corresponding property as specified by the transition-property property,
-   * which acts as a master list. If there are fewer durations specified than in
-   * the master list, the user agent repeat the list of durations. If there are
-   * more durations, the list is simply truncated to the right size. In both
-   * case the CSS declaration stays valid.
-   *
-   * MDN
-   */
-  val transitionDuration = new MultiTimeStyle("transitionDuration", "transition-duration")
-
-  /**
-   * The transition-property CSS property is used to specify the names of CSS
-   * properties to which a transition effect should be applied.
-   *
-   * MDN
-   */
-  val transitionProperty = new TypedStyle[String]("transitionProperty", "transition-property")
-
-  /**
-   * The CSS transform property lets you modify the coordinate space of the CSS
-   * visual formatting model. Using it, elements can be translated, rotated,
-   * scaled, and skewed according to the values set.
-   *
-   * If the property has a value different than none, a stacking context will be
-   * created. In that case the object will act as a containing block for
-   * position: fixed elements that it contains.
-   *
-   * MDN
-   */
-  val transform = new TypedStyle[String]("transform", "transform")
-
-
-  /**
-   * The transform-origin CSS property lets you modify the origin for
-   * transformations of an element. For example, the transform-origin of the
-   * rotate() function is the centre of rotation. (This property is applied by
-   * first translating the element by the negated value of the property, then
-   * applying the element's transform, then translating by the property value.)
-   *
-   * Not explicitely set values are reset to their corresponding values.
-   *
-   * MDN
-   */
-  val transformOrigin = new TypedStyle[String]("transformOrigin", "transform-origin")
-  /**
-   * The transform-style CSS property determines if the children of the element
-   * are positioned in the 3D-space or are flattened in the plane of the element.
-   *
-   * MDN
-   */
-  object transformStyle extends Style("transformStyle", "transform-style") {
-    /**
-     * Indicates that the children of the element should be positioned in the
-     * 3D-space.
-     *
-     * MDN
-     */
-    val `preserve-3d` = this ~= "preserve-3d"
-    /**
-     * Indicates that the children of the element are lying in the plane of the
-     * element itself.
-     *
-     * MDN
-     */
-    val flat = this ~= "flat"
-  }
-
-
-
-  /**
-   * The perspective CSS property determines the distance between the z=0 plane
-   * and the user in order to give to the 3D-positioned element some perspective.
-   * Each 3D element with z>0 becomes larger; each 3D-element with z<0 becomes
-   * smaller. The strength of the effect is determined by the value of this
-   * property.
-   *
-   * MDN
-   */
-  val perspective = new NoneOpenStyle[Length]("perspective", "perspective")
-
-  /**
-   * The perspective-origin CSS property determines the position the viewer is
-   * looking at. It is used as the vanishing point by the perspective property.
-   *
-   * MDN
-   */
-  val perspectiveOrigin = new TypedStyle[String]("perspectiveOrigin", "perspective-origin")
 
   /**
    * The text-align-last CSS property describes how the last line of a block or
@@ -2951,8 +2904,6 @@ private[scalatags] trait Styles {
    * MDN
    */
   val textIndent = new TypedStyle[Length]("textIndent", "text-indent")
-
-
 
   /**
    * The text-overflow CSS property determines how overflowed content that is
@@ -3101,5 +3052,70 @@ private[scalatags] trait Styles {
      */
     val collapse = this ~= "collapse"
   }
+
+
+
+  /**
+   * The white-space CSS property is used to to describe how whitespace inside
+   * the element is handled.
+   *
+   * MDN
+   */
+  object whiteSpace extends Style("whiteSpace", "white-space"){
+    /**
+     * Sequences of whitespace are collapsed. Newline characters in the source
+     * are handled as other whitespace. Breaks lines as necessary to fill line
+     * boxes.
+     *
+     * MDN
+     */
+    val normal = this ~= "normal"
+    /**
+     * Collapses whitespace as for normal, but suppresses line breaks (text
+     * wrapping) within text.
+     *
+     * MDN
+     */
+    val nowrap = this ~= "nowrap"
+    /**
+     * Sequences of whitespace are preserved, lines are only broken at newline
+     * characters in the source and at `<br>` elements.
+     *
+     * MDN
+     */
+    val pre = this ~= "pre"
+    /**
+     * Sequences of whitespace are preserved. Lines are broken at newline
+     * characters, at `<br>`, and as necessary to fill line boxes.
+     *
+     * MDN
+     */
+    val `pre-wrap` = this ~= "pre-wrap"
+    /**
+     * Sequences of whitespace are collapsed. Lines are broken at newline
+     * characters, at `<br>`, and as necessary to fill line boxes.
+     *
+     * MDN
+     */
+    val `pre-line` = this ~= "pre-line"
+  }
+  /**
+   * The word-spacing CSS property specifies spacing behavior between tags and
+   * words.
+   *
+   * MDN
+   */
+  val wordSpacing = new NormalOpenStyle[Length]("wordSpacing", "word-spacing")
+  /**
+   * The z-index CSS property specifies the z-order of an element and its
+   * descendants. When elements overlap, z-order determines which one covers the
+   * other. An element with a larger z-index generally covers an element with a
+   * lower one.
+   *
+   * MDN
+   */
+  val zIndex = new AutoStyle[Int]("zIndex", "z-index")
+
+
 
 }

@@ -471,7 +471,7 @@ class ExampleTests extends FreeSpec{
       val evilInput1 = "\"><script>alert('hello!')</script>"
       val evilInput2 = "<script>alert('hello!')</script>"
 
-      val x = html(
+      html(
         head(
           script("some script")
         ),
@@ -483,8 +483,7 @@ class ExampleTests extends FreeSpec{
           evilInput2
         )
       )
-      println(x.toString)
-      x
+
     },
     """
     <html>
@@ -527,7 +526,28 @@ class ExampleTests extends FreeSpec{
     </html>
     """
   )
-
+  "Additional Imports" in strCheck(
+    {
+      import Styles.pageBreakBefore
+      import Tags.address
+      import SvgTags.svg
+      import SvgStyles.stroke
+      div(
+        p(pageBreakBefore.always, "a long paragraph which should not be broken"),
+        address("500 Memorial Drive, Cambridge MA"),
+        svg(stroke:="blue")
+      )
+    },
+    """
+    <div>
+        <p style="page-break-before: always;">
+            a long paragraph which should not be broken
+        </p>
+        <address>500 Memorial Drive, Cambridge MA</address>
+        <svg style="stroke: blue;" />
+    </div>
+    """
+  )
   "Typesafe CSS" in strCheck(
     div(zIndex:=10),
     """<div style="z-index: 10;" />"""
@@ -546,15 +566,15 @@ class ExampleTests extends FreeSpec{
 
   "Different ways of static typing" in strCheck(
     div(
-      div(backgroundColor:=##"ababab"),
+      div(backgroundColor:=hex"ababab"),
       div(color:=rgb(0, 255, 255)),
       div(color.red),
       div(borderRightColor:=hsla(100, 0, 50, 0.5)),
-      div(backgroundImage:=radialGradient(##"f00", ##"0f0"~50.pct, ##"00f")),
+      div(backgroundImage:=radialGradient(hex"f00", hex"0f0"~50.pct, hex"00f")),
       div(backgroundImage:=url("www.picture.com/my_picture")),
       div(backgroundImage:=(
-        radialGradient(45.px, 45.px, "ellipse farthest-corner", ##"f00", ##"0f0"~500.px, ##"00f"),
-        linearGradient("to top left", ##"f00", ##"0f0"~10.px, ##"00f")
+        radialGradient(45.px, 45.px, "ellipse farthest-corner", hex"f00", hex"0f0"~500.px, hex"00f"),
+        linearGradient("to top left", hex"f00", hex"0f0"~10.px, hex"00f")
         ))
     ),
     """

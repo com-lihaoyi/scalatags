@@ -135,7 +135,7 @@ private[scalatags] trait DataTypes {
     /**
      * A color represented as a hex string e.g. #fff or #ababab
      */
-    def ##(args: Any*): Color = Hex(sc.parts.mkString)
+    def hex(args: Any*): Color = Hex(sc.parts.mkString)
   }
 
   def linearGradient(direction: String, colors: ColorStop*) = LinearGradient(direction, colors:_*)

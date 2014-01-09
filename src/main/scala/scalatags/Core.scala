@@ -181,7 +181,7 @@ case class AttrPair(attr: Attr[_], value: String) extends Nested{
 class Attr[T](val name: String){
   if (!Escaping.validAttrName(name))
     throw new IllegalArgumentException(
-      s"Illegal attribute name: $tag is not a valid XML attribute name"
+      s"Illegal attribute name: $name is not a valid XML attribute name"
     )
 
   override def toString = name

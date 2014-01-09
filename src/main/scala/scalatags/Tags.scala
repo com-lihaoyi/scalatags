@@ -14,12 +14,10 @@
 package scalatags
 
 /**
- * Less-often used HTML tags. These are not imported by default in order to
- * avoid polluting your namespace with mostly-unused tags. They can be accessed
- * through `tags.XXX`, or via `import tags._` if you really want them and don't
- * mind the extra namespace pollution.
+ * Contains HTML tags which are used less frequently. These are not imported by
+ * default to avoid namespace pollution.
  */
-object tag{
+object Tags{
   // Document Metadata
   /**
    * Defines the title of the document, shown in a browser's title bar or on the
@@ -143,6 +141,12 @@ object tag{
    */
   val kbd = "kbd".tag
 
+  /**
+   * Defines a mathematical formula.
+   *
+   *  MDN
+   */
+  val math = "math".tag
   /**
    * Represents text highlighted for reference purposes, that is for its
    * relevance in another context.
@@ -637,18 +641,7 @@ private[scalatags] trait Tags{
    *  MDN
    */
   val area = "area".tag
-  /**
-   * Defines an embeded vector image.
-   *
-   *  MDN
-   */
-  val svg = "svg".tag
-  /**
-   * Defines a mathematical formula.
-   *
-   *  MDN
-   */
-  val math = "math".tag
+
 
   // Tabular data
   /**

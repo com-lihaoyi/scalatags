@@ -292,7 +292,53 @@ Again, you can take the result of `.style` or `.cls` and assign them to variable
 
 A full list of the shortcut methods (for both attributes and styles) provided by ScalaTags can be found in [HtmlAttributes.scala](src/main/scala/scalatags/HtmlAttributes.scala) and [Styles.scala](src/main/scala/scalatags/Styles.scala). This of course won't include any which you define yourself.
 
-More ways of representing Attributes and Styles
+
+Non-String Attributes and Styles
+================================
+
+```scala
+div(
+  p(float.left)(
+    "This is my first paragraph"
+  ),
+  a(tabindex:=10)(
+    p("Goooogle")
+  ),
+  input(disabled:=true)
+)
+```
+
+Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above. Attempts to pass in strings to `float:=`, `tabindex:=` or `disabled:=` result in compile errors.
+
+If you for some reason really need to pass in a special value for one of these attributes or styles (e.g. you have a Javascript library that parses these values and does some magic) you can either use the `.attr` and `.style` extensions shown earlier to create versions of `float`, `tabindex` or `disabled` which takes Strings, or you can use the `~=` operator to force assignment:
+
+```scala
+div(
+  p(float~="left")(
+    "This is my first paragraph"
+  ),
+  a(tabindex~="10")(
+    p("Goooogle")
+  ),
+  input(disabled~="true")
+)
+```
+
+Both of these print the same thing:
+
+```html
+<div>
+    <p style="float: left;">This is my first paragraph</p>
+    <a tabindex="10">
+        <p>Goooogle</p>
+    </a>
+    <input disabled="true" />
+</div>
+```
+
+In general, the `~=` operator should need need to be used very often, as only a conservative subset of attributes and styles provide non-string typechecking, those that take a well-defined set of values that falls nicely within some other data-type. Nonetheless, it is there as an escape hatch should you need it.
+
+More Attributes and Styles
 ===============================================
 
 ```scala
@@ -339,52 +385,45 @@ The above snippet renders the following HTML:
     <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);" />
 </div>
 ```
-Non-String Attributes and Styles
-================================
+
+Currently only a subset of attributes and styles provide this kind of non-string typechecking; that number will increase as better ways are found of rigorously typing the CSS syntax.
+
+
+Additional Imports
+=====================
 
 ```scala
+import Styles.pageBreakBefore
+import Tags.address
+import SvgTags.svg
+import SvgStyles.stroke
 div(
-  p(float.left)(
-    "This is my first paragraph"
-  ),
-  a(tabindex:=10)(
-    p("Goooogle")
-  ),
-  input(disabled:=true)
+  p(pageBreakBefore.always, "a long paragraph which should not be broken"),
+  address("500 Memorial Drive, Cambridge MA"),
+  svg(stroke:="blue")
 )
 ```
 
-Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above. Attempts to pass in strings to `float:=`, `tabindex:=` or `disabled:=` result in compile errors.
+By default, only a subset of tags, attributes and styles are imported, which correspond to the most commonly-used tags, attributes and styles. This is done to balance the convenience of having everything available at hand with the pollution of dumping everything into your global namespace.
 
-If you for some reason really need to pass in a special value for one of these attributes or styles (e.g. you have a Javascript library that parses these values and does some magic) you can either use the `.attr` and `.style` extensions shown earlier to create versions of `float`, `tabindex` or `disabled` which takes Strings, or you can use the `~=` operator to force assignment:
+Additional tags can be found in:
+
+- __Styles__: additional CSS Styles
+- __Tags__: additional Tags
+- __SvgTags__: tags related to SVG images
+- __SvgStyles__: styles related to SVG images.
+
+The above example prints:
 
 ```scala
-div(
-  p(float~="left")(
-    "This is my first paragraph"
-  ),
-  a(tabindex~="10")(
-    p("Goooogle")
-  ),
-  input(disabled~="true")
-)
-```
-
-Both of these print the same thing:
-
-```html
 <div>
-    <p style="float: left;">This is my first paragraph</p>
-    <a tabindex="10">
-        <p>Goooogle</p>
-    </a>
-    <input disabled="true" />
+    <p style="page-break-before: always;">
+        a long paragraph which should not be broken
+    </p>
+    <address>500 Memorial Drive, Cambridge MA</address>
+    <svg style="stroke: blue;" />
 </div>
 ```
-
-In general, the `~=` operator should need need to be used very often, as only a conservative subset of attributes and styles provide non-string typechecking, those that take a well-defined set of values that falls nicely within some other data-type. Nonetheless, it is there as an escape hatch should you need it.
-
-Currently only a small number of attributes and styles provide this kind of non-string typechecking; that number will increase as better ways are found of rigorously typing the CSS syntax.
 
 Variables
 =========
