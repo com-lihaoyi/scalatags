@@ -30,7 +30,7 @@ with Misc{
 
 
   /**
-   * Allows you to modify a HtmlNode by adding a Seq containing other mod-able
+   * Allows you to modify a HtmlNode by adding a Seq containing other nest-able
    * objects to its list of children.
    */
   implicit class SeqNested[A <% Nested](xs: Seq[A])extends Nested{

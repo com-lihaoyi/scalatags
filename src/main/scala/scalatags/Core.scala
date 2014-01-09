@@ -27,7 +27,7 @@ class RawNode(val v: String) extends Node{
 }
 
 /**
- * A general interface for all types which can appear in a ScalaTags fragment.
+ * A general interface for all XML types which can appear in a ScalaTags fragment.
  */
 trait Node extends Nested{
   /**
@@ -57,8 +57,9 @@ trait Node extends Nested{
 }
 /**
  * Represents a value that can be nested within a Node. This can be another
- * node, but can also be a CSS style or HTML attribute binding, which will
- * add itself to the node's attributes.
+ * Node, but can also be a CSS style or HTML attribute binding, which will
+ * add itself to the node's attributes but not appear in the final `children`
+ * list.
  */
 trait Nested{
   def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]): Unit
@@ -219,7 +220,7 @@ case class StylePair(style: Style, value: String) extends Nested{
   }
 }
 /**
- * A Style that takes any value of type T as a parameter; overloads the ~=
+ * A Style that takes any value of type T as a parameter; overloads the :=
  * operator to also accept values of that type to convert to strings, allowing
  * more concise and pseudo-typesafe use of that style.
  */
