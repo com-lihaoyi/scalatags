@@ -83,7 +83,7 @@ Although other templating systems also perform static validation, Scalatags is a
 
 ![CSS Compilation Error](docs/TypesafeCSS.png)
 
-Making them fail to compile if you accidentally pass the wrong thing in:
+Making them fail to compile if you accidentally pass the wrong thing in.
 
 Take a look at the [prior work](#prior-work) section for a more detailed analysis of Scalatags in comparison to other popular libraries.
 
