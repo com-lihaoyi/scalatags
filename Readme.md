@@ -46,7 +46,7 @@ ScalaTags is hosted on [Maven Central](http://search.maven.org/#artifactdetails%
 libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.0"
 ```
 
-And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
+And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console, or browse the [Scaladoc](http://lihaoyi.github.io/scalatags/#package).
 
 ScalaJS
 =======
