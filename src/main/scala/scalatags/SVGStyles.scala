@@ -15,18 +15,18 @@ private[scalatags] class CurrentColor(jsName: String, cssName: String) extends T
 }
 
 private[scalatags] trait Baseline{ self: TypedStyle[String] =>
-  val auto = this ~= "auto"
+  val auto = this := "auto"
 
-  val `before-edge` = this ~= "before-edge"
-  val `text-before-edge` = this ~= "text-before-edge"
-  val middle = this ~= "middle"
-  val central = this ~= "central"
-  val `after-edge` = this ~= "after-edge"
-  val `text-after-edge` = this ~= "text-after-edge"
-  val ideographic = this ~= "ideographic"
-  val alphabetic = this ~= "alphabetic"
-  val hanging = this ~= "hanging"
-  val mathematical = this ~= "mathematical"
+  val `before-edge` = this := "before-edge"
+  val `text-before-edge` = this := "text-before-edge"
+  val middle = this := "middle"
+  val central = this := "central"
+  val `after-edge` = this := "after-edge"
+  val `text-after-edge` = this := "text-after-edge"
+  val ideographic = this := "ideographic"
+  val alphabetic = this := "alphabetic"
+  val hanging = this := "hanging"
+  val mathematical = this := "mathematical"
 }
 
 private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends Style(jsName, cssName){
@@ -100,10 +100,10 @@ object SvgStyles{
    * MDN
    */
   object baselineShift extends TypedStyle[Length]("baselineShift", "baseline-shift") {
-    val auto = this ~= "auto"
-    val baseline = this ~= "baseline"
-    val sup = this ~= "sup"
-    val sub = this ~= "sub"
+    val auto = this := "auto"
+    val baseline = this := "baseline"
+    val sup = this := "sup"
+    val sub = this := "sub"
   }
 
   /**
@@ -123,7 +123,7 @@ object SvgStyles{
      *
      * MDN
      */
-    val start = this ~= "start"
+    val start = this := "start"
     /**
      * The rendered characters are aligned such that the middle of the text
      * string is at the current text position. (For text on a path, conceptually
@@ -134,7 +134,7 @@ object SvgStyles{
      *
      * MDN
      */
-    val middle = this ~= "middle"
+    val middle = this := "middle"
     /**
      * The rendered characters are aligned such that the end of the text string
      * is at the initial current text position.For Latin in its usual orientation
@@ -144,7 +144,7 @@ object SvgStyles{
      *
      * MDN
      */
-    val end = this ~= "end"
+    val end = this := "end"
   }
 
   /**
@@ -228,8 +228,8 @@ object SvgStyles{
    * MDN
    */
   object fill extends TypedStyle[String]("fill", "fill"){
-    val remove = this ~= "remove"
-    val freeze = this ~= "freeze"
+    val remove = this := "remove"
+    val freeze = this := "freeze"
   }
 
   /**

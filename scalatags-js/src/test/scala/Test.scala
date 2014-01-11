@@ -25,8 +25,8 @@ object Test extends JasmineTest {
             script("some script")
           ),
           body(
-            h1(backgroundColor~="blue", color~="red")("This is my title"),
-            div(backgroundColor~="blue", color~="red")(
+            h1(backgroundColor:="blue", color:="red")("This is my title"),
+            div(backgroundColor:="blue", color:="red")(
               p(contentpara, first)(
                 "This is my first paragraph"
               ),

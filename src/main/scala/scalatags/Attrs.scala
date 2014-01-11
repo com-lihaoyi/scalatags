@@ -9,9 +9,16 @@
  */
 package scalatags
 
+/**
+ * Module containing static bindings for common HTML attributes.
+ */
+object Attrs extends Attrs
 
-
-private[scalatags] trait Attributes{
+/**
+ * Trait containing the contents of the `Attributes` module, so they can be
+ * mixed in to other objects if needed.
+ */
+trait Attrs{
 
   /**
    * This is the single required attribute for anchors defining a hypertext

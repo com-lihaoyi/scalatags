@@ -96,7 +96,7 @@ Hello World
 -----------
 
 ```scala
-import scalatags._
+import scalatags.all._
 
 val frag = html(
   head(
@@ -112,7 +112,9 @@ val frag = html(
 )
 ```
 
-The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This example code creates a Scalatags fragment. We could do many things with a fragment: store it, return it, it's just a normal Scala value. Eventually, though, you will want to convert it into HTML. To do this, simply use:
+The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.all._`. See [below](#managing-imports) if you want more fine-grain control over what's imported.
+
+This example code creates a Scalatags fragment. We could do many things with a fragment: store it, return it, it's just a normal Scala value. Eventually, though, you will want to convert it into HTML. To do this, simply use:
 
 ```scala
 frag.toString
@@ -304,17 +306,17 @@ div(
 
 Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above. Attempts to pass in strings to `float:=`, `tabindex:=` or `disabled:=` result in compile errors.
 
-If you for some reason really need to pass in a special value for one of these attributes or styles (e.g. you have a Javascript library that parses these values and does some magic) you can either use the `.attr` and `.style` extensions shown earlier to create versions of `float`, `tabindex` or `disabled` which takes Strings, or you can use the `~=` operator to force assignment:
+If you for some reason really need to pass in a special value for one of these attributes or styles (e.g. you have a Javascript library that parses these values and does some magic) you can either use the `.attr` and `.style` extensions shown earlier to create versions of `float`, `tabindex` or `disabled` which takes Strings, or you can use the `:=` operator to force assignment:
 
 ```scala
 div(
-  p(float~="left")(
+  p(float:="left")(
     "This is my first paragraph"
   ),
-  a(tabindex~="10")(
+  a(tabindex:="10")(
     p("Goooogle")
   ),
-  input(disabled~="true")
+  input(disabled:="true")
 )
 ```
 
@@ -330,7 +332,7 @@ Both of these print the same thing:
 </div>
 ```
 
-In general, the `~=` operator should need need to be used very often, as only a conservative subset of attributes and styles provide non-string typechecking, those that take a well-defined set of values that falls nicely within some other data-type. Nonetheless, it is there as an escape hatch should you need it.
+In general, the `:=` operator should need need to be used very often, as only a conservative subset of attributes and styles provide non-string typechecking, those that take a well-defined set of values that falls nicely within some other data-type. Nonetheless, it is there as an escape hatch should you need it.
 
 More Attributes and Styles
 ===============================================
@@ -363,7 +365,7 @@ In general, this is the range of techniques to try when you want to define a
 CSS rule and don't know how. Many of the more complex rules still take `String`s
 in their `:=` method, meaning they don't have any typesafe bindings written for
 them. Even for the rules which have a typesafe `:=`, if you find you need
-something not provided by the typesafe wrappers, you can always use `~=` to as
+something not provided by the typesafe wrappers, you can always use `:=` to as
 an escape hatch to fall back to strings.
 
 The above snippet renders the following HTML:
@@ -383,12 +385,87 @@ The above snippet renders the following HTML:
 Currently only a subset of attributes and styles provide this kind of non-string typechecking; that number will increase as better ways are found of rigorously typing the CSS syntax.
 
 
-Additional Imports
-=====================
+Managing Imports
+================
 
 ```scala
-import Styles.pageBreakBefore
-import Tags.address
+import scalatags.{Attributes => a, Styles => s, _}
+import scalatags.Tags._
+div(
+  p(s.color:="red")("Red Text"),
+  img(a.href:="www.imgur.com/picture.jpg")
+)
+```
+
+Apart from using `import scalatags.all._`, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports `Attrs` and `Styles` aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. `value`, `id`, etc.) that you may not use.
+
+The main objects which you can import things from are:
+
+- `Tags`: common HTML tags
+- `Tags2`: less common HTML tags
+- `Attrs`: common HTML attributes
+- `Styles`: common CSS styles
+- `Styles2`: less common CSS styles
+- `Svg`: SVG tags
+- `SvgStyles`: CSS styles only associated with SVG elements
+- `DataTypes`: case classes representing CSS length, colors, etc.
+- `DataConverters`: convenient extensions (e.g. `10.px`) to create the CSS datatypes
+
+You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
+
+- `all`: this imports the contents of `Tags`, `Attrs`, `Styles` and `DataConverters`
+- `short`: this imports the contents of `Tags` and `DataConverters`, but aliases `Attrs` as `a` and `Styles` as `s`
+
+Thus, you can choose exactly what you want to import, and how:
+
+```scala
+import scalatags.{Attributes => attr, Styles => css, _}
+import scalatags.Tags._
+div(
+  p(css.color:="red")("Red Text"),
+  img(attr.href:="www.imgur.com/picture.jpg")
+)
+```
+
+Or you can rely on a aggregator like `all` (which the rest of the examples use) or `short`:
+
+```scala
+import scalatags.short._
+div(
+  p(css.color:="red")("Red Text"),
+  img(attr.href:="www.imgur.com/picture.jpg")
+)
+```
+
+If you wish to put together your own collection of imports, all the objects described above (`Tags`, `Attrs`, etc.) are also available as traits, so you can put together your own:
+
+```scala
+object custom extends Tags{
+  val attr = new Attributes {}
+  val css = new Styles {}
+}
+import custom._
+div(
+  p(css.color:="red")("Red Text"),
+  img(attr.href:="www.imgur.com/picture.jpg")
+)
+```
+
+In this case, you can define `custom` top-level somewhere, and simply have everyone else use `import custom._` to get exactly what you want. All three of of these examples print
+
+```html
+<div>
+    <p style="color: red;">Red Text</p>
+    <img href="www.imgur.com/picture.jpg" />
+</div>
+```
+
+
+The lesser used tags or styles are generally not imported wholesale by default, but you can always import the ones you need:
+
+```scala
+import Styles2.pageBreakBefore
+import Tags2.address
 import SvgTags.svg
 import SvgStyles.stroke
 div(
@@ -398,16 +475,7 @@ div(
 )
 ```
 
-By default, only a subset of tags, attributes and styles are imported, which correspond to the most commonly-used tags, attributes and styles. This is done to balance the convenience of having everything available at hand with the pollution of dumping everything into your global namespace.
-
-Additional tags can be found in:
-
-- __Styles__: additional CSS Styles
-- __Tags__: additional Tags
-- __SvgTags__: tags related to SVG images
-- __SvgStyles__: styles related to SVG images.
-
-The above example prints:
+This prints:
 
 ```scala
 <div>

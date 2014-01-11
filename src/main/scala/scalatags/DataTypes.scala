@@ -1,9 +1,16 @@
 package scalatags
 
-import DataTypes._
+/**
+ * Module containing convenient ways of constructing CSS data types
+ */
+object DataConverters extends DataConverters
 
-
-private[scalatags] trait DataTypes {
+/**
+ * Trait containing the contents of the `DataConverters` module, so it can be
+ * mixed in to other objects as needed.
+ */
+trait DataConverters{
+  import DataTypes._
   implicit def Int2CssNumber(x: Int) = new CssNumber(x)
   implicit def Double2CssNumber(x: Double) = new CssNumber(x)
   implicit def Float2CssNumber(x: Float) = new CssNumber(x)
@@ -173,7 +180,7 @@ private[scalatags] trait DataTypes {
    * An image found at a particular URL
    */
   def url(s: String) = Url(s)
-  
+
   def element(s: String) = Element(s)
   /**
    * A color represented as its 3 primary components, from 0 to 255
@@ -202,7 +209,7 @@ private[scalatags] trait DataTypes {
  * your fragments, but useful if you want to pass CSS values around and need a
  * type to put in a parameter list or collection.
  */
-object DataTypes{
+object DataTypes {
 
   /**
    * Something that can be used in as a color stop in a gradient. Generally is

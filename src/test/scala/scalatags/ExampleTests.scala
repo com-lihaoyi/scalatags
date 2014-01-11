@@ -1,8 +1,8 @@
 package scalatags
 
-import org.scalatest._
-
+import org.scalatest.FreeSpec
 import Util._
+import scalatags.all._
 
 /**
  * A set of examples used in the documentation.
@@ -26,7 +26,7 @@ class ExampleTests extends FreeSpec{
     """
     <html>
         <head>
-            <script src="..." />
+            <script src="..."></script>
             <script>alert('Hello World')</script>
         </head>
         <body>
@@ -267,45 +267,27 @@ class ExampleTests extends FreeSpec{
     </html>
     """
   )
-  "Classes and CSS" in strCheck(
-  {
-    val contentpara = "contentpara".cls
-    val first = "first".cls
-    html(
-      head(
-        script("some script")
-      ),
-      body(
-        h1(backgroundColor~="blue", color~="red")("This is my title"),
-        div(backgroundColor~="blue", color~="red")(
-          p(contentpara, first)(
-            "This is my first paragraph"
-          ),
-          a(opacity:=0.9)(
-            p("contentpara".cls)("Goooogle")
+  "Classes and CSS Custom" in strCheck(
+    {
+      val contentpara = "contentpara".cls
+      val first = "first".cls
+      html(
+        head(
+          script("some script")
+        ),
+        body(
+          h1(backgroundColor:="blue", color:="red")("This is my title"),
+          div(backgroundColor:="blue", color:="red")(
+            p(contentpara, first)(
+              "This is my first paragraph"
+            ),
+            a(opacity:=0.9)(
+              p("contentpara".cls)("Goooogle")
+            )
           )
         )
       )
-    )
-  },
-    """
-    <html>
-        <head>
-            <script>some script</script>
-        </head>
-        <body>
-            <h1 style="background-color: blue; color: red;">This is my title</h1>
-            <div style="background-color: blue; color: red;">
-            <p class="contentpara first">This is my first paragraph</p>
-            <a style="opacity: 0.9;">
-                <p class="contentpara">Goooogle</p>
-            </a>
-            </div>
-        </body>
-    </html>
-    """
-  )
-  "Classes and CSS Custom" in strCheck(
+    },
     html(
       head(
         script("some script")
@@ -345,8 +327,7 @@ class ExampleTests extends FreeSpec{
         "This is my first paragraph"
       ),
 
-
-      a(tabi)(
+      a(tabindex:=10)(
         p("Goooogle")
       ),
 
@@ -365,13 +346,13 @@ class ExampleTests extends FreeSpec{
   )
   "Force-Stringifying Attributes and Styles" in strCheck(
     div(
-      p(float~="left")(
+      p(float:="left")(
         "This is my first paragraph"
       ),
-      a(tabindex~="10")(
+      a(tabindex:="10")(
         p("Goooogle")
       ),
-      input(disabled~="true")
+      input(disabled:="true")
     ),
     """
     <div>
@@ -395,14 +376,13 @@ class ExampleTests extends FreeSpec{
         )
       )
 
-
     page(
       Seq(
         script("some script")
       ),
       Seq(
         p("This is the first ", b("image"), " displayed on the ", a("site")),
-        img(src~="www.myImage.com/image.jpg"),
+        img(src:="www.myImage.com/image.jpg"),
         p("blah blah blah i am text")
       )
     )
@@ -469,6 +449,40 @@ class ExampleTests extends FreeSpec{
   )
 
 
+  "Manual imports" in strCheck(
+    {
+      import scalatags.short._
+      div(
+        p(css.color:="red")("Red Text"),
+        img(attr.href:="www.imgur.com/picture.jpg")
+      )
+    },
+    {
+      import scalatags.{Attrs => attr, Styles => css, _}
+      import scalatags.Tags._
+      div(
+        p(css.color:="red")("Red Text"),
+        img(attr.href:="www.imgur.com/picture.jpg")
+      )
+    },
+    {
+      object custom extends Tags{
+        val attr = new Attrs {}
+        val css = new Styles {}
+      }
+      import custom._
+      div(
+        p(css.color:="red")("Red Text"),
+        img(attr.href:="www.imgur.com/picture.jpg")
+      )
+    },
+    """
+    <div>
+        <p style="color: red;">Red Text</p>
+        <img href="www.imgur.com/picture.jpg" />
+    </div>
+    """
+  )
 
   "Proper Escaping" in strCheck(
     {
@@ -532,8 +546,8 @@ class ExampleTests extends FreeSpec{
   )
   "Additional Imports" in strCheck(
     {
-      import Styles.pageBreakBefore
-      import Tags.address
+      import Styles2.pageBreakBefore
+      import Tags2.address
       import SvgTags.svg
       import SvgStyles.stroke
       div(
@@ -548,13 +562,13 @@ class ExampleTests extends FreeSpec{
             a long paragraph which should not be broken
         </p>
         <address>500 Memorial Drive, Cambridge MA</address>
-        <svg style="stroke: blue;" />
+        <svg style="stroke: blue;"></svg>
     </div>
     """
   )
   "Typesafe CSS" in strCheck(
     div(zIndex:=10),
-    """<div style="z-index: 10;" />"""
+    """<div style="z-index: 10;"></div>"""
   )
   "Custom attributes and styles" in strCheck(
     {
@@ -565,7 +579,7 @@ class ExampleTests extends FreeSpec{
         mozBorderRadius:="10px"
       )
     },
-    """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;" />"""
+    """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;"></div>"""
   )
 
   "Different ways of static typing" in strCheck(
@@ -583,13 +597,13 @@ class ExampleTests extends FreeSpec{
     ),
     """
     <div>
-      <div style="background-color: #ababab;" />
-      <div style="color: rgb(0, 255, 255);" />
-      <div style="color: red;" />
-      <div style="border-right-color: hsla(100, 0, 50, 0.5);" />
-      <div style="background-image: radial-gradient(#f00, #0f0 50%, #00f);" />
-      <div style="background-image: url(www.picture.com/my_picture);" />
-      <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);" />
+      <div style="background-color: #ababab;"></div>
+      <div style="color: rgb(0, 255, 255);"></div>
+      <div style="color: red;"></div>
+      <div style="border-right-color: hsla(100, 0, 50, 0.5);"></div>
+      <div style="background-image: radial-gradient(#f00, #0f0 50%, #00f);"></div>
+      <div style="background-image: url(www.picture.com/my_picture);"></div>
+      <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);"></div>
     </div>
     """
   )

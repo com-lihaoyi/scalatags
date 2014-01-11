@@ -75,7 +75,7 @@ trait Nested{
  *
  * @param tag The name of the tag
  */
-class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
+class HtmlTag(val tag: String = "", val void: Boolean = false, nested: Vector[Nested] = Vector()) extends Node{
 
   if (!Escaping.validTag(tag))
     throw new IllegalArgumentException(
@@ -103,6 +103,7 @@ class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
    * from `attrs`.
    */
   lazy val styles = attrs("style").split(";|:")
+                                  .iterator
                                   .map(_.trim)
                                   .filter(_ != "")
                                   .grouped(2)
@@ -119,7 +120,7 @@ class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
   ) = {
     val _children = mutable.Buffer.empty[Node]
     val _attrs = mutable.Map.empty[String, String]
-    for (n <- nested.reverseIterator){
+    for (n <- nested){
       n.build(_children, _attrs)
     }
 
@@ -131,13 +132,8 @@ class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
    * to the HtmlTag. Note that any these modifications are queued up and only
    * evaluated when (if!) the HtmlTag is rendered.
    */
-  def apply(xs: Nested*) = {
-    var newNested = nested
-    for (x <- xs){
-      newNested = x :: newNested
-    }
-    new HtmlTag(tag, newNested)
-  }
+  def apply(xs: Nested*) = new HtmlTag(tag, void, nested ++ xs)
+
 
   /**
    * Serialize this HtmlTag and all its children out to the given StringBuilder.
@@ -152,7 +148,7 @@ class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
       Escaping.escape(value, strb)
       strb ++= "\""
     }
-    if(children == Nil)
+    if(children == Nil && void)
       // No children - close tag
       strb ++= " />"
     else {
@@ -168,18 +164,17 @@ class HtmlTag(val tag: String = "", nested: List[Nested] = Nil) extends Node{
 /**
  * A key value pair representing the assignment of an attribute to a value.
  */
-case class AttrPair(attr: Attr[_], value: String) extends Nested{
+case class AttrPair(attr: Attr, value: String) extends Nested{
   def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
     attrs(attr.name) = value
   }
 }
 
 /**
- * Wraps up a HTML attribute in a statically-typed value with an associated
- * type; overloads the ~= operator to also accept values of that type to convert
- * to strings, allowing more concise and pseudo-typesafe use of that attribute.
+ * Wraps up a HTML attribute in an untyped value with an associated
+ * type; the := operator takes Strings.
  */
-class Attr[T](val name: String){
+class Attr(val name: String){
   if (!Escaping.validAttrName(name))
     throw new IllegalArgumentException(
       s"Illegal attribute name: $name is not a valid XML attribute name"
@@ -190,12 +185,27 @@ class Attr[T](val name: String){
    * Force-assigns a typed attribute to a string even if its type would not
    * normally allow it.
    */
-  def ~=(v: String) = AttrPair(this, v)
+  def :=(v: String) = AttrPair(this, v)
+
+}
+
+/**
+ * Wraps up a HTML attribute in a statically-typed value with an associated
+ * type; overloads the := operator to also accept values of that type to convert
+ * to strings, allowing more concise and pseudo-typesafe use of that attribute.
+ */
+class TypedAttr[T](name: String) extends Attr(name){
+  if (!Escaping.validAttrName(name))
+    throw new IllegalArgumentException(
+      s"Illegal attribute name: $name is not a valid XML attribute name"
+    )
+
+  override def toString = name
 
   /**
    * Assign an attribute to some value of the correct type.
    */
-  def :=(v: T) = AttrPair(this, v.toString)
+  def :=(v: T): AttrPair = AttrPair(this, v.toString)
 }
 
 /**
@@ -206,7 +216,7 @@ class Style(val jsName: String, val cssName: String) {
    * Force-assigns a typed style to a string even if its type would not normally
    * .allow it
    */
-  def ~=(value: String) = StylePair(this, value)
+  def :=(value: String) = StylePair(this, value)
   override def toString = cssName
 }
 

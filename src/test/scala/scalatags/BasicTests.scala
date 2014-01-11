@@ -1,20 +1,21 @@
 package scalatags
 
-import org.scalatest._
-import Util._
 
+import scalatags.all._
+import org.scalatest.FreeSpec
+import Util._
 class BasicTests extends FreeSpec{
 
 
   /**
    * Tests the usage of the pre-defined tags, as well as creating
-   * the tags on the fly from Symbols and Strings
+   * the tags on the fly from Strings
    */
   "basic tag creation" in {
-    assert(a.toString === "<a />")
-    assert(html.toString === "<html />")
-    assert("this_is_an_unusual_tag".tag.toString === "<this_is_an_unusual_tag />")
-    assert("this-is-a-string-with-dashes".tag.toString === "<this-is-a-string-with-dashes />")
+    assert(a.toString === "<a></a>")
+    assert(html.toString === "<html></html>")
+    assert("this_is_an_unusual_tag".tag.toString === "<this_is_an_unusual_tag></this_is_an_unusual_tag>")
+    assert("this-is-a-string-with-dashes".voidTag.toString === "<this-is-a-string-with-dashes />")
   }
 
   /**
@@ -36,11 +37,11 @@ class BasicTests extends FreeSpec{
     <html>
         <head>
             <script></script>
-            <string-tag />
+            <string-tag></string-tag>
         </head>
         <body>
             <div>
-                <p />
+                <p></p>
             </div>
         </body>
     </html>
@@ -51,9 +52,9 @@ class BasicTests extends FreeSpec{
   "css chaining" in strCheck(
     div(
       float.left,
-      color~="red"
+      color:="red"
     ),
-    """<div style="float: left; color: red;" />"""
+    """<div style="float: left; color: red;"></div>"""
   )
 
 
@@ -62,7 +63,7 @@ class BasicTests extends FreeSpec{
       id:="cow",
       `class`:="thing lol"
     ),
-    """<div class="thing lol" id="cow" />"""
+    """<div class="thing lol" id="cow"></div>"""
   )
 
 
@@ -120,7 +121,33 @@ class BasicTests extends FreeSpec{
     ),
     """<div><h1>Hello</h1>01234</div>"""
   )
-
-
-
+  "Perf" in {
+    // Status Quo: 1000000 in 11739ms
+    val start = System.currentTimeMillis()
+    var i = 0
+    val n = 1000000
+    while(i < n){
+      i += 1
+      val contentpara = "contentpara".cls
+      val first = "first".cls
+      html(
+        head(
+          script("some script")
+        ),
+        body(
+          h1(backgroundColor:="blue", color:="red")("This is my title"),
+          div(backgroundColor:="blue", color:="red")(
+            p(contentpara, first)(
+              "This is my first paragraph"
+            ),
+            a(opacity:=0.9)(
+              p("contentpara".cls)("Goooogle")
+            )
+          )
+        )
+      ).toString()
+    }
+    val end = System.currentTimeMillis()
+    println((end - start) + "\t" + (end - start) * 1.0 / n)
+  }
 }

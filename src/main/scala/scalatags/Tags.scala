@@ -10,14 +10,22 @@
  *
  * Everything else is under the MIT License
  * http://opensource.org/licenses/MIT
+ *
+ * according to the spec (http://www.w3.org/TR/html5/syntax.html#void-elements),
+ * tags that cannot have any contents can be self closing. This means:
+ *
+ * area, base, br, col, command, embed, hr, img, input,
+ * keygen, link, meta, param, source, track, wbr
+ *
+ * Other tags cannot, and must have a separate closing tag even when empty.
  */
 package scalatags
 
 /**
- * Contains HTML tags which are used less frequently. These are not imported by
- * default to avoid namespace pollution.
+ * Contains HTML tags which are used less frequently. These are generally
+ * imported individually as needed.
  */
-object Tags{
+object Tags2{
   // Document Metadata
   /**
    * Defines the title of the document, shown in a browser's title bar or on the
@@ -200,7 +208,7 @@ object Tags{
    *
    *  MDN
    */
-  val keygen = "keygen".tag
+  val keygen = "keygen".voidTag
   /**
    * The result of a calculation
    *
@@ -240,7 +248,7 @@ object Tags{
    *
    *  MDN
    */
-  val command = "command".tag
+  val command = "command".voidTag
   /**
    * A list of commands
    *
@@ -250,12 +258,16 @@ object Tags{
 }
 
 /**
- * Module containing static definitions for all the common HTML5 tags,
- * giving you nice autocomplete and error-checking by the compiler. Tags
- * which aren't on this list can be easily be created using Symbols, although
- * the syntax is slightly less nice (`"head".x` instead of just `head`).
+ * Module containing static definitions for common HTML5 tags.
  */
-private[scalatags] trait Tags{
+object Tags extends Tags
+
+/**
+ * Trait that contains the contents of the `Tags` object, so they can be mixed
+ * in to other objects if needed.
+ */
+trait Tags{
+
 
 
   // Root Element
@@ -281,19 +293,19 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val base = "base".tag
+  val base = "base".voidTag
   /**
    * Used to link JavaScript and external CSS with the current HTML document.
    *
    *  MDN
    */
-  val link = "link".tag
+  val link = "link".voidTag
   /**
    * Defines metadata that can't be defined using another HTML element.
    *
    *  MDN
    */
-  val meta = "meta".tag
+  val meta = "meta".voidTag
 
 
   // Scripting
@@ -380,7 +392,7 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val hr = "hr".tag
+  val hr = "hr".voidTag
   /**
    * Indicates that its content is preformatted and that this format must be
    * preserved.
@@ -539,14 +551,14 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val br = "br".tag
+  val br = "br".voidTag
   /**
    * Represents a line break opportunity , that is a suggested point for wrapping
    * text in order to improve readability of text split on several lines.
    *
    *  MDN
    */
-  val wbr = "wbr".tag
+  val wbr = "wbr".voidTag
 
   // Edits
   /**
@@ -568,7 +580,7 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val img = "img".tag
+  val img = "img".voidTag
   /**
    * Represents a nested browsing context , that is an embedded HTML document.
    *
@@ -581,7 +593,7 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val embed = "embed".tag
+  val embed = "embed".voidTag
   /**
    * Represents an external resource , which is treated as an image, an HTML
    * sub-document, or an external resource to be processed by a plug-in.
@@ -594,7 +606,7 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val param = "param".tag
+  val param = "param".voidTag
   /**
    * Represents a video , and its associated audio files and captions, with the
    * necessary interface to play it.
@@ -614,14 +626,14 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val source = "source".tag
+  val source = "source".voidTag
   /**
    * Allows authors to specify timed text track for media elements like video or
    * audio
    *
    *  MDN
    */
-  val track = "track".tag
+  val track = "track".voidTag
   /**
    * Represents a bitmap area that scripts can use to render graphics like graphs,
    * games or any visual images on the fly.
@@ -640,7 +652,7 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val area = "area".tag
+  val area = "area".voidTag
 
 
   // Tabular data
@@ -667,7 +679,7 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val col = "col".tag
+  val col = "col".voidTag
   /**
    * The table body.
    *
@@ -736,7 +748,7 @@ private[scalatags] trait Tags{
    *
    *  MDN
    */
-  val input = "input".tag
+  val input = "input".voidTag
   /**
    * A button
    *
