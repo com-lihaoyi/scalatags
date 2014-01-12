@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <script>console.log(1)</script>
+  </head>
+  <body>
+    <h1 style="color: red;">{{titleString}}</h1>
+    <div style="background-color: blue;">
+      <p class="{{contentpara}} {{first}}" title="this is paragraph 0">{{firstParaString}}</p>
+      <a href="www.google.com">
+        <p>Goooogle</p>
+      </a>
+      {{#paras}}
+        {{> src/test/resource/para}}
+      {{/paras}}
+    </div>
+  </body>
+</html>

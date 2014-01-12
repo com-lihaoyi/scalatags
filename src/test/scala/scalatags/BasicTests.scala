@@ -112,7 +112,7 @@ class BasicTests extends FreeSpec{
       float.left,
       height:=10.px
     )
-    assert(frag.styles == Seq("background-color" -> "red", "float" -> "left", "height" -> "10px"))
+    assert(frag.styles == Map("background-color" -> "red", "float" -> "left", "height" -> "10px"))
   }
   "Seq of strings" in strCheck(
     div(
@@ -121,33 +121,5 @@ class BasicTests extends FreeSpec{
     ),
     """<div><h1>Hello</h1>01234</div>"""
   )
-  "Perf" in {
-    // Status Quo: 1000000 in 11739ms
-    val start = System.currentTimeMillis()
-    var i = 0
-    val n = 1000000
-    while(i < n){
-      i += 1
-      val contentpara = "contentpara".cls
-      val first = "first".cls
-      html(
-        head(
-          script("some script")
-        ),
-        body(
-          h1(backgroundColor:="blue", color:="red")("This is my title"),
-          div(backgroundColor:="blue", color:="red")(
-            p(contentpara, first)(
-              "This is my first paragraph"
-            ),
-            a(opacity:=0.9)(
-              p("contentpara".cls)("Goooogle")
-            )
-          )
-        )
-      ).toString()
-    }
-    val end = System.currentTimeMillis()
-    println((end - start) + "\t" + (end - start) * 1.0 / n)
-  }
+
 }

@@ -427,13 +427,13 @@ div(
 )
 ```
 
-Or you can rely on a aggregator like `all` (which the rest of the examples use) or `short`:
+Or you can rely on a aggregator like `all` (which the rest of the examples use) or `short`. `short` imports `Attrs` and `Styles` as `*`, making them quick to access without cluttering the global namespace:
 
 ```scala
 import scalatags.short._
 div(
-  p(css.color:="red")("Red Text"),
-  img(attr.href:="www.imgur.com/picture.jpg")
+  p(*.color:="red")("Red Text"),
+  img(*.href:="www.imgur.com/picture.jpg")
 )
 ```
 
@@ -860,6 +860,7 @@ However, they still have their downsides:
 
 - Abstractions are less clunky to use than in old-school templates, e.g. `@component()` rather than `{{ component() }}`, but still not ideal.
 - The one-template-per-file rule is still there, making abstractions clunky to define.
+- They still require their own special build-system-integration, run-time compilation, caching, and other things, which a templating language really shouldn't need. [Scalate](http://scalate.fusesource.org/index.html), which has a runtime dependency on the entire Scala compiler, suffers from the same problem.
 - The syntax still poses a problem for editors; both HTML editors and C#/Scala editors won't want to work with these templates, so you still end up with sub-par support or waiting for plugins.
 - You still end up with weird [edge](http://stackoverflow.com/questions/13973009/complex-pattern-matching-on-templace-using-scala-play) [cases](http://stackoverflow.com/questions/12070625/compilation-error-of-play-framework-templates) due to the fact that you're squashing together two completely unrelated syntaxes.
 
@@ -911,6 +912,7 @@ And that's why I created Scalatags:
 - Syntax highlighting, error-highlighting, jump-to-definition, in-editor-documentation, and all the other nice IDE features out of the box. No more waiting for plugins!
 - Inbuilt and custom tags are uniformly just function calls (e.g. `div("hello world")`)
 - Custom components are trivial to create (`def component(x: Int, y: Int) = ...`) and trivial to use (`component(value1, value2)`) because they're just functions.
+- No dependencies! No need for SBT integration, filesystem loading, runtime compilation, caching, and all that jazz. You create a Scala object, call `.toString()`, and that's it!
 
 On top of fixing all the old problems, Scalatags targets some new ones:
 

@@ -1,0 +1,25 @@
+-@ val titleString: String
+-@ val contentpara: String
+-@ val first: String
+-@ val firstParaString: String
+-@ val paras: Seq[(Int, String)]
+
+html
+  head
+    script console.log(1)
+
+  body
+    h1(style="color: red;")
+      = titleString
+    div(style="background-color: blue;")
+      p(class="#{contentpara} #{first}" title="this is paragraph 0")
+        = firstParaString
+
+      a(href="www.google.com")
+        p Goooogle
+
+      - paras.foreach{ case (count, color) =>
+        - render("src/test/resource/para.jade", Map("count" -> count, "color" -> color))
+      - }
+
+

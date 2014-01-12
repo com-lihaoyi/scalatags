@@ -33,10 +33,10 @@ trait Node extends Nested{
   /**
    * Converts an ScalaTag fragment into an html string
    */
-  override def toString() = {
+  override def toString = {
     val strb = new StringBuilder
     writeTo(strb)
-    strb.toString
+    strb.toString()
   }
 
   /**
@@ -65,6 +65,12 @@ trait Nested{
   def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]): Unit
 }
 
+
+object HtmlTag{
+  def apply(tag: String, children: Seq[Node], attrs: SortedMap[String, String], void: Boolean = false) = {
+    new HtmlTag(tag, children, attrs, void)
+  }
+}
 /**
  * A single HTML tag.
  *
@@ -75,40 +81,44 @@ trait Nested{
  *
  * @param tag The name of the tag
  */
-class HtmlTag(val tag: String = "", val void: Boolean = false, nested: Vector[Nested] = Vector()) extends Node{
+class HtmlTag(val tag: String = "",
+              children0: Seq[Node],
+              attrs0: SortedMap[String, String],
+              val void: Boolean = false,
+              nested: List[Nested] = Nil) extends Node{
 
-  if (!Escaping.validTag(tag))
-    throw new IllegalArgumentException(
-      s"Illegal tag name: $tag is not a valid XML tag name"
-    )
   /**
    * The children of this HtmlTag.
    */
-  lazy val children = _children
+  def children = _children
+
   /**
    * The HTML attributes, as a map. This does not include the styles of classes
    * defined in the HtmlTag's `styles` or `classes` members, which will be
    * concatenated to any `styles` or `classes` in the `attrs` when the tag
    * is finally rendered to HTML.
    */
-  lazy val attrs = _attrs
+  def attrs = _attrs
 
   /**
    * Represents the list of CSS classes this HtmlTag contains; lazily derived
    * from `attrs`.
    */
   lazy val classes = attrs("class").split(" ").toSeq
+
   /**
    * Represents the list of CSS styles this HtmlTag contains; lazily derived
    * from `attrs`.
    */
-  lazy val styles = attrs("style").split(";|:")
-                                  .iterator
-                                  .map(_.trim)
-                                  .filter(_ != "")
-                                  .grouped(2)
-                                  .map(pair => pair(0) -> pair(1))
-                                  .toSeq
+  lazy val styles = {
+    SortedMap.empty[String, String] ++
+      attrs("style").split(";|:")
+        .iterator
+        .map(_.trim)
+        .filter(_ != "")
+        .grouped(2)
+        .map(pair => pair(0) -> pair(1))
+  }
 
   // Render all these things lazily using mutable state; the bulk of HtmlTags
   // ever created will never be rendered, and it is faster to quickly build up
@@ -116,11 +126,11 @@ class HtmlTag(val tag: String = "", val void: Boolean = false, nested: Vector[Ne
   // collections all the way.
   private[this] lazy val (
     _children: Seq[Node],
-    _attrs: Map[String, String]
+    _attrs: SortedMap[String, String]
   ) = {
-    val _children = mutable.Buffer.empty[Node]
+    val _children = children0.toBuffer
     val _attrs = mutable.Map.empty[String, String]
-    for (n <- nested){
+    for (n <- nested.reverseIterator){
       n.build(_children, _attrs)
     }
 
@@ -132,8 +142,13 @@ class HtmlTag(val tag: String = "", val void: Boolean = false, nested: Vector[Ne
    * to the HtmlTag. Note that any these modifications are queued up and only
    * evaluated when (if!) the HtmlTag is rendered.
    */
-  def apply(xs: Nested*) = new HtmlTag(tag, void, nested ++ xs)
-
+  def apply(xs: Nested*) = {
+    var newNested = nested
+    for (x <- xs){
+      newNested = x :: newNested
+    }
+    new HtmlTag(tag, children0, attrs0, void, newNested)
+  }
 
   /**
    * Serialize this HtmlTag and all its children out to the given StringBuilder.
@@ -148,13 +163,18 @@ class HtmlTag(val tag: String = "", val void: Boolean = false, nested: Vector[Ne
       Escaping.escape(value, strb)
       strb ++= "\""
     }
-    if(children == Nil && void)
+    if(children.isEmpty && void)
       // No children - close tag
       strb ++= " />"
     else {
       strb ++= ">"
       // Childrens
-      children.foreach(_.writeTo(strb))
+      var i = 0
+      val l = children.length
+      while(i < l){
+        children(i).writeTo(strb)
+        i += 1
+      }
       // Closing tag
       strb ++= "</" ++= tag ++= ">"
     }
@@ -195,11 +215,6 @@ class Attr(val name: String){
  * to strings, allowing more concise and pseudo-typesafe use of that attribute.
  */
 class TypedAttr[T](name: String) extends Attr(name){
-  if (!Escaping.validAttrName(name))
-    throw new IllegalArgumentException(
-      s"Illegal attribute name: $name is not a valid XML attribute name"
-    )
-
   override def toString = name
 
   /**

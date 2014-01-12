@@ -453,8 +453,8 @@ class ExampleTests extends FreeSpec{
     {
       import scalatags.short._
       div(
-        p(css.color:="red")("Red Text"),
-        img(attr.href:="www.imgur.com/picture.jpg")
+        p(*.color:="red")("Red Text"),
+        img(*.href:="www.imgur.com/picture.jpg")
       )
     },
     {

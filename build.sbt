@@ -7,7 +7,8 @@ version       := "0.2.0"
 scalaVersion  := "2.10.0"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
+  "org.scalatest" % "scalatest_2.10" % "2.0" % "test",
+  "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1" % "test"
 )
 
 publishMavenStyle := true
@@ -38,3 +39,13 @@ pomExtra := (
     </developer>
   </developers>
 )
+
+seq(Twirl.settings: _*)
+
+sourceDirectory in Twirl.twirlCompile <<= (sourceDirectory in Test) / "twirl"
+
+target in Twirl.twirlCompile <<= (sourceManaged in Test) / "generated-twirl-sources"
+
+(sourceGenerators in Compile) ~= {x => Nil}
+
+(sourceGenerators in Test) <+= Twirl.twirlCompile
