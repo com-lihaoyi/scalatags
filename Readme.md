@@ -1,7 +1,7 @@
 ScalaTags
 =========
 
-ScalaTags is a small, [fast](#Performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
+ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
 
 ```scala
 html(
@@ -40,7 +40,7 @@ And turns them into HTML like this:
 Getting Started
 ===============
 
-ScalaTags is hosted on [Maven Central](http://search.maven.org/#artifactdetails%7Ccom.scalatags%7Cscalatags_2.10%7C0.1.4%7Cjar); to get started, simply add the following to your `build.sbt`:
+ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cscalatags); to get started, simply add the following to your `build.sbt`:
 
 ```scala
 libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.0"
@@ -59,11 +59,13 @@ To use Scalatags with a ScalaJS project, check out this project Just put a sourc
 Why ScalaTags
 =============
 
-The core functionality of Scalatags is less than 500 lines of code, and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition [by a large margin](#Performance).
+The core functionality of Scalatags is less than [500 lines of code](src/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance).
 
 It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent them all yourself when you have someone else who has done it before you.
 
-Like Play!'s [Twirl templates](https://github.com/spray/twirl), and ASP.NET's [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), Scalatags takes the view that it is better to re-use the host language in your templates than try to invent your own mini-language. This lets you be immediately productive working with your HTML fragments, since you have the full power of Scala at your disposal and don't have to learn a special, ad-hoc mini-language. Unlike Twirl and Razor (and most other template engines avalailable) ScalaTags is an embedded DSL, not requiring any special parser or build step, and has no compile-time or run-time dependencies on the filesystem, caches, logging, or anything of that sort.
+Like Play!'s [Twirl templates](https://github.com/spray/twirl), and Razor, Scalatags takes the view that it is better to re-use the host language in your templates than try to invent your own mini-language. This lets you be immediately productive working with your HTML fragments, since you have the full power of Scala at your disposal and don't have to learn a special, ad-hoc mini-language.
+
+Unlike Twirl and Razor (and most other template engines avalailable) ScalaTags is an embedded DSL that sits inside your Scala code, rather than in separate template files. This means it does not require any special parser or build step, and has no compile-time or run-time dependencies on the filesystem, caches, logging, or anything of that sort.
 
 Since ScalaTags is pure Scala. This means that any IDE which understands Scala will understand ScalaTags. Not only do you get syntax highlighting, you also get code completion:
 
@@ -78,12 +80,6 @@ and in-editor documentation:
 ![Inline Documentation](docs/InlineDocs.png)
 
 And all the other good things (<em>jump to definition</em>, *extract method*, etc.) you're used to in a statically typed language. No more messing around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
-
-Although other templating systems also perform static validation, Scalatags is able to statically check the templates to a much greater degree than any external templating engine. For example, we can apply static constraints to a number of HTML attributes and CSS rules:
-
-![CSS Compilation Error](docs/TypesafeCSS.png)
-
-Making them fail to compile if you accidentally pass the wrong thing in.
 
 Take a look at the [prior work](#prior-work) section for a more detailed analysis of Scalatags in comparison to other popular libraries.
 
@@ -306,7 +302,7 @@ div(
 
 Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above. Attempts to pass in strings to `float:=`, `tabindex:=` or `disabled:=` result in compile errors.
 
-If you for some reason really need to pass in a special value for one of these attributes or styles (e.g. you have a Javascript library that parses these values and does some magic) you can either use the `.attr` and `.style` extensions shown earlier to create versions of `float`, `tabindex` or `disabled` which takes Strings, or you can use the `:=` operator to force assignment:
+Even for styles or attributes which take values other than strings (e.g. `tabindex`) the `:=` operator can still be used to force assignment:
 
 ```scala
 div(
@@ -331,59 +327,6 @@ Both of these print the same thing:
     <input disabled="true" />
 </div>
 ```
-
-In general, the `:=` operator should need need to be used very often, as only a conservative subset of attributes and styles provide non-string typechecking, those that take a well-defined set of values that falls nicely within some other data-type. Nonetheless, it is there as an escape hatch should you need it.
-
-More Attributes and Styles
-===============================================
-
-```scala
-div(
-  div(backgroundColor:=hex"ababab"),
-  div(color:=rgb(0, 255, 255)),
-  div(color.red),
-  div(borderRightColor:=hsla(100, 0, 50, 0.5)),
-  div(backgroundImage:=radialGradient(hex"f00", hex"0f0"~50.pct, hex"00f")),
-  div(backgroundImage:=url("www.picture.com/my_picture")),
-  div(backgroundImage:=(
-    radialGradient(45.px, 45.px, "ellipse farthest-corner", hex"f00", hex"0f0"~500.px, hex"00f"),
-    linearGradient("to top left", hex"f00", hex"0f0"~10.px, hex"00f")
-  ))
-)
-```
-
-Due to the irregular nature of CSS syntax, Scalatag's static bindings are not always
-uniform. The above snippet shows an spread of the static bindings Scalatags provides:
-
-- `hex"..."` to define colors
-- `color.red` syntax, similar to `float.left` used elsewhere in this document
-  to define bindings to enum values.
-- The `hsla`, `url` and other functions, which provide a concise and
-  typesafe wrappers for their respective CSS declarations
-
-In general, this is the range of techniques to try when you want to define a
-CSS rule and don't know how. Many of the more complex rules still take `String`s
-in their `:=` method, meaning they don't have any typesafe bindings written for
-them. Even for the rules which have a typesafe `:=`, if you find you need
-something not provided by the typesafe wrappers, you can always use `:=` to as
-an escape hatch to fall back to strings.
-
-The above snippet renders the following HTML:
-
-```html
-<div>
-    <div style="background-color: #ababab;" />
-    <div style="color: rgb(0, 255, 255);" />
-    <div style="color: red;" />
-    <div style="border-right-color: hsla(100, 0, 50, 0.5);" />
-    <div style="background-image: radial-gradient(#f00, #0f0 50%, #00f);" />
-    <div style="background-image: url(www.picture.com/my_picture);" />
-    <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);" />
-</div>
-```
-
-Currently only a subset of attributes and styles provide this kind of non-string typechecking; that number will increase as better ways are found of rigorously typing the CSS syntax.
-
 
 Managing Imports
 ================
@@ -414,7 +357,7 @@ The main objects which you can import things from are:
 You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
 
 - `all`: this imports the contents of `Tags`, `Attrs`, `Styles` and `DataConverters`
-- `short`: this imports the contents of `Tags` and `DataConverters`, but aliases `Attrs` as `a` and `Styles` as `s`
+- `short`: this imports the contents of `Tags` and `DataConverters`, but aliases `Attrs` and `Styles` as `*`
 
 Thus, you can choose exactly what you want to import, and how:
 
@@ -806,7 +749,7 @@ Most of the time, functions are sufficient to keep things DRY, if you for some r
 Performance
 ===========
 
-| Library          | Renders/60s |
+| Template Engine  | Renders     |
 | ---------------- | -----------:|
 | Scalatags        |   3292636   |
 | scala-xml        |   1812697   |
@@ -814,11 +757,11 @@ Performance
 | Scalate-Mustache |    255138   |
 | Scalate-Jade     |    200174   |
 
-These numbers are micro-benchmark results from rendering a simple Scalatags fragment (or equivalent in the other template engines) over and over for 60 seconds.
+These numbers are the number of times each template engine is able to render (to a String) a simple, dynamic HTML fragment in 60 seconds.
 
-The fragment (shown below) is designed to exercise a bunch of different functionality in each template engine: functions/partials, loops, value-interpolation, etc.. The templates were structured basically identically despite the difference in language used by the different engines. All templates were loaded and rendered once before the benchmarking begun, to allow for any file-operations/pre-compilation to happen.
+The fragment (shown below) is designed to exercise a bunch of different functionality in each template engine: functions/partials, loops, value-interpolation, etc.. The templates were structured identically despite the difference in language used by the different engines. All templates were loaded and rendered once before the benchmarking begun, to allow for any file-operations/pre-compilation to happen.
 
-I think the numbers more or less speak for themselves; Scalatags is almost twice as fast as splicing/serializing `scala-xml` literals, almost four times as fast as `Twirl`, the [play-framework template engine](http://www.playframework.com/documentation/2.2.x/ScalaTemplates) and 10-15 times as fast as the various [Scalate](http://scalate.fusesource.org/) alternatives. This is likely due to overhead from the somewhat bloated data structures used by `scala-xml` (which Twirl also uses) and the heavy-use of dictionaries used to implement the custom scoping in the Scalate templates. Although this is a microbenchmark, the conclusion is pretty clear: Scalatags is fast!
+The numbers speak for themselves; Scalatags is almost twice as fast as splicing/serializing `scala-xml` literals, almost four times as fast as [Twirl](http://www.playframework.com/documentation/2.2.x/ScalaTemplates), and 10-15 times as fast as the various [Scalate](http://scalate.fusesource.org/) alternatives. This is likely due to overhead from the somewhat bloated data structures used by `scala-xml` (which Twirl also uses) and the heavy-use of dictionaries used to implement the custom scoping in the Scalate templates. Although this is a microbenchmark, the conclusion is pretty clear: Scalatags is fast!
 
 This is the Scalatags fragment that was rendered:
 
@@ -884,7 +827,7 @@ Scalatags was made after experience with a broad range of HTML generation system
 Old-school Templates
 --------------------
 
-[Jinja2](http://jinja.pocoo.org/docs/) is the templating engine that comes bundled with [Flask](http://flask.pocoo.org/), and a similar (but somewhat weaker) system comes bundled with [Django](https://docs.djangoproject.com/en/dev/topics/templates/), and another system in a similar vein is [Ruby on Rail's ERB](http://guides.rubyonrails.org/layouts_and_rendering.html) rendering engine. This spread more-or-less represents the old-school way of rendering HTML, in that they:
+[Jinja2](http://jinja.pocoo.org/docs/) is the templating engine that comes bundled with [Flask](http://flask.pocoo.org/), a similar (but somewhat weaker) system comes bundled with [Django](https://docs.djangoproject.com/en/dev/topics/templates/), and another system in a similar vein is [Ruby on Rail's ERB](http://guides.rubyonrails.org/layouts_and_rendering.html) rendering engine. This spread more-or-less represents the old-school way of rendering HTML, in that they:
 
 - Are effectively string-based
 - Use special syntax for both interpolating variables as well as for basic control flow logic
@@ -974,8 +917,9 @@ On top of fixing all the old problems, Scalatags targets some new ones:
 
 - Typesafe-ish access to HTML tags, attributes and CSS classes and styles. No more weird bugs due to typos like `flaot: left` or `<dvi>`.
 - Cross compiles to run on both JVM and Javascript via [ScalaJS](https://github.com/scala-js/scala-js), which is a property few other engines (e.g. [Mustache](http://mustache.github.io/)) have.
+- [Blazing fast](#performance)
 
-Scalatags is still a work in progress, but I think I've hit most of the pain points I was feeling with the old systems, and hope to continually improve it over time. Pull requests welcome!
+Scalatags is still a work in progress, but I think I've hit most of the pain points I was feeling with the old systems, and hope to continually improve it over time. Pull requests are welcome!
 
 License
 =======
