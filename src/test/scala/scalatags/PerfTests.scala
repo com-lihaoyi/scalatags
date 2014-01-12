@@ -44,7 +44,7 @@ class PerfTests extends FreeSpec{
     def test(f: () => String, name: String) = {
       val start = System.currentTimeMillis()
       var i = 0
-      val d = 5000
+      val d = 10000
 
       while(System.currentTimeMillis() - start < d){
         i += 1

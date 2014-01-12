@@ -104,13 +104,13 @@ class HtmlTag(val tag: String = "",
    * Represents the list of CSS classes this HtmlTag contains; lazily derived
    * from `attrs`.
    */
-  lazy val classes = attrs("class").split(" ").toSeq
+  def classes = attrs("class").split(" ").toSeq
 
   /**
    * Represents the list of CSS styles this HtmlTag contains; lazily derived
    * from `attrs`.
    */
-  lazy val styles = {
+  def styles = {
     SortedMap.empty[String, String] ++
       attrs("style").split(";|:")
         .iterator
@@ -143,9 +143,12 @@ class HtmlTag(val tag: String = "",
    * evaluated when (if!) the HtmlTag is rendered.
    */
   def apply(xs: Nested*) = {
+
     var newNested = nested
-    for (x <- xs){
-      newNested = x :: newNested
+    var i = 0
+    while(i < xs.length){
+      newNested = xs(i) :: newNested
+      i += 1
     }
     new HtmlTag(tag, children0, attrs0, void, newNested)
   }
