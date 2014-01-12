@@ -32,9 +32,9 @@ class PerfTests extends FreeSpec{
   """
 
   "Correctness" in {
-    println("Correctness")
     Util.strCheck(
       Scalatags(),
+      ScalaXML(),
       Mustache(),
       Jade(),
       Twirl(),
@@ -42,8 +42,6 @@ class PerfTests extends FreeSpec{
     )
   }
   "Perf" in {
-    println("Perf")
-    // Status Quo: 1000000 in 11739ms
 
     def test(f: () => String, name: String) = {
       val start = System.currentTimeMillis()
@@ -55,12 +53,14 @@ class PerfTests extends FreeSpec{
         f()
       }
 
-      println(name + "\t" + i + " in " + d)
+      println(name.padTo(20, ' ') + i + " in " + d)
     }
     test(Scalatags, "Scalatags")
+    test(ScalaXML, "ScalaXML")
+    test(Twirl, "Twirl")
     test(Mustache, "Mustache")
     test(Jade, "Jade")
-    test(Twirl, "Twirl")
+
   }
 }
 case object Scalatags extends (() => String){
@@ -147,4 +147,34 @@ case object Twirl extends (() => String){
       )
     ).toString
   }
+}
+
+case object ScalaXML extends (() => String){
+  val contentpara = "contentpara"
+  val first = "first"
+
+  def para(i: Int) = {
+    val color = if (i % 2 == 0) "red" else "green"
+    <p class={contentpara}
+       style={s"color: $color;"}
+       title={s"this is paragraph $i"}>Paragraph {i}</p>
+  }
+  def apply() = {
+
+    <html>
+      <head>
+        <script>console.log(1)</script>
+      </head>
+      <body>
+        <h1 style="color: red;">{Scalatags.titleString}</h1>
+        <div style="background-color: blue;">
+          <p class={contentpara + " " + first} title="this is paragraph 0">{Scalatags.firstParaString}</p>
+          <a href="www.google.com">
+            <p>Goooogle</p>
+          </a>
+          {0 until 5 map para}
+        </div>
+      </body>
+    </html>
+  }.toString
 }
