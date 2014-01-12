@@ -56,10 +56,10 @@ class PerfTests extends FreeSpec{
       println(name.padTo(20, ' ') + i + " in " + d)
     }
     test(Scalatags, "Scalatags")
-    test(ScalaXML, "ScalaXML")
-    test(Twirl, "Twirl")
-    test(Mustache, "Mustache")
-    test(Jade, "Jade")
+//    test(ScalaXML, "ScalaXML")
+//    test(Twirl, "Twirl")
+//    test(Mustache, "Mustache")
+//    test(Jade, "Jade")
 
   }
 }

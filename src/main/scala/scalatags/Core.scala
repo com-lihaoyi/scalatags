@@ -71,11 +71,6 @@ trait Nested{
 }
 
 
-//object HtmlTag{
-//  def apply(tag: String, children: Seq[Node], attrs: SortedMap[String, String], void: Boolean = false) = {
-//    new HtmlTag(tag, children, attrs, void)
-//  }
-//}
 /**
  * A single HTML tag.
  *
@@ -85,6 +80,9 @@ trait Nested{
  * outside.
  *
  * @param tag The name of the tag
+ * @param children Child nodes
+ * @param attrs A sorted map of attributes
+ * @param void Whether or not the tag can be self-closing
  */
 case class HtmlTag(tag: String = "",
                    children: Seq[Node],
