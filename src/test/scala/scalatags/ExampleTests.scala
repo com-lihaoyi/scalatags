@@ -407,29 +407,7 @@ class ExampleTests extends FreeSpec{
 
     "Inheritence" in strCheck(
       {
-        class Parent{
-          def render = html(
-            headFrag,
-            bodyFrag
 
-          )
-          def headFrag = head(
-            script("some script")
-          )
-          def bodyFrag = body(
-            h1("This is my title"),
-            div(
-              p("This is my first paragraph"),
-              p("This is my second paragraph")
-            )
-          )
-        }
-
-        object Child extends Parent{
-          override def headFrag = head(
-            script("some other script")
-          )
-        }
 
         Child.render
       },
@@ -467,10 +445,7 @@ class ExampleTests extends FreeSpec{
         )
       },
       {
-        object custom extends Tags{
-          val attr = new Attrs {}
-          val css = new Styles {}
-        }
+
         import custom._
         div(
           p(css.color:="red")("Red Text"),
@@ -609,4 +584,35 @@ class ExampleTests extends FreeSpec{
       """
     )
   }
+}
+
+// These guys are currently placed at the top level because
+// ScalaJS does not support objects and classes nested within
+// closures
+class Parent{
+  def render = html(
+    headFrag,
+    bodyFrag
+
+  )
+  def headFrag = head(
+    script("some script")
+  )
+  def bodyFrag = body(
+    h1("This is my title"),
+    div(
+      p("This is my first paragraph"),
+      p("This is my second paragraph")
+    )
+  )
+}
+
+object Child extends Parent{
+  override def headFrag = head(
+    script("some other script")
+  )
+}
+object custom extends Tags{
+  val attr = new Attrs {}
+  val css = new Styles {}
 }

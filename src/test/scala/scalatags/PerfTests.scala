@@ -5,32 +5,31 @@ import org.scalatest.FreeSpec
 trait PerfTests extends FreeSpec{
 
   def samples: Seq[(() => String, String)]
+  "perf" - {
+    "Correctness" in {
+      Util.strCheck(
 
-  "Correctness" in {
-    Util.strCheck(
+        (samples.map(_._1()) :+ PerfTests.expected):_*
+      )
+    }
+    "Perf" in {
 
-      (samples.map(_._1()) :+ PerfTests.expected):_*
-    )
-  }
-  "Perf" in {
+      def test(f: () => String, name: String) = {
+        val start = System.currentTimeMillis()
+        var i = 0
+        val d = 60000
 
-    def test(f: () => String, name: String) = {
-      val start = System.currentTimeMillis()
-      var i = 0
-      val d = 3
+        while(System.currentTimeMillis() - start < d){
+          i += 1
+          f()
+        }
 
-      while(System.currentTimeMillis() - start < d){
-        i += 1
-        f()
+        println(name.padTo(20, ' ') + i + " in " + d)
       }
-
-      println(name.padTo(20, ' ') + i + " in " + d)
+      for ((sample, name) <- samples){
+        test(sample, name)
+      }
     }
-    for ((sample, name) <- samples){
-      test(sample, name)
-    }
-
-
   }
 }
 object PerfTests{
@@ -91,4 +90,35 @@ case object Scalatags extends (() => String){
         )
       )
     ).toString()
+}
+
+
+case object ScalaXML extends (() => String){
+  val contentpara = "contentpara"
+  val first = "first"
+
+  def para(i: Int) = {
+    val color = if (i % 2 == 0) "red" else "green"
+    <p class={contentpara}
+       style={s"color: $color;"}
+       title={s"this is paragraph $i"}>Paragraph {i}</p>
+  }
+  def apply() = {
+
+    <html>
+      <head>
+        <script>console.log(1)</script>
+      </head>
+      <body>
+        <h1 style="color: red;">{Scalatags.titleString}</h1>
+        <div style="background-color: blue;">
+          <p class={contentpara + " " + first} title="this is paragraph 0">{Scalatags.firstParaString}</p>
+          <a href="www.google.com">
+            <p>Goooogle</p>
+          </a>
+          {0 until 5 map para}
+        </div>
+      </body>
+    </html>
+  }.toString
 }

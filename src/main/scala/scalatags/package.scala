@@ -110,6 +110,7 @@ package object scalatags {
   }
   private[scalatags] def camelCase(dashedString: String) = {
     val first :: rest = dashedString.split("-").toList
-    (first :: rest.map(s => s(0).toUpper + s.drop(1))).mkString
+
+    (first :: rest.map(s => s(0).toUpper.toString + s.drop(1))).mkString
   }
 }

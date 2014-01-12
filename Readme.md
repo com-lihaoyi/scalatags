@@ -751,11 +751,13 @@ Performance
 
 | Template Engine  | Renders     |
 | ---------------- | -----------:|
-| Scalatags        |   3292636   |
-| scala-xml        |   1812697   |
-| Twirl            |    927939   |
-| Scalate-Mustache |    255138   |
-| Scalate-Jade     |    200174   |
+| Scalatags        |   7436041   |
+| scala-xml        |   3794707   |
+| Twirl            |   1902274   |
+| Scalate-Mustache |    500975   |
+| Scalate-Jade     |    396224   |
+| Scalatags-Rhino  |     14505   |
+| scala-xml-Rhino  |      6783   |
 
 These numbers are the number of times each template engine is able to render (to a String) a simple, dynamic HTML fragment in 60 seconds.
 
