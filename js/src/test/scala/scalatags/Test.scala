@@ -1,35 +1,16 @@
-package example
-package test
+package scalatags
 
-import scala.scalajs.js
-import js.Dynamic.{ global => g }
-import scala.scalajs.test.JasmineTest
-import scalatags.HtmlTag
-
-import scalatags.HtmlTag
+import org.scalatest.FreeSpec
 import scalatags.all._
-import scalatags.HtmlTag
 import scalatags.Styles.{float, color}
-
-
-object Test extends JasmineTest {
-  def clean(s: String) = "\\n\\s*".r.replaceAllIn(s, "").trim()
-  def strCheck(x: Any*) = {
-    for (Seq(a, b) <- x.grouped(2)) {
-      //      println(clean(a.toString()))
-      //      println(clean(b.toString()))
-      assert(
-        clean(a.toString()) == clean(b.toString())
-      )
-    }
-  }
+import Util.strCheck
+object BasicTestsJs extends BasicTests
+object ExampleTestsJs extends ExampleTests
+/*
+object Test extends FreeSpec {
   import scalatags._
-  implicit class SuperString(s: String){
-    def in(thunk: => Unit) = {
-      it(s)(thunk)
-    }
-  }
-  describe("Scalatags") {
+
+  "Scalatags" - {
     "Splash example" in strCheck(
       html(
         head(
@@ -630,4 +611,4 @@ object Test extends JasmineTest {
       """
     )
   }
-}
+}*/

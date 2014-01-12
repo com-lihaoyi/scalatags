@@ -1,7 +1,10 @@
-out/*
-target/*
-project/target/*
-project/project/*
+
+js/target/*
+jvm/target/*
+js/project/target/*
+js/project/project/*
+jvm/project/target/*
+jvm/project/project/*
 .idea/*
 .idea_modules/*
 *.iml
