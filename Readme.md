@@ -759,7 +759,7 @@ Performance
 
 These numbers are the number of times each template engine is able to render (to a String) a simple, dynamic HTML fragment in 60 seconds.
 
-The fragment (shown below) is designed to exercise a bunch of different functionality in each template engine: functions/partials, loops, value-interpolation, etc.. The templates were structured identically despite the difference in language used by the different engines. All templates were loaded and rendered once before the benchmarking begun, to allow for any file-operations/pre-compilation to happen.
+The fragment (shown below) is designed to exercise a bunch of different functionality in each template engine: functions/partials, loops, value-interpolation, etc.. The templates were structured identically despite the different languages used by the various engines. All templates were loaded and rendered once before the benchmarking begun, to allow for any file-operations/pre-compilation to happen.
 
 The numbers speak for themselves; Scalatags is almost twice as fast as splicing/serializing `scala-xml` literals, almost four times as fast as [Twirl](http://www.playframework.com/documentation/2.2.x/ScalaTemplates), and 10-15 times as fast as the various [Scalate](http://scalate.fusesource.org/) alternatives. This is likely due to overhead from the somewhat bloated data structures used by `scala-xml` (which Twirl also uses) and the heavy-use of dictionaries used to implement the custom scoping in the Scalate templates. Although this is a microbenchmark, the conclusion is pretty clear: Scalatags is fast!
 
@@ -806,18 +806,22 @@ The rest of the code involved in this micro-benchmark can be found in [PerfTests
 Internals
 =========
 
-The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](), with most of the implicit extensions and conversions living in [package.scala]().
+The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](src/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](src/main/scala/scalatags/package.scala).
 
-The rough architecture is as follows:
+The primary data structure, the `HtmlNode`, is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of `Nested` objects, which are really objects with a single `transform: HtmlNode => HtmlNode` method. These transforms are applied to the `HtmlNode` sequentially, returning a new HtmlNode at the end of the process.
 
-- Every node is effectively-immutable, and contains a list of `Nested` objects within it. Calling the node's apply method (e.g. `div(..., ...)`) creates a new node with the new `Nested` objects appended.
-- A `Nested` can be a child-node, a attribute binding, a style binding, a css class, a `String`, or something that you define yourself.
-- When a node is rendered, the list of `Nested` objects is traversed and used to populate a `children` list and `attrs` map, which are then used to render the HTML string. Each `Nested` has a `build` method that it uses to populate those data structures during rendering time. This also happens lazily when either `children` or `attrs` is called directly.
-- After rendering, `children` and `attrs` are cached and the node remains effectively immutable after.
+The current selection of `Nested` (or implicitly convertable) types include
 
-The goal of this is to avoid the performance penalty of building the data structure completely immutably, while also avoiding the correctness problems when the mutability is externally visible. By lazily deferring the actual construction until the value is needed, and then using mutation to speed things up, Scalatags optimizes for the most common use case where a tag is only rendered once, after it has finished construction, while still preserving the illusion of immutability to any external observers.
+- `HtmlNode`s and `String`s: appends itself to the parent's `children` list.
+- `AttrPair`s: sets a key in the parent's `attrs` list.
+- `StylePair`s: appends the inline `style: value;` to the parent's `style` attribute.
 
-By writing custom `Nested` objects with your own `build` method, you can create "tags" that when placed into the contents of a tag, manipulates the `children` and `attrs` structures in interesting ways. Possible uses include validating that `attrs` only contains valid values for that element, or binding a [reactive variable](https://github.com/lihaoyi/scala.rx) to an attribute with enough scaffolding to propagate changes to the attribute after the page has rendered.
+Although these are the `Nested`s which are provided, it is possible to come up with your own custom `Nested`s which do a variety of different things to the `HtmlNode`. All it has to do is provide a `transform: HtmlNode => HtmlNode` method, and it can do whatever it wants to the `HtmlNode` being transformed, including:
+
+- Adding multiple attributes at once
+- Adding both attributes and children at once
+- Modifying existing attributes
+- Modifying or filtering the list of children
 
 Prior Work
 ==========
