@@ -29,7 +29,7 @@ private[scalatags] trait Baseline{ self: TypedStyle[String] =>
   val mathematical = this := "mathematical"
 }
 
-private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends Style(jsName, cssName){
+private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName){
   /**
    * This value determines the "insideness" of a point in the shape by drawing
    * a ray from that point to infinity in any direction and then examining the
@@ -246,7 +246,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object strokeLinejoin extends Style("strokeLinejoin", "stroke-linejoin"){
+  object strokeLinejoin extends UntypedStyle("strokeLinejoin", "stroke-linejoin"){
     val miter = this -> "miter"
     val round = this -> "round"
     val bevel = this -> "bevel"
@@ -303,7 +303,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object strokeLinecap extends Style("strokeLinecap", "stroke-linecap"){
+  object strokeLinecap extends UntypedStyle("strokeLinecap", "stroke-linecap"){
     val butt = this -> "butt"
     val round = this -> "round"
     val square = this -> "square"
@@ -370,7 +370,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object colorInterpolationFilters extends Style("colorInterpolationFilters", "color-interpolation-filters"){
+  object colorInterpolationFilters extends UntypedStyle("colorInterpolationFilters", "color-interpolation-filters"){
     /**
      * Indicates that the user agent can choose either the sRGB or linearRGB
      * spaces for color interpolation. This option indicates that the author

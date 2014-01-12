@@ -1,10 +1,11 @@
 package scalatags
 import scala.collection.{SortedMap, mutable}
+import scala.collection.immutable.Queue
 
 /**
  * Represents a single CSS class.
  */
-class Cls(val name: String) extends Nested{
+case class Cls(name: String) extends Nested{
   def transform(tag: HtmlTag) = {
     tag.copy(attrs =
       tag.attrs.updated(
@@ -18,17 +19,15 @@ class Cls(val name: String) extends Nested{
 /**
  * A Node which contains a String.
  */
-class StringNode(val v: String) extends Node{
+case class StringNode(v: String) extends Node{
   def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
-  def children = Nil
 }
 
 /**
  * A Node which contains a String which will not be escaped.
  */
-class RawNode(val v: String) extends Node{
+case class RawNode(v: String) extends Node{
   def writeTo(strb: StringBuilder): Unit = strb ++= v
-  def children = Nil
 }
 
 /**
@@ -51,13 +50,8 @@ trait Node extends Nested{
    */
   def writeTo(strb: StringBuilder): Unit
 
-  /**
-   * The children of a ScalaTag node
-   */
-  def children: Seq[Node]
-
   def transform(tag: HtmlTag) = {
-    tag.copy(children = tag.children :+ this)
+    tag.copy(children = this :: tag.children)
   }
 }
 /**
@@ -67,6 +61,12 @@ trait Node extends Nested{
  * list.
  */
 trait Nested{
+  /**
+   * Transforms the tag and returns a new one.
+   *
+   * Can't be `apply`, because some `Nested`s (e.g. `HtmlTag`) already have an
+   * `apply` method, and the overloading becomes ambiguous.
+   */
   def transform(tag: HtmlTag): HtmlTag
 }
 
@@ -74,18 +74,13 @@ trait Nested{
 /**
  * A single HTML tag.
  *
- * Note that the various properties of interest (e.g. children, attrs,
- * classes, styles) are all computed mutably/lazily in order to speed up the
- * serialization of the node while still keeping it immutable from the
- * outside.
- *
  * @param tag The name of the tag
  * @param children Child nodes
  * @param attrs A sorted map of attributes
  * @param void Whether or not the tag can be self-closing
  */
 case class HtmlTag(tag: String = "",
-                   children: Seq[Node],
+                   children: List[Node],
                    attrs: SortedMap[String, String],
                    void: Boolean = false) extends Node{
 
@@ -93,13 +88,13 @@ case class HtmlTag(tag: String = "",
    * Represents the list of CSS classes this HtmlTag contains; lazily derived
    * from `attrs`.
    */
-  def classes = attrs("class").split(" ").toSeq
+  lazy val classes = attrs("class").split(" ").toSeq
 
   /**
    * Represents the list of CSS styles this HtmlTag contains; lazily derived
    * from `attrs`.
    */
-  def styles = {
+  lazy val styles = {
     SortedMap.empty[String, String] ++
       attrs("style").split(";|:")
         .iterator
@@ -144,12 +139,13 @@ case class HtmlTag(tag: String = "",
     else {
       strb ++= ">"
       // Childrens
-      var i = 0
-      val l = children.length
-      while(i < l){
-        children(i).writeTo(strb)
-        i += 1
+      var x = children.reverse
+      while(!x.isEmpty){
+        val child :: newX = x
+        x = newX
+        child.writeTo(strb)
       }
+
       // Closing tag
       strb ++= "</" ++= tag ++= ">"
     }
@@ -169,13 +165,12 @@ case class AttrPair(attr: Attr, value: String) extends Nested{
  * Wraps up a HTML attribute in an untyped value with an associated
  * type; the := operator takes Strings.
  */
-class Attr(val name: String){
+abstract class Attr{
+  def name: String
   if (!Escaping.validAttrName(name))
     throw new IllegalArgumentException(
       s"Illegal attribute name: $name is not a valid XML attribute name"
     )
-
-  override def toString = name
   /**
    * Force-assigns a typed attribute to a string even if its type would not
    * normally allow it.
@@ -183,15 +178,13 @@ class Attr(val name: String){
   def :=(v: String) = AttrPair(this, v)
 
 }
-
+case class UntypedAttr(name: String) extends Attr
 /**
  * Wraps up a HTML attribute in a statically-typed value with an associated
  * type; overloads the := operator to also accept values of that type to convert
  * to strings, allowing more concise and pseudo-typesafe use of that attribute.
  */
-class TypedAttr[T](name: String) extends Attr(name){
-  override def toString = name
-
+case class TypedAttr[T](name: String) extends Attr{
   /**
    * Assign an attribute to some value of the correct type.
    */
@@ -201,15 +194,23 @@ class TypedAttr[T](name: String) extends Attr(name){
 /**
  * A Style that only has a fixed set of possible values, provided by its members.
  */
-class Style(val jsName: String, val cssName: String) {
+abstract class Style{
+  /**
+   * The name of this style from Javascript, normally camel-case
+   */
+  def jsName: String
+  /**
+   * The name of this style in CSS, normally dash-separated
+   */
+  def cssName: String
   /**
    * Force-assigns a typed style to a string even if its type would not normally
    * .allow it
    */
   def :=(value: String) = StylePair(this, value)
-  override def toString = cssName
-}
 
+}
+case class UntypedStyle(jsName: String, cssName: String) extends Style
 /**
  * A key value pair representing the assignment of a style to a value.
  */
@@ -229,7 +230,7 @@ case class StylePair(style: Style, value: String) extends Nested{
  * operator to also accept values of that type to convert to strings, allowing
  * more concise and pseudo-typesafe use of that style.
  */
-class TypedStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+case class TypedStyle[T](jsName: String, cssName: String) extends Style{
   /**
    * Assign this style to some value of the correct type.
    */

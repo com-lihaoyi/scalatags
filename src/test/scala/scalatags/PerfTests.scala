@@ -46,7 +46,7 @@ class PerfTests extends FreeSpec{
     def test(f: () => String, name: String) = {
       val start = System.currentTimeMillis()
       var i = 0
-      val d = 10000
+      val d = 30000
 
       while(System.currentTimeMillis() - start < d){
         i += 1
@@ -56,10 +56,10 @@ class PerfTests extends FreeSpec{
       println(name.padTo(20, ' ') + i + " in " + d)
     }
     test(Scalatags, "Scalatags")
-//    test(ScalaXML, "ScalaXML")
-//    test(Twirl, "Twirl")
-//    test(Mustache, "Mustache")
-//    test(Jade, "Jade")
+    test(ScalaXML, "ScalaXML")
+    test(Twirl, "Twirl")
+    test(Mustache, "Mustache")
+    test(Jade, "Jade")
 
   }
 }
@@ -74,27 +74,28 @@ case object Scalatags extends (() => String){
   )
   val titleString = "This is my title"
   val firstParaString = "This is my first paragraph"
-  def apply() = html(
-    head(
-      script("console.log(1)")
-    ),
-    body(
-      h1(color:="red")(titleString),
-      div(backgroundColor:="blue")(
-        para(0)(
-          first,
-          firstParaString
-        ),
-        a(href:="www.google.com")(
-          p("Goooogle")
-        ),
-        for(i <- 0 until 5) yield para(i)(
-          s"Paragraph $i",
-          color:=(if (i % 2 == 0) "red" else "green")
+  def apply() =
+    html(
+      head(
+        script("console.log(1)")
+      ),
+      body(
+        h1(color:="red")(titleString),
+        div(backgroundColor:="blue")(
+          para(0)(
+            first,
+            firstParaString
+          ),
+          a(href:="www.google.com")(
+            p("Goooogle")
+          ),
+          for(i <- 0 until 5) yield para(i)(
+            s"Paragraph $i",
+            color:=(if (i % 2 == 0) "red" else "green")
+          )
         )
       )
-    )
-  ).toString()
+    ).toString()
 }
 case object Jade extends (() => String){
   val engine = new TemplateEngine

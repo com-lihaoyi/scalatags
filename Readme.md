@@ -1,7 +1,7 @@
 ScalaTags
 =========
 
-ScalaTags is a small XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
+ScalaTags is a small, [fast](#Performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
 
 ```scala
 html(
@@ -59,11 +59,11 @@ To use Scalatags with a ScalaJS project, check out this project Just put a sourc
 Why ScalaTags
 =============
 
-The core functionality of Scalatags is less than 500 lines of code, and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx).
+The core functionality of Scalatags is less than 500 lines of code, and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition [by a large margin](#Performance).
 
 It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent them all yourself when you have someone else who has done it before you.
 
-ScalaTags is inspired by the Play! Framework's [Twirl templates](https://github.com/spray/twirl), and ASP.NET's [Razor templates](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx). Like those, it takes the view that it is better to re-use the host language in your templates, rather than try to invent your own mini-language. Unlike Twirl and Razor, ScalaTags is an embedded DSL, not requiring any special parser or build step.
+Like Play!'s [Twirl templates](https://github.com/spray/twirl), and ASP.NET's [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), Scalatags takes the view that it is better to re-use the host language in your templates than try to invent your own mini-language. This lets you be immediately productive working with your HTML fragments, since you have the full power of Scala at your disposal and don't have to learn a special, ad-hoc mini-language. Unlike Twirl and Razor (and most other template engines avalailable) ScalaTags is an embedded DSL, not requiring any special parser or build step, and has no compile-time or run-time dependencies on the filesystem, caches, logging, or anything of that sort.
 
 Since ScalaTags is pure Scala. This means that any IDE which understands Scala will understand ScalaTags. Not only do you get syntax highlighting, you also get code completion:
 
@@ -802,6 +802,62 @@ Most of the time, functions are sufficient to keep things DRY, if you for some r
     </body>
 </html>
 ```
+
+Performance
+===========
+
+| Library          | Renders/60s |
+| ---------------- | -----------:|
+| Scalatags        |   3292636   |
+| scala-xml        |   1812697   |
+| Twirl            |    927939   |
+| Scalate-Mustache |    255138   |
+| Scalate-Jade     |    200174   |
+
+These numbers are micro-benchmark results from rendering a simple Scalatags fragment (or equivalent in the other template engines) over and over for 60 seconds.
+
+The fragment (shown below) is designed to exercise a bunch of different functionality in each template engine: functions/partials, loops, value-interpolation, etc.. The templates were structured basically identically despite the difference in language used by the different engines. All templates were loaded and rendered once before the benchmarking begun, to allow for any file-operations/pre-compilation to happen.
+
+I think the numbers more or less speak for themselves; Scalatags is almost twice as fast as splicing/serializing `scala-xml` literals, almost four times as fast as `Twirl`, the [play-framework template engine](http://www.playframework.com/documentation/2.2.x/ScalaTemplates) and 10-15 times as fast as the various [Scalate](http://scalate.fusesource.org/) alternatives. This is likely due to overhead from the somewhat bloated data structures used by `scala-xml` (which Twirl also uses) and the heavy-use of dictionaries used to implement the custom scoping in the Scalate templates. Although this is a microbenchmark, the conclusion is pretty clear: Scalatags is fast!
+
+This is the Scalatags fragment that was rendered:
+
+```scala
+val contentpara = "contentpara".cls
+val first = "first".cls
+
+def para(n: Int) = p(
+  contentpara,
+  title:=s"this is paragraph $n"
+)
+
+val titleString = "This is my title"
+val firstParaString = "This is my first paragraph"
+
+html(
+  head(
+    script("console.log(1)")
+  ),
+  body(
+    h1(color:="red")(titleString),
+    div(backgroundColor:="blue")(
+      para(0)(
+        first,
+        firstParaString
+      ),
+      a(href:="www.google.com")(
+        p("Goooogle")
+      ),
+      for(i <- 0 until 5) yield para(i)(
+        s"Paragraph $i",
+        color:=(if (i % 2 == 0) "red" else "green")
+      )
+    )
+  )
+).toString()
+```
+
+The rest of the code involved in this micro-benchmark can be found in [PerfTests.scala](src/test/scala/scalatags/PerfTests.scala)
 
 
 Internals

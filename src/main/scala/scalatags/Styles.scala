@@ -36,7 +36,7 @@ private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extend
 }
 
 
-private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName) {
   /**
    * Displays a series of rounded dots. The spacing of the dots are not
    * defined by the specification and are implementation-specific. The radius
@@ -122,7 +122,7 @@ private[scalatags] class BorderStyle(jsName: String, cssName: String) extends Ou
 
 }
 
-private[scalatags] class Overflow(jsName: String, cssName: String) extends Style(jsName, cssName){
+private[scalatags] class Overflow(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName){
   /**
    * Default value. Content is not clipped, it may be rendered outside the
    * content box.
@@ -154,7 +154,7 @@ private[scalatags] class Overflow(jsName: String, cssName: String) extends Style
   val auto = this := "auto"
 }
 
-private[scalatags] class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName){
+private[scalatags] class PageBreak(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName){
   /**
    * Initial value. Automatic page breaks (neither forced nor forbidden).
    *
@@ -190,7 +190,7 @@ private[scalatags] class PageBreak(jsName: String, cssName: String) extends Styl
 }
 
 
-private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName){
+private[scalatags] class BorderRadius(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName){
   def ~(r1: String, r2: String = "") = this := s"$r1 $r2"
 }
 
@@ -210,7 +210,7 @@ private[scalatags] class BorderWidth(jsName: String, cssName: String)  extends T
   val thick = this := "thick"
 }
 
-private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName){
+private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName){
   def ~(times: Time*) = this := times.mkString(", ")
 }
 
@@ -338,7 +338,7 @@ object Styles2{
    *
    * MDN
    */
-  object backfaceVisibility extends Style("backfaceVisibility", "backface-visibility") {
+  object backfaceVisibility extends UntypedStyle("backfaceVisibility", "backface-visibility") {
     /**
      * The back face is visible.
      *
@@ -361,7 +361,7 @@ object Styles2{
    *
    * MDN
    */
-  object columns extends Style("columns", "columns") {
+  object columns extends UntypedStyle("columns", "columns") {
     def ~(number: Int) = this := number.toString
 
     def ~(number: Int, width: Length) = this := s"$number $width"
@@ -382,7 +382,7 @@ object Styles2{
    *
    * MDN
    */
-  object columnFill extends Style("columnFill", "column-fill") {
+  object columnFill extends UntypedStyle("columnFill", "column-fill") {
     /**
      * Is a keyword indicating that columns are filled sequentially.
      *
@@ -423,7 +423,7 @@ object Styles2{
    *
    * MDN
    */
-  object columnSpan extends Style("columnSpan", "column-span") {
+  object columnSpan extends UntypedStyle("columnSpan", "column-span") {
     /**
      * The element does not span multiple columns.
      *
@@ -676,7 +676,7 @@ object Styles2{
    *
    * MDN
    */
-  object transformStyle extends Style("transformStyle", "transform-style") {
+  object transformStyle extends UntypedStyle("transformStyle", "transform-style") {
     /**
      * Indicates that the children of the element should be positioned in the
      * 3D-space.
@@ -703,7 +703,7 @@ object Styles2{
    *
    * MDN
    */
-  object unicodeBidi extends Style("unicodeBidi", "unicode-bidi") {
+  object unicodeBidi extends UntypedStyle("unicodeBidi", "unicode-bidi") {
     /**
      * The element does not offer a additional level of embedding with respect
      * to the bidirectional algorithm. For inline elements implicit reordering
@@ -740,7 +740,7 @@ object Styles2{
    *
    * MDN
    */
-  object wordBreak extends Style("wordBreak", "word-break") {
+  object wordBreak extends UntypedStyle("wordBreak", "word-break") {
     /**
      * Use the default line break rule.
      *
@@ -781,7 +781,7 @@ trait Styles {
    *
    * MDN
    */
-  object backgroundAttachment extends Style("backgroundAttachment", "background-attachment") {
+  object backgroundAttachment extends UntypedStyle("backgroundAttachment", "background-attachment") {
     /**
      * This keyword means that the background image will scroll within the
      * viewport along with the block the image is contained within.
@@ -859,7 +859,7 @@ trait Styles {
    *
    * MDN
    */
-  object backgroundOrigin extends Style("backgroundOrigin", "background-origin") {
+  object backgroundOrigin extends UntypedStyle("backgroundOrigin", "background-origin") {
     /**
      * The background extends to the outside edge of the border (but underneath
      * the border in z-ordering).
@@ -892,7 +892,7 @@ trait Styles {
    *
    * MDN
    */
-  object backgroundClip extends Style("backgroundClip", "background-clip") {
+  object backgroundClip extends UntypedStyle("backgroundClip", "background-clip") {
     /**
      * The background extends to the outside edge of the border (but underneath
      * the border in z-ordering).
@@ -1079,7 +1079,7 @@ trait Styles {
    *
    * MDN
    */
-  object borderCollapse extends Style("borderCollapse", "border-collapse") {
+  object borderCollapse extends UntypedStyle("borderCollapse", "border-collapse") {
     /**
      * Is a keyword requesting the use of the separated-border table rendering
      * model. It is the default value.
@@ -1105,7 +1105,7 @@ trait Styles {
    *
    * MDN
    */
-  object borderLeft extends Style("borderLeft", "border-left") {
+  object borderLeft extends UntypedStyle("borderLeft", "border-left") {
     def ~(width: Length, style: String, color: Color) = this := s"$width $style $color"
   }
   /**
@@ -1160,7 +1160,7 @@ trait Styles {
    *
    * MDN
    */
-  object borderSpacing extends Style("borderSpacing", "border-spacing") {
+  object borderSpacing extends UntypedStyle("borderSpacing", "border-spacing") {
     def :=(length: Length): StylePair = this := length.toString
 
     def :=(horizontal: Length, vertical: Length): StylePair = this := s"$horizontal $vertical"
@@ -1211,7 +1211,7 @@ trait Styles {
    *
    * MDN
    */
-  object borderColor extends Style("borderColor", "border-color") {
+  object borderColor extends UntypedStyle("borderColor", "border-color") {
     def ~(color: Color) = this := color.toString
 
     def ~(horizontal: Color, vertical: Color) = this := s"$horizontal $vertical"
@@ -1229,7 +1229,7 @@ trait Styles {
    *
    * MDN
    */
-  object boxSizing extends Style("boxSizing", "box-sizing") {
+  object boxSizing extends UntypedStyle("boxSizing", "box-sizing") {
     /**
      * This is the default style as specified by the CSS standard. The width and
      * height properties are measured including only the content, but not the
@@ -1283,7 +1283,7 @@ trait Styles {
    *
    * MDN
    */
-  object clip extends Style("clip", "clip") {
+  object clip extends UntypedStyle("clip", "clip") {
     def rect(top: Length, right: Length, bottom: Length, left: Length) =
       this := s"rect($top, $right, $bottom, $left)"
 
@@ -1512,7 +1512,7 @@ trait Styles {
    *
    * MDN
    */
-  object float extends Style("cssFloat", "float") {
+  object float extends UntypedStyle("cssFloat", "float") {
     /**
      * Is a keyword indicating that the element must float on the left side of
      * its containing block.
@@ -1557,7 +1557,7 @@ trait Styles {
    *
    * MDN
    */
-  object direction extends Style("direction", "direction") {
+  object direction extends UntypedStyle("direction", "direction") {
     /**
      * The initial value of direction (that is, if not otherwise specified). Text
      * and other elements go from left to right.
@@ -1586,7 +1586,7 @@ trait Styles {
    *
    * MDN
    */
-  object display extends Style("display", "display") {
+  object display extends UntypedStyle("display", "display") {
     /**
      * Turns off the display of an element (it has no effect on layout); all
      * descendant elements also have their display turned off. The document is
@@ -1716,7 +1716,7 @@ trait Styles {
    *
    * MDN
    */
-  object pointerEvents extends Style("pointerEvents", "pointer-events") {
+  object pointerEvents extends UntypedStyle("pointerEvents", "pointer-events") {
     /**
      * The element behaves as it would if the pointer-events property was not
      * specified. In SVG content, this value and the value visiblePainted have
@@ -1832,7 +1832,7 @@ trait Styles {
    *
    * MDN
    */
-  object listStylePosition extends Style("listStylePosition", "list-style-position") {
+  object listStylePosition extends UntypedStyle("listStylePosition", "list-style-position") {
     /**
      * The marker box is outside the principal block box.
      *
@@ -1848,7 +1848,7 @@ trait Styles {
     val inside = this := "inside"
   }
 
-  object wordWrap extends Style("wordWrap", "word-wrap") {
+  object wordWrap extends UntypedStyle("wordWrap", "word-wrap") {
     /**
      * Indicates that lines may only break at normal word break points.
      *
@@ -1962,7 +1962,7 @@ trait Styles {
    *
    * MDN
    */
-  object mask extends Style("mask", "mask") {
+  object mask extends UntypedStyle("mask", "mask") {
     val none = this := "none"
 
     def uri(s: String) = this := s"uri($s)"
@@ -1976,7 +1976,7 @@ trait Styles {
    *
    * MDN
    */
-  object emptyCells extends Style("emptyCells", "empty-cells") {
+  object emptyCells extends UntypedStyle("emptyCells", "empty-cells") {
     /**
      * Is a keyword indicating that borders and backgrounds should be drawn like
      * in a normal cells.
@@ -2115,7 +2115,7 @@ trait Styles {
    *
    * MDN
    */
-  object listStyleType extends Style("listStyleType", "list-style-type") {
+  object listStyleType extends UntypedStyle("listStyleType", "list-style-type") {
     /**
      * No item marker is shown
      *
@@ -2273,7 +2273,7 @@ trait Styles {
    *
    * MDN
    */
-  object captionSide extends Style("captionSide", "caption-side") {
+  object captionSide extends UntypedStyle("captionSide", "caption-side") {
     /**
      * The caption box will be above the table.
      *
@@ -2307,7 +2307,7 @@ trait Styles {
    *
    * MDN
    */
-  object position extends Style("position", "position") {
+  object position extends UntypedStyle("position", "position") {
     /**
      * This keyword let the element use the normal behavior, that is it is laid
      * out in its current position in the flow.  The top, right, bottom, and left
@@ -2347,7 +2347,7 @@ trait Styles {
   }
 
 
-  object quotes extends Style("quotes", "quotes") {
+  object quotes extends UntypedStyle("quotes", "quotes") {
     /**
      * The open-quote and close-quote values of the content property produce no
      * quotation marks.
@@ -2362,7 +2362,7 @@ trait Styles {
 
   }
 
-  object tableLayout extends Style("tableLayout", "table-layout") {
+  object tableLayout extends UntypedStyle("tableLayout", "table-layout") {
     /**
      * An automatic table layout algorithm is commonly used by most browsers for
      * table layout. The width of the table and its cells depends on the content
@@ -2511,7 +2511,7 @@ trait Styles {
    *
    * MDN
    */
-  object fontStyle extends Style("fontStyle", "font-style"){
+  object fontStyle extends UntypedStyle("fontStyle", "font-style"){
     /**
      * Selects a font that is classified as normal within a font-family
      *
@@ -2540,7 +2540,7 @@ trait Styles {
    *
    * MDN
    */
-  object clear extends Style("clear", "clear") {
+  object clear extends UntypedStyle("clear", "clear") {
     /**
      * The element is not moved down to clear past floating elements.
      *
@@ -2623,7 +2623,7 @@ trait Styles {
    *
    * MDN
    */
-  object margin extends Style("margin", "margin") {
+  object margin extends UntypedStyle("margin", "margin") {
     /**
      * auto is replaced by some suitable value, e.g. it can be used for
      * centering of blocks.
@@ -2820,7 +2820,7 @@ trait Styles {
    *
    * MDN
    */
-  val textAlignLast = new Style("textAlignLast", "text-align-last") with TextAlign
+  val textAlignLast = new UntypedStyle("textAlignLast", "text-align-last") with TextAlign
   trait TextAlign extends Style{
     /**
      * The same as left if direction is left-to-right and right if direction is
@@ -2869,14 +2869,14 @@ trait Styles {
    *
    * MDN
    */
-  val textAlign = new Style("textAlign", "text-align") with TextAlign
+  val textAlign = new UntypedStyle("textAlign", "text-align") with TextAlign
   /**
    * The text-decoration CSS property is used to set the text formatting to
    * underline, overline, line-through or blink.
    *
    * MDN
    */
-  object textDecoration extends Style("textDecoration", "text-decoration") {
+  object textDecoration extends UntypedStyle("textDecoration", "text-decoration") {
     /**
      * Produces no text decoration.
      *
@@ -2920,7 +2920,7 @@ trait Styles {
    *
    * MDN
    */
-  object textOverflow extends Style("textOverflow", "text-overflow") {
+  object textOverflow extends UntypedStyle("textOverflow", "text-overflow") {
     /**
      * This keyword value indicates to truncate the text at the limit of the
      * content area, therefore the truncation can happen in the middle of a
@@ -2950,7 +2950,7 @@ trait Styles {
    *
    * MDN
    */
-  object textUnderlinePosition extends Style("textUnderlinePosition", "text-underline-position") {
+  object textUnderlinePosition extends UntypedStyle("textUnderlinePosition", "text-underline-position") {
     /**
      * This keyword allows the browser to use an algorithm to choose between
      * under and alphabetic.
@@ -2993,7 +2993,7 @@ trait Styles {
    *
    * MDN
    */
-  object textTransform extends Style("textTransform", "text-transform") {
+  object textTransform extends UntypedStyle("textTransform", "text-transform") {
     /**
      * Forces the first letter of each word to be converted to
      * uppercase. Other characters are unchanged.
@@ -3036,7 +3036,7 @@ trait Styles {
    */
   val textShadow = new NoneOpenStyle[String]("textShadow", "text-shadow")
 
-  object visibility extends Style("visibility", "visibility") {
+  object visibility extends UntypedStyle("visibility", "visibility") {
     /**
      * Default value, the box is visible
      *
@@ -3069,7 +3069,7 @@ trait Styles {
    *
    * MDN
    */
-  object whiteSpace extends Style("whiteSpace", "white-space"){
+  object whiteSpace extends UntypedStyle("whiteSpace", "white-space"){
     /**
      * Sequences of whitespace are collapsed. Newline characters in the source
      * are handled as other whitespace. Breaks lines as necessary to fill line
