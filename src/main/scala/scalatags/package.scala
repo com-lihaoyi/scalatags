@@ -30,11 +30,7 @@ package object scalatags {
   /**
    * Allows you to modify a HtmlNode by adding a String to its list of children
    */
-  implicit class StringNested(v: String) extends Nested{
-    def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
-      children.append(new StringNode(v))
-    }
-  }
+  implicit def stringNode(v: String) = new StringNode(v)
 
 
   /**
@@ -42,8 +38,10 @@ package object scalatags {
    * objects to its list of children.
    */
   implicit class SeqNested[A <% Nested](xs: Seq[A])extends Nested{
-    def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
-      for(x <- xs) x.build(children, attrs)
+    def transform(tag: HtmlTag) = {
+      var t = tag
+      for(x <- xs) t = x.transform(t)
+      t
     }
   }
 

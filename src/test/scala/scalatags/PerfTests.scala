@@ -31,14 +31,18 @@ class PerfTests extends FreeSpec{
     </html>
   """
 
-  "Correctness" in Util.strCheck(
-    Scalatags(),
-//    Mustache(),
-//    Jade(),
-//    Twirl(),
-    expected
-  )
+  "Correctness" in {
+    println("Correctness")
+    Util.strCheck(
+      Scalatags(),
+      Mustache(),
+      Jade(),
+      Twirl(),
+      expected
+    )
+  }
   "Perf" in {
+    println("Perf")
     // Status Quo: 1000000 in 11739ms
 
     def test(f: () => String, name: String) = {
@@ -54,9 +58,9 @@ class PerfTests extends FreeSpec{
       println(name + "\t" + i + " in " + d)
     }
     test(Scalatags, "Scalatags")
-//    test(Mustache, "Mustache")
-//    test(Jade, "Jade")
-//    test(Twirl, "Twirl")
+    test(Mustache, "Mustache")
+    test(Jade, "Jade")
+    test(Twirl, "Twirl")
   }
 }
 case object Scalatags extends (() => String){

@@ -5,8 +5,13 @@ import scala.collection.{SortedMap, mutable}
  * Represents a single CSS class.
  */
 class Cls(val name: String) extends Nested{
-  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
-    attrs("class") = attrs.get("class").fold(name)(_ + " " + name)
+  def transform(tag: HtmlTag) = {
+    tag.copy(attrs =
+      tag.attrs.updated(
+        "class",
+        tag.attrs.get("class").fold(name)(_ + " " + name)
+      )
+    )
   }
 }
 
@@ -51,8 +56,8 @@ trait Node extends Nested{
    */
   def children: Seq[Node]
 
-  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
-    children.append(this)
+  def transform(tag: HtmlTag) = {
+    tag.copy(children = tag.children :+ this)
   }
 }
 /**
@@ -62,15 +67,15 @@ trait Node extends Nested{
  * list.
  */
 trait Nested{
-  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]): Unit
+  def transform(tag: HtmlTag): HtmlTag
 }
 
 
-object HtmlTag{
-  def apply(tag: String, children: Seq[Node], attrs: SortedMap[String, String], void: Boolean = false) = {
-    new HtmlTag(tag, children, attrs, void)
-  }
-}
+//object HtmlTag{
+//  def apply(tag: String, children: Seq[Node], attrs: SortedMap[String, String], void: Boolean = false) = {
+//    new HtmlTag(tag, children, attrs, void)
+//  }
+//}
 /**
  * A single HTML tag.
  *
@@ -81,24 +86,10 @@ object HtmlTag{
  *
  * @param tag The name of the tag
  */
-class HtmlTag(val tag: String = "",
-              children0: Seq[Node],
-              attrs0: SortedMap[String, String],
-              val void: Boolean = false,
-              nested: List[Nested] = Nil) extends Node{
-
-  /**
-   * The children of this HtmlTag.
-   */
-  def children = _children
-
-  /**
-   * The HTML attributes, as a map. This does not include the styles of classes
-   * defined in the HtmlTag's `styles` or `classes` members, which will be
-   * concatenated to any `styles` or `classes` in the `attrs` when the tag
-   * is finally rendered to HTML.
-   */
-  def attrs = _attrs
+case class HtmlTag(tag: String = "",
+                   children: Seq[Node],
+                   attrs: SortedMap[String, String],
+                   void: Boolean = false) extends Node{
 
   /**
    * Represents the list of CSS classes this HtmlTag contains; lazily derived
@@ -120,37 +111,20 @@ class HtmlTag(val tag: String = "",
         .map(pair => pair(0) -> pair(1))
   }
 
-  // Render all these things lazily using mutable state; the bulk of HtmlTags
-  // ever created will never be rendered, and it is faster to quickly build up
-  // large fragments using mutability rather than trying to use persistent
-  // collections all the way.
-  private[this] lazy val (
-    _children: Seq[Node],
-    _attrs: SortedMap[String, String]
-  ) = {
-    val _children = children0.toBuffer
-    val _attrs = mutable.Map.empty[String, String]
-    for (n <- nested.reverseIterator){
-      n.build(_children, _attrs)
-    }
-
-    (_children.toSeq, SortedMap.empty[String, String] ++ _attrs)
-  }
-
   /**
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the HtmlTag. Note that any these modifications are queued up and only
    * evaluated when (if!) the HtmlTag is rendered.
    */
   def apply(xs: Nested*) = {
+    var newTag = this
 
-    var newNested = nested
     var i = 0
     while(i < xs.length){
-      newNested = xs(i) :: newNested
+      newTag = xs(i).transform(newTag)
       i += 1
     }
-    new HtmlTag(tag, children0, attrs0, void, newNested)
+    newTag
   }
 
   /**
@@ -188,8 +162,8 @@ class HtmlTag(val tag: String = "",
  * A key value pair representing the assignment of an attribute to a value.
  */
 case class AttrPair(attr: Attr, value: String) extends Nested{
-  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
-    attrs(attr.name) = value
+  def transform(tag: HtmlTag) = {
+    tag.copy(attrs = tag.attrs.updated(attr.name, value))
   }
 }
 
@@ -242,9 +216,14 @@ class Style(val jsName: String, val cssName: String) {
  * A key value pair representing the assignment of a style to a value.
  */
 case class StylePair(style: Style, value: String) extends Nested{
-  def build(children: mutable.Buffer[Node], attrs: mutable.Map[String, String]) = {
+  def transform(tag: HtmlTag) = {
     val str = style.cssName + ": " + value + ";"
-    attrs("style") = attrs.get("style").fold(str)(_ + " " + str)
+    tag.copy(attrs =
+      tag.attrs.updated(
+        "style",
+        tag.attrs.get("style").fold(str)(_ + " " + str)
+      )
+    )
   }
 }
 /**
