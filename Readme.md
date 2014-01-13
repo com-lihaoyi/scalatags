@@ -170,9 +170,9 @@ html(
 )
 ```
 
-In Scalatags, each attribute has an associated value which can be used to set it. This example shows you set the `onclick` and `href` attributes with the `:=` operator.
+In Scalatags, each attribute has an associated value which can be used to set it. This example shows you set the `onclick` and `href` attributes with the `:=` operator. These are all instances of the [Attr](http://lihaoyi.github.io/scalatags/#scalatags.Attr) class.
 
-The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by Scalatags. This can be done with the `.attr` method that Scalatags adds to Strings:
+The common HTML attributes all have static values to use in your fragments, and the list can be seen [here](http://lihaoyi.github.io/scalatags/#scalatags.Attrs). This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by Scalatags. This can be done with the `.attr` method that Scalatags adds to Strings:
 
 ```scala
 html(
@@ -240,7 +240,7 @@ html(
 
 In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a large but finite number of styles, and not any arbitrary string can be a style. The above example shows how CSS classes and inline-styles are typically set.
 
-Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](shared/main/scala/scalatags/Styles.scala).
+Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles). These are all instances of the [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style) class.
 
 Scalatags also provides a way of setting styles dynamically as strings. This example shows how to define your own styles or css classes inline:
 
@@ -356,8 +356,8 @@ The main objects which you can import things from are:
 
 You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
 
-- `all`: this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters)
-- `short`: this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters), but aliases [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`
+- [all](http://lihaoyi.github.io/scalatags/#scalatags.package$$all$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters)
+- [short](http://lihaoyi.github.io/scalatags/#scalatags.package$$short$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters), but aliases [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`
 
 Thus, you can choose exactly what you want to import, and how:
 
@@ -370,7 +370,7 @@ div(
 )
 ```
 
-Or you can rely on a aggregator like `all` (which the rest of the examples use) or `short`. `short` imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`, making them quick to access without cluttering the global namespace:
+Or you can rely on a aggregator like [all](http://lihaoyi.github.io/scalatags/#scalatags.package$$all$) (which the rest of the examples use) or [short](http://lihaoyi.github.io/scalatags/#scalatags.package$$short$). [short](http://lihaoyi.github.io/scalatags/#scalatags.package$$short$) imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`, making them quick to access without cluttering the global namespace:
 
 ```scala
 import scalatags.short._
