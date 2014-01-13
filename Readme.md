@@ -808,15 +808,15 @@ Internals
 
 The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](shared/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](shared/main/scala/scalatags/package.scala).
 
-The primary data structure, the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode), is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) objects, which are really objects with a single `transform: HtmlNode => HtmlNode` method. These transforms are applied to the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode) sequentially, returning a new HtmlNode at the end of the process.
+The primary data structure, the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag), is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) objects, which are really objects with a single `transform: HtmlTag => HtmlTag` method. These transforms are applied to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag) sequentially, returning a new HtmlTag at the end of the process.
 
 The current selection of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) (or implicitly convertable) types include
 
-- [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode)s and `String`s: appends itself to the parent's `children` list.
+- [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag)s and `String`s: appends itself to the parent's `children` list.
 - [AttrPair](http://lihaoyi.github.io/scalatags/#scalatags.AttrPair)s: sets a key in the parent's [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) list.
 - [StylePair](http://lihaoyi.github.io/scalatags/#scalatags.StylePair)s: appends the inline `style: value;` to the parent's `style` attribute.
 
-Although these are the [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which are provided, it is possible to come up with your own custom [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which do a variety of different things to the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode). All it has to do is provide a `transform: HtmlNode => HtmlNode` method, and it can do whatever it wants to the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode) being transformed, including:
+Although these are the [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which are provided, it is possible to come up with your own custom [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which do a variety of different things to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag). All it has to do is provide a `transform: HtmlTag => HtmlTag` method, and it can do whatever it wants to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag) being transformed, including:
 
 - Adding multiple attributes at once
 - Adding both attributes and children at once
