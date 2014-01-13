@@ -9,11 +9,6 @@
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
@@ -37,22 +32,22 @@
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">class</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">TypedStyle</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <span class="name">TypedStyle</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="jsName">jsName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="cssName">cssName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A Style that takes any value of type T as a parameter; overloads the :=
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A <a href="Style.html" class="extype" name="scalatags.Style">Style</a> that takes any value of type T as a parameter; overloads the :=
 operator to also accept values of that type to convert to strings, allowing
 more concise and pseudo-typesafe use of that style.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="Style.html" class="extype" name="scalatags.Style">Style</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="Style.html" class="extype" name="scalatags.Style">Style</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
           <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="SvgStyles$$alignmentBaseline$.html" class="extype" name="scalatags.SvgStyles.alignmentBaseline">alignmentBaseline</a>, <a href="SvgStyles$$baselineShift$.html" class="extype" name="scalatags.SvgStyles.baselineShift">baselineShift</a>, <a href="Styles$$columnRuleWidth$.html" class="extype" name="scalatags.Styles.columnRuleWidth">columnRuleWidth</a>, <a href="SvgStyles$$dominantBaseline$.html" class="extype" name="scalatags.SvgStyles.dominantBaseline">dominantBaseline</a>, <a href="SvgStyles$$fill$.html" class="extype" name="scalatags.SvgStyles.fill">fill</a>, <a href="SvgStyles$$textAnchor$.html" class="extype" name="scalatags.SvgStyles.textAnchor">textAnchor</a></div>
+          <div class="subClasses hiddenContent"><a href="SvgStyles$$alignmentBaseline$.html" class="extype" name="scalatags.SvgStyles.alignmentBaseline">alignmentBaseline</a>, <a href="Styles$backgroundSize$.html" class="extype" name="scalatags.Styles.backgroundSize">backgroundSize</a>, <a href="SvgStyles$$baselineShift$.html" class="extype" name="scalatags.SvgStyles.baselineShift">baselineShift</a>, <a href="Styles$color$.html" class="extype" name="scalatags.Styles.color">color</a>, <a href="Styles2$$columnRuleWidth$.html" class="extype" name="scalatags.Styles2.columnRuleWidth">columnRuleWidth</a>, <a href="Styles$cursor$.html" class="extype" name="scalatags.Styles.cursor">cursor</a>, <a href="SvgStyles$$dominantBaseline$.html" class="extype" name="scalatags.SvgStyles.dominantBaseline">dominantBaseline</a>, <a href="SvgStyles$$fill$.html" class="extype" name="scalatags.SvgStyles.fill">fill</a>, <a href="Styles$fontSize$.html" class="extype" name="scalatags.Styles.fontSize">fontSize</a>, <a href="Styles$fontWeight$.html" class="extype" name="scalatags.Styles.fontWeight">fontWeight</a>, <a href="Styles$listStyleImage$.html" class="extype" name="scalatags.Styles.listStyleImage">listStyleImage</a>, <a href="Styles$outlineColor$.html" class="extype" name="scalatags.Styles.outlineColor">outlineColor</a>, <a href="Styles$outlineWidth$.html" class="extype" name="scalatags.Styles.outlineWidth">outlineWidth</a>, <a href="SvgStyles$$textAnchor$.html" class="extype" name="scalatags.SvgStyles.textAnchor">textAnchor</a>, <a href="Styles$verticalAlign$.html" class="extype" name="scalatags.Styles.verticalAlign">verticalAlign</a></div>
         </div></div>
         
 
@@ -70,7 +65,7 @@ more concise and pseudo-typesafe use of that style.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalatags.TypedStyle"><span>TypedStyle</span></li><li class="in" name="scalatags.Style"><span>Style</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalatags.TypedStyle"><span>TypedStyle</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scalatags.Style"><span>Style</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -164,6 +159,22 @@ more concise and pseudo-typesafe use of that style.
       </span>
       </h4>
       <p class="shortcomment cmt">Assign this style to some value of the correct type.</p>
+    </li><li name="scalatags.Style#:=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id=":=(value:String):scalatags.StylePair"></a>
+      <a id=":=(String):StylePair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $colon$eq" class="name">:=</span><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Force-assigns a typed style to a string even if its type would not normally
+.</p><div class="fullcomment"><div class="comment cmt"><p>Force-assigns a typed style to a string even if its type would not normally
+.allow it
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
@@ -215,10 +226,28 @@ more concise and pseudo-typesafe use of that style.
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
+    </li><li name="scalatags.TypedStyle#cssName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="cssName:String"></a>
+      <a id="cssName:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cssName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The name of this style in CSS, normally dash-separated
+</p><div class="fullcomment"><div class="comment cmt"><p>The name of this style in CSS, normally dash-separated
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.TypedStyle">TypedStyle</a> → <a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -232,19 +261,6 @@ more concise and pseudo-typesafe use of that style.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -257,8 +273,11 @@ more concise and pseudo-typesafe use of that style.
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -271,19 +290,6 @@ more concise and pseudo-typesafe use of that style.
       </span>
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -300,6 +306,21 @@ more concise and pseudo-typesafe use of that style.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scalatags.TypedStyle#jsName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="jsName:String"></a>
+      <a id="jsName:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">jsName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The name of this style from Javascript, normally camel-case
+</p><div class="fullcomment"><div class="comment cmt"><p>The name of this style from Javascript, normally camel-case
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.TypedStyle">TypedStyle</a> → <a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -352,19 +373,6 @@ more concise and pseudo-typesafe use of that style.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scalatags.Style#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <a id="toString():String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a> → AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -378,7 +386,10 @@ more concise and pseudo-typesafe use of that style.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -394,7 +405,10 @@ more concise and pseudo-typesafe use of that style.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -410,25 +424,12 @@ more concise and pseudo-typesafe use of that style.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalatags.Style#~=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="~=(value:String):scalatags.StylePair"></a>
-      <a id="~=(String):StylePair"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $tilde$eq" class="name">~=</span><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Force-assigns a typed style to a string even if its type would not normally
-.</p><div class="fullcomment"><div class="comment cmt"><p>Force-assigns a typed style to a string even if its type would not normally
-.allow it
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -438,7 +439,15 @@ more concise and pseudo-typesafe use of that style.
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scalatags.Style">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="scalatags.Style">
               <h3>Inherited from <a href="Style.html" class="extype" name="scalatags.Style">Style</a></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
@@ -460,7 +469,6 @@ more concise and pseudo-typesafe use of that style.
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
     </body>
       </html>

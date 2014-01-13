@@ -2,22 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>StringNested - scalatags.StringNested</title>
-          <meta name="description" content="StringNested - scalatags.StringNested" />
-          <meta name="keywords" content="StringNested scalatags.StringNested" />
+          <title>TextAlign - scalatags.Styles.TextAlign</title>
+          <meta name="description" content="TextAlign - scalatags.Styles.TextAlign" />
+          <meta name="keywords" content="TextAlign scalatags.Styles.TextAlign" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
-            var hash = 'scalatags.package$$StringNested';
+            var hash = 'scalatags.Styles$TextAlign';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -29,25 +24,24 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../lib/class_big.png" />
-        <p id="owner"><a href="package.html" class="extype" name="scalatags">scalatags</a></p>
-        <h1>StringNested</h1>
+        <img src="../lib/trait_big.png" />
+        <p id="owner"><a href="package.html" class="extype" name="scalatags">scalatags</a>.<a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></p>
+        <h1>TextAlign</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">StringNested</span><span class="result"> extends <a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a></span>
+        <span class="name">TextAlign</span><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Allows you to modify a HtmlNode by adding a String to its list of children
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="Style.html" class="extype" name="scalatags.Style">Style</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -65,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalatags.StringNested"><span>StringNested</span></li><li class="in" name="scalatags.Nested"><span>Nested</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalatags.Styles.TextAlign"><span>TextAlign</span></li><li class="in" name="scalatags.Style"><span>Style</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -83,30 +77,47 @@
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="scalatags.StringNested#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(v:String):scalatags.package.StringNested"></a>
-      <a id="&lt;init&gt;:StringNested"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
-      </span>
-      <span class="symbol">
-        <span class="name">StringNested</span><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
-      </span>
-      </h4>
-      
-    </li></ol>
-            </div>
-
         
 
         
 
         <div id="values" class="values members">
-              <h3>Value Members</h3>
+              <h3>Abstract Value Members</h3>
+              <ol><li name="scalatags.Style#cssName" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="cssName:String"></a>
+      <a id="cssName:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cssName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The name of this style in CSS, normally dash-separated
+</p><div class="fullcomment"><div class="comment cmt"><p>The name of this style in CSS, normally dash-separated
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
+    </li><li name="scalatags.Style#jsName" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="jsName:String"></a>
+      <a id="jsName:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">jsName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The name of this style from Javascript, normally camel-case
+</p><div class="fullcomment"><div class="comment cmt"><p>The name of this style from Javascript, normally camel-case
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div id="values" class="values members">
+              <h3>Concrete Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
@@ -146,6 +157,22 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scalatags.Style#:=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id=":=(value:String):scalatags.StylePair"></a>
+      <a id=":=(String):StylePair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $colon$eq" class="name">:=</span><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Force-assigns a typed style to a string even if its type would not normally
+.</p><div class="fullcomment"><div class="comment cmt"><p>Force-assigns a typed style to a string even if its type would not normally
+.allow it
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:AnyRef):Boolean"></a>
       <a id="==(AnyRef):Boolean"></a>
@@ -185,19 +212,20 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.StringNested#build" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="build(children:scala.collection.mutable.Buffer[scalatags.Node],attrs:scala.collection.mutable.Map[String,String]):Unit"></a>
-      <a id="build(Buffer[Node],Map[String,String]):Unit"></a>
+    </li><li name="scalatags.Styles.TextAlign#center" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="center:scalatags.StylePair"></a>
+      <a id="center:StylePair"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">build</span><span class="params">(<span name="children">children: <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[<a href="Node.html" class="extype" name="scalatags.Node">Node</a>]</span>, <span name="attrs">attrs: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">center</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.StringNested">StringNested</a> → <a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a></dd></dl></div>
+      <p class="shortcomment cmt">The inline contents are centered within the line box.</p><div class="fullcomment"><div class="comment cmt"><p>The inline contents are centered within the line box.</p><p>MDN
+</p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -210,10 +238,29 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
+    </li><li name="scalatags.Styles.TextAlign#end" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="end:scalatags.StylePair"></a>
+      <a id="end:StylePair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">end</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The same as right if direction is left-to-right and left if direction is
+right-to-left.</p><div class="fullcomment"><div class="comment cmt"><p>The same as right if direction is left-to-right and left if direction is
+right-to-left.</p><p>MDN
+</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -252,8 +299,11 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -295,6 +345,35 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scalatags.Styles.TextAlign#justify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="justify:scalatags.StylePair"></a>
+      <a id="justify:StylePair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">justify</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The text is justified.</p><div class="fullcomment"><div class="comment cmt"><p>The text is justified. Text should line up their left and right edges to
+the left and right content edges of the paragraph.</p><p>MDN
+</p></div></div>
+    </li><li name="scalatags.Styles.TextAlign#left" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="left:scalatags.StylePair"></a>
+      <a id="left:StylePair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">left</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The inline contents are aligned to the left edge of the line box.</p><div class="fullcomment"><div class="comment cmt"><p>The inline contents are aligned to the left edge of the line box.</p><p>MDN
+</p></div></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -334,6 +413,36 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scalatags.Styles.TextAlign#right" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="right:scalatags.StylePair"></a>
+      <a id="right:StylePair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">right</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The inline contents are aligned to the right edge of the line box.</p><div class="fullcomment"><div class="comment cmt"><p>The inline contents are aligned to the right edge of the line box.</p><p>MDN
+</p></div></div>
+    </li><li name="scalatags.Styles.TextAlign#start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="start:scalatags.StylePair"></a>
+      <a id="start:StylePair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">start</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The same as left if direction is left-to-right and right if direction is
+right-to-left.</p><div class="fullcomment"><div class="comment cmt"><p>The same as left if direction is left-to-right and right if direction is
+right-to-left.</p><p>MDN
+</p></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -373,7 +482,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -389,7 +501,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -405,7 +520,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li></ol>
@@ -417,8 +535,8 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scalatags.Nested">
-              <h3>Inherited from <a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a></h3>
+        <div class="parent" name="scalatags.Style">
+              <h3>Inherited from <a href="Style.html" class="extype" name="scalatags.Style">Style</a></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
@@ -439,7 +557,6 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
     </body>
       </html>

@@ -9,11 +9,6 @@
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
@@ -37,20 +32,19 @@
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">class</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">HtmlTag</span><span class="result"> extends <a href="Node.html" class="extype" name="scalatags.Node">Node</a></span>
+        <span class="name">HtmlTag</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="children">children: <span class="extype" name="scala.List">List</span>[<a href="Node.html" class="extype" name="scalatags.Node">Node</a>]</span>, <span name="attrs">attrs: <span class="extype" name="scala.collection.SortedMap">SortedMap</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="void">void: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result"> extends <a href="Node.html" class="extype" name="scalatags.Node">Node</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A single HTML tag.</p><p>Note that the various properties of interest (e.g. children, attrs,
-classes, styles) are all computed mutably/lazily in order to speed up the
-serialization of the node while still keeping it immutable from the
-outside.
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A single HTML tag.
+</p></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>The name of the tag</p></dd><dt class="param">children</dt><dd class="cmt"><p>A backwards list of child-nodes; kept this way for fast
+                updates, and reversed before being rendered.</p></dd><dt class="param">attrs</dt><dd class="cmt"><p>A sorted map of attributes</p></dd><dt class="param">void</dt><dd class="cmt"><p>Whether or not the tag can be self-closing
+</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="Node.html" class="extype" name="scalatags.Node">Node</a>, <a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="Node.html" class="extype" name="scalatags.Node">Node</a>, <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -68,7 +62,7 @@ outside.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalatags.HtmlTag"><span>HtmlTag</span></li><li class="in" name="scalatags.Node"><span>Node</span></li><li class="in" name="scalatags.Nested"><span>Nested</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalatags.HtmlTag"><span>HtmlTag</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scalatags.Node"><span>Node</span></li><li class="in" name="scalatags.Modifier"><span>Modifier</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -89,7 +83,7 @@ outside.
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="scalatags.HtmlTag#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(tag:String,nested:List[scalatags.Nested]):scalatags.HtmlTag"></a>
+      <a id="&lt;init&gt;(tag:String,children:List[scalatags.Node],attrs:scala.collection.SortedMap[String,String],void:Boolean):scalatags.HtmlTag"></a>
       <a id="&lt;init&gt;:HtmlTag"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,10 +91,11 @@ outside.
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">HtmlTag</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="nested">nested: <span class="extype" name="scala.List">List</span>[<a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a>] = <span class="symbol">immutable.this.Nil</span></span>)</span>
+        <span class="name">HtmlTag</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="children">children: <span class="extype" name="scala.List">List</span>[<a href="Node.html" class="extype" name="scalatags.Node">Node</a>]</span>, <span name="attrs">attrs: <span class="extype" name="scala.collection.SortedMap">SortedMap</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="void">void: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span>
       </span>
       </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>The name of the tag
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>The name of the tag</p></dd><dt class="param">children</dt><dd class="cmt"><p>A backwards list of child-nodes; kept this way for fast
+                updates, and reversed before being rendered.</p></dd><dt class="param">attrs</dt><dd class="cmt"><p>A sorted map of attributes</p></dd><dt class="param">void</dt><dd class="cmt"><p>Whether or not the tag can be self-closing
 </p></dd></dl></div>
     </li></ol>
             </div>
@@ -177,20 +172,20 @@ outside.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scalatags.HtmlTag#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(xs:scalatags.Nested*):scalatags.HtmlTag"></a>
-      <a id="apply(Nested*):HtmlTag"></a>
+      <a id="apply(xs:scalatags.Modifier*):scalatags.HtmlTag"></a>
+      <a id="apply(Modifier*):HtmlTag"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="xs">xs: <a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a>*</span>)</span><span class="result">: <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>
+        <span class="name">apply</span><span class="params">(<span name="xs">xs: <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a>*</span>)</span><span class="result">: <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Add the given modifications (e.</p><div class="fullcomment"><div class="comment cmt"><p>Add the given modifications (e.g. additional children, or new attributes)
-to the HtmlTag. Note that any these modifications are queued up and only
-evaluated when (if!) the HtmlTag is rendered.
+to the <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a>. Note that any these modifications are queued up and only
+evaluated when (if!) the <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a> is rendered.
 </p></div></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -205,50 +200,33 @@ evaluated when (if!) the HtmlTag is rendered.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.HtmlTag#attrs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="attrs:Map[String,String]"></a>
-      <a id="attrs:Map[String,String]"></a>
+    </li><li name="scalatags.HtmlTag#attrs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="attrs:scala.collection.SortedMap[String,String]"></a>
+      <a id="attrs:SortedMap[String,String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">lazy val</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">attrs</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">attrs</span><span class="result">: <span class="extype" name="scala.collection.SortedMap">SortedMap</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The HTML attributes, as a map.</p><div class="fullcomment"><div class="comment cmt"><p>The HTML attributes, as a map. This does not include the styles of classes
-defined in the HtmlTag's <code>styles</code> or <code>classes</code> members, which will be
-concatenated to any <code>styles</code> or <code>classes</code> in the <code>attrs</code> when the tag
-is finally rendered to HTML.
-</p></div></div>
-    </li><li name="scalatags.Node#build" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="build(children:scala.collection.mutable.Buffer[scalatags.Node],attrs:scala.collection.mutable.Map[String,String]):Unit"></a>
-      <a id="build(Buffer[Node],Map[String,String]):Unit"></a>
+      <p class="shortcomment cmt">A sorted map of attributes</p>
+    </li><li name="scalatags.HtmlTag#children" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="children:List[scalatags.Node]"></a>
+      <a id="children:List[Node]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">build</span><span class="params">(<span name="children">children: <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[<a href="Node.html" class="extype" name="scalatags.Node">Node</a>]</span>, <span name="attrs">attrs: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">children</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Node.html" class="extype" name="scalatags.Node">Node</a>]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Node.html" class="extype" name="scalatags.Node">Node</a> → <a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a></dd></dl></div>
-    </li><li name="scalatags.HtmlTag#children" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="children:Seq[scalatags.Node]"></a>
-      <a id="children:Seq[Node]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">lazy val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">children</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="Node.html" class="extype" name="scalatags.Node">Node</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The children of this HtmlTag.</p><div class="fullcomment"><div class="comment cmt"><p>The children of this HtmlTag.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a> → <a href="Node.html" class="extype" name="scalatags.Node">Node</a></dd></dl></div>
+      <p class="shortcomment cmt">A backwards list of child-nodes; kept this way for fast
+                updates, and reversed before being rendered.</p>
     </li><li name="scalatags.HtmlTag#classes" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="classes:Seq[String]"></a>
       <a id="classes:Seq[String]"></a>
@@ -275,8 +253,11 @@ from <code>attrs</code>.</p>
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -292,19 +273,6 @@ from <code>attrs</code>.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -317,8 +285,11 @@ from <code>attrs</code>.</p>
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -331,19 +302,6 @@ from <code>attrs</code>.</p>
       </span>
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -400,15 +358,15 @@ from <code>attrs</code>.</p>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scalatags.HtmlTag#styles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="styles:Seq[(String,String)]"></a>
-      <a id="styles:Seq[(String,String)]"></a>
+      <a id="styles:scala.collection.SortedMap[String,String]"></a>
+      <a id="styles:SortedMap[String,String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
       </span>
       <span class="symbol">
-        <span class="name">styles</span><span class="result">: <span class="extype" name="scala.collection.Seq">Seq</span>[(<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="java.lang.String">String</span>)]</span>
+        <span class="name">styles</span><span class="result">: <span class="extype" name="scala.collection.SortedMap">SortedMap</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Represents the list of CSS styles this HtmlTag contains; lazily derived
@@ -438,8 +396,7 @@ from <code>attrs</code>.</p>
         <span class="name">tag</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The name of the tag
-</p>
+      <p class="shortcomment cmt">The name of the tag</p>
     </li><li name="scalatags.Node#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -455,6 +412,35 @@ from <code>attrs</code>.</p>
       <p class="shortcomment cmt">Converts an ScalaTag fragment into an html string
 </p><div class="fullcomment"><div class="comment cmt"><p>Converts an ScalaTag fragment into an html string
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Node.html" class="extype" name="scalatags.Node">Node</a> → AnyRef → Any</dd></dl></div>
+    </li><li name="scalatags.Node#transform" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="transform(tag:scalatags.HtmlTag):scalatags.HtmlTag"></a>
+      <a id="transform(HtmlTag):HtmlTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">transform</span><span class="params">(<span name="tag">tag: <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>)</span><span class="result">: <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Transforms the tag and returns a new one.</p><div class="fullcomment"><div class="comment cmt"><p>Transforms the tag and returns a new one.</p><p>Can't be <code>apply</code>, because some <span class="extype" name="Modifiers">Modifiers</span> (e.g. <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a>) already have an
+<a href="#apply(xs:scalatags.Modifier*):scalatags.HtmlTag" class="extmbr" name="scalatags.HtmlTag#apply">apply</a> method, and the overloading becomes ambiguous.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Node.html" class="extype" name="scalatags.Node">Node</a> → <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a></dd></dl></div>
+    </li><li name="scalatags.HtmlTag#void" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="void:Boolean"></a>
+      <a id="void:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">void</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Whether or not the tag can be self-closing
+</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -468,7 +454,10 @@ from <code>attrs</code>.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -484,7 +473,10 @@ from <code>attrs</code>.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -500,7 +492,10 @@ from <code>attrs</code>.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scalatags.HtmlTag#writeTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -515,7 +510,7 @@ from <code>attrs</code>.</p>
         <span class="name">writeTo</span><span class="params">(<span name="strb">strb: <span class="extype" name="scala.StringBuilder">StringBuilder</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Serialize this HtmlTag and all its children out to the given StringBuilder.</p><div class="fullcomment"><div class="comment cmt"><p>Serialize this HtmlTag and all its children out to the given StringBuilder.
+      <p class="shortcomment cmt">Serialize this <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a> and all its children out to the given StringBuilder.</p><div class="fullcomment"><div class="comment cmt"><p>Serialize this <a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a> and all its children out to the given StringBuilder.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.HtmlTag">HtmlTag</a> → <a href="Node.html" class="extype" name="scalatags.Node">Node</a></dd></dl></div>
     </li></ol>
             </div>
@@ -526,10 +521,18 @@ from <code>attrs</code>.</p>
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scalatags.Node">
+        <div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="scalatags.Node">
               <h3>Inherited from <a href="Node.html" class="extype" name="scalatags.Node">Node</a></h3>
-            </div><div class="parent" name="scalatags.Nested">
-              <h3>Inherited from <a href="Nested.html" class="extype" name="scalatags.Nested">Nested</a></h3>
+            </div><div class="parent" name="scalatags.Modifier">
+              <h3>Inherited from <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
@@ -550,7 +553,6 @@ from <code>attrs</code>.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
     </body>
       </html>

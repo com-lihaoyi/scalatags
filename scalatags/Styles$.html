@@ -9,11 +9,6 @@
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
@@ -29,9 +24,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../lib/object_big.png" />
+        <a href="Styles.html" title="Go to companion"><img src="../lib/object_to_trait_big.png" /></a>
         <p id="owner"><a href="package.html" class="extype" name="scalatags">scalatags</a></p>
-        <h1>Styles</h1>
+        <h1><a href="Styles.html" title="Go to companion">Styles</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -40,15 +35,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Styles</span>
+        <span class="name">Styles</span><span class="result"> extends <a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Contains CSS styles which are used less frequently. These are not imported by
-default to avoid namespace pollution.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Module that contains bindings for commonly-used CSS styles.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -66,7 +60,7 @@ default to avoid namespace pollution.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalatags.Styles"><span>Styles</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalatags.Styles"><span>Styles</span></li><li class="in" name="scalatags.Styles"><span>Styles</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -86,7 +80,23 @@ default to avoid namespace pollution.
         <div id="allMembers">
         
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="scalatags.Styles.TextAlign" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="TextAlignextendsStyle"></a>
+      <a id="TextAlign:TextAlign"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$TextAlign.html"><span class="name">TextAlign</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li></ol>
+            </div>
 
         
 
@@ -157,172 +167,6 @@ default to avoid namespace pollution.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.Styles#animation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animation:scalatags.TypedStyle[String]"></a>
-      <a id="animation:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animation</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation CSS property is a shorthand property for animation-name,
-animation-duration, animation-timing-function, animation-delay,
-animation-iteration-count and animation-direction.</p><div class="fullcomment"><div class="comment cmt"><p>The animation CSS property is a shorthand property for animation-name,
-animation-duration, animation-timing-function, animation-delay,
-animation-iteration-count and animation-direction.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationDelay" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationDelay:scalatags.MultiTimeStyle"></a>
-      <a id="animationDelay:MultiTimeStyle"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationDelay</span><span class="result">: <span class="extype" name="scalatags.MultiTimeStyle">MultiTimeStyle</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation-delay CSS property specifies when the animation should start.</p><div class="fullcomment"><div class="comment cmt"><p>The animation-delay CSS property specifies when the animation should start.
-This lets the animation sequence begin some time after it's applied to an
-element.</p><p>A value of 0s, which is the default value of the property, indicates that
-the animation should begin as soon as it's applied. Otherwise, the value
-specifies an offset from the moment the animation is applied to the element;
-animation will begin that amount of time after being applied.</p><p>Specifying a negative value for the animation delay causes the animation to
-begin executing immediately. However, it will appear to have begun executing
-partway through its cycle. For example, if you specify -1s as the animation
-delay time, the animation will begin immediately but will start 1 second
-into the animation sequence.</p><p>If you specify a negative value for the animation delay, but the starting
-value is implicit, the starting value is taken from the moment the animation
-is applied to the element.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationDirection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationDirection:scalatags.TypedStyle[String]"></a>
-      <a id="animationDirection:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationDirection</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation-direction CSS property indicates whether the animation should
-play in reverse on alternate cycles.</p><div class="fullcomment"><div class="comment cmt"><p>The animation-direction CSS property indicates whether the animation should
-play in reverse on alternate cycles.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationDuration" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationDuration:scalatags.TypedStyle[String]"></a>
-      <a id="animationDuration:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationDuration</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation-duration CSS property specifies the Length of time that an
-animation should take to complete one cycle.</p><div class="fullcomment"><div class="comment cmt"><p>The animation-duration CSS property specifies the Length of time that an
-animation should take to complete one cycle.</p><p>A value of 0s, which is the default value, indicates that no animation should
-occur.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationFillMode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationFillMode:scalatags.TypedStyle[String]"></a>
-      <a id="animationFillMode:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationFillMode</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation-fill-mode CSS property specifies how a CSS animation should
-apply styles to its target before and after it is executing.</p><div class="fullcomment"><div class="comment cmt"><p>The animation-fill-mode CSS property specifies how a CSS animation should
-apply styles to its target before and after it is executing.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationIterationCount" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationIterationCount:scalatags.TypedStyle[String]"></a>
-      <a id="animationIterationCount:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationIterationCount</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation-iteration-count CSS property defines the number of times an
-animation cycle should be played before stopping.</p><div class="fullcomment"><div class="comment cmt"><p>The animation-iteration-count CSS property defines the number of times an
-animation cycle should be played before stopping.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationName:scalatags.TypedStyle[String]"></a>
-      <a id="animationName:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationName</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation-name CSS property specifies a list of animations that should
-be applied to the selected element.</p><div class="fullcomment"><div class="comment cmt"><p>The animation-name CSS property specifies a list of animations that should
-be applied to the selected element. Each name indicates a @keyframes at-rule
-that defines the property values for the animation sequence.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationPlayState" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationPlayState:scalatags.TypedStyle[String]"></a>
-      <a id="animationPlayState:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationPlayState</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The animation-play-state CSS property determines whether an animation is
-running or paused.</p><div class="fullcomment"><div class="comment cmt"><p>The animation-play-state CSS property determines whether an animation is
-running or paused. You can query this property's value to determine whether
-or not the animation is currently running; in addition, you can set its
-value to pause and resume playback of an animation.</p><p>Resuming a paused animation will start the animation from where it left off
-at the time it was paused, rather than starting over from the beginning of
-the animation sequence.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#animationTimingFunction" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="animationTimingFunction:scalatags.TypedStyle[String]"></a>
-      <a id="animationTimingFunction:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">animationTimingFunction</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The CSS animation-timing-function property specifies how a CSS animation
-should progress over the duration of each cycle.</p><div class="fullcomment"><div class="comment cmt"><p>The CSS animation-timing-function property specifies how a CSS animation
-should progress over the duration of each cycle. The possible values are
-one or several &lt;timing-function&gt;.</p><p>For keyframed animations, the timing function applies between keyframes
-rather than over the entire animation. In other words, the timing function
-is applied at the start of the keyframe and at the end of the keyframe.</p><p>An animation timing function defined within a keyframe block applies to that
-keyframe; otherwise. If no timing function is specified for the keyframe,
-the timing function specified for the overall animation is used.</p><p>MDN
-</p></div></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -336,20 +180,689 @@ the timing function specified for the overall animation is used.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.Styles.backfaceVisibility" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="backfaceVisibility"></a>
-      <a id="backfaceVisibility:backfaceVisibility"></a>
+    </li><li name="scalatags.Styles#background" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="background:scalatags.TypedStyle[String]"></a>
+      <a id="background:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">background</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The background CSS property is a shorthand for setting the individual
+background values in a single place in the style sheet.</p><div class="fullcomment"><div class="comment cmt"><p>The background CSS property is a shorthand for setting the individual
+background values in a single place in the style sheet. background can be
+used to set the values for one or more of: background-clip, background-color,
+background-image, background-origin, background-position, background-repeat,
+background-size, and background-attachment.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.backgroundAttachment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="backgroundAttachment"></a>
+      <a id="backgroundAttachment:backgroundAttachment"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$backfaceVisibility$.html"><span class="name">backfaceVisibility</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <a href="Styles$backgroundAttachment$.html"><span class="name">backgroundAttachment</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
       </span>
       </h4>
-      <p class="comment cmt">The CSS backface-visibility property determines whether or not the back
-face of the element is visible when facing the user.</p>
+      <p class="comment cmt">If a background-image is specified, the background-attachment CSS
+property determines whether that image's position is fixed within
+the viewport, or scrolls along with its containing block.</p>
+    </li><li name="scalatags.Styles.backgroundClip" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="backgroundClip"></a>
+      <a id="backgroundClip:backgroundClip"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$backgroundClip$.html"><span class="name">backgroundClip</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The background-clip CSS property specifies whether an element's background,
+either the color or image, extends underneath its border.</p>
+    </li><li name="scalatags.Styles#backgroundColor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="backgroundColor:scalatags.TypedStyle[scalatags.DataTypes.Color]"></a>
+      <a id="backgroundColor:TypedStyle[Color]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">backgroundColor</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The background-color CSS property sets the background color of an element,
+either through a color value or the keyword transparent.</p><div class="fullcomment"><div class="comment cmt"><p>The background-color CSS property sets the background color of an element,
+either through a color value or the keyword transparent.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#backgroundImage" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="backgroundImage:scalatags.MultiImageStyle"></a>
+      <a id="backgroundImage:MultiImageStyle"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">backgroundImage</span><span class="result">: <span class="extype" name="scalatags.MultiImageStyle">MultiImageStyle</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The CSS background-image property sets one or several background images for
+an element.</p><div class="fullcomment"><div class="comment cmt"><p>The CSS background-image property sets one or several background images for
+an element. The images are drawn on successive stacking context layers, with
+the first specified being drawn as if it is the closest to the user. The
+borders of the element are then drawn on top of them, and the background-color
+is drawn beneath them.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.backgroundOrigin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="backgroundOrigin"></a>
+      <a id="backgroundOrigin:backgroundOrigin"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$backgroundOrigin$.html"><span class="name">backgroundOrigin</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The background-origin CSS property determines the background positioning
+area, that is the position of the origin of an image specified using the
+background-image CSS property.</p>
+    </li><li name="scalatags.Styles#backgroundPosition" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="backgroundPosition:scalatags.TypedStyle[String]"></a>
+      <a id="backgroundPosition:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">backgroundPosition</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The background-position CSS property sets the initial position, relative to
+the background position layer defined by background-origin for each defined
+background image.</p><div class="fullcomment"><div class="comment cmt"><p>The background-position CSS property sets the initial position, relative to
+the background position layer defined by background-origin for each defined
+background image.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#backgroundRepeat" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="backgroundRepeat:scalatags.TypedStyle[String]"></a>
+      <a id="backgroundRepeat:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">backgroundRepeat</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The background-repeat CSS property defines how background images are repeated.</p><div class="fullcomment"><div class="comment cmt"><p>The background-repeat CSS property defines how background images are repeated.
+A background image can be repeated along the horizontal axis, the vertical
+axis, both, or not repeated at all. When the repetition of the image tiles
+doesn't let them exactly cover the background, the way adjustments are done
+can be controlled by the author: by default, the last image is clipped, but
+the different tiles can instead be re-sized, or space can be inserted
+between the tiles.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.backgroundSize" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="backgroundSize"></a>
+      <a id="backgroundSize:backgroundSize"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$backgroundSize$.html"><span class="name">backgroundSize</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The background-size CSS property specifies the size of the background
+images.</p>
+    </li><li name="scalatags.Styles#border" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="border:scalatags.TypedStyle[String]"></a>
+      <a id="border:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">border</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border CSS property is a shorthand property for setting the individual
+border property values in a single place in the style sheet.</p><div class="fullcomment"><div class="comment cmt"><p>The border CSS property is a shorthand property for setting the individual
+border property values in a single place in the style sheet. border can be
+used to set the values for one or more of: border-width, border-style,
+border-color.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderBottom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderBottom:scalatags.TypedStyle[String]"></a>
+      <a id="borderBottom:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderBottom</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-bottom CSS property is a shorthand that sets the values of
+border-bottom-color, border-bottom-style, and border-bottom-width.</p><div class="fullcomment"><div class="comment cmt"><p>The border-bottom CSS property is a shorthand that sets the values of
+border-bottom-color, border-bottom-style, and border-bottom-width. These
+properties describe the bottom border of elements.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderBottomColor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderBottomColor:scalatags.TypedStyle[scalatags.DataTypes.Color]"></a>
+      <a id="borderBottomColor:TypedStyle[Color]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderBottomColor</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-bottom-color CSS property sets the color of the bottom border of
+an element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-bottom-color CSS property sets the color of the bottom border of
+an element. Note that in many cases the shorthand CSS properties border-color
+or border-bottom are more convenient and preferable.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderBottomLeftRadius" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderBottomLeftRadius:scalatags.BorderRadius"></a>
+      <a id="borderBottomLeftRadius:BorderRadius"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderBottomLeftRadius</span><span class="result">: <span class="extype" name="scalatags.BorderRadius">BorderRadius</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-bottom-left-radius CSS property sets the rounding of the
+bottom-left corner of the element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-bottom-left-radius CSS property sets the rounding of the
+bottom-left corner of the element. The rounding can be a circle or an
+ellipse, or if one of the value is 0 no rounding is done and the corner is
+square.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderBottomRightRadius" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderBottomRightRadius:scalatags.BorderRadius"></a>
+      <a id="borderBottomRightRadius:BorderRadius"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderBottomRightRadius</span><span class="result">: <span class="extype" name="scalatags.BorderRadius">BorderRadius</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-bottom-right-radius CSS property sets the rounding of the
+bottom-right corner of the element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-bottom-right-radius CSS property sets the rounding of the
+bottom-right corner of the element. The rounding can be a circle or an
+ellipse, or if one of the value is 0 no rounding is done and the corner is
+square.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderBottomStyle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderBottomStyle:scalatags.BorderStyle"></a>
+      <a id="borderBottomStyle:BorderStyle"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderBottomStyle</span><span class="result">: <span class="extype" name="scalatags.BorderStyle">BorderStyle</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-bottom-style CSS property sets the line style of the bottom
+border of a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-bottom-style CSS property sets the line style of the bottom
+border of a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderBottomWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderBottomWidth:scalatags.BorderWidth"></a>
+      <a id="borderBottomWidth:BorderWidth"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderBottomWidth</span><span class="result">: <span class="extype" name="scalatags.BorderWidth">BorderWidth</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-bottom-width CSS property sets the width of the bottom border of
+a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-bottom-width CSS property sets the width of the bottom border of
+a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.borderCollapse" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="borderCollapse"></a>
+      <a id="borderCollapse:borderCollapse"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$borderCollapse$.html"><span class="name">borderCollapse</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The border-collapse CSS property selects a table's border model.</p>
+    </li><li name="scalatags.Styles.borderColor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="borderColor"></a>
+      <a id="borderColor:borderColor"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$borderColor$.html"><span class="name">borderColor</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The border-color CSS property is a shorthand for setting the color of the
+four sides of an element's border: border-top-color, border-right-color,
+border-bottom-color, border-left-color</p>
+    </li><li name="scalatags.Styles.borderLeft" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="borderLeft"></a>
+      <a id="borderLeft:borderLeft"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$borderLeft$.html"><span class="name">borderLeft</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The border-left CSS property is a shorthand that sets the values of
+border-left-color, border-left-style, and border-left-width.</p>
+    </li><li name="scalatags.Styles#borderLeftColor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderLeftColor:scalatags.TypedStyle[scalatags.DataTypes.Color]"></a>
+      <a id="borderLeftColor:TypedStyle[Color]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderLeftColor</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-right-color CSS property sets the color of the right border of
+an element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-right-color CSS property sets the color of the right border of
+an element. Note that in many cases the shorthand CSS properties
+border-color or border-right are more convenient and preferable.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderLeftStyle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderLeftStyle:scalatags.BorderStyle"></a>
+      <a id="borderLeftStyle:BorderStyle"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderLeftStyle</span><span class="result">: <span class="extype" name="scalatags.BorderStyle">BorderStyle</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-left-style CSS property sets the line style of the left border
+of a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-left-style CSS property sets the line style of the left border
+of a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderLeftWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderLeftWidth:scalatags.BorderWidth"></a>
+      <a id="borderLeftWidth:BorderWidth"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderLeftWidth</span><span class="result">: <span class="extype" name="scalatags.BorderWidth">BorderWidth</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-left-width CSS property sets the width of the left border of a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-left-width CSS property sets the width of the left border of a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderRadius" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderRadius:scalatags.TypedStyle[String]"></a>
+      <a id="borderRadius:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderRadius</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-radius CSS property allows Web authors to define how rounded
+border corners are.</p><div class="fullcomment"><div class="comment cmt"><p>The border-radius CSS property allows Web authors to define how rounded
+border corners are. The curve of each corner is defined using one or two
+radii, defining its shape: circle or ellipse.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderRight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderRight:scalatags.TypedStyle[String]"></a>
+      <a id="borderRight:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderRight</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-right CSS property is a shorthand that sets the values of
+border-right-color, border-right-style, and border-right-width.</p><div class="fullcomment"><div class="comment cmt"><p>The border-right CSS property is a shorthand that sets the values of
+border-right-color, border-right-style, and border-right-width. These
+properties describe the right border of elements.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderRightColor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderRightColor:scalatags.TypedStyle[scalatags.DataTypes.Color]"></a>
+      <a id="borderRightColor:TypedStyle[Color]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderRightColor</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-right-color CSS property sets the color of the top border of an
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-right-color CSS property sets the color of the top border of an
+element. Note that in many cases the shorthand CSS properties border-color
+or border-right are more convenient and preferable.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderRightStyle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderRightStyle:scalatags.BorderStyle"></a>
+      <a id="borderRightStyle:BorderStyle"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderRightStyle</span><span class="result">: <span class="extype" name="scalatags.BorderStyle">BorderStyle</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-right-style CSS property sets the line style of the right border
+of a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-right-style CSS property sets the line style of the right border
+of a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderRightWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderRightWidth:scalatags.BorderWidth"></a>
+      <a id="borderRightWidth:BorderWidth"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderRightWidth</span><span class="result">: <span class="extype" name="scalatags.BorderWidth">BorderWidth</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-right-width CSS property sets the width of the right border of
+a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-right-width CSS property sets the width of the right border of
+a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.borderSpacing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="borderSpacing"></a>
+      <a id="borderSpacing:borderSpacing"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$borderSpacing$.html"><span class="name">borderSpacing</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The border-spacing CSS property specifies the distance between the borders
+of adjacent cells (only for the separated borders model).</p>
+    </li><li name="scalatags.Styles#borderStyle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderStyle:scalatags.TypedStyle[String]"></a>
+      <a id="borderStyle:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderStyle</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-style CSS property is a shorthand property for setting the line
+style for all four sides of the elements border.</p><div class="fullcomment"><div class="comment cmt"><p>The border-style CSS property is a shorthand property for setting the line
+style for all four sides of the elements border.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderTop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderTop:scalatags.TypedStyle[String]"></a>
+      <a id="borderTop:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderTop</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-top CSS property is a shorthand that sets the values of
+border-top-color, border-top-style, and border-top-width.</p><div class="fullcomment"><div class="comment cmt"><p>The border-top CSS property is a shorthand that sets the values of
+border-top-color, border-top-style, and border-top-width. These
+properties describe the top border of elements.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderTopColor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderTopColor:scalatags.TypedStyle[scalatags.DataTypes.Color]"></a>
+      <a id="borderTopColor:TypedStyle[Color]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderTopColor</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-top-color CSS property sets the color of the top border of an
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-top-color CSS property sets the color of the top border of an
+element. Note that in many cases the shorthand CSS properties border-color
+or border-top are more convenient and preferable.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderTopLeftRadius" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderTopLeftRadius:scalatags.BorderRadius"></a>
+      <a id="borderTopLeftRadius:BorderRadius"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderTopLeftRadius</span><span class="result">: <span class="extype" name="scalatags.BorderRadius">BorderRadius</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-top-left-radius CSS property sets the rounding of the
+top-left corner of the element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-top-left-radius CSS property sets the rounding of the
+top-left corner of the element. The rounding can be a circle or an
+ellipse, or if one of the value is 0 no rounding is done and the corner is
+square.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderTopRightRadius" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderTopRightRadius:scalatags.BorderRadius"></a>
+      <a id="borderTopRightRadius:BorderRadius"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderTopRightRadius</span><span class="result">: <span class="extype" name="scalatags.BorderRadius">BorderRadius</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-top-right-radius CSS property sets the rounding of the top-right
+corner of the element.</p><div class="fullcomment"><div class="comment cmt"><p>The border-top-right-radius CSS property sets the rounding of the top-right
+corner of the element. The rounding can be a circle or an ellipse, or if
+one of the value is 0 no rounding is done and the corner is square.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderTopStyle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderTopStyle:scalatags.BorderStyle"></a>
+      <a id="borderTopStyle:BorderStyle"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderTopStyle</span><span class="result">: <span class="extype" name="scalatags.BorderStyle">BorderStyle</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-top-style CSS property sets the line style of the top border of a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-top-style CSS property sets the line style of the top border of a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderTopWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderTopWidth:scalatags.BorderWidth"></a>
+      <a id="borderTopWidth:BorderWidth"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderTopWidth</span><span class="result">: <span class="extype" name="scalatags.BorderWidth">BorderWidth</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-top-width CSS property sets the width of the top border of a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-top-width CSS property sets the width of the top border of a box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#borderWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="borderWidth:scalatags.TypedStyle[String]"></a>
+      <a id="borderWidth:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">borderWidth</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The border-width CSS property sets the width of the border of a box.</p><div class="fullcomment"><div class="comment cmt"><p>The border-width CSS property sets the width of the border of a box. Using
+the shorthand property border is often more convenient.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#bottom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="bottom:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
+      <a id="bottom:AutoStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">bottom</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The bottom CSS property participates in specifying the position of
+positioned elements.</p><div class="fullcomment"><div class="comment cmt"><p>The bottom CSS property participates in specifying the position of
+positioned elements.</p><p>For absolutely positioned elements, that is those with position: absolute
+or position: fixed, it specifies the distance between the bottom margin edge
+of the element and the bottom edge of its containing block.</p><p>For relatively positioned elements, that is those with position: relative,
+it specifies the distance the element is moved above its normal position.</p><p>However, the top property overrides the bottom property, so if top is not
+auto, the computed value of bottom is the negative of the computed value of
+top.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#boxShadow" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="boxShadow:scalatags.TypedStyle[String]"></a>
+      <a id="boxShadow:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">boxShadow</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The box-shadow CSS property describes one or more shadow effects as a
+comma-separated list.</p><div class="fullcomment"><div class="comment cmt"><p>The box-shadow CSS property describes one or more shadow effects as a
+comma-separated list. It allows casting a drop shadow from the frame of
+almost any element. If a border-radius is specified on the element with a
+box shadow, the box shadow takes on the same rounded corners. The z-ordering
+of multiple box shadows is the same as multiple text shadows (the first
+specified shadow is on top).</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.boxSizing" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="boxSizing"></a>
+      <a id="boxSizing:boxSizing"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$boxSizing$.html"><span class="name">boxSizing</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The box-sizing CSS property is used to alter the default CSS box model used
+to calculate widths and heights of elements.</p>
+    </li><li name="scalatags.Styles.captionSide" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="captionSide"></a>
+      <a id="captionSide:captionSide"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$captionSide$.html"><span class="name">captionSide</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The caption-side CSS property positions the content of a table's <code><caption>`
+on the specified side.
+
+MDN
+</code></p>
+    </li><li name="scalatags.Styles.clear" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="clear"></a>
+      <a id="clear:clear"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$clear$.html"><span class="name">clear</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The clear CSS property specifies whether an element can be next to floating
+elements that precede it or must be moved down (cleared) below them.</p>
+    </li><li name="scalatags.Styles.clip" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="clip"></a>
+      <a id="clip:clip"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$clip$.html"><span class="name">clip</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The clip CSS property defines what portion of an element is visible.</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -362,197 +875,100 @@ face of the element is visible when facing the user.</p>
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalatags.Styles#columnCount" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="columnCount:scalatags.AutoStyle[Int]"></a>
-      <a id="columnCount:AutoStyle[Int]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">columnCount</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<span class="extype" name="scala.Int">Int</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The column-count CSS property describes the number of columns of the element.</p><div class="fullcomment"><div class="comment cmt"><p>The column-count CSS property describes the number of columns of the element.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles.columnFill" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="columnFill"></a>
-      <a id="columnFill:columnFill"></a>
+    </li><li name="scalatags.Styles.color" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="color"></a>
+      <a id="color:color"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$columnFill$.html"><span class="name">columnFill</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <a href="Styles$color$.html"><span class="name">color</span></a><span class="result"> extends <span class="extype" name="scalatags.CurrentColor">CurrentColor</span></span>
       </span>
       </h4>
-      <p class="comment cmt">The column-fill CSS property controls how contents are partitioned into
-columns.</p>
-    </li><li name="scalatags.Styles#columnGap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="columnGap:scalatags.NormalOpenStyle[scalatags.DataTypes.Length]"></a>
-      <a id="columnGap:NormalOpenStyle[Length]"></a>
+      <p class="comment cmt">The CSS color property sets the foreground color of an element's text
+content, and its decorations.</p>
+    </li><li name="scalatags.Styles#content" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="content:scalatags.TypedStyle[String]"></a>
+      <a id="content:TypedStyle[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">columnGap</span><span class="result">: <span class="extype" name="scalatags.NormalOpenStyle">NormalOpenStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+        <span class="name">content</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The column-gap CSS property sets the size of the gap between columns for
-elements which are specified to display as a multi-column element.</p><div class="fullcomment"><div class="comment cmt"><p>The column-gap CSS property sets the size of the gap between columns for
-elements which are specified to display as a multi-column element.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#columnRule" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="columnRule:scalatags.TypedStyle[String]"></a>
-      <a id="columnRule:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">columnRule</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">In multi-column layouts, the column-rule CSS property specifies a straight
-line, or &quot;rule&quot;, to be drawn between each column.</p><div class="fullcomment"><div class="comment cmt"><p>In multi-column layouts, the column-rule CSS property specifies a straight
-line, or &quot;rule&quot;, to be drawn between each column. It is a convenient
-shorthand to avoid setting each of the individual column-rule-* properties
-separately : column-rule-width, column-rule-style and column-rule-color.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#columnRuleColor" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="columnRuleColor:scalatags.TypedStyle[scalatags.DataTypes.Color]"></a>
-      <a id="columnRuleColor:TypedStyle[Color]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">columnRuleColor</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The column-rule-color CSS property lets you set the color of the rule drawn
-between columns in multi-column layouts.</p><div class="fullcomment"><div class="comment cmt"><p>The column-rule-color CSS property lets you set the color of the rule drawn
-between columns in multi-column layouts.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles.columnRuleStyle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="columnRuleStyle"></a>
-      <a id="columnRuleStyle:columnRuleStyle"></a>
+      <p class="shortcomment cmt">The content CSS property is used with the ::before and ::after pseudo-elements
+to generate content in an element.</p><div class="fullcomment"><div class="comment cmt"><p>The content CSS property is used with the ::before and ::after pseudo-elements
+to generate content in an element. Objects inserted using the content
+property are anonymous replaced elements.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.cursor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="cursor"></a>
+      <a id="cursor:cursor"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$columnRuleStyle$.html"><span class="name">columnRuleStyle</span></a><span class="result"> extends <span class="extype" name="scalatags.OutlineStyle">OutlineStyle</span></span>
+        <a href="Styles$cursor$.html"><span class="name">cursor</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Url.html" class="extype" name="scalatags.DataTypes.Url">Url</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">The column-rule-style CSS property lets you set the style of the rule drawn
-between columns in multi-column layouts.</p>
-    </li><li name="scalatags.Styles.columnRuleWidth" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="columnRuleWidth"></a>
-      <a id="columnRuleWidth:columnRuleWidth"></a>
+      <p class="comment cmt">The cursor CSS property specifies the mouse cursor displayed when the mouse
+pointer is over an element.</p>
+    </li><li name="scalatags.Styles.direction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="direction"></a>
+      <a id="direction:direction"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$columnRuleWidth$.html"><span class="name">columnRuleWidth</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+        <a href="Styles$direction$.html"><span class="name">direction</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
       </span>
       </h4>
-      <p class="comment cmt">The column-rule-width CSS property lets you set the width of the rule drawn
-between columns in multi-column layouts.</p>
-    </li><li name="scalatags.Styles.columnSpan" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="columnSpan"></a>
-      <a id="columnSpan:columnSpan"></a>
+      <p class="comment cmt">Set the direction CSS property to match the direction of the text: rtl for
+Hebrew or Arabic text and ltr for other scripts.</p>
+    </li><li name="scalatags.Styles.display" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="display"></a>
+      <a id="display:display"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$columnSpan$.html"><span class="name">columnSpan</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <a href="Styles$display$.html"><span class="name">display</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
       </span>
       </h4>
-      <p class="comment cmt">The column-span CSS property makes it possible for an element to span across
-all columns when its value is set to all.</p>
-    </li><li name="scalatags.Styles#columnWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="columnWidth:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
-      <a id="columnWidth:AutoStyle[Length]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">columnWidth</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The column-width CSS property suggests an optimal column width.</p><div class="fullcomment"><div class="comment cmt"><p>The column-width CSS property suggests an optimal column width. This is not
-a absolute value but a mere hint. Browser will adjust the width of the
-column around that suggested value, allowing to achieve scalable designs
-that fit different screen size. Especially in presence of the column-count
-CSS property which has precedence, to set an exact column width, all Length
-values must be specified. In horizontal text these are width, column-width,
-column-gap, and column-rule-width</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles.columns" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="columns"></a>
-      <a id="columns:columns"></a>
+      <p class="comment cmt">The display CSS property specifies the type of rendering box used for an
+element.</p>
+    </li><li name="scalatags.Styles.emptyCells" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="emptyCells"></a>
+      <a id="emptyCells:emptyCells"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$columns$.html"><span class="name">columns</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <a href="Styles$emptyCells$.html"><span class="name">emptyCells</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
       </span>
       </h4>
-      <p class="comment cmt">The columns CSS property is a shorthand property allowing to set both the
-column-width and the column-count properties at the same time.</p>
-    </li><li name="scalatags.Styles#counterIncrement" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="counterIncrement:scalatags.TypedStyle[String]"></a>
-      <a id="counterIncrement:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">counterIncrement</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The counter-increment CSS property is used to increase the value of CSS
-Counters by a given value.</p><div class="fullcomment"><div class="comment cmt"><p>The counter-increment CSS property is used to increase the value of CSS
-Counters by a given value. The counter's value can be reset using the
-counter-reset CSS property.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#counterReset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="counterReset:scalatags.TypedStyle[String]"></a>
-      <a id="counterReset:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">counterReset</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The counter-reset CSS property is used to reset CSS Counters to a given
-value.</p><div class="fullcomment"><div class="comment cmt"><p>The counter-reset CSS property is used to reset CSS Counters to a given
-value.</p><p>MDN
-</p></div></div>
+      <p class="comment cmt">he empty-cells CSS property specifies how user agents should render borders
+and backgrounds around cells that have no visible content.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -591,10 +1007,145 @@ value.</p><p>MDN
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
+    </li><li name="scalatags.Styles.float" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="float"></a>
+      <a id="float:float"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$float$.html"><span class="name">float</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The float CSS property specifies that an element should be taken from the
+normal flow and placed along the left or right side of its container, where
+text and inline elements will wrap around it.</p>
+    </li><li name="scalatags.Styles#font" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="font:scalatags.TypedStyle[String]"></a>
+      <a id="font:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">font</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The font CSS property is either a shorthand property for setting font-style,
+font-variant, font-weight, font-size, line-height and font-family, or a way
+to set the element's font to a system font, using specific keywords.</p><div class="fullcomment"><div class="comment cmt"><p>The font CSS property is either a shorthand property for setting font-style,
+font-variant, font-weight, font-size, line-height and font-family, or a way
+to set the element's font to a system font, using specific keywords.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#fontFamily" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fontFamily:scalatags.TypedStyle[String]"></a>
+      <a id="fontFamily:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fontFamily</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The font-family CSS property allows for a prioritized list of font family
+names and/or generic family names to be specified for the selected element.</p><div class="fullcomment"><div class="comment cmt"><p>The font-family CSS property allows for a prioritized list of font family
+names and/or generic family names to be specified for the selected element.
+Unlike most other CSS properties, values are separated by a comma to indicate
+that they are alternatives. The browser will select the first font on the
+list that is installed on the computer, or that can be downloaded using the
+information provided by a @font-face at-rule.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#fontFeatureSettings" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fontFeatureSettings:scalatags.TypedStyle[String]"></a>
+      <a id="fontFeatureSettings:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fontFeatureSettings</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The font-feature-settings CSS property allows control over advanced
+typographic features in OpenType fonts.</p><div class="fullcomment"><div class="comment cmt"><p>The font-feature-settings CSS property allows control over advanced
+typographic features in OpenType fonts.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.fontSize" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fontSize"></a>
+      <a id="fontSize:fontSize"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$fontSize$.html"><span class="name">fontSize</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The font-size CSS property specifies the size of the font – specifically
+the desired height of glyphs from the font.</p>
+    </li><li name="scalatags.Styles#fontSizeAdjust" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fontSizeAdjust:scalatags.TypedStyle[Number]"></a>
+      <a id="fontSizeAdjust:TypedStyle[Number]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fontSizeAdjust</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="java.lang.Number">Number</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The font-size-adjust CSS property specifies that font size should be chosen
+based on the height of lowercase letters rather than the height of capital
+letters.</p><div class="fullcomment"><div class="comment cmt"><p>The font-size-adjust CSS property specifies that font size should be chosen
+based on the height of lowercase letters rather than the height of capital
+letters.</p><p>This is useful since the legibility of fonts, especially at small sizes, is
+determined more by the size of lowercase letters than by the size of capital
+letters. This can cause problems when the first-choice font-family is
+unavailable and its replacement has a significantly different aspect ratio
+(the ratio of the size of lowercase letters to the size of the font).</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.fontStyle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fontStyle"></a>
+      <a id="fontStyle:fontStyle"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$fontStyle$.html"><span class="name">fontStyle</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The font-style CSS property allows italic or oblique faces to be selected
+within a font-family.</p>
+    </li><li name="scalatags.Styles.fontWeight" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fontWeight"></a>
+      <a id="fontWeight:fontWeight"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$fontWeight$.html"><span class="name">fontWeight</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The font-weight CSS property specifies the weight or boldness of the font.</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -621,6 +1172,23 @@ value.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scalatags.Styles#height" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="height:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
+      <a id="height:AutoStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">height</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The height CSS property specifies the height of the content area of an
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The height CSS property specifies the height of the content area of an
+element. The content area is inside the padding, border, and margin of the
+element.</p><p>The min-height and max-height properties override height.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -634,6 +1202,273 @@ value.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scalatags.Styles#left" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="left:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
+      <a id="left:AutoStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">left</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The left CSS property specifies part of the position of positioned elements.</p><div class="fullcomment"><div class="comment cmt"><p>The left CSS property specifies part of the position of positioned elements.</p><p>For absolutely positioned elements (those with position: absolute or
+position: fixed), it specifies the distance between the left margin edge of
+the element and the left edge of its containing block.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#letterSpacing" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="letterSpacing:scalatags.NormalOpenStyle[scalatags.DataTypes.Length]"></a>
+      <a id="letterSpacing:NormalOpenStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">letterSpacing</span><span class="result">: <span class="extype" name="scalatags.NormalOpenStyle">NormalOpenStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The letter-spacing CSS property specifies spacing behavior between text
+characters.</p><div class="fullcomment"><div class="comment cmt"><p>The letter-spacing CSS property specifies spacing behavior between text
+characters.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#lineHeight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="lineHeight:scalatags.NormalOpenStyle[scalatags.DataTypes.Length]"></a>
+      <a id="lineHeight:NormalOpenStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">lineHeight</span><span class="result">: <span class="extype" name="scalatags.NormalOpenStyle">NormalOpenStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">On block level elements, the line-height CSS property specifies the minimal
+height of line boxes within the element.</p><div class="fullcomment"><div class="comment cmt"><p>On block level elements, the line-height CSS property specifies the minimal
+height of line boxes within the element.</p><p>On non-replaced inline elements, line-height specifies the height that is
+used in the calculation of the line box height.</p><p>On replaced inline elements, like buttons or other input element, line-height has no effect.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#listStyle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listStyle:scalatags.TypedStyle[String]"></a>
+      <a id="listStyle:TypedStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">listStyle</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The list-style CSS property is a shorthand property for setting
+list-style-type, list-style-image and list-style-position.</p><div class="fullcomment"><div class="comment cmt"><p>The list-style CSS property is a shorthand property for setting
+list-style-type, list-style-image and list-style-position.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.listStyleImage" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="listStyleImage"></a>
+      <a id="listStyleImage:listStyleImage"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$listStyleImage$.html"><span class="name">listStyleImage</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Url.html" class="extype" name="scalatags.DataTypes.Url">Url</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The list-style-image CSS property sets the image that will be used as the
+list item marker.</p>
+    </li><li name="scalatags.Styles.listStylePosition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="listStylePosition"></a>
+      <a id="listStylePosition:listStylePosition"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$listStylePosition$.html"><span class="name">listStylePosition</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The list-style-position CSS property specifies the position of the marker
+box in the principal block box.</p>
+    </li><li name="scalatags.Styles.listStyleType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="listStyleType"></a>
+      <a id="listStyleType:listStyleType"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$listStyleType$.html"><span class="name">listStyleType</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The list-style-type CSS property specifies appearance of a list item element.</p>
+    </li><li name="scalatags.Styles.margin" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="margin"></a>
+      <a id="margin:margin"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$margin$.html"><span class="name">margin</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The margin CSS property sets the margin for all four sides.</p>
+    </li><li name="scalatags.Styles#marginBottom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="marginBottom:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
+      <a id="marginBottom:AutoStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">marginBottom</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The margin-bottom CSS property of an element sets the margin space required
+on the bottom of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The margin-bottom CSS property of an element sets the margin space required
+on the bottom of an element. A negative value is also allowed.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#marginLeft" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="marginLeft:scalatags.TypedStyle[scalatags.DataTypes.Length]withscalatags.MarginAuto"></a>
+      <a id="marginLeft:TypedStyle[Length]withMarginAuto"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">marginLeft</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>] with <span class="extype" name="scalatags.MarginAuto">MarginAuto</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The margin-left CSS property of an element sets the margin space required
+on the left side of a box associated with an element.</p><div class="fullcomment"><div class="comment cmt"><p>The margin-left CSS property of an element sets the margin space required
+on the left side of a box associated with an element. A negative value is
+also allowed.</p><p>The vertical margins of two adjacent boxes may fuse. This is called margin
+collapsing.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#marginRight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="marginRight:scalatags.TypedStyle[scalatags.DataTypes.Length]withscalatags.MarginAuto"></a>
+      <a id="marginRight:TypedStyle[Length]withMarginAuto"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">marginRight</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>] with <span class="extype" name="scalatags.MarginAuto">MarginAuto</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The margin-right CSS property of an element sets the margin space required
+on the bottom of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The margin-right CSS property of an element sets the margin space required
+on the bottom of an element. A negative value is also allowed.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#marginTop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="marginTop:scalatags.TypedStyle[scalatags.DataTypes.Length]withscalatags.MarginAuto"></a>
+      <a id="marginTop:TypedStyle[Length]withMarginAuto"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">marginTop</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>] with <span class="extype" name="scalatags.MarginAuto">MarginAuto</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The margin-top CSS property of an element sets the margin space required on
+the top of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The margin-top CSS property of an element sets the margin space required on
+the top of an element. A negative value is also allowed.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.mask" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="mask"></a>
+      <a id="mask:mask"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$mask$.html"><span class="name">mask</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">If the value is a URI value, the element pointed to by the URI is used as
+an SVG mask.</p>
+    </li><li name="scalatags.Styles#maxHeight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="maxHeight:scalatags.NoneOpenStyle[scalatags.DataTypes.Length]"></a>
+      <a id="maxHeight:NoneOpenStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">maxHeight</span><span class="result">: <span class="extype" name="scalatags.NoneOpenStyle">NoneOpenStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The max-height CSS property is used to set the maximum height of a given
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The max-height CSS property is used to set the maximum height of a given
+element. It prevents the used value of the height property from becoming
+larger than the value specified for max-height.</p><p>max-height overrides height, but min-height overrides max-height.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#maxWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="maxWidth:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="maxWidth:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">maxWidth</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The max-width CSS property is used to set the maximum width of a given
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The max-width CSS property is used to set the maximum width of a given
+element. It prevents the used value of the width property from becoming
+larger than the value specified for max-width.</p><p>max-width overrides width, but min-width overrides max-width.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#minHeight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="minHeight:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="minHeight:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">minHeight</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The min-height CSS property is used to set the minimum height of a given
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The min-height CSS property is used to set the minimum height of a given
+element. It prevents the used value of the height property from becoming
+smaller than the value specified for min-height.</p><p>The value of min-height overrides both max-height and height.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#minWidth" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="minWidth:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="minWidth:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">minWidth</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The min-width CSS property is used to set the minimum width of a given
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The min-width CSS property is used to set the minimum width of a given
+element. It prevents the used value of the width property from becoming
+smaller than the value specified for min-width.</p><p>The value of min-width overrides both max-width and width.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -673,107 +1508,292 @@ value.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scalatags.Styles#orphans" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="orphans:scalatags.TypedStyle[Int]"></a>
-      <a id="orphans:TypedStyle[Int]"></a>
+    </li><li name="scalatags.Styles#opacity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="opacity:scalatags.TypedStyle[Double]"></a>
+      <a id="opacity:TypedStyle[Double]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">orphans</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Int">Int</span>]</span>
+        <span class="name">opacity</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Double">Double</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The orphans CSS property refers to the minimum number of lines in a block
-container that must be left at the bottom of the page.</p><div class="fullcomment"><div class="comment cmt"><p>The orphans CSS property refers to the minimum number of lines in a block
-container that must be left at the bottom of the page. This property is
-normally used to control how page breaks occur.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#pageBreakAfter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="pageBreakAfter:scalatags.PageBreak"></a>
-      <a id="pageBreakAfter:PageBreak"></a>
+      <p class="shortcomment cmt">The opacity CSS property specifies the transparency of an element, that is,
+the degree to which the background behind the element is overlaid.</p><div class="fullcomment"><div class="comment cmt"><p>The opacity CSS property specifies the transparency of an element, that is,
+the degree to which the background behind the element is overlaid.</p><p>The value applies to the element as a whole, including its contents, even
+though the value is not inherited by child elements. Thus, an element and
+its contained children all have the same opacity relative to the element's
+background, even if the element and its children have different opacities
+relative to one another.</p><p>Using this property with a value different than 1 places the element in a
+new stacking context.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#outline" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="outline:scalatags.TypedStyle[String]"></a>
+      <a id="outline:TypedStyle[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">pageBreakAfter</span><span class="result">: <span class="extype" name="scalatags.PageBreak">PageBreak</span></span>
+        <span class="name">outline</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The page-break-after CSS property adjusts page breaks after the current
-element.</p><div class="fullcomment"><div class="comment cmt"><p>The page-break-after CSS property adjusts page breaks after the current
-element.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#pageBreakBefore" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="pageBreakBefore:scalatags.PageBreak"></a>
-      <a id="pageBreakBefore:PageBreak"></a>
+      <p class="shortcomment cmt">The CSS outline property is a shorthand property for setting one or more of
+the individual outline properties outline-style, outline-width and
+outline-color in a single rule.</p><div class="fullcomment"><div class="comment cmt"><p>The CSS outline property is a shorthand property for setting one or more of
+the individual outline properties outline-style, outline-width and
+outline-color in a single rule. In most cases the use of this shortcut is
+preferable and more convenient.</p><p>Outlines do not take up space, they are drawn above the content.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.outlineColor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="outlineColor"></a>
+      <a id="outlineColor:outlineColor"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$outlineColor$.html"><span class="name">outlineColor</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The outline-color CSS property sets the color of the outline of an element.</p>
+    </li><li name="scalatags.Styles#outlineStyle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="outlineStyle:scalatags.OutlineStyle"></a>
+      <a id="outlineStyle:OutlineStyle"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">pageBreakBefore</span><span class="result">: <span class="extype" name="scalatags.PageBreak">PageBreak</span></span>
+        <span class="name">outlineStyle</span><span class="result">: <span class="extype" name="scalatags.OutlineStyle">OutlineStyle</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The page-break-before CSS property adjusts page breaks before the current
-element.</p><div class="fullcomment"><div class="comment cmt"><p>The page-break-before CSS property adjusts page breaks before the current
-element.</p><p>This properties applies to block elements that generate a box. It won't
-apply on an empty <code></code></p><p><code> that won't generate a box.</code></p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#pageBreakInside" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="pageBreakInside:scalatags.PageBreak"></a>
-      <a id="pageBreakInside:PageBreak"></a>
+      <p class="shortcomment cmt">The outline-style CSS property is used to set the style of the outline of
+an element.</p><div class="fullcomment"><div class="comment cmt"><p>The outline-style CSS property is used to set the style of the outline of
+an element. An outline is a line that is drawn around elements, outside the
+border edge, to make the element stand out.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.outlineWidth" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="outlineWidth"></a>
+      <a id="outlineWidth:outlineWidth"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$outlineWidth$.html"><span class="name">outlineWidth</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The outline-width CSS property is used to set the width of the outline of
+an element.</p>
+    </li><li name="scalatags.Styles.overflow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="overflow"></a>
+      <a id="overflow:overflow"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$overflow$.html"><span class="name">overflow</span></a><span class="result"> extends <span class="extype" name="scalatags.Overflow">Overflow</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The overflow CSS property specifies whether to clip content, render scroll
+bars or display overflow content of a block-level element.</p>
+    </li><li name="scalatags.Styles#overflowX" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overflowX:scalatags.Overflow"></a>
+      <a id="overflowX:Overflow"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">pageBreakInside</span><span class="result">: <span class="extype" name="scalatags.PageBreak">PageBreak</span></span>
+        <span class="name">overflowX</span><span class="result">: <span class="extype" name="scalatags.Overflow">Overflow</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The page-break-inside CSS property adjusts page breaks inside the current
-element.</p><div class="fullcomment"><div class="comment cmt"><p>The page-break-inside CSS property adjusts page breaks inside the current
-element.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#perspective" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="perspective:scalatags.NoneOpenStyle[scalatags.DataTypes.Length]"></a>
-      <a id="perspective:NoneOpenStyle[Length]"></a>
+      <p class="shortcomment cmt">The overflow-x CSS property specifies whether to clip content, render a
+scroll bar or display overflow content of a block-level element, when it
+overflows at the left and right edges.</p><div class="fullcomment"><div class="comment cmt"><p>The overflow-x CSS property specifies whether to clip content, render a
+scroll bar or display overflow content of a block-level element, when it
+overflows at the left and right edges.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#overflowY" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overflowY:scalatags.Overflow"></a>
+      <a id="overflowY:Overflow"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">perspective</span><span class="result">: <span class="extype" name="scalatags.NoneOpenStyle">NoneOpenStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+        <span class="name">overflowY</span><span class="result">: <span class="extype" name="scalatags.Overflow">Overflow</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The perspective CSS property determines the distance between the z=0 plane
-and the user in order to give to the 3D-positioned element some perspective.</p><div class="fullcomment"><div class="comment cmt"><p>The perspective CSS property determines the distance between the z=0 plane
-and the user in order to give to the 3D-positioned element some perspective.
-Each 3D element with z&gt;0 becomes larger; each 3D-element with z&lt;0 becomes
-smaller. The strength of the effect is determined by the value of this
-property.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#perspectiveOrigin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="perspectiveOrigin:scalatags.TypedStyle[String]"></a>
-      <a id="perspectiveOrigin:TypedStyle[String]"></a>
+      <p class="shortcomment cmt">The overflow-y CSS property specifies whether to clip content, render a
+scroll bar, or display overflow content of a block-level element, when it
+overflows at the top and bottom edges.</p><div class="fullcomment"><div class="comment cmt"><p>The overflow-y CSS property specifies whether to clip content, render a
+scroll bar, or display overflow content of a block-level element, when it
+overflows at the top and bottom edges.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#padding" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="padding:scalatags.TypedStyle[String]"></a>
+      <a id="padding:TypedStyle[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">perspectiveOrigin</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">padding</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The perspective-origin CSS property determines the position the viewer is
-looking at.</p><div class="fullcomment"><div class="comment cmt"><p>The perspective-origin CSS property determines the position the viewer is
-looking at. It is used as the vanishing point by the perspective property.</p><p>MDN
-</p></div></div>
+      <p class="shortcomment cmt">The padding CSS property sets the required padding space on all sides of an
+element.</p><div class="fullcomment"><div class="comment cmt"><p>The padding CSS property sets the required padding space on all sides of an
+element. The padding area is the space between the content of the element
+and its border. Negative values are not allowed.</p><p>The padding property is a shorthand to avoid setting each side separately
+(padding-top, padding-right, padding-bottom, padding-left).</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#paddingBottom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="paddingBottom:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="paddingBottom:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">paddingBottom</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The padding-bottom CSS property of an element sets the height of the padding
+area at the bottom of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The padding-bottom CSS property of an element sets the height of the padding
+area at the bottom of an element. The padding area is the space between the
+content of the element and it's border. Contrary to margin-bottom values,
+negative values of padding-bottom are invalid.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#paddingLeft" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="paddingLeft:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="paddingLeft:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">paddingLeft</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The padding-left CSS property of an element sets the padding space required
+on the left side of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The padding-left CSS property of an element sets the padding space required
+on the left side of an element. The padding area is the space between the
+content of the element and it's border. A negative value is not allowed.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#paddingRight" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="paddingRight:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="paddingRight:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">paddingRight</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The padding-right CSS property of an element sets the padding space
+required on the right side of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The padding-right CSS property of an element sets the padding space
+required on the right side of an element. The padding area is the space
+between the content of the element and its border. Negative values are not
+allowed.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#paddingTop" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="paddingTop:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="paddingTop:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">paddingTop</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The padding-top CSS property of an element sets the padding space required
+on the top of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The padding-top CSS property of an element sets the padding space required
+on the top of an element. The padding area is the space between the content
+of the element and its border. Contrary to margin-top values, negative
+values of padding-top are invalid.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.pointerEvents" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="pointerEvents"></a>
+      <a id="pointerEvents:pointerEvents"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$pointerEvents$.html"><span class="name">pointerEvents</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The CSS property pointer-events allows authors to control under what
+circumstances (if any) a particular graphic element can become the target
+of mouse events.</p>
+    </li><li name="scalatags.Styles.position" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="position"></a>
+      <a id="position:position"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$position$.html"><span class="name">position</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The position CSS property chooses alternative rules for positioning elements,
+designed to be useful for scripted animation effects.</p>
+    </li><li name="scalatags.Styles.quotes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="quotes"></a>
+      <a id="quotes:quotes"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$quotes$.html"><span class="name">quotes</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#right" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="right:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
+      <a id="right:AutoStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">right</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The right CSS property specifies part of the position of positioned elements.</p><div class="fullcomment"><div class="comment cmt"><p>The right CSS property specifies part of the position of positioned elements.</p><p>For absolutely positioned elements (those with position: absolute or
+position: fixed), it specifies the distance between the right margin edge
+of the element and the right edge of its containing block.</p><p>The right property has no effect on non-positioned elements.</p><p>When both the right CSS property and the left CSS property are defined, the
+position of the element is overspecified. In that case, the left value has
+precedence when the container is left-to-right (that is that the right
+computed value is set to -left), and the right value has precedence when
+the container is right-to-left (that is that the left computed value is set
+to -right).</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -787,6 +1807,143 @@ looking at. It is used as the vanishing point by the perspective property.</p><p
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scalatags.Styles.tableLayout" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tableLayout"></a>
+      <a id="tableLayout:tableLayout"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$tableLayout$.html"><span class="name">tableLayout</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#textAlign" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="textAlign:scalatags.UntypedStylewithStyles.this.TextAlign"></a>
+      <a id="textAlign:UntypedStylewithTextAlign"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">textAlign</span><span class="result">: <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a> with <a href="#TextAlignextendsStyle" class="extmbr" name="scalatags.Styles.TextAlign">TextAlign</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The text-align CSS property describes how inline content like text is
+aligned in its parent block element.</p><div class="fullcomment"><div class="comment cmt"><p>The text-align CSS property describes how inline content like text is
+aligned in its parent block element. text-align does not control the
+alignment of block elements itself, only their inline content.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#textAlignLast" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="textAlignLast:scalatags.UntypedStylewithStyles.this.TextAlign"></a>
+      <a id="textAlignLast:UntypedStylewithTextAlign"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">textAlignLast</span><span class="result">: <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a> with <a href="#TextAlignextendsStyle" class="extmbr" name="scalatags.Styles.TextAlign">TextAlign</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The text-align-last CSS property describes how the last line of a block or
+a line, right before a forced line break, is aligned.</p><div class="fullcomment"><div class="comment cmt"><p>The text-align-last CSS property describes how the last line of a block or
+a line, right before a forced line break, is aligned.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.textDecoration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="textDecoration"></a>
+      <a id="textDecoration:textDecoration"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$textDecoration$.html"><span class="name">textDecoration</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The text-decoration CSS property is used to set the text formatting to
+underline, overline, line-through or blink.</p>
+    </li><li name="scalatags.Styles#textIndent" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="textIndent:scalatags.TypedStyle[scalatags.DataTypes.Length]"></a>
+      <a id="textIndent:TypedStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">textIndent</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The text-indent CSS property specifies how much horizontal space should be
+left before the beginning of the first line of the text content of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The text-indent CSS property specifies how much horizontal space should be
+left before the beginning of the first line of the text content of an element.
+Horizontal spacing is with respect to the left (or right, for right-to-left
+layout) edge of the containing block element's box.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.textOverflow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="textOverflow"></a>
+      <a id="textOverflow:textOverflow"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$textOverflow$.html"><span class="name">textOverflow</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The text-overflow CSS property determines how overflowed content that is
+not displayed is signaled to the users.</p>
+    </li><li name="scalatags.Styles#textShadow" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="textShadow:scalatags.NoneOpenStyle[String]"></a>
+      <a id="textShadow:NoneOpenStyle[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">textShadow</span><span class="result">: <span class="extype" name="scalatags.NoneOpenStyle">NoneOpenStyle</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The text-shadow CSS property adds shadows to text.</p><div class="fullcomment"><div class="comment cmt"><p>The text-shadow CSS property adds shadows to text. It accepts a comma-separated
+list of shadows to be applied to the text and text-decorations of the element.</p><p>Each shadow is specified as an offset from the text, along with optional
+color and blur radius values.</p><p>Multiple shadows are applied front-to-back, with the first-specified shadow
+on top.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.textTransform" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="textTransform"></a>
+      <a id="textTransform:textTransform"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$textTransform$.html"><span class="name">textTransform</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The text-transform CSS property specifies how to capitalize an element's
+text.</p>
+    </li><li name="scalatags.Styles.textUnderlinePosition" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="textUnderlinePosition"></a>
+      <a id="textUnderlinePosition:textUnderlinePosition"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$textUnderlinePosition$.html"><span class="name">textUnderlinePosition</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The CSS text-underline-position property specifies the position of the
+underline which is set using the text-decoration property underline value.</p>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -800,175 +1957,53 @@ looking at. It is used as the vanishing point by the perspective property.</p><p
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scalatags.Styles#transform" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transform:scalatags.TypedStyle[String]"></a>
-      <a id="transform:TypedStyle[String]"></a>
+    </li><li name="scalatags.Styles#top" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="top:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
+      <a id="top:AutoStyle[Length]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">transform</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">top</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">The CSS transform property lets you modify the coordinate space of the CSS
-visual formatting model.</p><div class="fullcomment"><div class="comment cmt"><p>The CSS transform property lets you modify the coordinate space of the CSS
-visual formatting model. Using it, elements can be translated, rotated,
-scaled, and skewed according to the values set.</p><p>If the property has a value different than none, a stacking context will be
-created. In that case the object will act as a containing block for
-position: fixed elements that it contains.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#transformOrigin" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transformOrigin:scalatags.TypedStyle[String]"></a>
-      <a id="transformOrigin:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">transformOrigin</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The transform-origin CSS property lets you modify the origin for
-transformations of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The transform-origin CSS property lets you modify the origin for
-transformations of an element. For example, the transform-origin of the
-rotate() function is the centre of rotation. (This property is applied by
-first translating the element by the negated value of the property, then
-applying the element's transform, then translating by the property value.)</p><p>Not explicitely set values are reset to their corresponding values.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles.transformStyle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="transformStyle"></a>
-      <a id="transformStyle:transformStyle"></a>
+      <p class="shortcomment cmt">The top CSS property specifies part of the position of positioned elements.</p><div class="fullcomment"><div class="comment cmt"><p>The top CSS property specifies part of the position of positioned elements.
+It has no effect on non-positioned elements.</p><p>For absolutely positioned elements (those with position: absolute or
+position: fixed), it specifies the distance between the top margin edge of
+the element and the top edge of its containing block.</p><p>For relatively positioned elements (those with position: relative), it
+specifies the amount the element is moved below its normal position.</p><p>When both top and bottom are specified, the element position is
+over-constrained and the top property has precedence: the computed value
+of bottom is set to -top, while its specified value is ignored.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.verticalAlign" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="verticalAlign"></a>
+      <a id="verticalAlign:verticalAlign"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$transformStyle$.html"><span class="name">transformStyle</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <a href="Styles$verticalAlign$.html"><span class="name">verticalAlign</span></a><span class="result"> extends <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">The transform-style CSS property determines if the children of the element
-are positioned in the 3D-space or are flattened in the plane of the element.</p>
-    </li><li name="scalatags.Styles#transition" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transition:scalatags.TypedStyle[String]"></a>
-      <a id="transition:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">transition</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The CSS transition property is a shorthand property for transition-property,
-transition-duration, transition-timing-function, and transition-delay.</p><div class="fullcomment"><div class="comment cmt"><p>The CSS transition property is a shorthand property for transition-property,
-transition-duration, transition-timing-function, and transition-delay. It
-allows to define the transition between two states of an element. Different
-states may be defined using pseudo-classes like :hover or :active or
-dynamically set using JavaScript.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#transitionDelay" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transitionDelay:scalatags.MultiTimeStyle"></a>
-      <a id="transitionDelay:MultiTimeStyle"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">transitionDelay</span><span class="result">: <span class="extype" name="scalatags.MultiTimeStyle">MultiTimeStyle</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The transition-delay CSS property specifies the amount of time to wait
-between a change being requested to a property that is to be transitioned
-and the start of the transition effect.</p><div class="fullcomment"><div class="comment cmt"><p>The transition-delay CSS property specifies the amount of time to wait
-between a change being requested to a property that is to be transitioned
-and the start of the transition effect.</p><p>A value of 0s, or 0ms, indicates that the property will begin to animate its
-transition immediately when the value changes; positive values will delay
-the start of the transition effect for the corresponding number of seconds.
-Negative values cause the transition to begin immediately, but to cause the
-transition to seem to begin partway through the animation effect.</p><p>You may specify multiple delays; each delay will be applied to the
-corresponding property as specified by the transition-property property,
-which acts as a master list. If there are fewer delays specified than in the
-master list, missing values are set to the initial value (0s). If there are
-more delays, the list is simply truncated to the right size. In both case
-the CSS declaration stays valid.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#transitionDuration" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transitionDuration:scalatags.MultiTimeStyle"></a>
-      <a id="transitionDuration:MultiTimeStyle"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">transitionDuration</span><span class="result">: <span class="extype" name="scalatags.MultiTimeStyle">MultiTimeStyle</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The transition-duration CSS property specifies the number of seconds or
-milliseconds a transition animation should take to complete.</p><div class="fullcomment"><div class="comment cmt"><p>The transition-duration CSS property specifies the number of seconds or
-milliseconds a transition animation should take to complete. By default,
-the value is 0s, meaning that no animation will occur.</p><p>You may specify multiple durations; each duration will be applied to the
-corresponding property as specified by the transition-property property,
-which acts as a master list. If there are fewer durations specified than in
-the master list, the user agent repeat the list of durations. If there are
-more durations, the list is simply truncated to the right size. In both
-case the CSS declaration stays valid.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#transitionProperty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transitionProperty:scalatags.TypedStyle[String]"></a>
-      <a id="transitionProperty:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">transitionProperty</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The transition-property CSS property is used to specify the names of CSS
-properties to which a transition effect should be applied.</p><div class="fullcomment"><div class="comment cmt"><p>The transition-property CSS property is used to specify the names of CSS
-properties to which a transition effect should be applied.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles#transitionTimingFunction" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transitionTimingFunction:scalatags.TypedStyle[String]"></a>
-      <a id="transitionTimingFunction:TypedStyle[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">transitionTimingFunction</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The CSS transition-timing-function property is used to describe how the
-intermediate values of the CSS properties being affected by a transition
-effect are calculated.</p><div class="fullcomment"><div class="comment cmt"><p>The CSS transition-timing-function property is used to describe how the
-intermediate values of the CSS properties being affected by a transition
-effect are calculated. This in essence lets you establish an acceleration
-curve, so that the speed of the transition can vary over its duration.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles.unicodeBidi" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="unicodeBidi"></a>
-      <a id="unicodeBidi:unicodeBidi"></a>
+      <p class="comment cmt">The vertical-align CSS property specifies the vertical alignment of an
+inline or table-cell box.</p>
+    </li><li name="scalatags.Styles.visibility" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="visibility"></a>
+      <a id="visibility:visibility"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$unicodeBidi$.html"><span class="name">unicodeBidi</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <a href="Styles$visibility$.html"><span class="name">visibility</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
       </span>
       </h4>
-      <p class="comment cmt">The unicode-bidi CSS property together with the direction property relates
-to the handling of bidirectional text in a document.</p>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -982,7 +2017,10 @@ to the handling of bidirectional text in a document.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -998,7 +2036,10 @@ to the handling of bidirectional text in a document.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1014,41 +2055,88 @@ to the handling of bidirectional text in a document.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalatags.Styles#widows" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="widows:scalatags.TypedStyle[Number]"></a>
-      <a id="widows:TypedStyle[Number]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">widows</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="java.lang.Number">Number</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The widows CSS property defines how many minimum lines must be left on top
-of a new page, on a paged media.</p><div class="fullcomment"><div class="comment cmt"><p>The widows CSS property defines how many minimum lines must be left on top
-of a new page, on a paged media. In typography, a widow is the last line of
-a paragraph appearing alone at the top of a page. Setting the widows property
-allows to prevent widows to be left.</p><p>On a non-paged media, like screen, the widows CSS property has no effect.</p><p>MDN
-</p></div></div>
-    </li><li name="scalatags.Styles.wordBreak" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="wordBreak"></a>
-      <a id="wordBreak:wordBreak"></a>
+    </li><li name="scalatags.Styles.whiteSpace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="whiteSpace"></a>
+      <a id="whiteSpace:whiteSpace"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$$wordBreak$.html"><span class="name">wordBreak</span></a><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <a href="Styles$whiteSpace$.html"><span class="name">whiteSpace</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
       </span>
       </h4>
-      <p class="comment cmt">The word-break CSS property is used to specify how (or if) to break lines
-within words.</p>
+      <p class="comment cmt">The white-space CSS property is used to to describe how whitespace inside
+the element is handled.</p>
+    </li><li name="scalatags.Styles#width" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="width:scalatags.AutoStyle[scalatags.DataTypes.Length]"></a>
+      <a id="width:AutoStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">width</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The width CSS property specifies the width of the content area of an element.</p><div class="fullcomment"><div class="comment cmt"><p>The width CSS property specifies the width of the content area of an element.
+The content area is inside the padding, border, and margin of the element.</p><p>The min-width and max-width properties override width.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#wordSpacing" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wordSpacing:scalatags.NormalOpenStyle[scalatags.DataTypes.Length]"></a>
+      <a id="wordSpacing:NormalOpenStyle[Length]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wordSpacing</span><span class="result">: <span class="extype" name="scalatags.NormalOpenStyle">NormalOpenStyle</span>[<a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The word-spacing CSS property specifies spacing behavior between tags and
+words.</p><div class="fullcomment"><div class="comment cmt"><p>The word-spacing CSS property specifies spacing behavior between tags and
+words.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles.wordWrap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wordWrap"></a>
+      <a id="wordWrap:wordWrap"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Styles$wordWrap$.html"><span class="name">wordWrap</span></a><span class="result"> extends <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
+    </li><li name="scalatags.Styles#zIndex" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="zIndex:scalatags.AutoStyle[Int]"></a>
+      <a id="zIndex:AutoStyle[Int]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">zIndex</span><span class="result">: <span class="extype" name="scalatags.AutoStyle">AutoStyle</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The z-index CSS property specifies the z-order of an element and its
+descendants.</p><div class="fullcomment"><div class="comment cmt"><p>The z-index CSS property specifies the z-order of an element and its
+descendants. When elements overlap, z-order determines which one covers the
+other. An element with a larger z-index generally covers an element with a
+lower one.</p><p>MDN
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -1058,7 +2146,9 @@ within words.</p>
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scalatags.Styles">
+              <h3>Inherited from <a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
@@ -1078,7 +2168,6 @@ within words.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
     </body>
       </html>

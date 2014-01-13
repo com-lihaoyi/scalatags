@@ -9,11 +9,6 @@
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
@@ -44,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides extension methods on strings to fit them into HtmlNode fragments.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides extension methods on strings to fit them into Scalatag fragments.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -186,32 +181,32 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scalatags.ExtendedString#attr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="attr:scalatags.Attr[String]"></a>
-      <a id="attr:Attr[String]"></a>
+      <a id="attr:scalatags.UntypedAttr"></a>
+      <a id="attr:UntypedAttr"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">attr</span><span class="result">: <a href="Attr.html" class="extype" name="scalatags.Attr">Attr</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">attr</span><span class="result">: <a href="UntypedAttr.html" class="extype" name="scalatags.UntypedAttr">UntypedAttr</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Converts the string to a Attr
+      <p class="shortcomment cmt">Converts the string to a <a href="UntypedAttr.html" class="extype" name="scalatags.UntypedAttr">UntypedAttr</a>
 </p>
     </li><li name="scalatags.ExtendedString#attrTyped" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="attrTyped[T]:scalatags.Attr[T]"></a>
-      <a id="attrTyped[T]:Attr[T]"></a>
+      <a id="attrTyped[T]:scalatags.TypedAttr[T]"></a>
+      <a id="attrTyped[T]:TypedAttr[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">attrTyped</span><span class="tparams">[<span name="T">T</span>]</span><span class="result">: <a href="Attr.html" class="extype" name="scalatags.Attr">Attr</a>[<span class="extype" name="scalatags.ExtendedString.attrTyped.T">T</span>]</span>
+        <span class="name">attrTyped</span><span class="tparams">[<span name="T">T</span>]</span><span class="result">: <a href="TypedAttr.html" class="extype" name="scalatags.TypedAttr">TypedAttr</a>[<span class="extype" name="scalatags.ExtendedString.attrTyped.T">T</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Converts the string to a TypedAttr; also takes the type of the TypedAttr
+      <p class="shortcomment cmt">Converts the string to a <a href="TypedAttr.html" class="extype" name="scalatags.TypedAttr">TypedAttr</a>
 </p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -225,8 +220,11 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scalatags.ExtendedString#cls" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -241,7 +239,7 @@
         <span class="name">cls</span><span class="result">: <a href="Cls.html" class="extype" name="scalatags.Cls">Cls</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Converts the string to a CSS Cls object.</p>
+      <p class="shortcomment cmt">Converts the string to a CSS <a href="Cls.html" class="extype" name="scalatags.Cls">Cls</a> object.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -280,8 +278,11 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -363,18 +364,18 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scalatags.ExtendedString#style" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="style:scalatags.TypedStyle[String]"></a>
-      <a id="style:TypedStyle[String]"></a>
+      <a id="style:scalatags.UntypedStyle"></a>
+      <a id="style:UntypedStyle"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">style</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">style</span><span class="result">: <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Converts the string to a Style.</p><div class="fullcomment"><div class="comment cmt"><p>Converts the string to a Style. The string is used as the cssName of the
+      <p class="shortcomment cmt">Converts the string to a <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts the string to a <a href="UntypedStyle.html" class="extype" name="scalatags.UntypedStyle">UntypedStyle</a>. The string is used as the cssName of the
 style, and the jsName of the style is generated by converted the dashes
 to camelcase.
 </p></div></div>
@@ -390,9 +391,8 @@ to camelcase.
         <span class="name">styleTyped</span><span class="tparams">[<span name="T">T</span>]</span><span class="result">: <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>[<span class="extype" name="scalatags.ExtendedString.styleTyped.T">T</span>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Converts the string to a TypedStyle; also takes the type of the
-TypedStyle.</p><div class="fullcomment"><div class="comment cmt"><p>Converts the string to a TypedStyle; also takes the type of the
-TypedStyle. The string is used as the cssName of the style, and the
+      <p class="shortcomment cmt">Converts the string to a <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts the string to a <a href="TypedStyle.html" class="extype" name="scalatags.TypedStyle">TypedStyle</a>.
+The string is used as the cssName of the style, and the
 jsName of the style is generated by converted the dashes to camelcase.
 </p></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -420,7 +420,7 @@ jsName of the style is generated by converted the dashes to camelcase.
         <span class="name">tag</span><span class="result">: <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Converts the string to a HtmlTag
+      <p class="shortcomment cmt">Converts the string to a <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a>
 </p>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
@@ -435,6 +435,20 @@ jsName of the style is generated by converted the dashes to camelcase.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scalatags.ExtendedString#voidTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="voidTag:scalatags.HtmlTag"></a>
+      <a id="voidTag:HtmlTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">voidTag</span><span class="result">: <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Converts the string to a void <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a>; that means that they cannot
+contain any content, and can be rendered as self-closing tags.</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -448,7 +462,10 @@ jsName of the style is generated by converted the dashes to camelcase.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -464,7 +481,10 @@ jsName of the style is generated by converted the dashes to camelcase.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -480,7 +500,10 @@ jsName of the style is generated by converted the dashes to camelcase.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li></ol>
@@ -512,7 +535,6 @@ jsName of the style is generated by converted the dashes to camelcase.
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
     </body>
       </html>

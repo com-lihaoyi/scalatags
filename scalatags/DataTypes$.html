@@ -9,11 +9,6 @@
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
@@ -117,7 +112,7 @@ type to put in a parameter list or collection.
       </h4>
       <p class="comment cmt">The Color CSS data type denotes a color in the sRGB color space.</p>
     </li><li name="scalatags.DataTypes.ColorStop" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ColorStopextendsObject"></a>
+      <a id="ColorStopextendsAnyRef"></a>
       <a id="ColorStop:ColorStop"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -141,7 +136,7 @@ type to put in a parameter list or collection.
         <a href="DataTypes$$ColorStopPair.html"><span class="name">ColorStopPair</span></a><span class="params">(<span name="c">c: <a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a></span>, <span name="p">p: <a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a></span>)</span><span class="result"> extends <a href="DataTypes$$ColorStop.html" class="extype" name="scalatags.DataTypes.ColorStop">ColorStop</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Pair of Color and Length to be used in a gradient
+      <p class="comment cmt">Pair of <a href="DataTypes$$Color.html" class="extype" name="scalatags.DataTypes.Color">Color</a> and <a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a> to be used in a gradient
 </p>
     </li><li name="scalatags.DataTypes.Element" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ElementextendsDataTypes.ImagewithProductwithSerializable"></a>
@@ -169,7 +164,7 @@ type to put in a parameter list or collection.
         <a href="DataTypes$$Gradient.html"><span class="name">Gradient</span></a><span class="result"> extends <a href="DataTypes$$Image.html" class="extype" name="scalatags.DataTypes.Image">Image</a></span>
       </span>
       </h4>
-      <p class="comment cmt">An image which is a gradient, either Linear or Radial
+      <p class="comment cmt">An image which is a gradient, either <span class="extype" name="Linear">Linear</span> or <span class="extype" name="Radial">Radial</span>
 </p>
     </li><li name="scalatags.DataTypes.Hex" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="HexextendsDataTypes.ColorwithProductwithSerializable"></a>
@@ -213,7 +208,7 @@ type to put in a parameter list or collection.
       <p class="comment cmt">A color represented as Hue (0-360), Saturation (0-100) and Lightness (0-100)
 as well as an alpha (opacity) from 0.</p>
     </li><li name="scalatags.DataTypes.Image" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ImageextendsObject"></a>
+      <a id="ImageextendsAnyRef"></a>
       <a id="Image:Image"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -237,7 +232,7 @@ as well as an alpha (opacity) from 0.</p>
         <a href="DataTypes$$Length.html"><span class="name">Length</span></a><span class="params">(<span name="number">number: <span class="extype" name="scala.Double">Double</span></span>, <span name="unit">unit: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scalatags.DataTypes.NumberUnit">NumberUnit</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
-      <p class="comment cmt">The Length CSS data type denotes distance measurements.</p>
+      <p class="comment cmt">The <a href="DataTypes$$Length.html" class="extype" name="scalatags.DataTypes.Length">Length</a> CSS data type denotes distance measurements.</p>
     </li><li name="scalatags.DataTypes.LinearGradient" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="LinearGradientextendsDataTypes.GradientwithProductwithSerializable"></a>
       <a id="LinearGradient:LinearGradient"></a>
@@ -253,7 +248,7 @@ as well as an alpha (opacity) from 0.</p>
       <p class="comment cmt">The CSS linear-gradient() function creates an Image which represents a
 linear gradient of colors.</p>
     </li><li name="scalatags.DataTypes.Position" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="PositionextendsObject"></a>
+      <a id="PositionextendsAnyRef"></a>
       <a id="Position:Position"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -280,7 +275,7 @@ linear gradient of colors.</p>
       <p class="comment cmt">The CSS radial-gradient() function creates an Image which represents a
 gradient of colors radiating from an origin, the center of the gradient.</p>
     </li><li name="scalatags.DataTypes.Ratio" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="RatioextendsObject"></a>
+      <a id="RatioextendsAnyRef"></a>
       <a id="Ratio:Ratio"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -444,8 +439,11 @@ as well as an alpha (opacity) from 0.</p>
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -486,8 +484,11 @@ as well as an alpha (opacity) from 0.</p>
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -607,7 +608,10 @@ as well as an alpha (opacity) from 0.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -623,7 +627,10 @@ as well as an alpha (opacity) from 0.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -639,7 +646,10 @@ as well as an alpha (opacity) from 0.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li></ol>
@@ -671,7 +681,6 @@ as well as an alpha (opacity) from 0.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
     </body>
       </html>

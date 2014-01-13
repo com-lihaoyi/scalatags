@@ -2,22 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>unicodeBidi - scalatags.Styles.unicodeBidi</title>
-          <meta name="description" content="unicodeBidi - scalatags.Styles.unicodeBidi" />
-          <meta name="keywords" content="unicodeBidi scalatags.Styles.unicodeBidi" />
+          <title>Modifier - scalatags.Modifier</title>
+          <meta name="description" content="Modifier - scalatags.Modifier" />
+          <meta name="keywords" content="Modifier scalatags.Modifier" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
-            var hash = 'scalatags.Styles$$unicodeBidi$';
+            var hash = 'scalatags.Modifier';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -27,32 +22,33 @@
    	  </script>
     
         </head>
-        <body class="value">
+        <body class="type">
       <div id="definition">
-        <img src="../lib/object_big.png" />
-        <p id="owner"><a href="package.html" class="extype" name="scalatags">scalatags</a>.<a href="Styles$.html" class="extype" name="scalatags.Styles">Styles</a></p>
-        <h1>unicodeBidi</h1>
+        <img src="../lib/trait_big.png" />
+        <p id="owner"><a href="package.html" class="extype" name="scalatags">scalatags</a></p>
+        <h1>Modifier</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">unicodeBidi</span><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>
+        <span class="name">Modifier</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The unicode-bidi CSS property together with the direction property relates
-to the handling of bidirectional text in a document. For example, if a block
-of text contains both left-to-right and right-to-left text then the
-user-agent uses a complex Unicode algorithm to decide how to display the
-text. This property overrides this algorithm and allows the developer to
-control the text embedding.</p><p>MDN
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Represents a value that can be nested within a <a href="Node.html" class="extype" name="scalatags.Node">Node</a>. This can be another
+<a href="Node.html" class="extype" name="scalatags.Node">Node</a>, but can also be a CSS style or HTML attribute binding, which will
+add itself to the node's attributes but not appear in the final <code>children</code>
+list.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="Style.html" class="extype" name="scalatags.Style">Style</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div><div class="toggleContainer block">
+          <span class="toggle">Known Subclasses</span>
+          <div class="subClasses hiddenContent"><a href="AttrPair.html" class="extype" name="scalatags.AttrPair">AttrPair</a>, <a href="Cls.html" class="extype" name="scalatags.Cls">Cls</a>, <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a>, <a href="Node.html" class="extype" name="scalatags.Node">Node</a>, <a href="RawNode.html" class="extype" name="scalatags.RawNode">RawNode</a>, <a href="package$$SeqModifier.html" class="extype" name="scalatags.SeqModifier">SeqModifier</a>, <a href="StringNode.html" class="extype" name="scalatags.StringNode">StringNode</a>, <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></div>
         </div></div>
         
 
@@ -70,7 +66,7 @@ control the text embedding.</p><p>MDN
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalatags.Styles.unicodeBidi"><span>unicodeBidi</span></li><li class="in" name="scalatags.Style"><span>Style</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalatags.Modifier"><span>Modifier</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -92,10 +88,28 @@ control the text embedding.</p><p>MDN
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Abstract Value Members</h3>
+              <ol><li name="scalatags.Modifier#transform" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="transform(tag:scalatags.HtmlTag):scalatags.HtmlTag"></a>
+      <a id="transform(HtmlTag):HtmlTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">transform</span><span class="params">(<span name="tag">tag: <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>)</span><span class="result">: <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Transforms the tag and returns a new one.</p><div class="fullcomment"><div class="comment cmt"><p>Transforms the tag and returns a new one.</p><p>Can't be <code>apply</code>, because some <span class="extype" name="Modifiers">Modifiers</span> (e.g. <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a>) already have an
+<span class="extype" name="apply">apply</span> method, and the overloading becomes ambiguous.
+</p></div></div>
+    </li></ol>
+            </div>
 
         <div id="values" class="values members">
-              <h3>Value Members</h3>
+              <h3>Concrete Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:AnyRef):Boolean"></a>
       <a id="!=(AnyRef):Boolean"></a>
@@ -174,24 +188,6 @@ control the text embedding.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.Styles.unicodeBidi#bidi-override" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="bidi-override:scalatags.StylePair"></a>
-      <a id="bidi-override:StylePair"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: bidi$minusoverride" class="name">bidi-override</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">For inline elements this creates an override.</p><div class="fullcomment"><div class="comment cmt"><p>For inline elements this creates an override. For block container elements
-this creates an override for inline-level descendants not within another
-block container element. This means that inside the element, reordering
-is strictly in sequence according to the direction property; the implicit
-part of the bidirectional algorithm is ignored.</p><p>MDN
-</p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -204,40 +200,13 @@ part of the bidirectional algorithm is ignored.</p><p>MDN
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalatags.Style#cssName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="cssName:String"></a>
-      <a id="cssName:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">cssName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
-    </li><li name="scalatags.Styles.unicodeBidi#embed" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="embed:scalatags.StylePair"></a>
-      <a id="embed:StylePair"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">embed</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">If the element is inline, this value opens an additional level of
-embedding with respect to the bidirectional algorithm.</p><div class="fullcomment"><div class="comment cmt"><p>If the element is inline, this value opens an additional level of
-embedding with respect to the bidirectional algorithm. The direction of
-this embedding level is given by the direction property.</p><p>MDN
-</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -276,8 +245,11 @@ this embedding level is given by the direction property.</p><p>MDN
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">java.lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -319,19 +291,6 @@ this embedding level is given by the direction property.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.Style#jsName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="jsName:String"></a>
-      <a id="jsName:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">jsName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -345,23 +304,6 @@ this embedding level is given by the direction property.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scalatags.Styles.unicodeBidi#normal" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="normal:scalatags.StylePair"></a>
-      <a id="normal:StylePair"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">normal</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">The element does not offer a additional level of embedding with respect
-to the bidirectional algorithm.</p><div class="fullcomment"><div class="comment cmt"><p>The element does not offer a additional level of embedding with respect
-to the bidirectional algorithm. For inline elements implicit reordering
-works across element boundaries.</p><p>MDN
-</p></div></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -401,7 +343,7 @@ works across element boundaries.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scalatags.Style#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
@@ -410,10 +352,10 @@ works across element boundaries.</p><p>MDN
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a> → AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -427,7 +369,10 @@ works across element boundaries.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -443,7 +388,10 @@ works across element boundaries.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -459,25 +407,12 @@ works across element boundaries.</p><p>MDN
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalatags.Style#~=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="~=(value:String):scalatags.StylePair"></a>
-      <a id="~=(String):StylePair"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $tilde$eq" class="name">~=</span><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="StylePair.html" class="extype" name="scalatags.StylePair">StylePair</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Force-assigns a typed style to a string even if its type would not normally
-.</p><div class="fullcomment"><div class="comment cmt"><p>Force-assigns a typed style to a string even if its type would not normally
-.allow it
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Style.html" class="extype" name="scalatags.Style">Style</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -487,9 +422,7 @@ works across element boundaries.</p><p>MDN
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scalatags.Style">
-              <h3>Inherited from <a href="Style.html" class="extype" name="scalatags.Style">Style</a></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
@@ -509,7 +442,6 @@ works across element boundaries.</p><p>MDN
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
     </body>
       </html>
