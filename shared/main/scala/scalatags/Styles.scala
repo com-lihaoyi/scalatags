@@ -550,7 +550,7 @@ object Styles2{
    * element.
    *
    * This properties applies to block elements that generate a box. It won't
-   * apply on an empty `<div>` that won't generate a box.
+   * apply on an empty div that won't generate a box.
    *
    * MDN
    */
@@ -1626,62 +1626,62 @@ trait Styles {
     val `inline-block` = this := "inline-block"
     /**
      * The inline-table value does not have a direct mapping in HTML. It behaves
-     * like a `<table>` HTML element, but as an inline box, rather than a
+     * like a table HTML element, but as an inline box, rather than a
      * block-level box. Inside the table box is a block-level context
      *
      * MDN
      */
     val `inline-table` = this := "inline-table"
     /**
-     * Behaves like the `<table>` HTML element. It defines a block-level box.
+     * Behaves like the table HTML element. It defines a block-level box.
      *
      * MDN
      */
     val table = this := "table"
     /**
-     * Behaves like the `<caption>` HTML element.
+     * Behaves like the caption HTML element.
      *
      * MDN
      */
     val `table-caption` = this := "table-caption"
     /**
-     * Behaves like the `<td>` HTML element
+     * Behaves like the td HTML element
      *
      * MDN
      */
     val `table-cell` = this := "table-cell"
     /**
-     * These elements behave like the corresponding `<col>` HTML elements.
+     * These elements behave like the corresponding col HTML elements.
      *
      * MDN
      */
     val `table-column` = this := "table-column"
     /**
-     * These elements behave like the corresponding `<colgroup>` HTML elements.
+     * These elements behave like the corresponding colgroup HTML elements.
      *
      * MDN
      */
     val `table-column-group` = this := "table-column-group"
     /**
-     * These elements behave like the corresponding `<tfoot>` HTML elements
+     * These elements behave like the corresponding tfoot HTML elements
      *
      * MDN
      */
     val `table-footer-group` = this := "table-footer-group"
     /**
-     * These elements behave like the corresponding `<thead>` HTML elements
+     * These elements behave like the corresponding thead HTML elements
      *
      * MDN
      */
     val `table-header-group` = this := "table-header-group"
     /**
-     * Behaves like the `<tr>` HTML element
+     * Behaves like the tr HTML element
      *
      * MDN
      */
     val `table-row` = this := "table-row"
     /**
-     * These elements behave like the corresponding `<tbody>` HTML elements
+     * These elements behave like the corresponding tbody HTML elements
      *
      * MDN
      */
@@ -1904,7 +1904,7 @@ trait Styles {
   object verticalAlign extends TypedStyle[Length]("verticalAlign", "vertical-align") {
     /**
      * Aligns the baseline of the element with the baseline of its parent. The
-     * baseline of some replaced elements, like `<textarea>` is not specified by
+     * baseline of some replaced elements, like textarea is not specified by
      * the HTML specification, meaning that their behavior with this keyword may
      * change from one browser to the other.
      *
@@ -2111,7 +2111,7 @@ trait Styles {
   /**
    * The list-style-type CSS property specifies appearance of a list item element.
    * As it is the only one who defaults to display:list-item, this is usually a
-   * `<li>` element, but can be any element with this display value.
+   * li element, but can be any element with this display value.
    *
    * MDN
    */
@@ -2268,7 +2268,7 @@ trait Styles {
   val overflowY = new Overflow("overflowY", "overflow-y")
 
   /**
-   * The caption-side CSS property positions the content of a table's `<caption>`
+   * The caption-side CSS property positions the content of a table's caption
    * on the specified side.
    *
    * MDN
@@ -3087,21 +3087,21 @@ trait Styles {
     val nowrap = this := "nowrap"
     /**
      * Sequences of whitespace are preserved, lines are only broken at newline
-     * characters in the source and at `<br>` elements.
+     * characters in the source and at br elements.
      *
      * MDN
      */
     val pre = this := "pre"
     /**
      * Sequences of whitespace are preserved. Lines are broken at newline
-     * characters, at `<br>`, and as necessary to fill line boxes.
+     * characters, at br, and as necessary to fill line boxes.
      *
      * MDN
      */
     val `pre-wrap` = this := "pre-wrap"
     /**
      * Sequences of whitespace are collapsed. Lines are broken at newline
-     * characters, at `<br>`, and as necessary to fill line boxes.
+     * characters, at br, and as necessary to fill line boxes.
      *
      * MDN
      */

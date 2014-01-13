@@ -21,7 +21,7 @@ object SvgTags {
 
   /**
    * The altGlyphItem element provides a set of candidates for glyph substitution
-   * by the `<altglyph>` element.
+   * by the altglyph element.
    *
    * MDN
    */
@@ -85,7 +85,7 @@ object SvgTags {
    * of a defs element. Defining these elements inside of a defs element
    * promotes understandability of the SVG content and thus promotes
    * accessibility. Graphical elements defined in a defs will not be directly
-   * rendered. You can use a `<use>` element to render those elements wherever you
+   * rendered. You can use a use element to render those elements wherever you
    * want on the viewport.
    *
    * MDN
@@ -132,8 +132,8 @@ object SvgTags {
   val fecolormatrix = "fecolormatrix".tag
   /**
    * The color of each pixel is modified by changing each channel (R, G, B, and
-   * A) to the result of what the children `<fefuncr>`, `<fefuncb>`, `<fefuncg>`,
-   * and `<fefunca>` return.
+   * A) to the result of what the children fefuncr, fefuncb, fefuncg,
+   * and fefunca return.
    *
    * MDN
    */
@@ -174,8 +174,8 @@ object SvgTags {
   val fedisplacementmap = "fedisplacementmap".tag
   /**
    * This filter primitive define a distant light source that can be used
-   * within a lighting filter primitive: `<fediffuselighting>` or
-   * `<fespecularlighting>`.
+   * within a lighting filter primitive: fediffuselighting or
+   * fespecularlighting.
    *
    * MDN
    */
@@ -189,28 +189,28 @@ object SvgTags {
   val feflood = "feflood".tag
   /**
    * This filter primitive defines the transfer function for the alpha component
-   * of the input graphic of its parent `<fecomponenttransfer>` element.
+   * of the input graphic of its parent fecomponenttransfer element.
    *
    * MDN
    */
   val fefunca = "fefunca".tag
   /**
    * This filter primitive defines the transfer function for the blue component
-   * of the input graphic of its parent `<fecomponenttransfer>` element.
+   * of the input graphic of its parent fecomponenttransfer element.
    *
    * MDN
    */
   val fefuncb = "fefuncb".tag
   /**
    * This filter primitive defines the transfer function for the green component
-   * of the input graphic of its parent `<fecomponenttransfer>` element.
+   * of the input graphic of its parent fecomponenttransfer element.
    *
    * MDN
    */
   val fefuncg = "fefuncg".tag
   /**
    * This filter primitive defines the transfer function for the red component
-   * of the input graphic of its parent `<fecomponenttransfer>` element.
+   * of the input graphic of its parent fecomponenttransfer element.
    *
    * MDN
    */
@@ -235,7 +235,7 @@ object SvgTags {
   /**
    * The feMerge filter allows filter effects to be applied concurrently
    * instead of sequentially. This is achieved by other filters storing their
-   * output via the result attribute and then accessing it in a `<femergenode>`
+   * output via the result attribute and then accessing it in a femergenode
    * child.
    *
    * MDN
@@ -244,7 +244,7 @@ object SvgTags {
 
   /**
    * The feMergeNode takes the result of another filter to be processed by its
-   * parent `<femerge>`.
+   * parent femerge.
    *
    * MDN
    */
@@ -282,7 +282,7 @@ object SvgTags {
   val fespotlight = "fespotlight".tag
   /**
    * An input image is tiled and the result used to fill a target. The effect
-   * is similar to the one of a `<pattern>`.
+   * is similar to the one of a pattern.
    *
    * MDN
    */
@@ -318,7 +318,7 @@ object SvgTags {
   val `font-face` = "font-face".tag
   /**
    * The font-face-format element describes the type of font referenced by its
-   * parent `<font-face-uri>`.
+   * parent font-face-uri.
    *
    * MDN
    */
@@ -332,8 +332,8 @@ object SvgTags {
   val `font-face-name` = "font-face-name".tag
   /**
    * The font-face-src element corresponds to the src property in CSS @font-face
-   * descriptions. It serves as container for `<font-face-name>`, pointing to
-   * locally installed copies of this font, and `<font-face-uri>`, utilizing
+   * descriptions. It serves as container for font-face-name, pointing to
+   * locally installed copies of this font, and font-face-uri, utilizing
    * remotely defined fonts.
    *
    * MDN
@@ -358,7 +358,7 @@ object SvgTags {
    * The g element is a container used to group objects. Transformations applied
    * to the g element are performed on all of its child elements. Attributes
    * applied are inherited by child elements. In addition, it can be used to
-   * define complex objects that can later be referenced with the `<use>` element.
+   * define complex objects that can later be referenced with the use element.
    *
    * MDN
    */
@@ -371,7 +371,7 @@ object SvgTags {
   val glyph = "glyph".tag
   /**
    * The glyphRef element provides a single possible glyph to the referencing
-   * `<altglyph>` substitution.
+   * altglyph substitution.
    *
    * MDN
    */
@@ -384,7 +384,7 @@ object SvgTags {
    */
   val hkern = "hkern".tag
   /**
-   * The SVG Image Element (`<image>`) allows a raster image into be included in
+   * The SVG Image Element (image) allows a raster image into be included in
    * an SVG document.
    *
    * MDN
@@ -406,14 +406,14 @@ object SvgTags {
   val lineargradient = "lineargradient".tag
   /**
    * The marker element defines the graphics that is to be used for drawing
-   * arrowheads or polymarkers on a given `<path>`, `<line>`, `<polyline>` or
-   * `<polygon>` element.
+   * arrowheads or polymarkers on a given path, line, polyline or
+   * polygon element.
    *
    * MDN
    */
   val marker = "marker".tag
   /**
-   * In SVG, you can specify that any other graphics object or `<g>` element can
+   * In SVG, you can specify that any other graphics object or g element can
    * be used as an alpha mask for compositing the current object into the
    * background. A mask is defined with the mask element. A mask is
    * used/referenced using the mask property.
@@ -432,14 +432,14 @@ object SvgTags {
   val metadata = "metadata".tag
   /**
    * The missing-glyph's content is rendered, if for a given character the font
-   * doesn't define an appropriate `<glyph>`.
+   * doesn't define an appropriate glyph.
    *
    * MDN
    */
   val `missing-glyph` = "missing-glyph".tag
   /**
-   * the mpath sub-element for the `<animatemotion>` element provides the ability
-   * to reference an external `<path>` element as the definition of a motion path.
+   * the mpath sub-element for the animatemotion element provides the ability
+   * to reference an external path element as the definition of a motion path.
    *
    * MDN
    */
@@ -502,8 +502,8 @@ object SvgTags {
   val set = "set".tag
   /**
    * The ramp of colors to use on a gradient is defined by the stop elements
-   * that are child elements to either the `<lineargradient>` element or the
-   * `<radialgradient>` element.
+   * that are child elements to either the lineargradient element or the
+   * radialgradient element.
    *
    * MDN
    */
@@ -522,7 +522,7 @@ object SvgTags {
    * systemLanguage attributes on its direct child elements in order, and then
    * processes and renders the first child for which these attributes evaluate
    * to true. All others will be bypassed and therefore not rendered. If the
-   * child element is a container element such as a `<g>`, then the entire
+   * child element is a container element such as a g, then the entire
    * subtree is either processed/rendered or bypassed/not rendered.
    *
    * MDN
@@ -530,12 +530,12 @@ object SvgTags {
   val switch = "switch".tag
   /**
    * The symbol element is used to define graphical template objects which can
-   * be instantiated by a `<use>` element. The use of symbol elements for
+   * be instantiated by a use element. The use of symbol elements for
    * graphics that are used multiple times in the same document adds structure
    * and semantics. Documents that are rich in structure may be rendered
    * graphically, as speech, or as braille, and thus promote accessibility.
    * note that a symbol element itself is not rendered. Only instances of a
-   * symbol element (i.e., a reference to a symbol by a `<use>` element) are
+   * symbol element (i.e., a reference to a symbol by a use element) are
    * rendered.
    *
    * MDN
@@ -551,24 +551,24 @@ object SvgTags {
   val text = "text".tag
   /**
    * In addition to text drawn in a straight line, SVG also includes the
-   * ability to place text along the shape of a `<path>` element. To specify that
-   * a block of text is to be rendered along the shape of a `<path>`, include
+   * ability to place text along the shape of a path element. To specify that
+   * a block of text is to be rendered along the shape of a path, include
    * the given text within a textPath element which includes an xlink:href
-   * attribute with a reference to a `<path>` element.
+   * attribute with a reference to a path element.
    *
    * MDN
    */
   val textpath = "textpath".tag
   /**
-   * The textual content for a `<text>` can be either character data directly
-   * embedded within the `<text>` element or the character data content of a
+   * The textual content for a text can be either character data directly
+   * embedded within the text element or the character data content of a
    * referenced element, where the referencing is specified with a tref element.
    *
    * MDN
    */
   val tref = "tref".tag
   /**
-   * Within a `<text>` element, text and font properties and the current text
+   * Within a text element, text and font properties and the current text
    * position can be adjusted with absolute or relative coordinate values by
    * including a tspan element.
    *

@@ -34,8 +34,8 @@ trait Attrs{
   val href = "href".attr
   /**
    * The URI of a program that processes the information submitted via the form.
-   * This value can be overridden by a formaction attribute on a `<button>` or
-   * `<input>` element.
+   * This value can be overridden by a formaction attribute on a button or
+   * input element.
    *
    * MDN
    */
@@ -68,7 +68,7 @@ trait Attrs{
    *   context (that is, the browsing context that is an ancestor of the current
    *   one, and has no parent). If there is no parent, this option behaves the
    *   same way as _self.
-   * - iframename: The response is displayed in a named `<iframe>`.
+   * - iframename: The response is displayed in a named iframe.
    */
   val target = "target".attr
   /**
@@ -93,7 +93,7 @@ trait Attrs{
    */
   val onblur = "onblur".attr
   /**
-   * The change event is fired for `<input>`, `<select>`, and `<textarea>` elements
+   * The change event is fired for input, select, and textarea elements
    * when a change to the element's value is committed by the user.
    *
    * MDN
@@ -201,7 +201,7 @@ trait Attrs{
   /**
    * This attribute contains CSS styling declarations to be applied to the
    * element. Note that it is recommended for styles to be defined in a separate
-   * file or files. This attribute and the `<style>` element have mainly the
+   * file or files. This attribute and the style element have mainly the
    * purpose of allowing for quick styling, for example for testing purposes.
    *
    * MDN

@@ -16,14 +16,14 @@ case class Cls(name: String) extends Modifier{
 }
 
 /**
- * A [[Node] which contains a String.
+ * A [[scalatags.Node] which contains a String.
  */
 case class StringNode(v: String) extends Node{
   def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
 }
 
 /**
- * A [[Node]] which contains a String which will not be escaped.
+ * A [[scalatags.Node]] which contains a String which will not be escaped.
  */
 case class RawNode(v: String) extends Node{
   def writeTo(strb: StringBuilder): Unit = strb ++= v
@@ -62,7 +62,7 @@ trait Modifier{
   /**
    * Transforms the tag and returns a new one.
    *
-   * Can't be `apply`, because some [[Modifiers]] (e.g. [[HtmlTag]]) already have an
+   * Can't be `apply`, because some [[Modifier]]s (e.g. [[HtmlTag]]) already have an
    * [[apply]] method, and the overloading becomes ambiguous.
    */
   def transform(tag: HtmlTag): HtmlTag

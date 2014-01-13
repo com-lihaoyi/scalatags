@@ -29,13 +29,13 @@ package object scalatags {
   def raw(s: String) = new RawNode(s)
 
   /**
-   * Allows you to modify a HtmlNode by adding a String to its list of children
+   * Allows you to modify a HtmlTag by adding a String to its list of children
    */
   implicit def stringNode(v: String) = new StringNode(v)
 
 
   /**
-   * Allows you to modify a [[HtmlNode]] by adding a Seq containing other nest-able
+   * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
    */
   implicit class SeqModifier[A <% Modifier](xs: Seq[A]) extends Modifier{

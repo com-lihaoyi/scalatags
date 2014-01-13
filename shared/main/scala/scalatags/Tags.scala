@@ -163,7 +163,7 @@ object Tags2{
    */
   val mark = "mark".tag
   /**
-   * Represents content to be marked with ruby annotations , short runs of text
+   * Represents content to be marked with ruby annotations, short runs of text
    * presented alongside the text. This is often used in conjunction with East
    * Asian language where the annotations act as a guide for pronunciation, like
    * the Japanese furigana .
@@ -238,7 +238,7 @@ object Tags2{
    */
   val details = "details".tag
   /**
-   * A summary , caption , or legend for a given `<details>`.
+   * A summary, caption, or legend for a given details.
    *
    *  MDN
    */
@@ -320,7 +320,7 @@ trait Tags{
 
   // Sections
   /**
-   * Represents the content of an HTML document. There is only one `<body>`
+   * Represents the content of an HTML document. There is only one body
    *   element in a document.
    *
    *  MDN
@@ -553,7 +553,7 @@ trait Tags{
    */
   val br = "br".voidTag
   /**
-   * Represents a line break opportunity , that is a suggested point for wrapping
+   * Represents a line break opportunity, that is a suggested point for wrapping
    * text in order to improve readability of text split on several lines.
    *
    *  MDN
@@ -582,7 +582,7 @@ trait Tags{
    */
   val img = "img".voidTag
   /**
-   * Represents a nested browsing context , that is an embedded HTML document.
+   * Represents a nested browsing context, that is an embedded HTML document.
    *
    *  MDN
    */
@@ -595,20 +595,20 @@ trait Tags{
    */
   val embed = "embed".voidTag
   /**
-   * Represents an external resource , which is treated as an image, an HTML
+   * Represents an external resource, which is treated as an image, an HTML
    * sub-document, or an external resource to be processed by a plug-in.
    *
    *  MDN
    */
   val `object` = "object".tag
   /**
-   * Defines parameters for use by plug-ins invoked by `<object>` elements.
+   * Defines parameters for use by plug-ins invoked by object elements.
    *
    *  MDN
    */
   val param = "param".voidTag
   /**
-   * Represents a video , and its associated audio files and captions, with the
+   * Represents a video, and its associated audio files and captions, with the
    * necessary interface to play it.
    *
    *  MDN
@@ -719,7 +719,7 @@ trait Tags{
 
   // Forms
   /**
-   * Represents a form , consisting of controls, that can be submitted to a
+   * Represents a form, consisting of controls, that can be submitted to a
    * server for processing.
    *
    *  MDN

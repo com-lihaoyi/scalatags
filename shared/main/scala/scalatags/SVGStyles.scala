@@ -157,7 +157,7 @@ object SvgStyles{
 
   /**
    * the stroke-width attribute specifies the width of the outline on the current
-   * object. Its default value is 1. If a `<percentage>` is used, the value
+   * object. Its default value is 1. If a percentage is used, the value
    * represents a percentage of the current viewport. If a value of 0 is used
    * the outline will never be drawn.
    *
@@ -180,12 +180,12 @@ object SvgStyles{
 
   /**
    * The marker-end defines the arrowhead or polymarker that will be drawn at
-   * the final vertex of the given `<path>` element or basic shape. Note that for
-   * a `<path>` element which ends with a closed sub-path, the last vertex is the
+   * the final vertex of the given path element or basic shape. Note that for
+   * a path element which ends with a closed sub-path, the last vertex is the
    * same as the initial vertex on the given sub-path. In this case, if
    * marker-end does not equal none, then it is possible that two markers will
    * be rendered on the given vertex. One way to prevent this is to set
-   * marker-end to none. (Note that the same comment applies to `<polygon>`
+   * marker-end to none. (Note that the same comment applies to polygon
    * elements.)
    *
    * MDN
@@ -282,7 +282,7 @@ object SvgStyles{
 
   /**
    * The marker-start attribute defines the arrowhead or polymarker that will be
-   * drawn at the first vertex of the given `<path>` element or basic shape.
+   * drawn at the first vertex of the given path element or basic shape.
    *
    * MDN
    */
@@ -290,8 +290,8 @@ object SvgStyles{
 
   /**
    * The clip-rule attribute only applies to graphics elements that are contained
-   * within a `<clippath>` element. The clip-rule attribute basically works as the
-   * fill-rule attribute, except that it applies to `<clippath>` definitions.
+   * within a clippath element. The clip-rule attribute basically works as the
+   * fill-rule attribute, except that it applies to clippath definitions.
    *
    * MDN
    */
@@ -319,8 +319,8 @@ object SvgStyles{
 
   /**
    * The marker element defines the graphics that is to be used for drawing
-   * arrowheads or polymarkers on a given `<path>`, `<line>`, `<polyline>` or
-   * `<polygon>` element.
+   * arrowheads or polymarkers on a given path, line, polyline or
+   * polygon element.
    *
    * MDN
    */
@@ -328,7 +328,7 @@ object SvgStyles{
 
   /**
    * The marker-mid defines the arrowhead or polymarker that shall be drawn at
-   * every vertex other than the first and last vertex of the given `<path>`
+   * every vertex other than the first and last vertex of the given path
    *   element or basic shape.
    *
    * MDN
@@ -347,9 +347,9 @@ object SvgStyles{
 
   /**
    * The flood-color attribute indicates what color to use to flood the current
-   * filter primitive subregion defined through the `<feflood>` element. The
+   * filter primitive subregion defined through the feflood element. The
    * keyword currentColor and ICC colors can be specified in the same manner as
-   * within a `<paint>` specification for the fill and stroke attributes.
+   * within a paint specification for the fill and stroke attributes.
    *
    * MDN
    */
@@ -358,7 +358,7 @@ object SvgStyles{
   /**
    * The stop-color attribute indicates what color to use at that gradient stop.
    * The keyword currentColor and ICC colors can be specified in the same manner
-   * as within a `<paint>` specification for the fill and stroke attributes.
+   * as within a paint specification for the fill and stroke attributes.
    *
    * MDN
    */
@@ -396,7 +396,7 @@ object SvgStyles{
 
   /**
    * The lighting-color attribute defines the color of the light source for
-   * filter primitives elements `<fediffuselighting>` and `<fespecularlighting>`.
+   * filter primitives elements fediffuselighting and fespecularlighting.
    *
    * MDN
    */
@@ -405,7 +405,7 @@ object SvgStyles{
 
   /**
    * The flood-opacity attribute indicates the opacity value to use across the
-   * current filter primitive subregion defined through the `<feflood>` element.
+   * current filter primitive subregion defined through the feflood element.
    *
    * MDN
    */

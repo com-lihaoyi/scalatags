@@ -97,7 +97,7 @@ trait DataConverters{
 
     /**
      * This unit represents the font-size of the root element (e.g. the font-size
-     * of the `<html>` element). When used on the font-size on this root element,
+     * of the html element). When used on the font-size on this root element,
      * it represents its initial value.
      *
      * MDN
