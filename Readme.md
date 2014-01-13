@@ -240,7 +240,7 @@ html(
 
 In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a large but finite number of styles, and not any arbitrary string can be a style. The above example shows how CSS classes and inline-styles are typically set.
 
-Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles). These are all instances of the [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style) class.
+Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` (instances of [Cls](http://lihaoyi.github.io/scalatags/#scalatags.Cls)) are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles). These are all instances of the [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style) class.
 
 Scalatags also provides a way of setting styles dynamically as strings. This example shows how to define your own styles or css classes inline:
 
@@ -282,7 +282,7 @@ Again, you can take the result of `.style` or `.cls` and assign them to variable
 </html>
 ```
 
-A full list of the shortcut methods (for both attributes and styles) provided by ScalaTags can be found in [HtmlAttributes.scala](shared/main/scala/scalatags/HtmlAttributes.scala) and [Styles.scala](shared/main/scala/scalatags/Styles.scala). This of course won't include any which you define yourself.
+A list of the attributes and styles provided by ScalaTags can be found in [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles). This of course won't include any which you define yourself.
 
 
 Non-String Attributes and Styles
@@ -813,7 +813,7 @@ The primary data structure, the [HtmlTag](http://lihaoyi.github.io/scalatags/#sc
 The current selection of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) (or implicitly convertable) types include
 
 - [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag)s and `String`s: appends itself to the parent's `children` list.
-- [AttrPair](http://lihaoyi.github.io/scalatags/#scalatags.AttrPair)s: sets a key in the parent's [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) list.
+- [AttrPair](http://lihaoyi.github.io/scalatags/#scalatags.AttrPair)s: sets a key in the parent's `attrs` list.
 - [StylePair](http://lihaoyi.github.io/scalatags/#scalatags.StylePair)s: appends the inline `style: value;` to the parent's `style` attribute.
 
 Although these are the [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which are provided, it is possible to come up with your own custom [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which do a variety of different things to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag). All it has to do is provide a `transform: HtmlTag => HtmlTag` method, and it can do whatever it wants to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag) being transformed, including:
