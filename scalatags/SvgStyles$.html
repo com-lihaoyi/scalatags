@@ -222,9 +222,9 @@ bounded by the currently active clipping path are not drawn.</p><p>MDN
       </span>
       </h4>
       <p class="shortcomment cmt">The clip-rule attribute only applies to graphics elements that are contained
-within a <code>&lt;clippath&gt;</code> element.</p><div class="fullcomment"><div class="comment cmt"><p>The clip-rule attribute only applies to graphics elements that are contained
-within a <code>&lt;clippath&gt;</code> element. The clip-rule attribute basically works as the
-fill-rule attribute, except that it applies to <code>&lt;clippath&gt;</code> definitions.</p><p>MDN
+within a clippath element.</p><div class="fullcomment"><div class="comment cmt"><p>The clip-rule attribute only applies to graphics elements that are contained
+within a clippath element. The clip-rule attribute basically works as the
+fill-rule attribute, except that it applies to clippath definitions.</p><p>MDN
 </p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -380,10 +380,10 @@ so obvious.</p><p>MDN
       </span>
       </h4>
       <p class="shortcomment cmt">The flood-color attribute indicates what color to use to flood the current
-filter primitive subregion defined through the <code>&lt;feflood&gt;</code> element.</p><div class="fullcomment"><div class="comment cmt"><p>The flood-color attribute indicates what color to use to flood the current
-filter primitive subregion defined through the <code>&lt;feflood&gt;</code> element. The
+filter primitive subregion defined through the feflood element.</p><div class="fullcomment"><div class="comment cmt"><p>The flood-color attribute indicates what color to use to flood the current
+filter primitive subregion defined through the feflood element. The
 keyword currentColor and ICC colors can be specified in the same manner as
-within a <code>&lt;paint&gt;</code> specification for the fill and stroke attributes.</p><p>MDN
+within a paint specification for the fill and stroke attributes.</p><p>MDN
 </p></div></div>
     </li><li name="scalatags.SvgStyles#floodOpacity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="floodOpacity:scalatags.TypedStyle[Double]"></a>
@@ -398,8 +398,8 @@ within a <code>&lt;paint&gt;</code> specification for the fill and stroke attrib
       </span>
       </h4>
       <p class="shortcomment cmt">The flood-opacity attribute indicates the opacity value to use across the
-current filter primitive subregion defined through the <code>&lt;feflood&gt;</code> element.</p><div class="fullcomment"><div class="comment cmt"><p>The flood-opacity attribute indicates the opacity value to use across the
-current filter primitive subregion defined through the <code>&lt;feflood&gt;</code> element.</p><p>MDN
+current filter primitive subregion defined through the feflood element.</p><div class="fullcomment"><div class="comment cmt"><p>The flood-opacity attribute indicates the opacity value to use across the
+current filter primitive subregion defined through the feflood element.</p><p>MDN
 </p></div></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
@@ -471,8 +471,8 @@ inter-character spacing to a specific Length (typically, zero).</p><p>MDN
       </span>
       </h4>
       <p class="shortcomment cmt">The lighting-color attribute defines the color of the light source for
-filter primitives elements <code>&lt;fediffuselighting&gt;</code> and <code>&lt;fespecularlighting&gt;</code>.</p><div class="fullcomment"><div class="comment cmt"><p>The lighting-color attribute defines the color of the light source for
-filter primitives elements <code>&lt;fediffuselighting&gt;</code> and <code>&lt;fespecularlighting&gt;</code>.</p><p>MDN
+filter primitives elements fediffuselighting and fespecularlighting.</p><div class="fullcomment"><div class="comment cmt"><p>The lighting-color attribute defines the color of the light source for
+filter primitives elements fediffuselighting and fespecularlighting.</p><p>MDN
 </p></div></div>
     </li><li name="scalatags.SvgStyles#marker" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="marker:scalatags.TypedStyle[String]"></a>
@@ -487,10 +487,10 @@ filter primitives elements <code>&lt;fediffuselighting&gt;</code> and <code>&lt;
       </span>
       </h4>
       <p class="shortcomment cmt">The marker element defines the graphics that is to be used for drawing
-arrowheads or polymarkers on a given <code>&lt;path&gt;</code>, <code>&lt;line&gt;</code>, <code>&lt;polyline&gt;</code> or
-<code>&lt;polygon&gt;</code> element.</p><div class="fullcomment"><div class="comment cmt"><p>The marker element defines the graphics that is to be used for drawing
-arrowheads or polymarkers on a given <code>&lt;path&gt;</code>, <code>&lt;line&gt;</code>, <code>&lt;polyline&gt;</code> or
-<code>&lt;polygon&gt;</code> element.</p><p>MDN
+arrowheads or polymarkers on a given path, line, polyline or
+polygon element.</p><div class="fullcomment"><div class="comment cmt"><p>The marker element defines the graphics that is to be used for drawing
+arrowheads or polymarkers on a given path, line, polyline or
+polygon element.</p><p>MDN
 </p></div></div>
     </li><li name="scalatags.SvgStyles#markerEnd" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="markerEnd:scalatags.TypedStyle[String]"></a>
@@ -505,13 +505,13 @@ arrowheads or polymarkers on a given <code>&lt;path&gt;</code>, <code>&lt;line&g
       </span>
       </h4>
       <p class="shortcomment cmt">The marker-end defines the arrowhead or polymarker that will be drawn at
-the final vertex of the given <code>&lt;path&gt;</code> element or basic shape.</p><div class="fullcomment"><div class="comment cmt"><p>The marker-end defines the arrowhead or polymarker that will be drawn at
-the final vertex of the given <code>&lt;path&gt;</code> element or basic shape. Note that for
-a <code>&lt;path&gt;</code> element which ends with a closed sub-path, the last vertex is the
+the final vertex of the given path element or basic shape.</p><div class="fullcomment"><div class="comment cmt"><p>The marker-end defines the arrowhead or polymarker that will be drawn at
+the final vertex of the given path element or basic shape. Note that for
+a path element which ends with a closed sub-path, the last vertex is the
 same as the initial vertex on the given sub-path. In this case, if
 marker-end does not equal none, then it is possible that two markers will
 be rendered on the given vertex. One way to prevent this is to set
-marker-end to none. (Note that the same comment applies to <code>&lt;polygon&gt;</code>
+marker-end to none. (Note that the same comment applies to polygon
 elements.)</p><p>MDN
 </p></div></div>
     </li><li name="scalatags.SvgStyles#markerMid" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -527,9 +527,9 @@ elements.)</p><p>MDN
       </span>
       </h4>
       <p class="shortcomment cmt">The marker-mid defines the arrowhead or polymarker that shall be drawn at
-every vertex other than the first and last vertex of the given <code>&lt;path&gt;</code>
+every vertex other than the first and last vertex of the given path
   element or basic shape.</p><div class="fullcomment"><div class="comment cmt"><p>The marker-mid defines the arrowhead or polymarker that shall be drawn at
-every vertex other than the first and last vertex of the given <code>&lt;path&gt;</code>
+every vertex other than the first and last vertex of the given path
   element or basic shape.</p><p>MDN
 </p></div></div>
     </li><li name="scalatags.SvgStyles#markerStart" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -545,8 +545,8 @@ every vertex other than the first and last vertex of the given <code>&lt;path&gt
       </span>
       </h4>
       <p class="shortcomment cmt">The marker-start attribute defines the arrowhead or polymarker that will be
-drawn at the first vertex of the given <code>&lt;path&gt;</code> element or basic shape.</p><div class="fullcomment"><div class="comment cmt"><p>The marker-start attribute defines the arrowhead or polymarker that will be
-drawn at the first vertex of the given <code>&lt;path&gt;</code> element or basic shape.</p><p>MDN
+drawn at the first vertex of the given path element or basic shape.</p><div class="fullcomment"><div class="comment cmt"><p>The marker-start attribute defines the arrowhead or polymarker that will be
+drawn at the first vertex of the given path element or basic shape.</p><p>MDN
 </p></div></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -601,7 +601,7 @@ drawn at the first vertex of the given <code>&lt;path&gt;</code> element or basi
       </h4>
       <p class="shortcomment cmt">The stop-color attribute indicates what color to use at that gradient stop.</p><div class="fullcomment"><div class="comment cmt"><p>The stop-color attribute indicates what color to use at that gradient stop.
 The keyword currentColor and ICC colors can be specified in the same manner
-as within a <code>&lt;paint&gt;</code> specification for the fill and stroke attributes.</p><p>MDN
+as within a paint specification for the fill and stroke attributes.</p><p>MDN
 </p></div></div>
     </li><li name="scalatags.SvgStyles#stopOpacity" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="stopOpacity:scalatags.TypedStyle[Number]"></a>
@@ -744,7 +744,7 @@ current object. Its default value is 1.</p><p>MDN
       </h4>
       <p class="shortcomment cmt">the stroke-width attribute specifies the width of the outline on the current
 object.</p><div class="fullcomment"><div class="comment cmt"><p>the stroke-width attribute specifies the width of the outline on the current
-object. Its default value is 1. If a <code>&lt;percentage&gt;</code> is used, the value
+object. Its default value is 1. If a percentage is used, the value
 represents a percentage of the current viewport. If a value of 0 is used
 the outline will never be drawn.</p><p>MDN
 </p></div></div>
