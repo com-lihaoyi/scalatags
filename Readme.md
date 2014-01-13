@@ -240,7 +240,7 @@ html(
 
 In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a large but finite number of styles, and not any arbitrary string can be a style. The above example shows how CSS classes and inline-styles are typically set.
 
-Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` (instances of [Cls](http://lihaoyi.github.io/scalatags/#scalatags.Cls)) are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles). These are all instances of the [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style) class.
+Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` (Instances of [Cls](http://lihaoyi.github.io/scalatags/#scalatags.Cls)) are defined just before, while `backgroundColor`, `color` and `opacity` (Instances of [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style)) are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles).
 
 Scalatags also provides a way of setting styles dynamically as strings. This example shows how to define your own styles or css classes inline:
 
