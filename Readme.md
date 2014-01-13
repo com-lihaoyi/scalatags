@@ -51,9 +51,9 @@ And you're good to go! Open up a `sbt console` and you can start working through
 ScalaJS
 =======
 
-ScalaTags now works out-of-the-box with [Scala.js](http://www.scala-js.org/). The folder ```scalatags-js``` includes an alternate SBT project that builds with ScalaJS.
+ScalaTags now works out-of-the-box with [Scala.js](http://www.scala-js.org/). The folder ```js``` includes an alternate SBT project that builds with ScalaJS.
 
-To use Scalatags with a ScalaJS project, check out this project Just put a source dependency on the the `/scalatags-js` folder from your own project. This manual process should improve when ScalaJS's package management story is more mature.
+To use Scalatags with a ScalaJS project, check out this project Just put a source dependency on the the `/js` folder from your own project. This manual process should improve when ScalaJS's package management story is more mature.
 
 
 Why ScalaTags
@@ -340,24 +340,24 @@ div(
 )
 ```
 
-Apart from using `import scalatags.all._`, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports `Attrs` and `Styles` aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. `value`, `id`, etc.) that you may not use.
+Apart from using `import scalatags.all._`, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. `value`, `id`, etc.) that you may not use.
 
 The main objects which you can import things from are:
 
-- `Tags`: common HTML tags
-- `Tags2`: less common HTML tags
-- `Attrs`: common HTML attributes
-- `Styles`: common CSS styles
-- `Styles2`: less common CSS styles
-- `Svg`: SVG tags
-- `SvgStyles`: CSS styles only associated with SVG elements
-- `DataTypes`: case classes representing CSS length, colors, etc.
-- `DataConverters`: convenient extensions (e.g. `10.px`) to create the CSS datatypes
+- [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags): common HTML tags
+- [Tags2](http://lihaoyi.github.io/scalatags/#scalatags.Tags2): less common HTML tags
+- [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs): common HTML attributes
+- [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles): common CSS styles
+- [Styles2](http://lihaoyi.github.io/scalatags/#scalatags.Styles2): less common CSS styles
+- [Svg](http://lihaoyi.github.io/scalatags/#scalatags.Svg): SVG tags
+- [SvgStyles](http://lihaoyi.github.io/scalatags/#scalatags.SvgStyles): CSS styles only associated with SVG elements
+- [DataTypes](http://lihaoyi.github.io/scalatags/#scalatags.DataTypes): case classes representing CSS length, colors, etc.
+- [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters): convenient extensions (e.g. `10.px`) to create the CSS datatypes
 
 You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
 
-- `all`: this imports the contents of `Tags`, `Attrs`, `Styles` and `DataConverters`
-- `short`: this imports the contents of `Tags` and `DataConverters`, but aliases `Attrs` and `Styles` as `*`
+- `all`: this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters)
+- `short`: this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters), but aliases [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`
 
 Thus, you can choose exactly what you want to import, and how:
 
@@ -370,7 +370,7 @@ div(
 )
 ```
 
-Or you can rely on a aggregator like `all` (which the rest of the examples use) or `short`. `short` imports `Attrs` and `Styles` as `*`, making them quick to access without cluttering the global namespace:
+Or you can rely on a aggregator like `all` (which the rest of the examples use) or `short`. `short` imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`, making them quick to access without cluttering the global namespace:
 
 ```scala
 import scalatags.short._
@@ -380,7 +380,7 @@ div(
 )
 ```
 
-If you wish to put together your own collection of imports, all the objects described above (`Tags`, `Attrs`, etc.) are also available as traits, so you can put together your own:
+If you wish to put together your own collection of imports, all the objects described above ([Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), etc.) are also available as traits, so you can put together your own:
 
 ```scala
 object custom extends Tags{
@@ -808,15 +808,15 @@ Internals
 
 The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](shared/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](shared/main/scala/scalatags/package.scala).
 
-The primary data structure, the `HtmlNode`, is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of `Modifier` objects, which are really objects with a single `transform: HtmlNode => HtmlNode` method. These transforms are applied to the `HtmlNode` sequentially, returning a new HtmlNode at the end of the process.
+The primary data structure, the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode), is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) objects, which are really objects with a single `transform: HtmlNode => HtmlNode` method. These transforms are applied to the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode) sequentially, returning a new HtmlNode at the end of the process.
 
-The current selection of `Modifier` (or implicitly convertable) types include
+The current selection of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) (or implicitly convertable) types include
 
-- `HtmlNode`s and `String`s: appends itself to the parent's `children` list.
-- `AttrPair`s: sets a key in the parent's `attrs` list.
-- `StylePair`s: appends the inline `style: value;` to the parent's `style` attribute.
+- [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode)s and `String`s: appends itself to the parent's `children` list.
+- [AttrPair](http://lihaoyi.github.io/scalatags/#scalatags.AttrPair)s: sets a key in the parent's [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) list.
+- [StylePair](http://lihaoyi.github.io/scalatags/#scalatags.StylePair)s: appends the inline `style: value;` to the parent's `style` attribute.
 
-Although these are the `Modifier`s which are provided, it is possible to come up with your own custom `Modifier`s which do a variety of different things to the `HtmlNode`. All it has to do is provide a `transform: HtmlNode => HtmlNode` method, and it can do whatever it wants to the `HtmlNode` being transformed, including:
+Although these are the [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which are provided, it is possible to come up with your own custom [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier)s which do a variety of different things to the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode). All it has to do is provide a `transform: HtmlNode => HtmlNode` method, and it can do whatever it wants to the [HtmlNode](http://lihaoyi.github.io/scalatags/#scalatags.HtmlNode) being transformed, including:
 
 - Adding multiple attributes at once
 - Adding both attributes and children at once

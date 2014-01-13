@@ -141,7 +141,7 @@ object Tags2{
    *
    *  MDN
    */
-  val sampl = "samp".tag
+  val samp = "samp".tag
   /**
    * Represents user input, often from a keyboard, but not necessarily.
    *
