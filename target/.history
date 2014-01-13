@@ -1,0 +1,12 @@
+compile
+exit
+test-only scalatags.PerfTestsImpl
+last jvm/test:testOnly
+test-only scalatags.PerfTestsImpl
+last jvm/test:testOnly
+test-only scalatags.PerfTestsImpl
+last jvm/test:testOnly
+test-only scalatags.PerfTestsImpl
+test
+project
+project jvm

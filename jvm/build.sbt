@@ -2,7 +2,7 @@ organization := "com.scalatags"
 
 name := "scalatags"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.3"
 
 version := "0.3.0"
 
@@ -11,21 +11,9 @@ libraryDependencies ++= Seq(
   "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1" % "test"
 )
 
-unmanagedSourceDirectories in Compile <+= baseDirectory(_ / ".." / "src" / "main")
+unmanagedSourceDirectories in Compile <+= baseDirectory(_ / ".." / "shared" / "main")
 
-unmanagedSourceDirectories in Test <+= baseDirectory(_ / ".." / "src" / "test")
-
-
-// Twirl
-seq(Twirl.settings: _*)
-
-sourceDirectory in Twirl.twirlCompile <<= (sourceDirectory in Test) / "twirl"
-
-target in Twirl.twirlCompile <<= (sourceManaged in Test) / "generated-twirl-sources"
-
-(sourceGenerators in Compile) ~= {x => Nil}
-
-(sourceGenerators in Test) <+= Twirl.twirlCompile
+unmanagedSourceDirectories in Test <+= baseDirectory(_ / ".." / "shared" / "test")
 
 
 // Sonatype
