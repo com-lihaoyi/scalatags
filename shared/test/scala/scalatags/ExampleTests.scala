@@ -289,22 +289,22 @@ class ExampleTests extends FreeSpec{
           )
         )
       },
-      html(
-        head(
-          script("some script")
-        ),
-        body(
-          h1("background-color".style:="blue", "color".style:="red")("This is my title"),
-          div("background-color".style:="blue", "color".style:="red")(
-            p("contentpara".cls, "first".cls)(
-              "This is my first paragraph"
-            ),
-            a("opacity".style:="0.9")(
-              p("contentpara".cls)("Goooogle")
-            )
+    html(
+      head(
+        script("some script")
+      ),
+      body(
+        h1(style:="background-color: blue; color: red;")("This is my title"),
+        div(style:="background-color: blue; color: red;")(
+          p(`class`:="contentpara first")(
+            "This is my first paragraph"
+          ),
+          a(style:="opacity: 0.9;")(
+            p("contentpara".cls)("Goooogle")
           )
         )
-      ),
+      )
+    ),
       """
       <html>
           <head>

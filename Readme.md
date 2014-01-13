@@ -242,7 +242,7 @@ In HTML, the `class` and `style` attributes are often thought of not as normal a
 
 Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` (Instances of [Cls](http://lihaoyi.github.io/scalatags/#scalatags.Cls)) are defined just before, while `backgroundColor`, `color` and `opacity` (Instances of [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style)) are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles).
 
-Scalatags also provides a way of setting styles dynamically as strings. This example shows how to define your own styles or css classes inline:
+Of course, `class` and `style` are in the end just attributes, so you can treat them as such and bind them directly without any fuss:
 
 ```scala
 html(
@@ -250,12 +250,12 @@ html(
     script("some script")
   ),
   body(
-    h1("background-color".style:="blue", "color".style:="red")("This is my title"),
-    div("background-color".style:="blue", "color".style:="red")(
-      p("contentpara".cls, "first".cls)(
+    h1(style:="background-color: blue; color: red;")("This is my title"),
+    div(style:="background-color: blue; color: red;")(
+      p(`class`:="contentpara first")(
         "This is my first paragraph"
       ),
-      a("opacity".style:="0.9")(
+      a(style:="opacity: 0.9;")(
         p("contentpara".cls)("Goooogle")
       )
     )
@@ -263,7 +263,7 @@ html(
 )
 ```
 
-Again, you can take the result of `.style` or `.cls` and assign them to variables, allowing you to use them in multiple places without having to copy the stringly-typed, verbose declaration each time. Both of these print the same thing:
+Both of these print the same thing:
 
 ```html
 <html>
