@@ -59,7 +59,7 @@ To use Scalatags with a ScalaJS project, check out this project Just put a sourc
 Why ScalaTags
 =============
 
-The core functionality of Scalatags is less than [500 lines of code](src/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance).
+The core functionality of Scalatags is less than [500 lines of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance).
 
 It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent them all yourself when you have someone else who has done it before you.
 
@@ -86,7 +86,7 @@ Take a look at the [prior work](#prior-work) section for a more detailed analysi
 Basic Examples
 ==============
 
-This is a bunch of simple examples to get you started using ScalaTags. These examples are all in the [unit tests](src/test/scala/scalatags/ExampleTests.scala).
+This is a bunch of simple examples to get you started using ScalaTags. These examples are all in the [unit tests](shared/test/scala/scalatags/ExampleTests.scala).
 
 Hello World
 -----------
@@ -240,7 +240,7 @@ html(
 
 In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a large but finite number of styles, and not any arbitrary string can be a style. The above example shows how CSS classes and inline-styles are typically set.
 
-Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](src/main/scala/scalatags/Styles.scala).
+Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` are defined just before, while `backgroundColor`, `color` and `opacity` are [defined by Scalatags](shared/main/scala/scalatags/Styles.scala).
 
 Scalatags also provides a way of setting styles dynamically as strings. This example shows how to define your own styles or css classes inline:
 
@@ -282,7 +282,7 @@ Again, you can take the result of `.style` or `.cls` and assign them to variable
 </html>
 ```
 
-A full list of the shortcut methods (for both attributes and styles) provided by ScalaTags can be found in [HtmlAttributes.scala](src/main/scala/scalatags/HtmlAttributes.scala) and [Styles.scala](src/main/scala/scalatags/Styles.scala). This of course won't include any which you define yourself.
+A full list of the shortcut methods (for both attributes and styles) provided by ScalaTags can be found in [HtmlAttributes.scala](shared/main/scala/scalatags/HtmlAttributes.scala) and [Styles.scala](shared/main/scala/scalatags/Styles.scala). This of course won't include any which you define yourself.
 
 
 Non-String Attributes and Styles
@@ -800,23 +800,23 @@ html(
 ).toString()
 ```
 
-The rest of the code involved in this micro-benchmark can be found in [PerfTests.scala](src/test/scala/scalatags/PerfTests.scala)
+The rest of the code involved in this micro-benchmark can be found in [PerfTests.scala](shared/test/scala/scalatags/PerfTests.scala)
 
 
 Internals
 =========
 
-The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](src/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](src/main/scala/scalatags/package.scala).
+The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](shared/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](shared/main/scala/scalatags/package.scala).
 
-The primary data structure, the `HtmlNode`, is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of `Nested` objects, which are really objects with a single `transform: HtmlNode => HtmlNode` method. These transforms are applied to the `HtmlNode` sequentially, returning a new HtmlNode at the end of the process.
+The primary data structure, the `HtmlNode`, is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of `Modifier` objects, which are really objects with a single `transform: HtmlNode => HtmlNode` method. These transforms are applied to the `HtmlNode` sequentially, returning a new HtmlNode at the end of the process.
 
-The current selection of `Nested` (or implicitly convertable) types include
+The current selection of `Modifier` (or implicitly convertable) types include
 
 - `HtmlNode`s and `String`s: appends itself to the parent's `children` list.
 - `AttrPair`s: sets a key in the parent's `attrs` list.
 - `StylePair`s: appends the inline `style: value;` to the parent's `style` attribute.
 
-Although these are the `Nested`s which are provided, it is possible to come up with your own custom `Nested`s which do a variety of different things to the `HtmlNode`. All it has to do is provide a `transform: HtmlNode => HtmlNode` method, and it can do whatever it wants to the `HtmlNode` being transformed, including:
+Although these are the `Modifier`s which are provided, it is possible to come up with your own custom `Modifier`s which do a variety of different things to the `HtmlNode`. All it has to do is provide a `transform: HtmlNode => HtmlNode` method, and it can do whatever it wants to the `HtmlNode` being transformed, including:
 
 - Adding multiple attributes at once
 - Adding both attributes and children at once

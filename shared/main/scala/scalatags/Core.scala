@@ -4,7 +4,7 @@ import scala.collection.{SortedMap, mutable}
 /**
  * Represents a single CSS class.
  */
-case class Cls(name: String) extends Nested{
+case class Cls(name: String) extends Modifier{
   def transform(tag: HtmlTag) = {
     tag.copy(attrs =
       tag.attrs.updated(
@@ -32,7 +32,7 @@ case class RawNode(v: String) extends Node{
 /**
  * A general interface for all XML types which can appear in a ScalaTags fragment.
  */
-trait Node extends Nested{
+trait Node extends Modifier{
   /**
    * Converts an ScalaTag fragment into an html string
    */
@@ -58,11 +58,11 @@ trait Node extends Nested{
  * add itself to the node's attributes but not appear in the final `children`
  * list.
  */
-trait Nested{
+trait Modifier{
   /**
    * Transforms the tag and returns a new one.
    *
-   * Can't be `apply`, because some [[Nesteds]] (e.g. [[HtmlTag]]) already have an
+   * Can't be `apply`, because some [[Modifiers]] (e.g. [[HtmlTag]]) already have an
    * [[apply]] method, and the overloading becomes ambiguous.
    */
   def transform(tag: HtmlTag): HtmlTag
@@ -108,7 +108,7 @@ case class HtmlTag(tag: String = "",
    * to the [[HtmlTag]]. Note that any these modifications are queued up and only
    * evaluated when (if!) the [[HtmlTag]] is rendered.
    */
-  def apply(xs: Nested*) = {
+  def apply(xs: Modifier*) = {
     var newTag = this
 
     var i = 0
@@ -154,7 +154,7 @@ case class HtmlTag(tag: String = "",
 /**
  * A key value pair representing the assignment of an attribute to a value.
  */
-case class AttrPair(attr: Attr, value: String) extends Nested{
+case class AttrPair(attr: Attr, value: String) extends Modifier{
   def transform(tag: HtmlTag) = {
     tag.copy(attrs = tag.attrs.updated(attr.name, value))
   }
@@ -218,7 +218,7 @@ case class UntypedStyle(jsName: String, cssName: String) extends Style
 /**
  * A key value pair representing the assignment of a style to a value.
  */
-case class StylePair(style: Style, value: String) extends Nested{
+case class StylePair(style: Style, value: String) extends Modifier{
   def transform(tag: HtmlTag) = {
     val str = style.cssName + ": " + value + ";"
     tag.copy(attrs =

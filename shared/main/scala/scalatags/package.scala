@@ -38,7 +38,7 @@ package object scalatags {
    * Allows you to modify a [[HtmlNode]] by adding a Seq containing other nest-able
    * objects to its list of children.
    */
-  implicit class SeqNested[A <% Nested](xs: Seq[A]) extends Nested{
+  implicit class SeqModifier[A <% Modifier](xs: Seq[A]) extends Modifier{
     def transform(tag: HtmlTag) = {
       var t = tag
       for(x <- xs) t = x.transform(t)
