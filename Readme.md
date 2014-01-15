@@ -43,7 +43,7 @@ Getting Started
 ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cscalatags); to get started, simply add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.0"
+libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.2"
 ```
 
 And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console, or browse the [Scaladoc](http://lihaoyi.github.io/scalatags/#package).
@@ -51,10 +51,13 @@ And you're good to go! Open up a `sbt console` and you can start working through
 ScalaJS
 =======
 
-ScalaTags now works out-of-the-box with [Scala.js](http://www.scala-js.org/). The folder ```js``` includes an alternate SBT project that builds with ScalaJS.
+To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
-To use Scalatags with a ScalaJS project, check out this project Just put a source dependency on the the `/js` folder from your own project. This manual process should improve when ScalaJS's package management story is more mature.
+```scala
+libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.2-JS"
+```
 
+And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 2.2-JS is currently only compatibly with ScalaJS 2.1.
 
 Why ScalaTags
 =============
