@@ -89,15 +89,9 @@ And you should be good to go generating HTML fragments in the browser! Scalatags
 Why Scalatags
 =============
 
-The core functionality of Scalatags is less than [500 lines of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance).
+The core functionality of Scalatags is less than [500 lines of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost *everything*, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
 
-It does this by leveraging the functionality of the Scala language to do almost *everything*. A lot of different language constructs can be used to help keep your templates concise and [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself), and why re-invent them all yourself when you have someone else who has done it before you.
-
-Like Play!'s [Twirl templates](https://github.com/spray/twirl), and Razor, Scalatags takes the view that it is better to re-use the host language in your templates than try to invent your own mini-language. This lets you be immediately productive working with your HTML fragments, since you have the full power of Scala at your disposal and don't have to learn a special, ad-hoc mini-language.
-
-Unlike Twirl and Razor (and most other template engines avalailable) ScalaTags is an embedded DSL that sits inside your Scala code, rather than in separate template files. This means it does not require any special parser or build step, and has no compile-time or run-time dependencies on the filesystem, caches, logging, or anything of that sort.
-
-Since ScalaTags is pure Scala. This means that any IDE which understands Scala will understand ScalaTags. Not only do you get syntax highlighting, you also get code completion:
+Since ScalaTags is pure Scala. This means that any editor which understands Scala will understand ScalaTags. Not only do you get syntax highlighting, you also get code completion:
 
 ![Autocomplete](docs/Autocomplete.png)
 
@@ -109,7 +103,7 @@ and in-editor documentation:
 
 ![Inline Documentation](docs/InlineDocs.png)
 
-And all the other good things (<em>jump to definition</em>, *extract method*, etc.) you're used to in a statically typed language. No more messing around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
+And all the other good things (<em>jump to definition</em>, *extract method*, etc.) you're used to in a statically typed language. No more digging around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
 
 Take a look at the [prior work](#prior-work) section for a more detailed analysis of Scalatags in comparison to other popular libraries.
 
