@@ -365,6 +365,51 @@ class ExampleTests extends FreeSpec{
       </div>
       """
     )
+    "Filters and Transformations" in strCheck({
+      def uppercase(node: Node): Node = {
+        node match{
+          case t: HtmlTag => t.copy(children = t.children.map(uppercase))
+          case StringNode(v) => StringNode(v.toUpperCase)
+          case x => x
+        }
+      }
+      html(
+        head(
+          script("some script")
+        ),
+        uppercase(
+          body(
+            h1("This is my title"),
+            div(
+              p(onclick:="... do some js")(
+                "This is my first paragraph"
+              ),
+              a(href:="www.google.com")(
+                p("Goooogle")
+              )
+            )
+          )
+        )
+      )},
+      """
+      <html>
+          <head>
+              <script>some script</script>
+          </head>
+          <body>
+              <h1>THIS IS MY TITLE</h1>
+              <div>
+                  <p onclick="... do some js">
+                      THIS IS MY FIRST PARAGRAPH
+                  </p>
+                  <a href="www.google.com">
+                      <p>GOOOOGLE</p>
+                  </a>
+              </div>
+          </body>
+      </html>
+      """
+    )
 
     "Layouts" in strCheck(
     {

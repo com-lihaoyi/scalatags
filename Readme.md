@@ -36,7 +36,33 @@ And turns them into HTML like this:
     </body>
 </html>
 ```
+Contents
+========
 
+- [Getting Started](#getting-started)
+- [ScalaJS](#scalajs)
+- [Why Scalatags](#why-scalatags)
+- [Basic Examples](#basic-examples)
+  - [Hello World](#hello-world)
+  - [Attributes](#attributes)
+  - [CSS and Classes](#css--classes)
+  - [Non-String Attributes and Styles](#non-string-attributes-and-styles)
+  - [Managing Imports](#managing-imports)
+  - [Variables](#variables)
+  - [Control Flow](#control-flow)
+  - [Functions](#functions)
+  - [Auto-escaping and unsanitized Input](#auto-escaping-and-unsanitized-input)
+  - [Layouts](#layouts)
+  - [Inheritance](#inheritance)
+  - [Filters and Transformations](#filters-and-transformations)
+- [Performance](#performance)
+- [Internals](#internals)
+- [Prior Work](#prior-work)
+  - [Old-school Templates](#old-school-templates)
+  - [Razor and Play Templates](#razor-and-play-templates)
+  - [XHP and Pyxl](#xhp-and-pyxl)
+  - [Scalatags](#scalatags-1)
+- [License](#license)
 Getting Started
 ===============
 
@@ -59,7 +85,7 @@ libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.2-JS"
 
 And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 2.2-JS is currently only compatibly with ScalaJS 2.1.
 
-Why ScalaTags
+Why Scalatags
 =============
 
 The core functionality of Scalatags is less than [500 lines of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance).
@@ -729,7 +755,7 @@ object Child extends Parent{
   )
 }
 
-Child.toString
+Child.render
 ```
 
 Most of the time, functions are sufficient to keep things DRY, if you for some reason want to use inheritance to structure your code, you probably already know how to do so. Again, unlike [other](http://wsgiarea.pocoo.org/jinja/docs/inheritance.html) [frameworks](http://docs.makotemplates.org/en/latest/inheritance.html) that have implemented complex inheritance systems themselves, Scalatags is just Scala, and it behaves as you'd expect.
@@ -748,6 +774,59 @@ Most of the time, functions are sufficient to keep things DRY, if you for some r
     </body>
 </html>
 ```
+
+Filters and Transformations
+---------------------------
+```scala
+def uppercase(node: Node): Node = {
+  node match{
+    case t: HtmlTag => t.copy(children = t.children.map(uppercase))
+    case StringNode(v) => StringNode(v.toUpperCase)
+    case x => x
+  }
+}
+html(
+  head(
+    script("some script")
+  ),
+  uppercase(
+    body(
+      h1("This is my title"),
+      div(
+        p(onclick:="... do some js")(
+          "This is my first paragraph"
+        ),
+        a(href:="www.google.com")(
+          p("Goooogle")
+        )
+      )
+    )
+  )
+)
+```
+
+Again, this is something that many other templating frameworks have [ad-hoc implementations](http://jinja.pocoo.org/docs/templates/#id7) of. In Scalatags, this can be handled entirely by a simple function. The above snippet both uses *and* defines a transformer that converts all text within it to uppercase. The transformer function (`uppercase`) recursively walks the given fragment, upper-casing any `StringNode`s it find. This prints the result below:
+
+```html
+<html>
+    <head>
+        <script>some script</script>
+    </head>
+    <body>
+        <h1>THIS IS MY TITLE</h1>
+        <div>
+            <p onclick="... do some js">
+                THIS IS MY FIRST PARAGRAPH
+            </p>
+            <a href="www.google.com">
+                <p>GOOOOGLE</p>
+            </a>
+        </div>
+    </body>
+</html>
+```
+
+The above example is frivolous, but demonstrates how you can implement and use filters to perform bulk-transforms on your Scalatags fragments before rendering them. This is something you should not need to do very often, but is pretty simple to do should you need it.
 
 Performance
 ===========
