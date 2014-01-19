@@ -369,8 +369,9 @@ class ExampleTests extends FreeSpec{
       def uppercase(node: Node): Node = {
         node match{
           case t: HtmlTag => t.copy(children = t.children.map(uppercase))
+          case r: RawNode => r
           case StringNode(v) => StringNode(v.toUpperCase)
-          case x => x
+
         }
       }
       html(
@@ -409,6 +410,57 @@ class ExampleTests extends FreeSpec{
           </body>
       </html>
       """
+    )
+    "Filters and Transformations Complex" in strCheck({
+      def autoLink(node: Node): Seq[Node] = {
+        node match{
+          case t: HtmlTag => Seq(t.copy(children = t.children.flatMap(autoLink)))
+          case r: RawNode => Seq(r)
+          case StringNode(v) =>
+            val regex = "(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#]".r
+            val text = regex.split(v).map(StringNode)
+            val links =
+              regex.findAllMatchIn(v)
+                   .map(_.toString)
+                   .map{m => a(href:=m)(m)}
+                   .toSeq
+
+            text.zipAll(links, StringNode(""), StringNode(""))
+                .flatMap{case (x, y) => Seq(x, y)}
+                .reverse
+        }
+      }
+
+      html(
+        head,
+        autoLink(
+          body(
+            h1("This is my title"),
+            div(
+              p(
+                "This is my first paragraph on http://www.github.com wooo"
+              ),
+              "I love http://www.google.com"
+            )
+          )
+        )
+      )
+    },
+    """
+      <html>
+          <head></head>
+          <body>
+              <h1>This is my title</h1>
+              <div>
+                  <p>
+                      This is my first paragraph on
+                      <a href="http://www.github.com">http://www.github.com</a> wooo
+                  </p>
+                  I love <a href="http://www.google.com">http://www.google.com</a>
+              </div>
+          </body>
+      </html>
+    """
     )
 
     "Layouts" in strCheck(

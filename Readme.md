@@ -427,6 +427,7 @@ In this case, you can define `custom` top-level somewhere, and simply have every
 </div>
 ```
 
+This custom import object also provides you a place to define your own custom tags that will be imported throughout your project e.g. a `js(s: String)` tag as shorthand for `script(src:=s)`. You can even override the default definitions, e.g. making `script` be a shorthand for `script(type:="javascript")` so that you can never forget to use your own custom version.
 
 The lesser used tags or styles are generally not imported wholesale by default, but you can always import the ones you need:
 
@@ -776,8 +777,8 @@ Filters and Transformations
 def uppercase(node: Node): Node = {
   node match{
     case t: HtmlTag => t.copy(children = t.children.map(uppercase))
+    case r: RawNode => r
     case StringNode(v) => StringNode(v.toUpperCase)
-    case x => x
   }
 }
 html(
@@ -821,7 +822,61 @@ Again, this is something that many other templating frameworks have [ad-hoc impl
 </html>
 ```
 
-The above example is frivolous, but demonstrates how you can implement and use filters to perform bulk-transforms on your Scalatags fragments before rendering them. This is something you should not need to do very often, but is pretty simple to do should you need it.
+The above example is frivolous, but demonstrates how you can implement and use filters to perform bulk-transforms on your Scalatags fragments before rendering them. This is something you should not need to do very often, but is pretty simple to do should you need it. Here's a more involved example, which uses a Regex to identify URLs in the body text and converts them into links:
+
+```scala
+def autoLink(node: Node): Seq[Node] = {
+  node match{
+    case t: HtmlTag => Seq(t.copy(children = t.children.flatMap(autoLink)))
+    case r: RawNode => Seq(r)
+    case StringNode(v) =>
+      val regex = "(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#]".r
+      val text = regex.split(v).map(StringNode)
+      val links =
+        regex.findAllMatchIn(v)
+             .map(_.toString)
+             .map{m => a(href:=m)(m)}
+             .toSeq
+
+      text.zipAll(links, StringNode(""), StringNode(""))
+          .flatMap{case (x, y) => Seq(x, y)}
+          .reverse
+  }
+}
+
+html(
+  head,
+  autoLink(
+    body(
+      h1("This is my title"),
+      div(
+        p(
+          "This is my first paragraph on http://www.github.com wooo"
+        ),
+        "I love http://www.google.com"
+      )
+    )
+  )
+)
+```
+
+Again, this is a full example showing both the usage *and* the definition of the `autoLink` filter. This prints the below HTML:
+
+```html
+<html>
+    <head></head>
+    <body>
+        <h1>This is my title</h1>
+        <div>
+            <p>
+                This is my first paragraph on
+                <a href="http://www.github.com">http://www.github.com</a> wooo
+            </p>
+            I love <a href="http://www.google.com">http://www.google.com</a>
+        </div>
+    </body>
+</html>
+```
 
 Performance
 ===========
