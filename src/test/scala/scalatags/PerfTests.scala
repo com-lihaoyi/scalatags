@@ -10,7 +10,7 @@ class PerfTestsImpl extends PerfTests{
   val samples = Seq(
     Scalatags -> "Scalatags",
     ScalaXML -> "ScalaXML",
-//    Twirl -> "Twirl",
+    Twirl -> "Twirl",
     Mustache -> "Mustache",
     Jade -> "Jade"
   )
@@ -58,16 +58,16 @@ case object Mustache extends (() => String){
 // Commented out because Twirl currently does not support SBT 0.13.0, and it's
 // not worth maintaining separate SBT versions just to put it in the test suite.
 
-//case object Twirl extends (() => String){
-//  def apply() = {
-//    html.page(
-//      "contentpara",
-//      "first",
-//      Scalatags.titleString,
-//      Scalatags.firstParaString,
-//      (0 until 5).map(i =>
-//        (i, if (i % 2 == 0) "red" else "green")
-//      )
-//    ).toString
-//  }
-//}
+case object Twirl extends (() => String){
+  def apply() = {
+    html.page(
+      "contentpara",
+      "first",
+      Scalatags.titleString,
+      Scalatags.firstParaString,
+      (0 until 5).map(i =>
+        (i, if (i % 2 == 0) "red" else "green")
+      )
+    ).toString
+  }
+}
