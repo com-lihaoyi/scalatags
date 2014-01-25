@@ -76,7 +76,7 @@ ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%
 libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.2"
 ```
 
-And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console, or browse the .
+And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
 
 ScalaJS
 =======
@@ -941,9 +941,16 @@ The rest of the code involved in this micro-benchmark can be found in [PerfTests
 Internals
 =========
 
-The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](shared/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](shared/main/scala/scalatags/package.scala).
+The primary data structure, the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag):
 
-The primary data structure, the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag), is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) objects, which are really objects with a single `transform: HtmlTag => HtmlTag` method. These transforms are applied to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag) sequentially, returning a new HtmlTag at the end of the process.
+```scala
+case class HtmlTag(tag: String,
+                   children: List[Node],
+                   attrs: SortedMap[String, String],
+                   void: Boolean) extends Node
+```
+
+is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) objects, which are really objects with a single `transform: HtmlTag => HtmlTag` method. These transforms are applied to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag) sequentially, returning a new HtmlTag at the end of the process.
 
 The current selection of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) (or implicitly convertable) types include
 
@@ -957,6 +964,8 @@ Although these are the [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.
 - Adding both attributes and children at once
 - Modifying existing attributes
 - Modifying or filtering the list of children
+
+The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](shared/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](shared/main/scala/scalatags/package.scala).
 
 Prior Work
 ==========
