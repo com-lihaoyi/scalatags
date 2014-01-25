@@ -1,6 +1,23 @@
-lazy val root = project.in(file(".")).aggregate(js, jvm)
+lazy val root = project.in(file(".")).aggregate(js)
 
 lazy val js = project.in(file("js"))
 
-lazy val jvm = project.in(file("jvm"))
+Build.sharedSettings
+
+unmanagedSourceDirectories in Compile <+= baseDirectory(_ / "shared" / "main" / "scala")
+
+unmanagedSourceDirectories in Test <+= baseDirectory(_ / "shared" / "test" / "scala")
+
+version := "0.2.2"
+
+//Twirl.settings
+//
+//sourceDirectory in Twirl.twirlCompile <<= (sourceDirectory in Test) / "twirl"
+//
+//target in Twirl.twirlCompile <<= (sourceManaged in Test) / "generated-twirl-sources"
+
+libraryDependencies ++= Seq(
+  "org.scalatest" % "scalatest_2.10" % "2.0" % "test",
+  "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1" % "test"
+)
 

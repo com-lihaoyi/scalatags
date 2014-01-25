@@ -63,6 +63,9 @@ Contents
   - [XHP and Pyxl](#xhp-and-pyxl)
   - [Scalatags](#scalatags-1)
 - [License](#license)
+- [Mailing List](s.google.com/forum/#!forum/scalatags)
+- [Scaladoc](http://lihaoyi.github.io/scalatags/#package)
+
 
 Getting Started
 ===============
@@ -73,7 +76,7 @@ ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%
 libraryDependencies += "com.scalatags" % "scalatags_2.10" % "0.2.2"
 ```
 
-And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console, or browse the [Scaladoc](http://lihaoyi.github.io/scalatags/#package).
+And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console, or browse the .
 
 ScalaJS
 =======

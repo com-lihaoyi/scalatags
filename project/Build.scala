@@ -5,8 +5,7 @@ object Build extends sbt.Build{
     organization := "com.scalatags",
     name := "scalatags",
     scalaVersion := "2.10.3",
-    unmanagedSourceDirectories in Compile <+= baseDirectory(_ / ".." / "shared" / "main"),
-    unmanagedSourceDirectories in Test <+= baseDirectory(_ / ".." / "shared" / "test"),
+
     // Sonatype
     publishArtifact in Test := false,
     publishTo <<= version { (v: String) =>
