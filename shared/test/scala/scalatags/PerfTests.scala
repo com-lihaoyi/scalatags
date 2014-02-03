@@ -1,33 +1,35 @@
 package scalatags
+import utest.framework.TestSuite
+import utest._
 
-import org.scalatest.FreeSpec
-
-trait PerfTests extends FreeSpec{
+trait PerfTests extends TestSuite{
 
   def samples: Seq[(() => String, String)]
-  "perf" - {
-    "Correctness" in {
-      Util.strCheck(
+  def tests = {
+    "perf" - {
+      "correctness" - {
+        Util.strCheck(
 
-        (samples.map(_._1()) :+ PerfTests.expected):_*
-      )
-    }
-    "Perf" in {
-
-      def test(f: () => String, name: String) = {
-        val start = System.currentTimeMillis()
-        var i = 0
-        val d = 10000
-
-        while(System.currentTimeMillis() - start < d){
-          i += 1
-          f()
-        }
-
-        println(name.padTo(20, ' ') + i + " in " + d)
+          (samples.map(_._1()) :+ PerfTests.expected):_*
+        )
       }
-      for ((sample, name) <- samples){
-        test(sample, name)
+      "performance" - {
+
+        def test(f: () => String, name: String) = {
+          val start = System.currentTimeMillis()
+          var i = 0
+          val d = 10000
+
+          while(System.currentTimeMillis() - start < d){
+            i += 1
+            f()
+          }
+
+          println(name.padTo(20, ' ') + i + " in " + d)
+        }
+        for ((sample, name) <- samples){
+          test(sample, name)
+        }
       }
     }
   }

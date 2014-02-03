@@ -19,4 +19,17 @@ object Util {
       }
     }
   }
+  def main(args: Array[String]){
+    import utest._
+    import utest.framework.TestSuite
+    import utest.ExecutionContext.RunNow
+    val tests = TestSuite{
+      "hello"-{
+        println("world")
+      }
+    }
+    println("A")
+    tests.run()
+    println("B")
+  }
 }
