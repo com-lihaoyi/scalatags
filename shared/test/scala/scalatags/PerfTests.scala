@@ -5,7 +5,8 @@ import utest._
 trait PerfTests extends TestSuite{
 
   def samples: Seq[(() => String, String)]
-  def tests = {
+
+  def tests = TestSuite{
     "perf" - {
       "correctness" - {
         Util.strCheck(

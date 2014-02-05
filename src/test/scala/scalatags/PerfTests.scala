@@ -4,7 +4,7 @@ import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSour
 import java.io.{StringWriter, PrintWriter}
 import java.nio.file.Paths
 
-class PerfTestsImpl extends PerfTests{
+object PerfTestsImpl extends PerfTests{
   val samples = Seq(
     Scalatags -> "Scalatags",
     ScalaXML -> "ScalaXML",
