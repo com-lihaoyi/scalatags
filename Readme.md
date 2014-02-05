@@ -25,7 +25,7 @@ And turns them into HTML like this:
 ```html
 <html>
     <head>
-        <script src="..." />
+        <script src="..."></script>
         <script>alert('Hello World')</script>
     </head>
     <body>
