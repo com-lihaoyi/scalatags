@@ -5,15 +5,15 @@ scalaJSSettings
 
 Build.sharedSettings
 
-version := "0.2.2-JS"
+version := "0.2.3-JS"
 
 unmanagedSourceDirectories in Compile <+= baseDirectory(_ / ".." / "shared" / "main")
 
 unmanagedSourceDirectories in Test <+= baseDirectory(_ / ".." / "shared" / "test")
 
 libraryDependencies ++= Seq(
-  "com.lihaoyi" % "utest_2.10" % "0.1.0-JS" % "test",
-  "com.lihaoyi" % "utest-runner_2.10" % "0.1.0" % "test"
+  "com.lihaoyi.utest" % "utest_2.10" % "0.1.1-JS" % "test",
+  "com.lihaoyi.utest" % "utest-runner_2.10" % "0.1.1" % "test"
 )
 
 
