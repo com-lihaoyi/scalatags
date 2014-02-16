@@ -94,7 +94,7 @@ Why Scalatags
 
 The core functionality of Scalatags is less than [500 lines of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost *everything*, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
 
-Since ScalaTags is pure Scala. This means that any editor which understands Scala will understand ScalaTags. Not only do you get syntax highlighting, you also get code completion:
+Since ScalaTags is pure Scala, any editor that understands Scala will understand ScalaTags. Not only do you get syntax highlighting, you also get code completion:
 
 ![Autocomplete](docs/Autocomplete.png)
 
@@ -135,9 +135,9 @@ val frag = html(
 )
 ```
 
-The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.all._`. See [below](#managing-imports) if you want more fine-grain control over what's imported.
+The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.all._`. See [below](#managing-imports) if you want more fine-grained control over what's imported.
 
-This example code creates a Scalatags fragment. We could do many things with a fragment: store it, return it, it's just a normal Scala value. Eventually, though, you will want to convert it into HTML. To do this, simply use:
+This example code creates a Scalatags fragment. We could do many things with a fragment: store it, return it, etc. since it's just a normal Scala value. Eventually, though, you will want to convert it into HTML. To do this, simply use:
 
 ```scala
 frag.toString
@@ -149,14 +149,14 @@ Which will give you a String containing the HTML representation:
 <html><head><script>some script</script></head><body><h1>This is my title</h1><div><p>This is my first paragraph</p><p>This is my second paragraph</p></div></body></html>
 ```
 
-This representation omits unnecesary whitespace. To improve readability we could pretty print it using some XML processing:
+This representation omits unnecesary whitespace. To improve readability we could pretty-print it using some XML processing:
 
 ```scala
 val prettier = new scala.xml.PrettyPrinter(80, 4)
 println(prettier.format(scala.xml.XML.loadString(frag.toString)))
 ```
 
-executing that prints out:
+Which prints out:
 
 ```html
 <html>
@@ -173,7 +173,7 @@ executing that prints out:
 </html>
 ```
 
-The following examples will simply show the initial Scalatag fragment and the final prettyprinted HTML, skipping the intermediate steps.
+The following examples will simply show the initial Scalatag fragment and the final pretty-printed HTML, skipping the intermediate steps.
 
 Attributes
 ----------
@@ -197,7 +197,7 @@ html(
 )
 ```
 
-In Scalatags, each attribute has an associated value which can be used to set it. This example shows you set the `onclick` and `href` attributes with the `:=` operator. These are all instances of the [Attr](http://lihaoyi.github.io/scalatags/#scalatags.Attr) class.
+In Scalatags, each attribute has an associated value which can be used to set it. This example shows how you set the `onclick` and `href` attributes with the `:=` operator. Attributes are all instances of the [Attr](http://lihaoyi.github.io/scalatags/#scalatags.Attr) class.
 
 The common HTML attributes all have static values to use in your fragments, and the list can be seen [here](http://lihaoyi.github.io/scalatags/#scalatags.Attrs). This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by Scalatags. This can be done with the `.attr` method that Scalatags adds to Strings:
 
@@ -220,7 +220,9 @@ html(
 )
 ```
 
-If you wish to, you can also take the result of the `.attr` call and assign it to a variable for you to use later in an identical way. Both of these print the same thing:
+If you wish to, you can also take the result of the `.attr` call and assign it to a variable for you to use later in an identical way.
+
+Both the above examples print the same thing:
 
 ```html
 <html>
@@ -265,9 +267,9 @@ html(
 )
 ```
 
-In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a large but finite number of styles, and not any arbitrary string can be a style. The above example shows how CSS classes and inline-styles are typically set.
+In HTML, the `class` and `style` attributes are often thought of not as normal attributes (which contain strings), but as lists of strings (for `class`) and lists of key-value pairs (for `style`). Furthermore, there is a large but finite number of styles, and a style cannot simply be any arbitrary string. The above example shows how CSS classes and inline-styles are typically set.
 
-Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` (Instances of [Cls](http://lihaoyi.github.io/scalatags/#scalatags.Cls)) are defined just before, while `backgroundColor`, `color` and `opacity` (Instances of [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style)) are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles).
+Note that in this case, `backgroundColor`, `color`, `contentpara`, `first` and `opacity` are all statically typed identifiers. The two CSS classes `contentpara` and `first` (instances of [Cls](http://lihaoyi.github.io/scalatags/#scalatags.Cls)) are defined just before, while `backgroundColor`, `color` and `opacity` (instances of [Style](http://lihaoyi.github.io/scalatags/#scalatags.Style)) are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.Styles).
 
 Of course, `class` and `style` are in the end just attributes, so you can treat them as such and bind them directly without any fuss:
 
@@ -290,7 +292,7 @@ html(
 )
 ```
 
-Both of these print the same thing:
+Both the above examples print the same thing:
 
 ```html
 <html>
@@ -329,7 +331,7 @@ div(
 
 Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above. Attempts to pass in strings to `float:=`, `tabindex:=` or `disabled:=` result in compile errors.
 
-Even for styles or attributes which take values other than strings (e.g. `tabindex`) the `:=` operator can still be used to force assignment:
+Even for styles or attributes which take values other than strings (e.g. `tabindex`), the `:=` operator can still be used to force assignment:
 
 ```scala
 div(
@@ -343,7 +345,7 @@ div(
 )
 ```
 
-Both of these print the same thing:
+Both of the above examples print the same thing:
 
 ```html
 <div>
@@ -421,7 +423,9 @@ div(
 )
 ```
 
-In this case, you can define `custom` top-level somewhere, and simply have everyone else use `import custom._` to get exactly what you want. All three of of these examples print
+In this case, you can define `custom` top-level somewhere, and simply have everyone else use `import custom._` to get exactly what you want.
+
+All three of these examples print:
 
 ```html
 <div>
@@ -480,6 +484,7 @@ html(
 ```
 
 Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints
+:
 
 ```html
 <html>
@@ -524,13 +529,13 @@ html(
 )
 ```
 
-Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own [crufty little programming language embedded inside them for control flow](http://jinja.pocoo.org/docs/templates/#list-of-control-structures), you probably already know how to use ScalaTags' control flow syntax. They're just Scala after all.
+Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own [crufty little programming language embedded inside them for control flow](http://jinja.pocoo.org/docs/templates/#list-of-control-structures), you probably already know how to use ScalaTags' control flow syntax. It'sDR just Scala after all.
 
 This prints out:
 
 ```html
 <html>
-    <head>
+    <head>DR
         <script>some script</script>
     </head>
     <body>
@@ -757,7 +762,7 @@ object Child extends Parent{
 Child.render
 ```
 
-Most of the time, functions are sufficient to keep things DRY, if you for some reason want to use inheritance to structure your code, you probably already know how to do so. Again, unlike [other](http://wsgiarea.pocoo.org/jinja/docs/inheritance.html) [frameworks](http://docs.makotemplates.org/en/latest/inheritance.html) that have implemented complex inheritance systems themselves, Scalatags is just Scala, and it behaves as you'd expect.
+Most of the time, functions are sufficient to keep things DRY, but if for some reason you want to use inheritance to structure your code, you probably already know how to do so. Again, unlike [other](http://wsgiarea.pocoo.org/jinja/docs/inheritance.html) [frameworks](http://docs.makotemplates.org/en/latest/inheritance.html) that have implemented complex inheritance systems themselves, Scalatags is just Scala, and it behaves as you'd expect.
 
 ```html
 <html>
@@ -950,7 +955,7 @@ case class HtmlTag(tag: String,
                    void: Boolean) extends Node
 ```
 
-is a simple, immutable representation of a single HTML tag. It's `.apply()` method takes a list of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) objects, which are really objects with a single `transform: HtmlTag => HtmlTag` method. These transforms are applied to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag) sequentially, returning a new HtmlTag at the end of the process.
+is a simple, immutable representation of a single HTML tag. Its `.apply()` method takes a list of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) objects, which are really objects with a single `transform: HtmlTag => HtmlTag` method. These transforms are applied to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.HtmlTag) sequentially, returning a new HtmlTag at the end of the process.
 
 The current selection of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Modifier) (or implicitly convertable) types include
 
@@ -987,7 +992,7 @@ They also showcase many of the weaknesses of this style of templating system:
 - The fact that it's string based means it's vulnerable to XSS injections, or plain-old malformed HTML output.
 - The one-template-per-file rule discourages you from building your page from small re-usable fragments, because who wants to keep track of hundreds of individual files. People are reluctant to make a file with 3-5 lines in it, which is understandable but unfortunate because factoring templates into re-usable 3-5 line snippets is a good way of staying sane.
 - The API is complex and novel: Jinja2 for example contains logic around [file-loading](http://jinja.pocoo.org/docs/api/#loaders) & [caching](http://jinja.pocoo.org/docs/api/#bytecode-cache), as well as custom Jinja2-specific ways of doing [loops](http://jinja.pocoo.org/docs/templates/#for), [conditionals](http://jinja.pocoo.org/docs/templates/#if), [functions](http://jinja.pocoo.org/docs/templates/#macros), [comments](http://jinja.pocoo.org/docs/templates/#comments), [inheritance](http://jinja.pocoo.org/docs/templates/#template-inheritance), [scoping](http://jinja.pocoo.org/docs/templates/#block-nesting-and-scope), [imports](http://jinja.pocoo.org/docs/templates/#import-context-behavior) and other things. All these are things you would have to learn.
-- The syntax is completely new; finding a editor that properly supports all the quirks and semantics (or even simply highlighting things properly) is hard. You could hack together something quick and extremely fragile, or you could wait ages for a solid plugin to materialize.
+- The syntax is completely new; finding an editor that properly supports all the quirks and semantics (or even simply highlighting things properly) is hard. You could hack together something quick and extremely fragile, or you could wait ages for a solid plugin to materialize.
 - Abstraction is clunky: inbuilt tags are used via `<div />`, while user-defined components are called e.g. by `{{ component() }}`. You're left with a choice between not using much abstraction and mainly sticking to inbuilt tags, or creating components and accepting the fact that your templates will basically be totally composed of `{{ curly braces }}`. Neither choice is satisfying.
 - Have no sort of static checking at all; you're just passing dicts around, and waiting for silly mistakes to blow up at run-time so you can fix them.
 
@@ -1053,7 +1058,7 @@ Scalatags
 And that's why I created Scalatags:
 
 - Structured and immune to malformed output/XSS.
-- No more one-template-per-file rule; make small templates to your hearts content!
+- No more one-template-per-file rule; make small templates to your heart's content!
 - Dead-simple API, which re-uses 100% of what you know about Scala's language and libraries.
 - 100% Scala syntax; no more bumping into weird edge cases with the parser.
 - Syntax highlighting, error-highlighting, jump-to-definition, in-editor-documentation, and all the other nice IDE features out of the box. No more waiting for plugins!
