@@ -483,8 +483,7 @@ html(
 )
 ```
 
-Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints
-:
+Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints:
 
 ```html
 <html>
@@ -529,13 +528,13 @@ html(
 )
 ```
 
-Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own [crufty little programming language embedded inside them for control flow](http://jinja.pocoo.org/docs/templates/#list-of-control-structures), you probably already know how to use ScalaTags' control flow syntax. It'sDR just Scala after all.
+Like most other XML templating languages, ScalaTags contains control flow statements like `if` and `for`. Unlike other templating languages which have their own [crufty little programming language embedded inside them for control flow](http://jinja.pocoo.org/docs/templates/#list-of-control-structures), you probably already know how to use ScalaTags' control flow syntax. It's just Scala after all.
 
 This prints out:
 
 ```html
 <html>
-    <head>DR
+    <head>
         <script>some script</script>
     </head>
     <body>
