@@ -156,7 +156,7 @@ val prettier = new scala.xml.PrettyPrinter(80, 4)
 println(prettier.format(scala.xml.XML.loadString(frag.toString)))
 ```
 
-Which prints out:
+Executing the above prints out:
 
 ```html
 <html>
