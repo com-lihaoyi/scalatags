@@ -20,6 +20,7 @@
  * Other tags cannot, and must have a separate closing tag even when empty.
  */
 package scalatags
+import acyclic.file
 
 /**
  * Contains HTML tags which are used less frequently. These are generally

@@ -9,10 +9,7 @@
  */
 package scalatags
 import DataTypes._
-
-private[scalatags] class CurrentColor(jsName: String, cssName: String) extends TypedStyle[Color](jsName, cssName){
-  val currentColor = this -> "currentColor"
-}
+import acyclic.file
 
 private[scalatags] trait Baseline{ self: TypedStyle[String] =>
   val auto = this := "auto"

@@ -9,6 +9,7 @@
  */
 package scalatags
 import DataTypes._
+import acyclic.file
 /**
  * A Style that takes any value of type T as a parameter and has an auto value
  */
@@ -34,7 +35,9 @@ private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extend
     this := (image +: images).mkString(", ")
   }
 }
-
+private[scalatags] class CurrentColor(jsName: String, cssName: String) extends TypedStyle[Color](jsName, cssName){
+  val currentColor = this -> "currentColor"
+}
 
 private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName) {
   /**

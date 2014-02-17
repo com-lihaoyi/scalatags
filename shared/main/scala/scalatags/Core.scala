@@ -1,4 +1,5 @@
 package scalatags
+import acyclic.file
 import scala.collection.{SortedMap, mutable}
 
 /**

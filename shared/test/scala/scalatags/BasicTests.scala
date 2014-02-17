@@ -1,5 +1,5 @@
 package scalatags
-
+import acyclic.file
 import utest.framework.TestSuite
 import utest._
 import scalatags.all._

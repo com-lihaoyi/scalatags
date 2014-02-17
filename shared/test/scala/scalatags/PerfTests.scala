@@ -1,7 +1,7 @@
 package scalatags
 import utest.framework.TestSuite
 import utest._
-
+import acyclic.file
 trait PerfTests extends TestSuite{
 
   def samples: Seq[(() => String, String)]

@@ -1,3 +1,4 @@
+import acyclic.file
 import scala.collection.immutable.Queue
 import scala.collection.{SortedMap, mutable}
 
@@ -8,19 +9,7 @@ import scala.collection.{SortedMap, mutable}
  */
 package object scalatags {
 
-  /**
-   * Convenience object to help import all [[Tags]], [[Attrs]], [[Styles]] and
-   * [[Datatypes]] into the global namespace via `import scalatags.all._`
-   */
-  object all extends Attrs with Styles with Tags with DataConverters
-  /**
-   * Convenience object to help import all [[Tags]], and [[DataConverters]], while
-   * aliases [[Attrs]] as `attr` and [[Styles]] as `css`. Used via
-   * `import scalatags.short._`
-   */
-  object short extends Tags with DataConverters{
-    object * extends Attrs with Styles
-  }
+
   /**
    * Mark the given string as "raw", meaning it will not get escaped when the
    * Scalatags fragment is serialized. This makes it easy to open up XSS holes

@@ -19,7 +19,12 @@ version := "0.2.3"
 libraryDependencies ++= Seq(
   "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1" % "test",
   "com.lihaoyi.utest" % "utest_2.10" % "0.1.1" % "test",
-  "com.lihaoyi.utest" % "utest-runner_2.10" % "0.1.1" % "test"
+  "com.lihaoyi.utest" % "utest-runner_2.10" % "0.1.1" % "test",
+  "com.lihaoyi.acyclic" %% "acyclic" % "0.1.0" % "provided"
 )
 
 testFrameworks += new TestFramework("utest.runner.JvmFramework")
+
+autoCompilerPlugins := true
+
+addCompilerPlugin("com.lihaoyi.acyclic" %% "acyclic" % "0.1.0")
