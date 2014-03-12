@@ -119,6 +119,7 @@ Hello World
 -----------
 
 ```scala
+import scalatags._
 import scalatags.all._
 
 val frag = html(

@@ -36,6 +36,25 @@ package object scalatags {
   }
 
   /**
+   * Allows you to modify a [[HtmlTag]] by adding an Option containing other nest-able
+   * objects to its list of children.
+   */
+  implicit def OptionModifier[A <% Modifier](xs: Option[A]) = SeqModifier(xs.toSeq)
+
+  /**
+   * Allows you to modify a [[HtmlTag]] by adding an Array containing other nest-able
+   * objects to its list of children.
+   */
+  implicit def ArrayModifier[A <% Modifier](xs: Array[A]) = SeqModifier(xs.toSeq)
+
+  /**
+   * Lets you put Unit into a scalatags tree, as a no-op.
+   */
+  implicit def UnitModifier(u: Unit) = new scalatags.Modifier{
+    def transform(t: scalatags.HtmlTag) = t
+  }
+
+  /**
    * Provides extension methods on strings to fit them into Scalatag fragments.
    */
   implicit class ExtendedString(s: String){

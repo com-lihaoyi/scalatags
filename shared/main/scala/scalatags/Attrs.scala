@@ -221,6 +221,8 @@ trait Attrs{
    * and so on. The common use of this attribute is to define the type of style
    * sheet linked and the most common current value is text/css, which indicates
    * a Cascading Style Sheet format.
+   *
+   * MDN
    */
   val `type` = "type".attr
   /**
@@ -232,8 +234,15 @@ trait Attrs{
    * Classes allows CSS and Javascript to select and access specific elements
    * via the class selectors or functions like the DOM method
    * document.getElementsByClassName.
+   *
+   * MDN
    */
   val `class` = "class".attr
+
+  /**
+   * Shorthand for the `class` attribute
+   */
+  val cls = `class`
 
   /**
    * This attribute participates in defining the language of the element, the
