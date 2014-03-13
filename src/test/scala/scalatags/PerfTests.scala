@@ -2,7 +2,7 @@ package scalatags
 
 import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
 import java.io.{StringWriter, PrintWriter}
-import java.nio.file.Paths
+
 
 object PerfTestsImpl extends PerfTests{
   val samples = Seq(

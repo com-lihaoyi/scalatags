@@ -90,7 +90,7 @@ object BasicTests extends TestSuite{
         div(
           float.left,
           style:="background-color: red;",
-          `class`:="my-class",
+          cls:="my-class",
           "other-class".cls,
           p("i am a cow")
         ),
@@ -116,13 +116,28 @@ object BasicTests extends TestSuite{
         )
         assert(frag.styles == Map("background-color" -> "red", "float" -> "left", "height" -> "10px"))
       }
-      "stringSeq" - strCheck(
+      "intSeq" - strCheck(
         div(
           h1("Hello"),
-          for(i <- 0 until 5) yield "" + i
+          for(i <- 0 until 5) yield i
         ),
         """<div><h1>Hello</h1>01234</div>"""
       )
+      "stringArray" - {
+        val strArr = Array("hello")
+        strCheck(
+          div(
+            Some("lol"),
+            Some(1),
+            None: Option[String],
+            h1("Hello"),
+            Array(1, 2, 3),
+            strArr,
+            ()
+          ),
+          """<div>lol1<h1>Hello</h1>123hello</div>"""
+        )
+      }
     }
   }
 

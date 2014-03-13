@@ -6,15 +6,14 @@ object Util {
   }
   def strCheck(x: Any*) = {
     for (Seq(a, b) <- x.grouped(2)) {
-//      println(clean(a.toString()))
-//      println(clean(b.toString()))
+
       try
         assert(
           clean(a.toString()) == clean(b.toString())
         )
       catch {case e: AssertionError =>
         println(clean(a.toString()))
-        println(clean(a.toString()))
+        println(clean(b.toString()))
         throw e
       }
     }

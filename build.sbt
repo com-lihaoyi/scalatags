@@ -8,7 +8,7 @@ unmanagedSourceDirectories in Compile <+= baseDirectory(_ / "shared" / "main" / 
 
 unmanagedSourceDirectories in Test <+= baseDirectory(_ / "shared" / "test" / "scala")
 
-version := "0.2.3"
+version := "0.2.4"
 
 //Twirl.settings
 //
@@ -18,13 +18,12 @@ version := "0.2.3"
 
 libraryDependencies ++= Seq(
   "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1" % "test",
-  "com.lihaoyi.utest" % "utest_2.10" % "0.1.1" % "test",
-  "com.lihaoyi.utest" % "utest-runner_2.10" % "0.1.1" % "test",
-  "com.lihaoyi.acyclic" %% "acyclic" % "0.1.0" % "provided"
+  "com.lihaoyi.utest" % "utest_2.10" % "0.1.2" % "test",
+  "com.lihaoyi.acyclic" %% "acyclic" % "0.1.1" % "provided"
 )
 
 testFrameworks += new TestFramework("utest.runner.JvmFramework")
 
 autoCompilerPlugins := true
 
-addCompilerPlugin("com.lihaoyi.acyclic" %% "acyclic" % "0.1.0")
+addCompilerPlugin("com.lihaoyi.acyclic" %% "acyclic" % "0.1.1")
