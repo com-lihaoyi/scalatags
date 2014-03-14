@@ -18,8 +18,8 @@ version := "0.2.4"
 
 libraryDependencies ++= Seq(
   "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1" % "test",
-  "com.lihaoyi.utest" % "utest_2.10" % "0.1.2" % "test",
-  "com.lihaoyi.acyclic" %% "acyclic" % "0.1.1" % "provided"
+  "com.lihaoyi" % "utest_2.10" % "0.1.2" % "test",
+  "com.lihaoyi" %% "acyclic" % "0.1.1" % "provided"
 )
 
 testFrameworks += new TestFramework("utest.runner.JvmFramework")
