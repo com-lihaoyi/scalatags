@@ -8,12 +8,12 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 
 //addSbtPlugin("io.spray" % "sbt-twirl" % "0.7.0-SNAPSHOT")
 
-addSbtPlugin("com.lihaoyi.utest" % "utest-js-plugin" % "0.1.2")
+addSbtPlugin("com.lihaoyi" % "utest-js-plugin" % "0.1.2")
 
 libraryDependencies ++= Seq(
-  "com.lihaoyi.acyclic" %% "acyclic" % "0.1.1" % "provided"
+  "com.lihaoyi" %% "acyclic" % "0.1.1" % "provided"
 )
 
 autoCompilerPlugins := true
 
-addCompilerPlugin("com.lihaoyi.acyclic" %% "acyclic" % "0.1.1")
+addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.1")
