@@ -229,7 +229,7 @@ trait Attrs{
   /**
    * Shorthand for the `type` attribute
    */ 
-  val tpe = "type".attr
+  val tpe = `type`
   
   /**
    *
