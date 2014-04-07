@@ -225,6 +225,12 @@ trait Attrs{
    * MDN
    */
   val `type` = "type".attr
+  
+  /**
+   * Shorthand for the `type` attribute
+   */ 
+  val tpe = "type".attr
+  
   /**
    *
    */
