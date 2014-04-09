@@ -220,11 +220,16 @@ trait Attrs{
    * value of the attribute should be a MIME type such as text/html, text/css,
    * and so on. The common use of this attribute is to define the type of style
    * sheet linked and the most common current value is text/css, which indicates
-   * a Cascading Style Sheet format.
+   * a Cascading Style Sheet format. You can use tpe as an alias for this
+   * attribute so you don't have to backtick-escape this attribute.
    *
    * MDN
    */
   val `type` = "type".attr
+  /**
+   * Shorthand for the `type` attribute
+   */ 
+  val tpe = `type`
   /**
    *
    */
@@ -233,17 +238,16 @@ trait Attrs{
    * This attribute is a space-separated list of the classes of the element.
    * Classes allows CSS and Javascript to select and access specific elements
    * via the class selectors or functions like the DOM method
-   * document.getElementsByClassName.
+   * document.getElementsByClassName. You can use cls as an alias for this
+   * attribute so you don't have to backtick-escape this attribute.
    *
    * MDN
    */
   val `class` = "class".attr
-
   /**
    * Shorthand for the `class` attribute
    */
   val cls = `class`
-
   /**
    * This attribute participates in defining the language of the element, the
    * language that non-editable elements are written in or the language that
@@ -265,7 +269,6 @@ trait Attrs{
    * MDN
    */
   val placeholder = "placeholder".attr
-
   /**
    * This enumerated attribute defines whether the element may be checked for
    * spelling errors.
