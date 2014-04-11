@@ -10,7 +10,6 @@ trait PerfTests extends TestSuite{
     "perf" - {
       "correctness" - {
         Util.strCheck(
-
           (samples.map(_._1()) :+ PerfTests.expected):_*
         )
       }

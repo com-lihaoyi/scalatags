@@ -19,8 +19,11 @@ target in Twirl.twirlCompile <<= (sourceManaged in Test) / "generated-twirl-sour
 libraryDependencies ++= Seq(
   "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1" % "test",
   "com.lihaoyi" % "utest_2.10" % "0.1.2" % "test",
-  "com.lihaoyi" %% "acyclic" % "0.1.1" % "provided"
+  "com.lihaoyi" %% "acyclic" % "0.1.1" % "provided",
+  "com.nativelibs4java" %% "scalaxy-loops" % "0.3-SNAPSHOT" % "provided"
 )
+
+resolvers += Resolver.sonatypeRepo("snapshots")
 
 testFrameworks += new TestFramework("utest.runner.JvmFramework")
 

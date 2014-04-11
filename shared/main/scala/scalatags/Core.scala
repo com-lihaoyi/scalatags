@@ -2,13 +2,18 @@ package scalatags
 
 import acyclic.file
 import scala.collection.{SortedMap, mutable}
+import scalaxy.loops._
+import scala.language.postfixOps
 
 /**
  * Represents a single CSS class.
  */
 case class Cls(name: String) extends Modifier{
-  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
-    (Nil, SortedMap("class" -> attrs.get("class").fold(name)(_ + " " + name)))
+  def transforms = {
+    Array((_, attrs) => Mod.Attr(
+      "class",
+      attrs.get("class").fold(name)(_ + " " + name)
+    ))
   }
 }
 
@@ -45,8 +50,8 @@ trait Node extends Modifier{
    */
   def writeTo(strb: StringBuilder): Unit
 
-  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
-    (List(this), SortedMap.empty)
+  def transforms = {
+    Array((_, _) => Mod.Child(this))
   }
 }
 /**
@@ -62,9 +67,8 @@ trait Modifier{
    * Can't be `apply`, because some [[Modifier]]s (e.g. [[HtmlTag]]) already have an
    * [[apply]] method, and the overloading becomes ambiguous.
    */
-  def transforms(children: List[Node], attrs: SortedMap[String, String]): (List[Node], SortedMap[String, String])
+  def transforms: Array[(List[Node], SortedMap[String, String]) => Mod]
 }
-
 
 /**
  * A single HTML tag.
@@ -106,18 +110,19 @@ case class TypedHtmlTag[T](tag: String = "",
    * evaluated when (if!) the [[HtmlTag]] is rendered.
    */
   def apply(xs: Modifier*) = {
-    var newTag = this
 
-    var i = 0
-    while(i < xs.length){
-      val (newChildren, newAttrs) = xs(i).transforms(newTag.children, newTag.attrs)
-      newTag = newTag.copy(
-        children = newChildren ::: newTag.children,
-        attrs = newTag.attrs ++ newAttrs
-      )
-      i += 1
+    var children = this.children
+    var attrs = this.attrs
+    for(i <- 0 until xs.length optimized){
+      val ts = xs(i).transforms
+      for(j <- 0 until ts.length optimized){
+        ts(j)(children, attrs) match{
+          case Mod.Attr(k, v) => attrs = attrs.updated(k, v)
+          case Mod.Child(c) => children = c :: children
+        }
+      }
     }
-    newTag
+    this.copy(children = children, attrs = attrs)
   }
 
   /**
@@ -156,9 +161,7 @@ case class TypedHtmlTag[T](tag: String = "",
  * A key value pair representing the assignment of an attribute to a value.
  */
 case class AttrPair(attr: Attr, value: String) extends Modifier{
-  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
-    (Nil, SortedMap(attr.name -> value))
-  }
+  def transforms = Array((_, _) => Mod.Attr(attr.name, value))
 }
 
 /**
@@ -220,9 +223,12 @@ case class UntypedStyle(jsName: String, cssName: String) extends Style
  * A key value pair representing the assignment of a style to a value.
  */
 case class StylePair(style: Style, value: String) extends Modifier{
-  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
+  def transforms = {
     val str = style.cssName + ": " + value + ";"
-    (Nil, SortedMap("style" -> attrs.get("style").fold(str)(_ + " " + str)))
+    Array((_, attrs) => Mod.Attr(
+      "style",
+      attrs.get("style").fold(str)(_ + " " + str)
+    ))
   }
 }
 /**
@@ -235,5 +241,16 @@ case class TypedStyle[T](jsName: String, cssName: String) extends Style{
    * Assign this style to some value of the correct type.
    */
   def :=(value: T) = StylePair(this, value.toString)
+}
+
+/**
+ * Things that a modifier is allowed to do to a node.
+ *
+ * It can only set attributes, or append children.
+ */
+sealed trait Mod
+object Mod{
+  case class Attr(k: String, v: String) extends Mod
+  case class Child(n: Node) extends Mod
 }
 

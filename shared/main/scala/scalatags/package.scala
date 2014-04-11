@@ -29,20 +29,7 @@ package object scalatags {
    * objects to its list of children.
    */
   implicit class SeqModifier[A <% Modifier](xs: Seq[A]) extends Modifier{
-    def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
-      var curChildren = children
-      var curAttrs = attrs
-      var allNewChildren = List.empty[Node]
-      var allNewAttrs = SortedMap.empty[String, String]
-      for(x <- xs) {
-        val (newChildren, newAttrs) = x.transforms(curChildren, curAttrs)
-        curChildren = newChildren ::: curChildren
-        allNewChildren = newChildren ::: curChildren
-        curAttrs = curAttrs ++ newAttrs
-        allNewAttrs = allNewAttrs ++ newAttrs
-      }
-      (allNewChildren, allNewAttrs)
-    }
+    def transforms = xs.flatMap(_.transforms).toArray
   }
 
   /**
@@ -61,9 +48,7 @@ package object scalatags {
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
   implicit def UnitModifier(u: Unit) = new scalatags.Modifier{
-    def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
-      (Nil, SortedMap.empty)
-    }
+    def transforms = Array.empty
   }
 
   /**
