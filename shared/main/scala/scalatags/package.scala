@@ -9,7 +9,8 @@ import scala.collection.{SortedMap, mutable}
  */
 package object scalatags {
 
-
+  val HtmlTag = TypedHtmlTag
+  type HtmlTag = TypedHtmlTag[_]
   /**
    * Mark the given string as "raw", meaning it will not get escaped when the
    * Scalatags fragment is serialized. This makes it easy to open up XSS holes
@@ -28,10 +29,19 @@ package object scalatags {
    * objects to its list of children.
    */
   implicit class SeqModifier[A <% Modifier](xs: Seq[A]) extends Modifier{
-    def transform(tag: HtmlTag) = {
-      var t = tag
-      for(x <- xs) t = x.transform(t)
-      t
+    def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
+      var curChildren = children
+      var curAttrs = attrs
+      var allNewChildren = List.empty[Node]
+      var allNewAttrs = SortedMap.empty[String, String]
+      for(x <- xs) {
+        val (newChildren, newAttrs) = x.transforms(curChildren, curAttrs)
+        curChildren = newChildren ::: curChildren
+        allNewChildren = newChildren ::: curChildren
+        curAttrs = curAttrs ++ newAttrs
+        allNewAttrs = allNewAttrs ++ newAttrs
+      }
+      (allNewChildren, allNewAttrs)
     }
   }
 
@@ -51,7 +61,9 @@ package object scalatags {
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
   implicit def UnitModifier(u: Unit) = new scalatags.Modifier{
-    def transform(t: scalatags.HtmlTag) = t
+    def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
+      (Nil, SortedMap.empty)
+    }
   }
 
   /**
@@ -67,23 +79,23 @@ package object scalatags {
     /**
      * Converts the string to a [[HtmlTag]]
      */
-    def tag = {
+    def tag[T] = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      HtmlTag(s, Nil, SortedMap.empty)
+      HtmlTag[T](s, Nil, SortedMap.empty)
     }
     /**
      * Converts the string to a void [[HtmlTag]]; that means that they cannot
      * contain any content, and can be rendered as self-closing tags.
      */
-    def voidTag = {
+    def voidTag[T] = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      HtmlTag(s, Nil, SortedMap.empty, void=true)
+      HtmlTag[T](s, Nil, SortedMap.empty, void=true)
     }
     /**
      * Converts the string to a [[UntypedAttr]]

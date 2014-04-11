@@ -13,7 +13,8 @@ unmanagedSourceDirectories in Test <+= baseDirectory(_ / ".." / "shared" / "test
 
 libraryDependencies ++= Seq(
   "com.lihaoyi" % "utest_2.10" % "0.1.2-JS" % "test",
-  "com.lihaoyi" %% "acyclic" % "0.1.1" % "provided"
+  "com.lihaoyi" %% "acyclic" % "0.1.1" % "provided",
+  "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.3"
 )
 
 

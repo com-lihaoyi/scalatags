@@ -20,6 +20,7 @@
  * Other tags cannot, and must have a separate closing tag even when empty.
  */
 package scalatags
+
 import acyclic.file
 
 /**
@@ -786,5 +787,4 @@ trait Tags{
    *  MDN
    */
   val textarea = "textarea".tag
-
 }

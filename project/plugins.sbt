@@ -4,9 +4,9 @@ resolvers += Resolver.sonatypeRepo("releases")
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-//resolvers += Classpaths.sbtPluginSnapshots
+resolvers += "spray repo" at "http://repo.spray.io"
 
-//addSbtPlugin("io.spray" % "sbt-twirl" % "0.7.0-SNAPSHOT")
+addSbtPlugin("io.spray" % "sbt-twirl" % "0.7.0")
 
 addSbtPlugin("com.lihaoyi" % "utest-js-plugin" % "0.1.2")
 

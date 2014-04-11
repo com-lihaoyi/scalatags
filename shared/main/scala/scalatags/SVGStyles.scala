@@ -8,6 +8,7 @@
  * http://opensource.org/licenses/MIT
  */
 package scalatags
+
 import DataTypes._
 import acyclic.file
 

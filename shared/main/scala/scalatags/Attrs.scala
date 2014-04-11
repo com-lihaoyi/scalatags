@@ -8,6 +8,7 @@
  * http://opensource.org/licenses/MIT
  */
 package scalatags
+
 import acyclic.file
 /**
  * Module containing static bindings for common HTML attributes.

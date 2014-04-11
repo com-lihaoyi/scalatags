@@ -1,4 +1,5 @@
 package scalatags
+
 import acyclic.file
 import scala.collection.{SortedMap, mutable}
 
@@ -6,13 +7,8 @@ import scala.collection.{SortedMap, mutable}
  * Represents a single CSS class.
  */
 case class Cls(name: String) extends Modifier{
-  def transform(tag: HtmlTag) = {
-    tag.copy(attrs =
-      tag.attrs.updated(
-        "class",
-        tag.attrs.get("class").fold(name)(_ + " " + name)
-      )
-    )
+  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
+    (Nil, SortedMap("class" -> attrs.get("class").fold(name)(_ + " " + name)))
   }
 }
 
@@ -49,8 +45,8 @@ trait Node extends Modifier{
    */
   def writeTo(strb: StringBuilder): Unit
 
-  def transform(tag: HtmlTag) = {
-    tag.copy(children = this :: tag.children)
+  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
+    (List(this), SortedMap.empty)
   }
 }
 /**
@@ -66,7 +62,7 @@ trait Modifier{
    * Can't be `apply`, because some [[Modifier]]s (e.g. [[HtmlTag]]) already have an
    * [[apply]] method, and the overloading becomes ambiguous.
    */
-  def transform(tag: HtmlTag): HtmlTag
+  def transforms(children: List[Node], attrs: SortedMap[String, String]): (List[Node], SortedMap[String, String])
 }
 
 
@@ -79,10 +75,10 @@ trait Modifier{
  * @param attrs A sorted map of attributes
  * @param void Whether or not the tag can be self-closing
  */
-case class HtmlTag(tag: String = "",
-                   children: List[Node],
-                   attrs: SortedMap[String, String],
-                   void: Boolean = false) extends Node{
+case class TypedHtmlTag[T](tag: String = "",
+                           children: List[Node],
+                           attrs: SortedMap[String, String],
+                           void: Boolean = false) extends Node{
 
   /**
    * Represents the list of CSS classes this HtmlTag contains; lazily derived
@@ -114,7 +110,11 @@ case class HtmlTag(tag: String = "",
 
     var i = 0
     while(i < xs.length){
-      newTag = xs(i).transform(newTag)
+      val (newChildren, newAttrs) = xs(i).transforms(newTag.children, newTag.attrs)
+      newTag = newTag.copy(
+        children = newChildren ::: newTag.children,
+        attrs = newTag.attrs ++ newAttrs
+      )
       i += 1
     }
     newTag
@@ -156,8 +156,8 @@ case class HtmlTag(tag: String = "",
  * A key value pair representing the assignment of an attribute to a value.
  */
 case class AttrPair(attr: Attr, value: String) extends Modifier{
-  def transform(tag: HtmlTag) = {
-    tag.copy(attrs = tag.attrs.updated(attr.name, value))
+  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
+    (Nil, SortedMap(attr.name -> value))
   }
 }
 
@@ -220,14 +220,9 @@ case class UntypedStyle(jsName: String, cssName: String) extends Style
  * A key value pair representing the assignment of a style to a value.
  */
 case class StylePair(style: Style, value: String) extends Modifier{
-  def transform(tag: HtmlTag) = {
+  def transforms(children: List[Node], attrs: SortedMap[String, String]) = {
     val str = style.cssName + ": " + value + ";"
-    tag.copy(attrs =
-      tag.attrs.updated(
-        "style",
-        tag.attrs.get("style").fold(str)(_ + " " + str)
-      )
-    )
+    (Nil, SortedMap("style" -> attrs.get("style").fold(str)(_ + " " + str)))
   }
 }
 /**
