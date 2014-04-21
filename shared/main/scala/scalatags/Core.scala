@@ -2,8 +2,6 @@ package scalatags
 
 import acyclic.file
 import scala.collection.{SortedMap, mutable}
-import scalaxy.loops._
-import scala.language.postfixOps
 
 /**
  * Represents a single CSS class.
@@ -106,16 +104,16 @@ case class TypedHtmlTag[T](tag: String = "",
 
   /**
    * Add the given modifications (e.g. additional children, or new attributes)
-   * to the [[HtmlTag]]. Note that any these modifications are queued up and only
-   * evaluated when (if!) the [[HtmlTag]] is rendered.
+   * to the [[HtmlTag]].
    */
   def apply(xs: Modifier*) = {
 
     var children = this.children
     var attrs = this.attrs
-    for(i <- 0 until xs.length optimized){
+
+    for(i <- 0 until xs.length){
       val ts = xs(i).transforms
-      for(j <- 0 until ts.length optimized){
+      for(j <- 0 until ts.length){
         ts(j)(children, attrs) match{
           case Mod.Attr(k, v) => attrs = attrs.updated(k, v)
           case Mod.Child(c) => children = c :: children

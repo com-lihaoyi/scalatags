@@ -19,7 +19,7 @@ html
         p Goooogle
 
       - paras.foreach{ case (count, color) =>
-        - render("src/test/resource/para.jade", Map("count" -> count, "color" -> color))
+        - render("jvm/src/test/resource/para.jade", Map("count" -> count, "color" -> color))
       - }
 
 
