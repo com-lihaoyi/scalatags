@@ -5,39 +5,7 @@ import scala.scalajs.sbtplugin.ScalaJSPlugin.scalaJSSettings
 import twirl.sbt.TwirlPlugin.Twirl
 
 object Build extends sbt.Build{
-  lazy val root = project.in(file("."))
-                         .settings(crossScalaVersions := Seq("2.10.4", "2.11.0"))
-                         .aggregate(js, jvm)
-
-  lazy val js = project.in(file("js"))
-                       .settings(sharedSettings ++ scalaJSSettings:_*)
-                       .settings(
-    version := version.value + "-JS",
-    libraryDependencies ++= Seq(
-      "com.lihaoyi" %% "utest" % "0.1.3-JS" % "test",
-      "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.3"
-    ),
-    (loadedTestFrameworks in Test) := {
-      (loadedTestFrameworks in Test).value.updated(
-        sbt.TestFramework(classOf[utest.runner.JsFramework].getName),
-        new utest.runner.JsFramework(environment = (scalaJSEnvironment in Test).value)
-      )
-    }
-  )
-
-  lazy val jvm = project.in(file("jvm"))
-                        .settings(sharedSettings ++ Twirl.settings:_*)
-                        .settings(
-    sourceDirectory in Twirl.twirlCompile <<= (sourceDirectory in Test) / "twirl",
-    target in Twirl.twirlCompile <<= (sourceManaged in Test) / "generated-twirl-sources",
-    libraryDependencies ++= Seq(
-//      "org.fusesource.scalate" %% "scalate-core" % "1.6.1" % "test",
-      "com.lihaoyi" %% "utest" % "0.1.3" % "test"
-    ),
-    testFrameworks += new TestFramework("utest.runner.JvmFramework")
-  )
-
-  val sharedSettings = Seq(
+  val cross = new utest.jsrunner.JsCrossBuild(
     organization := "com.scalatags",
     name := "scalatags",
     scalaVersion := "2.10.4",
@@ -45,16 +13,18 @@ object Build extends sbt.Build{
     libraryDependencies ++= Seq("com.lihaoyi" %% "acyclic" % "0.1.2" % "provided"),
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
 
-      // Sonatype
-    publishArtifact in Test := false,
+    libraryDependencies ++= (
+      if (scalaVersion.value.startsWith("2.10")) Nil
+      else Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.1")
+    ),
+
+    // Sonatype
     version := "0.2.5",
-    unmanagedSourceDirectories in Compile <+= baseDirectory(_ / ".." / "shared" / "main"),
-    unmanagedSourceDirectories in Test <+= baseDirectory(_ / ".." / "shared" / "test"),
     publishTo <<= version { (v: String) =>
       Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },
 
-    pomExtra := (
+    pomExtra :=
       <url>https://github.com/lihaoyi/scalatags</url>
         <licenses>
           <license>
@@ -73,6 +43,16 @@ object Build extends sbt.Build{
             <url>https://github.com/lihaoyi</url>
           </developer>
         </developers>
+
+  )
+  lazy val root = cross.root
+
+  lazy val js = cross.js.settings(
+    libraryDependencies ++= Seq(
+      "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.3"
     )
   )
+
+  lazy val jvm = cross.jvm
+
 }

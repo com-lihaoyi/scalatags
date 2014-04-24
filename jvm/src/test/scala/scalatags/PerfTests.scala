@@ -8,7 +8,7 @@ object PerfTestsImpl extends PerfTests{
   val samples = Seq(
     Scalatags -> "Scalatags",
     ScalaXML -> "ScalaXML"//,
-//    Twirl -> "Twirl",
+//    Twirl -> "Twirl"
 //    Mustache -> "Mustache",
 //    Jade -> "Jade"
   )
