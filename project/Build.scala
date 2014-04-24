@@ -49,7 +49,7 @@ object Build extends sbt.Build{
 
   lazy val js = cross.js.settings(
     libraryDependencies ++= Seq(
-      "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.3"
+      "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.4"
     )
   )
 
