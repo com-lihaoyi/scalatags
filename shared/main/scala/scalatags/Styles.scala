@@ -2636,13 +2636,13 @@ trait Styles {
      */
     val auto = this := "auto"
 
-    def ~(allSides: Length) = this := allSides.toString
+    def :=(allSides: Length): StylePair = this := allSides.toString
 
-    def ~(vertical: Length, horizontal: Length) = this := s"$vertical $horizontal"
+    def :=(vertical: Length, horizontal: Length): StylePair = this := s"$vertical $horizontal"
 
-    def ~(top: Length, horizontal: Length, bottom: Length) = this := s"$top $horizontal $bottom"
+    def :=(top: Length, horizontal: Length, bottom: Length): StylePair = this := s"$top $horizontal $bottom"
 
-    def ~(top: Length, right: Length, bottom: Length, left: Length) = this := s"$top $right $bottom $left"
+    def :=(top: Length, right: Length, bottom: Length, left: Length): StylePair = this := s"$top $right $bottom $left"
   }
 
 

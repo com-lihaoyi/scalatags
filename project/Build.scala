@@ -17,6 +17,15 @@ object Build extends sbt.Build{
       if (scalaVersion.value.startsWith("2.10")) Nil
       else Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.1")
     ),
+    libraryDependencies ++= Seq(
+      "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+      compilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
+    ) ++ (
+      if (scalaVersion.value startsWith "2.11.") Nil
+      else Seq(
+        "org.scalamacros" %% s"quasiquotes" % "2.0.0"
+      )
+    ),
 
     // Sonatype
     version := "0.2.5",
