@@ -9,8 +9,8 @@ import utest.framework.TestSuite
  */
 object ExampleTests extends TestSuite{
   def tests = TestSuite{
-    "examples" - {
-      "splashExample" - strCheck(
+    'examples{
+      'splashExample-strCheck(
         html(
           head(
             script(src:="..."),
@@ -40,7 +40,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "helloWorld" - strCheck(
+      'helloWorld-strCheck(
         html(
           head(
             script("some script")
@@ -68,7 +68,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "variables" - strCheck(
+      'variables-strCheck(
         {
           val title = "title"
           val numVisitors = 1023
@@ -101,7 +101,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "controlFlow" - strCheck(
+      'controlFlow-strCheck(
         {
           val numVisitors = 1023
           val posts = Seq(
@@ -151,7 +151,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "functions" - strCheck(
+      'functions-strCheck(
         {
           def imgBox(source: String, text: String) = div(
             img(src:=source),
@@ -200,7 +200,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "customAttributes" - strCheck(
+      'customAttributes-strCheck(
         html(
           head(
             script("some script")
@@ -234,7 +234,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "attributes" - strCheck(
+      'attributes-strCheck(
         html(
           head(
             script("some script")
@@ -269,7 +269,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "classesAndCssCustom" - strCheck(
+      'classesAndCssCustom-strCheck(
         {
           val contentpara = "contentpara".cls
           val first = "first".cls
@@ -323,7 +323,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "nonStringAttributesAndStyles" - strCheck(
+      'nonStringAttributesAndStyles-strCheck(
         div(
           p(float.left)(
             "This is my first paragraph"
@@ -346,7 +346,7 @@ object ExampleTests extends TestSuite{
         </div>
         """
       )
-      "forceStringifyingAttributesAndStyles" - strCheck(
+      'forceStringifyingAttributesAndStyles-strCheck(
         div(
           p(float:="left")(
             "This is my first paragraph"
@@ -366,7 +366,7 @@ object ExampleTests extends TestSuite{
         </div>
         """
       )
-      "filtersAndTransformations" - strCheck({
+      'filtersAndTransformations-strCheck({
         def uppercase(node: Node): Node = {
           node match{
             case t: HtmlTag => t.copy(children = t.children.map(uppercase))
@@ -412,7 +412,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "filtersandTransformationsComplex" - strCheck({
+      'filtersandTransformationsComplex-strCheck({
         def autoLink(node: Node): Seq[Node] = {
           node match{
             case t: HtmlTag => Seq(t.copy(children = t.children.flatMap(autoLink)))
@@ -464,7 +464,7 @@ object ExampleTests extends TestSuite{
       """
       )
 
-      "layouts" - strCheck(
+      'layouts-strCheck(
       {
         def page(scripts: Seq[Node], content: Seq[Node]) =
           html(
@@ -503,7 +503,7 @@ object ExampleTests extends TestSuite{
       """
       )
 
-      "inheritence" - strCheck(
+      'inheritence-strCheck(
         {
           class Parent{
             def render = html(
@@ -549,7 +549,7 @@ object ExampleTests extends TestSuite{
       )
 
 
-      "manualImports" - strCheck(
+      'manualImports-strCheck(
         {
           import scalatags.short._
           div(
@@ -584,7 +584,7 @@ object ExampleTests extends TestSuite{
         """
       )
 
-      "properEscaping" - strCheck(
+      'properEscaping-strCheck(
         {
           val evilInput1 = "\"><script>alert('hello!')</script>"
           val evilInput2 = "<script>alert('hello!')</script>"
@@ -618,7 +618,7 @@ object ExampleTests extends TestSuite{
         """
       )
 
-      "unsanitizedInput" - strCheck(
+      'unsanitizedInput-strCheck(
         {
           val evilInput = "<script>alert('hello!')</script>"
 
@@ -644,7 +644,7 @@ object ExampleTests extends TestSuite{
         </html>
         """
       )
-      "additionalImports" - strCheck(
+      'additionalImports-strCheck(
         {
           import Styles2.pageBreakBefore
           import Tags2.address
@@ -666,11 +666,11 @@ object ExampleTests extends TestSuite{
         </div>
         """
       )
-      "typesafeCSS" - strCheck(
+      'typesafeCSS-strCheck(
         div(zIndex:=10),
         """<div style="z-index: 10;"></div>"""
       )
-      "customAttributesAndStyles" - strCheck(
+      'customAttributesAndStyles-strCheck(
         {
           val dataAppKey = "data-app-key".attr
           val mozBorderRadius = "-moz-border-radius".style
@@ -682,7 +682,7 @@ object ExampleTests extends TestSuite{
         """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;"></div>"""
       )
 
-      "differentWaysOfStaticTyping" - strCheck(
+      'differentWaysOfStaticTyping-strCheck(
         div(
           div(backgroundColor:=hex"ababab"),
           div(color:=rgb(0, 255, 255)),

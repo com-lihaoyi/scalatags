@@ -6,13 +6,13 @@ import scalatags.all._
 import Util._
 object BasicTests extends TestSuite{
   def tests = TestSuite{
-    "basics" - {
+    'basics{
       /**
        * Tests the usage of the pre-defined tags, as well as creating
        * the tags on the fly from Strings
        */
 
-      "tagCreation" - {
+      'tagCreation{
         assert(a.toString == "<a></a>")
         assert(html.toString == "<html></html>")
         assert("this_is_an_unusual_tag".tag.toString == "<this_is_an_unusual_tag></this_is_an_unusual_tag>")
@@ -22,7 +22,7 @@ object BasicTests extends TestSuite{
       /**
        * Tests nesting tags in a simple hierarchy
        */
-      "structuredTags" - strCheck(
+      'cssChaining-strCheck(
         html(
           head(
             script(""),
@@ -50,7 +50,7 @@ object BasicTests extends TestSuite{
       )
 
 
-      "cssChaining" - strCheck(
+      'cssChaining-strCheck(
         div(
           float.left,
           color:="red"
@@ -59,7 +59,7 @@ object BasicTests extends TestSuite{
       )
 
 
-      "attributeChaining" - strCheck(
+      'attributeChaining-strCheck(
         div(
           id:="cow",
           `class`:="thing lol"
@@ -68,7 +68,7 @@ object BasicTests extends TestSuite{
       )
 
 
-      "mixingAttributesStylesAndChildren" - strCheck(
+      'mixingAttributesStylesAndChildren-strCheck(
         div(
           id:="cow",
           float.left,
@@ -77,7 +77,7 @@ object BasicTests extends TestSuite{
         """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
       )
 
-      "cssHelpers" - {
+      'cssHelpers{
 
         assert(10.px.toString == "10px")
         assert(10.0.px.toString == "10px")
@@ -85,7 +85,7 @@ object BasicTests extends TestSuite{
         assert(10.pt.toString == "10pt")
       }
 
-      "classStyleAttrOverwriting" - strCheck(
+      'classStyleAttrOverwriting-strCheck(
         //class/style after attr appends, but attr after class/style overwrites
         div(
           float.left,
@@ -97,18 +97,18 @@ object BasicTests extends TestSuite{
         """<div class="my-class other-class" style="background-color: red;"><p>i am a cow</p></div>"""
       )
 
-      "styleConvertsThingsToCamelcase" - {
+      'styleConvertsThingsToCamelcase{
         assert("i-am-a-cow".style.jsName == "iAmACow")
       }
 
-      "classesListIsGenerated" - {
+      'classesListIsGenerated{
         val frag = div(
           `class`:="my-class",
           "other-class".cls
         )
         assert(frag.classes == Seq("my-class", "other-class"))
       }
-      "styleListIsGenerated" - {
+      'styleListIsGenerated{
         val frag = div(
           style:="background-color: red;",
           float.left,
@@ -116,14 +116,14 @@ object BasicTests extends TestSuite{
         )
         assert(frag.styles == Map("background-color" -> "red", "float" -> "left", "height" -> "10px"))
       }
-      "intSeq" - strCheck(
+      'intSeq-strCheck(
         div(
           h1("Hello"),
           for(i <- 0 until 5) yield i
         ),
         """<div><h1>Hello</h1>01234</div>"""
       )
-      "stringArray" - {
+      'stringArray{
         val strArr = Array("hello")
         strCheck(
           div(

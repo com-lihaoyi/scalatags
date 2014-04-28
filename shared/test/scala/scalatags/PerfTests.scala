@@ -7,13 +7,13 @@ trait PerfTests extends TestSuite{
   def samples: Seq[(() => String, String)]
 
   def tests = TestSuite{
-    "perf" - {
-      "correctness" - {
+    'perf{
+      'correctness{
         Util.strCheck(
           (samples.map(_._1()) :+ PerfTests.expected):_*
         )
       }
-      "performance" - {
+      'performance{
 
         def test(f: () => String, name: String) = {
           val start = System.currentTimeMillis()
