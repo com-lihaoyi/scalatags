@@ -39,6 +39,7 @@ And turns them into HTML like this:
 Contents
 ========
 
+- [Mailing List](https://groups.google.com/forum/#!forum/scalatags)
 - [Getting Started](#getting-started)
 - [ScalaJS](#scalajs)
 - [Why Scalatags](#why-scalatags)
@@ -63,7 +64,6 @@ Contents
   - [XHP and Pyxl](#xhp-and-pyxl)
   - [Scalatags](#scalatags-1)
 - [License](#license)
-- [Mailing List](s.google.com/forum/#!forum/scalatags)
 - [Scaladoc](http://lihaoyi.github.io/scalatags/#package)
 
 
