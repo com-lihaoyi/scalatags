@@ -10,7 +10,7 @@ html(
     script(
       "alert('Hello World')"
     )
-   ),
+  ),
   body(
     div(
       h1(id:="title", "This is a title"),
