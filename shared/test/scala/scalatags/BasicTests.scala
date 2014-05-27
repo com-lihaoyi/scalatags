@@ -4,6 +4,8 @@ import utest.framework.TestSuite
 import utest._
 import scalatags.all._
 import Util._
+import scala.collection.SortedMap
+
 object BasicTests extends TestSuite{
   def tests = TestSuite{
     'basics{
@@ -50,12 +52,12 @@ object BasicTests extends TestSuite{
       )
 
 
-      'cssChaining-strCheck(
+      'cssChaining2-strCheck(
         div(
           float.left,
           color:="red"
         ),
-        """<div style="float: left; color: red;"></div>"""
+        """<div style="color: red; float: left;"></div>"""
       )
 
 
@@ -94,7 +96,7 @@ object BasicTests extends TestSuite{
           "other-class".cls,
           p("i am a cow")
         ),
-        """<div class="my-class other-class" style="background-color: red;"><p>i am a cow</p></div>"""
+        """<div class="my-class other-class" style="background-color: red; float: left;"><p>i am a cow</p></div>"""
       )
 
       'styleConvertsThingsToCamelcase{
@@ -106,7 +108,8 @@ object BasicTests extends TestSuite{
           `class`:="my-class",
           "other-class".cls
         )
-        assert(frag.classes == Seq("my-class", "other-class"))
+        // `my-class` is stored in `attrs` instead of `classes`
+        assert(frag.classes == Seq("other-class"))
       }
       'styleListIsGenerated{
         val frag = div(
@@ -114,7 +117,9 @@ object BasicTests extends TestSuite{
           float.left,
           height:=10.px
         )
-        assert(frag.styles == Map("background-color" -> "red", "float" -> "left", "height" -> "10px"))
+        // "background-color" -> "red" is stored in `attrs` not `styles`
+        val expected = SortedMap[String, Any]("float" -> "left", "height" -> "10px")
+        assert(frag.styles.toString == expected.toString)
       }
       'intSeq-strCheck(
         div(

@@ -12,7 +12,7 @@ package scalatags
 import DataTypes._
 import acyclic.file
 
-private[scalatags] trait Baseline{ self: TypedStyle[String] =>
+private[scalatags] trait Baseline{ self: Style =>
   val auto = this := "auto"
 
   val `before-edge` = this := "before-edge"
@@ -27,7 +27,7 @@ private[scalatags] trait Baseline{ self: TypedStyle[String] =>
   val mathematical = this := "mathematical"
 }
 
-private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends UntypedStyle(jsName, cssName){
+private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends Style(jsName, cssName){
   /**
    * This value determines the "insideness" of a point in the shape by drawing
    * a ray from that point to infinity in any direction and then examining the
@@ -68,7 +68,7 @@ object SvgStyles{
    * MDN
    */
   object alignmentBaseline
-    extends TypedStyle[String]("alignmentBaseline", "alignment-baseline")
+    extends Style("alignmentBaseline", "alignment-baseline")
     with Baseline{
     val baseline = this -> "baseline"
   }
@@ -82,14 +82,14 @@ object SvgStyles{
    *
    * MDN
    */
-  val strokeMiterlimit = new TypedStyle[Number]("strokeMiterlimit", "stroke-miterlimit")
+  val strokeMiterlimit = new Style("strokeMiterlimit", "stroke-miterlimit")
 
   /**
    * The stop-opacity attribute defines the opacity of a given gradient stop.
    *
    * MDN
    */
-  val stopOpacity = new TypedStyle[Number]("stopOpacity", "stop-opacity")
+  val stopOpacity = new Style("stopOpacity", "stop-opacity")
   /**
    * The baseline-shift attribute allows repositioning of the dominant-baseline
    * relative to the dominant-baseline of the parent text content element. The
@@ -97,7 +97,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object baselineShift extends TypedStyle[Length]("baselineShift", "baseline-shift") {
+  object baselineShift extends Style("baselineShift", "baseline-shift") {
     val auto = this := "auto"
     val baseline = this := "baseline"
     val sup = this := "sup"
@@ -110,7 +110,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object textAnchor extends TypedStyle[String]("textAnchor", "text-anchor"){
+  object textAnchor extends Style("textAnchor", "text-anchor"){
     /**
      * The rendered characters are aligned such that the start of the text string
      * is at the initial current text position. For Latin in its usual orientation
@@ -151,7 +151,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val strokeDasharray = new TypedStyle[String]("strokeDasharray", "stroke-dasharray")
+  val strokeDasharray = new Style("strokeDasharray", "stroke-dasharray")
 
   /**
    * the stroke-width attribute specifies the width of the outline on the current
@@ -161,7 +161,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val strokeWidth = new TypedStyle[Length]("strokeWidth", "stroke-width")
+  val strokeWidth = new Style("strokeWidth", "stroke-width")
 
 
   /**
@@ -188,7 +188,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val markerEnd = new TypedStyle[String]("markerEnd", "marker-end")
+  val markerEnd = new Style("markerEnd", "marker-end")
 
   /**
    * The dominant-baseline attribute is used to determine or re-determine a 
@@ -202,7 +202,7 @@ object SvgStyles{
    * MDN
    */
   object dominantBaseline
-    extends TypedStyle[String]("dominantBaseline", "dominant-baseline")
+    extends Style("dominantBaseline", "dominant-baseline")
     with Baseline{
       val `use-script` = this -> "user-script"
       val `no-change` = this -> "no-change"
@@ -225,7 +225,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object fill extends TypedStyle[String]("fill", "fill"){
+  object fill extends Style("fill", "fill"){
     val remove = this := "remove"
     val freeze = this := "freeze"
   }
@@ -236,7 +236,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val strokeDashoffset = new TypedStyle[Length]("strokeDashoffset", "stroke-dashoffset")
+  val strokeDashoffset = new Style("strokeDashoffset", "stroke-dashoffset")
 
   /**
    * The stroke-linejoin attribute specifies the shape to be used at the corners
@@ -244,7 +244,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object strokeLinejoin extends UntypedStyle("strokeLinejoin", "stroke-linejoin"){
+  object strokeLinejoin extends Style("strokeLinejoin", "stroke-linejoin"){
     val miter = this -> "miter"
     val round = this -> "round"
     val bevel = this -> "bevel"
@@ -257,7 +257,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val clipPath = new TypedStyle[String]("clipPath", "clip-path")
+  val clipPath = new Style("clipPath", "clip-path")
 
 
   /**
@@ -268,7 +268,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val kerning = new TypedStyle[Length]("kerning", "kerning")
+  val kerning = new Style("kerning", "kerning")
 
   /**
    * the stroke-opacity attribute specifies the opacity of the outline on the
@@ -276,7 +276,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val strokeOpacity = new TypedStyle[Double]("strokeOpacity", "stroke-opacity")
+  val strokeOpacity = new Style("strokeOpacity", "stroke-opacity")
 
   /**
    * The marker-start attribute defines the arrowhead or polymarker that will be
@@ -284,7 +284,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val markerStart = new TypedStyle[String]("markerStart", "marker-start")
+  val markerStart = new Style("markerStart", "marker-start")
 
   /**
    * The clip-rule attribute only applies to graphics elements that are contained
@@ -301,7 +301,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object strokeLinecap extends UntypedStyle("strokeLinecap", "stroke-linecap"){
+  object strokeLinecap extends Style("strokeLinecap", "stroke-linecap"){
     val butt = this -> "butt"
     val round = this -> "round"
     val square = this -> "square"
@@ -313,7 +313,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val fillOpacity = new TypedStyle[Double]("fillOpacity", "fill-opacity")
+  val fillOpacity = new Style("fillOpacity", "fill-opacity")
 
   /**
    * The marker element defines the graphics that is to be used for drawing
@@ -322,7 +322,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val marker = new TypedStyle[String]("marker", "marker")
+  val marker = new Style("marker", "marker")
 
   /**
    * The marker-mid defines the arrowhead or polymarker that shall be drawn at
@@ -341,7 +341,7 @@ object SvgStyles{
    *
    * MDN
    */
-  val stroke = new TypedStyle[String]("stroke", "stroke")
+  val stroke = new Style("stroke", "stroke")
 
   /**
    * The flood-color attribute indicates what color to use to flood the current
@@ -368,7 +368,7 @@ object SvgStyles{
    *
    * MDN
    */
-  object colorInterpolationFilters extends UntypedStyle("colorInterpolationFilters", "color-interpolation-filters"){
+  object colorInterpolationFilters extends Style("colorInterpolationFilters", "color-interpolation-filters"){
     /**
      * Indicates that the user agent can choose either the sRGB or linearRGB
      * spaces for color interpolation. This option indicates that the author
@@ -407,5 +407,5 @@ object SvgStyles{
    *
    * MDN
    */
-  val floodOpacity = new TypedStyle[Double]("floodOpacity", "flood-opacity")
+  val floodOpacity = new Style("floodOpacity", "flood-opacity")
 }
