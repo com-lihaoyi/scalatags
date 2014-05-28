@@ -9,3 +9,4 @@ resolvers += "spray repo" at "http://repo.spray.io"
 addSbtPlugin("io.spray" % "sbt-twirl" % "0.7.0")
 
 addSbtPlugin("com.lihaoyi" % "utest-js-plugin" % "0.1.5")
+

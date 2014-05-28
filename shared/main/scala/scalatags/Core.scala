@@ -7,7 +7,7 @@ import scala.collection.{SortedMap, mutable}
  * Represents a single CSS class.
  */
 case class Cls(name: Any) extends Modifier{
-  def transforms = Array((_, _) => Mod.Cls(name))
+  def transforms = Array(Mod.Cls(name))
 }
 
 /**
@@ -43,9 +43,7 @@ trait Node extends Modifier{
    */
   def writeTo(strb: StringBuilder): Unit
 
-  def transforms = {
-    Array((_, _) => Mod.Child(this))
-  }
+  def transforms = Array(Mod.Child(this))
 }
 /**
  * Represents a value that can be nested within a [[Node]]. This can be another
@@ -60,7 +58,7 @@ trait Modifier{
    * Can't be `apply`, because some [[Modifier]]s (e.g. [[HtmlTag]]) already have an
    * [[TypedHtmlTag.apply]] method, and the overloading becomes ambiguous.
    */
-  def transforms: Array[(List[Node], SortedMap[String, Any]) => Mod]
+  def transforms: Array[Mod]
 }
 
 /**
@@ -88,17 +86,20 @@ case class TypedHtmlTag[T](tag: String = "",
     var attrs = this.attrs
     var classes = this.classes
     var styles = this.styles
-
-    for(i <- 0 until xs.length){
+    var i = 0
+    while(i < xs.length){
       val ts = xs(i).transforms
-      for(j <- 0 until ts.length){
-        ts(j)(children, attrs) match{
+      var j = 0
+      while(j < ts.length){
+        ts(j) match{
           case Mod.Attr(k, v) => attrs = attrs.updated(k, v)
           case Mod.Child(c) => children = c :: children
           case Mod.Cls(c) => classes = c :: classes
           case Mod.Style(k, v) => styles = styles.updated(k, v)
         }
+        j += 1
       }
+      i += 1
     }
     this.copy(
       children = children,
@@ -157,7 +158,7 @@ case class TypedHtmlTag[T](tag: String = "",
  * A key value pair representing the assignment of an attribute to a value.
  */
 case class AttrPair(attr: Attr, value: Any) extends Modifier{
-  def transforms = Array((_, _) => Mod.Attr(attr.name, value))
+  def transforms = Array(Mod.Attr(attr.name, value))
 }
 
 /**
@@ -201,7 +202,7 @@ case class Style(jsName: String, cssName: String){
  * A key value pair representing the assignment of a style to a value.
  */
 case class StylePair(style: Style, value: Any) extends Modifier{
-  def transforms = Array((_, _) => Mod.Style(style.cssName, value))
+  def transforms = Array(Mod.Style(style.cssName, value))
 
 }
 

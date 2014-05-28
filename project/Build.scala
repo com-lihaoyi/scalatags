@@ -1,9 +1,14 @@
 import sbt._
 import Keys._
+import scala.scalajs.sbtplugin.env.nodejs.NodeJSEnv
+import scala.scalajs.sbtplugin.env.phantomjs.PhantomJSEnv
 import scala.scalajs.sbtplugin.ScalaJSPlugin.ScalaJSKeys._
-import scala.scalajs.sbtplugin.ScalaJSPlugin.scalaJSSettings
-import twirl.sbt.TwirlPlugin.Twirl
-
+import scala.scalajs.sbtplugin._
+import scala.scalajs.sbtplugin.env.rhino.RhinoJSEnv
+import ScalaJSPlugin._
+import ScalaJSKeys._
+import twirl.sbt.TwirlPlugin._
+import Twirl._
 object Build extends sbt.Build{
   val cross = new utest.jsrunner.JsCrossBuild(
     organization := "com.scalatags",
@@ -50,9 +55,16 @@ object Build extends sbt.Build{
   lazy val js = cross.js.settings(
     libraryDependencies ++= Seq(
       "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.4"
-    )
+    ),
+    jsDependencies += "org.webjars" % "mustachejs" % "0.8.1" / "mustache.js",
+    (jsEnv in Test) := new PhantomJSEnv
   )
 
-  lazy val jvm = cross.jvm
+  lazy val jvm = cross.jvm.settings(Twirl.settings:_*).settings(
+    libraryDependencies ++= Seq(
+      "org.fusesource.scalate" %% "scalate-core" % "1.6.1" % "test"
+    ),
+    sourceDirectory in twirlCompile := (sourceDirectory in Compile).value / "twirl"
+  )
 
 }
