@@ -30,19 +30,28 @@ object Escaping {
     // dpp (David Pollak) 2010/02/03
     val len = text.length
     var pos = 0
+    var prev = 0
+
+    @inline
+    def handle(snip: String) = {
+      s.append(text.substring(prev, pos))
+      prev = pos + 1
+      s.append(snip)
+    }
     while (pos < len) {
       text.charAt(pos) match {
-        case '<' => s.append("&lt;")
-        case '>' => s.append("&gt;")
-        case '&' => s.append("&amp;")
-        case '"' => s.append("&quot;")
-        case '\n' => s.append('\n')
-        case '\r' => s.append('\r')
-        case '\t' => s.append('\t')
-        case c => if (c >= ' ') s.append(c)
+        case '<' => handle("&lt;")
+        case '>' => handle("&gt;")
+        case '&' => handle("&amp;")
+        case '"' => handle("&quot;")
+        case '\n' => handle("\n")
+        case '\r' => handle("\r")
+        case '\t' => handle("\t")
+        case c if c < ' ' => handle("")
+        case _ =>
       }
-
       pos += 1
     }
+    handle("")
   }
 }

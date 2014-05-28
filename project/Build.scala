@@ -56,8 +56,11 @@ object Build extends sbt.Build{
     libraryDependencies ++= Seq(
       "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.4"
     ),
-    jsDependencies += "org.webjars" % "mustachejs" % "0.8.1" / "mustache.js",
-    (jsEnv in Test) := new PhantomJSEnv
+    jsDependencies ++= Seq(
+      ProvidedJS / "mustache.js" % "test",
+      ProvidedJS / "jade.js" % "test"
+    ),
+    (jsEnv in Test) := new NodeJSEnv
   )
 
   lazy val jvm = cross.jvm.settings(Twirl.settings:_*).settings(
