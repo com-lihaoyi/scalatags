@@ -10,8 +10,6 @@ import scalatags.Platform.Base
  * A general interface for all XML types which can appear in a ScalaTags fragment.
  */
 trait Node[Target] extends Modifier[Target] {
-
-
   /**
    * Appends the textual representation of the ScalaTag fragment to the
    * 'strb' StringBuilder. Used to optimize the [[toString( )]] operation.
@@ -47,18 +45,16 @@ trait Modifier[Target] {
  * @param attrs A sorted map of attributes
  * @param void Whether or not the tag can be self-closing
  */
-trait AbstractTypedHtmlTag[T <: Base, Target] {
+trait AbstractTypedHtmlTag[T <: Base, Target] extends Node[StringBuilder]{
 
-  type Self
+  type Self <: AbstractTypedHtmlTag[T, Target]
   def tag: String
   def children: List[Node[Target]]
   def attrs: SortedMap[String, AttrVal[Target]]
-  def classes: List[Any]
   def styles: SortedMap[Style, StyleVal[Target]]
   def void: Boolean
   def copy(children: List[Node[Target]],
            attrs: SortedMap[String, AttrVal[Target]],
-           classes: List[Any],
            styles: SortedMap[Style, StyleVal[Target]]): Self
 
   /**
@@ -69,7 +65,6 @@ trait AbstractTypedHtmlTag[T <: Base, Target] {
 
     var children = this.children
     var attrs = this.attrs
-    var classes = this.classes
     var styles = this.styles
     var i = 0
     while (i < xs.length) {
@@ -79,7 +74,6 @@ trait AbstractTypedHtmlTag[T <: Base, Target] {
         ts(j) match {
           case Mod.Attr(k, v) => attrs = attrs.updated(k, v)
           case Mod.Child(c) => children = c :: children
-          case Mod.Cls(c) => classes = c :: classes
           case Mod.Style(k, v) => styles = styles.updated(k, v)
         }
         j += 1
@@ -89,7 +83,6 @@ trait AbstractTypedHtmlTag[T <: Base, Target] {
     this.copy(
       children = children,
       attrs = attrs,
-      classes = classes,
       styles = styles
     )
   }
@@ -140,9 +133,6 @@ trait StyleVal[Target] {
   def applyTo(t: Target, k: Style): Unit
 }
 
-trait ClsVal[Target] {
-  def applyTo(t: Target): Unit
-}
 
 trait AttrVal[Target] {
   def applyTo(t: Target, k: Attr): Unit
@@ -158,7 +148,6 @@ sealed trait Mod[Target]
 
 object Mod {
   case class Attr[Target](k: String, v: AttrVal[Target]) extends Mod[Target]
-  case class Cls[Target](v: ClsVal[Target]) extends Mod[Target]
   case class Style[Target](k: scalatags.Style, v: StyleVal[Target]) extends Mod[Target]
   case class Child[Target](n: Node[Target]) extends Mod[Target]
 }

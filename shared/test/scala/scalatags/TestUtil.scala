@@ -1,6 +1,6 @@
 package scalatags
 import acyclic.file
-object Util {
+object TestUtil {
   def clean(s: String) = {
     " +<".r.replaceAllIn("\\n\\s*".r.replaceAllIn(s, "").trim(), "<")
   }

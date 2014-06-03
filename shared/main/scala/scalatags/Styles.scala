@@ -9,10 +9,9 @@
  */
 package scalatags
 
-import DataTypes._
 import acyclic.file
 
-trait StyleMisc extends Util {
+trait StyleMisc[Target] extends Util[Target] {
 
   /**
    * A Style that takes any value of type T as a parameter and has an auto value
@@ -35,11 +34,7 @@ trait StyleMisc extends Util {
     val normal = this := "normal"
   }
 
-  private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
-    def :=(image: Image, images: Image*): StylePair[Target] = {
-      this := (image +: images).mkString(", ")
-    }
-  }
+  private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extends Style(jsName, cssName)
 
   private[scalatags] class CurrentColor(jsName: String, cssName: String) extends Style(jsName, cssName) {
     val currentColor = this -> "currentColor"
@@ -199,9 +194,7 @@ trait StyleMisc extends Util {
   }
 
 
-  private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName) {
-    def ~(r1: String, r2: String = "") = this := s"$r1 $r2"
-  }
+  private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName)
 
   private[scalatags] trait MarginAuto extends Style {
     /**
@@ -220,16 +213,14 @@ trait StyleMisc extends Util {
     val thick = this := "thick"
   }
 
-  private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
-    def ~(times: Time*) = this := times.mkString(", ")
-  }
+  private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName)
 
 }
 /**
  * Contains CSS styles which are used less frequently. These are not imported by
  * default to avoid namespace pollution.
  */
-trait Styles2 extends Util with StyleMisc{
+trait Styles2[Target] extends Util[Target] with StyleMisc[Target]{
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -373,9 +364,7 @@ trait Styles2 extends Util with StyleMisc{
    * MDN
    */
   object columns extends Style("columns", "columns") {
-    def ~(number: Int) = this := number.toString
-
-    def ~(number: Int, width: Length) = this := s"$number $width"
+    def :=(number: Int, width: String): StylePair[Target] = this := s"$number $width"
   }
 
   /**
@@ -415,7 +404,7 @@ trait Styles2 extends Util with StyleMisc{
    *
    * MDN
    */
-  val columnGap = new NormalOpenStyle[Length]("columnGap", "column-gap")
+  val columnGap = new NormalOpenStyle[String]("columnGap", "column-gap")
 
   /**
    * In multi-column layouts, the column-rule CSS property specifies a straight
@@ -464,7 +453,7 @@ trait Styles2 extends Util with StyleMisc{
    *
    * MDN
    */
-  val columnWidth = new AutoStyle[Length]("columnWidth", "column-width")
+  val columnWidth = new AutoStyle[String]("columnWidth", "column-width")
 
   /**
    * The column-rule-color CSS property lets you set the color of the rule drawn
@@ -577,7 +566,7 @@ trait Styles2 extends Util with StyleMisc{
    *
    * MDN
    */
-  val perspective = new NoneOpenStyle[Length]("perspective", "perspective")
+  val perspective = new NoneOpenStyle[String]("perspective", "perspective")
 
   /**
    * The perspective-origin CSS property determines the position the viewer is
@@ -779,7 +768,7 @@ trait Styles2 extends Util with StyleMisc{
  * Trait that contains the contents of the `Styles` object, so they can
  * be mixed in to other objects if needed.
  */
-trait Styles extends Util with StyleMisc{
+trait Styles[Target] extends Util[Target] with StyleMisc[Target]{
   /**
    * If a background-image is specified, the background-attachment CSS
    * property determines whether that image's position is fixed within
@@ -1111,9 +1100,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  object borderLeft extends Style("borderLeft", "border-left") {
-    def ~(width: Length, style: String, color: Color) = this := s"$width $style $color"
-  }
+  val borderLeft = new Style("borderLeft", "border-left")
   /**
    * The border-left-style CSS property sets the line style of the left border
    * of a box.
@@ -1167,9 +1154,7 @@ trait Styles extends Util with StyleMisc{
    * MDN
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
-    def :=(length: Length): StylePair[Target] = this := length.toString
-
-    def :=(horizontal: Length, vertical: Length): StylePair[Target] = this := s"$horizontal $vertical"
+    def :=(horizontal: String, vertical: String): StylePair[Target] = this := s"$horizontal $vertical"
   }
 
 
@@ -1217,15 +1202,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  object borderColor extends Style("borderColor", "border-color") {
-    def ~(color: Color) = this := color.toString
-
-    def ~(horizontal: Color, vertical: Color) = this := s"$horizontal $vertical"
-
-    def ~(top: Color, vertical: Color, bottom: Color) = this := s"$top $vertical $bottom"
-
-    def ~(top: Color, right: Color, bottom: Color, left: Color) = this := s"$top $right $bottom $left"
-  }
+  val borderColor = new Style("borderColor", "border-color")
 
   /**
    * The box-sizing CSS property is used to alter the default CSS box model used
@@ -1290,7 +1267,7 @@ trait Styles extends Util with StyleMisc{
    * MDN
    */
   object clip extends Style("clip", "clip") {
-    def rect(top: Length, right: Length, bottom: Length, left: Length) =
+    def rect(top: String, right: String, bottom: String, left: String) =
       this := s"rect($top, $right, $bottom, $left)"
 
     def auto = this := "auto"
@@ -2008,7 +1985,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val height = new AutoStyle[Length]("height", "height")
+  val height = new AutoStyle[String]("height", "height")
 
 
   /**
@@ -2080,7 +2057,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val right = new AutoStyle[Length]("right", "right")
+  val right = new AutoStyle[String]("right", "right")
 
 
 
@@ -2095,7 +2072,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val lineHeight = new NormalOpenStyle[Length]("lineHeight", "lineheight")
+  val lineHeight = new NormalOpenStyle[String]("lineHeight", "lineheight")
 
   /**
    * The left CSS property specifies part of the position of positioned elements.
@@ -2106,7 +2083,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val left = new AutoStyle[Length]("left", "left")
+  val left = new AutoStyle[String]("left", "left")
 
 
 
@@ -2589,7 +2566,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val marginBottom = new AutoStyle[Length]("marginBottom", "margin-bottom")
+  val marginBottom = new AutoStyle[String]("marginBottom", "margin-bottom")
 
   /**
    * The margin-right CSS property of an element sets the margin space required
@@ -2638,13 +2615,6 @@ trait Styles extends Util with StyleMisc{
      */
     val auto = this := "auto"
 
-    def ~(allSides: Length) = this := allSides.toString
-
-    def ~(vertical: Length, horizontal: Length) = this := s"$vertical $horizontal"
-
-    def ~(top: Length, horizontal: Length, bottom: Length) = this := s"$top $horizontal $bottom"
-
-    def ~(top: Length, right: Length, bottom: Length, left: Length) = this := s"$top $right $bottom $left"
   }
 
 
@@ -2665,7 +2635,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val top = new AutoStyle[Length]("top", "top")
+  val top = new AutoStyle[String]("top", "top")
 
 
   /**
@@ -2676,7 +2646,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val width = new AutoStyle[Length]("width", "width")
+  val width = new AutoStyle[String]("width", "width")
 
   /**
    * The bottom CSS property participates in specifying the position of
@@ -2695,7 +2665,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val bottom = new AutoStyle[Length]("bottom", "bottom")
+  val bottom = new AutoStyle[String]("bottom", "bottom")
 
   /**
    * The letter-spacing CSS property specifies spacing behavior between text
@@ -2703,7 +2673,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val letterSpacing = new NormalOpenStyle[Length]("letterSpacing", "letter-spacing")
+  val letterSpacing = new NormalOpenStyle[String]("letterSpacing", "letter-spacing")
 
 
   /**
@@ -2715,7 +2685,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val maxHeight = new NoneOpenStyle[Length]("maxHeight", "max-height")
+  val maxHeight = new NoneOpenStyle[String]("maxHeight", "max-height")
 
   /**
    * The min-width CSS property is used to set the minimum width of a given
@@ -3119,7 +3089,7 @@ trait Styles extends Util with StyleMisc{
    *
    * MDN
    */
-  val wordSpacing = new NormalOpenStyle[Length]("wordSpacing", "word-spacing")
+  val wordSpacing = new NormalOpenStyle[String]("wordSpacing", "word-spacing")
   /**
    * The z-index CSS property specifies the z-order of an element and its
    * descendants. When elements overlap, z-order determines which one covers the

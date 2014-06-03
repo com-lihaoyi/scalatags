@@ -1,19 +1,19 @@
 package scalatags
 
-import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
+//import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
 import java.io.{StringWriter, PrintWriter}
 
 
 object PerfTests extends PerfTestBase{
   val samples = Seq(
     Scalatags -> "Scalatags",
-    ScalaXML -> "ScalaXML",
+    ScalaXML -> "ScalaXML"//,
 //    Twirl -> "Twirl",
-    Mustache -> "Mustache",
-    Jade -> "Jade"
+//    Mustache -> "Mustache",
+//    Jade -> "Jade"
   )
 }
-
+/*
 case object Jade extends (() => String){
   val engine = new TemplateEngine
 
@@ -52,7 +52,7 @@ case object Mustache extends (() => String){
     template.render(ctx)
     stringWriter.toString
   }
-}
+}*/
 
 //case object Twirl extends (() => String){
 //  def apply() = {

@@ -7,7 +7,7 @@ import org.scalajs.dom
   * Contains Tags which are only used for SVG. These are not imported by
   * default to avoid namespace pollution.
   */
-trait SvgTags extends Util{
+trait SvgTags[Target] extends Util[Target]{
    /**
     * The altGlyph element allows sophisticated selection of the glyphs used to
     * render its child character data.

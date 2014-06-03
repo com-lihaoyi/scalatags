@@ -9,14 +9,13 @@
  */
 package scalatags
 
-import DataTypes._
 import acyclic.file
 
 /**
  * Contains CSS styles which are only used for SVG. These are not imported by
  * default to avoid namespace pollution.
  */
-trait SvgStyles extends StyleMisc with Util{
+trait SvgStyles[Target] extends StyleMisc[Target] with Util[Target]{
 
   private[scalatags] trait Baseline{ self: Style =>
     val auto = this := "auto"

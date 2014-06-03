@@ -1,7 +1,7 @@
 package scalatags
 import acyclic.file
 import utest._
-import Util._
+import TestUtil._
 import scalatags.all._
 import utest.framework.TestSuite
 /**
@@ -271,8 +271,8 @@ object ExampleTests extends TestSuite{
       )
       'classesAndCssCustom-strCheck(
         {
-          val contentpara = "contentpara".cls
-          val first = "first".cls
+          val contentpara = "contentpara"
+          val first = "first"
           html(
             head(
               script("some script")
@@ -280,11 +280,11 @@ object ExampleTests extends TestSuite{
             body(
               h1(backgroundColor:="blue", color:="red")("This is my title"),
               div(backgroundColor:="blue", color:="red")(
-                p(contentpara, first)(
+                p(cls := s"$contentpara $first")(
                   "This is my first paragraph"
                 ),
                 a(opacity:=0.9)(
-                  p("contentpara".cls)("Goooogle")
+                  p(cls := "contentpara")("Goooogle")
                 )
               )
             )
@@ -301,7 +301,7 @@ object ExampleTests extends TestSuite{
               "This is my first paragraph"
             ),
             a(style:="opacity: 0.9;")(
-              p("contentpara".cls)("Goooogle")
+              p(cls := "contentpara")("Goooogle")
             )
           )
         )
@@ -367,7 +367,7 @@ object ExampleTests extends TestSuite{
         """
       )
       'filtersAndTransformations-strCheck({
-        def uppercase(node: Node): Node = {
+        def uppercase(node: Node[StringBuilder]): Node[StringBuilder] = {
           node match{
             case t: HtmlTag => t.copy(children = t.children.map(uppercase))
             case r: RawNode => r
@@ -413,7 +413,7 @@ object ExampleTests extends TestSuite{
         """
       )
       'filtersandTransformationsComplex-strCheck({
-        def autoLink(node: Node): Seq[Node] = {
+        def autoLink(node: Node[StringBuilder]): Seq[Node[StringBuilder]] = {
           node match{
             case t: HtmlTag => Seq(t.copy(children = t.children.flatMap(autoLink)))
             case r: RawNode => Seq(r)
@@ -466,12 +466,12 @@ object ExampleTests extends TestSuite{
 
       'layouts-strCheck(
       {
-        def page(scripts: Seq[Node], content: Seq[Node]) =
+        def page(scripts: Seq[Node[StringBuilder]], content: Seq[Node[StringBuilder]]) =
           html(
             head(scripts),
             body(
               h1("This is my title"),
-              div("content".cls)(content)
+              div(cls := "content")(content)
             )
           )
 
@@ -558,17 +558,17 @@ object ExampleTests extends TestSuite{
           )
         },
         {
-          import scalatags.{Attrs => attr, Styles => css, _}
-          import scalatags.Tags._
+          import scalatags.misc.{attrs => attr, styles => css}
+          import scalatags.misc.tags._
           div(
             p(css.color:="red")("Red Text"),
             img(attr.href:="www.imgur.com/picture.jpg")
           )
         },
         {
-          object custom extends Tags{
-            val attr = new Attrs {}
-            val css = new Styles {}
+          object custom extends Tags[StringBuilder] with scalatags.StringTags{
+            val attr = scalatags.misc.attrs
+            val css = scalatags.misc.styles
           }
           import custom._
           div(
@@ -646,10 +646,10 @@ object ExampleTests extends TestSuite{
       )
       'additionalImports-strCheck(
         {
-          import Styles2.pageBreakBefore
-          import Tags2.address
-          import SvgTags.svg
-          import SvgStyles.stroke
+          import misc.styles2.pageBreakBefore
+          import misc.tags2.address
+          import misc.svgTags.svg
+          import misc.svgStyles.stroke
           div(
             p(pageBreakBefore.always, "a long paragraph which should not be broken"),
             address("500 Memorial Drive, Cambridge MA"),
@@ -682,31 +682,7 @@ object ExampleTests extends TestSuite{
         """<div data-app-key="YOUR_APP_KEY" style="-moz-border-radius: 10px;"></div>"""
       )
 
-      'differentWaysOfStaticTyping-strCheck(
-        div(
-          div(backgroundColor:=hex"ababab"),
-          div(color:=rgb(0, 255, 255)),
-          div(color.red),
-          div(borderRightColor:=hsla(100, 0, 50, 0.5)),
-          div(backgroundImage:=radialGradient(hex"f00", hex"0f0"~50.pct, hex"00f")),
-          div(backgroundImage:=url("www.picture.com/my_picture")),
-          div(backgroundImage:=(
-            radialGradient(45.px, 45.px, "ellipse farthest-corner", hex"f00", hex"0f0"~500.px, hex"00f"),
-            linearGradient("to top left", hex"f00", hex"0f0"~10.px, hex"00f")
-            ))
-        ),
-        """
-        <div>
-          <div style="background-color: #ababab;"></div>
-          <div style="color: rgb(0, 255, 255);"></div>
-          <div style="color: red;"></div>
-          <div style="border-right-color: hsla(100, 0, 50, 0.5);"></div>
-          <div style="background-image: radial-gradient(#f00, #0f0 50%, #00f);"></div>
-          <div style="background-image: url(www.picture.com/my_picture);"></div>
-          <div style="background-image: radial-gradient(45px 45px, ellipse farthest-corner, #f00, #0f0 500px, #00f), linear-gradient(to top left, #f00, #0f0 10px, #00f);"></div>
-        </div>
-        """
-      )
+
     }
   }
 }

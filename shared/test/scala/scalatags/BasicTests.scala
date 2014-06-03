@@ -3,7 +3,7 @@ import acyclic.file
 import utest.framework.TestSuite
 import utest._
 import scalatags.all._
-import Util._
+import TestUtil._
 import scala.collection.SortedMap
 
 object BasicTests extends TestSuite{
@@ -20,14 +20,14 @@ object BasicTests extends TestSuite{
         assert("this_is_an_unusual_tag".tag.toString == "<this_is_an_unusual_tag></this_is_an_unusual_tag>")
         assert("this-is-a-string-with-dashes".voidTag.toString == "<this-is-a-string-with-dashes />")
       }
-
+      val x = script("")
       /**
        * Tests nesting tags in a simple hierarchy
        */
       'cssChaining-strCheck(
         html(
           head(
-            script(""),
+            x,
             "string-tag".tag
           ),
           body(
@@ -93,23 +93,13 @@ object BasicTests extends TestSuite{
           float.left,
           style:="background-color: red;",
           cls:="my-class",
-          "other-class".cls,
           p("i am a cow")
         ),
-        """<div class="my-class other-class" style="background-color: red; float: left;"><p>i am a cow</p></div>"""
+        """<div class="my-class" style="background-color: red; float: left;"><p>i am a cow</p></div>"""
       )
 
       'styleConvertsThingsToCamelcase{
         assert("i-am-a-cow".style.jsName == "iAmACow")
-      }
-
-      'classesListIsGenerated{
-        val frag = div(
-          `class`:="my-class",
-          "other-class".cls
-        )
-        // `my-class` is stored in `attrs` instead of `classes`
-        assert(frag.classes == Seq("other-class"))
       }
       'styleListIsGenerated{
         val frag = div(

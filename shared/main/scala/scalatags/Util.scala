@@ -6,11 +6,11 @@ import scala.collection.SortedMap
 /**
  * Created by haoyi on 6/2/14.
  */
-trait Util {
-  type Target
+trait Util[Target] {
   def makeAbstractTypedHtmlTag[T <: Base](tag: String, void: Boolean): AbstractTypedHtmlTag[T, Target]
   implicit def StringAttr(s: String): AttrVal[Target]
   implicit def StringStyle(s: String): StyleVal[Target]
+
   /**
    * Provides extension methods on strings to fit them into Scalatag fragments.
    */
@@ -70,10 +70,6 @@ trait Util {
    * Scalatags fragment is serialized. This makes it easy to open up XSS holes
    * and other vulnerabilities, but is sometimes necessary and useful.
    */
-
-
-
-
   implicit object styleOrdering extends Ordering[Style]{
     override def compare(x: Style, y: Style): Int = x.cssName compareTo y.cssName
   }

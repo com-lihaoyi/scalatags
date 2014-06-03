@@ -30,7 +30,7 @@ trait PerfTestBase extends TestSuite{
   def tests = TestSuite{
     'perf{
       'correctness{
-        Util.strCheck(
+        TestUtil.strCheck(
           (samples.map(_._1()) :+ expected):_*
         )
       }
@@ -58,10 +58,10 @@ trait PerfTestBase extends TestSuite{
 case object Scalatags extends (() => String){
 
   import scalatags.all._
-  val contentpara = "contentpara".cls
-  val first = "first".cls
+  val contentpara = "contentpara"
+  val first = "first"
   def para(n: Int) = p(
-    contentpara,
+    cls := contentpara,
     title:=s"this is paragraph $n"
   )
   val titleString = "This is my title"
@@ -75,7 +75,7 @@ case object Scalatags extends (() => String){
         h1(color:="red")(titleString),
         div(backgroundColor:="blue")(
           para(0)(
-            first,
+            cls := first,
             firstParaString
           ),
           a(href:="www.google.com")(

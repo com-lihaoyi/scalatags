@@ -27,9 +27,8 @@ import acyclic.file
  * Contains HTML tags which are used less frequently. These are generally
  * imported individually as needed.
  */
-trait Tags2 extends Util{
+trait Tags2[Target] extends Util[Target]{
 
-  type Target
   // Document Metadata
   /**
    * Defines the title of the document, shown in a browser's title bar or on the
@@ -266,7 +265,7 @@ trait Tags2 extends Util{
  * Trait that contains the contents of the `Tags` object, so they can be mixed
  * in to other objects if needed.
  */
-trait Tags extends Util{
+trait Tags[Target] extends Util[Target]{
 
 
 
