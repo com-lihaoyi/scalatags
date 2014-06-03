@@ -12,53 +12,53 @@ package scalatags
 import DataTypes._
 import acyclic.file
 
-private[scalatags] trait Baseline{ self: Style =>
-  val auto = this := "auto"
-
-  val `before-edge` = this := "before-edge"
-  val `text-before-edge` = this := "text-before-edge"
-  val middle = this := "middle"
-  val central = this := "central"
-  val `after-edge` = this := "after-edge"
-  val `text-after-edge` = this := "text-after-edge"
-  val ideographic = this := "ideographic"
-  val alphabetic = this := "alphabetic"
-  val hanging = this := "hanging"
-  val mathematical = this := "mathematical"
-}
-
-private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends Style(jsName, cssName){
-  /**
-   * This value determines the "insideness" of a point in the shape by drawing
-   * a ray from that point to infinity in any direction and then examining the
-   * places where a segment of the shape crosses the ray. Starting with a
-   * count of zero, add one each time a path segment crosses the ray from left
-   * to right and subtract one each time a path segment crosses the ray from
-   * right to left. After counting the crossings, if the result is zero then
-   * the point is outside the path. Otherwise, it is inside.
-   *
-   * MDN
-   */
-  val nonzero = this -> "nonzero"
-  /**
-   * This value determines the "insideness" of a point in the shape by drawing
-   * a ray from that point to infinity in any direction and counting the number
-   * of path segments from the given shape that the ray crosses. If this number
-   * is odd, the point is inside; if even, the point is outside.
-   *
-   * MDN
-   */
-  val evenodd = this -> "evenodd"
-}
-
 /**
  * Contains CSS styles which are only used for SVG. These are not imported by
  * default to avoid namespace pollution.
  */
-object SvgStyles{
+trait SvgStyles extends StyleMisc with Util{
+
+  private[scalatags] trait Baseline{ self: Style =>
+    val auto = this := "auto"
+
+    val `before-edge` = this := "before-edge"
+    val `text-before-edge` = this := "text-before-edge"
+    val middle = this := "middle"
+    val central = this := "central"
+    val `after-edge` = this := "after-edge"
+    val `text-after-edge` = this := "text-after-edge"
+    val ideographic = this := "ideographic"
+    val alphabetic = this := "alphabetic"
+    val hanging = this := "hanging"
+    val mathematical = this := "mathematical"
+  }
+
+  private[scalatags] class ClipFillRule(jsName: String, cssName: String) extends Style(jsName, cssName){
+    /**
+     * This value determines the "insideness" of a point in the shape by drawing
+     * a ray from that point to infinity in any direction and then examining the
+     * places where a segment of the shape crosses the ray. Starting with a
+     * count of zero, add one each time a path segment crosses the ray from left
+     * to right and subtract one each time a path segment crosses the ray from
+     * right to left. After counting the crossings, if the result is zero then
+     * the point is outside the path. Otherwise, it is inside.
+     *
+     * MDN
+     */
+    val nonzero = this -> "nonzero"
+    /**
+     * This value determines the "insideness" of a point in the shape by drawing
+     * a ray from that point to infinity in any direction and counting the number
+     * of path segments from the given shape that the ray crosses. If this number
+     * is odd, the point is inside; if even, the point is outside.
+     *
+     * MDN
+     */
+    val evenodd = this -> "evenodd"
+  }
 
 
-  /**
+/**
    * This property specifies which baseline of this element is to be aligned
    * with the corresponding baseline of the parent. For example, this allows
    * alphabetic baselines in Roman text to stay aligned across font size changes.

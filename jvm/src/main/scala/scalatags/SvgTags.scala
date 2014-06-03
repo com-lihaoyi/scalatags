@@ -5,7 +5,7 @@ import acyclic.file
  * Contains Tags which are only used for SVG. These are not imported by
  * default to avoid namespace pollution.
  */
-object SvgTags {
+trait SvgTags extends Util{
   /**
    * The altGlyph element allows sophisticated selection of the glyphs used to
    * render its child character data.

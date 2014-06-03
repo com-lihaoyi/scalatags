@@ -22,15 +22,13 @@
 package scalatags
 
 import acyclic.file
-import scalatags.HtmlTag
-import scala.collection.SortedMap
 import org.scalajs.dom
 
 /**
   * Contains HTML tags which are used less frequently. These are generally
   * imported individually as needed.
   */
-object Tags2 {
+trait Tags2 extends Util{
 
   // Document Metadata
   /**
@@ -264,15 +262,10 @@ object Tags2 {
 }
 
 /**
- * Module containing static definitions for common HTML5 tags.
- */
-object Tags extends Tags
-
-/**
  * Trait that contains the contents of the `Tags` object, so they can be mixed
  * in to other objects if needed.
  */
-trait Tags{
+trait Tags extends Util{
 
 
 

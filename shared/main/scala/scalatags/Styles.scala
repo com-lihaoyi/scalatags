@@ -11,218 +11,225 @@ package scalatags
 
 import DataTypes._
 import acyclic.file
-/**
- * A Style that takes any value of type T as a parameter and has an auto value
- */
-private[scalatags] class AutoStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
-  val auto = this := "auto"
-}
-/**
- * A Style that takes any value of type T as a parameter and has an none value
- */
-private[scalatags] class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
-  val none = this := "none"
-}
 
-/**
- * A Style that takes any value of type T as a parameter and has an normal value
- */
-private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
-  val normal = this := "normal"
-}
+trait StyleMisc extends Util {
 
-private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
-  def :=(image: Image, images: Image*): StylePair = {
-    this := (image +: images).mkString(", ")
+  /**
+   * A Style that takes any value of type T as a parameter and has an auto value
+   */
+  private[scalatags] class AutoStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+    val auto = this := "auto"
   }
+
+  /**
+   * A Style that takes any value of type T as a parameter and has an none value
+   */
+  private[scalatags] class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+    val none = this := "none"
+  }
+
+  /**
+   * A Style that takes any value of type T as a parameter and has an normal value
+   */
+  private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+    val normal = this := "normal"
+  }
+
+  private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    def :=(image: Image, images: Image*): StylePair[Target] = {
+      this := (image +: images).mkString(", ")
+    }
+  }
+
+  private[scalatags] class CurrentColor(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    val currentColor = this -> "currentColor"
+  }
+
+  private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    /**
+     * Displays a series of rounded dots. The spacing of the dots are not
+     * defined by the specification and are implementation-specific. The radius
+     * of the dots is half the calculated border-right-width.
+     *
+     * MDN
+     */
+    val dotted = this := "dotted"
+    /**
+     * Displays a series of short square-ended dashes or line segments. The exact
+     * size and Length of the segments are not defined by the specification and
+     * are implementation-specific.
+     *
+     * MDN
+     */
+    val dashed = this := "dashed"
+    /**
+     * Displays a single, straight, solid line.
+     *
+     * MDN
+     */
+    val solid = this := "solid"
+    /**
+     * Displays two straight lines that add up to the pixel amount defined as
+     * border-width or border-right-width.
+     *
+     * MDN
+     */
+    val double = this := "double"
+    /**
+     * Displays a border leading to a carved effect. It is the opposite of ridge.
+     *
+     * MDN
+     */
+    val groove = this := "groove"
+    /**
+     * Displays a border with a 3D effect, like if it is coming out of the page.
+     * It is the opposite of groove.
+     *
+     * MDN
+     */
+    val ridge = this := "ridge"
+    /**
+     * Displays a border that makes the box appear embedded. It is the opposite
+     * of outset. When applied to a table cell with border-collapse set to
+     * collapsed, this value behaves like groove.
+     *
+     * MDN
+     */
+    val inset = this := "inset"
+    /**
+     * Displays a border that makes the box appear in 3D, embossed. It is the
+     * opposite of inset. When applied to a table cell with border-collapse set
+     * to collapsed, this value behaves like ridge.
+     *
+     * MDN
+     */
+    val outset = this := "outset"
+  }
+
+  private[scalatags] class BorderStyle(jsName: String, cssName: String) extends OutlineStyle(jsName, cssName) {
+    /**
+     * Like for the hidden keyword, displays no border. In that case, except if
+     * a background image is set, the calculated values of border-right-width
+     * will be 0, even if specified otherwise through the property. In case of
+     * table cell and border collapsing, the none value has the lowest priority:
+     * it means that if any other conflicting border is set, it will be
+     * displayed.
+     *
+     * MDN
+     */
+    val none = this := "none"
+    /**
+     * Like for the none keyword, displays no border. In that case, except if a
+     * background image is set, the calculated values of border-right-width will
+     * be 0, even if specified otherwise through the property. In case of table
+     * cell and border collapsing, the hidden value has the highest priority: it
+     * means that if any other conflicting border is set, it won't be displayed.
+     *
+     * MDN
+     */
+    val hidden = this := "hidden"
+
+  }
+
+  private[scalatags] class Overflow(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    /**
+     * Default value. Content is not clipped, it may be rendered outside the
+     * content box.
+     *
+     * MDN
+     */
+    val visible = this := "visible"
+    /**
+     * The content is clipped and no scrollbars are provided.
+     *
+     * MDN
+     */
+    val hidden = this := "hidden"
+    /**
+     * The content is clipped and desktop browsers use scrollbars, whether or
+     * not any content is clipped. This avoids any problem with scrollbars
+     * appearing and disappearing in a dynamic environment. Printers may print
+     * overflowing content.
+     *
+     * MDN
+     */
+    val scroll = this := "scroll"
+    /**
+     * Depends on the user agent. Desktop browsers like Firefox provide
+     * scrollbars if content overflows.
+     *
+     * MDN
+     */
+    val auto = this := "auto"
+  }
+
+  private[scalatags] class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    /**
+     * Initial value. Automatic page breaks (neither forced nor forbidden).
+     *
+     * MDN
+     */
+    val auto = this := "auto"
+    /**
+     * Always force page breaks.
+     *
+     * MDN
+     */
+    val always = this := "always"
+    /**
+     * Avoid page breaks.
+     *
+     * MDN
+     */
+    val avoid = this := "avoid"
+    /**
+     * Force page breaks so that the next page is formatted
+     * as a left page.
+     *
+     * MDN
+     */
+    val left = this := "left"
+    /**
+     * Force page breaks so that the next page is formatted
+     * as a right page.
+     *
+     * MDN
+     */
+    val right = this := "right"
+  }
+
+
+  private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    def ~(r1: String, r2: String = "") = this := s"$r1 $r2"
+  }
+
+  private[scalatags] trait MarginAuto extends Style {
+    /**
+     * auto is replaced by some suitable value, e.g. it can be used for
+     * centering of blocks.
+     *
+     * MDN
+     */
+    val auto = this := "auto"
+
+  }
+
+  private[scalatags] class BorderWidth(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    val thin = this := "thin"
+    val medium = this := "medium"
+    val thick = this := "thick"
+  }
+
+  private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+    def ~(times: Time*) = this := times.mkString(", ")
+  }
+
 }
-private[scalatags] class CurrentColor(jsName: String, cssName: String) extends Style(jsName, cssName){
-  val currentColor = this -> "currentColor"
-}
-
-private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
-  /**
-   * Displays a series of rounded dots. The spacing of the dots are not
-   * defined by the specification and are implementation-specific. The radius
-   * of the dots is half the calculated border-right-width.
-   *
-   * MDN
-   */
-  val dotted = this := "dotted"
-  /**
-   * Displays a series of short square-ended dashes or line segments. The exact
-   * size and Length of the segments are not defined by the specification and
-   * are implementation-specific.
-   *
-   * MDN
-   */
-  val dashed = this := "dashed"
-  /**
-   * Displays a single, straight, solid line.
-   *
-   * MDN
-   */
-  val solid = this := "solid"
-  /**
-   * Displays two straight lines that add up to the pixel amount defined as
-   * border-width or border-right-width.
-   *
-   * MDN
-   */
-  val double = this := "double"
-  /**
-   * Displays a border leading to a carved effect. It is the opposite of ridge.
-   *
-   * MDN
-   */
-  val groove = this := "groove"
-  /**
-   * Displays a border with a 3D effect, like if it is coming out of the page.
-   * It is the opposite of groove.
-   *
-   * MDN
-   */
-  val ridge = this := "ridge"
-  /**
-   * Displays a border that makes the box appear embedded. It is the opposite
-   * of outset. When applied to a table cell with border-collapse set to
-   * collapsed, this value behaves like groove.
-   *
-   * MDN
-   */
-  val inset = this := "inset"
-  /**
-   * Displays a border that makes the box appear in 3D, embossed. It is the
-   * opposite of inset. When applied to a table cell with border-collapse set
-   * to collapsed, this value behaves like ridge.
-   *
-   * MDN
-   */
-  val outset = this := "outset"
-}
-
-private[scalatags] class BorderStyle(jsName: String, cssName: String) extends OutlineStyle(jsName, cssName){
-  /**
-   * Like for the hidden keyword, displays no border. In that case, except if
-   * a background image is set, the calculated values of border-right-width
-   * will be 0, even if specified otherwise through the property. In case of
-   * table cell and border collapsing, the none value has the lowest priority:
-   * it means that if any other conflicting border is set, it will be
-   * displayed.
-   *
-   * MDN
-   */
-  val none = this := "none"
-  /**
-   * Like for the none keyword, displays no border. In that case, except if a
-   * background image is set, the calculated values of border-right-width will
-   * be 0, even if specified otherwise through the property. In case of table
-   * cell and border collapsing, the hidden value has the highest priority: it
-   * means that if any other conflicting border is set, it won't be displayed.
-   *
-   * MDN
-   */
-  val hidden = this := "hidden"
-
-}
-
-private[scalatags] class Overflow(jsName: String, cssName: String) extends Style(jsName, cssName){
-  /**
-   * Default value. Content is not clipped, it may be rendered outside the
-   * content box.
-   *
-   * MDN
-   */
-  val visible = this := "visible"
-  /**
-   * The content is clipped and no scrollbars are provided.
-   *
-   * MDN
-   */
-  val hidden = this := "hidden"
-  /**
-   * The content is clipped and desktop browsers use scrollbars, whether or
-   * not any content is clipped. This avoids any problem with scrollbars
-   * appearing and disappearing in a dynamic environment. Printers may print
-   * overflowing content.
-   *
-   * MDN
-   */
-  val scroll = this := "scroll"
-  /**
-   * Depends on the user agent. Desktop browsers like Firefox provide
-   * scrollbars if content overflows.
-   *
-   * MDN
-   */
-  val auto = this := "auto"
-}
-
-private[scalatags] class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName){
-  /**
-   * Initial value. Automatic page breaks (neither forced nor forbidden).
-   *
-   * MDN
-   */
-  val auto = this := "auto"
-  /**
-   * Always force page breaks.
-   *
-   * MDN
-   */
-  val always = this := "always"
-  /**
-   * Avoid page breaks.
-   *
-   * MDN
-   */
-  val avoid = this := "avoid"
-  /**
-   * Force page breaks so that the next page is formatted
-   * as a left page.
-   *
-   * MDN
-   */
-  val left = this := "left"
-  /**
-   * Force page breaks so that the next page is formatted
-   * as a right page.
-   *
-   * MDN
-   */
-  val right = this := "right"
-}
-
-
-private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName){
-  def ~(r1: String, r2: String = "") = this := s"$r1 $r2"
-}
-
-private[scalatags] trait MarginAuto extends Style {
-  /**
-   * auto is replaced by some suitable value, e.g. it can be used for
-   * centering of blocks.
-   *
-   * MDN
-   */
-  val auto = this := "auto"
-
-}
-private[scalatags] class BorderWidth(jsName: String, cssName: String)  extends Style(jsName, cssName){
-  val thin = this := "thin"
-  val medium = this := "medium"
-  val thick = this := "thick"
-}
-
-private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName){
-  def ~(times: Time*) = this := times.mkString(", ")
-}
-
 /**
  * Contains CSS styles which are used less frequently. These are not imported by
  * default to avoid namespace pollution.
  */
-object Styles2{
+trait Styles2 extends Util with StyleMisc{
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -769,15 +776,10 @@ object Styles2{
 }
 
 /**
- * Module that contains bindings for commonly-used CSS styles.
- */
-object Styles extends Styles
-
-/**
  * Trait that contains the contents of the `Styles` object, so they can
  * be mixed in to other objects if needed.
  */
-trait Styles {
+trait Styles extends Util with StyleMisc{
   /**
    * If a background-image is specified, the background-attachment CSS
    * property determines whether that image's position is fixed within
@@ -1165,9 +1167,9 @@ trait Styles {
    * MDN
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
-    def :=(length: Length): StylePair = this := length.toString
+    def :=(length: Length): StylePair[Target] = this := length.toString
 
-    def :=(horizontal: Length, vertical: Length): StylePair = this := s"$horizontal $vertical"
+    def :=(horizontal: Length, vertical: Length): StylePair[Target] = this := s"$horizontal $vertical"
   }
 
 
