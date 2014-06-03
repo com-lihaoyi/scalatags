@@ -75,7 +75,7 @@ case object Scalatags extends (() => String){
         h1(color:="red")(titleString),
         div(backgroundColor:="blue")(
           para(0)(
-            cls := first,
+            cls := s"$contentpara $first",
             firstParaString
           ),
           a(href:="www.google.com")(

@@ -22,50 +22,40 @@ object misc {
  * [[Datatypes]] into the global namespace via `import scalatags.all._`
  */
 trait StringTags extends Util[StringBuilder]{ self =>
+  class GenericAttr(val writer: StringBuilder => Unit) extends AttrVal[StringBuilder]{
+    override def applyTo(strb: StringBuilder, k: Attr): Unit = {
+      strb ++= k.name ++= "=\""
+      applyPartial(strb)
+      strb ++= "\""
+    }
+    def applyPartial(strb: StringBuilder) = writer(strb)
+    def merge(o: AttrVal[StringBuilder]) = new GenericAttr({ strb =>
+      applyPartial(strb)
+      strb ++= " "
+      o.applyPartial(strb)
+    })
+  }
+  implicit def stringAttr(s: String) = new StringAttr(s)
+  case class StringAttr(s: String) extends GenericAttr(Escaping.escape(s, _))
+  implicit def booleanAttr(b: Boolean) = new BooleanAttr(b)
+  case class BooleanAttr(b: Boolean) extends GenericAttr(_ ++= b.toString)
+  implicit def numericAttr[T: Numeric](n: T) = new NumericAttr(n)
+  case class NumericAttr[T: Numeric](n: T) extends GenericAttr(_ ++= n.toString)
 
-  implicit class StringAttr(s: String) extends AttrVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Attr): Unit = {
-      strb ++= " " ++= k.name ++= "=\""
-      Escaping.escape(s, strb)
-      strb ++= "\""
+  class GenericStyle(writer: StringBuilder => Unit) extends StyleVal[StringBuilder]{
+    override def applyTo(strb: StringBuilder, k: Style): Unit = {
+      strb ++= k.cssName ++= ": "
+      writer(strb)
+      strb ++= ";"
     }
   }
-  implicit class BooleanAttr(b: Boolean) extends AttrVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Attr): Unit = {
-      strb ++= " " ++= k.name ++= "=\""
-      b.toString
-      strb ++= "\""
-    }
-  }
-  implicit class NumericAttr[T: Numeric](n: T) extends AttrVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Attr): Unit = {
-      strb ++= " " ++= k.name ++= "=\""
-      strb ++= n.toString
-      strb ++= "\""
-    }
-  }
+  implicit def stringStyle(s: String) = new StringStyle(s)
+  case class StringStyle(s: String) extends GenericStyle(Escaping.escape(s, _))
+  implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
+  case class BooleanStyle(b: Boolean) extends GenericStyle(_ ++= b.toString)
+  implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
+  case class NumericStyle[T: Numeric](n: T) extends GenericStyle(_ ++= n.toString)
 
-  implicit class StringStyle(s: String) extends StyleVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Style): Unit = {
-      strb ++= " " ++= k.cssName ++= ": "
-      Escaping.escape(s, strb)
-      strb ++= ";"
-    }
-  }
-  implicit class BooleanStyle(b: Boolean) extends StyleVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Style): Unit = {
-      strb ++= " " ++= k.cssName ++= ": "
-      strb ++= b.toString
-      strb ++= ";"
-    }
-  }
-  implicit class NumericStyle[T: Numeric](n: T) extends StyleVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Style): Unit = {
-      strb ++= " " ++= k.cssName ++= ": "
-      n.toString
-      strb ++= ";"
-    }
-  }
   def raw(s: String) = new RawNode(s)
 
   /**
@@ -94,30 +84,30 @@ trait StringTags extends Util[StringBuilder]{ self =>
   type HtmlTag = TypedHtmlTag[Platform.Base]
   val HtmlTag = TypedHtmlTag
   def makeAbstractTypedHtmlTag[T <: Platform.Base](tag: String, void: Boolean) = {
-    TypedHtmlTag(tag, Nil, SortedMap.empty, Nil, SortedMap.empty, void)
+    TypedHtmlTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
   }
   case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
-                                         children: List[Node[StringBuilder]],
-                                         attrs: SortedMap[String, AttrVal[StringBuilder]],
-                                         classes: List[Any],
-                                         styles: SortedMap[Style, StyleVal[StringBuilder]],
-                                         void: Boolean = false)
-                                         extends AbstractTypedHtmlTag[T, StringBuilder]{
+                                              children: List[Node[StringBuilder]],
+                                              attrs: SortedMap[Attr, AttrVal[StringBuilder]],
+                                              styles: SortedMap[Style, StyleVal[StringBuilder]],
+                                              void: Boolean = false)
+                                              extends AbstractTypedHtmlTag[T, StringBuilder]{
     type Self = TypedHtmlTag[T]
     def collapsedAttrs = {
       var moddedAttrs = attrs
-      if (!classes.isEmpty) {
-        moddedAttrs = moddedAttrs.updated(
-          "class",
-          (moddedAttrs.get("class") ++ classes.reverseIterator).mkString(" ")
-        )
-      }
+
       if (!styles.isEmpty) {
-        val styleStrings = styles.map { case (k, v) => s"${k.cssName}: $v;"}.toList
-        moddedAttrs = moddedAttrs.updated(
-          "style",
-          (moddedAttrs.get("style") ++ styleStrings).mkString(" ")
-        )
+        val strb = new StringBuilder()
+
+        for ((k, v) <- styles) {
+          if (strb.length > 0) strb ++= " "
+          v.applyTo(strb, k)
+        }
+
+        val newVal = {
+          moddedAttrs.get(Attr("style")).fold[AttrVal[StringBuilder]](strb.toString)(_ merge strb.toString)
+        }
+        moddedAttrs = moddedAttrs.updated(Attr("style"), newVal)
       }
       moddedAttrs
     }
@@ -131,16 +121,10 @@ trait StringTags extends Util[StringBuilder]{ self =>
 
       // attributes
       for ((attr, value) <- collapsedAttrs) {
-        strb ++= " " ++= attr ++= "=\""
-        Escaping.escape(value.toString, strb)
-        strb ++= "\""
+        strb ++= " "
+        value.applyTo(strb, attr)
       }
-      for ((k, v) <- styles) {
-        v.applyTo(strb, k)
-      }
-      for (c <- children) {
-        c.writeTo(strb)
-      }
+
       if (children.isEmpty && void)
       // No children - close tag
         strb ++= " />"
@@ -167,10 +151,10 @@ trait StringTags extends Util[StringBuilder]{ self =>
       strb.toString()
     }
 
-    override def copy(children: List[Node[StringBuilder]] = children,
-                      attrs: SortedMap[String, AttrVal[StringBuilder]] = attrs,
+    override def transform(children: List[Node[StringBuilder]] = children,
+                      attrs: SortedMap[Attr, AttrVal[StringBuilder]] = attrs,
                       styles: SortedMap[Style, StyleVal[StringBuilder]] = styles): Self = {
-      this.copy(children, attrs, styles)
+      this.copy(children=children, attrs=attrs, styles=styles)
     }
   }
 }

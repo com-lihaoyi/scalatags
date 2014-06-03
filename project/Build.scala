@@ -11,7 +11,7 @@ object Build extends sbt.Build{
   val cross = new utest.jsrunner.JsCrossBuild(
     organization := "com.scalatags",
     name := "scalatags",
-    scalaVersion := "2.10.4",
+    scalaVersion := "2.11.1",
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq("com.lihaoyi" %% "acyclic" % "0.1.2" % "provided"),
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),

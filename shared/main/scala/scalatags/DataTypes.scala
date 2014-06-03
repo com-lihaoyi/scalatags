@@ -22,7 +22,7 @@ trait DataConverters{
    * Extends numbers to provide a bunch of useful methods, allowing you to write
    * CSS-lengths in a nice syntax without resorting to strings.
    */
-  class CssNumber(x: Double){
+  class CssNumber[T: Numeric](x: T){
 
     /**
      * Relative to the viewing device. For screen display, typically one device
@@ -140,13 +140,6 @@ trait DataConverters{
     def pct = (x + "%")
   }
 }
-
-/**
- * The [[Length]] CSS data type denotes distance measurements. It is a Number
- * immediately followed by a length unit (px, em, pc, in, mm, …). Like for any
- * CSS dimension, there is no space between the unit literal and the number.
- */
-
 
 
 

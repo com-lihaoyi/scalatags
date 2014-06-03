@@ -9,34 +9,41 @@ import scala.collection.SortedMap
 object BasicTests extends TestSuite{
   def tests = TestSuite{
     'basics{
+      'helloWorld{
+        val sample = div("omg")
+        println(sample.children)
+        println(sample.attrs)
+        assert(sample.toString == "<div>omg</div>")
+      }
       /**
        * Tests the usage of the pre-defined tags, as well as creating
        * the tags on the fly from Strings
        */
-
       'tagCreation{
         assert(a.toString == "<a></a>")
         assert(html.toString == "<html></html>")
         assert("this_is_an_unusual_tag".tag.toString == "<this_is_an_unusual_tag></this_is_an_unusual_tag>")
         assert("this-is-a-string-with-dashes".voidTag.toString == "<this-is-a-string-with-dashes />")
       }
-      val x = script("")
+
       /**
        * Tests nesting tags in a simple hierarchy
        */
-      'cssChaining-strCheck(
-        html(
-          head(
-            x,
-            "string-tag".tag
-          ),
-          body(
-            div(
-              p
+      'cssChaining-{
+        val x = script("")
+        strCheck(
+          html(
+            head(
+              x,
+              "string-tag".tag
+            ),
+            body(
+              div(
+                p
+              )
             )
-          )
-        ),
-        """
+          ),
+          """
         <html>
             <head>
                 <script></script>
@@ -48,8 +55,9 @@ object BasicTests extends TestSuite{
                 </div>
             </body>
         </html>
-        """
-      )
+          """
+        )
+      }
 
 
       'cssChaining2-strCheck(
@@ -81,10 +89,10 @@ object BasicTests extends TestSuite{
 
       'cssHelpers{
 
-        assert(10.px.toString == "10px")
-        assert(10.0.px.toString == "10px")
-        assert(10.em.toString == "10em")
-        assert(10.pt.toString == "10pt")
+        assert(10.px == "10px")
+        assert(10.0.px == "10.0px")
+        assert(10.em == "10em")
+        assert(10.pt == "10pt")
       }
 
       'classStyleAttrOverwriting-strCheck(
@@ -108,9 +116,9 @@ object BasicTests extends TestSuite{
           height:=10.px
         )
         // "background-color" -> "red" is stored in `attrs` not `styles`
-        val expected = SortedMap(float -> "left", height -> "10px")
-
-        assert(frag.styles.toString == expected.toString)
+        val expected = SortedMap[Style, StyleVal[StringBuilder]](float -> "left", height -> "10px")
+        val styleList = frag.styles
+        assert(styleList.toString == expected.toString)
       }
       'intSeq-strCheck(
         div(

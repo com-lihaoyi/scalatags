@@ -50,12 +50,12 @@ trait AbstractTypedHtmlTag[T <: Base, Target] extends Node[StringBuilder]{
   type Self <: AbstractTypedHtmlTag[T, Target]
   def tag: String
   def children: List[Node[Target]]
-  def attrs: SortedMap[String, AttrVal[Target]]
+  def attrs: SortedMap[Attr, AttrVal[Target]]
   def styles: SortedMap[Style, StyleVal[Target]]
   def void: Boolean
-  def copy(children: List[Node[Target]],
-           attrs: SortedMap[String, AttrVal[Target]],
-           styles: SortedMap[Style, StyleVal[Target]]): Self
+  def transform(children: List[Node[Target]],
+                attrs: SortedMap[Attr, AttrVal[Target]],
+                styles: SortedMap[Style, StyleVal[Target]]): Self
 
   /**
    * Add the given modifications (e.g. additional children, or new attributes)
@@ -80,7 +80,7 @@ trait AbstractTypedHtmlTag[T <: Base, Target] extends Node[StringBuilder]{
       }
       i += 1
     }
-    this.copy(
+    this.transform(
       children = children,
       attrs = attrs,
       styles = styles
@@ -92,7 +92,7 @@ trait AbstractTypedHtmlTag[T <: Base, Target] extends Node[StringBuilder]{
  * A key value pair representing the assignment of an attribute to a value.
  */
 case class AttrPair[Target](attr: Attr, value: AttrVal[Target]) extends Modifier[Target] {
-  def transforms = Array(Mod.Attr(attr.name, value))
+  def transforms = Array(Mod.Attr(attr, value))
 }
 
 /**
@@ -133,11 +133,11 @@ trait StyleVal[Target] {
   def applyTo(t: Target, k: Style): Unit
 }
 
-
 trait AttrVal[Target] {
+  def merge(o: AttrVal[Target]): AttrVal[Target]
+  def applyPartial(t: Target): Unit
   def applyTo(t: Target, k: Attr): Unit
 }
-
 
 /**
  * Things that a modifier is allowed to do to a node.
@@ -147,7 +147,7 @@ trait AttrVal[Target] {
 sealed trait Mod[Target]
 
 object Mod {
-  case class Attr[Target](k: String, v: AttrVal[Target]) extends Mod[Target]
+  case class Attr[Target](k: scalatags.Attr, v: AttrVal[Target]) extends Mod[Target]
   case class Style[Target](k: scalatags.Style, v: StyleVal[Target]) extends Mod[Target]
   case class Child[Target](n: Node[Target]) extends Mod[Target]
 }
