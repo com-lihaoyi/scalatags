@@ -2,6 +2,7 @@ package scalatags
 
 import acyclic.file
 import scala.collection.{SortedMap, mutable}
+import scalatags.Platform.Base
 
 /**
  * Represents a single CSS class.
@@ -70,12 +71,12 @@ trait Modifier{
  * @param attrs A sorted map of attributes
  * @param void Whether or not the tag can be self-closing
  */
-case class TypedHtmlTag[T](tag: String = "",
-                           children: List[Node],
-                           attrs: SortedMap[String, Any],
-                           classes: List[Any],
-                           styles: SortedMap[String, Any],
-                           void: Boolean = false) extends Node{
+case class TypedHtmlTag[T <: Base](tag: String = "",
+                                   children: List[Node],
+                                   attrs: SortedMap[String, Any],
+                                   classes: List[Any],
+                                   styles: SortedMap[Style, Any],
+                                   void: Boolean = false) extends Node{
   /**
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[HtmlTag]].
@@ -106,15 +107,10 @@ case class TypedHtmlTag[T](tag: String = "",
       attrs = attrs,
       classes = classes,
       styles = styles
-    )
+    ).asInstanceOf[TypedHtmlTag[T]]
   }
 
-  /**
-   * Serialize this [[HtmlTag]] and all its children out to the given StringBuilder.
-   */
-  def writeTo(strb: StringBuilder): Unit = {
-    // tag
-    strb ++= "<" ++= tag
+  def collapsedAttrs = {
     var moddedAttrs = attrs
     if (!classes.isEmpty){
       moddedAttrs = moddedAttrs.updated(
@@ -123,14 +119,23 @@ case class TypedHtmlTag[T](tag: String = "",
       )
     }
     if (!styles.isEmpty){
-      val styleStrings = styles.map{case (k, v) => s"$k: $v;"}.toList
+      val styleStrings = styles.map{case (k, v) => s"${k.cssName}: $v;"}.toList
       moddedAttrs = moddedAttrs.updated(
         "style",
         (moddedAttrs.get("style") ++ styleStrings).mkString(" ")
       )
     }
+    moddedAttrs
+  }
+  /**
+   * Serialize this [[HtmlTag]] and all its children out to the given StringBuilder.
+   */
+  def writeTo(strb: StringBuilder): Unit = {
+    // tag
+    strb ++= "<" ++= tag
+
     // attributes
-    for((attr, value) <- moddedAttrs){
+    for((attr, value) <- collapsedAttrs){
       strb ++= " " ++= attr ++= "=\""
       Escaping.escape(value.toString, strb)
       strb ++= "\""
@@ -165,8 +170,8 @@ case class AttrPair(attr: Attr, value: Any) extends Modifier{
  * Wraps up a HTML attribute in an untyped value with an associated
  * type; the := operator takes Strings.
  */
-abstract class Attr{
-  def name: String
+case class Attr(name: String){
+
   if (!Escaping.validAttrName(name))
     throw new IllegalArgumentException(
       s"Illegal attribute name: $name is not a valid XML attribute name"
@@ -175,22 +180,9 @@ abstract class Attr{
    * Force-assigns a typed attribute to a string even if its type would not
    * normally allow it.
    */
-  def :=(v: String) = AttrPair(this, v)
+  def :=(v: Any) = AttrPair(this, v)
 
 }
-case class UntypedAttr(name: String) extends Attr
-/**
- * Wraps up a HTML attribute in a statically-typed value with an associated
- * type; overloads the := operator to also accept values of that type to convert
- * to strings, allowing more concise and pseudo-typesafe use of that attribute.
- */
-case class TypedAttr[T](name: String) extends Attr{
-  /**
-   * Assign an attribute to some value of the correct type.
-   */
-  def :=(v: T): AttrPair = AttrPair(this, v.toString)
-}
-
 /**
  * A [[Style]] which does not have a particular type, and takes strings as its
  * values
@@ -202,7 +194,7 @@ case class Style(jsName: String, cssName: String){
  * A key value pair representing the assignment of a style to a value.
  */
 case class StylePair(style: Style, value: Any) extends Modifier{
-  def transforms = Array(Mod.Style(style.cssName, value))
+  def transforms = Array(Mod.Style(style, value))
 
 }
 
@@ -215,7 +207,7 @@ sealed trait Mod
 object Mod{
   case class Attr(k: String, v: Any) extends Mod
   case class Cls(v: Any) extends Mod
-  case class Style(k: String, v: Any) extends Mod
+  case class Style(k: scalatags.Style, v: Any) extends Mod
   case class Child(n: Node) extends Mod
 }
 

@@ -31,6 +31,7 @@ import org.scalajs.dom
   * imported individually as needed.
   */
 object Tags2 {
+
   // Document Metadata
   /**
   * Defines the title of the document, shown in a browser's title bar or on the

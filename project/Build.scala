@@ -1,10 +1,8 @@
 import sbt._
 import Keys._
 import scala.scalajs.sbtplugin.env.nodejs.NodeJSEnv
-import scala.scalajs.sbtplugin.env.phantomjs.PhantomJSEnv
-import scala.scalajs.sbtplugin.ScalaJSPlugin.ScalaJSKeys._
 import scala.scalajs.sbtplugin._
-import scala.scalajs.sbtplugin.env.rhino.RhinoJSEnv
+
 import ScalaJSPlugin._
 import ScalaJSKeys._
 import twirl.sbt.TwirlPlugin._
@@ -20,11 +18,11 @@ object Build extends sbt.Build{
 
     libraryDependencies ++= (
       if (scalaVersion.value.startsWith("2.10")) Nil
-      else Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.1")
+      else Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.1" % "test")
     ),
 
     // Sonatype
-    version := "0.2.5",
+    version := "0.2.6",
     publishTo <<= version { (v: String) =>
       Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },

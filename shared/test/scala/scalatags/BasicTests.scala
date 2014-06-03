@@ -118,7 +118,8 @@ object BasicTests extends TestSuite{
           height:=10.px
         )
         // "background-color" -> "red" is stored in `attrs` not `styles`
-        val expected = SortedMap[String, Any]("float" -> "left", "height" -> "10px")
+        val expected = SortedMap(float -> "left", height -> "10px")
+
         assert(frag.styles.toString == expected.toString)
       }
       'intSeq-strCheck(

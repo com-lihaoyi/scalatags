@@ -1,6 +1,7 @@
 import acyclic.file
 import scala.collection.immutable.Queue
 import scala.collection.{SortedMap, mutable}
+import scalatags.Platform.Base
 
 /**
  * ScalaTags is a small XML/HTML construction library for Scala. See
@@ -8,7 +9,7 @@ import scala.collection.{SortedMap, mutable}
  * and documentation.
  */
 package object scalatags {
-
+//  type Base = Platform.Base
   val HtmlTag = TypedHtmlTag
   type HtmlTag = TypedHtmlTag[_]
   /**
@@ -23,7 +24,9 @@ package object scalatags {
    */
   implicit def stringNode(v: String) = new StringNode(v)
 
-
+  implicit object styleOrdering extends Ordering[Style]{
+    override def compare(x: Style, y: Style): Int = x.cssName compareTo( y.cssName)
+  }
   /**
    * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
@@ -64,7 +67,7 @@ package object scalatags {
     /**
      * Converts the string to a [[HtmlTag]]
      */
-    def tag[T] = {
+    def tag[T <: Base] = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
@@ -75,7 +78,7 @@ package object scalatags {
      * Converts the string to a void [[HtmlTag]]; that means that they cannot
      * contain any content, and can be rendered as self-closing tags.
      */
-    def voidTag[T] = {
+    def voidTag[T <: Base] = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
@@ -90,7 +93,7 @@ package object scalatags {
         throw new IllegalArgumentException(
           s"Illegal attribute name: $s is not a valid XML attribute name"
         )
-      UntypedAttr(s)
+      Attr(s)
     }
     /**
      * Converts the string to a [[TypedAttr]]
@@ -100,7 +103,7 @@ package object scalatags {
         throw new IllegalArgumentException(
           s"Illegal attribute name: $s is not a valid XML attribute name"
         )
-      TypedAttr[T](s)
+      Attr(s)
     }
     /**
      * Converts the string to a [[Style]]. The string is used as the cssName of the
