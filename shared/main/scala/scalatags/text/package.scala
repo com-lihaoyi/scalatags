@@ -69,7 +69,6 @@ package object text {
   implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
   implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
 
-
   case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
                                               children: List[Node[StringBuilder]],
                                               attrs: SortedMap[Attr, AttrVal[StringBuilder]],

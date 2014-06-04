@@ -3,6 +3,7 @@ import Keys._
 import scala.scalajs.sbtplugin.env.nodejs.NodeJSEnv
 import scala.scalajs.sbtplugin._
 
+import scala.scalajs.sbtplugin.env.phantomjs.PhantomJSEnv
 import ScalaJSPlugin._
 import ScalaJSKeys._
 import twirl.sbt.TwirlPlugin._
@@ -58,7 +59,7 @@ object Build extends sbt.Build{
       ProvidedJS / "mustache.js" % "test",
       ProvidedJS / "jade.js" % "test"
     ),
-    (jsEnv in Test) := new NodeJSEnv
+    (jsEnv in Test) := new PhantomJSEnv
   )
 
   lazy val jvm = cross.jvm.settings(Twirl.settings:_*).settings(

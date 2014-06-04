@@ -10,8 +10,6 @@
 package scalatags
 package generic
 
-import scalatags.generic.Util
-
 /**
  * Trait containing the contents of the [[Attrs]] module, so they can be
  * mixed in to other objects if needed.

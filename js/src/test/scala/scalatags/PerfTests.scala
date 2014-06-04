@@ -1,8 +1,8 @@
 package scalatags
 
-import scalatags.all._
-import scalatags.Styles.{float, color}
-import Util.strCheck
+import scalatags.text.all._
+
+import TestUtil.strCheck
 import org.scalajs.dom._
 import scalajs.js
 import scalajs.js.Dynamic._

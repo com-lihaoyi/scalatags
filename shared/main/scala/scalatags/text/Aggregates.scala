@@ -25,7 +25,8 @@ object misc {
  * [[Datatypes]] into the global namespace via `import scalatags.all._`
  */
 trait StringTags extends Util[StringBuilder]{ self =>
-
+  implicit val styleOrdering = Orderings.styleOrdering
+  implicit val attrOrdering = Orderings.attrOrdering
   protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
   protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
   protected[this] implicit def numericAttrInternal[T: Numeric](n: T) = new NumericAttr(n)

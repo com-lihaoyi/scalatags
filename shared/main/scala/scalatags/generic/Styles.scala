@@ -10,7 +10,6 @@
 package scalatags
 package generic
 
-import scalatags.generic.{Util, Style}
 
 trait StyleMisc[Target] extends Util[Target] {
 
