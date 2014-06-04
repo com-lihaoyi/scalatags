@@ -1,5 +1,4 @@
 package scalatags
-package generic
 
 /**
  * Module containing convenient ways of constructing CSS data types

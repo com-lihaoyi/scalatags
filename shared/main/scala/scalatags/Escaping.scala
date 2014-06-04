@@ -1,5 +1,4 @@
 package scalatags
-package generic
 
 /**
  * Utility methods related to validating and escaping XML; used internally but

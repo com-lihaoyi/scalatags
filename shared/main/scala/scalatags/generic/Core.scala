@@ -4,7 +4,6 @@ package generic
 import scala.collection.SortedMap
 import scalatags.Platform.Base
 import scalatags.generic
-import Orderings._
 
 /**
  * A general interface for all XML types which can appear in a ScalaTags fragment.
@@ -45,8 +44,8 @@ trait Modifier[Target] {
  * @param attrs A sorted map of attributes
  * @param void Whether or not the tag can be self-closing
  */
-trait AbstractTypedHtmlTag[T <: Base, Target] extends Node[Target]{
-  type Self <: AbstractTypedHtmlTag[T, Target]
+trait TypedHtmlTag[T <: Base, Target] extends Node[Target]{
+  type Self <: TypedHtmlTag[T, Target]
   def tag: String
   def children: List[Node[Target]]
   def attrs: SortedMap[Attr, AttrVal[Target]]
@@ -91,15 +90,6 @@ trait AbstractTypedHtmlTag[T <: Base, Target] extends Node[Target]{
  */
 case class AttrPair[Target](attr: Attr, value: AttrVal[Target]) extends Modifier[Target] {
   def transforms = Array(Mod.Attr(attr, value))
-}
-object Orderings{
-  implicit object styleOrdering extends Ordering[Style]{
-    override def compare(x: Style, y: Style): Int = x.cssName compareTo y.cssName
-  }
-
-  implicit object attrOrdering extends Ordering[Attr]{
-    override def compare(x: Attr, y: Attr): Int = x.name compareTo y.name
-  }
 }
 /**
  * Wraps up a HTML attribute in an untyped value with an associated

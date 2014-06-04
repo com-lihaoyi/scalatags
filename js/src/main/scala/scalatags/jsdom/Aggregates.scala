@@ -27,8 +27,7 @@ object misc {
  */
 trait StringTags extends Util[dom.Element]{ self =>
   type ConcreteHtmlTag[T <: Platform.Base] = jsdom.TypedHtmlTag[T]
-  implicit val styleOrdering = Orderings.styleOrdering
-  implicit val attrOrdering = Orderings.attrOrdering
+
   protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
   protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
   protected[this] implicit def numericAttrInternal[T: Numeric](n: T) = new NumericAttr(n)

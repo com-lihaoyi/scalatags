@@ -5,9 +5,6 @@ import scala.collection.SortedMap
 import scalatags.generic.Style
 import scalatags.generic.Attr
 
-/**
- * Created by haoyi on 6/3/14.
- */
 package object text {
 
   /**
@@ -74,7 +71,7 @@ package object text {
                                               attrs: SortedMap[Attr, AttrVal[StringBuilder]],
                                               styles: SortedMap[Style, StyleVal[StringBuilder]],
                                               void: Boolean = false)
-    extends AbstractTypedHtmlTag[T, StringBuilder]{
+    extends generic.TypedHtmlTag[T, StringBuilder]{
     type Self = TypedHtmlTag[T]
     def collapsedAttrs = {
       var moddedAttrs = attrs

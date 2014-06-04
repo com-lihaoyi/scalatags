@@ -50,8 +50,8 @@ package object jsdom {
   class GenericStyle[T](t: T) extends StyleVal[dom.Element]{
     override def applyTo(elem: dom.Element, k: Style): Unit = {
       elem.asInstanceOf[dom.HTMLElement]
-        .style
-        .setProperty(k.jsName, t.toString)
+          .style
+          .setProperty(k.cssName, t.toString)
     }
   }
   case class StringStyle(s: String) extends GenericStyle(s)
@@ -66,7 +66,7 @@ package object jsdom {
                                               attrs: SortedMap[Attr, AttrVal[dom.Element]],
                                               styles: SortedMap[Style, StyleVal[dom.Element]],
                                               void: Boolean = false)
-    extends AbstractTypedHtmlTag[T, dom.Element]{
+    extends generic.TypedHtmlTag[T, dom.Element]{
     type Self = TypedHtmlTag[T]
 
     /**
@@ -92,6 +92,7 @@ package object jsdom {
       this.copy(children=children, attrs=attrs, styles=styles)
     }
 
+    override def toString = toDom.outerHTML
   }
   type HtmlTag = TypedHtmlTag[Platform.Base]
   val HtmlTag = TypedHtmlTag
