@@ -11,7 +11,6 @@ package scalatags
 package generic
 
 import acyclic.file
-import scalatags.generic.Style
 
 /**
  * Contains CSS styles which are only used for SVG. These are not imported by

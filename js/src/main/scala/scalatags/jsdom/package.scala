@@ -1,21 +1,12 @@
 package scalatags
 
-import utest.framework.TestSuite
-import org.scalajs.dom
 import scalatags.generic._
-
+import org.scalajs.dom
 import scala.collection.SortedMap
-import org.scalajs.dom.Element
-import scala.collection
+import scalatags.generic.Style
+import scalatags.generic.Attr
 
-object BindingTests extends TestSuite{
-
-  val tests = TestSuite{
-    
-  }
-}
-object Cake {
-
+package object jsdom {
   /**
    * Lets you put numbers into a scalatags tree, as a no-op.
    */
@@ -45,8 +36,8 @@ object Cake {
       elem.setAttribute(k.name, t.toString)
     }
 
-    override def merge(o: AttrVal[Element]): AttrVal[Element] = ???
-    override def applyPartial(t: Element): Unit = ???
+    override def merge(o: AttrVal[dom.Element]): AttrVal[dom.Element] = ???
+    override def applyPartial(t: dom.Element): Unit = ???
   }
   case class StringAttr(s: String) extends GenericAttr(s)
   case class BooleanAttr(b: Boolean) extends GenericAttr(b)
@@ -59,8 +50,8 @@ object Cake {
   class GenericStyle[T](t: T) extends StyleVal[dom.Element]{
     override def applyTo(elem: dom.Element, k: Style): Unit = {
       elem.asInstanceOf[dom.HTMLElement]
-          .style
-          .setProperty(k.jsName, t.toString)
+        .style
+        .setProperty(k.jsName, t.toString)
     }
   }
   case class StringStyle(s: String) extends GenericStyle(s)
@@ -75,7 +66,7 @@ object Cake {
                                               attrs: SortedMap[Attr, AttrVal[dom.Element]],
                                               styles: SortedMap[Style, StyleVal[dom.Element]],
                                               void: Boolean = false)
-                                              extends AbstractTypedHtmlTag[T, dom.Element]{
+    extends AbstractTypedHtmlTag[T, dom.Element]{
     type Self = TypedHtmlTag[T]
 
     /**
@@ -92,7 +83,7 @@ object Cake {
       for ((attr, value) <- attrs) value.applyTo(elem, attr)
       for ((style, value) <- styles) value.applyTo(elem, style)
       for (c <- children) c.writeTo(elem)
-      elem
+      elem.asInstanceOf[T]
     }
 
     override def transform(children: List[Node[dom.Element]],
