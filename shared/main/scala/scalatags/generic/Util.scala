@@ -9,8 +9,8 @@ import scalatags._
  */
 trait Util[Target] {
   def makeAbstractTypedHtmlTag[T <: Base](tag: String, void: Boolean): AbstractTypedHtmlTag[T, Target]
-  implicit def stringAttr(s: String): AttrVal[Target]
-  implicit def stringStyle(s: String): StyleVal[Target]
+  protected[this] implicit def stringAttrInternal(s: String): AttrVal[Target]
+  protected[this] implicit def stringStyleInternal(s: String): StyleVal[Target]
 
   /**
    * Provides extension methods on strings to fit them into Scalatag fragments.

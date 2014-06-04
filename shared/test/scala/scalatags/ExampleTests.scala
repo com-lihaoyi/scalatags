@@ -2,7 +2,7 @@ package scalatags
 import acyclic.file
 import utest._
 import TestUtil._
-import scalatags.text.{StringTags, misc, short, all}
+import scalatags.text._
 import all._
 import utest.framework.TestSuite
 import scalatags.generic.{Tags, Node}

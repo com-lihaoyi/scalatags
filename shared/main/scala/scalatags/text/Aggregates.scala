@@ -25,55 +25,14 @@ object misc {
  * [[Datatypes]] into the global namespace via `import scalatags.all._`
  */
 trait StringTags extends Util[StringBuilder]{ self =>
-  class GenericAttr(val writer: StringBuilder => Unit) extends AttrVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Attr): Unit = {
-      strb ++= k.name ++= "=\""
-      applyPartial(strb)
-      strb ++= "\""
-    }
-    def applyPartial(strb: StringBuilder) = writer(strb)
-    def merge(o: AttrVal[StringBuilder]) = new GenericAttr({ strb =>
-      applyPartial(strb)
-      strb ++= " "
-      o.applyPartial(strb)
-    })
-  }
-  implicit def stringAttr(s: String) = new StringAttr(s)
-  case class StringAttr(s: String) extends GenericAttr(Escaping.escape(s, _))
-  implicit def booleanAttr(b: Boolean) = new BooleanAttr(b)
-  case class BooleanAttr(b: Boolean) extends GenericAttr(_ ++= b.toString)
-  implicit def numericAttr[T: Numeric](n: T) = new NumericAttr(n)
-  case class NumericAttr[T: Numeric](n: T) extends GenericAttr(_ ++= n.toString)
 
-  class GenericStyle(writer: StringBuilder => Unit) extends StyleVal[StringBuilder]{
-    override def applyTo(strb: StringBuilder, k: Style): Unit = {
-      strb ++= k.cssName ++= ": "
-      writer(strb)
-      strb ++= ";"
-    }
-  }
-  implicit def stringStyle(s: String) = new StringStyle(s)
-  case class StringStyle(s: String) extends GenericStyle(Escaping.escape(s, _))
-  implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
-  case class BooleanStyle(b: Boolean) extends GenericStyle(_ ++= b.toString)
-  implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
-  case class NumericStyle[T: Numeric](n: T) extends GenericStyle(_ ++= n.toString)
+  protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
+  protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
+  protected[this] implicit def numericAttrInternal[T: Numeric](n: T) = new NumericAttr(n)
 
-  def raw(s: String) = new RawNode(s)
-
-  /**
-   * A [[Node]] which contains a String.
-   */
-  case class StringNode(v: String) extends Node[StringBuilder] {
-    def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
-  }
-
-  /**
-   * A [[Node]] which contains a String which will not be escaped.
-   */
-  case class RawNode(v: String) extends Node[StringBuilder] {
-    def writeTo(strb: StringBuilder): Unit = strb ++= v
-  }
+  protected[this] implicit def stringStyleInternal(s: String) = new StringStyle(s)
+  protected[this] implicit def booleanStyleInternal(b: Boolean) = new BooleanStyle(b)
+  protected[this] implicit def numericStyleInternal[T: Numeric](n: T) = new NumericStyle(n)
 
   /**
    * Allows you to modify a HtmlTag by adding a String to its list of children
@@ -108,7 +67,7 @@ trait StringTags extends Util[StringBuilder]{ self =>
         }
 
         val newVal = {
-          moddedAttrs.get(Attr("style")).fold[AttrVal[StringBuilder]](strb.toString)(_ merge strb.toString)
+          moddedAttrs.get(Attr("style")).fold[AttrVal[StringBuilder]](StringAttr(strb.toString))(_ merge StringAttr(strb.toString))
         }
         moddedAttrs = moddedAttrs.updated(Attr("style"), newVal)
       }

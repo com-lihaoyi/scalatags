@@ -2,7 +2,7 @@ package scalatags
 import utest.framework.TestSuite
 import utest._
 import acyclic.file
-import scalatags.text.all
+import scalatags.text._
 
 trait PerfTestBase extends TestSuite{
   val expected =

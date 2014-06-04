@@ -3,6 +3,7 @@ import acyclic.file
 import utest.framework.TestSuite
 import utest._
 import scalatags.text.all
+import scalatags.text._
 import all._
 import TestUtil._
 import scala.collection.SortedMap
