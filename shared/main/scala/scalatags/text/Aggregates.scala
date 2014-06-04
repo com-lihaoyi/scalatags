@@ -34,15 +34,6 @@ trait StringTags extends Util[StringBuilder]{ self =>
   protected[this] implicit def booleanStyleInternal(b: Boolean) = new BooleanStyle(b)
   protected[this] implicit def numericStyleInternal[T: Numeric](n: T) = new NumericStyle(n)
 
-  /**
-   * Allows you to modify a HtmlTag by adding a String to its list of children
-   */
-  implicit def stringNode(v: String) = new StringNode(v)
-
-  /**
-   * Lets you put numbers into a scalatags tree, as a no-op.
-   */
-  implicit def NumericModifier[T: Numeric](u: T) = new StringNode(u.toString)
   type HtmlTag = TypedHtmlTag[Platform.Base]
   val HtmlTag = TypedHtmlTag
   def makeAbstractTypedHtmlTag[T <: Platform.Base](tag: String, void: Boolean) = {

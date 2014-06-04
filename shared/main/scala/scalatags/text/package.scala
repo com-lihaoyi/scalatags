@@ -9,6 +9,16 @@ import scalatags.generic.Attr
  * Created by haoyi on 6/3/14.
  */
 package object text {
+
+  /**
+   * Lets you put numbers into a scalatags tree, as a no-op.
+   */
+  implicit def NumericModifier[T: Numeric](u: T) = new StringNode(u.toString)
+
+  /**
+   * Allows you to modify a HtmlTag by adding a String to its list of children
+   */
+  implicit def stringNode(v: String) = new StringNode(v)
   /**
    * A [[Node]] which contains a String.
    */
@@ -16,6 +26,7 @@ package object text {
     def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
   }
 
+  def raw(s: String) = new RawNode(s)
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
@@ -58,6 +69,6 @@ package object text {
   implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
   implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
 
-  def raw(s: String) = new RawNode(s)
+
 
 }
