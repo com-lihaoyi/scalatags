@@ -8,8 +8,9 @@
  * http://opensource.org/licenses/MIT
  */
 package scalatags
+package generic
 
-import acyclic.file
+import scalatags.generic.{Util, Style}
 
 trait StyleMisc[Target] extends Util[Target] {
 

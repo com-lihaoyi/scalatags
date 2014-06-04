@@ -1,9 +1,9 @@
 package scalatags
+package generic
 
-import acyclic.file
-import scala.collection.{SortedMap, mutable}
+import scala.collection.SortedMap
 import scalatags.Platform.Base
-
+import scalatags.generic
 
 
 /**
@@ -147,7 +147,7 @@ trait AttrVal[Target] {
 sealed trait Mod[Target]
 
 object Mod {
-  case class Attr[Target](k: scalatags.Attr, v: AttrVal[Target]) extends Mod[Target]
-  case class Style[Target](k: scalatags.Style, v: StyleVal[Target]) extends Mod[Target]
+  case class Attr[Target](k: generic.Attr, v: AttrVal[Target]) extends Mod[Target]
+  case class Style[Target](k: generic.Style, v: StyleVal[Target]) extends Mod[Target]
   case class Child[Target](n: Node[Target]) extends Mod[Target]
 }

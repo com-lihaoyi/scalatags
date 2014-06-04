@@ -2,9 +2,11 @@ package scalatags
 import acyclic.file
 import utest.framework.TestSuite
 import utest._
-import scalatags.all._
+import scalatags.text.all
+import all._
 import TestUtil._
 import scala.collection.SortedMap
+import scalatags.generic.{StyleVal, Style}
 
 object BasicTests extends TestSuite{
   def tests = TestSuite{

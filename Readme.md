@@ -363,7 +363,7 @@ Managing Imports
 
 ```scala
 import scalatags.{Attributes => a, Styles => s, _}
-import scalatags.Tags._
+import scalatags.generic.Tags._
 div(
   p(s.color:="red")("Red Text"),
   img(a.href:="www.imgur.com/picture.jpg")
@@ -374,8 +374,8 @@ Apart from using `import scalatags.all._`, it is possible to perform the imports
 
 The main objects which you can import things from are:
 
-- [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags): common HTML tags
-- [Tags2](http://lihaoyi.github.io/scalatags/#scalatags.Tags2): less common HTML tags
+- [Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags): common HTML tags
+- [Tags2](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags2): less common HTML tags
 - [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs): common HTML attributes
 - [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles): common CSS styles
 - [Styles2](http://lihaoyi.github.io/scalatags/#scalatags.Styles2): less common CSS styles
@@ -386,14 +386,14 @@ The main objects which you can import things from are:
 
 You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
 
-- [all](http://lihaoyi.github.io/scalatags/#scalatags.package$$all$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters)
-- [short](http://lihaoyi.github.io/scalatags/#scalatags.package$$short$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters), but aliases [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`
+- [all](http://lihaoyi.github.io/scalatags/#scalatags.package$$all$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters)
+- [short](http://lihaoyi.github.io/scalatags/#scalatags.package$$short$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.DataConverters), but aliases [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.Styles) as `*`
 
 Thus, you can choose exactly what you want to import, and how:
 
 ```scala
 import scalatags.{Attributes => attr, Styles => css, _}
-import scalatags.Tags._
+import scalatags.generic.Tags._
 div(
   p(css.color:="red")("Red Text"),
   img(attr.href:="www.imgur.com/picture.jpg")
@@ -410,7 +410,7 @@ div(
 )
 ```
 
-If you wish to put together your own collection of imports, all the objects described above ([Tags](http://lihaoyi.github.io/scalatags/#scalatags.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), etc.) are also available as traits, so you can put together your own:
+If you wish to put together your own collection of imports, all the objects described above ([Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Attrs), etc.) are also available as traits, so you can put together your own:
 
 ```scala
 object custom extends Tags{

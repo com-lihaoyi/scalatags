@@ -2,6 +2,8 @@ package scalatags
 import utest.framework.TestSuite
 import utest._
 import acyclic.file
+import scalatags.text.all
+
 trait PerfTestBase extends TestSuite{
   val expected =
     """
@@ -57,7 +59,7 @@ trait PerfTestBase extends TestSuite{
 }
 case object Scalatags extends (() => String){
 
-  import scalatags.all._
+  import all._
   val contentpara = "contentpara"
   val first = "first"
   def para(n: Int) = p(

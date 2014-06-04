@@ -19,9 +19,8 @@
  *
  * Other tags cannot, and must have a separate closing tag even when empty.
  */
-package scalatags
+package scalatags.generic
 
-import acyclic.file
 import org.scalajs.dom
 
 /**

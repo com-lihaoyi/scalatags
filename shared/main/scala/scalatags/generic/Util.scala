@@ -1,7 +1,8 @@
 package scalatags
+package generic
 
 import scalatags.Platform._
-import scala.collection.SortedMap
+import scalatags._
 
 /**
  * Created by haoyi on 6/2/14.

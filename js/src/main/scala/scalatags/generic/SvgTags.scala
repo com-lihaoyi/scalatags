@@ -1,6 +1,5 @@
-package scalatags
+package scalatags.generic
 
-import acyclic.file
 import org.scalajs.dom
 
 /**

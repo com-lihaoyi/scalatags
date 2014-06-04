@@ -2,8 +2,12 @@ package scalatags
 import acyclic.file
 import utest._
 import TestUtil._
-import scalatags.all._
+import scalatags.text.{StringTags, misc, short, all}
+import all._
 import utest.framework.TestSuite
+import scalatags.generic.{Tags, Node}
+import scalatags.text
+
 /**
  * A set of examples used - the documentation.
  */
@@ -551,24 +555,24 @@ object ExampleTests extends TestSuite{
 
       'manualImports-strCheck(
         {
-          import scalatags.short._
+          import short._
           div(
             p(*.color:="red")("Red Text"),
             img(*.href:="www.imgur.com/picture.jpg")
           )
         },
         {
-          import scalatags.misc.{attrs => attr, styles => css}
-          import scalatags.misc.tags._
+          import misc.{attrs => attr, styles => css}
+          import misc.tags._
           div(
             p(css.color:="red")("Red Text"),
             img(attr.href:="www.imgur.com/picture.jpg")
           )
         },
         {
-          object custom extends Tags[StringBuilder] with scalatags.StringTags{
-            val attr = scalatags.misc.attrs
-            val css = scalatags.misc.styles
+          object custom extends Tags[StringBuilder] with StringTags{
+            val attr = text.misc.attrs
+            val css = text.misc.styles
           }
           import custom._
           div(

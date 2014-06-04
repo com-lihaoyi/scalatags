@@ -1,7 +1,10 @@
 package scalatags
+package text
 
-import acyclic.file
 import scala.collection.SortedMap
+import scalatags.generic._
+import scalatags.generic.Style
+import scalatags.generic.Attr
 
 object all extends StringTags with Attrs[StringBuilder] with Styles[StringBuilder] with Tags[StringBuilder] with DataConverters with Util[StringBuilder]
 object short extends StringTags with Util[StringBuilder] with DataConverters{
@@ -59,14 +62,14 @@ trait StringTags extends Util[StringBuilder]{ self =>
   def raw(s: String) = new RawNode(s)
 
   /**
-   * A [[scalatags.Node]] which contains a String.
+   * A [[Node]] which contains a String.
    */
   case class StringNode(v: String) extends Node[StringBuilder] {
     def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
   }
 
   /**
-   * A [[scalatags.Node]] which contains a String which will not be escaped.
+   * A [[Node]] which contains a String which will not be escaped.
    */
   case class RawNode(v: String) extends Node[StringBuilder] {
     def writeTo(strb: StringBuilder): Unit = strb ++= v

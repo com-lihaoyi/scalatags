@@ -8,8 +8,9 @@
  * http://opensource.org/licenses/MIT
  */
 package scalatags
+package generic
 
-import acyclic.file
+import scalatags.generic.Util
 
 /**
  * Trait containing the contents of the [[Attrs]] module, so they can be

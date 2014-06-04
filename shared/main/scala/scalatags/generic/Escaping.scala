@@ -1,6 +1,6 @@
 package scalatags
+package generic
 
-import acyclic.file
 /**
  * Utility methods related to validating and escaping XML; used internally but
  * potentially useful outside of Scalatags.
