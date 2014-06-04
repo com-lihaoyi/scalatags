@@ -6,6 +6,7 @@ import scalatags.generic._
 import scalatags.generic.Style
 import scalatags.generic.Attr
 import org.scalajs.dom
+import jsdomX._
 
 object all extends StringTags with Attrs[dom.Element] with Styles[dom.Element] with Tags[dom.Element] with DataConverters with Util[dom.Element]
 object short extends StringTags with Util[dom.Element] with DataConverters{
@@ -26,7 +27,7 @@ object misc {
  * [[Datatypes]] into the global namespace via `import scalatags.all._`
  */
 trait StringTags extends Util[dom.Element]{ self =>
-  type ConcreteHtmlTag[T <: Platform.Base] = jsdom.TypedHtmlTag[T]
+  type ConcreteHtmlTag[T <: Platform.Base] = jsdomX.TypedHtmlTag[T]
 
   protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
   protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
@@ -36,7 +37,7 @@ trait StringTags extends Util[dom.Element]{ self =>
   protected[this] implicit def booleanStyleInternal(b: Boolean) = new BooleanStyle(b)
   protected[this] implicit def numericStyleInternal[T: Numeric](n: T) = new NumericStyle(n)
 
-  def makeAbstractTypedHtmlTag[T <: Platform.Base](tag: String, void: Boolean): jsdom.TypedHtmlTag[T] = {
+  def makeAbstractTypedHtmlTag[T <: Platform.Base](tag: String, void: Boolean): jsdomX.TypedHtmlTag[T] = {
     TypedHtmlTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
   }
 }

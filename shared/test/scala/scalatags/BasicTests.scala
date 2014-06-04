@@ -2,14 +2,16 @@ package scalatags
 import acyclic.file
 import utest.framework.TestSuite
 import utest._
-import scalatags.text.all
-import scalatags.text._
-import all._
+
+
 import TestUtil._
 import scala.collection.SortedMap
 import scalatags.generic.{StyleVal, Style}
 
 object BasicTests extends TestSuite{
+  import scalatags.text.all._
+  import scalatags.textX._
+
   def tests = TestSuite{
 
     'helloWorld{
@@ -29,67 +31,6 @@ object BasicTests extends TestSuite{
       assert("this-is-a-string-with-dashes".voidTag.toString == "<this-is-a-string-with-dashes />")
     }
 
-    /**
-     * Tests nesting tags in a simple hierarchy
-     */
-    'cssChaining-{
-      val x = script("")
-      strCheck(
-        html(
-          head(
-            x,
-            "string-tag".tag
-          ),
-          body(
-            div(
-              p
-            )
-          )
-        ),
-        """
-      <html>
-          <head>
-              <script></script>
-              <string-tag></string-tag>
-          </head>
-          <body>
-              <div>
-                  <p></p>
-              </div>
-          </body>
-      </html>
-        """
-      )
-    }
-
-
-    'cssChaining2-strCheck(
-      div(
-        float.left,
-        color:="red"
-      ),
-      """<div style="color: red; float: left;"></div>"""
-    )
-
-
-    'attributeChaining-strCheck(
-      div(
-        id:="cow",
-        `class`:="thing lol"
-      ),
-      """<div class="thing lol" id="cow"></div>"""
-    )
-
-
-    'mixingAttributesStylesAndChildren-strCheck(
-      div(
-        id:="cow",
-        float.left,
-        p("i am a cow")
-      ),
-      """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
-    )
-
     'cssHelpers{
 
       assert(10.px == "10px")
@@ -97,17 +38,6 @@ object BasicTests extends TestSuite{
       assert(10.em == "10em")
       assert(10.pt == "10pt")
     }
-
-    'classStyleAttrOverwriting-strCheck(
-      //class/style after attr appends, but attr after class/style overwrites
-      div(
-        float.left,
-        style:="background-color: red;",
-        cls:="my-class",
-        p("i am a cow")
-      ),
-      """<div class="my-class" style="background-color: red; float: left;"><p>i am a cow</p></div>"""
-    )
 
     'styleConvertsThingsToCamelcase{
       assert("i-am-a-cow".style.jsName == "iAmACow")
@@ -123,27 +53,7 @@ object BasicTests extends TestSuite{
       val styleList = frag.styles
       assert(styleList.toString == expected.toString)
     }
-    'intSeq-strCheck(
-      div(
-        h1("Hello"),
-        for(i <- 0 until 5) yield i
-      ),
-      """<div><h1>Hello</h1>01234</div>"""
-    )
-    'stringArray{
-      val strArr = Array("hello")
-      strCheck(
-        div(
-          Some("lol"),
-          Some(1),
-          None: Option[String],
-          h1("Hello"),
-          Array(1, 2, 3),
-          strArr,
-          ()
-        ),
-        """<div>lol1<h1>Hello</h1>123hello</div>"""
-      )
-    }
+
+
   }
 }

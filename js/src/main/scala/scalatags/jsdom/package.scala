@@ -6,7 +6,7 @@ import scala.collection.SortedMap
 import scalatags.generic.Style
 import scalatags.generic.Attr
 
-package object jsdom {
+object jsdomX extends Omg[dom.Element]{
   /**
    * Lets you put numbers into a scalatags tree, as a no-op.
    */
@@ -82,7 +82,7 @@ package object jsdom {
       val elem = dom.document.createElement(tag)
       for ((attr, value) <- attrs) value.applyTo(elem, attr)
       for ((style, value) <- styles) value.applyTo(elem, style)
-      for (c <- children) c.writeTo(elem)
+      for (c <- children.reverseIterator) c.writeTo(elem)
       elem.asInstanceOf[T]
     }
 

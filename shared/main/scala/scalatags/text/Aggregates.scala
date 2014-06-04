@@ -1,6 +1,6 @@
 package scalatags
 package text
-
+import textX._
 import scala.collection.SortedMap
 import scalatags.generic._
 import scalatags.generic.Style
@@ -25,7 +25,7 @@ object misc {
  * [[Datatypes]] into the global namespace via `import scalatags.all._`
  */
 trait StringTags extends Util[StringBuilder]{ self =>
-  type ConcreteHtmlTag[T <: Platform.Base] = text.TypedHtmlTag[T]
+  type ConcreteHtmlTag[T <: Platform.Base] = textX.TypedHtmlTag[T]
 
   protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
   protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)

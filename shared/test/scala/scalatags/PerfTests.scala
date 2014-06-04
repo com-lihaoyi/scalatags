@@ -3,7 +3,7 @@ import utest.framework.TestSuite
 import utest._
 import acyclic.file
 import scalatags.text._
-
+import scalatags.textX._
 trait PerfTestBase extends TestSuite{
   val expected =
     """
