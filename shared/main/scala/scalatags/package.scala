@@ -1,6 +1,7 @@
 import acyclic.file
 import scala.collection.immutable.Queue
 import scala.collection.{SortedMap, mutable}
+import scalatags.generic.{Attr, Style}
 import scalatags.Platform.Base
 
 /**
@@ -9,11 +10,17 @@ import scalatags.Platform.Base
  * and documentation.
  */
 package object scalatags {
-//  type Base = Platform.Base
-
   private[scalatags] def camelCase(dashedString: String) = {
     val first :: rest = dashedString.split("-").toList
 
     (first :: rest.map(s => s(0).toUpper.toString + s.drop(1))).mkString
   }
+  implicit object styleOrdering extends Ordering[Style]{
+    override def compare(x: Style, y: Style): Int = x.cssName compareTo y.cssName
+  }
+
+  implicit object attrOrdering extends Ordering[Attr]{
+    override def compare(x: Attr, y: Attr): Int = x.name compareTo y.name
+  }
+
 }

@@ -66,13 +66,7 @@ trait Util[Target] {
 
   }
 
-  implicit object styleOrdering extends Ordering[Style]{
-    override def compare(x: Style, y: Style): Int = x.cssName compareTo y.cssName
-  }
 
-  implicit object attrOrdering extends Ordering[Attr]{
-    override def compare(x: Attr, y: Attr): Int = x.name compareTo y.name
-  }
   /**
    * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
