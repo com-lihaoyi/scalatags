@@ -10,7 +10,7 @@ import scalatags.generic.{StyleVal, Style}
 
 object BasicTests extends TestSuite{
   import scalatags.text.all._
-  import scalatags.textX._
+  import scalatags.text.Implicits._
 
   def tests = TestSuite{
 

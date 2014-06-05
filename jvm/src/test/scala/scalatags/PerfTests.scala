@@ -6,7 +6,7 @@ import java.io.{StringWriter, PrintWriter}
 
 object PerfTests extends PerfTestBase{
   val samples = Seq(
-    Scalatags -> "Scalatags",
+    ScalatagsText -> "ScalatagsText",
     ScalaXML -> "ScalaXML"//,
 //    Twirl -> "Twirl",
 //    Mustache -> "Mustache",

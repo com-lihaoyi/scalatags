@@ -2,8 +2,10 @@ package scalatags
 import utest.framework.TestSuite
 import utest._
 import acyclic.file
-import scalatags.text._
-import scalatags.textX._
+
+
+
+import generic.PerfTestRunner._
 trait PerfTestBase extends TestSuite{
   val expected =
     """
@@ -57,40 +59,7 @@ trait PerfTestBase extends TestSuite{
     }
   }
 }
-case object Scalatags extends (() => String){
-
-  import all._
-  val contentpara = "contentpara"
-  val first = "first"
-  def para(n: Int) = p(
-    cls := contentpara,
-    title:=s"this is paragraph $n"
-  )
-  val titleString = "This is my title"
-  val firstParaString = "This is my first paragraph"
-  def apply() =
-    html(
-      head(
-        script("console.log(1)")
-      ),
-      body(
-        h1(color:="red")(titleString),
-        div(backgroundColor:="blue")(
-          para(0)(
-            cls := s"$contentpara $first",
-            firstParaString
-          ),
-          a(href:="www.google.com")(
-            p("Goooogle")
-          ),
-          for(i <- 0 until 5) yield para(i)(
-            s"Paragraph $i",
-            color:=(if (i % 2 == 0) "red" else "green")
-          )
-        )
-      )
-    ).toString()
-}
+case object ScalatagsText extends generic.PerfTestRunner(scalatags.text.all, scalatags.text.Implicits)
 
 
 case object ScalaXML extends (() => String){
@@ -110,9 +79,9 @@ case object ScalaXML extends (() => String){
         <script>console.log(1)</script>
       </head>
       <body>
-        <h1 style="color: red;">{Scalatags.titleString}</h1>
+        <h1 style="color: red;">{titleString}</h1>
         <div style="background-color: blue;">
-          <p class={contentpara + " " + first} title="this is paragraph 0">{Scalatags.firstParaString}</p>
+          <p class={contentpara + " " + first} title="this is paragraph 0">{firstParaString}</p>
           <a href="www.google.com">
             <p>Goooogle</p>
           </a>

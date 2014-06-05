@@ -5,7 +5,7 @@ import scala.collection.SortedMap
 import scalatags.generic.Style
 import TestUtil.strCheck
 class ExampleTests[T](v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
-                      omg: Omg[T]) extends TestSuite{
+                      omg: AbstractPackage[T]) extends TestSuite{
   import v._
   import omg._
   val tests = TestSuite{

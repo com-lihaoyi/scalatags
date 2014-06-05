@@ -1,12 +1,12 @@
 package scalatags
-
+package jsdom
 import scalatags.generic._
 import org.scalajs.dom
 import scala.collection.SortedMap
 import scalatags.generic.Style
 import scalatags.generic.Attr
 
-object jsdomX extends Omg[dom.Element]{
+object Implicits extends generic.AbstractPackage[dom.Element]{
   /**
    * Lets you put numbers into a scalatags tree, as a no-op.
    */

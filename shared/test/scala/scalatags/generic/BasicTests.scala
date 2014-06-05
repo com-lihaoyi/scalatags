@@ -5,13 +5,12 @@ import acyclic.file
 import utest.framework.TestSuite
 import utest._
 
-
 import TestUtil._
 import scala.collection.SortedMap
 import scalatags.generic.{StyleVal, Style}
 
 class BasicTests[T](v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
-                    omg: Omg[T]) extends TestSuite{
+                    omg: AbstractPackage[T]) extends TestSuite{
   import v._
   import omg._
   val tests = TestSuite{

@@ -6,10 +6,12 @@ import TestUtil.strCheck
 import org.scalajs.dom._
 import scalajs.js
 import scalajs.js.Dynamic._
+import generic.PerfTestRunner._
 object PerfTests extends PerfTestBase{
   val samples = Seq(
-    Scalatags -> "Scalatags",
-    ScalaXML -> "ScalaXML",
+    ScalatagsText -> "ScalatagsText",
+    ScalatagsDom -> "ScalatagsDom",
+//    ScalaXML -> "ScalaXML",
     Mustache -> "Mustache"//,
 //    Jade -> "Jade"
   )
@@ -49,8 +51,8 @@ object Mustache extends (() => String){
     scala.scalajs.js.Dynamic.global.Mustache.render(
       mainTemplate,
       literal(
-        titleString = Scalatags.titleString,
-        firstParaString = Scalatags.firstParaString,
+        titleString = titleString,
+        firstParaString = firstParaString,
         contentpara = "contentpara",
         first = "first",
         paras = data
@@ -58,6 +60,8 @@ object Mustache extends (() => String){
     ).toString
   }
 }
+
+case object ScalatagsDom extends generic.PerfTestRunner(scalatags.jsdom.all, scalatags.jsdom.Implicits)
 
 object Jade extends (() => String){
   val mainTemplate =
@@ -110,8 +114,8 @@ object Jade extends (() => String){
     scala.scalajs.js.Dynamic.global.jade.render(
       mainTemplate,
       literal(
-        titleString = Scalatags.titleString,
-        firstParaString = Scalatags.firstParaString,
+        titleString = titleString,
+        firstParaString = firstParaString,
         contentpara = "contentpara",
         first = "first",
         paras = data
