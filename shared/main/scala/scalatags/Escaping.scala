@@ -34,19 +34,18 @@ object Escaping {
     @inline
     def handle(snip: String) = {
       s.append(text.substring(prev, pos))
-      prev = pos + 1
       s.append(snip)
     }
     while (pos < len) {
       text.charAt(pos) match {
-        case '<' => handle("&lt;")
-        case '>' => handle("&gt;")
-        case '&' => handle("&amp;")
-        case '"' => handle("&quot;")
-        case '\n' => handle("\n")
-        case '\r' => handle("\r")
-        case '\t' => handle("\t")
-        case c if c < ' ' => handle("")
+        case '<' => handle("&lt;"); prev = pos + 1
+        case '>' => handle("&gt;"); prev = pos + 1
+        case '&' => handle("&amp;"); prev = pos + 1
+        case '"' => handle("&quot;"); prev = pos + 1
+        case '\n' => handle("\n"); prev = pos + 1
+        case '\r' => handle("\r"); prev = pos + 1
+        case '\t' => handle("\t"); prev = pos + 1
+        case c if c < ' ' => handle(""); prev = pos + 1
         case _ =>
       }
       pos += 1

@@ -30,10 +30,7 @@ trait AbstractPackage[T]{
   val RawNode: Companion[RawNode]
   def raw(s: String): RawNode
   type StringNode <: Node
-  trait Companion[V] extends (String => V){
-    def apply(target: String): V
-    def unapply(target: V): Option[String]
-  }
+
   val StringNode: Companion[StringNode]
 }
 

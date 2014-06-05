@@ -23,4 +23,9 @@ package object scalatags {
   implicit object attrOrdering extends Ordering[Attr]{
     override def compare(x: Attr, y: Attr): Int = x.name compareTo y.name
   }
+
+  trait Companion[V] extends (String => V){
+    def apply(target: String): V
+    def unapply(target: V): Option[String]
+  }
 }

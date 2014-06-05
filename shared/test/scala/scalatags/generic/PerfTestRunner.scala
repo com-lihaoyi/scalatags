@@ -4,7 +4,7 @@ package generic
 import utest._
 
 class ScalatagsPerf[T](val v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
-                        val omg: AbstractPackage[T]) extends PerfTest{
+                       val omg: AbstractPackage[T]) extends PerfTest{
   import v._
   import omg._
   import generic.PerfTest._
@@ -76,7 +76,7 @@ trait PerfTest extends TestSuite{
 
       TestUtil.strCheck(calc, PerfTest.expected)
       'performance{
-
+        println("Benchmarking " + this.name)
         val start = System.currentTimeMillis()
         var i = 0
         val d = 10000

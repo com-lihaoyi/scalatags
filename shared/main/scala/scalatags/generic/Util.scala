@@ -8,6 +8,7 @@ import scalatags._
  * Created by haoyi on 6/2/14.
  */
 trait Util[Target] {
+
   type ConcreteHtmlTag[T <: Platform.Base] <: TypedHtmlTag[T, Target]
   def makeAbstractTypedHtmlTag[T <: Base](tag: String, void: Boolean): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttrInternal(s: String): AttrVal[Target]

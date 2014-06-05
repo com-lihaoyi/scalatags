@@ -12,7 +12,6 @@ object short extends StringTags with Util with DataConverters with generic.Abstr
   object * extends StringTags with Attrs with Styles
 }
 object misc extends AbstractMisc[dom.Element]{
-
   object attrs extends StringTags with Attrs
   object tags extends StringTags with Tags
   object tags2 extends StringTags with Tags2

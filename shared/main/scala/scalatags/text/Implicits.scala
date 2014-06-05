@@ -102,9 +102,9 @@ object Implicits extends AbstractPackage[StringBuilder]{
       strb ++= "<" ++= tag
 
       // attributes
-      for ((attr, value) <- collapsedAttrs) {
+      for (pair <- collapsedAttrs) {
         strb ++= " "
-        value.applyTo(strb, attr)
+        pair._2.applyTo(strb, pair._1)
       }
 
       if (children.isEmpty && void)
