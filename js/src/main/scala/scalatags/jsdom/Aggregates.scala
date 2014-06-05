@@ -2,31 +2,31 @@ package scalatags
 package jsdom
 
 import scala.collection.SortedMap
-import scalatags.generic._
-import scalatags.generic.Style
-import scalatags.generic.Attr
+
 import org.scalajs.dom
 import Implicits._
+import scalatags.generic.AbstractMisc
 
-object all extends StringTags with Attrs[dom.Element] with Styles[dom.Element] with Tags[dom.Element] with DataConverters with Util[dom.Element]
-object short extends StringTags with Util[dom.Element] with DataConverters{
-  object * extends StringTags with Attrs[dom.Element] with Styles[dom.Element]
+object all extends StringTags with Attrs with Styles with Tags with DataConverters with Util
+object short extends StringTags with Util with DataConverters with generic.AbstractShort[dom.Element]{
+  object * extends StringTags with Attrs with Styles
 }
-object misc {
-  object attrs extends StringTags with Attrs[dom.Element]
-  object tags extends StringTags with Tags[dom.Element]
-  object tags2 extends StringTags with Tags2[dom.Element]
-  object styles extends StringTags with Styles[dom.Element]
-  object styles2 extends StringTags with Styles2[dom.Element]
-  object svgTags extends StringTags with SvgTags[dom.Element]
-  object svgStyles extends StringTags with SvgStyles[dom.Element]
+object misc extends AbstractMisc[dom.Element]{
+
+  object attrs extends StringTags with Attrs
+  object tags extends StringTags with Tags
+  object tags2 extends StringTags with Tags2
+  object styles extends StringTags with Styles
+  object styles2 extends StringTags with Styles2
+  object svgTags extends StringTags with SvgTags
+  object svgStyles extends StringTags with SvgStyles
 
 }
 /**
  * Convenience object to help import all [[Tags]], [[Attrs]], [[Styles]] and
  * [[Datatypes]] into the global namespace via `import scalatags.all._`
  */
-trait StringTags extends Util[dom.Element]{ self =>
+trait StringTags extends Util{ self =>
   type ConcreteHtmlTag[T <: Platform.Base] = Implicits.TypedHtmlTag[T]
 
   protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)

@@ -19,7 +19,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
   /**
    * A [[Node]] which contains a String.
    */
-  case class StringNode(v: String) extends Node[StringBuilder] {
+  case class StringNode(v: String) extends Node {
     def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
   }
 
@@ -27,7 +27,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
-  case class RawNode(v: String) extends Node[StringBuilder] {
+  case class RawNode(v: String) extends Node {
     def writeTo(strb: StringBuilder): Unit = strb ++= v
   }
 
@@ -67,7 +67,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
   implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
 
   case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
-                                              children: List[Node[StringBuilder]],
+                                              children: List[Node],
                                               attrs: SortedMap[Attr, AttrVal[StringBuilder]],
                                               styles: SortedMap[Style, StyleVal[StringBuilder]],
                                               void: Boolean = false)
@@ -131,7 +131,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
       strb.toString()
     }
 
-    override def transform(children: List[Node[StringBuilder]] = children,
+    override def transform(children: List[Node] = children,
                            attrs: SortedMap[Attr, AttrVal[StringBuilder]] = attrs,
                            styles: SortedMap[Style, StyleVal[StringBuilder]] = styles): Self = {
       this.copy(children=children, attrs=attrs, styles=styles)

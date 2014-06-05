@@ -7,6 +7,7 @@ import scalatags.generic.Style
 import scalatags.generic.Attr
 
 object Implicits extends generic.AbstractPackage[dom.Element]{
+
   /**
    * Lets you put numbers into a scalatags tree, as a no-op.
    */
@@ -19,7 +20,7 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   /**
    * A [[Node]] which contains a String.
    */
-  case class StringNode(v: String) extends Node[dom.Element] {
+  case class StringNode(v: String) extends Node {
     def writeTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
   }
 
@@ -27,8 +28,8 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
-  case class RawNode(v: String) extends Node[dom.Element] {
-    def writeTo(elem: dom.Element): Unit = elem.appendChild(dom.document.createTextNode(v))
+  case class RawNode(v: String) extends Node {
+    def writeTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
   }
 
   class GenericAttr[T](val t: T) extends AttrVal[dom.Element]{
@@ -62,7 +63,7 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
 
   case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
-                                              children: List[Node[dom.Element]],
+                                              children: List[Node],
                                               attrs: SortedMap[Attr, AttrVal[dom.Element]],
                                               styles: SortedMap[Style, StyleVal[dom.Element]],
                                               void: Boolean = false)
@@ -105,7 +106,7 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
       elem.asInstanceOf[T]
     }
 
-    override def transform(children: List[Node[dom.Element]],
+    override def transform(children: List[Node],
                            attrs: SortedMap[Attr, AttrVal[dom.Element]],
                            styles: SortedMap[Style, StyleVal[dom.Element]]): Self = {
       this.copy(children=children, attrs=attrs, styles=styles)

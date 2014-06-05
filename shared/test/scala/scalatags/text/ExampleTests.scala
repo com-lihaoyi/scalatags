@@ -1,11 +1,7 @@
 package scalatags.text
 
-import scalatags.generic.Tags
+
 import scalatags.generic
-
-
-/**
- * A set of examples used - the documentation.
- */
-object ExampleTests extends generic.ExampleTests(scalatags.text.all, scalatags.text.Implicits)
+import scalatags.text._
+object ExampleTests extends generic.ExampleTests(all, short, misc, Implicits)
 

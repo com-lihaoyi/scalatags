@@ -16,8 +16,6 @@ object BasicTests extends TestSuite{
 
     'helloWorld{
       val sample = div("omg")
-      println(sample.children)
-      println(sample.attrs)
       assert(sample.toString == "<div>omg</div>")
     }
     /**

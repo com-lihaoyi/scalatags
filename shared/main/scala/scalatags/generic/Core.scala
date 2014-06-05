@@ -51,9 +51,9 @@ trait TypedHtmlTag[T <: Base, Target] extends Node[Target]{
   def attrs: SortedMap[Attr, AttrVal[Target]]
   def styles: SortedMap[Style, StyleVal[Target]]
   def void: Boolean
-  def transform(children: List[Node[Target]] = Nil,
-                attrs: SortedMap[Attr, AttrVal[Target]],
-                styles: SortedMap[Style, StyleVal[Target]]): Self
+  def transform(children: List[Node[Target]] = this.children,
+                attrs: SortedMap[Attr, AttrVal[Target]] = this.attrs,
+                styles: SortedMap[Style, StyleVal[Target]] = this.styles): Self
 
   /**
    * Add the given modifications (e.g. additional children, or new attributes)
