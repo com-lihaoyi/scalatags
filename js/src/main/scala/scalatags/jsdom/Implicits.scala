@@ -6,6 +6,7 @@ import scala.collection.SortedMap
 import scalatags.generic.Style
 import scalatags.generic.Attr
 import scala.annotation.switch
+import scala.scalajs.js
 
 object Implicits extends generic.AbstractPackage[dom.Element]{
 
@@ -25,7 +26,14 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   case class StringNode(v: String) extends Node {
     def writeTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
   }
+  case class Bind(v: js.Any) extends AttrVal[dom.Element]{
+    def applyTo(elem: dom.Element, k: Attr): Unit = {
+      elem.asInstanceOf[js.Dynamic].updateDynamic(k.name)(v)
+    }
 
+    override def merge(o: AttrVal[dom.Element]): AttrVal[dom.Element] = ???
+    override def applyPartial(t: dom.Element): Unit = ???
+  }
   def raw(s: String) = new RawNode(s)
   /**
    * A [[Node]] which contains a String which will not be escaped.
@@ -36,7 +44,7 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   }
 
   class GenericAttr[T](val t: T) extends AttrVal[dom.Element]{
-    override def applyTo(elem: dom.Element, k: Attr): Unit = {
+    def applyTo(elem: dom.Element, k: Attr): Unit = {
       elem.setAttribute(k.name, t.toString)
     }
 
