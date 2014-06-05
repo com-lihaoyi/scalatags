@@ -81,16 +81,18 @@ class BasicTests[T](v: generic.Attrs[T] with generic.Styles[T] with generic.Tags
       """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
     )
 
-    'classStyleAttrOverwriting-strCheck(
-      //class/style after attr appends, but attr after class/style overwrites
-      div(
-        float.left,
-        style:="background-color: red;",
-        cls:="my-class",
-        p("i am a cow")
-      ),
-      """<div class="my-class" style="background-color: red; float: left;"><p>i am a cow</p></div>"""
-    )
+    'classStyleAttrOverwriting-{
+      strCheck(
+        //class/style after attr appends, but attr after class/style overwrites
+        div(
+          float.left,
+          style:="background-color: red;",
+          cls:="my-class",
+          p("i am a cow")
+        ),
+        """<div class="my-class" style="background-color: red; float: left;"><p>i am a cow</p></div>"""
+      )
+    }
 
     'intSeq-strCheck(
       div(

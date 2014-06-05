@@ -63,7 +63,7 @@ object Build extends sbt.Build{
 
   lazy val jvm = cross.jvm.settings(Twirl.settings:_*).settings(
     libraryDependencies ++= Seq(
-//      "org.fusesource.scalate" %% "scalate-core" % "1.6.1" % "test"
+      "org.fusesource.scalate" %% "scalate-core" % "1.6.1" % "test"
     ),
     sourceDirectory in twirlCompile := (sourceDirectory in Compile).value / "twirl"
   )

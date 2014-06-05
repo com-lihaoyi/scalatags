@@ -1,22 +1,20 @@
-package scalatags.generic
+package scalatags
+package generic
 
+import utest._
 
-import scalatags.generic
-
-/**
- * Created by haoyi on 6/4/14.
- */
-class PerfTestRunner[T](val v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
-                        val omg: AbstractPackage[T]) extends (() => String){
+class ScalatagsPerf[T](val v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
+                        val omg: AbstractPackage[T]) extends PerfTest{
   import v._
   import omg._
-  import generic.PerfTestRunner._
-  def para(n: Int) = p(
+  import generic.PerfTest._
+  def para(n: Int, m: generic.Modifier[T]*) = p(
     cls := contentpara,
+    m,
     title:=s"this is paragraph $n"
   )
 
-  def apply() =
+  def calc() =
     html(
       head(
         script("console.log(1)")
@@ -31,19 +29,66 @@ class PerfTestRunner[T](val v: generic.Attrs[T] with generic.Styles[T] with gene
           a(href:="www.google.com")(
             p("Goooogle")
           ),
-          for(i <- 0 until 5) yield para(i)(
-            s"Paragraph $i",
-            color:=(if (i % 2 == 0) "red" else "green")
-          )
+          for(i <- 0 until 5) yield {
+            para(i, color:=(if (i % 2 == 0) "red" else "green"))(
+              s"Paragraph $i"
+            )
+          }
         )
       )
     ).toString()
 
 }
-object PerfTestRunner{
+object PerfTest{
   val titleString = "This is my title"
   val firstParaString = "This is my first paragraph"
   val contentpara = "contentpara"
   val first = "first"
+  val expected =
+    """
+    <html>
+      <head>
+        <script>console.log(1)</script>
+      </head>
+      <body>
+        <h1 style="color: red;">This is my title</h1>
+        <div style="background-color: blue;">
+          <p class="contentpara first" title="this is paragraph 0">This is my first paragraph</p>
+          <a href="www.google.com">
+            <p>Goooogle</p>
+          </a>
+          <p class="contentpara" style="color: red;" title="this is paragraph 0">Paragraph 0</p>
+          <p class="contentpara" style="color: green;" title="this is paragraph 1">Paragraph 1</p>
+          <p class="contentpara" style="color: red;" title="this is paragraph 2">Paragraph 2</p>
+          <p class="contentpara" style="color: green;" title="this is paragraph 3">Paragraph 3</p>
+          <p class="contentpara" style="color: red;" title="this is paragraph 4">Paragraph 4</p>
+        </div>
+      </body>
+    </html>
+    """
+}
+trait PerfTest extends TestSuite{
 
+  def calc(): String
+  def name: String = this.toString
+  def tests = TestSuite{
+    'correctness{
+
+      TestUtil.strCheck(calc, PerfTest.expected)
+      'performance{
+
+        val start = System.currentTimeMillis()
+        var i = 0
+        val d = 10000
+
+        while(System.currentTimeMillis() - start < d){
+          i += 1
+          calc()
+        }
+
+        name.padTo(20, ' ') + i + " in " + d
+
+      }
+    }
+  }
 }

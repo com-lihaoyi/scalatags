@@ -80,8 +80,27 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
      */
     def toDom = {
       val elem = dom.document.createElement(tag)
-      for ((attr, value) <- attrs) value.applyTo(elem, attr)
-      for ((style, value) <- styles) value.applyTo(elem, style)
+      var styleWritten = false
+      def applyStyles() = {
+        for ((style, value) <- styles) value.applyTo(elem, style)
+      }
+      for ((attr, value) <- attrs) {
+        if (attr.name >= "style" && !styleWritten){
+          if (attr.name > "style") {
+            applyStyles()
+            value.applyTo(elem, attr)
+          }else{
+            value.applyTo(elem, attr)
+            applyStyles()
+          }
+          styleWritten = true
+        }else{
+          value.applyTo(elem, attr)
+        }
+      }
+      if (!styleWritten){
+        applyStyles()
+      }
       for (c <- children.reverseIterator) c.writeTo(elem)
       elem.asInstanceOf[T]
     }

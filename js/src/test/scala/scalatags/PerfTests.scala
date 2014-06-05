@@ -6,17 +6,10 @@ import TestUtil.strCheck
 import org.scalajs.dom._
 import scalajs.js
 import scalajs.js.Dynamic._
-import generic.PerfTestRunner._
-object PerfTests extends PerfTestBase{
-  val samples = Seq(
-    ScalatagsText -> "ScalatagsText",
-    ScalatagsDom -> "ScalatagsDom",
-//    ScalaXML -> "ScalaXML",
-    Mustache -> "Mustache"//,
-//    Jade -> "Jade"
-  )
-}
-object Mustache extends (() => String){
+import generic.PerfTest._
+
+
+case object MustachePerf extends generic.PerfTest{
   val mainTemplate =
     """
       |<html>
@@ -46,7 +39,7 @@ object Mustache extends (() => String){
   )
   console.log("omg")
   console.log(global.Mustache)
-  def apply() = {
+  def calc() = {
 
     scala.scalajs.js.Dynamic.global.Mustache.render(
       mainTemplate,
@@ -61,9 +54,8 @@ object Mustache extends (() => String){
   }
 }
 
-case object ScalatagsDom extends generic.PerfTestRunner(scalatags.jsdom.all, scalatags.jsdom.Implicits)
 
-object Jade extends (() => String){
+object JadePerf extends (() => String){
   val mainTemplate =
     """
       |-@ val titleString: String

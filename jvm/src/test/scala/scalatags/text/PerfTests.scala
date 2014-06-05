@@ -1,29 +1,19 @@
 package scalatags
+package text
 
-//import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
+import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
 import java.io.{StringWriter, PrintWriter}
 
-
-object PerfTests extends PerfTestBase{
-  val samples = Seq(
-    ScalatagsText -> "ScalatagsText",
-    ScalaXML -> "ScalaXML"//,
-//    Twirl -> "Twirl",
-//    Mustache -> "Mustache",
-//    Jade -> "Jade"
-  )
-}
-/*
-case object Jade extends (() => String){
+case object JadePerf extends generic.PerfTest{
   val engine = new TemplateEngine
 
   val template = engine.load(TemplateSource.fromFile("jvm/src/test/resource/page.jade"))
 
-  def apply() = {
+  def calc() = {
     val stringWriter = new StringWriter()
     val ctx = new DefaultRenderContext("", engine, new PrintWriter(stringWriter))
-    ctx.attributes("titleString") = Scalatags.titleString
-    ctx.attributes("firstParaString") = Scalatags.firstParaString
+    ctx.attributes("titleString") = generic.PerfTest.titleString
+    ctx.attributes("firstParaString") = generic.PerfTest.firstParaString
     ctx.attributes("contentpara") = "contentpara"
     ctx.attributes("first") = "first"
     ctx.attributes("paras") = (0 until 5).map(i =>
@@ -33,16 +23,16 @@ case object Jade extends (() => String){
     stringWriter.toString
   }
 }
-case object Mustache extends (() => String){
+case object MustachePerf extends generic.PerfTest{
   val engine = new TemplateEngine
 
   val template = engine.load(TemplateSource.fromFile("jvm/src/test/resource/page.mustache"))
 
-  def apply() = {
+  def calc() = {
     val stringWriter = new StringWriter()
     val ctx = new DefaultRenderContext("", engine, new PrintWriter(stringWriter))
-    ctx.attributes("titleString") = Scalatags.titleString
-    ctx.attributes("firstParaString") = Scalatags.firstParaString
+    ctx.attributes("titleString") = generic.PerfTest.titleString
+    ctx.attributes("firstParaString") = generic.PerfTest.firstParaString
     ctx.attributes("contentpara") = "contentpara"
     ctx.attributes("first") = "first"
     ctx.attributes("paras") = (0 until 5).map(i =>  Map(
@@ -52,7 +42,7 @@ case object Mustache extends (() => String){
     template.render(ctx)
     stringWriter.toString
   }
-}*/
+}
 
 //case object Twirl extends (() => String){
 //  def apply() = {

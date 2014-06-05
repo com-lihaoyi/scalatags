@@ -9,13 +9,6 @@ class ExampleTests[T](v: generic.Attrs[T] with generic.Styles[T] with generic.Ta
   import v._
   import omg._
   val tests = TestSuite{
-    'cssChaining2-strCheck(
-      div(
-        float.left,
-        color:="red"
-      ),
-      """<div style="color: red; float: left;"></div>"""
-    )
 
     /**
      * Tests nesting tags in a simple hierarchy
