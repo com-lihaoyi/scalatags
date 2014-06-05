@@ -5,6 +5,7 @@ import org.scalajs.dom
 import scala.collection.SortedMap
 import scalatags.generic.Style
 import scalatags.generic.Attr
+import scala.annotation.switch
 
 object Implicits extends generic.AbstractPackage[dom.Element]{
 
@@ -85,26 +86,36 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
       val elem = dom.document.createElement(tag)
       var styleWritten = false
       def applyStyles() = {
-        for ((style, value) <- styles) value.applyTo(elem, style)
-      }
-      for ((attr, value) <- attrs) {
-        if (attr.name >= "style" && !styleWritten){
-          if (attr.name > "style") {
-            applyStyles()
-            value.applyTo(elem, attr)
-          }else{
-            value.applyTo(elem, attr)
-            applyStyles()
-          }
-          styleWritten = true
-        }else{
-          value.applyTo(elem, attr)
+        for (pair <- styles) {
+          pair._2.applyTo(elem, pair._1)
         }
       }
-      if (!styleWritten){
-        applyStyles()
+      for (pair <- attrs) {
+        val attr = pair._1
+        val value = pair._2
+
+        val cmp = attr.name.toString compareTo "style"
+        (cmp: @switch) match {
+          case -1 => value.applyTo(elem, attr)
+          case 1 if !styleWritten =>
+            applyStyles()
+            value.applyTo(elem, attr)
+            styleWritten = true
+          case 0 if !styleWritten =>
+            value.applyTo(elem, attr)
+            applyStyles()
+            styleWritten = true
+        }
+
       }
-      for (c <- children.reverseIterator) c.writeTo(elem)
+      if (!styleWritten) applyStyles()
+
+      var x = children.reverse
+      while (!x.isEmpty) {
+        val child :: newX = x
+        x = newX
+        child.writeTo(elem)
+      }
       elem.asInstanceOf[T]
     }
 
