@@ -19,6 +19,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
   /**
    * A [[Node]] which contains a String.
    */
+  object StringNode extends Companion[StringNode]
   case class StringNode(v: String) extends Node {
     def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
   }
@@ -27,6 +28,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
+  object RawNode extends Companion[RawNode]
   case class RawNode(v: String) extends Node {
     def writeTo(strb: StringBuilder): Unit = strb ++= v
   }

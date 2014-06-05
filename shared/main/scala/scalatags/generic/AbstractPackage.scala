@@ -27,10 +27,14 @@ trait AbstractPackage[T]{
   implicit def NumericModifier[V: Numeric](u: V): Node
   type HtmlTag <: generic.TypedHtmlTag[Platform.Base, T]
   type RawNode <: Node
-  val RawNode: String => RawNode
+  val RawNode: Companion[RawNode]
   def raw(s: String): RawNode
-
-
+  type StringNode <: Node
+  trait Companion[V] extends (String => V){
+    def apply(target: String): V
+    def unapply(target: V): Option[String]
+  }
+  val StringNode: Companion[StringNode]
 }
 
 trait AbstractShort[T]{

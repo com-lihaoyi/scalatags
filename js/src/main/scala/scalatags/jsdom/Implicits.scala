@@ -20,6 +20,7 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   /**
    * A [[Node]] which contains a String.
    */
+  object StringNode extends Companion[StringNode]
   case class StringNode(v: String) extends Node {
     def writeTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
   }
@@ -28,6 +29,7 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
+  object RawNode extends Companion[RawNode]
   case class RawNode(v: String) extends Node {
     def writeTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
   }
