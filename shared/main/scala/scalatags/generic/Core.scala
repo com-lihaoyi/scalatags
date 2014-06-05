@@ -63,9 +63,8 @@ trait TypedHtmlTag[T <: Base, Target] extends Node[Target]{
     var children = this.children
     var attrs = this.attrs
     var styles = this.styles
-    var i = 0
-    while (i < xs.length) {
-      val ts = xs(i).transforms
+    for(x <- xs){
+      val ts = x.transforms
       var j = 0
       while (j < ts.length) {
         ts(j) match {
@@ -75,7 +74,6 @@ trait TypedHtmlTag[T <: Base, Target] extends Node[Target]{
         }
         j += 1
       }
-      i += 1
     }
     this.transform(
       children = children,
