@@ -37,13 +37,11 @@ trait Modifier[Target] {
 
 
 /**
- * A single HTML tag.
+ * A generic representation of a Scalatags tag.
  *
- * @param tag The name of the tag
- * @param children A backwards list of child-nodes; kept this way for fast
- *                 updates, and reversed before being rendered.
- * @param attrs A sorted map of attributes
- * @param void Whether or not the tag can be self-closing
+ * @tparam T The base type that this tag represents. On Scala-JVM, this is all
+ *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
+ *           associated with that tag name.
  */
 trait TypedTag[T <: Base, Target] extends Node[Target]{
   type Self <: TypedTag[T, Target]
@@ -124,10 +122,20 @@ case class StylePair[Target](style: Style, value: StyleVal[Target]) extends Modi
   def transforms = Array(Mod.Style(style, value))
 }
 
+/**
+ * Represents a single value of a Style. This is often a string, but it
+ * can be anything, as long as it can be applied to the specified [[Target]]
+ * type
+ */
 trait StyleVal[Target] {
   def applyTo(t: Target, k: Style): Unit
 }
 
+/**
+ * Represents a single value of a Attribute. This is often a string, but it
+ * can be anything, as long as it can be applied to the specified [[Target]]
+ * type
+ */
 trait AttrVal[Target] {
   def merge(o: AttrVal[Target]): AttrVal[Target]
   def applyPartial(t: Target): Unit

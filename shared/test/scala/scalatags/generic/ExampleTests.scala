@@ -556,8 +556,8 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
       )
     },
     {
-      import misc.{attrs => attr, styles => css, _}
-      import misc.tags._
+      import omg.{attrs => attr, styles => css, _}
+      import omg.tags._
       div(
         p(css.color:="red")("Red Text"),
         img(attr.href:="www.imgur.com/picture.jpg")
@@ -644,7 +644,7 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
     )
     'additionalImports-strCheck(
     {
-      import misc._
+      import omg._
       import styles2.pageBreakBefore
       import tags2.address
       import svgTags.svg
