@@ -9,8 +9,8 @@ import scalatags._
  */
 trait Util[Target] {
 
-  type ConcreteHtmlTag[T <: Platform.Base] <: TypedHtmlTag[T, Target]
-  def makeAbstractTypedHtmlTag[T <: Base](tag: String, void: Boolean): ConcreteHtmlTag[T]
+  type ConcreteHtmlTag[T <: Platform.Base] <: TypedTag[T, Target]
+  def makeAbstractTypedTag[T <: Base](tag: String, void: Boolean): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttrInternal(s: String): AttrVal[Target]
   protected[this] implicit def stringStyleInternal(s: String): StyleVal[Target]
 
@@ -26,7 +26,7 @@ trait Util[Target] {
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      makeAbstractTypedHtmlTag[T](s, false)
+      makeAbstractTypedTag[T](s, false)
     }
     /**
      * Converts the string to a void [[HtmlTag]]; that means that they cannot
@@ -37,7 +37,7 @@ trait Util[Target] {
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      makeAbstractTypedHtmlTag[T](s, true)
+      makeAbstractTypedTag[T](s, true)
     }
     /**
      * Converts the string to a [[UntypedAttr]]

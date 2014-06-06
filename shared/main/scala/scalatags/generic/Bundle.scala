@@ -28,12 +28,12 @@ trait Bundle[T]{
 
   implicit def stringNode(v: String): Node
   implicit def NumericModifier[V: Numeric](u: V): Node
-  type HtmlTag <: generic.TypedHtmlTag[Platform.Base, T]
+  type Tag <: generic.TypedTag[Platform.Base, T]
+
   type RawNode <: Node
   val RawNode: Companion[RawNode]
   def raw(s: String): RawNode
   type StringNode <: Node
-
   val StringNode: Companion[StringNode]
 }
 

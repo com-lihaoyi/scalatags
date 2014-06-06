@@ -5,7 +5,9 @@ import org.scalajs.dom
 import scala.collection.SortedMap
 import scala.annotation.switch
 import scala.scalajs.js
-object JsDom extends generic.Bundle[dom.Element]{
+import scalatags.JsDom.Bind
+
+object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   object all extends StringTags with Attrs with Styles with Tags with DataConverters with Util
   object short extends StringTags with Util with DataConverters with generic.AbstractShort[dom.Element]{
     object * extends StringTags with Attrs with Styles
@@ -24,7 +26,7 @@ object JsDom extends generic.Bundle[dom.Element]{
    * [[Datatypes]] into the global namespace via `import scalatags.all._`
    */
   trait StringTags extends Util{ self =>
-    type ConcreteHtmlTag[T <: Platform.Base] = TypedHtmlTag[T]
+    type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
 
     protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
     protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
@@ -34,8 +36,8 @@ object JsDom extends generic.Bundle[dom.Element]{
     protected[this] implicit def booleanStyleInternal(b: Boolean) = new BooleanStyle(b)
     protected[this] implicit def numericStyleInternal[T: Numeric](n: T) = new NumericStyle(n)
 
-    def makeAbstractTypedHtmlTag[T <: Platform.Base](tag: String, void: Boolean): TypedHtmlTag[T] = {
-      TypedHtmlTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
+    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean): TypedTag[T] = {
+      TypedTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
     }
   }
 
@@ -102,13 +104,13 @@ object JsDom extends generic.Bundle[dom.Element]{
   implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
   implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
 
-  case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
+  case class TypedTag[T <: Platform.Base](tag: String = "",
                                               children: List[Node],
                                               attrs: SortedMap[Attr, AttrVal],
                                               styles: SortedMap[Style, StyleVal],
                                               void: Boolean = false)
-    extends generic.TypedHtmlTag[T, dom.Element]{
-    type Self = TypedHtmlTag[T]
+    extends generic.TypedTag[T, dom.Element]{
+    type Self = TypedTag[T]
 
     /**
      * Serialize this [[HtmlTag]] and all its children out to the given dom.Element.
@@ -163,6 +165,14 @@ object JsDom extends generic.Bundle[dom.Element]{
 
     override def toString = toDom.outerHTML
   }
-  type HtmlTag = TypedHtmlTag[Platform.Base]
-  val HtmlTag = TypedHtmlTag
+  type HtmlTag = TypedTag[dom.HTMLElement]
+  val HtmlTag = TypedTag
+  type SvgTag = TypedTag[dom.SVGElement]
+  val SvgTag = TypedTag
+  type Tag = TypedTag[Platform.Base]
+  val Tag = TypedTag
+}
+
+trait LowPriorityImplicits{
+  implicit def bindable[T <% js.Any](x: T) = Bind(x)
 }

@@ -368,7 +368,7 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
    'filtersAndTransformations-strCheck({
       def uppercase(node: Node): Node = {
         node match{
-          case t: omg.HtmlTag => t.transform(children = t.children.map(uppercase))
+          case t: omg.Tag => t.transform(children = t.children.map(uppercase))
           case RawNode(r) => r
           case StringNode(v) => StringNode(v.toUpperCase)
         }
@@ -413,7 +413,7 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
     'filtersandTransformationsComplex-strCheck({
       def autoLink(node: Node): Seq[Node] = {
         node match{
-          case t: HtmlTag => Seq(t.transform(children = t.children.flatMap(autoLink)))
+          case t: Tag => Seq(t.transform(children = t.children.flatMap(autoLink)))
           case RawNode(r) => Seq(r)
           case StringNode(v) =>
             val regex = "(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#]".r

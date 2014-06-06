@@ -8,6 +8,7 @@ import TestUtil._
 import org.scalajs.dom
 import scala.scalajs.js
 object DomTests extends TestSuite{
+
   def tests = TestSuite{
     'basic {
       'children {
@@ -53,7 +54,8 @@ object DomTests extends TestSuite{
     'boundAttributes{
       var count = 0
       val elem = div(
-        onclick := Bind(() => count += 1)
+        onclick := {() => count += 1},
+        tabindex := 1
       ).toDom
 
       assert(count == 0)

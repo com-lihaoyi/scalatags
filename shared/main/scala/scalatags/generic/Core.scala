@@ -30,7 +30,7 @@ trait Modifier[Target] {
    * Transforms the tag and returns a new one.
    *
    * Can't be `apply`, because some [[Modifier]]s (e.g. [[HtmlTag]]) already have an
-   * [[TypedHtmlTag.apply]] method, and the overloading becomes ambiguous.
+   * [[TypedTag.apply]] method, and the overloading becomes ambiguous.
    */
   def transforms: Array[Mod[Target]]
 }
@@ -45,8 +45,8 @@ trait Modifier[Target] {
  * @param attrs A sorted map of attributes
  * @param void Whether or not the tag can be self-closing
  */
-trait TypedHtmlTag[T <: Base, Target] extends Node[Target]{
-  type Self <: TypedHtmlTag[T, Target]
+trait TypedTag[T <: Base, Target] extends Node[Target]{
+  type Self <: TypedTag[T, Target]
   def tag: String
   def children: List[Node[Target]]
   def attrs: SortedMap[Attr, AttrVal[Target]]
