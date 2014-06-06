@@ -22,7 +22,7 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.2.6",
+    version := "0.3.0-RC1",
     publishTo <<= version { (v: String) =>
       Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },
@@ -61,11 +61,11 @@ object Build extends sbt.Build{
     (jsEnv in Test) := new PhantomJSEnv
   )
 
-  lazy val jvm = cross.jvm.settings(Twirl.settings:_*).settings(
+  lazy val jvm = cross.jvm.settings(
     libraryDependencies ++= Seq(
-      "org.fusesource.scalate" %% "scalate-core" % "1.6.1" % "test"
-    ),
-    sourceDirectory in twirlCompile := (sourceDirectory in Compile).value / "twirl"
+//      "org.fusesource.scalate" %% "scalate-core" % "1.6.1" % "test"
+    )
+//    sourceDirectory in twirlCompile := (sourceDirectory in Compile).value / "twirl"
   )
 
 }

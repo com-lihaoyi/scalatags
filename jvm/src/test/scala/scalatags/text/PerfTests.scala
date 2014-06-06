@@ -1,7 +1,7 @@
 package scalatags
 package text
 import acyclic.file
-import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
+/*import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
 import java.io.{StringWriter, PrintWriter}
 
 case object JadePerf extends generic.PerfTest{
@@ -42,7 +42,7 @@ case object MustachePerf extends generic.PerfTest{
     template.render(ctx)
     stringWriter.toString
   }
-}
+}*/
 
 //case object Twirl extends (() => String){
 //  def apply() = {

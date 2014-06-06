@@ -36,13 +36,13 @@ trait Bundle[T]{
    * via the `*` object
    */
   val short: AbstractShort[T]
-  val attrs: generic.Attrs[T]
-  val tags: generic.Tags[T]
-  val tags2: generic.Tags2[T]
-  val styles: generic.Styles[T]
-  val styles2: generic.Styles2[T]
-  val svgTags: generic.SvgTags[T]
-  val svgStyles: generic.SvgStyles[T]
+  val attrs: Attrs
+  val tags: Tags
+  val tags2: Tags2
+  val styles: Styles
+  val styles2: Styles2
+  val svgTags: SvgTags
+  val svgStyles: SvgStyles
 
   type Attrs = generic.Attrs[T]
   type Tags = generic.Tags[T]
@@ -55,6 +55,19 @@ trait Bundle[T]{
   type Node = generic.Node[T]
   type AttrVal = generic.AttrVal[T]
   type StyleVal = generic.StyleVal[T]
+
+  type Attr = generic.Attr
+  type Style = generic.Style
+  type Modifier = generic.Modifier[T]
+  type Mod = generic.Mod[T]
+  object Mod {
+    type Attr = generic.Mod.Attr[T]
+    val Attr = generic.Mod.Attr
+    type Style = generic.Mod.Style[T]
+    val Style = generic.Mod.Style
+    type Child = generic.Mod.Child[T]
+    val Child = generic.Mod.Child
+  }
 
   implicit def stringAttr(s: String): AttrVal
   implicit def booleanAttr(b: Boolean): AttrVal

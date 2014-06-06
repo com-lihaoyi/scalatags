@@ -1,6 +1,5 @@
 package scalatags
 
-import scalatags.generic._
 import org.scalajs.dom
 import scala.collection.SortedMap
 import scala.annotation.switch
@@ -105,13 +104,13 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
   implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
 
-  case class TypedTag[T <: Platform.Base](tag: String = "",
+  case class TypedTag[+T <: Platform.Base](tag: String = "",
                                               children: List[Node],
                                               attrs: SortedMap[Attr, AttrVal],
                                               styles: SortedMap[Style, StyleVal],
                                               void: Boolean = false)
     extends generic.TypedTag[T, dom.Element]{
-    type Self = TypedTag[T]
+    protected[this] type Self = TypedTag[T]
 
     /**
      * Serialize this [[HtmlTag]] and all its children out to the given dom.Element.
@@ -122,7 +121,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
     /**
      * Converts an ScalaTag fragment into an html string
      */
-    def toDom = {
+    def toDom: T = {
       val elem = dom.document.createElement(tag)
       var styleWritten = false
       def applyStyles() = {
@@ -160,10 +159,16 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
 
     override def transform(children: List[Node],
                            attrs: SortedMap[Attr, AttrVal],
-                           styles: SortedMap[Style, StyleVal]): Self = {
+                           styles: SortedMap[Style, StyleVal]): TypedTag[T] = {
       this.copy(children=children, attrs=attrs, styles=styles)
     }
 
+    /**
+     * Trivial override, not strictly necessary, but it makes IntelliJ happy...
+     */
+    override def apply(xs: Modifier*): TypedTag[T] = {
+      super.apply(xs:_*)
+    }
     override def toString = toDom.outerHTML
   }
   type HtmlTag = TypedTag[dom.HTMLElement]

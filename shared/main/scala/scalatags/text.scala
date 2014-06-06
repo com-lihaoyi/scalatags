@@ -2,30 +2,29 @@ package scalatags
 
 import scalatags.generic._
 import scala.collection.SortedMap
-import scalatags.generic.Style
-import scalatags.generic.Attr
 import acyclic.file
+
+/**
+ * A Scalatags module that works with a text back-end, i.e. it creates HTML
+ * `String`s.
+ */
 object Text extends Bundle[StringBuilder] {
   object all extends StringTags with Attrs with Styles with Tags with DataConverters with Util
   object short extends StringTags with Util with DataConverters with generic.AbstractShort[StringBuilder]{
     object * extends StringTags with Attrs with Styles
   }
-  object misc extends AbstractMisc[StringBuilder]{
-    object attrs extends StringTags with Attrs
-    object tags extends StringTags with Tags
-    object tags2 extends StringTags with Tags2
-    object styles extends StringTags with Styles
-    object styles2 extends StringTags with Styles2
-    object svgTags extends StringTags with SvgTags
-    object svgStyles extends StringTags with SvgStyles
-  }
 
-  /**
-   * Convenience object to help import all [[Tags]], [[Attrs]], [[Styles]] and
-   * [[Datatypes]] into the global namespace via `import scalatags.all._`
-   */
+  object attrs extends StringTags with Attrs
+  object tags extends StringTags with Tags
+  object tags2 extends StringTags with Tags2
+  object styles extends StringTags with Styles
+  object styles2 extends StringTags with Styles2
+  object svgTags extends StringTags with SvgTags
+  object svgStyles extends StringTags with SvgStyles
+
+
   trait StringTags extends Util{ self =>
-    type ConcreteHtmlTag[T <: Platform.Base] = TypedHtmlTag[T]
+    type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
 
     protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
     protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
@@ -35,31 +34,23 @@ object Text extends Bundle[StringBuilder] {
     protected[this] implicit def booleanStyleInternal(b: Boolean) = new BooleanStyle(b)
     protected[this] implicit def numericStyleInternal[T: Numeric](n: T) = new NumericStyle(n)
 
-    def makeAbstractTypedHtmlTag[T <: Platform.Base](tag: String, void: Boolean) = {
-      TypedHtmlTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
+    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean) = {
+      TypedTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
     }
   }
-  /**
-   * Lets you put numbers into a scalatags tree, as a no-op.
-   */
+
   implicit def NumericModifier[T: Numeric](u: T) = new StringNode(u.toString)
 
-  /**
-   * Allows you to modify a HtmlTag by adding a String to its list of children
-   */
+
   implicit def stringNode(v: String) = new StringNode(v)
-  /**
-   * A [[Node]] which contains a String.
-   */
+
   object StringNode extends Companion[StringNode]
   case class StringNode(v: String) extends Node {
     def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
   }
 
   def raw(s: String) = new RawNode(s)
-  /**
-   * A [[Node]] which contains a String which will not be escaped.
-   */
+
   object RawNode extends Companion[RawNode]
   case class RawNode(v: String) extends Node {
     def writeTo(strb: StringBuilder): Unit = strb ++= v
@@ -100,13 +91,13 @@ object Text extends Bundle[StringBuilder] {
   implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
   implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
 
-  case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
-                                              children: List[Node],
-                                              attrs: SortedMap[Attr, AttrVal],
-                                              styles: SortedMap[Style, StyleVal],
-                                              void: Boolean = false)
-    extends generic.TypedHtmlTag[T, StringBuilder]{
-    type Self = TypedHtmlTag[T]
+  case class TypedTag[+T <: Platform.Base](tag: String = "",
+                                          children: List[Node],
+                                          attrs: SortedMap[Attr, AttrVal],
+                                          styles: SortedMap[Style, StyleVal],
+                                          void: Boolean = false)
+    extends generic.TypedTag[T, StringBuilder]{
+    protected[this] type Self = TypedTag[T]
     def collapsedAttrs = {
       var moddedAttrs = attrs
 
@@ -171,7 +162,7 @@ object Text extends Bundle[StringBuilder] {
       this.copy(children=children, attrs=attrs, styles=styles)
     }
   }
-  type HtmlTag = TypedHtmlTag[Platform.Base]
-  val HtmlTag = TypedHtmlTag
+  type Tag = TypedTag[Platform.Base]
+  val Tag = TypedTag
 
 }

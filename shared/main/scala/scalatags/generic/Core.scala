@@ -28,9 +28,6 @@ trait Node[Target] extends Modifier[Target] {
 trait Modifier[Target] {
   /**
    * Transforms the tag and returns a new one.
-   *
-   * Can't be `apply`, because some [[Modifier]]s (e.g. [[HtmlTag]]) already have an
-   * [[TypedTag.apply]] method, and the overloading becomes ambiguous.
    */
   def transforms: Array[Mod[Target]]
 }
@@ -43,8 +40,8 @@ trait Modifier[Target] {
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[T <: Base, Target] extends Node[Target]{
-  type Self <: TypedTag[T, Target]
+trait TypedTag[+T <: Base, Target] extends Node[Target]{
+  protected[this] type Self <: TypedTag[T, Target]
   def tag: String
   def children: List[Node[Target]]
   def attrs: SortedMap[Attr, AttrVal[Target]]
@@ -56,9 +53,9 @@ trait TypedTag[T <: Base, Target] extends Node[Target]{
 
   /**
    * Add the given modifications (e.g. additional children, or new attributes)
-   * to the [[HtmlTag]].
+   * to the [[TypedTag]].
    */
-  def apply(xs: Modifier[Target]*) = {
+  def apply(xs: Modifier[Target]*): Self = {
     var children = this.children
     var attrs = this.attrs
     var styles = this.styles
