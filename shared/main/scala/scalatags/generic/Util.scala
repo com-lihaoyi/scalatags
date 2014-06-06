@@ -1,6 +1,6 @@
 package scalatags
 package generic
-
+import acyclic.file
 import scalatags.Platform._
 import scalatags._
 

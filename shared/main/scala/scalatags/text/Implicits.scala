@@ -4,7 +4,7 @@ import scalatags.generic._
 import scala.collection.SortedMap
 import scalatags.generic.Style
 import scalatags.generic.Attr
-
+import acyclic.file
 object Implicits extends AbstractPackage[StringBuilder]{
 
   /**
@@ -33,14 +33,14 @@ object Implicits extends AbstractPackage[StringBuilder]{
     def writeTo(strb: StringBuilder): Unit = strb ++= v
   }
 
-  class GenericAttr(val writer: StringBuilder => Unit) extends AttrVal[StringBuilder]{
+  class GenericAttr(val writer: StringBuilder => Unit) extends AttrVal{
     override def applyTo(strb: StringBuilder, k: Attr): Unit = {
       strb ++= k.name ++= "=\""
       applyPartial(strb)
       strb ++= "\""
     }
     def applyPartial(strb: StringBuilder) = writer(strb)
-    def merge(o: AttrVal[StringBuilder]) = new GenericAttr({ strb =>
+    def merge(o: AttrVal) = new GenericAttr({ strb =>
       applyPartial(strb)
       strb ++= " "
       o.applyPartial(strb)
@@ -54,7 +54,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
   implicit def numericAttr[T: Numeric](n: T) = new NumericAttr(n)
 
 
-  class GenericStyle(writer: StringBuilder => Unit) extends StyleVal[StringBuilder]{
+  class GenericStyle(writer: StringBuilder => Unit) extends StyleVal{
     override def applyTo(strb: StringBuilder, k: Style): Unit = {
       strb ++= k.cssName ++= ": "
       writer(strb)
@@ -70,8 +70,8 @@ object Implicits extends AbstractPackage[StringBuilder]{
 
   case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
                                               children: List[Node],
-                                              attrs: SortedMap[Attr, AttrVal[StringBuilder]],
-                                              styles: SortedMap[Style, StyleVal[StringBuilder]],
+                                              attrs: SortedMap[Attr, AttrVal],
+                                              styles: SortedMap[Style, StyleVal],
                                               void: Boolean = false)
     extends generic.TypedHtmlTag[T, StringBuilder]{
     type Self = TypedHtmlTag[T]
@@ -87,7 +87,7 @@ object Implicits extends AbstractPackage[StringBuilder]{
         }
 
         val newVal = {
-          moddedAttrs.get(Attr("style")).fold[AttrVal[StringBuilder]](StringAttr(strb.toString))(_ merge StringAttr(strb.toString))
+          moddedAttrs.get(Attr("style")).fold[AttrVal](StringAttr(strb.toString))(_ merge StringAttr(strb.toString))
         }
         moddedAttrs = moddedAttrs.updated(Attr("style"), newVal)
       }
@@ -134,8 +134,8 @@ object Implicits extends AbstractPackage[StringBuilder]{
     }
 
     override def transform(children: List[Node] = children,
-                           attrs: SortedMap[Attr, AttrVal[StringBuilder]] = attrs,
-                           styles: SortedMap[Style, StyleVal[StringBuilder]] = styles): Self = {
+                           attrs: SortedMap[Attr, AttrVal] = attrs,
+                           styles: SortedMap[Style, StyleVal] = styles): Self = {
       this.copy(children=children, attrs=attrs, styles=styles)
     }
   }

@@ -9,7 +9,7 @@
  */
 package scalatags
 package generic
-
+import acyclic.file
 
 trait StyleMisc[Target] extends Util[Target] {
 

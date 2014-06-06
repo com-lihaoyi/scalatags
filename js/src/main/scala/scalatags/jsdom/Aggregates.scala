@@ -1,6 +1,6 @@
 package scalatags
 package jsdom
-
+import acyclic.file
 import scala.collection.SortedMap
 
 import org.scalajs.dom

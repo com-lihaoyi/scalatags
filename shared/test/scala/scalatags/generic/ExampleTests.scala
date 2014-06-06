@@ -4,6 +4,7 @@ import utest._
 import scala.collection.SortedMap
 import scalatags.generic.Style
 import TestUtil.strCheck
+import acyclic.file
 class ExampleTests[T](all: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
                       short: generic.Util[T] with generic.AbstractShort[T],
                       misc: generic.AbstractMisc[T],

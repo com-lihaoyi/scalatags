@@ -6,7 +6,7 @@ import utest._
 
 import TestUtil._
 import scala.collection.SortedMap
-import scalatags.generic.{StyleVal, Style}
+import scalatags.generic.Style
 
 object BasicTests extends TestSuite{
   import scalatags.text.all._
@@ -47,11 +47,9 @@ object BasicTests extends TestSuite{
         height:=10.px
       )
       // "background-color" -> "red" is stored in `attrs` not `styles`
-      val expected = SortedMap[Style, StyleVal[StringBuilder]](float -> "left", height -> "10px")
+      val expected = SortedMap[Style, StyleVal](float -> "left", height -> "10px")
       val styleList = frag.styles
       assert(styleList.toString == expected.toString)
     }
-
-
   }
 }

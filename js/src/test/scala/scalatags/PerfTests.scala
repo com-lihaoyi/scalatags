@@ -1,7 +1,7 @@
 package scalatags
 
 import scalatags.text.all._
-
+import acyclic.file
 import TestUtil.strCheck
 import org.scalajs.dom._
 import scalajs.js

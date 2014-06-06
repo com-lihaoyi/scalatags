@@ -7,7 +7,7 @@ import scalatags.generic.Style
 import scalatags.generic.Attr
 import scala.annotation.switch
 import scala.scalajs.js
-
+import acyclic.file
 object Implicits extends generic.AbstractPackage[dom.Element]{
 
   /**
@@ -26,12 +26,12 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   case class StringNode(v: String) extends Node {
     def writeTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
   }
-  case class Bind(v: js.Any) extends AttrVal[dom.Element]{
+  case class Bind(v: js.Any) extends AttrVal{
     def applyTo(elem: dom.Element, k: Attr): Unit = {
       elem.asInstanceOf[js.Dynamic].updateDynamic(k.name)(v)
     }
 
-    override def merge(o: AttrVal[dom.Element]): AttrVal[dom.Element] = ???
+    override def merge(o: AttrVal): AttrVal = ???
     override def applyPartial(t: dom.Element): Unit = ???
   }
   def raw(s: String) = new RawNode(s)
@@ -43,12 +43,12 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
     def writeTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
   }
 
-  class GenericAttr[T](val t: T) extends AttrVal[dom.Element]{
+  class GenericAttr[T](val t: T) extends AttrVal{
     def applyTo(elem: dom.Element, k: Attr): Unit = {
       elem.setAttribute(k.name, t.toString)
     }
 
-    override def merge(o: AttrVal[dom.Element]): AttrVal[dom.Element] = ???
+    override def merge(o: AttrVal): AttrVal = ???
     override def applyPartial(t: dom.Element): Unit = ???
   }
   case class StringAttr(s: String) extends GenericAttr(s)
@@ -59,7 +59,7 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
   implicit def numericAttr[T: Numeric](n: T) = new NumericAttr(n)
 
 
-  class GenericStyle[T](t: T) extends StyleVal[dom.Element]{
+  class GenericStyle[T](t: T) extends StyleVal{
     override def applyTo(elem: dom.Element, k: Style): Unit = {
       elem.asInstanceOf[dom.HTMLElement]
           .style
@@ -75,8 +75,8 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
 
   case class TypedHtmlTag[T <: Platform.Base](tag: String = "",
                                               children: List[Node],
-                                              attrs: SortedMap[Attr, AttrVal[dom.Element]],
-                                              styles: SortedMap[Style, StyleVal[dom.Element]],
+                                              attrs: SortedMap[Attr, AttrVal],
+                                              styles: SortedMap[Style, StyleVal],
                                               void: Boolean = false)
     extends generic.TypedHtmlTag[T, dom.Element]{
     type Self = TypedHtmlTag[T]
@@ -114,7 +114,6 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
             applyStyles()
             styleWritten = true
         }
-
       }
       if (!styleWritten) applyStyles()
 
@@ -128,8 +127,8 @@ object Implicits extends generic.AbstractPackage[dom.Element]{
     }
 
     override def transform(children: List[Node],
-                           attrs: SortedMap[Attr, AttrVal[dom.Element]],
-                           styles: SortedMap[Style, StyleVal[dom.Element]]): Self = {
+                           attrs: SortedMap[Attr, AttrVal],
+                           styles: SortedMap[Style, StyleVal]): Self = {
       this.copy(children=children, attrs=attrs, styles=styles)
     }
 

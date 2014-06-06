@@ -1,6 +1,6 @@
 package scalatags
 package generic
-
+import acyclic.file
 
 /**
  * Created by haoyi on 6/4/14.
@@ -15,13 +15,15 @@ trait AbstractPackage[T]{
   type SvgStyles = generic.SvgStyles[T]
   type Util = generic.Util[T]
   type Node = generic.Node[T]
+  type AttrVal = generic.AttrVal[T]
+  type StyleVal = generic.StyleVal[T]
 
-  implicit def stringAttr(s: String): AttrVal[T]
-  implicit def booleanAttr(b: Boolean): AttrVal[T]
-  implicit def numericAttr[V: Numeric](n: V) : AttrVal[T]
-  implicit def stringStyle(s: String): StyleVal[T]
-  implicit def booleanStyle(b: Boolean): StyleVal[T]
-  implicit def numericStyle[V: Numeric](n: V): StyleVal[T]
+  implicit def stringAttr(s: String): AttrVal
+  implicit def booleanAttr(b: Boolean): AttrVal
+  implicit def numericAttr[V: Numeric](n: V) : AttrVal
+  implicit def stringStyle(s: String): StyleVal
+  implicit def booleanStyle(b: Boolean): StyleVal
+  implicit def numericStyle[V: Numeric](n: V): StyleVal
 
   implicit def stringNode(v: String): Node
   implicit def NumericModifier[V: Numeric](u: V): Node

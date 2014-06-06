@@ -1,6 +1,6 @@
 package scalatags
 package generic
-
+import acyclic.file
 import utest._
 
 class ScalatagsPerf[T](val v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],

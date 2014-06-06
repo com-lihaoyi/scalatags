@@ -1,5 +1,6 @@
 package scalatags
 package jsdom
+import acyclic.file
 import utest._
 import Implicits._
 import all._

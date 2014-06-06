@@ -1,5 +1,5 @@
 package scalatags.generic
-
+import acyclic.file
 /**
  * Contains HTML tags which are used less frequently. These are generally
  * imported individually as needed.

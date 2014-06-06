@@ -1,6 +1,6 @@
 package scalatags
 package text
-
+import acyclic.file
 import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
 import java.io.{StringWriter, PrintWriter}
 

@@ -3,7 +3,7 @@ package text
 import Implicits._
 import scala.collection.SortedMap
 import scalatags.generic.AbstractMisc
-
+import acyclic.file
 
 object all extends StringTags with Attrs with Styles with Tags with DataConverters with Util
 object short extends StringTags with Util with DataConverters with generic.AbstractShort[StringBuilder]{

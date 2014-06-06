@@ -9,7 +9,7 @@
  */
 package scalatags
 package generic
-
+import acyclic.file
 /**
  * Trait containing the contents of the [[Attrs]] module, so they can be
  * mixed in to other objects if needed.

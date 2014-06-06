@@ -1,7 +1,6 @@
-package scalatags.text
+package scalatags
+package text
+import acyclic.file
 
-
-import scalatags.generic
-import scalatags.text._
 object ExampleTests extends generic.ExampleTests(all, short, misc, Implicits)
 
