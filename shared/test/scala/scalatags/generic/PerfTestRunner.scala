@@ -3,11 +3,11 @@ package generic
 import acyclic.file
 import utest._
 
-class ScalatagsPerf[T](val v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
-                       val omg: AbstractPackage[T]) extends PerfTest {
+class ScalatagsPerf[T](val omg: Bundle[T]) extends PerfTest {
 
-  import v._
+
   import omg._
+  import all._
   import generic.PerfTest._
 
   def para(n: Int, m: generic.Modifier[T]*) = p(

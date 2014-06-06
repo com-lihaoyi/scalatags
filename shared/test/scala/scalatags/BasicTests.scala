@@ -9,9 +9,9 @@ import scala.collection.SortedMap
 import scalatags.generic.Style
 
 object BasicTests extends TestSuite{
-  import scalatags.text.all._
-  import scalatags.text.Implicits._
 
+  import scalatags.Text._
+  import all._
   def tests = TestSuite{
 
     'helloWorld{

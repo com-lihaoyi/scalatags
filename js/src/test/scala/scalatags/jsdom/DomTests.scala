@@ -2,7 +2,7 @@ package scalatags
 package jsdom
 import acyclic.file
 import utest._
-import Implicits._
+import JsDom._
 import all._
 import TestUtil._
 import org.scalajs.dom

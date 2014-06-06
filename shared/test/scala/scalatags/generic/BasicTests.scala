@@ -9,10 +9,9 @@ import TestUtil._
 import scala.collection.SortedMap
 import scalatags.generic.{StyleVal, Style}
 
-class BasicTests[T](v: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
-                    omg: AbstractPackage[T]) extends TestSuite{
-  import v._
+class BasicTests[T](omg: Bundle[T]) extends TestSuite{
   import omg._
+  import all._
   val tests = TestSuite{
     'cssChaining2-strCheck(
       div(

@@ -3,7 +3,7 @@ import acyclic.file
 import scalatags.generic
 
 
-case object ScalatagsPerf extends generic.ScalatagsPerf(scalatags.text.all, scalatags.text.Implicits)
+case object ScalatagsPerf extends generic.ScalatagsPerf(scalatags.Text)
 
 
 case object ScalaXMLPerf extends generic.PerfTest{

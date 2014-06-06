@@ -1,6 +1,6 @@
 package scalatags
 
-import scalatags.text.all._
+
 import acyclic.file
 import TestUtil.strCheck
 import org.scalajs.dom._

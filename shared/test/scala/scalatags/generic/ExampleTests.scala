@@ -5,12 +5,10 @@ import scala.collection.SortedMap
 import scalatags.generic.Style
 import TestUtil.strCheck
 import acyclic.file
-class ExampleTests[T](all: generic.Attrs[T] with generic.Styles[T] with generic.Tags[T],
-                      short: generic.Util[T] with generic.AbstractShort[T],
-                      misc: generic.AbstractMisc[T],
-                      omg: AbstractPackage[T]) extends TestSuite{
-  import all._
+class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
   import omg._
+  import all._
+
   val tests = TestSuite{
     'splashExample-strCheck(
       html(

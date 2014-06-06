@@ -2,10 +2,11 @@ package scalatags
 package generic
 import acyclic.file
 
-/**
- * Created by haoyi on 6/4/14.
- */
-trait AbstractPackage[T]{
+trait Bundle[T]{
+  val all: Attrs with Styles with Tags with DataConverters with Util
+  val short: AbstractShort[T]
+  val misc: AbstractMisc[T]
+
   type Attrs = generic.Attrs[T]
   type Tags = generic.Tags[T]
   type Tags2 = generic.Tags2[T]
