@@ -37,20 +37,20 @@ object Text extends Bundle[text.Builder] {
     }
   }
 
-  implicit def NumericModifier[T: Numeric](u: T) = new StringNode(u.toString)
+  implicit def NumericNode[T: Numeric](u: T) = new StringNode(u.toString)
 
   implicit def stringNode(v: String) = new StringNode(v)
 
 
   object StringNode extends Companion[StringNode]
-  case class StringNode(v: String) extends Modifier with text.Child {
+  case class StringNode(v: String) extends Node with text.Child {
     def writeTo(strb: StringBuilder) = Escaping.escape(v, strb)
   }
 
   def raw(s: String) = new RawNode(s)
 
   object RawNode extends Companion[RawNode]
-  case class RawNode(v: String) extends Modifier with text.Child {
+  case class RawNode(v: String) extends Node with text.Child {
     def writeTo(strb: StringBuilder) = strb ++= v
   }
 
@@ -81,7 +81,7 @@ object Text extends Bundle[text.Builder] {
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+T <: Platform.Base](tag: String = "",
-                                           modifiers: List[Seq[Modifier]],
+                                           modifiers: List[Seq[Node]],
                                            void: Boolean = false)
                                            extends generic.TypedTag[T, text.Builder]
                                            with text.Child{
@@ -112,10 +112,13 @@ object Text extends Bundle[text.Builder] {
       strb += '<' ++= tag
 
       // attributes
-      for (pair <- builder.attrs) {
+      var i = 0
+      while (i < builder.attrIndex){
+        val pair = builder.attrs(i)
         strb += ' ' ++= pair._1 ++= "=\""
         Escaping.escape(pair._2, strb)
         strb += '\"'
+        i += 1
       }
 
       if (builder.childIndex == 0 && void) {
@@ -135,7 +138,7 @@ object Text extends Bundle[text.Builder] {
       }
     }
 
-    def apply(xs: Modifier*): TypedTag[T] = {
+    def apply(xs: Node*): TypedTag[T] = {
       this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
     }
 
