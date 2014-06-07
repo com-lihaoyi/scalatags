@@ -8,10 +8,10 @@ import scalatags.generic
 
 
 /**
- * Represents a value that can be nested within a [[Node]]. This can be another
- * [[Node]], but can also be a CSS style or HTML attribute binding, which will
- * add itself to the node's attributes but not appear in the final `children`
- * list.
+ * Represents a value that can be nested within a [[TypedTag]]. This can be
+ * another [[Node]], but can also be a CSS style or HTML attribute binding,
+ * which will add itself to the node's attributes but not appear in the final
+ * `children` list.
  */
 trait Node[Target] {
   /**
@@ -72,7 +72,7 @@ trait TypedTag[+T <: Base, Target] extends Node[Target]{
 }
 
 /**
- * Wraps up a HTML attribute in a value.
+ * Wraps up a HTML attribute in a value which isn't a string.
  */
 case class Attr(name: String) {
 
@@ -98,19 +98,37 @@ case class Style(jsName: String, cssName: String) {
    */
   def :=[Target, T](v: T)(implicit ev: StyleValue[Target, T]) = StylePair(this, v, ev)
 }
+/**
+ * An [[Attr]], it's associated value, and an [[AttrValue]] of the correct type
+ */
 case class AttrPair[Target, T](a: Attr, v: T, ev: AttrValue[Target, T]) extends Node[Target] {
   override def applyTo(t: Target): Unit = {
     ev.apply(t, a, v)
   }
 }
+/**
+ * Used to specify how to handle a particular type [[T]] when it is used as
+ * the value of a [[Attr]]. Only types with a specified [[AttrValue]] may
+ * be used.
+ */
 trait AttrValue[Target, T]{
   def apply(t: Target, a: Attr, v: T)
 }
+
+/**
+ * A [[Style]], it's associated value, and a [[StyleValue]] of the correct type
+ */
 case class StylePair[Target, T](s: Style, v: T, ev: StyleValue[Target, T]) extends Node[Target]{
   override def applyTo(t: Target): Unit = {
     ev.apply(t, s, v)
   }
 }
+
+/**
+ * Used to specify how to handle a particular type [[T]] when it is used as
+ * the value of a [[Style]]. Only types with a specified [[StyleValue]] may
+ * be used.
+ */
 trait StyleValue[Target, T]{
   def apply(t: Target, s: Style, v: T)
 }

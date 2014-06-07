@@ -96,17 +96,7 @@ object Text extends Bundle[text.Builder] {
      */
     def writeTo(strb: StringBuilder): Unit = {
       val builder = new text.Builder()
-      var current = modifiers
-
-      while (current != Nil) {
-        val frag = current.head
-        var i = 0
-        while(i < frag.length){
-          frag(i).applyTo(builder)
-          i += 1
-        }
-        current = current.tail
-      }
+      build(builder)
 
       // tag
       strb += '<' ++= tag

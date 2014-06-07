@@ -10,7 +10,7 @@ class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTest {
 
   def para(n: Int, m: generic.Node[T]*) = p(
     m,
-    title := s"this is paragraph $n"
+    title := ("this is paragraph " + n)
   )
 
   def calc() = {
@@ -22,7 +22,7 @@ class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTest {
         h1(color := "red")(titleString),
         div(backgroundColor := "blue")(
           para(0,
-            cls := s"$contentpara $first",
+            cls := contentpara + " " + first,
             firstParaString
           ),
           a(href := "www.google.com")(
@@ -32,7 +32,8 @@ class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTest {
             para(i,
               cls := contentpara,
               color := (if (i % 2 == 0) "red" else "green"),
-              s"Paragraph $i"
+              "Paragraph ",
+              i
             )
           }
         )
