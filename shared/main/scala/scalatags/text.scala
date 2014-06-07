@@ -30,11 +30,7 @@ object Text extends Bundle[text.Builder] {
     type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
 
     protected[this] implicit def stringAttr = new GenericAttr[String]
-    protected[this] implicit def booleanAttr= new GenericAttr[Boolean]
-    protected[this] implicit def numericAttr[T: Numeric] = new GenericAttr[T]
     protected[this] implicit def stringStyle = new GenericStyle[String]
-    protected[this] implicit def booleanStyle = new GenericStyle[Boolean]
-    protected[this] implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
     def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean) = {
       TypedTag(tag, Nil, void)
@@ -63,8 +59,8 @@ object Text extends Bundle[text.Builder] {
       t.addAttr(a.name, v.toString)
     }
   }
-  implicit def stringAttr = new GenericAttr[String]
-  implicit def booleanAttr= new GenericAttr[Boolean]
+  implicit val stringAttr = new GenericAttr[String]
+  implicit val booleanAttr= new GenericAttr[Boolean]
   implicit def numericAttr[T: Numeric] = new GenericAttr[T]
 
   class GenericStyle[T] extends StyleValue[T]{
@@ -80,8 +76,8 @@ object Text extends Bundle[text.Builder] {
 
     }
   }
-  implicit def stringStyle = new GenericStyle[String]
-  implicit def booleanStyle = new GenericStyle[Boolean]
+  implicit val stringStyle = new GenericStyle[String]
+  implicit val booleanStyle = new GenericStyle[Boolean]
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+T <: Platform.Base](tag: String = "",

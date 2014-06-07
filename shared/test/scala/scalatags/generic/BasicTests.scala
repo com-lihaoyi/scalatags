@@ -10,9 +10,7 @@ import TestUtil._
 class BasicTests[T](omg: Bundle[T]) extends TestSuite{
   import omg._
   import all._
-  def main(args: Array[String]): Unit = {
-    println(a(href := "www.google.com", color := "red", "iogmomomg", style := "fff; ", span("lol")))
-  }
+
   val tests = TestSuite{
 
     /**

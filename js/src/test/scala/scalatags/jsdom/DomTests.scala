@@ -49,16 +49,42 @@ object DomTests extends TestSuite{
         )
       }
     }
-    'boundAttributes{
-      var count = 0
-      val elem = div(
-        onclick := {() => count += 1},
-        tabindex := 1
-      ).toDom
+    'fancy {
+      'boundAttributes {
+        var count = 0
+        val elem = div(
+          onclick := { () => count += 1},
+          tabindex := 1
+        ).toDom
 
-      assert(count == 0)
-      elem.onclick(null)
-      assert(count == 1)
+        assert(count == 0)
+        elem.onclick(null)
+        assert(count == 1)
+      }
+      'triggers {
+        // Wrapping this, because for some reason if I leave it top-level
+        // the compiler crashes =(
+        def runTriggers() = {
+          val labelElem = label("Default").toDom
+
+          val inputElem = input(
+            `type`:="text",
+            onfocus := { () => labelElem.textContent = ""}
+          ).toDom
+
+          val box = div(
+            inputElem,
+            labelElem
+          ).toDom
+
+          assert(labelElem.textContent == "Default")
+          inputElem.onfocus(null)
+          assert(labelElem.textContent == "")
+        }
+        runTriggers()
+
+      }
     }
   }
+
 }

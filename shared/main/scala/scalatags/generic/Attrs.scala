@@ -307,7 +307,7 @@ trait Attrs[Target] extends Util[Target]{
    *
    * MDN
    */
-  val autofocus = "autofocus".attrTyped[Boolean]
+  val autofocus = "autofocus".attr
   /**
    * When the value of the type attribute is radio or checkbox, the presence of
    * this Boolean attribute indicates that the control is selected by default;
@@ -315,7 +315,7 @@ trait Attrs[Target] extends Util[Target]{
    *
    * MDN
    */
-  val checked = "checked".attrTyped[Boolean]
+  val checked = "checked".attr
   /**
    * Declares the character encoding of the page or script. Used on meta and
    * script elements.
@@ -333,7 +333,7 @@ trait Attrs[Target] extends Util[Target]{
    *
    * MDN
    */
-  val disabled = "disabled".attrTyped[Boolean]
+  val disabled = "disabled".attr
   /**
    * Describes elements which belongs to this one. Used on labels and output
    * elements.
@@ -348,7 +348,7 @@ trait Attrs[Target] extends Util[Target]{
    *
    * MDN
    */
-  val readonly = "readonly".attrTyped[Boolean]
+  val readonly = "readonly".attr
   /**
    * This attribute specifies that the user must fill in a value before
    * submitting a form. It cannot be used when the type attribute is hidden,
@@ -357,13 +357,13 @@ trait Attrs[Target] extends Util[Target]{
    *
    * MDN
    */
-  val required = "required".attrTyped[Boolean]
+  val required = "required".attr
   /**
    * The number of visible text lines for the control.
    *
    * MDN
    */
-  val rows = "rows".attrTyped[Int]
+  val rows = "rows".attr
   /**
    * The visible width of the text control, in average character widths. If it
    * is specified, it must be a positive integer. If it is not specified, the
@@ -371,7 +371,7 @@ trait Attrs[Target] extends Util[Target]{
    *
    * MDN
    */
-  val cols = "cols".attrTyped[Int]
+  val cols = "cols".attr
   /**
    * The initial size of the control. This value is in pixels unless the value
    * of the type attribute is text or password, in which case, it is an integer
@@ -401,6 +401,6 @@ trait Attrs[Target] extends Util[Target]{
    *
    * An element with a 0 value, an invalid value, or no tabindex value should be placed after elements with a positive tabindex in the sequential keyboard navigation order.
    */
-  val tabindex = "tabindex".attrTyped[Int]
+  val tabindex = "tabindex".attr
 }
 

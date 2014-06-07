@@ -2,6 +2,8 @@ package scalatags
 
 import org.scalajs.dom
 import scala.scalajs.js
+import scalatags.generic.Modifier
+import org.scalajs.dom.Element
 
 
 /**
@@ -28,11 +30,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
     type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
 
     protected[this] implicit def stringAttr = new GenericAttr[String]
-    protected[this] implicit def booleanAttr= new GenericAttr[Boolean]
-    protected[this] implicit def numericAttr[T: Numeric] = new GenericAttr[T]
     protected[this] implicit def stringStyle = new GenericStyle[String]
-    protected[this] implicit def booleanStyle = new GenericStyle[Boolean]
-    protected[this] implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
     def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean): TypedTag[T] = {
       TypedTag(tag, Nil, void)
@@ -131,5 +129,8 @@ trait LowPriorityImplicits{
     def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
+  }
+  implicit def bindElement(e: dom.Element) = new Modifier[dom.Element] {
+    override def applyTo(t: Element) = t.appendChild(e)
   }
 }
