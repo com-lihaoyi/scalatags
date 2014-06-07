@@ -54,10 +54,6 @@ object Build extends sbt.Build{
     libraryDependencies ++= Seq(
       "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.4"
     ),
-    jsDependencies ++= Seq(
-      ProvidedJS / "mustache.js" % "test",
-      ProvidedJS / "jade.js" % "test"
-    ),
     (jsEnv in Test) := new PhantomJSEnv
   )
 

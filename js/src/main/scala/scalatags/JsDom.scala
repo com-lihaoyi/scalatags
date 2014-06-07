@@ -84,7 +84,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+T <: Platform.Base](tag: String = "",
-                                           modifiers: List[Node],
+                                           modifiers: List[Seq[Node]],
                                            void: Boolean = false)
                                            extends generic.TypedTag[T, dom.Element]{
     protected[this] type Self = TypedTag[T]
@@ -100,14 +100,14 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
      */
     def toDom: T = {
       val elem = dom.document.createElement(tag)
-      modifiers.foreach(_.applyTo(elem))
+      build(elem)
       elem.asInstanceOf[T]
     }
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
     def apply(xs: Node*): TypedTag[T] = {
-      this.copy(tag=tag, void = void, modifiers = modifiers ::: xs.toList)
+      this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
     override def toString = toDom.outerHTML
   }

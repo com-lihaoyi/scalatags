@@ -32,6 +32,39 @@ trait TypedTag[+T <: Base, Target] extends Node[Target]{
   def tag: String
 
   /**
+   * The modifiers that are applied to a TypedTag are kept in this linked-Seq
+   * (which are actually WrappedArrays) data-structure in order for maximum
+   * performance.
+   */
+  def modifiers: List[Seq[Node[Target]]]
+
+  /**
+   * Walks the [[modifiers]] to apply them to a particular [[Target]].
+   * Super sketchy/procedural for max performance.
+   */
+  def build(b: Target): Unit = {
+    var current = modifiers
+    val arr = new Array[Seq[Node[Target]]](modifiers.length)
+
+    var i = 0
+    while(current != Nil){
+      arr(i) = current.head
+      current =  current.tail
+      i += 1
+    }
+
+    var j = arr.length
+    while (j > 0) {
+      j -= 1
+      val frag = arr(j)
+      var i = 0
+      while(i < frag.length){
+        frag(i).applyTo(b)
+        i += 1
+      }
+    }
+  }
+  /**
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[TypedTag]].
    */
@@ -39,8 +72,7 @@ trait TypedTag[+T <: Base, Target] extends Node[Target]{
 }
 
 /**
- * Wraps up a HTML attribute in an untyped value with an associated
- * type; the := operator takes Strings.
+ * Wraps up a HTML attribute in a value.
  */
 case class Attr(name: String) {
 
@@ -50,17 +82,20 @@ case class Attr(name: String) {
     )
 
   /**
-   * Force-assigns a typed attribute to a string even if its type would not
-   * normally allow it.
+   * Creates an [[AttrPair]] from an [[Attr]] and a value of type [[T]], if
+   * there is an [[AttrValue]] of the correct type.
    */
   def :=[Target, T](v: T)(implicit ev: AttrValue[Target, T]) = AttrPair(this, v, ev)
 }
 
 /**
- * A [[Style]] which does not have a particular type, and takes strings as its
- * values
+ * Wraps up a CSS style in a value.
  */
 case class Style(jsName: String, cssName: String) {
+  /**
+   * Creates an [[StylePair]] from an [[Style]] and a value of type [[T]], if
+   * there is an [[StyleValue]] of the correct type.
+   */
   def :=[Target, T](v: T)(implicit ev: StyleValue[Target, T]) = StylePair(this, v, ev)
 }
 case class AttrPair[Target, T](a: Attr, v: T, ev: AttrValue[Target, T]) extends Node[Target] {

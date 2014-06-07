@@ -108,5 +108,17 @@ class BasicTests[T](omg: Bundle[T]) extends TestSuite{
         """<div>lol1<h1>Hello</h1>123hello</div>"""
       )
     }
+    'applyChaining{
+      strCheck(
+        a(
+          tabindex := 1,
+          onclick := "lol"
+        )(
+          href := "boo",
+          alt := "g"
+        ),
+        """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
+      )
+    }
   }
 }

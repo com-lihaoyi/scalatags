@@ -3,15 +3,12 @@ package generic
 import acyclic.file
 import utest._
 
-class ScalatagsPerf[T](val omg: Bundle[T]) extends PerfTest {
-
-
-  import omg._
+class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTest {
+  import bundle._
   import all._
   import generic.PerfTest._
 
   def para(n: Int, m: generic.Node[T]*) = p(
-    cls := contentpara,
     m,
     title := s"this is paragraph $n"
   )
@@ -24,7 +21,7 @@ class ScalatagsPerf[T](val omg: Bundle[T]) extends PerfTest {
       body(
         h1(color := "red")(titleString),
         div(backgroundColor := "blue")(
-          para(0)(
+          para(0,
             cls := s"$contentpara $first",
             firstParaString
           ),
@@ -32,7 +29,9 @@ class ScalatagsPerf[T](val omg: Bundle[T]) extends PerfTest {
             p("Goooogle")
           ),
           for (i <- 0 until 5) yield {
-            para(i, color := (if (i % 2 == 0) "red" else "green"))(
+            para(i,
+              cls := contentpara,
+              color := (if (i % 2 == 0) "red" else "green"),
               s"Paragraph $i"
             )
           }
@@ -77,7 +76,7 @@ trait PerfTest extends TestSuite{
   def tests = TestSuite{
     'correctness{
 
-//      TestUtil.strCheck(calc, PerfTest.expected)
+      TestUtil.strCheck(calc(), PerfTest.expected)
       'performance{
         println("Benchmarking " + this.name)
         val start = System.currentTimeMillis()
