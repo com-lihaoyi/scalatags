@@ -929,7 +929,7 @@ The current selection of [Node](http://lihaoyi.github.io/scalatags/#scalatags.Te
 - [AttrPair](http://lihaoyi.github.io/scalatags/#scalatags.Text.AttrPair)s: sets a key in the parent's `attrs` list.
 - [StylePair](http://lihaoyi.github.io/scalatags/#scalatags.Text.StylePair)s: appends the inline `style: value;` to the parent's `style` attribute.
 
-Although these are the [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node)s which are provided, it is possible to come up with your own custom [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node)s which do a variety of different things to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag). All it has to do is provide a `transform: HtmlTag => HtmlTag` method, and it can do whatever it wants to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag) being transformed, including:
+Although these are the [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node)s which are provided, it is possible to come up with your own custom [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node)s which do a variety of different things to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag). All it has to do is provide a `transform: HtmlTperag => HtmlTag` method, and it can do whatever it wants to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag) being transformed, including:
 
 - Adding multiple attributes at once
 - Adding both attributes and children at once
