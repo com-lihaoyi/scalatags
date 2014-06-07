@@ -13,7 +13,7 @@ import scalatags.generic
  * add itself to the node's attributes but not appear in the final `children`
  * list.
  */
-trait Modifier[Target] {
+trait Node[Target] {
   /**
    * Transforms the tag and returns a new one.
    */
@@ -27,7 +27,7 @@ trait Modifier[Target] {
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[+T <: Base, Target] extends Modifier[Target]{
+trait TypedTag[+T <: Base, Target] extends Node[Target]{
   protected[this] type Self <: TypedTag[T, Target]
   def tag: String
 
@@ -35,7 +35,7 @@ trait TypedTag[+T <: Base, Target] extends Modifier[Target]{
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[TypedTag]].
    */
-  def apply(xs: Modifier[Target]*): Self
+  def apply(xs: Node[Target]*): Self
 }
 
 /**
@@ -63,7 +63,7 @@ case class Attr(name: String) {
 case class Style(jsName: String, cssName: String) {
   def :=[Target, T](v: T)(implicit ev: StyleValue[Target, T]) = StylePair(this, v, ev)
 }
-case class AttrPair[Target, T](a: Attr, v: T, ev: AttrValue[Target, T]) extends Modifier[Target] {
+case class AttrPair[Target, T](a: Attr, v: T, ev: AttrValue[Target, T]) extends Node[Target] {
   override def applyTo(t: Target): Unit = {
     ev.apply(t, a, v)
   }
@@ -71,7 +71,7 @@ case class AttrPair[Target, T](a: Attr, v: T, ev: AttrValue[Target, T]) extends 
 trait AttrValue[Target, T]{
   def apply(t: Target, a: Attr, v: T)
 }
-case class StylePair[Target, T](s: Style, v: T, ev: StyleValue[Target, T]) extends Modifier[Target]{
+case class StylePair[Target, T](s: Style, v: T, ev: StyleValue[Target, T]) extends Node[Target]{
   override def applyTo(t: Target): Unit = {
     ev.apply(t, s, v)
   }

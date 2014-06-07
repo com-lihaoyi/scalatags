@@ -368,7 +368,7 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
 
     'layouts-strCheck(
     {
-      def page(scripts: Seq[Modifier], content: Seq[Modifier]) =
+      def page(scripts: Seq[Node], content: Seq[Node]) =
         html(
           head(scripts),
           body(

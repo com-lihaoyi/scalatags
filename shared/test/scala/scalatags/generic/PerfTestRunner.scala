@@ -10,7 +10,7 @@ class ScalatagsPerf[T](val omg: Bundle[T]) extends PerfTest {
   import all._
   import generic.PerfTest._
 
-  def para(n: Int, m: generic.Modifier[T]*) = p(
+  def para(n: Int, m: generic.Node[T]*) = p(
     cls := contentpara,
     m,
     title := s"this is paragraph $n"

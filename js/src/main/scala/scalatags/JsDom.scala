@@ -2,7 +2,7 @@ package scalatags
 
 import org.scalajs.dom
 import scala.scalajs.js
-import scalatags.generic.Modifier
+import scalatags.generic.Node
 import org.scalajs.dom.Element
 
 
@@ -40,7 +40,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   /**
    * Lets you put numbers into a scalatags tree, as a no-op.
    */
-  implicit def NumericModifier[T: Numeric](u: T) = new StringNode(u.toString)
+  implicit def NumericNode[T: Numeric](u: T) = new StringNode(u.toString)
 
   /**
    * Allows you to modify a HtmlTag by adding a String to its list of children
@@ -50,7 +50,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
    * A [[Node]] which contains a String.
    */
   object StringNode extends Companion[StringNode]
-  case class StringNode(v: String) extends Modifier {
+  case class StringNode(v: String) extends Node {
     def applyTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
   }
 
@@ -59,7 +59,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
    * A [[Node]] which contains a String which will not be escaped.
    */
   object RawNode extends Companion[RawNode]
-  case class RawNode(v: String) extends Modifier {
+  case class RawNode(v: String) extends Node {
     def applyTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
   }
 
@@ -84,7 +84,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+T <: Platform.Base](tag: String = "",
-                                           modifiers: List[Modifier],
+                                           modifiers: List[Node],
                                            void: Boolean = false)
                                            extends generic.TypedTag[T, dom.Element]{
     protected[this] type Self = TypedTag[T]
@@ -106,7 +106,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
-    def apply(xs: Modifier*): TypedTag[T] = {
+    def apply(xs: Node*): TypedTag[T] = {
       this.copy(tag=tag, void = void, modifiers = modifiers ::: xs.toList)
     }
     override def toString = toDom.outerHTML
@@ -130,7 +130,7 @@ trait LowPriorityImplicits{
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit def bindElement(e: dom.Element) = new Modifier[dom.Element] {
+  implicit def bindElement(e: dom.Element) = new Node[dom.Element] {
     override def applyTo(t: Element) = t.appendChild(e)
   }
 }

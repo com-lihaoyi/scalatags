@@ -1,7 +1,7 @@
 package scalatags.text
 
 import scala.collection.mutable
-import scalatags.generic.Modifier
+import scalatags.generic.Node
 
 
 class Builder(var children: Array[Child] = new Array(4),
@@ -35,7 +35,7 @@ class Builder(var children: Array[Child] = new Array(4),
   }
 }
 
-trait Child extends Modifier[Builder]{
+trait Child extends Node[Builder]{
   def writeTo(strb: StringBuilder): Unit
   def applyTo(b: Builder) = b.addChild(this)
 }

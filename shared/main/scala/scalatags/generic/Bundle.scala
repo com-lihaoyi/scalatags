@@ -55,7 +55,7 @@ trait Bundle[T]{
 
   type Attr = generic.Attr
   type Style = generic.Style
-  type Modifier = generic.Modifier[T]
+  type Node = generic.Node[T]
   type AttrValue[V] = generic.AttrValue[T, V]
   type StyleValue[V] = generic.StyleValue[T, V]
 
@@ -69,18 +69,18 @@ trait Bundle[T]{
   /**
    * Allows you to modify a HtmlTag by adding a String to its list of children
    */
-  implicit def stringNode(v: String): Modifier
+  implicit def stringNode(v: String): Node
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def NumericModifier[V: Numeric](u: V): Modifier
+  implicit def NumericNode[V: Numeric](u: V): Node
 
   type Tag <: generic.TypedTag[Platform.Base, T]
 
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
-  type RawNode <: Modifier
+  type RawNode <: Node
   val RawNode: Companion[RawNode]
 
   /**
@@ -91,7 +91,7 @@ trait Bundle[T]{
   /**
    * A [[Node]] which contains a String.
    */
-  type StringNode <: Modifier
+  type StringNode <: Node
   val StringNode: Companion[StringNode]
 }
 

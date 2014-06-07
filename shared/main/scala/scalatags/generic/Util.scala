@@ -63,7 +63,7 @@ trait Util[Target] {
    * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
    */
-  implicit class SeqModifier[A <% Modifier[Target]](xs: Seq[A]) extends Modifier[Target]{
+  implicit class SeqNode[A <% Node[Target]](xs: Seq[A]) extends Node[Target]{
     def applyTo(t: Target) = xs.foreach(_.applyTo(t))
   }
 
@@ -71,18 +71,18 @@ trait Util[Target] {
    * Allows you to modify a [[HtmlTag]] by adding an Option containing other nest-able
    * objects to its list of children.
    */
-  implicit def OptionModifier[A <% Modifier[Target]](xs: Option[A]) = new SeqModifier(xs.toSeq)
+  implicit def OptionNode[A <% Node[Target]](xs: Option[A]) = new SeqNode(xs.toSeq)
 
   /**
    * Allows you to modify a [[HtmlTag]] by adding an Array containing other nest-able
    * objects to its list of children.
    */
-  implicit def ArrayModifier[A <% Modifier[Target]](xs: Array[A]) = new SeqModifier[A](xs.toSeq)
+  implicit def ArrayNode[A <% Node[Target]](xs: Array[A]) = new SeqNode[A](xs.toSeq)
 
   /**
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
-  implicit def UnitModifier(u: Unit) = new Modifier[Target]{
+  implicit def UnitNode(u: Unit) = new Node[Target]{
     def applyTo(t: Target) = ()
   }
 }
