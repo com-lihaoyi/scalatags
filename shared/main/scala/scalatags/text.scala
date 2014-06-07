@@ -3,14 +3,17 @@ package scalatags
 import scalatags.generic._
 import scala.collection.SortedMap
 import acyclic.file
+import collection.mutable
 
 /**
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
  * `String`s.
  */
-object Text extends Bundle[StringBuilder] {
+
+object Text extends Bundle[text.Builder] {
+
   object all extends StringTags with Attrs with Styles with Tags with DataConverters with Util
-  object short extends StringTags with Util with DataConverters with generic.AbstractShort[StringBuilder]{
+  object short extends StringTags with Util with DataConverters with generic.AbstractShort[text.Builder]{
     object * extends StringTags with Attrs with Styles
   }
 
@@ -26,127 +29,120 @@ object Text extends Bundle[StringBuilder] {
   trait StringTags extends Util{ self =>
     type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
 
-    protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
-    protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
-    protected[this] implicit def numericAttrInternal[T: Numeric](n: T) = new NumericAttr(n)
-
-    protected[this] implicit def stringStyleInternal(s: String) = new StringStyle(s)
-    protected[this] implicit def booleanStyleInternal(b: Boolean) = new BooleanStyle(b)
-    protected[this] implicit def numericStyleInternal[T: Numeric](n: T) = new NumericStyle(n)
+    protected[this] implicit def stringAttr = new GenericAttr[String]
+    protected[this] implicit def booleanAttr= new GenericAttr[Boolean]
+    protected[this] implicit def numericAttr[T: Numeric] = new GenericAttr[T]
+    protected[this] implicit def stringStyle = new GenericStyle[String]
+    protected[this] implicit def booleanStyle = new GenericStyle[Boolean]
+    protected[this] implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
     def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean) = {
-      TypedTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
+      TypedTag(tag, Nil, void)
     }
   }
 
   implicit def NumericModifier[T: Numeric](u: T) = new StringNode(u.toString)
 
-
   implicit def stringNode(v: String) = new StringNode(v)
 
+
   object StringNode extends Companion[StringNode]
-  case class StringNode(v: String) extends Node {
-    def writeTo(strb: StringBuilder): Unit = Escaping.escape(v, strb)
+  case class StringNode(v: String) extends Modifier with text.Child {
+    def writeTo(strb: StringBuilder) = Escaping.escape(v, strb)
   }
 
   def raw(s: String) = new RawNode(s)
 
   object RawNode extends Companion[RawNode]
-  case class RawNode(v: String) extends Node {
-    def writeTo(strb: StringBuilder): Unit = strb ++= v
+  case class RawNode(v: String) extends Modifier with text.Child {
+    def writeTo(strb: StringBuilder) = strb ++= v
   }
 
-  class GenericAttr(val writer: StringBuilder => Unit) extends AttrVal{
-    override def applyTo(strb: StringBuilder, k: Attr): Unit = {
-      strb ++= k.name ++= "=\""
-      applyPartial(strb)
-      strb ++= "\""
+  class GenericAttr[T] extends AttrValue[T]{
+    def apply(t: text.Builder, a: Attr, v: T): Unit = {
+      t.addAttr(a.name, v.toString)
     }
-    def applyPartial(strb: StringBuilder) = writer(strb)
-    def merge(o: AttrVal) = new GenericAttr({ strb =>
-      applyPartial(strb)
-      strb ++= " "
-      o.applyPartial(strb)
-    })
   }
-  case class StringAttr(s: String) extends GenericAttr(Escaping.escape(s, _))
-  case class BooleanAttr(b: Boolean) extends GenericAttr(_ ++= b.toString)
-  case class NumericAttr[T: Numeric](n: T) extends GenericAttr(_ ++= n.toString)
-  implicit def stringAttr(s: String) = new StringAttr(s)
-  implicit def booleanAttr(b: Boolean) = new BooleanAttr(b)
-  implicit def numericAttr[T: Numeric](n: T) = new NumericAttr(n)
+  implicit def stringAttr = new GenericAttr[String]
+  implicit def booleanAttr= new GenericAttr[Boolean]
+  implicit def numericAttr[T: Numeric] = new GenericAttr[T]
 
+  class GenericStyle[T] extends StyleValue[T]{
+    def apply(t: text.Builder, s: Style, v: T): Unit = {
+      val strb = new StringBuilder()
 
-  class GenericStyle(writer: StringBuilder => Unit) extends StyleVal{
-    override def applyTo(strb: StringBuilder, k: Style): Unit = {
-      strb ++= k.cssName ++= ": "
-      writer(strb)
+      Escaping.escape(s.cssName, strb)
+      strb ++=  ": "
+      Escaping.escape(v.toString, strb)
       strb ++= ";"
+
+      t.addAttr("style", strb.toString)
+
     }
   }
-  case class StringStyle(s: String) extends GenericStyle(Escaping.escape(s, _))
-  case class BooleanStyle(b: Boolean) extends GenericStyle(_ ++= b.toString)
-  case class NumericStyle[T: Numeric](n: T) extends GenericStyle(_ ++= n.toString)
-  implicit def stringStyle(s: String) = new StringStyle(s)
-  implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
-  implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
+  implicit def stringStyle = new GenericStyle[String]
+  implicit def booleanStyle = new GenericStyle[Boolean]
+  implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+T <: Platform.Base](tag: String = "",
-                                          children: List[Node],
-                                          attrs: SortedMap[Attr, AttrVal],
-                                          styles: SortedMap[Style, StyleVal],
-                                          void: Boolean = false)
-    extends generic.TypedTag[T, StringBuilder]{
+                                           modifiers: List[Seq[Modifier]],
+                                           void: Boolean = false)
+                                           extends generic.TypedTag[T, text.Builder]
+                                           with text.Child{
     protected[this] type Self = TypedTag[T]
-    def collapsedAttrs = {
-      var moddedAttrs = attrs
-
-      if (!styles.isEmpty) {
-        val strb = new StringBuilder()
-
-        for ((k, v) <- styles) {
-          if (strb.length > 0) strb ++= " "
-          v.applyTo(strb, k)
-        }
-
-        val newVal = {
-          moddedAttrs.get(Attr("style")).fold[AttrVal](StringAttr(strb.toString))(_ merge StringAttr(strb.toString))
-        }
-        moddedAttrs = moddedAttrs.updated(Attr("style"), newVal)
-      }
-      moddedAttrs
-    }
 
     /**
-     * Serialize this [[HtmlTag]] and all its children out to the given StringBuilder.
+     * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.
+     *
+     * Although the external interface is pretty simple, the internals are a huge mess,
+     * because I've inlined a whole lot of things to improve the performance of this code
+     * ~4x from what it originally was, which is a pretty nice speedup
      */
     def writeTo(strb: StringBuilder): Unit = {
-      // tag
-      strb ++= "<" ++= tag
+      val builder = new text.Builder()
+      var current = modifiers
 
-      // attributes
-      for (pair <- collapsedAttrs) {
-        strb ++= " "
-        pair._2.applyTo(strb, pair._1)
+      while (current != Nil) {
+        val frag = current.head
+        var i = 0
+        while(i < frag.length){
+          frag(i).applyTo(builder)
+          i += 1
+        }
+        current = current.tail
       }
 
-      if (children.isEmpty && void)
-      // No children - close tag
+      // tag
+      strb += '<' ++= tag
+
+      // attributes
+      for (pair <- builder.attrs) {
+        strb += ' ' ++= pair._1 ++= "=\""
+        Escaping.escape(pair._2, strb)
+        strb += '\"'
+      }
+
+      if (builder.childIndex == 0 && void) {
+        // No children - close tag
         strb ++= " />"
-      else {
-        strb ++= ">"
+      } else {
+        strb += '>'
         // Childrens
-        var x = children.reverse
-        while (!x.isEmpty) {
-          val child :: newX = x
-          x = newX
-          child.writeTo(strb)
+        var i = 0
+        while(i < builder.childIndex){
+          builder.children(i).writeTo(strb)
+          i += 1
         }
 
         // Closing tag
-        strb ++= "</" ++= tag ++= ">"
+        strb ++= "</" ++= tag += '>'
       }
     }
+
+    def apply(xs: Modifier*): TypedTag[T] = {
+      this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
+    }
+
     /**
      * Converts an ScalaTag fragment into an html string
      */
@@ -154,12 +150,6 @@ object Text extends Bundle[StringBuilder] {
       val strb = new StringBuilder
       writeTo(strb)
       strb.toString()
-    }
-
-    override def transform(children: List[Node] = children,
-                           attrs: SortedMap[Attr, AttrVal] = attrs,
-                           styles: SortedMap[Style, StyleVal] = styles): Self = {
-      this.copy(children=children, attrs=attrs, styles=styles)
     }
   }
   type Tag = TypedTag[Platform.Base]
