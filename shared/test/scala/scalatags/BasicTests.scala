@@ -6,7 +6,7 @@ import utest._
 
 import TestUtil._
 import scala.collection.SortedMap
-import scalatags.generic.Style
+
 
 object BasicTests extends TestSuite{
 
@@ -30,26 +30,10 @@ object BasicTests extends TestSuite{
     }
 
     'cssHelpers{
-
       assert(10.px == "10px")
       assert(10.0.px == "10.0px" || 10.0.px == "10px")
       assert(10.em == "10em")
       assert(10.pt == "10pt")
-    }
-
-    'styleConvertsThingsToCamelcase{
-      assert("i-am-a-cow".style.jsName == "iAmACow")
-    }
-    'styleListIsGenerated{
-      val frag = div(
-        style:="background-color: red;",
-        float.left,
-        height:=10.px
-      )
-      // "background-color" -> "red" is stored in `attrs` not `styles`
-      val expected = SortedMap[Style, StyleVal](float -> "left", height -> "10px")
-      val styleList = frag.styles
-      assert(styleList.toString == expected.toString)
     }
   }
 }

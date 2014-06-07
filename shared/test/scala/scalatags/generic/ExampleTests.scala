@@ -1,8 +1,7 @@
 package scalatags
 package generic
 import utest._
-import scala.collection.SortedMap
-import scalatags.generic.Style
+
 import TestUtil.strCheck
 import acyclic.file
 class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
@@ -26,18 +25,18 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
         )
       ),
       """
-        <html>
-            <head>
-                <script src="..."></script>
-                <script>alert('Hello World')</script>
-            </head>
-            <body>
-                <div>
-                    <h1 id="title">This is a title</h1>
-                    <p>This is a big paragraph of text</p>
-                </div>
-            </body>
-        </html>
+      <html>
+          <head>
+              <script src="..."></script>
+              <script>alert('Hello World')</script>
+          </head>
+          <body>
+              <div>
+                  <h1 id="title">This is a title</h1>
+                  <p>This is a big paragraph of text</p>
+              </div>
+          </body>
+      </html>
       """
     )
     'helloWorld-strCheck(
@@ -365,106 +364,11 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
         </div>
       """
     )
-   'filtersAndTransformations-strCheck({
-      def uppercase(node: Node): Node = {
-        node match{
-          case t: omg.Tag => t.transform(children = t.children.map(uppercase))
-          case RawNode(r) => r
-          case StringNode(v) => StringNode(v.toUpperCase)
-        }
-      }
-      html(
-        head(
-          script("some script")
-        ),
-        uppercase(
-          body(
-            h1("This is my title"),
-            div(
-              p(onclick:="... do some js")(
-                "This is my first paragraph"
-              ),
-              a(href:="www.google.com")(
-                p("Goooogle")
-              )
-            )
-          )
-        )
-      )},
-    """
-        <html>
-            <head>
-                <script>some script</script>
-            </head>
-            <body>
-                <h1>THIS IS MY TITLE</h1>
-                <div>
-                    <p onclick="... do some js">
-                        THIS IS MY FIRST PARAGRAPH
-                    </p>
-                    <a href="www.google.com">
-                        <p>GOOOOGLE</p>
-                    </a>
-                </div>
-            </body>
-        </html>
-    """
-    )
-    'filtersandTransformationsComplex-strCheck({
-      def autoLink(node: Node): Seq[Node] = {
-        node match{
-          case t: Tag => Seq(t.transform(children = t.children.flatMap(autoLink)))
-          case RawNode(r) => Seq(r)
-          case StringNode(v) =>
-            val regex = "(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#]".r
-            val text = regex.split(v).map(StringNode)
-            val links =
-              regex.findAllMatchIn(v)
-                .map(_.toString)
-                .map{m => a(href:=m)(m)}
-                .toSeq
 
-            text.zipAll(links, StringNode(""), StringNode(""))
-              .flatMap{case (x, y) => Seq(x, y)}
-              .reverse
-        }
-      }
-
-      html(
-        head,
-        autoLink(
-          body(
-            h1("This is my title"),
-            div(
-              p(
-                "This is my first paragraph on http://www.github.com wooo"
-              ),
-              "I love http://www.google.com"
-            )
-          )
-        )
-      )
-    },
-    """
-        <html>
-            <head></head>
-            <body>
-                <h1>This is my title</h1>
-                <div>
-                    <p>
-                        This is my first paragraph on
-                        <a href="http://www.github.com">http://www.github.com</a> wooo
-                    </p>
-                    I love <a href="http://www.google.com">http://www.google.com</a>
-                </div>
-            </body>
-        </html>
-    """
-    )
 
     'layouts-strCheck(
     {
-      def page(scripts: Seq[Node], content: Seq[Node]) =
+      def page(scripts: Seq[Modifier], content: Seq[Modifier]) =
         html(
           head(scripts),
           body(

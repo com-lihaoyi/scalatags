@@ -52,44 +52,35 @@ trait Bundle[T]{
   type SvgTags = generic.SvgTags[T]
   type SvgStyles = generic.SvgStyles[T]
   type Util = generic.Util[T]
-  type Node = generic.Node[T]
-  type AttrVal = generic.AttrVal[T]
-  type StyleVal = generic.StyleVal[T]
 
   type Attr = generic.Attr
   type Style = generic.Style
   type Modifier = generic.Modifier[T]
-  type Mod = generic.Mod[T]
-  object Mod {
-    type Attr = generic.Mod.Attr[T]
-    val Attr = generic.Mod.Attr
-    type Style = generic.Mod.Style[T]
-    val Style = generic.Mod.Style
-    type Child = generic.Mod.Child[T]
-    val Child = generic.Mod.Child
-  }
+  type AttrValue[V] = generic.AttrValue[T, V]
+  type StyleValue[V] = generic.StyleValue[T, V]
 
-  implicit def stringAttr(s: String): AttrVal
-  implicit def booleanAttr(b: Boolean): AttrVal
-  implicit def numericAttr[V: Numeric](n: V) : AttrVal
-  implicit def stringStyle(s: String): StyleVal
-  implicit def booleanStyle(b: Boolean): StyleVal
-  implicit def numericStyle[V: Numeric](n: V): StyleVal
+  implicit def stringAttr: AttrValue[String]
+  implicit def booleanAttr: AttrValue[Boolean]
+  implicit def numericAttr[V: Numeric]: AttrValue[V]
+  implicit def stringStyle: StyleValue[String]
+  implicit def booleanStyle: StyleValue[Boolean]
+  implicit def numericStyle[V: Numeric]: StyleValue[V]
 
   /**
    * Allows you to modify a HtmlTag by adding a String to its list of children
    */
-  implicit def stringNode(v: String): Node
+  implicit def stringNode(v: String): Modifier
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def NumericModifier[V: Numeric](u: V): Node
+  implicit def NumericModifier[V: Numeric](u: V): Modifier
+
   type Tag <: generic.TypedTag[Platform.Base, T]
 
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
-  type RawNode <: Node
+  type RawNode <: Modifier
   val RawNode: Companion[RawNode]
 
   /**
@@ -100,7 +91,7 @@ trait Bundle[T]{
   /**
    * A [[Node]] which contains a String.
    */
-  type StringNode <: Node
+  type StringNode <: Modifier
   val StringNode: Companion[StringNode]
 }
 

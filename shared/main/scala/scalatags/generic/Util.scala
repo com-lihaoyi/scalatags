@@ -11,8 +11,12 @@ trait Util[Target] {
 
   type ConcreteHtmlTag[T <: Platform.Base] <: TypedTag[T, Target]
   def makeAbstractTypedTag[T <: Base](tag: String, void: Boolean): ConcreteHtmlTag[T]
-  protected[this] implicit def stringAttrInternal(s: String): AttrVal[Target]
-  protected[this] implicit def stringStyleInternal(s: String): StyleVal[Target]
+  protected[this] implicit def stringAttr: AttrValue[Target, String]
+  protected[this] implicit def booleanAttr: AttrValue[Target, Boolean]
+  protected[this] implicit def numericAttr[T: Numeric]: AttrValue[Target, T]
+  protected[this] implicit def stringStyle: StyleValue[Target, String]
+  protected[this] implicit def booleanStyle: StyleValue[Target, Boolean]
+  protected[this] implicit def numericStyle[T: Numeric]: StyleValue[Target, T]
 
   /**
    * Provides extension methods on strings to fit them into Scalatag fragments.
@@ -74,7 +78,7 @@ trait Util[Target] {
    * objects to its list of children.
    */
   implicit class SeqModifier[A <% Modifier[Target]](xs: Seq[A]) extends Modifier[Target]{
-    def transforms = xs.flatMap(_.transforms).toArray
+    def applyTo(t: Target) = xs.foreach(_.applyTo(t))
   }
 
   /**
@@ -93,6 +97,6 @@ trait Util[Target] {
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
   implicit def UnitModifier(u: Unit) = new Modifier[Target]{
-    def transforms = Array.empty
+    def applyTo(t: Target) = ()
   }
 }

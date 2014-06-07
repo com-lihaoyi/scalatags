@@ -6,12 +6,13 @@ import utest.framework.TestSuite
 import utest._
 
 import TestUtil._
-import scala.collection.SortedMap
-import scalatags.generic.{StyleVal, Style}
 
 class BasicTests[T](omg: Bundle[T]) extends TestSuite{
   import omg._
   import all._
+  def main(args: Array[String]): Unit = {
+    println(a(href := "www.google.com", color := "red", "iogmomomg", style := "fff; ", span("lol")))
+  }
   val tests = TestSuite{
     'cssChaining2-strCheck(
       div(

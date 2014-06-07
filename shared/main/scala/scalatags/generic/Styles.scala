@@ -364,7 +364,7 @@ trait Styles2[Target] extends Util[Target] with StyleMisc[Target]{
    * MDN
    */
   object columns extends Style("columns", "columns") {
-    def :=(number: Int, width: String): StylePair[Target] = this := s"$number $width"
+    def :=(number: Int, width: String): StylePair[Target, String] = this := s"$number $width"
   }
 
   /**
@@ -1154,7 +1154,7 @@ trait Styles[Target] extends Util[Target] with StyleMisc[Target]{
    * MDN
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
-    def :=(horizontal: String, vertical: String): StylePair[Target] = this := s"$horizontal $vertical"
+    def :=(horizontal: String, vertical: String): StylePair[Target, String] = this := s"$horizontal $vertical"
   }
 
 

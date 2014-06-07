@@ -1,10 +1,9 @@
 package scalatags
 
 import org.scalajs.dom
-import scala.collection.SortedMap
-import scala.annotation.switch
 import scala.scalajs.js
-import scalatags.JsDom.Bind
+
+
 /**
  * A Scalatags module that generates `dom.Element`s when the tags are rendered.
  * This provides some additional flexibility over the [[Text]] backend, as you
@@ -28,16 +27,15 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   trait StringTags extends Util{ self =>
     type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
 
-    protected[this] implicit def stringAttrInternal(s: String) = new StringAttr(s)
-    protected[this] implicit def booleanAttrInternal(b: Boolean) = new BooleanAttr(b)
-    protected[this] implicit def numericAttrInternal[T: Numeric](n: T) = new NumericAttr(n)
-
-    protected[this] implicit def stringStyleInternal(s: String) = new StringStyle(s)
-    protected[this] implicit def booleanStyleInternal(b: Boolean) = new BooleanStyle(b)
-    protected[this] implicit def numericStyleInternal[T: Numeric](n: T) = new NumericStyle(n)
+    protected[this] implicit def stringAttr = new GenericAttr[String]
+    protected[this] implicit def booleanAttr= new GenericAttr[Boolean]
+    protected[this] implicit def numericAttr[T: Numeric] = new GenericAttr[T]
+    protected[this] implicit def stringStyle = new GenericStyle[String]
+    protected[this] implicit def booleanStyle = new GenericStyle[Boolean]
+    protected[this] implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
     def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean): TypedTag[T] = {
-      TypedTag(tag, Nil, SortedMap.empty, SortedMap.empty, void)
+      TypedTag(tag, Nil, void)
     }
   }
 
@@ -54,68 +52,53 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
    * A [[Node]] which contains a String.
    */
   object StringNode extends Companion[StringNode]
-  case class StringNode(v: String) extends Node {
-    def writeTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
+  case class StringNode(v: String) extends Modifier {
+    def applyTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
   }
-  case class Bind(v: js.Any) extends AttrVal{
-    def applyTo(elem: dom.Element, k: Attr): Unit = {
-      elem.asInstanceOf[js.Dynamic].updateDynamic(k.name)(v)
-    }
 
-    override def merge(o: AttrVal): AttrVal = ???
-    override def applyPartial(t: dom.Element): Unit = ???
-  }
   def raw(s: String) = new RawNode(s)
   /**
    * A [[Node]] which contains a String which will not be escaped.
    */
   object RawNode extends Companion[RawNode]
-  case class RawNode(v: String) extends Node {
-    def writeTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
+  case class RawNode(v: String) extends Modifier {
+    def applyTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
   }
 
-  class GenericAttr[T](val t: T) extends AttrVal{
-    def applyTo(elem: dom.Element, k: Attr): Unit = {
-      elem.setAttribute(k.name, t.toString)
-    }
-
-    override def merge(o: AttrVal): AttrVal = ???
-    override def applyPartial(t: dom.Element): Unit = ???
-  }
-  case class StringAttr(s: String) extends GenericAttr(s)
-  case class BooleanAttr(b: Boolean) extends GenericAttr(b)
-  case class NumericAttr[T: Numeric](n: T) extends GenericAttr(n)
-  implicit def stringAttr(s: String) = new StringAttr(s)
-  implicit def booleanAttr(b: Boolean) = new BooleanAttr(b)
-  implicit def numericAttr[T: Numeric](n: T) = new NumericAttr(n)
-
-
-  class GenericStyle[T](t: T) extends StyleVal{
-    override def applyTo(elem: dom.Element, k: Style): Unit = {
-      elem.asInstanceOf[dom.HTMLElement]
-          .style
-          .setProperty(k.cssName, t.toString)
+  class GenericAttr[T] extends AttrValue[T]{
+    def apply(t: dom.Element, a: Attr, v: T): Unit = {
+      t.setAttribute(a.name, v.toString)
     }
   }
-  case class StringStyle(s: String) extends GenericStyle(s)
-  case class BooleanStyle(b: Boolean) extends GenericStyle(b)
-  case class NumericStyle[T: Numeric](n: T) extends GenericStyle(n)
-  implicit def stringStyle(s: String) = new StringStyle(s)
-  implicit def booleanStyle(b: Boolean) = new BooleanStyle(b)
-  implicit def numericStyle[T: Numeric](n: T) = new NumericStyle(n)
+  implicit def stringAttr = new GenericAttr[String]
+  implicit def booleanAttr= new GenericAttr[Boolean]
+  implicit def numericAttr[T: Numeric] = new GenericAttr[T]
+
+
+  class GenericStyle[T] extends StyleValue[T]{
+    def apply(t: dom.Element, s: Style, v: T): Unit = {
+      dom.console.log("GenericStyle")
+      dom.console.log(t.outerHTML + " " + s + " " + v)
+      t.asInstanceOf[dom.HTMLElement]
+       .style
+       .setProperty(s.cssName, t.toString)
+      dom.console.log(t.outerHTML)
+    }
+  }
+  implicit def stringStyle = new GenericStyle[String]
+  implicit def booleanStyle = new GenericStyle[Boolean]
+  implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+T <: Platform.Base](tag: String = "",
-                                              children: List[Node],
-                                              attrs: SortedMap[Attr, AttrVal],
-                                              styles: SortedMap[Style, StyleVal],
-                                              void: Boolean = false)
-    extends generic.TypedTag[T, dom.Element]{
+                                           modifiers: List[Modifier],
+                                           void: Boolean = false)
+                                           extends generic.TypedTag[T, dom.Element]{
     protected[this] type Self = TypedTag[T]
 
     /**
      * Serialize this [[HtmlTag]] and all its children out to the given dom.Element.
      */
-    def writeTo(elem: dom.Element): Unit = {
+    def applyTo(elem: dom.Element): Unit = {
       elem.appendChild(toDom)
     }
     /**
@@ -123,51 +106,14 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
      */
     def toDom: T = {
       val elem = dom.document.createElement(tag)
-      var styleWritten = false
-      def applyStyles() = {
-        for (pair <- styles) {
-          pair._2.applyTo(elem, pair._1)
-        }
-      }
-      for (pair <- attrs) {
-        val attr = pair._1
-        val value = pair._2
-
-        val cmp = attr.name.toString compareTo "style"
-        (cmp: @switch) match {
-          case -1 => value.applyTo(elem, attr)
-          case 1 if !styleWritten =>
-            applyStyles()
-            value.applyTo(elem, attr)
-            styleWritten = true
-          case 0 if !styleWritten =>
-            value.applyTo(elem, attr)
-            applyStyles()
-            styleWritten = true
-        }
-      }
-      if (!styleWritten) applyStyles()
-
-      var x = children.reverse
-      while (!x.isEmpty) {
-        val child :: newX = x
-        x = newX
-        child.writeTo(elem)
-      }
+      modifiers.map(_.applyTo(elem))
       elem.asInstanceOf[T]
     }
-
-    override def transform(children: List[Node],
-                           attrs: SortedMap[Attr, AttrVal],
-                           styles: SortedMap[Style, StyleVal]): TypedTag[T] = {
-      this.copy(children=children, attrs=attrs, styles=styles)
-    }
-
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
-    override def apply(xs: Modifier*): TypedTag[T] = {
-      super.apply(xs:_*)
+    def apply(xs: Modifier*): TypedTag[T] = {
+      this.copy(tag=tag, void = void, modifiers = modifiers ::: xs.toList)
     }
     override def toString = toDom.outerHTML
   }
@@ -180,5 +126,14 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
 }
 
 trait LowPriorityImplicits{
-  implicit def bindable[T <% js.Any](x: T) = Bind(x)
+  implicit object bindJsAny extends generic.AttrValue[dom.Element, js.Any]{
+    def apply(t: dom.Element, a: generic.Attr, v: js.Any): Unit = {
+      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
+    }
+  }
+  implicit def bindJsAnyLike[T <% js.Any] = new generic.AttrValue[dom.Element, T]{
+    def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
+      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
+    }
+  }
 }

@@ -8,7 +8,6 @@ import TestUtil._
 import org.scalajs.dom
 import scala.scalajs.js
 object DomTests extends TestSuite{
-
   def tests = TestSuite{
     'basic {
       'children {
@@ -41,7 +40,8 @@ object DomTests extends TestSuite{
           float.left,
           backgroundColor := "yellow"
         ).toDom
-
+        dom.console.log("OMGOMG")
+        dom.console.log(elem.outerHTML)
         assert(elem.style.color == "red")
         assert(elem.style.cssFloat == "left")
         assert(elem.style.backgroundColor == "yellow")
