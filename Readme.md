@@ -392,8 +392,8 @@ You can pick and choose exactly which bits you want to import, or you can use on
 Thus, you can choose exactly what you want to import, and how:
 
 ```scala
-import scalatags.Text.{Attributes => attr, Styles => css, _}
-import scalatags.Text.generic.Tags._
+import scalatags.Text.{attrs => attr, styles => css, _}
+import scalatags.Text.tags._
 div(
   p(css.color:="red")("Red Text"),
   img(attr.href:="www.imgur.com/picture.jpg")
@@ -410,23 +410,7 @@ div(
 )
 ```
 
-If you wish to put together your own collection of imports, all the objects described above ([Tags](http://lihaoyi.github.io/scalatags/#scalatags.Text.generic.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Text.Attrs), etc.) are also available as traits, so you can put together your own:
-
-```scala
-object custom extends Tags{
-  val attr = new Attributes {}
-  val css = new Styles {}
-}
-import custom._
-div(
-  p(css.color:="red")("Red Text"),
-  img(attr.href:="www.imgur.com/picture.jpg")
-)
-```
-
-In this case, you can define `custom` top-level somewhere, and simply have everyone else use `import custom._` to get exactly what you want.
-
-All three of these examples print:
+Both these examples print:
 
 ```html
 <div>

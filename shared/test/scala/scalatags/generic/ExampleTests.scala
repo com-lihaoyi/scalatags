@@ -466,24 +466,13 @@ class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
         p(css.color:="red")("Red Text"),
         img(attr.href:="www.imgur.com/picture.jpg")
       )
-    }/*,
-    {
-      object custom extends Tags{
-        val attr = new Attrs {}
-        val css = new Styles {}
-      }
-      import custom._
-      div(
-        p(css.color:="red")("Red Text"),
-        img(attr.href:="www.imgur.com/picture.jpg")
-      )
     },
     """
         <div>
             <p style="color: red;">Red Text</p>
             <img href="www.imgur.com/picture.jpg" />
         </div>
-    """*/
+    """
     )
 
     'properEscaping-strCheck(
