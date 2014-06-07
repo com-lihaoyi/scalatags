@@ -93,12 +93,12 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
      * Serialize this [[HtmlTag]] and all its children out to the given dom.Element.
      */
     def applyTo(elem: dom.Element): Unit = {
-      elem.appendChild(toDom)
+      elem.appendChild(render)
     }
     /**
      * Converts an ScalaTag fragment into an html string
      */
-    def toDom: T = {
+    def render: T = {
       val elem = dom.document.createElement(tag)
       build(elem)
       elem.asInstanceOf[T]
@@ -109,7 +109,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
     def apply(xs: Node*): TypedTag[T] = {
       this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
-    override def toString = toDom.outerHTML
+    override def toString = render.outerHTML
   }
   type HtmlTag = TypedTag[dom.HTMLElement]
   val HtmlTag = TypedTag

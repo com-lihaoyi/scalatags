@@ -1,4 +1,4 @@
-ScalaTags 0.2.5
+ScalaTags 0.3.0-RC1
 ===============
 
 ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
@@ -74,7 +74,7 @@ Getting Started
 ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cscalatags); to get started, simply add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.scalatags" %% "scalatags" % "0.2.5"
+libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.0-RC1"
 ```
 
 And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
@@ -85,7 +85,7 @@ ScalaJS
 To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
 ```scala
-libraryDependencies += "com.scalatags" %% "scalatags" % "0.2.5-JS"
+libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.0-RC1"
 ```
 
 And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 2.4-JS is currently only compatibly with ScalaJS 0.4.x.
@@ -782,12 +782,12 @@ This gives you a version of Scalatags that renders directly to `dom.Element`s, r
 Using the DOM
 -------------
 
-The DOM backend provides an additional method `.toDom` on all Scalatags fragments, which converts the fragment into a DOM tree:
+The DOM backend provides an additional method `.render` on all Scalatags fragments, which converts the fragment into a DOM tree:
 
 ```scala
-val elem = div.toDom
+val elem = div.render
 println(elem.children.length) // 0
-elem.appendChild(p("omg", "wtf", "bbq").toDom)
+elem.appendChild(p("omg", "wtf", "bbq").render)
 println(elem.children.length) // 1
 val pElem = elem.children(0).asInstanceOf[dom.HTMLParagraphElement]
 println(pElem.childNodes.length) // 3
@@ -803,7 +803,7 @@ var count = 0
 val elem = div(
   onclick := {() => count += 1},
   tabindex := 1
-).toDom
+).render
 
 assert(count == 0)
 elem.onclick(null)
@@ -817,17 +817,17 @@ Use Cases
 Having direct access to the DOM allows a great deal of flexibility that you do not have when working with strings. For example, the example below defines an input-label pair which clears the label when you focus on the input, a common pattern:
  
 ```scala
-val labelElem = label("Default").toDom
+val labelElem = label("Default").render
 
 val inputElem = input(
   `type`:="text",
   onfocus := { () => labelElem.textContent = ""}
-).toDom
+).render
 
 val box = div(
   inputElem,
   labelElem
-).toDom
+).render
 
 println(labelElem.textContent) // "Default"
 inputElem.onfocus(null)

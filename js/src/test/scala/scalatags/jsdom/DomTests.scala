@@ -11,9 +11,9 @@ object DomTests extends TestSuite{
   def tests = TestSuite{
     'basic {
       'children {
-        val elem = div.toDom
+        val elem = div.render
         assert(elem.children.length == 0)
-        elem.appendChild(p("omg", "wtf", "bbq").toDom)
+        elem.appendChild(p("omg", "wtf", "bbq").render)
         assert(elem.children.length == 1)
         val pElem = elem.children(0).asInstanceOf[dom.HTMLParagraphElement]
         assert(pElem.childNodes.length == 3)
@@ -25,7 +25,7 @@ object DomTests extends TestSuite{
         val elem = a(
           href := url,
           "Google"
-        ).toDom
+        ).render
 
         assert(elem.href == url)
         assert(elem.children.length == 0)
@@ -39,7 +39,7 @@ object DomTests extends TestSuite{
           color := "red",
           float.left,
           backgroundColor := "yellow"
-        ).toDom
+        ).render
         assert(elem.style.color == "red")
         assert(elem.style.cssFloat == "left")
         assert(elem.style.backgroundColor == "yellow")
@@ -55,7 +55,7 @@ object DomTests extends TestSuite{
         val elem = div(
           onclick := { () => count += 1},
           tabindex := 1
-        ).toDom
+        ).render
 
         assert(count == 0)
         elem.onclick(null)
@@ -65,17 +65,17 @@ object DomTests extends TestSuite{
         // Wrapping this, because for some reason if I leave it top-level
         // the compiler crashes =(
         def runTriggers() = {
-          val labelElem = label("Default").toDom
+          val labelElem = label("Default").render
 
           val inputElem = input(
             `type`:="text",
             onfocus := { () => labelElem.textContent = ""}
-          ).toDom
+          ).render
 
           val box = div(
             inputElem,
             labelElem
-          ).toDom
+          ).render
 
           assert(labelElem.textContent == "Default")
           inputElem.onfocus(null)
