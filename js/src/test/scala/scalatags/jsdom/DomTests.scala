@@ -40,14 +40,12 @@ object DomTests extends TestSuite{
           float.left,
           backgroundColor := "yellow"
         ).toDom
-        dom.console.log("OMGOMG")
-        dom.console.log(elem.outerHTML)
         assert(elem.style.color == "red")
         assert(elem.style.cssFloat == "left")
         assert(elem.style.backgroundColor == "yellow")
         // styles end up being sorted in alphabetical order
         assert(
-          elem.getAttribute("style") == "background-color: yellow; color: red; float: left; "
+          elem.getAttribute("style") == "color: red; float: left; background-color: yellow; "
         )
       }
     }

@@ -20,7 +20,6 @@ trait Modifier[Target] {
   def applyTo(t: Target): Unit
 }
 
-
 /**
  * A generic representation of a Scalatags tag.
  *
@@ -31,8 +30,6 @@ trait Modifier[Target] {
 trait TypedTag[+T <: Base, Target] extends Modifier[Target]{
   protected[this] type Self <: TypedTag[T, Target]
   def tag: String
-  def modifiers: List[Modifier[Target]]
-
 
   /**
    * Add the given modifications (e.g. additional children, or new attributes)

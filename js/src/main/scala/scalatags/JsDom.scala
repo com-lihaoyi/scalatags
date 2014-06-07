@@ -74,15 +74,11 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   implicit def booleanAttr= new GenericAttr[Boolean]
   implicit def numericAttr[T: Numeric] = new GenericAttr[T]
 
-
   class GenericStyle[T] extends StyleValue[T]{
     def apply(t: dom.Element, s: Style, v: T): Unit = {
-      dom.console.log("GenericStyle")
-      dom.console.log(t.outerHTML + " " + s + " " + v)
       t.asInstanceOf[dom.HTMLElement]
        .style
-       .setProperty(s.cssName, t.toString)
-      dom.console.log(t.outerHTML)
+       .setProperty(s.cssName, v.toString)
     }
   }
   implicit def stringStyle = new GenericStyle[String]
@@ -106,7 +102,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
      */
     def toDom: T = {
       val elem = dom.document.createElement(tag)
-      modifiers.map(_.applyTo(elem))
+      modifiers.foreach(_.applyTo(elem))
       elem.asInstanceOf[T]
     }
     /**

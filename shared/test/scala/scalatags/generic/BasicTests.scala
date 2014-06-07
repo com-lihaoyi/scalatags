@@ -14,13 +14,6 @@ class BasicTests[T](omg: Bundle[T]) extends TestSuite{
     println(a(href := "www.google.com", color := "red", "iogmomomg", style := "fff; ", span("lol")))
   }
   val tests = TestSuite{
-    'cssChaining2-strCheck(
-      div(
-        float.left,
-        color:="red"
-      ),
-      """<div style="color: red; float: left;"></div>"""
-    )
 
     /**
      * Tests nesting tags in a simple hierarchy
@@ -59,14 +52,14 @@ class BasicTests[T](omg: Bundle[T]) extends TestSuite{
         float.left,
         color:="red"
       ),
-      """<div style="color: red; float: left;"></div>"""
+      """<div style="float: left; color: red;"></div>"""
     )
 
 
     'attributeChaining-strCheck(
       div(
-        id:="cow",
-        `class`:="thing lol"
+        `class`:="thing lol",
+        id:="cow"
       ),
       """<div class="thing lol" id="cow"></div>"""
     )
@@ -85,9 +78,9 @@ class BasicTests[T](omg: Bundle[T]) extends TestSuite{
       strCheck(
         //class/style after attr appends, but attr after class/style overwrites
         div(
-          float.left,
-          style:="background-color: red;",
           cls:="my-class",
+          style:="background-color: red;",
+          float.left,
           p("i am a cow")
         ),
         """<div class="my-class" style="background-color: red; float: left;"><p>i am a cow</p></div>"""
