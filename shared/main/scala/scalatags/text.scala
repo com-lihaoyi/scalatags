@@ -4,6 +4,7 @@ import scalatags.generic._
 import scala.collection.SortedMap
 import acyclic.file
 import collection.mutable
+import scala.annotation.unchecked.uncheckedVariance
 
 /**
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
@@ -85,7 +86,10 @@ object Text extends Bundle[text.Builder] {
                                            void: Boolean = false)
                                            extends generic.TypedTag[T, text.Builder]
                                            with text.Child{
-    protected[this] type Self = TypedTag[T]
+    // unchecked because Scala 2.10.4 seems to not like this, even though
+    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
+    // and so just force this.
+    protected[this] type Self = TypedTag[T @uncheckedVariance]
 
     /**
      * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.

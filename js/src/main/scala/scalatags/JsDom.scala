@@ -4,6 +4,7 @@ import org.scalajs.dom
 import scala.scalajs.js
 import scalatags.generic.Node
 import org.scalajs.dom.Element
+import scala.annotation.unchecked.uncheckedVariance
 
 
 /**
@@ -87,7 +88,10 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
                                            modifiers: List[Seq[Node]],
                                            void: Boolean = false)
                                            extends generic.TypedTag[T, dom.Element]{
-    protected[this] type Self = TypedTag[T]
+    // unchecked because Scala 2.10.4 seems to not like this, even though
+    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
+    // and so just force this.
+    protected[this] type Self = TypedTag[T @uncheckedVariance]
 
     /**
      * Serialize this [[HtmlTag]] and all its children out to the given dom.Element.
