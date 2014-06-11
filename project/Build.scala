@@ -4,6 +4,7 @@ import scala.scalajs.sbtplugin.env.nodejs.NodeJSEnv
 import scala.scalajs.sbtplugin._
 
 import scala.scalajs.sbtplugin.env.phantomjs.PhantomJSEnv
+import scala.scalajs.sbtplugin.testing.JSClasspathLoader
 import ScalaJSPlugin._
 import ScalaJSKeys._
 import twirl.sbt.TwirlPlugin._
@@ -13,7 +14,7 @@ object Build extends sbt.Build{
     organization := "com.scalatags",
     name := "scalatags",
     autoCompilerPlugins := true,
-    libraryDependencies ++= Seq("com.lihaoyi" %% "acyclic" % "0.1.2" % "provided"),
+    libraryDependencies += "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
 
     libraryDependencies ++= (
@@ -22,7 +23,7 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.3.0-RC1",
+    version := "0.3.0-RC2",
     publishTo <<= version { (v: String) =>
       Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },
@@ -54,14 +55,9 @@ object Build extends sbt.Build{
     libraryDependencies ++= Seq(
       "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.4"
     ),
-    (jsEnv in Test) := new PhantomJSEnv
+    (jsEnv in Test) := new PhantomJSEnv,
+    (testLoader in Test) := JSClasspathLoader((execClasspath in Compile).value)
   )
 
-  lazy val jvm = cross.jvm.settings(
-    libraryDependencies ++= Seq(
-//      "org.fusesource.scalate" %% "scalate-core" % "1.6.1" % "test"
-    )
-//    sourceDirectory in twirlCompile := (sourceDirectory in Compile).value / "twirl"
-  )
-
+  lazy val jvm = cross.jvm
 }

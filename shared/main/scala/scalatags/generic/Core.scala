@@ -23,12 +23,12 @@ trait Node[Builder] {
 /**
  * A generic representation of a Scalatags tag.
  *
- * @tparam T The base type that this tag represents. On Scala-JVM, this is all
+ * @tparam Output The base type that this tag represents. On Scala-JVM, this is all
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[+T <: Base, Builder] extends Node[Builder]{
-  protected[this] type Self <: TypedTag[T, Builder]
+trait TypedTag[+Output <: Base, Builder] extends Node[Builder]{
+  protected[this] type Self <: TypedTag[Output, Builder]
   def tag: String
 
   /**
@@ -69,6 +69,7 @@ trait TypedTag[+T <: Base, Builder] extends Node[Builder]{
    * to the [[TypedTag]].
    */
   def apply(xs: Node[Builder]*): Self
+  def render: Output
 }
 
 /**

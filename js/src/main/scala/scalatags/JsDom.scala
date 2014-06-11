@@ -84,14 +84,14 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   implicit def booleanStyle = new GenericStyle[Boolean]
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
-  case class TypedTag[+T <: Platform.Base](tag: String = "",
+  case class TypedTag[+Output <: Platform.Base](tag: String = "",
                                            modifiers: List[Seq[Node]],
                                            void: Boolean = false)
-                                           extends generic.TypedTag[T, dom.Element]{
+                                           extends generic.TypedTag[Output, dom.Element]{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
-    protected[this] type Self = TypedTag[T @uncheckedVariance]
+    protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
     /**
      * Serialize this [[HtmlTag]] and all its children out to the given dom.Element.
@@ -102,15 +102,15 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
     /**
      * Converts an ScalaTag fragment into an html string
      */
-    def render: T = {
+    def render: Output = {
       val elem = dom.document.createElement(tag)
       build(elem)
-      elem.asInstanceOf[T]
+      elem.asInstanceOf[Output]
     }
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
-    def apply(xs: Node*): TypedTag[T] = {
+    def apply(xs: Node*): TypedTag[Output] = {
       this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
     override def toString = render.outerHTML

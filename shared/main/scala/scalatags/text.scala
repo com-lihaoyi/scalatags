@@ -81,15 +81,15 @@ object Text extends Bundle[text.Builder] {
   implicit val booleanStyle = new GenericStyle[Boolean]
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
-  case class TypedTag[+T <: Platform.Base](tag: String = "",
+  case class TypedTag[+Output <: Platform.Base](tag: String = "",
                                            modifiers: List[Seq[Node]],
                                            void: Boolean = false)
-                                           extends generic.TypedTag[T, text.Builder]
+                                           extends generic.TypedTag[Output, text.Builder]
                                            with text.Child{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
-    protected[this] type Self = TypedTag[T @uncheckedVariance]
+    protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
     /**
      * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.
@@ -132,7 +132,7 @@ object Text extends Bundle[text.Builder] {
       }
     }
 
-    def apply(xs: Node*): TypedTag[T] = {
+    def apply(xs: Node*): TypedTag[Output] = {
       this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
     }
 
@@ -144,6 +144,7 @@ object Text extends Bundle[text.Builder] {
       writeTo(strb)
       strb.toString()
     }
+    def render: Output = this.toString.asInstanceOf[Output]
   }
   type Tag = TypedTag[Platform.Base]
   val Tag = TypedTag
