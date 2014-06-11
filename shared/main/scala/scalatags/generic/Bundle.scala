@@ -23,7 +23,7 @@ import acyclic.file
  * in the common interface.
  *
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
- *           `Tag` is being rendered to give a final result.
+ *                 `Tag` is being rendered to give a final result.
  */
 trait Bundle[Builder]{
   /**
@@ -36,12 +36,33 @@ trait Bundle[Builder]{
    * via the `*` object
    */
   val short: AbstractShort[Builder]
+  /**
+   * Common attributes.
+   */
   val attrs: Attrs
+  /**
+   * Common tags
+   */
   val tags: Tags
+  /**
+   * Less common tags
+   */
   val tags2: Tags2
+  /**
+   * Common styles
+   */
   val styles: Styles
+  /**
+   * Less common styles
+   */
   val styles2: Styles2
+  /**
+   * SVG only tags
+   */
   val svgTags: SvgTags
+  /**
+   * SVG only styles
+   */
   val svgStyles: SvgStyles
 
   type Attrs = generic.Attrs[Builder]

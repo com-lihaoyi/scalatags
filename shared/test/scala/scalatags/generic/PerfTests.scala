@@ -3,10 +3,10 @@ package generic
 import acyclic.file
 import utest._
 
-class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTest {
+class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTests {
   import bundle._
   import all._
-  import generic.PerfTest._
+  import generic.PerfTests._
 
   def para(n: Int, m: generic.Node[T]*) = p(
     m,
@@ -42,7 +42,7 @@ class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTest {
   }
 
 }
-object PerfTest{
+object PerfTests{
   val titleString = "This is my title"
   val firstParaString = "This is my first paragraph"
   val contentpara = "contentpara"
@@ -70,14 +70,14 @@ object PerfTest{
     </html>
     """
 }
-trait PerfTest extends TestSuite{
+trait PerfTests extends TestSuite{
 
   def calc(): String
   def name: String = this.toString
   def tests = TestSuite{
     'correctness{
 
-      TestUtil.strCheck(calc(), PerfTest.expected)
+      TestUtil.strCheck(calc(), PerfTests.expected)
       'performance{
         println("Benchmarking " + this.name)
         val start = System.currentTimeMillis()

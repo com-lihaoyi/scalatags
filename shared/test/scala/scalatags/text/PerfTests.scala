@@ -6,8 +6,8 @@ import scalatags.generic
 case object ScalatagsPerf extends generic.ScalatagsPerf(scalatags.Text)
 
 
-case object ScalaXMLPerf extends generic.PerfTest{
-  import generic.PerfTest._
+case object ScalaXMLPerf extends generic.PerfTests{
+  import generic.PerfTests._
 
   def calc() = {
     def para(i: Int) = {
