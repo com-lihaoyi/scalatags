@@ -3,6 +3,7 @@ package scalatags
 import org.scalajs.dom
 import scala.scalajs.js
 import scalatags.generic.Node
+import scalatags.generic.Namespace
 import org.scalajs.dom.Element
 import scala.annotation.unchecked.uncheckedVariance
 
@@ -33,8 +34,8 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
     protected[this] implicit def stringAttr = new GenericAttr[String]
     protected[this] implicit def stringStyle = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean): TypedTag[T] = {
-      TypedTag(tag, Nil, void)
+    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean, namespace: Option[Namespace]): TypedTag[T] = {
+      TypedTag(tag, Nil, void, namespace)
     }
   }
 
@@ -86,7 +87,8 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
 
   case class TypedTag[+Output <: Platform.Base](tag: String = "",
                                            modifiers: List[Seq[Node]],
-                                           void: Boolean = false)
+                                           void: Boolean = false,
+                                           namespace: Option[Namespace])
                                            extends generic.TypedTag[Output, dom.Element]{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
@@ -103,7 +105,10 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
      * Converts an ScalaTag fragment into an html string
      */
     def render: Output = {
-      val elem = dom.document.createElement(tag)
+      val elem = namespace match {
+        case Some(Namespace(ns)) => dom.document.createElementNS(ns, tag)
+        case None => dom.document.createElement(tag)
+      }
       build(elem)
       elem.asInstanceOf[Output]
     }
