@@ -10,7 +10,7 @@ import scalatags._
 trait Util[Builder] {
 
   type ConcreteHtmlTag[T <: Platform.Base] <: TypedTag[T, Builder]
-  def makeAbstractTypedTag[T <: Base](tag: String, void: Boolean): ConcreteHtmlTag[T]
+  def makeAbstractTypedTag[T <: Base](tag: String, void: Boolean, namespace: Option[Namespace]): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttr: AttrValue[Builder, String]
   protected[this] implicit def stringStyle: StyleValue[Builder, String]
 
@@ -21,23 +21,23 @@ trait Util[Builder] {
     /**
      * Converts the string to a [[HtmlTag]]
      */
-    def tag[T <: Base] = {
+    def tag[T <: Base](implicit namespace: Namespace = null) = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      makeAbstractTypedTag[T](s, false)
+      makeAbstractTypedTag[T](s, false, Option(namespace))
     }
     /**
      * Converts the string to a void [[HtmlTag]]; that means that they cannot
      * contain any content, and can be rendered as self-closing tags.
      */
-    def voidTag[T <: Base] = {
+    def voidTag[T <: Base](implicit namespace: Namespace = null) = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      makeAbstractTypedTag[T](s, true)
+      makeAbstractTypedTag[T](s, true, Option(namespace))
     }
     /**
      * Converts the string to a [[UntypedAttr]]

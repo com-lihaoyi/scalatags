@@ -33,7 +33,7 @@ object Text extends Bundle[text.Builder] {
     protected[this] implicit def stringAttr = new GenericAttr[String]
     protected[this] implicit def stringStyle = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean) = {
+    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean, namespace: Option[Namespace]) = {
       TypedTag(tag, Nil, void)
     }
   }

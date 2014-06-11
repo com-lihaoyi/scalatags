@@ -133,3 +133,5 @@ case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) ext
 trait StyleValue[Builder, T]{
   def apply(t: Builder, s: Style, v: T)
 }
+
+case class Namespace(n: String)
