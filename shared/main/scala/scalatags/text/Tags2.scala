@@ -1,10 +1,13 @@
-package scalatags.generic
-import acyclic.file
+package scalatags
+package text
+
+import scalatags.generic.Util
+
 /**
  * Contains HTML tags which are used less frequently. These are generally
  * imported individually as needed.
  */
-trait Tags2[Builder] extends Util[Builder]{
+trait Tags2 extends generic.Tags2[Builder, String]{
 
   // Document Metadata
   /**

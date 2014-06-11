@@ -1,6 +1,7 @@
 package scalatags
 package generic
 import acyclic.file
+import scalatags.text
 
 /**
  * An abstract representation of the Scalatags package. This allows you to
@@ -25,7 +26,7 @@ import acyclic.file
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[Builder]{
+trait Bundle[Builder, Output]{
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
@@ -35,7 +36,7 @@ trait Bundle[Builder]{
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
-  val short: AbstractShort[Builder]
+  val short: AbstractShort[Builder, Output]
   /**
    * Common attributes.
    */
@@ -65,14 +66,14 @@ trait Bundle[Builder]{
    */
   val svgStyles: SvgStyles
 
-  type Attrs = generic.Attrs[Builder]
-  type Tags = generic.Tags[Builder]
-  type Tags2 = generic.Tags2[Builder]
-  type Styles = generic.Styles[Builder]
-  type Styles2 = generic.Styles2[Builder]
-  type SvgTags = generic.SvgTags[Builder]
-  type SvgStyles = generic.SvgStyles[Builder]
-  type Util = generic.Util[Builder]
+  type Attrs = generic.Attrs[Builder, Output]
+  type Tags = generic.Tags[Builder, Output]
+  type Tags2 = generic.Tags2[Builder, Output]
+  type Styles = generic.Styles[Builder, Output]
+  type Styles2 = generic.Styles2[Builder, Output]
+  type SvgTags = generic.SvgTags[Builder, Output]
+  type SvgStyles = generic.SvgStyles[Builder, Output]
+  type Util = generic.Util[Builder, Output]
 
   type Attr = generic.Attr
   type Style = generic.Style
@@ -96,7 +97,7 @@ trait Bundle[Builder]{
    */
   implicit def NumericNode[V: Numeric](u: V): Node
 
-  type Tag <: generic.TypedTag[Platform.Base, Builder]
+  type Tag <: generic.TypedTag[Output, Builder]
 
   /**
    * A [[Node]] which contains a String which will not be escaped.
@@ -116,6 +117,6 @@ trait Bundle[Builder]{
   val StringNode: Companion[StringNode]
 }
 
-trait AbstractShort[T]{
-  val `*`: generic.Attrs[T] with generic.Styles[T]
+trait AbstractShort[Builder, Output]{
+  val `*`: generic.Attrs[Builder, Output] with generic.Styles[Builder, Output]
 }

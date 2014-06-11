@@ -27,7 +27,7 @@ trait Node[Builder] {
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[+Output <: Base, Builder] extends Node[Builder]{
+trait TypedTag[+Output, Builder] extends Node[Builder]{
   protected[this] type Self <: TypedTag[Output, Builder]
   def tag: String
 

@@ -1,12 +1,13 @@
-package scalatags.generic
+package scalatags.jsdom
 
 import org.scalajs.dom
+import scalatags.generic.Util
 
 /**
   * Contains Tags which are only used for SVG. These are not imported by
   * default to avoid namespace pollution.
   */
-trait SvgTags[Builder] extends Util[Builder]{
+trait SvgTags extends Util[dom.Element, dom.Element]{
    /**
     * The altGlyph element allows sophisticated selection of the glyphs used to
     * render its child character data.

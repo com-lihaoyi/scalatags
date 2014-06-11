@@ -3,12 +3,12 @@ package generic
 import acyclic.file
 import utest._
 
-class ScalatagsPerf[T](val bundle: Bundle[T]) extends PerfTests {
+class ScalatagsPerf[Builder, Output](val bundle: Bundle[Builder, Output]) extends PerfTests {
   import bundle._
   import all._
   import generic.PerfTests._
 
-  def para(n: Int, m: generic.Node[T]*) = p(
+  def para(n: Int, m: generic.Node[Builder]*) = p(
     m,
     title := ("this is paragraph " + n)
   )

@@ -1,12 +1,35 @@
-package scalatags.generic
-import acyclic.file
+/**
+ * This file contains static bindings for the bulk of standardized HTML tags.
+ * The commonly used tags get imported by default, while the less commonly used
+ * tags are placed inside the `tag` object.
+ *
+ * Documentation marked "MDN" is thanks to Mozilla Contributors
+ * at https://developer.mozilla.org/en-US/docs/Web/API and available
+ * under the Creative Commons Attribution-ShareAlike v2.5 or later.
+ * http://creativecommons.org/licenses/by-sa/2.5/
+ *
+ * Everything else is under the MIT License
+ * http://opensource.org/licenses/MIT
+ *
+ * according to the spec (http://www.w3.org/TR/html5/syntax.html#void-elements),
+ * tags that cannot have any contents can be self closing. This means:
+ *
+ * area, base, br, col, command, embed, hr, img, input,
+ * keygen, link, meta, param, source, track, wbr
+ *
+ * Other tags cannot, and must have a separate closing tag even when empty.
+ */
+package scalatags.jsdom
+
+import org.scalajs.dom
+import scalatags.generic.Util
+
+
 /**
  * Trait that contains the contents of the `Tags` object, so they can be mixed
  * in to other objects if needed.
  */
-trait Tags[Builder] extends Util[Builder]{
-
-
+trait Tags extends Util[dom.Element, dom.Element]{
 
   // Root Element
   /**
@@ -15,7 +38,7 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val html = "html".tag
+  val html = "html".tag[dom.HTMLHtmlElement]
 
   // Document Metadata
   /**
@@ -24,26 +47,26 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val head = "head".tag
+  val head = "head".tag[dom.HTMLHeadElement]
 
   /**
    * Defines the base URL for relative URLs in the page.
    *
    *  MDN
    */
-  val base = "base".voidTag
+  val base = "base".voidTag[dom.HTMLBaseElement]
   /**
    * Used to link JavaScript and external CSS with the current HTML document.
    *
    *  MDN
    */
-  val link = "link".voidTag
+  val link = "link".voidTag[dom.HTMLLinkElement]
   /**
    * Defines metadata that can't be defined using another HTML element.
    *
    *  MDN
    */
-  val meta = "meta".voidTag
+  val meta = "meta".voidTag[dom.HTMLMetaElement]
 
 
   // Scripting
@@ -53,7 +76,7 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val script = "script".tag
+  val script = "script".tag[dom.HTMLScriptElement]
 
 
   // Sections
@@ -63,58 +86,58 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val body = "body".tag
+  val body = "body".tag[dom.HTMLBodyElement]
 
   /**
    * Heading level 1
    *
    *  MDN
    */
-  val h1 = "h1".tag
+  val h1 = "h1".tag[dom.HTMLHeadingElement]
   /**
    * Heading level 2
    *
    *  MDN
    */
-  val h2 = "h2".tag
+  val h2 = "h2".tag[dom.HTMLHeadingElement]
   /**
    * Heading level 3
    *
    *  MDN
    */
-  val h3 = "h3".tag
+  val h3 = "h3".tag[dom.HTMLHeadingElement]
   /**
    * Heading level 4
    *
    *  MDN
    */
-  val h4 = "h4".tag
+  val h4 = "h4".tag[dom.HTMLHeadingElement]
   /**
    * Heading level 5
    *
    *  MDN
    */
-  val h5 = "h5".tag
+  val h5 = "h5".tag[dom.HTMLHeadingElement]
   /**
    * Heading level 6
    *
    *  MDN
    */
-  val h6 = "h6".tag
+  val h6 = "h6".tag[dom.HTMLHeadingElement]
   /**
    * Defines the header of a page or section. It often contains a logo, the
    * title of the Web site, and a navigational table of content.
    *
    *  MDN
    */
-  val header = "header".tag
+  val header = "header".tag[dom.HTMLElement]
   /**
    * Defines the footer for a page or section. It often contains a copyright
    * notice, some links to legal information, or addresses to give feedback.
    *
    *  MDN
    */
-  val footer = "footer".tag
+  val footer = "footer".tag[dom.HTMLElement]
 
 
   // Grouping content
@@ -123,81 +146,81 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val p = "p".tag
+  val p = "p".tag[dom.HTMLParagraphElement]
   /**
    * Represents a thematic break between paragraphs of a section or article or
    * any longer content.
    *
    *  MDN
    */
-  val hr = "hr".voidTag
+  val hr = "hr".voidTag[dom.HTMLHRElement]
   /**
    * Indicates that its content is preformatted and that this format must be
    * preserved.
    *
    *  MDN
    */
-  val pre = "pre".tag
+  val pre = "pre".tag[dom.HTMLPreElement]
   /**
    * Represents a content that is quoted from another source.
    *
    *  MDN
    */
-  val blockquote = "blockquote".tag
+  val blockquote = "blockquote".tag[dom.HTMLQuoteElement]
   /**
    * Defines an ordered list of items.
    *
    *  MDN
    */
-  val ol = "ol".tag
+  val ol = "ol".tag[dom.HTMLOListElement]
   /**
    * Defines an unordered list of items.
    *
    *  MDN
    */
-  val ul = "ul".tag
+  val ul = "ul".tag[dom.HTMLUListElement]
   /**
    * Defines an item of an list.
    *
    *  MDN
    */
-  val li = "li".tag
+  val li = "li".tag[dom.HTMLLIElement]
   /**
    * Defines a definition list; al ist of terms and their associated definitions.
    *
    *  MDN
    */
-  val dl = "dl".tag
+  val dl = "dl".tag[dom.HTMLDListElement]
   /**
    * Represents a term defined by the next dd
    *
    *  MDN
    */
-  val dt = "dl".tag
+  val dt = "dl".tag[dom.HTMLDTElement]
   /**
    * Represents the definition of the terms immediately listed before it.
    *
    *  MDN
    */
-  val dd = "dd".tag
+  val dd = "dd".tag[dom.HTMLDDElement]
   /**
    * Represents a figure illustrated as part of the document.
    *
    *  MDN
    */
-  val figure = "figure".tag
+  val figure = "figure".tag[dom.HTMLElement]
   /**
    * Represents the legend of a figure.
    *
    *  MDN
    */
-  val figcaption = "figcaption".tag
+  val figcaption = "figcaption".tag[dom.HTMLElement]
   /**
    * Represents a generic container with no special meaning.
    *
    *  MDN
    */
-  val div = "div".tag
+  val div = "div".tag[dom.HTMLDivElement]
 
   // Text-level semantics
   /**
@@ -205,76 +228,76 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val a = "a".tag
+  val a = "a".tag[dom.HTMLAnchorElement]
   /**
    * Represents emphasized text.
    *
    *  MDN
    */
-  val em = "em".tag
+  val em = "em".tag[dom.HTMLElement]
   /**
    * Represents especially important text.
    *
    *  MDN
    */
-  val strong = "strong".tag
+  val strong = "strong".tag[dom.HTMLElement]
   /**
    * Represents a side comment; text like a disclaimer or copyright, which is not
    * essential to the comprehension of the document.
    *
    *  MDN
    */
-  val small = "small".tag
+  val small = "small".tag[dom.HTMLElement]
   /**
    * Strikethrough element, used for that is no longer accurate or relevant.
    *
    *  MDN
    */
-  val s = "s".tag
+  val s = "s".tag[dom.HTMLElement]
   /**
    * Represents the title of a work being cited.
    *
    *  MDN
    */
-  val cite = "cite".tag
+  val cite = "cite".tag[dom.HTMLElement]
 
   /**
    * Represents computer code.
    *
    *  MDN
    */
-  val code = "code".tag
+  val code = "code".tag[dom.HTMLElement]
 
   /**
    * Subscript tag
    *
    *  MDN
    */
-  val sub = "sub".tag
+  val sub = "sub".tag[dom.HTMLElement]
   /**
    * Superscript tag.
    *
    *  MDN
    */
-  val sup = "sup".tag
+  val sup = "sup".tag[dom.HTMLElement]
   /**
    * Italicized text.
    *
    *  MDN
    */
-  val i = "i".tag
+  val i = "i".tag[dom.HTMLElement]
   /**
    * Bold text.
    *
    *  MDN
    */
-  val b = "b".tag
+  val b = "b".tag[dom.HTMLElement]
   /**
    * Underlined text.
    *
    *  MDN
    */
-  val u = "u".tag
+  val u = "u".tag[dom.HTMLElement]
 
   /**
    * Represents text with no specific meaning. This has to be used when no other
@@ -283,20 +306,20 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val span = "span".tag
+  val span = "span".tag[dom.HTMLSpanElement]
   /**
    * Represents a line break.
    *
    *  MDN
    */
-  val br = "br".voidTag
+  val br = "br".voidTag[dom.HTMLBRElement]
   /**
    * Represents a line break opportunity, that is a suggested point for wrapping
    * text in order to improve readability of text split on several lines.
    *
    *  MDN
    */
-  val wbr = "wbr".voidTag
+  val wbr = "wbr".voidTag[dom.HTMLElement]
 
   // Edits
   /**
@@ -304,13 +327,13 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val ins = "ins".tag
+  val ins = "ins".tag[dom.HTMLModElement]
   /**
    * Defines a removal from the document.
    *
    *  MDN
    */
-  val del = "del".tag
+  val del = "del".tag[dom.HTMLModElement]
 
   // Embedded content
   /**
@@ -318,79 +341,79 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val img = "img".voidTag
+  val img = "img".voidTag[dom.HTMLImageElement]
   /**
    * Represents a nested browsing context, that is an embedded HTML document.
    *
    *  MDN
    */
-  val iframe = "iframe".tag
+  val iframe = "iframe".tag[dom.HTMLIFrameElement]
   /**
    * Represents a integration point for an external, often non-HTML, application
    * or interactive content.
    *
    *  MDN
    */
-  val embed = "embed".voidTag
+  val embed = "embed".voidTag[dom.HTMLEmbedElement]
   /**
    * Represents an external resource, which is treated as an image, an HTML
    * sub-document, or an external resource to be processed by a plug-in.
    *
    *  MDN
    */
-  val `object` = "object".tag
+  val `object` = "object".tag[dom.HTMLObjectElement]
   /**
    * Defines parameters for use by plug-ins invoked by object elements.
    *
    *  MDN
    */
-  val param = "param".voidTag
+  val param = "param".voidTag[dom.HTMLParamElement]
   /**
    * Represents a video, and its associated audio files and captions, with the
    * necessary interface to play it.
    *
    *  MDN
    */
-  val video = "video".tag
+  val video = "video".tag[dom.HTMLVideoElement]
   /**
    * Represents a sound or an audio stream.
    *
    *  MDN
    */
-  val audio = "audio".tag
+  val audio = "audio".tag[dom.HTMLAudioElement]
   /**
    * Allows the authors to specify alternate media resources for media elements
    * like video or audio
    *
    *  MDN
    */
-  val source = "source".voidTag
+  val source = "source".voidTag[dom.HTMLSourceElement]
   /**
    * Allows authors to specify timed text track for media elements like video or
    * audio
    *
    *  MDN
    */
-  val track = "track".voidTag
+  val track = "track".voidTag[dom.HTMLTrackElement]
   /**
    * Represents a bitmap area that scripts can use to render graphics like graphs,
    * games or any visual images on the fly.
    *
    *  MDN
    */
-  val canvas = "canvas".tag
+  val canvas = "canvas".tag[dom.HTMLCanvasElement]
   /**
    * In conjunction with area, defines an image map.
    *
    *  MDN
    */
-  val map = "map".tag
+  val map = "map".tag[dom.HTMLMapElement]
   /**
    * In conjunction with map, defines an image map
    *
    *  MDN
    */
-  val area = "area".voidTag
+  val area = "area".voidTag[dom.HTMLAreaElement]
 
 
   // Tabular data
@@ -399,61 +422,61 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val table = "table".tag
+  val table = "table".tag[dom.HTMLTableElement]
   /**
    * The title of a table.
    *
    *  MDN
    */
-  val caption = "caption".tag
+  val caption = "caption".tag[dom.HTMLTableCaptionElement]
   /**
    * A set of columns.
    *
    *  MDN
    */
-  val colgroup = "colgroup".tag
+  val colgroup = "colgroup".tag[dom.HTMLTableColElement]
   /**
    * A single column.
    *
    *  MDN
    */
-  val col = "col".voidTag
+  val col = "col".voidTag[dom.HTMLTableColElement]
   /**
    * The table body.
    *
    *  MDN
    */
-  val tbody = "tbody".tag
+  val tbody = "tbody".tag[dom.HTMLTableSectionElement]
   /**
    * The table headers.
    *
    *  MDN
    */
-  val thead = "thead".tag
+  val thead = "thead".tag[dom.HTMLTableSectionElement]
   /**
    * The table footer.
    *
    *  MDN
    */
-  val tfoot = "tfoot".tag
+  val tfoot = "tfoot".tag[dom.HTMLTableSectionElement]
   /**
    * A single row in a table.
    *
    *  MDN
    */
-  val tr = "tr".tag
+  val tr = "tr".tag[dom.HTMLTableRowElement]
   /**
    * A single cell in a table.
    *
    *  MDN
    */
-  val td = "td".tag
+  val td = "td".tag[dom.HTMLTableCellElement]
   /**
    * A header cell in a table.
    *
    *  MDN
    */
-  val th = "th".tag
+  val th = "th".tag[dom.HTMLTableHeaderCellElement]
 
   // Forms
   /**
@@ -462,65 +485,65 @@ trait Tags[Builder] extends Util[Builder]{
    *
    *  MDN
    */
-  val form = "form".tag
+  val form = "form".tag[dom.HTMLFormElement]
   /**
    * A set of fields.
    *
    *  MDN
    */
-  val fieldset = "fieldset".tag
+  val fieldset = "fieldset".tag[dom.HTMLFieldSetElement]
   /**
    * The caption for a fieldset.
    *
    *  MDN
    */
-  val legend = "legend".tag
+  val legend = "legend".tag[dom.HTMLLegendElement]
   /**
    * The caption of a single field
    *
    *  MDN
    */
-  val label = "label".tag
+  val label = "label".tag[dom.HTMLLabelElement]
   /**
    * A typed data field allowing the user to input data.
    *
    *  MDN
    */
-  val input = "input".voidTag
+  val input = "input".voidTag[dom.HTMLInputElement]
   /**
    * A button
    *
    *  MDN
    */
-  val button = "button".tag
+  val button = "button".tag[dom.HTMLButtonElement]
   /**
    * A control that allows the user to select one of a set of options.
    *
    *  MDN
    */
-  val select = "select".tag
+  val select = "select".tag[dom.HTMLSelectElement]
   /**
    * A set of predefined options for other controls.
    *
    *  MDN
    */
-  val datalist = "datalist".tag
+  val datalist = "datalist".tag[dom.HTMLDataListElement]
   /**
    * A set of options, logically grouped.
    *
    *  MDN
    */
-  val optgroup = "optgroup".tag
+  val optgroup = "optgroup".tag[dom.HTMLOptGroupElement]
   /**
    * An option in a select element.
    *
    *  MDN
    */
-  val option = "option".tag
+  val option = "option".tag[dom.HTMLOptionElement]
   /**
    * A multiline text edit control.
    *
    *  MDN
    */
-  val textarea = "textarea".tag
+  val textarea = "textarea".tag[dom.HTMLTextAreaElement]
 }

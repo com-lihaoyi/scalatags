@@ -7,7 +7,7 @@ import utest._
 
 import TestUtil._
 
-class BasicTests[Builder](omg: Bundle[Builder]) extends TestSuite{
+class BasicTests[Builder, Output](omg: Bundle[Builder, Output]) extends TestSuite{
   import omg._
   import all._
 

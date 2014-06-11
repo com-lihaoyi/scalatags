@@ -13,27 +13,27 @@ import scala.annotation.unchecked.uncheckedVariance
  * can bind structured objects to the attributes of your `dom.Element` without
  * serializing them first into strings.
  */
-object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
-  object all extends StringTags with Attrs with Styles with Tags with DataConverters with Util
-  object short extends StringTags with Util with DataConverters with generic.AbstractShort[dom.Element]{
+object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityImplicits{
+  object all extends StringTags with Attrs with Styles with jsdom.Tags with DataConverters
+  object short extends StringTags with Util with DataConverters with generic.AbstractShort[dom.Element, dom.Element]{
     object * extends StringTags with Attrs with Styles
   }
 
   object attrs extends StringTags with Attrs
-  object tags extends StringTags with Tags
-  object tags2 extends StringTags with Tags2
+  object tags extends StringTags with jsdom.Tags
+  object tags2 extends StringTags with jsdom.Tags2
   object styles extends StringTags with Styles
   object styles2 extends StringTags with Styles2
-  object svgTags extends StringTags with SvgTags
+  object svgTags extends StringTags with jsdom.SvgTags
   object svgStyles extends StringTags with SvgStyles
 
   trait StringTags extends Util{ self =>
-    type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
+    type ConcreteHtmlTag[T <: dom.Element] = TypedTag[T]
 
     protected[this] implicit def stringAttr = new GenericAttr[String]
     protected[this] implicit def stringStyle = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean): TypedTag[T] = {
+    def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean): TypedTag[T] = {
       TypedTag(tag, Nil, void)
     }
   }
@@ -84,7 +84,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   implicit def booleanStyle = new GenericStyle[Boolean]
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
-  case class TypedTag[+Output <: Platform.Base](tag: String = "",
+  case class TypedTag[+Output <: dom.Element](tag: String = "",
                                            modifiers: List[Seq[Node]],
                                            void: Boolean = false)
                                            extends generic.TypedTag[Output, dom.Element]{
@@ -119,7 +119,7 @@ object JsDom extends generic.Bundle[dom.Element] with LowPriorityImplicits{
   val HtmlTag = TypedTag
   type SvgTag = TypedTag[dom.SVGElement]
   val SvgTag = TypedTag
-  type Tag = TypedTag[Platform.Base]
+  type Tag = TypedTag[dom.Element]
   val Tag = TypedTag
 }
 
