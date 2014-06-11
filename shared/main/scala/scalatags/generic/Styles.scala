@@ -11,7 +11,7 @@ package scalatags
 package generic
 import acyclic.file
 
-trait StyleMisc[Target] extends Util[Target] {
+trait StyleMisc[Builder] extends Util[Builder] {
 
   /**
    * A Style that takes any value of type T as a parameter and has an auto value
@@ -220,7 +220,7 @@ trait StyleMisc[Target] extends Util[Target] {
  * Contains CSS styles which are used less frequently. These are not imported by
  * default to avoid namespace pollution.
  */
-trait Styles2[Target] extends Util[Target] with StyleMisc[Target]{
+trait Styles2[Builder] extends Util[Builder] with StyleMisc[Builder]{
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -364,7 +364,7 @@ trait Styles2[Target] extends Util[Target] with StyleMisc[Target]{
    * MDN
    */
   object columns extends Style("columns", "columns") {
-    def :=(number: Int, width: String): StylePair[Target, String] = this := s"$number $width"
+    def :=(number: Int, width: String): StylePair[Builder, String] = this := s"$number $width"
   }
 
   /**
@@ -768,7 +768,7 @@ trait Styles2[Target] extends Util[Target] with StyleMisc[Target]{
  * Trait that contains the contents of the `Styles` object, so they can
  * be mixed in to other objects if needed.
  */
-trait Styles[Target] extends Util[Target] with StyleMisc[Target]{
+trait Styles[Builder] extends Util[Builder] with StyleMisc[Builder]{
   /**
    * If a background-image is specified, the background-attachment CSS
    * property determines whether that image's position is fixed within
@@ -1154,7 +1154,7 @@ trait Styles[Target] extends Util[Target] with StyleMisc[Target]{
    * MDN
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
-    def :=(horizontal: String, vertical: String): StylePair[Target, String] = this := s"$horizontal $vertical"
+    def :=(horizontal: String, vertical: String): StylePair[Builder, String] = this := s"$horizontal $vertical"
   }
 
 

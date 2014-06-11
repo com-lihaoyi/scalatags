@@ -7,12 +7,12 @@ import scalatags._
 /**
  * Created by haoyi on 6/2/14.
  */
-trait Util[Target] {
+trait Util[Builder] {
 
-  type ConcreteHtmlTag[T <: Platform.Base] <: TypedTag[T, Target]
+  type ConcreteHtmlTag[T <: Platform.Base] <: TypedTag[T, Builder]
   def makeAbstractTypedTag[T <: Base](tag: String, void: Boolean): ConcreteHtmlTag[T]
-  protected[this] implicit def stringAttr: AttrValue[Target, String]
-  protected[this] implicit def stringStyle: StyleValue[Target, String]
+  protected[this] implicit def stringAttr: AttrValue[Builder, String]
+  protected[this] implicit def stringStyle: StyleValue[Builder, String]
 
   /**
    * Provides extension methods on strings to fit them into Scalatag fragments.
@@ -63,26 +63,26 @@ trait Util[Target] {
    * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
    */
-  implicit class SeqNode[A <% Node[Target]](xs: Seq[A]) extends Node[Target]{
-    def applyTo(t: Target) = xs.foreach(_.applyTo(t))
+  implicit class SeqNode[A <% Node[Builder]](xs: Seq[A]) extends Node[Builder]{
+    def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
   }
 
   /**
    * Allows you to modify a [[HtmlTag]] by adding an Option containing other nest-able
    * objects to its list of children.
    */
-  implicit def OptionNode[A <% Node[Target]](xs: Option[A]) = new SeqNode(xs.toSeq)
+  implicit def OptionNode[A <% Node[Builder]](xs: Option[A]) = new SeqNode(xs.toSeq)
 
   /**
    * Allows you to modify a [[HtmlTag]] by adding an Array containing other nest-able
    * objects to its list of children.
    */
-  implicit def ArrayNode[A <% Node[Target]](xs: Array[A]) = new SeqNode[A](xs.toSeq)
+  implicit def ArrayNode[A <% Node[Builder]](xs: Array[A]) = new SeqNode[A](xs.toSeq)
 
   /**
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
-  implicit def UnitNode(u: Unit) = new Node[Target]{
-    def applyTo(t: Target) = ()
+  implicit def UnitNode(u: Unit) = new Node[Builder]{
+    def applyTo(t: Builder) = ()
   }
 }

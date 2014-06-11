@@ -4,7 +4,7 @@ import utest._
 
 import TestUtil.strCheck
 import acyclic.file
-class ExampleTests[T](omg: Bundle[T]) extends TestSuite{
+class ExampleTests[Builder](omg: Bundle[Builder]) extends TestSuite{
   import omg._
   import all._
 

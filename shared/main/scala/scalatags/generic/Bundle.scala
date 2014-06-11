@@ -6,7 +6,7 @@ import acyclic.file
  * An abstract representation of the Scalatags package. This allows you to
  * customize Scalatags to work with different backends, by defining your own
  * implementation of [[Bundle[T].Tag]], and specifying how the various [[Attr]]s
- * and [[Style]]s contribute to construct the [[T]]. Apart from satisfying the
+ * and [[Style]]s contribute to construct the [[Builder]]. Apart from satisfying the
  * default String/Boolean/Numeric implementations of [[Attr]] and [[Style]],
  * you can also define your own, e.g. ScalaJS ships with an implicit conversion
  * from `js.Any` to `Attr`, so that you can attach objects to the resultant
@@ -22,10 +22,10 @@ import acyclic.file
  * (e.g. implicit conversions to [[Attr]]s and [[Style]]s which are present
  * in the common interface.
  *
- * @tparam T The type to which [[Attr]]s and [[Style]]s are applied to when the
+ * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *           `Tag` is being rendered to give a final result.
  */
-trait Bundle[T]{
+trait Bundle[Builder]{
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
@@ -35,7 +35,7 @@ trait Bundle[T]{
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
-  val short: AbstractShort[T]
+  val short: AbstractShort[Builder]
   val attrs: Attrs
   val tags: Tags
   val tags2: Tags2
@@ -44,20 +44,20 @@ trait Bundle[T]{
   val svgTags: SvgTags
   val svgStyles: SvgStyles
 
-  type Attrs = generic.Attrs[T]
-  type Tags = generic.Tags[T]
-  type Tags2 = generic.Tags2[T]
-  type Styles = generic.Styles[T]
-  type Styles2 = generic.Styles2[T]
-  type SvgTags = generic.SvgTags[T]
-  type SvgStyles = generic.SvgStyles[T]
-  type Util = generic.Util[T]
+  type Attrs = generic.Attrs[Builder]
+  type Tags = generic.Tags[Builder]
+  type Tags2 = generic.Tags2[Builder]
+  type Styles = generic.Styles[Builder]
+  type Styles2 = generic.Styles2[Builder]
+  type SvgTags = generic.SvgTags[Builder]
+  type SvgStyles = generic.SvgStyles[Builder]
+  type Util = generic.Util[Builder]
 
   type Attr = generic.Attr
   type Style = generic.Style
-  type Node = generic.Node[T]
-  type AttrValue[V] = generic.AttrValue[T, V]
-  type StyleValue[V] = generic.StyleValue[T, V]
+  type Node = generic.Node[Builder]
+  type AttrValue[V] = generic.AttrValue[Builder, V]
+  type StyleValue[V] = generic.StyleValue[Builder, V]
 
   implicit def stringAttr: AttrValue[String]
   implicit def booleanAttr: AttrValue[Boolean]
@@ -75,7 +75,7 @@ trait Bundle[T]{
    */
   implicit def NumericNode[V: Numeric](u: V): Node
 
-  type Tag <: generic.TypedTag[Platform.Base, T]
+  type Tag <: generic.TypedTag[Platform.Base, Builder]
 
   /**
    * A [[Node]] which contains a String which will not be escaped.

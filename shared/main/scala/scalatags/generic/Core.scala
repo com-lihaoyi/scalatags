@@ -13,11 +13,11 @@ import scalatags.generic
  * which will add itself to the node's attributes but not appear in the final
  * `children` list.
  */
-trait Node[Target] {
+trait Node[Builder] {
   /**
    * Transforms the tag and returns a new one.
    */
-  def applyTo(t: Target): Unit
+  def applyTo(t: Builder): Unit
 }
 
 /**
@@ -27,8 +27,8 @@ trait Node[Target] {
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[+T <: Base, Target] extends Node[Target]{
-  protected[this] type Self <: TypedTag[T, Target]
+trait TypedTag[+T <: Base, Builder] extends Node[Builder]{
+  protected[this] type Self <: TypedTag[T, Builder]
   def tag: String
 
   /**
@@ -36,15 +36,15 @@ trait TypedTag[+T <: Base, Target] extends Node[Target]{
    * (which are actually WrappedArrays) data-structure in order for maximum
    * performance.
    */
-  def modifiers: List[Seq[Node[Target]]]
+  def modifiers: List[Seq[Node[Builder]]]
 
   /**
-   * Walks the [[modifiers]] to apply them to a particular [[Target]].
+   * Walks the [[modifiers]] to apply them to a particular [[Builder]].
    * Super sketchy/procedural for max performance.
    */
-  def build(b: Target): Unit = {
+  def build(b: Builder): Unit = {
     var current = modifiers
-    val arr = new Array[Seq[Node[Target]]](modifiers.length)
+    val arr = new Array[Seq[Node[Builder]]](modifiers.length)
 
     var i = 0
     while(current != Nil){
@@ -68,7 +68,7 @@ trait TypedTag[+T <: Base, Target] extends Node[Target]{
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[TypedTag]].
    */
-  def apply(xs: Node[Target]*): Self
+  def apply(xs: Node[Builder]*): Self
 }
 
 /**
@@ -85,7 +85,7 @@ case class Attr(name: String) {
    * Creates an [[AttrPair]] from an [[Attr]] and a value of type [[T]], if
    * there is an [[AttrValue]] of the correct type.
    */
-  def :=[Target, T](v: T)(implicit ev: AttrValue[Target, T]) = AttrPair(this, v, ev)
+  def :=[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = AttrPair(this, v, ev)
 }
 
 /**
@@ -96,13 +96,13 @@ case class Style(jsName: String, cssName: String) {
    * Creates an [[StylePair]] from an [[Style]] and a value of type [[T]], if
    * there is an [[StyleValue]] of the correct type.
    */
-  def :=[Target, T](v: T)(implicit ev: StyleValue[Target, T]) = StylePair(this, v, ev)
+  def :=[Builder, T](v: T)(implicit ev: StyleValue[Builder, T]) = StylePair(this, v, ev)
 }
 /**
  * An [[Attr]], it's associated value, and an [[AttrValue]] of the correct type
  */
-case class AttrPair[Target, T](a: Attr, v: T, ev: AttrValue[Target, T]) extends Node[Target] {
-  override def applyTo(t: Target): Unit = {
+case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extends Node[Builder] {
+  override def applyTo(t: Builder): Unit = {
     ev.apply(t, a, v)
   }
 }
@@ -111,15 +111,15 @@ case class AttrPair[Target, T](a: Attr, v: T, ev: AttrValue[Target, T]) extends 
  * the value of a [[Attr]]. Only types with a specified [[AttrValue]] may
  * be used.
  */
-trait AttrValue[Target, T]{
-  def apply(t: Target, a: Attr, v: T)
+trait AttrValue[Builder, T]{
+  def apply(t: Builder, a: Attr, v: T)
 }
 
 /**
  * A [[Style]], it's associated value, and a [[StyleValue]] of the correct type
  */
-case class StylePair[Target, T](s: Style, v: T, ev: StyleValue[Target, T]) extends Node[Target]{
-  override def applyTo(t: Target): Unit = {
+case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) extends Node[Builder]{
+  override def applyTo(t: Builder): Unit = {
     ev.apply(t, s, v)
   }
 }
@@ -129,6 +129,6 @@ case class StylePair[Target, T](s: Style, v: T, ev: StyleValue[Target, T]) exten
  * the value of a [[Style]]. Only types with a specified [[StyleValue]] may
  * be used.
  */
-trait StyleValue[Target, T]{
-  def apply(t: Target, s: Style, v: T)
+trait StyleValue[Builder, T]{
+  def apply(t: Builder, s: Style, v: T)
 }

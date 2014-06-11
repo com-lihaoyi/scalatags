@@ -5,7 +5,7 @@ import org.scalajs.dom
    * Contains HTML tags which are used less frequently. These are generally
    * imported individually as needed.
    */
-trait Tags2[Target] extends Util[Target]{
+trait Tags2[Builder] extends Util[Builder]{
 
    // Document Metadata
    /**

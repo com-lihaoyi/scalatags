@@ -4,7 +4,7 @@ import acyclic.file
  * Trait that contains the contents of the `Tags` object, so they can be mixed
  * in to other objects if needed.
  */
-trait Tags[Target] extends Util[Target]{
+trait Tags[Builder] extends Util[Builder]{
 
 
 
