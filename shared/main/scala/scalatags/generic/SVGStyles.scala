@@ -16,7 +16,7 @@ import acyclic.file
  * Contains CSS styles which are only used for SVG. These are not imported by
  * default to avoid namespace pollution.
  */
-trait SvgStyles[Builder] extends StyleMisc[Builder] with Util[Builder]{
+trait SvgStyles[Builder, Output] extends StyleMisc[Builder, Output] {
 
   private[scalatags] trait Baseline{ self: Style =>
     val auto = this := "auto"

@@ -121,6 +121,7 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   val SvgTag = TypedTag
   type Tag = TypedTag[dom.Element]
   val Tag = TypedTag
+
 }
 
 trait LowPriorityImplicits{

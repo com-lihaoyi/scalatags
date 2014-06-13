@@ -1,4 +1,5 @@
-package scalatags.jsdom
+package scalatags
+package jsdom
 
 import org.scalajs.dom
 import scalatags.generic.Util
@@ -7,7 +8,7 @@ import scalatags.generic.Util
    * Contains HTML tags which are used less frequently. These are generally
    * imported individually as needed.
    */
-trait Tags2 extends Util[dom.Element, dom.Element]{
+trait Tags2 extends generic.Tags2[dom.Element, dom.Element]{
 
    // Document Metadata
    /**

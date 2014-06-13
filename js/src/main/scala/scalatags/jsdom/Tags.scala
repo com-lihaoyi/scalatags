@@ -19,7 +19,8 @@
  *
  * Other tags cannot, and must have a separate closing tag even when empty.
  */
-package scalatags.jsdom
+package scalatags
+package jsdom
 
 import org.scalajs.dom
 import scalatags.generic.Util
@@ -29,7 +30,7 @@ import scalatags.generic.Util
  * Trait that contains the contents of the `Tags` object, so they can be mixed
  * in to other objects if needed.
  */
-trait Tags extends Util[dom.Element, dom.Element]{
+trait Tags extends generic.Tags[dom.Element, dom.Element]{
 
   // Root Element
   /**

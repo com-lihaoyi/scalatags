@@ -1,4 +1,5 @@
-package scalatags.jsdom
+package scalatags
+package jsdom
 
 import org.scalajs.dom
 import scalatags.generic.Util
@@ -7,20 +8,20 @@ import scalatags.generic.Util
   * Contains Tags which are only used for SVG. These are not imported by
   * default to avoid namespace pollution.
   */
-trait SvgTags extends Util[dom.Element, dom.Element]{
+trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
    /**
     * The altGlyph element allows sophisticated selection of the glyphs used to
     * render its child character data.
     *
     * MDN
     */
-   val altglyph = "altglyph".tag
+   val altglyph = "altglyph".tag[dom.SVGElement]
    /**
     * The altGlyphDef element defines a substitution representation for glyphs.
     *
     * MDN
     */
-   val altglyphdef = "altglyphdef".tag
+   val altglyphdef = "altglyphdef".tag[dom.SVGElement]
 
    /**
     * The altGlyphItem element provides a set of candidates for glyph substitution
@@ -28,21 +29,21 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val altglyphitem = "altglyphitem".tag
+   val altglyphitem = "altglyphitem".tag[dom.SVGElement]
    /**
     * The animate element is put inside a shape element and defines how an
     * attribute of an element changes over the animation
     *
     * MDN
     */
-   val animate = "animate".tag
+   val animate = "animate".tag[dom.SVGElement]
    /**
     * The animateMotion element causes a referenced element to move along a
     * motion path.
     *
     * MDN
     */
-   val animatemotion = "animatemotion".tag
+   val animatemotion = "animatemotion".tag[dom.SVGElement]
    /**
     * The animateTransform element animates a transformation attribute on a target
     * element, thereby allowing animations to control translation, scaling,
@@ -50,7 +51,7 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val animatetransform = "animatetransform".tag
+   val animatetransform = "animatetransform".tag[dom.SVGElement]
    /**
     * The circle element is an SVG basic shape, used to create circles based on a
     * center point and a radius.
@@ -71,7 +72,7 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val `color-profile` = "color-profile".tag
+   val `color-profile` = "color-profile".tag[dom.SVGElement]
    /**
     * The cursor element can be used to define a platform-independent custom
     * cursor. A recommended approach for defining a platform-independent custom
@@ -81,7 +82,7 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val cursor = "cursor"
+   val cursor = "cursor".tag[dom.SVGElement]
    /**
     * SVG allows graphical objects to be defined for later reuse. It is
     * recommended that, wherever possible, referenced elements be defined inside
@@ -311,28 +312,28 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val font = "font".tag
+   val font = "font".tag[dom.SVGElement]
    /**
     * The font-face element corresponds to the CSS @font-face declaration. It
     * defines a font's outer properties.
     *
     * MDN
     */
-   val `font-face` = "font-face".tag
+   val `font-face` = "font-face".tag[dom.SVGElement]
    /**
     * The font-face-format element describes the type of font referenced by its
     * parent font-face-uri.
     *
     * MDN
     */
-   val `font-face-format` = "font-face-format".tag
+   val `font-face-format` = "font-face-format".tag[dom.SVGElement]
    /**
     * The font-face-name element points to a locally installed copy of this font,
     * identified by its name.
     *
     * MDN
     */
-   val `font-face-name` = "font-face-name".tag
+   val `font-face-name` = "font-face-name".tag[dom.SVGElement]
    /**
     * The font-face-src element corresponds to the src property in CSS @font-face
     * descriptions. It serves as container for font-face-name, pointing to
@@ -341,13 +342,13 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val `font-face-src` = "font-face-src".tag
+   val `font-face-src` = "font-face-src".tag[dom.SVGElement]
    /**
     * The font-face-uri element points to a remote definition of the current font.
     *
     * MDN
     */
-   val `font-face-uri` = "font-face-uri".tag
+   val `font-face-uri` = "font-face-uri".tag[dom.SVGElement]
    /**
     * The foreignObject element allows for inclusion of a foreign XML namespace
     * which has its graphical content drawn by a different user agent. The
@@ -356,7 +357,7 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val foreignobject = "foreignobject".tag
+   val foreignobject = "foreignobject".tag[dom.SVGElement]
    /**
     * The g element is a container used to group objects. Transformations applied
     * to the g element are performed on all of its child elements. Attributes
@@ -371,21 +372,21 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val glyph = "glyph".tag
+   val glyph = "glyph".tag[dom.SVGElement]
    /**
     * The glyphRef element provides a single possible glyph to the referencing
     * altglyph substitution.
     *
     * MDN
     */
-   val glyphref = "glyphref".tag
+   val glyphref = "glyphref".tag[dom.SVGElement]
    /**
     * The horizontal distance between two glyphs can be fine-tweaked with an
     * hkern Element. This process is known as Kerning.
     *
     * MDN
     */
-   val hkern = "hkern".tag
+   val hkern = "hkern".tag[dom.SVGElement]
    /**
     * The SVG Image Element (image) allows a raster image into be included in
     * an SVG document.
@@ -439,14 +440,14 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val `missing-glyph` = "missing-glyph".tag
+   val `missing-glyph` = "missing-glyph".tag[dom.SVGElement]
    /**
     * the mpath sub-element for the animatemotion element provides the ability
     * to reference an external path element as the definition of a motion path.
     *
     * MDN
     */
-   val mpath = "mpath".tag
+   val mpath = "mpath".tag[dom.SVGElement]
    /**
     * The path element is the generic element to define a shape. All the basic
     * shapes can be created with a path element.
@@ -502,7 +503,7 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val set = "set".tag
+   val set = "set".tag[dom.SVGElement]
    /**
     * The ramp of colors to use on a gradient is defined by the stop elements
     * that are child elements to either the lineargradient element or the
@@ -569,7 +570,7 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val tref = "tref"
+   val tref = "tref".tag[dom.SVGElement]
    /**
     * Within a text element, text and font properties and the current text
     * position can be adjusted with absolute or relative coordinate values by
@@ -603,7 +604,7 @@ trait SvgTags extends Util[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val vkern = "vkern".tag
+   val vkern = "vkern".tag[dom.SVGElement]
 
 
  }

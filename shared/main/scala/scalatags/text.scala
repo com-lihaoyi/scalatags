@@ -11,29 +11,29 @@ import scala.annotation.unchecked.uncheckedVariance
  * `String`s.
  */
 
-object Text extends Bundle[text.Builder] {
+object Text extends Bundle[text.Builder, String] {
 
-  object all extends StringTags with Attrs with Styles with Tags with DataConverters with Util
-  object short extends StringTags with Util with DataConverters with generic.AbstractShort[text.Builder]{
+  object all extends StringTags with Attrs with Styles with text.Tags with DataConverters
+  object short extends StringTags with Util with DataConverters with generic.AbstractShort[text.Builder, String]{
     object * extends StringTags with Attrs with Styles
   }
 
   object attrs extends StringTags with Attrs
-  object tags extends StringTags with Tags
-  object tags2 extends StringTags with Tags2
+  object tags extends StringTags with text.Tags
+  object tags2 extends StringTags with text.Tags2
   object styles extends StringTags with Styles
   object styles2 extends StringTags with Styles2
-  object svgTags extends StringTags with SvgTags
+  object svgTags extends StringTags with text.SvgTags
   object svgStyles extends StringTags with SvgStyles
 
 
   trait StringTags extends Util{ self =>
-    type ConcreteHtmlTag[T <: Platform.Base] = TypedTag[T]
+    type ConcreteHtmlTag[T <: String] = TypedTag[T]
 
     protected[this] implicit def stringAttr = new GenericAttr[String]
     protected[this] implicit def stringStyle = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T <: Platform.Base](tag: String, void: Boolean) = {
+    def makeAbstractTypedTag[T](tag: String, void: Boolean) = {
       TypedTag(tag, Nil, void)
     }
   }
@@ -81,11 +81,11 @@ object Text extends Bundle[text.Builder] {
   implicit val booleanStyle = new GenericStyle[Boolean]
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
-  case class TypedTag[+Output <: Platform.Base](tag: String = "",
-                                           modifiers: List[Seq[Node]],
-                                           void: Boolean = false)
-                                           extends generic.TypedTag[Output, text.Builder]
-                                           with text.Child{
+  case class TypedTag[+Output <: String](tag: String = "",
+                                         modifiers: List[Seq[Node]],
+                                         void: Boolean = false)
+                                         extends generic.TypedTag[Output, text.Builder]
+                                         with text.Child{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
@@ -146,7 +146,7 @@ object Text extends Bundle[text.Builder] {
     }
     def render: Output = this.toString.asInstanceOf[Output]
   }
-  type Tag = TypedTag[Platform.Base]
+  type Tag = TypedTag[String]
   val Tag = TypedTag
 
 }

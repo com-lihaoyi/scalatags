@@ -23,7 +23,7 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.3.0-RC2",
+    version := "0.3.0",
     publishTo <<= version { (v: String) =>
       Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },
@@ -53,7 +53,7 @@ object Build extends sbt.Build{
 
   lazy val js = cross.js.settings(
     libraryDependencies ++= Seq(
-      "org.scala-lang.modules.scalajs" %% "scalajs-dom" % "0.4"
+      "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6" % "provided"
     ),
     (jsEnv in Test) := new PhantomJSEnv,
     (testLoader in Test) := JSClasspathLoader((execClasspath in Compile).value)
