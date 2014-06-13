@@ -88,7 +88,7 @@ To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of
 libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.0"
 ```
 
-And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 2.4-JS is currently only compatibly with ScalaJS 0.4.x.
+And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags is currently only compatibly with ScalaJS 0.5.x.
 
 Why Scalatags
 =============
@@ -835,6 +835,10 @@ println(labelElem.textContent) // ""
 ```
 
 This allows a very convenient direct-binding of behaviors without having to trawl through the DOM with jquery selectors or creating lots of IDs and worrying about collisions. 
+
+-----------
+
+The DOM backend currently requires you to separately add a dependency on [scala-js-dom](https://github.com/scala-js/scala-js-dom) for it to function. 
 
 Performance
 ===========
