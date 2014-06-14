@@ -21,15 +21,39 @@ trait Node[Builder] {
 }
 
 /**
+ * A tag or an attribute which has identifiable type name.
+ */
+trait Named {
+
+  val name: String
+}
+
+/**
+ * A tag or an attribute which can be defined in a namespace.
+ */
+trait NamespaceAware {
+  this: Named => 
+
+  /**
+   * Optional namespace for the tag or attribute.
+   */
+  def namespace: Option[Namespace]
+
+  val qualifiedName: String = namespace match {
+    case Some(Namespace(_, Some(prefix))) => s"${prefix}:${name}"
+    case _ => name
+  }
+}
+
+/**
  * A generic representation of a Scalatags tag.
  *
  * @tparam Output The base type that this tag represents. On Scala-JVM, this is all
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[+Output, Builder] extends Node[Builder]{
+trait TypedTag[+Output, Builder] extends Node[Builder] with Named with NamespaceAware {
   protected[this] type Self <: TypedTag[Output, Builder]
-  def tag: String
 
   /**
    * The modifiers that are applied to a TypedTag are kept in this linked-Seq
@@ -69,13 +93,13 @@ trait TypedTag[+Output, Builder] extends Node[Builder]{
    * to the [[TypedTag]].
    */
   def apply(xs: Node[Builder]*): Self
-  def render: Output
+  def render(): Output
 }
 
 /**
  * Wraps up a HTML attribute in a value which isn't a string.
  */
-case class Attr(name: String) {
+case class Attr(name: String, namespace: Option[Namespace] = None) extends Named with NamespaceAware {
 
   if (!Escaping.validAttrName(name))
     throw new IllegalArgumentException(
@@ -133,3 +157,8 @@ case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) ext
 trait StyleValue[Builder, T]{
   def apply(t: Builder, s: Style, v: T)
 }
+
+/**
+ * XML namespace used for non-HTML tags.
+ */
+case class Namespace(uri: String, prefix: Option[String] = None)

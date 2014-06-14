@@ -3,10 +3,14 @@ package jsdom
 import acyclic.file
 import utest._
 import JsDom._
+import JsDom.all.ExtendedString
+import JsDom.svgTags._
+import JsDom.svgAttrs.{x, y, width, height}
 import all._
 import TestUtil._
 import org.scalajs.dom
 import scala.scalajs.js
+import scala.scalajs.js.Dynamic.{global => g}
 object DomTests extends TestSuite{
   def tests = TestSuite{
     'basic {
@@ -47,6 +51,27 @@ object DomTests extends TestSuite{
         assert(
           elem.getAttribute("style") == "color: red; float: left; background-color: yellow; "
         )
+      }
+
+      'svg {
+        val tag = svg(id := "test")(
+          metadata(
+          ),
+          clipPath(id := "clip")(
+            rect(x := 50, y := 50, width := 100, height := 100)
+          )
+        )
+        g.document.body.appendChild(tag.render)
+
+        val elem = g.document.getElementById("test")
+        assert(elem != null)
+        // casting will fail unless the tag was created with a proper namespace.
+        assert(elem.isInstanceOf[dom.SVGSVGElement])
+
+        val clip = g.document.getElementById("clip")
+        assert(clip != null)
+        // casting will fail unless the tag's name is in correct case.
+        assert(clip.isInstanceOf[dom.SVGClipPathElement])
       }
     }
     'fancy {

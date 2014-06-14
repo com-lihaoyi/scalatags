@@ -1,7 +1,5 @@
 package scalatags.generic
 
-import scalatags.generic.Util
-
 /**
   * Contains HTML tags which are used less frequently. These are generally
   * imported individually as needed.

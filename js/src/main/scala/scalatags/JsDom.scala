@@ -3,6 +3,7 @@ package scalatags
 import org.scalajs.dom
 import scala.scalajs.js
 import scalatags.generic.Node
+import scalatags.generic.Namespace
 import org.scalajs.dom.Element
 import scala.annotation.unchecked.uncheckedVariance
 
@@ -25,6 +26,7 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   object styles extends StringTags with Styles
   object styles2 extends StringTags with Styles2
   object svgTags extends StringTags with jsdom.SvgTags
+  object svgAttrs extends StringTags with SvgAttrs
   object svgStyles extends StringTags with SvgStyles
 
   trait StringTags extends Util{ self =>
@@ -33,8 +35,8 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
     protected[this] implicit def stringAttr = new GenericAttr[String]
     protected[this] implicit def stringStyle = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean): TypedTag[T] = {
-      TypedTag(tag, Nil, void)
+    def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespace: Option[Namespace]): TypedTag[T] = {
+      TypedTag(tag, Nil, void, namespace)
     }
   }
 
@@ -66,7 +68,11 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
 
   class GenericAttr[T] extends AttrValue[T]{
     def apply(t: dom.Element, a: Attr, v: T): Unit = {
-      t.setAttribute(a.name, v.toString)
+      a.namespace match {
+        case Some(Namespace(uri, prefix)) if t.namespaceURI != uri 
+          => t.setAttributeNS(uri, a.name, v.toString)
+        case _ => t.setAttribute(a.name, v.toString)
+      }
     }
   }
   implicit def stringAttr = new GenericAttr[String]
@@ -84,9 +90,10 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   implicit def booleanStyle = new GenericStyle[Boolean]
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
-  case class TypedTag[+Output <: dom.Element](tag: String = "",
+  case class TypedTag[+Output <: dom.Element](name: String = "",
                                            modifiers: List[Seq[Node]],
-                                           void: Boolean = false)
+                                           void: Boolean = false,
+                                           namespace: Option[Namespace])
                                            extends generic.TypedTag[Output, dom.Element]{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
@@ -103,7 +110,10 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
      * Converts an ScalaTag fragment into an html string
      */
     def render: Output = {
-      val elem = dom.document.createElement(tag)
+      val elem = namespace match {
+        case Some(Namespace(uri, prefix)) => dom.document.createElementNS(uri, name)
+        case None => dom.document.createElement(name)
+      }
       build(elem)
       elem.asInstanceOf[Output]
     }
@@ -111,7 +121,7 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
     def apply(xs: Node*): TypedTag[Output] = {
-      this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
+      this.copy(name = name, void = void, modifiers = xs :: modifiers)
     }
     override def toString = render.outerHTML
   }

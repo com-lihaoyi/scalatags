@@ -10,7 +10,7 @@ import scalatags._
 trait Util[Builder, Output] {
 
   type ConcreteHtmlTag[T <: Output] <: TypedTag[T, Builder]
-  def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean): ConcreteHtmlTag[T]
+  def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespace: Option[Namespace]): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttr: AttrValue[Builder, String]
   protected[this] implicit def stringStyle: StyleValue[Builder, String]
 
@@ -21,33 +21,33 @@ trait Util[Builder, Output] {
     /**
      * Converts the string to a [[HtmlTag]]
      */
-    def tag[T <: Output] = {
+    def tag[T <: Output](implicit namespace: Namespace = null) = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      makeAbstractTypedTag[T](s, false)
+      makeAbstractTypedTag[T](s, false, Option(namespace))
     }
     /**
      * Converts the string to a void [[HtmlTag]]; that means that they cannot
      * contain any content, and can be rendered as self-closing tags.
      */
-    def voidTag[T <: Output] = {
+    def voidTag[T <: Output](implicit namespace: Namespace = null) = {
       if (!Escaping.validTag(s))
         throw new IllegalArgumentException(
           s"Illegal tag name: $s is not a valid XML tag name"
         )
-      makeAbstractTypedTag[T](s, true)
+      makeAbstractTypedTag[T](s, true, Option(namespace))
     }
     /**
      * Converts the string to a [[UntypedAttr]]
      */
-    def attr = {
+    def attr(implicit namespace: Namespace = null) = {
       if (!Escaping.validAttrName(s))
         throw new IllegalArgumentException(
           s"Illegal attribute name: $s is not a valid XML attribute name"
         )
-      Attr(s)
+      Attr(s, Option(namespace))
     }
     /**
      * Converts the string to a [[Style]]. The string is used as the cssName of the

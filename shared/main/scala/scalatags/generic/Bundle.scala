@@ -62,6 +62,10 @@ trait Bundle[Builder, Output]{
    */
   val svgTags: SvgTags
   /**
+   * SVG only attributes
+   */
+  val svgAttrs: SvgAttrs
+  /**
    * SVG only styles
    */
   val svgStyles: SvgStyles
@@ -72,6 +76,7 @@ trait Bundle[Builder, Output]{
   type Styles = generic.Styles[Builder, Output]
   type Styles2 = generic.Styles2[Builder, Output]
   type SvgTags = generic.SvgTags[Builder, Output]
+  type SvgAttrs = generic.SvgAttrs[Builder, Output]
   type SvgStyles = generic.SvgStyles[Builder, Output]
   type Util = generic.Util[Builder, Output]
 
