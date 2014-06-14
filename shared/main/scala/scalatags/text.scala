@@ -24,6 +24,7 @@ object Text extends Bundle[text.Builder, String] {
   object styles extends StringTags with Styles
   object styles2 extends StringTags with Styles2
   object svgTags extends StringTags with text.SvgTags
+  object svgAttrs extends StringTags with SvgAttrs
   object svgStyles extends StringTags with SvgStyles
 
 

@@ -25,6 +25,7 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   object styles extends StringTags with Styles
   object styles2 extends StringTags with Styles2
   object svgTags extends StringTags with jsdom.SvgTags
+  object svgAttrs extends StringTags with SvgAttrs
   object svgStyles extends StringTags with SvgStyles
 
   trait StringTags extends Util{ self =>
