@@ -15,13 +15,13 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val altglyph = "altglyph".tag[dom.SVGElement]
+   val altGlyph = "altGlyph".tag[dom.SVGElement]
    /**
     * The altGlyphDef element defines a substitution representation for glyphs.
     *
     * MDN
     */
-   val altglyphdef = "altglyphdef".tag[dom.SVGElement]
+   val altGlyphDef = "altGlyphDef".tag[dom.SVGElement]
 
    /**
     * The altGlyphItem element provides a set of candidates for glyph substitution
@@ -29,7 +29,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val altglyphitem = "altglyphitem".tag[dom.SVGElement]
+   val altGlyphItem = "altGlyphItem".tag[dom.SVGElement]
    /**
     * The animate element is put inside a shape element and defines how an
     * attribute of an element changes over the animation
@@ -43,7 +43,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val animatemotion = "animatemotion".tag[dom.SVGElement]
+   val animateMotion = "animateMotion".tag[dom.SVGElement]
    /**
     * The animateTransform element animates a transformation attribute on a target
     * element, thereby allowing animations to control translation, scaling,
@@ -51,7 +51,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val animatetransform = "animatetransform".tag[dom.SVGElement]
+   val animateTransform = "animateTransform".tag[dom.SVGElement]
    /**
     * The circle element is an SVG basic shape, used to create circles based on a
     * center point and a radius.
@@ -66,7 +66,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val clippath = "clippath".tag[dom.SVGClipPathElement]
+   val clipPath = "clipPath".tag[dom.SVGClipPathElement]
    /**
     * The element allows describing the color profile used for the image.
     *
@@ -125,7 +125,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val feblend = "feblend".tag[dom.SVGFEBlendElement]
+   val feBlend = "feBlend".tag[dom.SVGFEBlendElement]
    /**
     * This filter changes colors based on a transformation matrix. Every pixel's
     * color value (represented by an [R,G,B,A] vector) is matrix multiplied to
@@ -133,7 +133,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val fecolormatrix = "fecolormatrix".tag[dom.SVGFEColorMatrixElement]
+   val feColorMatrix = "feColorMatrix".tag[dom.SVGFEColorMatrixElement]
    /**
     * The color of each pixel is modified by changing each channel (R, G, B, and
     * A) to the result of what the children fefuncr, fefuncb, fefuncg,
@@ -141,7 +141,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val fecomponenttransfer = "fecomponenttransfer".tag[dom.SVGComponentTransferFunctionElement]
+   val feComponentTransfer = "feComponentTransfer".tag[dom.SVGComponentTransferFunctionElement]
    /**
     * This filter primitive performs the combination of two input images pixel-wise
     * in image space using one of the Porter-Duff compositing operations: over,
@@ -150,7 +150,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val fecomposite = "fecomposite".tag[dom.SVGFECompositeElement]
+   val feComposite = "feComposite".tag[dom.SVGFECompositeElement]
    /**
     * the feConvolveMatrix element applies a matrix convolution filter effect.
     * A convolution combines pixels in the input image with neighboring pixels
@@ -160,7 +160,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val feconvolvematrix = "feconvolvematrix".tag[dom.SVGFEConvolveMatrixElement]
+   val feConvolveMatrix = "feConvolveMatrix".tag[dom.SVGFEConvolveMatrixElement]
    /**
     * This filter primitive lights an image using the alpha channel as a bump map.
     * The resulting image, which is an RGBA opaque image, depends on the light
@@ -168,14 +168,14 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val fediffuselighting = "fediffuselighting".tag[dom.SVGFEDiffuseLightingElement]
+   val feDiffuseLighting = "feDiffuseLighting".tag[dom.SVGFEDiffuseLightingElement]
    /**
     * This filter primitive uses the pixels values from the image from in2 to
     * spatially displace the image from in.
     *
     * MDN
     */
-   val fedisplacementmap = "fedisplacementmap".tag[dom.SVGFEDisplacementMapElement]
+   val feDisplacementMap = "feDisplacementMap".tag[dom.SVGFEDisplacementMapElement]
    /**
     * This filter primitive define a distant light source that can be used
     * within a lighting filter primitive: fediffuselighting or
@@ -183,49 +183,49 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val fedistantlighting = "fedistantlighting".tag[dom.SVGFEDistantLightElement]
+   val feDistantLighting = "feDistantLighting".tag[dom.SVGFEDistantLightElement]
    /**
     * The filter fills the filter subregion with the color and opacity defined by
     * flood-color and flood-opacity.
     *
     * MDN
     */
-   val feflood = "feflood".tag[dom.SVGFEFloodElement]
+   val feFlood = "feFlood".tag[dom.SVGFEFloodElement]
    /**
     * This filter primitive defines the transfer function for the alpha component
     * of the input graphic of its parent fecomponenttransfer element.
     *
     * MDN
     */
-   val fefunca = "fefunca".tag[dom.SVGFEFuncAElement]
+   val feFuncA = "feFuncA".tag[dom.SVGFEFuncAElement]
    /**
     * This filter primitive defines the transfer function for the blue component
     * of the input graphic of its parent fecomponenttransfer element.
     *
     * MDN
     */
-   val fefuncb = "fefuncb".tag[dom.SVGFEFuncBElement]
+   val feFuncB = "feFuncB".tag[dom.SVGFEFuncBElement]
    /**
     * This filter primitive defines the transfer function for the green component
     * of the input graphic of its parent fecomponenttransfer element.
     *
     * MDN
     */
-   val fefuncg = "fefuncg".tag[dom.SVGFEFuncGElement]
+   val feFuncG = "feFuncG".tag[dom.SVGFEFuncGElement]
    /**
     * This filter primitive defines the transfer function for the red component
     * of the input graphic of its parent fecomponenttransfer element.
     *
     * MDN
     */
-   val fefuncr = "fefuncr".tag[dom.SVGFEFuncRElement]
+   val feFuncR = "feFuncR".tag[dom.SVGFEFuncRElement]
    /**
     * The filter blurs the input image by the amount specified in stdDeviation,
     * which defines the bell-curve.
     *
     * MDN
     */
-   val fegaussianblur = "fegaussianblur".tag[dom.SVGFEGaussianBlurElement]
+   val feGaussianBlur = "feGaussianBlur".tag[dom.SVGFEGaussianBlurElement]
 
    /**
     * The feImage filter fetches image data from an external source and provides
@@ -234,7 +234,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val feimage = "feimage".tag[dom.SVGFEImageElement]
+   val feImage = "feImage".tag[dom.SVGFEImageElement]
 
    /**
     * The feMerge filter allows filter effects to be applied concurrently
@@ -244,7 +244,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val femerge = "femerge".tag[dom.SVGFEMergeElement]
+   val feMerge = "feMerge".tag[dom.SVGFEMergeElement]
 
    /**
     * The feMergeNode takes the result of another filter to be processed by its
@@ -252,22 +252,22 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val femergenode = "femergenode".tag[dom.SVGFEMergeNodeElement]
+   val feMergeNode = "feMergeNode".tag[dom.SVGFEMergeNodeElement]
    /**
     * This filter is used to erode or dilate the input image. It's usefulness
     * lies especially in fattening or thinning effects.
     *
     * MDN
     */
-   val femorphology = "femorphology".tag[dom.SVGFEMorphologyElement]
+   val feMorphology = "feMorphology".tag[dom.SVGFEMorphologyElement]
    /**
     * The input image as a whole is offset by the values specified in the dx
     * and dy attributes. It's used in creating drop-shadows.
     *
     * MDN
     */
-   val feoffset = "feoffset".tag[dom.SVGFEOffsetElement]
-   val fepointlight = "fepointlight".tag[dom.SVGFEPointLightElement]
+   val feOffset = "feOffset".tag[dom.SVGFEOffsetElement]
+   val fePointLight = "fePointLight".tag[dom.SVGFEPointLightElement]
    /**
     * This filter primitive lights a source graphic using the alpha channel as a
     * bump map. The resulting image is an RGBA image based on the light color.
@@ -279,18 +279,18 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val fespecularlighting = "fespecularlighting".tag[dom.SVGFESpecularLightingElement]
+   val feSpecularLighting = "feSpecularLighting".tag[dom.SVGFESpecularLightingElement]
    /**
     *
     */
-   val fespotlight = "fespotlight".tag[dom.SVGFESpotLightElement]
+   val feSpotLight = "feSpotLight".tag[dom.SVGFESpotLightElement]
    /**
     * An input image is tiled and the result used to fill a target. The effect
     * is similar to the one of a pattern.
     *
     * MDN
     */
-   val fetile = "fetile".tag[dom.SVGFETileElement]
+   val feTile = "feTile".tag[dom.SVGFETileElement]
    /**
     * This filter primitive creates an image using the Perlin turbulence
     * function. It allows the synthesis of artificial textures like clouds or
@@ -298,7 +298,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val feturbulance = "feturbulance".tag[dom.SVGFETurbulenceElement]
+   val feTurbulance = "feTurbulance".tag[dom.SVGFETurbulenceElement]
    /**
     * The filter element serves as container for atomic filter operations. It is
     * never rendered directly. A filter is referenced by using the filter
@@ -357,7 +357,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val foreignobject = "foreignobject".tag[dom.SVGElement]
+   val foreignObject = "foreignObject".tag[dom.SVGElement]
    /**
     * The g element is a container used to group objects. Transformations applied
     * to the g element are performed on all of its child elements. Attributes
@@ -379,7 +379,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val glyphref = "glyphref".tag[dom.SVGElement]
+   val glyphRef = "glyphRef".tag[dom.SVGElement]
    /**
     * The horizontal distance between two glyphs can be fine-tweaked with an
     * hkern Element. This process is known as Kerning.
@@ -407,7 +407,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val lineargradient = "lineargradient".tag[dom.SVGLinearGradientElement]
+   val linearGradient = "linearGradient".tag[dom.SVGLinearGradientElement]
    /**
     * The marker element defines the graphics that is to be used for drawing
     * arrowheads or polymarkers on a given path, line, polyline or
@@ -485,7 +485,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val radialgradient = "radialgradient".tag[dom.SVGRadialGradientElement]
+   val radialGradient = "radialGradient".tag[dom.SVGRadialGradientElement]
    /**
     * The rect element is an SVG basic shape, used to create rectangles based on
     * the position of a corner and their width and height. It may also be used to
@@ -562,7 +562,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
     *
     * MDN
     */
-   val textpath = "textpath".tag[dom.SVGTextPathElement]
+   val textPath = "textPath".tag[dom.SVGTextPathElement]
    /**
     * The textual content for a text can be either character data directly
     * embedded within the text element or the character data content of a
