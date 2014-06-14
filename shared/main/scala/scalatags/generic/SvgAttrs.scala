@@ -19,6 +19,8 @@ import acyclic.file
  */
 trait SvgAttrs[Builder, Output] extends Util[Builder, Output]{
 
+  implicit val namespace = Namespace("http://www.w3.org/2000/svg")
+
   /**
    * The viewBox attribute allows to specify that a given set of graphics stretch 
    * to fit a particular container element.

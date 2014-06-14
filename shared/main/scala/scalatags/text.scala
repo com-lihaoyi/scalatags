@@ -34,8 +34,8 @@ object Text extends Bundle[text.Builder, String] {
     protected[this] implicit def stringAttr = new GenericAttr[String]
     protected[this] implicit def stringStyle = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T](tag: String, void: Boolean) = {
-      TypedTag(tag, Nil, void)
+    def makeAbstractTypedTag[T](tag: String, void: Boolean, namespace: Option[Namespace]) = {
+      TypedTag(tag, Nil, void, namespace)
     }
   }
 
@@ -82,9 +82,10 @@ object Text extends Bundle[text.Builder, String] {
   implicit val booleanStyle = new GenericStyle[Boolean]
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
-  case class TypedTag[+Output <: String](tag: String = "",
+  case class TypedTag[+Output <: String](name: String = "",
                                          modifiers: List[Seq[Node]],
-                                         void: Boolean = false)
+                                         void: Boolean = false,
+                                         namespace: Option[Namespace])
                                          extends generic.TypedTag[Output, text.Builder]
                                          with text.Child{
     // unchecked because Scala 2.10.4 seems to not like this, even though
@@ -104,7 +105,7 @@ object Text extends Bundle[text.Builder, String] {
       build(builder)
 
       // tag
-      strb += '<' ++= tag
+      strb += '<' ++= name
 
       // attributes
       var i = 0
@@ -129,12 +130,12 @@ object Text extends Bundle[text.Builder, String] {
         }
 
         // Closing tag
-        strb ++= "</" ++= tag += '>'
+        strb ++= "</" ++= name += '>'
       }
     }
 
     def apply(xs: Node*): TypedTag[Output] = {
-      this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
+      this.copy(name=name, void = void, modifiers = xs :: modifiers)
     }
 
     /**

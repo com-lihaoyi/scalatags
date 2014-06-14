@@ -5,6 +5,9 @@ package scalatags.generic
  * default to avoid namespace pollution.
  */
 trait SvgTags[Builder, Output] extends Util[Builder, Output]{
+
+  implicit val namespace = Namespace("http://www.w3.org/2000/svg")
+
   /**
    * The altGlyph element allows sophisticated selection of the glyphs used to
    * render its child character data.
