@@ -13,11 +13,11 @@ object DomTests extends TestSuite{
       'children {
         val elem = div.render
         assert(elem.children.length == 0)
-        elem.appendChild(p("omg", "wtf", "bbq").render)
+        elem.appendChild(p(1, "wtf", "bbq").render)
         assert(elem.children.length == 1)
         val pElem = elem.children(0).asInstanceOf[dom.HTMLParagraphElement]
         assert(pElem.childNodes.length == 3)
-        assert(pElem.textContent == "omgwtfbbq")
+        assert(pElem.textContent == "1wtfbbq")
       }
 
       'attributes {

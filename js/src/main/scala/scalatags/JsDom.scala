@@ -39,8 +39,12 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
     }
   }
 
-  implicit def numericFrag[T: Numeric](u: T) = new StringFrag(u.toString)
-
+  implicit def byteFrag(v: Byte) = new StringFrag(v.toString)
+  implicit def shortFrag(v: Short) = new StringFrag(v.toString)
+  implicit def intFrag(v: Int) = new StringFrag(v.toString)
+  implicit def longFrag(v: Long) = new StringFrag(v.toString)
+  implicit def floatFrag(v: Float) = new StringFrag(v.toString)
+  implicit def doubleFrag(v: Double) = new StringFrag(v.toString)
   implicit def stringFrag(v: String) = new StringFrag(v)
 
   object StringFrag extends Companion[StringFrag]

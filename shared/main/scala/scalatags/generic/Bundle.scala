@@ -96,7 +96,27 @@ trait Bundle[Builder, Output]{
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def numericFrag[V: Numeric](u: V): Modifier
+  implicit def byteFrag(v: Byte): Modifier
+  /**
+   * Lets you put numbers into a scalatags tree, converting them to Strings
+   */
+  implicit def shortFrag(v: Short): Modifier
+  /**
+   * Lets you put numbers into a scalatags tree, converting them to Strings
+   */
+  implicit def intFrag(v: Int): Modifier
+  /**
+   * Lets you put numbers into a scalatags tree, converting them to Strings
+   */
+  implicit def longFrag(v: Long): Modifier
+  /**
+   * Lets you put numbers into a scalatags tree, converting them to Strings
+   */
+  implicit def floatFrag(v: Float): Modifier
+  /**
+   * Lets you put numbers into a scalatags tree, converting them to Strings
+   */
+  implicit def doubleFrag(v: Double): Modifier
 
   type Tag <: generic.TypedTag[Builder, Output]
 
