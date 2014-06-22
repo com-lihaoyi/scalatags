@@ -946,7 +946,8 @@ And the [Frag](http://lihaoyi.github.io/scalatags/#scalatags.generic.Frag):
 ```scala
 trait Frag[Builder, +Output] extends Modifier[Builder]{
   def render: Output
-}```
+}
+```
 
 
 A `TypedTag` is basically a tag-name together with a loose bag of `Modifier`s, and is itself a `Modifier` so it can be nested within other `TypedTag`s. A `Modifier` is a tag, a sequence of tags, an attribute binding, a style binding, or anything else that can be used to modify how a tag will be rendered. Lastly, a `Frag` represents the smallest standalone atom, which includes tags, loose strings, numbers, and other things.
