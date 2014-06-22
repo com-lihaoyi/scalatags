@@ -27,8 +27,8 @@ trait Modifier[Builder] {
  * like [[AttrPair]]s or [[StylePair]]s which only make sense as part of
  * a parent fragment
  */
-trait Frag[Builder, +Output] extends Modifier[Builder]{
-  def render: Output
+trait Frag[Builder, +Output <: FragT, +FragT] extends Modifier[Builder]{
+  def render: FragT
 }
 
 /**
@@ -38,8 +38,8 @@ trait Frag[Builder, +Output] extends Modifier[Builder]{
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[Builder, +Output] extends Frag[Builder, Output]{
-  protected[this] type Self <: TypedTag[Builder, Output]
+trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output, FragT]{
+  protected[this] type Self <: TypedTag[Builder, Output, FragT]
   def tag: String
 
   /**

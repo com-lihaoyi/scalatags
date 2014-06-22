@@ -7,9 +7,7 @@ import scalatags.generic.Util
  * Trait that contains the contents of the `Tags` object, so they can be mixed
  * in to other objects if needed.
  */
-trait Tags extends generic.Tags[Builder, String]{
-
-
+trait Tags extends generic.Tags[Builder, String, String]{
 
   // Root Element
   /**

@@ -26,7 +26,7 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[Builder, Output]{
+trait Bundle[Builder, Output <: FragT, FragT]{
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
@@ -36,7 +36,7 @@ trait Bundle[Builder, Output]{
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
-  val short: AbstractShort[Builder, Output]
+  val short: AbstractShort[Builder, Output, FragT]
   /**
    * Common attributes.
    */
@@ -66,14 +66,14 @@ trait Bundle[Builder, Output]{
    */
   val svgStyles: SvgStyles
 
-  type Attrs = generic.Attrs[Builder, Output]
-  type Tags = generic.Tags[Builder, Output]
-  type Tags2 = generic.Tags2[Builder, Output]
-  type Styles = generic.Styles[Builder, Output]
-  type Styles2 = generic.Styles2[Builder, Output]
-  type SvgTags = generic.SvgTags[Builder, Output]
-  type SvgStyles = generic.SvgStyles[Builder, Output]
-  type Util = generic.Util[Builder, Output]
+  type Attrs = generic.Attrs[Builder, Output, FragT]
+  type Tags = generic.Tags[Builder, Output, FragT]
+  type Tags2 = generic.Tags2[Builder, Output, FragT]
+  type Styles = generic.Styles[Builder, Output, FragT]
+  type Styles2 = generic.Styles2[Builder, Output, FragT]
+  type SvgTags = generic.SvgTags[Builder, Output, FragT]
+  type SvgStyles = generic.SvgStyles[Builder, Output, FragT]
+  type Util = generic.Util[Builder, Output, FragT]
 
   type Attr = generic.Attr
   type Style = generic.Style
@@ -92,33 +92,33 @@ trait Bundle[Builder, Output]{
   /**
    * Allows you to modify a HtmlTag by adding a String to its list of children
    */
-  implicit def stringFrag(v: String): Modifier
+  implicit def stringFrag(v: String): Frag[Builder, Output, FragT]
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def byteFrag(v: Byte): Modifier
+  implicit def byteFrag(v: Byte): Frag[Builder, Output, FragT]
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def shortFrag(v: Short): Modifier
+  implicit def shortFrag(v: Short): Frag[Builder, Output, FragT]
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def intFrag(v: Int): Modifier
+  implicit def intFrag(v: Int): Frag[Builder, Output, FragT]
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def longFrag(v: Long): Modifier
+  implicit def longFrag(v: Long): Frag[Builder, Output, FragT]
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def floatFrag(v: Float): Modifier
+  implicit def floatFrag(v: Float): Frag[Builder, Output, FragT]
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def doubleFrag(v: Double): Modifier
+  implicit def doubleFrag(v: Double): Frag[Builder, Output, FragT]
 
-  type Tag <: generic.TypedTag[Builder, Output]
+  type Tag <: generic.TypedTag[Builder, Output, FragT]
 
   /**
    * A [[Modifier]] which contains a String which will not be escaped.
@@ -138,6 +138,6 @@ trait Bundle[Builder, Output]{
   val StringFrag: Companion[StringFrag]
 }
 
-trait AbstractShort[Builder, Output]{
-  val `*`: generic.Attrs[Builder, Output] with generic.Styles[Builder, Output]
+trait AbstractShort[Builder, Output <: FragT, FragT]{
+  val `*`: generic.Attrs[Builder, Output, FragT] with generic.Styles[Builder, Output, FragT]
 }

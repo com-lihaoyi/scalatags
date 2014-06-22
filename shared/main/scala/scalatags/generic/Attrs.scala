@@ -14,7 +14,7 @@ import acyclic.file
  * Trait containing the contents of the [[Attrs]] module, so they can be
  * mixed in to other objects if needed.
  */
-trait Attrs[Builder, Output] extends Util[Builder, Output]{
+trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT]{
 
   /**
    * This is the single required attribute for anchors defining a hypertext

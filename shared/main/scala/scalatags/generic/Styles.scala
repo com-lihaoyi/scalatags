@@ -11,7 +11,7 @@ package scalatags
 package generic
 import acyclic.file
 
-trait StyleMisc[Builder, Output] extends Util[Builder, Output] {
+trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
 
   /**
    * A Style that takes any value of type T as a parameter and has an auto value
@@ -220,7 +220,7 @@ trait StyleMisc[Builder, Output] extends Util[Builder, Output] {
  * Contains CSS styles which are used less frequently. These are not imported by
  * default to avoid namespace pollution.
  */
-trait Styles2[Builder, Output] extends StyleMisc[Builder, Output]{
+trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT]{
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -768,7 +768,7 @@ trait Styles2[Builder, Output] extends StyleMisc[Builder, Output]{
  * Trait that contains the contents of the `Styles` object, so they can
  * be mixed in to other objects if needed.
  */
-trait Styles[Builder, Output] extends StyleMisc[Builder, Output]{
+trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT]{
   /**
    * If a background-image is specified, the background-attachment CSS
    * property determines whether that image's position is fixed within

@@ -14,9 +14,9 @@ import scalatags.generic.Modifier
  * can bind structured objects to the attributes of your `dom.Element` without
  * serializing them first into strings.
  */
-object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityImplicits{
+object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with LowPriorityImplicits{
   object all extends StringTags with Attrs with Styles with jsdom.Tags with DataConverters
-  object short extends StringTags with Util with DataConverters with generic.AbstractShort[dom.Element, dom.Element]{
+  object short extends StringTags with Util with DataConverters with generic.AbstractShort[dom.Element, dom.Element, dom.Node]{
     object * extends StringTags with Attrs with Styles
   }
 
@@ -48,8 +48,8 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   implicit def stringFrag(v: String) = new StringFrag(v)
 
   object StringFrag extends Companion[StringFrag]
-  case class StringFrag(v: String) extends Frag[dom.Text] {
-    def render = dom.document.createTextNode(v)
+  case class StringFrag(v: String) extends Frag{
+    def render: dom.Text = dom.document.createTextNode(v)
   }
 
   def raw(s: String) = new RawFrag(s)
@@ -84,15 +84,12 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   case class TypedTag[+Output <: dom.Element](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
                                               void: Boolean = false)
-                                              extends generic.TypedTag[dom.Element, Output]{
+                                              extends generic.TypedTag[dom.Element, Output, dom.Node]
+                                              with Frag{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
     protected[this] type Self = TypedTag[Output @uncheckedVariance]
-
-    def applyTo(elem: dom.Element): Unit = {
-      elem.appendChild(render)
-    }
 
     def render: Output = {
       val elem = dom.document.createElement(tag)
@@ -114,9 +111,9 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   type Tag = TypedTag[dom.Element]
   val Tag = TypedTag
 
-  type Frag[+T <: dom.Node] = DomFrag[dom.Element, T]
-  trait DomFrag[V, +T <: dom.Node] extends generic.Frag[V, T]{
-    def render: T
+  type Frag = DomFrag
+  trait DomFrag extends generic.Frag[dom.Element, dom.Element, dom.Node]{
+    def render: dom.Node
     def applyTo(b: dom.Element) = b.appendChild(this.render)
   }
 }

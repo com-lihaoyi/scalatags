@@ -8,7 +8,7 @@ import scalatags.generic.Util
   * Contains Tags which are only used for SVG. These are not imported by
   * default to avoid namespace pollution.
   */
-trait SvgTags extends generic.SvgTags[dom.Element, dom.Element]{
+trait SvgTags extends generic.SvgTags[dom.Element, dom.Element, dom.Node]{
    /**
     * The altGlyph element allows sophisticated selection of the glyphs used to
     * render its child character data.

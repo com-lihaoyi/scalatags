@@ -7,7 +7,7 @@ import scalatags.generic.Util
  * Contains HTML tags which are used less frequently. These are generally
  * imported individually as needed.
  */
-trait Tags2 extends generic.Tags2[Builder, String]{
+trait Tags2 extends generic.Tags2[Builder, String, String]{
 
   // Document Metadata
   /**

@@ -7,9 +7,9 @@ import scalatags._
 /**
  * Created by haoyi on 6/2/14.
  */
-trait Util[Builder, Output] {
+trait Util[Builder, Output <: FragT, FragT] {
 
-  type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T]
+  type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T, FragT]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttr: AttrValue[Builder, String]
   protected[this] implicit def stringStyle: StyleValue[Builder, String]

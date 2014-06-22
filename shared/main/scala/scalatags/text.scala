@@ -11,10 +11,10 @@ import scala.annotation.unchecked.uncheckedVariance
  * `String`s.
  */
 
-object Text extends Bundle[text.Builder, String] {
+object Text extends Bundle[text.Builder, String, String] {
 
   object all extends StringTags with Attrs with Styles with text.Tags with DataConverters
-  object short extends StringTags with Util with DataConverters with generic.AbstractShort[text.Builder, String]{
+  object short extends StringTags with Util with DataConverters with generic.AbstractShort[text.Builder, String, String]{
     object * extends StringTags with Attrs with Styles
   }
 
@@ -94,7 +94,7 @@ object Text extends Bundle[text.Builder, String] {
   case class TypedTag[+Output <: String](tag: String = "",
                                          modifiers: List[Seq[Modifier]],
                                          void: Boolean = false)
-                                         extends generic.TypedTag[text.Builder, Output]
+                                         extends generic.TypedTag[text.Builder, Output, String]
                                          with Frag{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4

@@ -906,7 +906,7 @@ Internals
 The primary data structure Scalatags uses are the [TypedTag](http://lihaoyi.github.io/scalatags/#scalatags.generic.TypedTag):
 
 ```scala
-trait TypedTag[Builder, +Output] extends Frag[Builder, Output]{
+trait TypedTag[Builder, +Output, FragT] extends Frag[Builder, Output, FragT]{
   def tag: String
 
   /**
@@ -944,7 +944,7 @@ trait Modifier[Builder] {
 And the [Frag](http://lihaoyi.github.io/scalatags/#scalatags.generic.Frag):
 
 ```scala
-trait Frag[Builder, +Output] extends Modifier[Builder]{
+trait Frag[Builder, +Output, FragT] extends Modifier[Builder]{
   def render: Output
 }
 ```
@@ -970,7 +970,7 @@ Architecture
 Scalatags has pretty odd internals in order to support code re-use between the Text and Dom packages. Essentially, each Scalatags package is an instance of 
  
 ```scala
-trait Bundle[Builder, Output]{
+trait Bundle[Builder, Output, FragT]{
 ```
 
 Which is parametrized on the `Builder` used to generate the output, as well as the final `Output` type. The Text package is defined as 
@@ -1033,10 +1033,10 @@ You can easier add other typeclass instances to handle binding e.g. `Future`s (w
 Cross-backend Code
 ------------------
 
-If you wish to, it is possible to write code that is generic against the Scalatags backend used, and can be compiled and run on both Text and JsDom backends at the same time! This is done by adding an explicit dependency on `generic.Bundle[Builder, Output]`, e.g. how it is done in the unit tests:
+If you wish to, it is possible to write code that is generic against the Scalatags backend used, and can be compiled and run on both Text and JsDom backends at the same time! This is done by adding an explicit dependency on `generic.Bundle[Builder, Output, FragT]`, e.g. how it is done in the unit tests:
  
 ```scala
-class ExampleTests[Builder, Output](bundle: Bundle[Builder, Output]) extends TestSuite{
+class ExampleTests[Builder, Output, FragT](bundle: Bundle[Builder, Output, FragT]) extends TestSuite{
   import bundle._
   ...
 }
