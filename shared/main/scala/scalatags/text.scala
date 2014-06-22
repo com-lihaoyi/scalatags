@@ -38,20 +38,26 @@ object Text extends Bundle[text.Builder, String] {
     }
   }
 
-  implicit def NumericNode[T: Numeric](u: T) = new StringNode(u.toString)
+  implicit def numericFrag[T: Numeric](u: T) = new StringFrag(u.toString)
 
-  implicit def stringNode(v: String) = new StringNode(v)
+  implicit def stringFrag(v: String) = new StringFrag(v)
 
 
-  object StringNode extends Companion[StringNode]
-  case class StringNode(v: String) extends Node with text.Child {
+  object StringFrag extends Companion[StringFrag]
+  case class StringFrag(v: String) extends Frag{
+    def render = {
+      val strb = new StringBuilder()
+      writeTo(strb)
+      strb.toString()
+    }
     def writeTo(strb: StringBuilder) = Escaping.escape(v, strb)
   }
 
-  def raw(s: String) = new RawNode(s)
+  def raw(s: String) = new RawFrag(s)
 
-  object RawNode extends Companion[RawNode]
-  case class RawNode(v: String) extends Node with text.Child {
+  object RawFrag extends Companion[RawFrag]
+  case class RawFrag(v: String) extends Frag {
+    def render = v
     def writeTo(strb: StringBuilder) = strb ++= v
   }
 
@@ -82,10 +88,10 @@ object Text extends Bundle[text.Builder, String] {
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+Output <: String](tag: String = "",
-                                         modifiers: List[Seq[Node]],
+                                         modifiers: List[Seq[Modifier]],
                                          void: Boolean = false)
-                                         extends generic.TypedTag[Output, text.Builder]
-                                         with text.Child{
+                                         extends generic.TypedTag[text.Builder, Output]
+                                         with Frag{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
@@ -132,7 +138,7 @@ object Text extends Bundle[text.Builder, String] {
       }
     }
 
-    def apply(xs: Node*): TypedTag[Output] = {
+    def apply(xs: Modifier*): TypedTag[Output] = {
       this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
     }
 
@@ -149,4 +155,5 @@ object Text extends Bundle[text.Builder, String] {
   type Tag = TypedTag[String]
   val Tag = TypedTag
 
+  type Frag = text.Frag
 }

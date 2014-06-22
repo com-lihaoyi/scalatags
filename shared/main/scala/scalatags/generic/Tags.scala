@@ -17,7 +17,7 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val html: TypedTag[Output, Builder]
+   val html: TypedTag[Builder, Output]
 
    // Document Metadata
    /**
@@ -26,26 +26,26 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val head: TypedTag[Output, Builder]
+   val head: TypedTag[Builder, Output]
 
    /**
     * Defines the base URL for relative URLs in the page.
     *
     *  MDN
     */
-   val base: TypedTag[Output, Builder]
+   val base: TypedTag[Builder, Output]
    /**
     * Used to link JavaScript and external CSS with the current HTML document.
     *
     *  MDN
     */
-   val link: TypedTag[Output, Builder]
+   val link: TypedTag[Builder, Output]
    /**
     * Defines metadata that can't be defined using another HTML element.
     *
     *  MDN
     */
-   val meta: TypedTag[Output, Builder]
+   val meta: TypedTag[Builder, Output]
 
 
    // Scripting
@@ -55,7 +55,7 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val script: TypedTag[Output, Builder]
+   val script: TypedTag[Builder, Output]
 
 
    // Sections
@@ -65,58 +65,58 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val body: TypedTag[Output, Builder]
+   val body: TypedTag[Builder, Output]
 
    /**
     * Heading level 1
     *
     *  MDN
     */
-   val h1: TypedTag[Output, Builder]
+   val h1: TypedTag[Builder, Output]
    /**
     * Heading level 2
     *
     *  MDN
     */
-   val h2: TypedTag[Output, Builder]
+   val h2: TypedTag[Builder, Output]
    /**
     * Heading level 3
     *
     *  MDN
     */
-   val h3: TypedTag[Output, Builder]
+   val h3: TypedTag[Builder, Output]
    /**
     * Heading level 4
     *
     *  MDN
     */
-   val h4: TypedTag[Output, Builder]
+   val h4: TypedTag[Builder, Output]
    /**
     * Heading level 5
     *
     *  MDN
     */
-   val h5: TypedTag[Output, Builder]
+   val h5: TypedTag[Builder, Output]
    /**
     * Heading level 6
     *
     *  MDN
     */
-   val h6: TypedTag[Output, Builder]
+   val h6: TypedTag[Builder, Output]
    /**
     * Defines the header of a page or section. It often contains a logo, the
     * title of the Web site, and a navigational table of content.
     *
     *  MDN
     */
-   val header: TypedTag[Output, Builder]
+   val header: TypedTag[Builder, Output]
    /**
     * Defines the footer for a page or section. It often contains a copyright
     * notice, some links to legal information, or addresses to give feedback.
     *
     *  MDN
     */
-   val footer: TypedTag[Output, Builder]
+   val footer: TypedTag[Builder, Output]
 
 
    // Grouping content
@@ -125,81 +125,81 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val p: TypedTag[Output, Builder]
+   val p: TypedTag[Builder, Output]
    /**
     * Represents a thematic break between paragraphs of a section or article or
     * any longer content.
     *
     *  MDN
     */
-   val hr: TypedTag[Output, Builder]
+   val hr: TypedTag[Builder, Output]
    /**
     * Indicates that its content is preformatted and that this format must be
     * preserved.
     *
     *  MDN
     */
-   val pre: TypedTag[Output, Builder]
+   val pre: TypedTag[Builder, Output]
    /**
     * Represents a content that is quoted from another source.
     *
     *  MDN
     */
-   val blockquote: TypedTag[Output, Builder]
+   val blockquote: TypedTag[Builder, Output]
    /**
     * Defines an ordered list of items.
     *
     *  MDN
     */
-   val ol: TypedTag[Output, Builder]
+   val ol: TypedTag[Builder, Output]
    /**
     * Defines an unordered list of items.
     *
     *  MDN
     */
-   val ul: TypedTag[Output, Builder]
+   val ul: TypedTag[Builder, Output]
    /**
     * Defines an item of an list.
     *
     *  MDN
     */
-   val li: TypedTag[Output, Builder]
+   val li: TypedTag[Builder, Output]
    /**
     * Defines a definition list; al ist of terms and their associated definitions.
     *
     *  MDN
     */
-   val dl: TypedTag[Output, Builder]
+   val dl: TypedTag[Builder, Output]
    /**
     * Represents a term defined by the next dd
     *
     *  MDN
     */
-   val dt: TypedTag[Output, Builder]
+   val dt: TypedTag[Builder, Output]
    /**
     * Represents the definition of the terms immediately listed before it.
     *
     *  MDN
     */
-   val dd: TypedTag[Output, Builder]
+   val dd: TypedTag[Builder, Output]
    /**
     * Represents a figure illustrated as part of the document.
     *
     *  MDN
     */
-   val figure: TypedTag[Output, Builder]
+   val figure: TypedTag[Builder, Output]
    /**
     * Represents the legend of a figure.
     *
     *  MDN
     */
-   val figcaption: TypedTag[Output, Builder]
+   val figcaption: TypedTag[Builder, Output]
    /**
     * Represents a generic container with no special meaning.
     *
     *  MDN
     */
-   val div: TypedTag[Output, Builder]
+   val div: TypedTag[Builder, Output]
 
    // Text-level semantics
    /**
@@ -207,76 +207,76 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val a: TypedTag[Output, Builder]
+   val a: TypedTag[Builder, Output]
    /**
     * Represents emphasized text.
     *
     *  MDN
     */
-   val em: TypedTag[Output, Builder]
+   val em: TypedTag[Builder, Output]
    /**
     * Represents especially important text.
     *
     *  MDN
     */
-   val strong: TypedTag[Output, Builder]
+   val strong: TypedTag[Builder, Output]
    /**
     * Represents a side comment; text like a disclaimer or copyright, which is not
     * essential to the comprehension of the document.
     *
     *  MDN
     */
-   val small: TypedTag[Output, Builder]
+   val small: TypedTag[Builder, Output]
    /**
     * Strikethrough element, used for that is no longer accurate or relevant.
     *
     *  MDN
     */
-   val s: TypedTag[Output, Builder]
+   val s: TypedTag[Builder, Output]
    /**
     * Represents the title of a work being cited.
     *
     *  MDN
     */
-   val cite: TypedTag[Output, Builder]
+   val cite: TypedTag[Builder, Output]
 
    /**
     * Represents computer code.
     *
     *  MDN
     */
-   val code: TypedTag[Output, Builder]
+   val code: TypedTag[Builder, Output]
 
    /**
     * Subscript tag
     *
     *  MDN
     */
-   val sub: TypedTag[Output, Builder]
+   val sub: TypedTag[Builder, Output]
    /**
     * Superscript tag.
     *
     *  MDN
     */
-   val sup: TypedTag[Output, Builder]
+   val sup: TypedTag[Builder, Output]
    /**
     * Italicized text.
     *
     *  MDN
     */
-   val i: TypedTag[Output, Builder]
+   val i: TypedTag[Builder, Output]
    /**
     * Bold text.
     *
     *  MDN
     */
-   val b: TypedTag[Output, Builder]
+   val b: TypedTag[Builder, Output]
    /**
     * Underlined text.
     *
     *  MDN
     */
-   val u: TypedTag[Output, Builder]
+   val u: TypedTag[Builder, Output]
 
    /**
     * Represents text with no specific meaning. This has to be used when no other
@@ -285,20 +285,20 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val span: TypedTag[Output, Builder]
+   val span: TypedTag[Builder, Output]
    /**
     * Represents a line break.
     *
     *  MDN
     */
-   val br: TypedTag[Output, Builder]
+   val br: TypedTag[Builder, Output]
    /**
     * Represents a line break opportunity, that is a suggested point for wrapping
     * text in order to improve readability of text split on several lines.
     *
     *  MDN
     */
-   val wbr: TypedTag[Output, Builder]
+   val wbr: TypedTag[Builder, Output]
 
    // Edits
    /**
@@ -306,13 +306,13 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val ins: TypedTag[Output, Builder]
+   val ins: TypedTag[Builder, Output]
    /**
     * Defines a removal from the document.
     *
     *  MDN
     */
-   val del: TypedTag[Output, Builder]
+   val del: TypedTag[Builder, Output]
 
    // Embedded content
    /**
@@ -320,79 +320,79 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val img: TypedTag[Output, Builder]
+   val img: TypedTag[Builder, Output]
    /**
     * Represents a nested browsing context, that is an embedded HTML document.
     *
     *  MDN
     */
-   val iframe: TypedTag[Output, Builder]
+   val iframe: TypedTag[Builder, Output]
    /**
     * Represents a integration point for an external, often non-HTML, application
     * or interactive content.
     *
     *  MDN
     */
-   val embed: TypedTag[Output, Builder]
+   val embed: TypedTag[Builder, Output]
    /**
     * Represents an external resource, which is treated as an image, an HTML
     * sub-document, or an external resource to be processed by a plug-in.
     *
     *  MDN
     */
-   val `object`: TypedTag[Output, Builder]
+   val `object`: TypedTag[Builder, Output]
    /**
     * Defines parameters for use by plug-ins invoked by object elements.
     *
     *  MDN
     */
-   val param: TypedTag[Output, Builder]
+   val param: TypedTag[Builder, Output]
    /**
     * Represents a video, and its associated audio files and captions, with the
     * necessary interface to play it.
     *
     *  MDN
     */
-   val video: TypedTag[Output, Builder]
+   val video: TypedTag[Builder, Output]
    /**
     * Represents a sound or an audio stream.
     *
     *  MDN
     */
-   val audio: TypedTag[Output, Builder]
+   val audio: TypedTag[Builder, Output]
    /**
     * Allows the authors to specify alternate media resources for media elements
     * like video or audio
     *
     *  MDN
     */
-   val source: TypedTag[Output, Builder]
+   val source: TypedTag[Builder, Output]
    /**
     * Allows authors to specify timed text track for media elements like video or
     * audio
     *
     *  MDN
     */
-   val track: TypedTag[Output, Builder]
+   val track: TypedTag[Builder, Output]
    /**
     * Represents a bitmap area that scripts can use to render graphics like graphs,
     * games or any visual images on the fly.
     *
     *  MDN
     */
-   val canvas: TypedTag[Output, Builder]
+   val canvas: TypedTag[Builder, Output]
    /**
     * In conjunction with area, defines an image map.
     *
     *  MDN
     */
-   val map: TypedTag[Output, Builder]
+   val map: TypedTag[Builder, Output]
    /**
     * In conjunction with map, defines an image map
     *
     *  MDN
     */
-   val area: TypedTag[Output, Builder]
+   val area: TypedTag[Builder, Output]
 
 
    // Tabular data
@@ -401,61 +401,61 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val table: TypedTag[Output, Builder]
+   val table: TypedTag[Builder, Output]
    /**
     * The title of a table.
     *
     *  MDN
     */
-   val caption: TypedTag[Output, Builder]
+   val caption: TypedTag[Builder, Output]
    /**
     * A set of columns.
     *
     *  MDN
     */
-   val colgroup: TypedTag[Output, Builder]
+   val colgroup: TypedTag[Builder, Output]
    /**
     * A single column.
     *
     *  MDN
     */
-   val col: TypedTag[Output, Builder]
+   val col: TypedTag[Builder, Output]
    /**
     * The table body.
     *
     *  MDN
     */
-   val tbody: TypedTag[Output, Builder]
+   val tbody: TypedTag[Builder, Output]
    /**
     * The table headers.
     *
     *  MDN
     */
-   val thead: TypedTag[Output, Builder]
+   val thead: TypedTag[Builder, Output]
    /**
     * The table footer.
     *
     *  MDN
     */
-   val tfoot: TypedTag[Output, Builder]
+   val tfoot: TypedTag[Builder, Output]
    /**
     * A single row in a table.
     *
     *  MDN
     */
-   val tr: TypedTag[Output, Builder]
+   val tr: TypedTag[Builder, Output]
    /**
     * A single cell in a table.
     *
     *  MDN
     */
-   val td: TypedTag[Output, Builder]
+   val td: TypedTag[Builder, Output]
    /**
     * A header cell in a table.
     *
     *  MDN
     */
-   val th: TypedTag[Output, Builder]
+   val th: TypedTag[Builder, Output]
 
    // Forms
    /**
@@ -464,65 +464,65 @@ trait Tags[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val form: TypedTag[Output, Builder]
+   val form: TypedTag[Builder, Output]
    /**
     * A set of fields.
     *
     *  MDN
     */
-   val fieldset: TypedTag[Output, Builder]
+   val fieldset: TypedTag[Builder, Output]
    /**
     * The caption for a fieldset.
     *
     *  MDN
     */
-   val legend: TypedTag[Output, Builder]
+   val legend: TypedTag[Builder, Output]
    /**
     * The caption of a single field
     *
     *  MDN
     */
-   val label: TypedTag[Output, Builder]
+   val label: TypedTag[Builder, Output]
    /**
     * A typed data field allowing the user to input data.
     *
     *  MDN
     */
-   val input: TypedTag[Output, Builder]
+   val input: TypedTag[Builder, Output]
    /**
     * A button
     *
     *  MDN
     */
-   val button: TypedTag[Output, Builder]
+   val button: TypedTag[Builder, Output]
    /**
     * A control that allows the user to select one of a set of options.
     *
     *  MDN
     */
-   val select: TypedTag[Output, Builder]
+   val select: TypedTag[Builder, Output]
    /**
     * A set of predefined options for other controls.
     *
     *  MDN
     */
-   val datalist: TypedTag[Output, Builder]
+   val datalist: TypedTag[Builder, Output]
    /**
     * A set of options, logically grouped.
     *
     *  MDN
     */
-   val optgroup: TypedTag[Output, Builder]
+   val optgroup: TypedTag[Builder, Output]
    /**
     * An option in a select element.
     *
     *  MDN
     */
-   val option: TypedTag[Output, Builder]
+   val option: TypedTag[Builder, Output]
    /**
     * A multiline text edit control.
     *
     *  MDN
     */
-   val textarea: TypedTag[Output, Builder]
+   val textarea: TypedTag[Builder, Output]
  }

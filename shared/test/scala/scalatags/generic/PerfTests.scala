@@ -8,7 +8,7 @@ class ScalatagsPerf[Builder, Output](val bundle: Bundle[Builder, Output]) extend
   import all._
   import generic.PerfTests._
 
-  def para(n: Int, m: generic.Node[Builder]*) = p(
+  def para(n: Int, m: generic.Modifier[Builder]*) = p(
     m,
     title := ("this is paragraph " + n)
   )

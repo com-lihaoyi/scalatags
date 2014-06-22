@@ -16,14 +16,14 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     * MDN
     */
-   val title: TypedTag[Output, Builder]
+   val title: TypedTag[Builder, Output]
 
    /**
     * Used to write inline CSS.
     *
     *  MDN
     */
-   val style: TypedTag[Output, Builder]
+   val style: TypedTag[Builder, Output]
    // Scripting
    /**
     * Defines alternative content to display when the browser doesn't support
@@ -31,7 +31,7 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val noscript: TypedTag[Output, Builder]
+   val noscript: TypedTag[Builder, Output]
 
    // Sections
    /**
@@ -40,34 +40,34 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val section: TypedTag[Output, Builder]
+   val section: TypedTag[Builder, Output]
    /**
     * Represents a section of a page that links to other pages or to parts within
     * the page: a section with navigation links.
     *
     *  MDN
     */
-   val nav: TypedTag[Output, Builder]
+   val nav: TypedTag[Builder, Output]
    /**
     * Defines self-contained content that could exist independently of the rest
     * of the content.
     *
     *  MDN
     */
-   val article: TypedTag[Output, Builder]
+   val article: TypedTag[Builder, Output]
    /**
     * Defines some content loosely related to the page content. If it is removed,
     * the remaining content still makes sense.
     *
     *  MDN
     */
-   val aside: TypedTag[Output, Builder]
+   val aside: TypedTag[Builder, Output]
    /**
     * Defines a section containing contact information.
     *
     *  MDN
     */
-   val address: TypedTag[Output, Builder]
+   val address: TypedTag[Builder, Output]
 
    /**
     * Defines the main or important content in the document. There is only one
@@ -75,7 +75,7 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val main: TypedTag[Output, Builder]
+   val main: TypedTag[Builder, Output]
 
    // Text level semantics
 
@@ -84,66 +84,66 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val q: TypedTag[Output, Builder]
+   val q: TypedTag[Builder, Output]
    /**
     * Represents a term whose definition is contained in its nearest ancestor
     * content.
     *
     *  MDN
     */
-   val dfn: TypedTag[Output, Builder]
+   val dfn: TypedTag[Builder, Output]
    /**
     * An abbreviation or acronym; the expansion of the abbreviation can be
     * represented in the title attribute.
     *
     *  MDN
     */
-   val abbr: TypedTag[Output, Builder]
+   val abbr: TypedTag[Builder, Output]
    /**
     * Associates to its content a machine-readable equivalent.
     *
     *  MDN
     */
-   val data: TypedTag[Output, Builder]
+   val data: TypedTag[Builder, Output]
    /**
     * Represents a date and time value; the machine-readable equivalent can be
     * represented in the datetime attribetu
     *
     *  MDN
     */
-   val time: TypedTag[Output, Builder]
+   val time: TypedTag[Builder, Output]
    /**
     * Represents a variable.
     *
     *  MDN
     */
-   val `var`: TypedTag[Output, Builder]
+   val `var`: TypedTag[Builder, Output]
    /**
     * Represents the output of a program or a computer.
     *
     *  MDN
     */
-   val samp: TypedTag[Output, Builder]
+   val samp: TypedTag[Builder, Output]
    /**
     * Represents user input, often from a keyboard, but not necessarily.
     *
     *  MDN
     */
-   val kbd: TypedTag[Output, Builder]
+   val kbd: TypedTag[Builder, Output]
 
    /**
     * Defines a mathematical formula.
     *
     *  MDN
     */
-   val math: TypedTag[Output, Builder]
+   val math: TypedTag[Builder, Output]
    /**
     * Represents text highlighted for reference purposes, that is for its
     * relevance in another context.
     *
     *  MDN
     */
-   val mark: TypedTag[Output, Builder]
+   val mark: TypedTag[Builder, Output]
    /**
     * Represents content to be marked with ruby annotations, short runs of text
     * presented alongside the text. This is often used in conjunction with East
@@ -152,13 +152,13 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val ruby: TypedTag[Output, Builder]
+   val ruby: TypedTag[Builder, Output]
    /**
     * Represents the text of a ruby annotation.
     *
     *  MDN
     */
-   val rt: TypedTag[Output, Builder]
+   val rt: TypedTag[Builder, Output]
    /**
     * Represents parenthesis around a ruby annotation, used to display the
     * annotation in an alternate way by browsers not supporting the standard
@@ -166,7 +166,7 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val rp: TypedTag[Output, Builder]
+   val rp: TypedTag[Builder, Output]
    /**
     * Represents text that must be isolated from its surrounding for bidirectional
     * text formatting. It allows embedding a span of text with a different, or
@@ -174,14 +174,14 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val bdi: TypedTag[Output, Builder]
+   val bdi: TypedTag[Builder, Output]
    /**
     * Represents the directionality of its children, in order to explicitly
     * override the Unicode bidirectional algorithm.
     *
     *  MDN
     */
-   val bdo: TypedTag[Output, Builder]
+   val bdo: TypedTag[Builder, Output]
 
    // Forms
 
@@ -190,25 +190,25 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val keygen: TypedTag[Output, Builder]
+   val keygen: TypedTag[Builder, Output]
    /**
     * The result of a calculation
     *
     *  MDN
     */
-   val output: TypedTag[Output, Builder]
+   val output: TypedTag[Builder, Output]
    /**
     * A progress completion bar
     *
     *  MDN
     */
-   val progress: TypedTag[Output, Builder]
+   val progress: TypedTag[Builder, Output]
    /**
     * A scalar measurement within a known range.
     *
     *  MDN
     */
-   val meter: TypedTag[Output, Builder]
+   val meter: TypedTag[Builder, Output]
 
 
    // Interactive elements
@@ -218,23 +218,23 @@ trait Tags2[Builder, Output] extends Util[Builder, Output]{
     *
     *  MDN
     */
-   val details: TypedTag[Output, Builder]
+   val details: TypedTag[Builder, Output]
    /**
     * A summary, caption, or legend for a given details.
     *
     *  MDN
     */
-   val summary: TypedTag[Output, Builder]
+   val summary: TypedTag[Builder, Output]
    /**
     * A command that the user can invoke.
     *
     *  MDN
     */
-   val command: TypedTag[Output, Builder]
+   val command: TypedTag[Builder, Output]
    /**
     * A list of commands
     *
     *  MDN
     */
-   val menu: TypedTag[Output, Builder]
+   val menu: TypedTag[Builder, Output]
  }

@@ -9,15 +9,26 @@ import scalatags.generic
 
 /**
  * Represents a value that can be nested within a [[TypedTag]]. This can be
- * another [[Node]], but can also be a CSS style or HTML attribute binding,
+ * another [[Modifier]], but can also be a CSS style or HTML attribute binding,
  * which will add itself to the node's attributes but not appear in the final
  * `children` list.
  */
-trait Node[Builder] {
+trait Modifier[Builder] {
   /**
-   * Transforms the tag and returns a new one.
+   * Applies this modifier to the specified [[Builder]], such that when
+   * rendering is complete the effect of adding this modifier can be seen.
    */
   def applyTo(t: Builder): Unit
+}
+
+/**
+ * Marker sub-type of [[Modifier]] which signifies that that type can be 
+ * rendered as a standalone fragment of [[Output]]. This excludes things
+ * like [[AttrPair]]s or [[StylePair]]s which only make sense as part of
+ * a parent fragment
+ */
+trait Frag[Builder, +Output] extends Modifier[Builder]{
+  def render: Output
 }
 
 /**
@@ -27,8 +38,8 @@ trait Node[Builder] {
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[+Output, Builder] extends Node[Builder]{
-  protected[this] type Self <: TypedTag[Output, Builder]
+trait TypedTag[Builder, +Output] extends Frag[Builder, Output]{
+  protected[this] type Self <: TypedTag[Builder, Output]
   def tag: String
 
   /**
@@ -36,7 +47,7 @@ trait TypedTag[+Output, Builder] extends Node[Builder]{
    * (which are actually WrappedArrays) data-structure in order for maximum
    * performance.
    */
-  def modifiers: List[Seq[Node[Builder]]]
+  def modifiers: List[Seq[Modifier[Builder]]]
 
   /**
    * Walks the [[modifiers]] to apply them to a particular [[Builder]].
@@ -44,7 +55,7 @@ trait TypedTag[+Output, Builder] extends Node[Builder]{
    */
   def build(b: Builder): Unit = {
     var current = modifiers
-    val arr = new Array[Seq[Node[Builder]]](modifiers.length)
+    val arr = new Array[Seq[Modifier[Builder]]](modifiers.length)
 
     var i = 0
     while(current != Nil){
@@ -68,7 +79,11 @@ trait TypedTag[+Output, Builder] extends Node[Builder]{
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[TypedTag]].
    */
-  def apply(xs: Node[Builder]*): Self
+  def apply(xs: Modifier[Builder]*): Self
+
+  /**
+   * Collapses this scalatags tag tree and returns an [[Output]]
+   */
   def render: Output
 }
 
@@ -102,7 +117,7 @@ case class Style(jsName: String, cssName: String) {
 /**
  * An [[Attr]], it's associated value, and an [[AttrValue]] of the correct type
  */
-case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extends Node[Builder] {
+case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extends Modifier[Builder] {
   override def applyTo(t: Builder): Unit = {
     ev.apply(t, a, v)
   }
@@ -119,7 +134,7 @@ trait AttrValue[Builder, T]{
 /**
  * A [[Style]], it's associated value, and a [[StyleValue]] of the correct type
  */
-case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) extends Node[Builder]{
+case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) extends Modifier[Builder]{
   override def applyTo(t: Builder): Unit = {
     ev.apply(t, s, v)
   }

@@ -368,7 +368,7 @@ class ExampleTests[Builder, Output](omg: Bundle[Builder, Output]) extends TestSu
 
     'layouts-strCheck(
     {
-      def page(scripts: Seq[Node], content: Seq[Node]) =
+      def page(scripts: Seq[Modifier], content: Seq[Modifier]) =
         html(
           head(scripts),
           body(

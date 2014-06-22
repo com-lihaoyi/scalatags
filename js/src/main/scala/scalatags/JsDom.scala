@@ -2,9 +2,10 @@ package scalatags
 
 import org.scalajs.dom
 import scala.scalajs.js
-import scalatags.generic.Node
+
 import org.scalajs.dom.Element
 import scala.annotation.unchecked.uncheckedVariance
+import scalatags.generic.Modifier
 
 
 /**
@@ -38,30 +39,22 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
     }
   }
 
-  /**
-   * Lets you put numbers into a scalatags tree, as a no-op.
-   */
-  implicit def NumericNode[T: Numeric](u: T) = new StringNode(u.toString)
+  implicit def numericFrag[T: Numeric](u: T) = new StringFrag(u.toString)
 
-  /**
-   * Allows you to modify a HtmlTag by adding a String to its list of children
-   */
-  implicit def stringNode(v: String) = new StringNode(v)
-  /**
-   * A [[Node]] which contains a String.
-   */
-  object StringNode extends Companion[StringNode]
-  case class StringNode(v: String) extends Node {
-    def applyTo(elem: dom.Element) = elem.appendChild(dom.document.createTextNode(v))
+  implicit def stringFrag(v: String) = new StringFrag(v)
+
+  object StringFrag extends Companion[StringFrag]
+  case class StringFrag(v: String) extends Frag[dom.Text] {
+    def render = dom.document.createTextNode(v)
   }
 
-  def raw(s: String) = new RawNode(s)
-  /**
-   * A [[Node]] which contains a String which will not be escaped.
-   */
-  object RawNode extends Companion[RawNode]
-  case class RawNode(v: String) extends Node {
-    def applyTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
+  def raw(s: String) = new RawFrag(s)
+
+  object RawFrag extends Companion[RawFrag]
+  case class RawFrag(v: String) extends Modifier{
+    def applyTo(elem: dom.Element): Unit = {
+      elem.insertAdjacentHTML("beforeend", v)
+    }
   }
 
   class GenericAttr[T] extends AttrValue[T]{
@@ -85,23 +78,18 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+Output <: dom.Element](tag: String = "",
-                                           modifiers: List[Seq[Node]],
-                                           void: Boolean = false)
-                                           extends generic.TypedTag[Output, dom.Element]{
+                                              modifiers: List[Seq[Modifier]],
+                                              void: Boolean = false)
+                                              extends generic.TypedTag[dom.Element, Output]{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
     protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
-    /**
-     * Serialize this [[HtmlTag]] and all its children out to the given dom.Element.
-     */
     def applyTo(elem: dom.Element): Unit = {
       elem.appendChild(render)
     }
-    /**
-     * Converts an ScalaTag fragment into an html string
-     */
+
     def render: Output = {
       val elem = dom.document.createElement(tag)
       build(elem)
@@ -110,7 +98,7 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
-    def apply(xs: Node*): TypedTag[Output] = {
+    def apply(xs: Modifier*): TypedTag[Output] = {
       this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
     override def toString = render.outerHTML
@@ -122,6 +110,11 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element] with LowPriorityIm
   type Tag = TypedTag[dom.Element]
   val Tag = TypedTag
 
+  type Frag[+T <: dom.Node] = DomFrag[dom.Element, T]
+  trait DomFrag[V, +T <: dom.Node] extends generic.Frag[V, T]{
+    def render: T
+    def applyTo(b: dom.Element) = b.appendChild(this.render)
+  }
 }
 
 trait LowPriorityImplicits{
@@ -135,7 +128,7 @@ trait LowPriorityImplicits{
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit def bindElement(e: dom.Element) = new Node[dom.Element] {
+  implicit class bindElement(e: dom.Element) extends generic.Modifier[dom.Element] {
     override def applyTo(t: Element) = t.appendChild(e)
   }
 }

@@ -77,7 +77,8 @@ trait Bundle[Builder, Output]{
 
   type Attr = generic.Attr
   type Style = generic.Style
-  type Node = generic.Node[Builder]
+  type Modifier = generic.Modifier[Builder]
+
   type AttrValue[V] = generic.AttrValue[Builder, V]
   type StyleValue[V] = generic.StyleValue[Builder, V]
 
@@ -91,30 +92,30 @@ trait Bundle[Builder, Output]{
   /**
    * Allows you to modify a HtmlTag by adding a String to its list of children
    */
-  implicit def stringNode(v: String): Node
+  implicit def stringFrag(v: String): Modifier
   /**
    * Lets you put numbers into a scalatags tree, converting them to Strings
    */
-  implicit def NumericNode[V: Numeric](u: V): Node
+  implicit def numericFrag[V: Numeric](u: V): Modifier
 
-  type Tag <: generic.TypedTag[Output, Builder]
+  type Tag <: generic.TypedTag[Builder, Output]
 
   /**
-   * A [[Node]] which contains a String which will not be escaped.
+   * A [[Modifier]] which contains a String which will not be escaped.
    */
-  type RawNode <: Node
-  val RawNode: Companion[RawNode]
+  type RawFrag <: Modifier
+  val RawFrag: Companion[RawFrag]
 
   /**
    * Delimits a string that should be included in the result as raw,
    * un-escaped HTML
    */
-  def raw(s: String): RawNode
+  def raw(s: String): RawFrag
   /**
-   * A [[Node]] which contains a String.
+   * A [[Modifier]] which contains a String.
    */
-  type StringNode <: Node
-  val StringNode: Companion[StringNode]
+  type StringFrag <: Modifier
+  val StringFrag: Companion[StringFrag]
 }
 
 trait AbstractShort[Builder, Output]{

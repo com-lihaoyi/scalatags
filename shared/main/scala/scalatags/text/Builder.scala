@@ -1,7 +1,8 @@
-package scalatags.text
+package scalatags
+package text
 
 import scala.collection.mutable
-import scalatags.generic.Node
+import scalatags.generic.Modifier
 import scala.reflect.ClassTag
 
 /**
@@ -12,7 +13,7 @@ import scala.reflect.ClassTag
  * exposes more of its internals than it probably should for performance,
  * so even though the stuff isn't private, don't touch it!
  */
-class Builder(var children: Array[Child] = new Array(4),
+class Builder(var children: Array[Frag] = new Array(4),
               var attrs: Array[(String, String)] = new Array(4)){
   final var childIndex = 0
   final var attrIndex = 0
@@ -30,7 +31,7 @@ class Builder(var children: Array[Child] = new Array(4),
       null
     }
   }
-  def addChild(c: Child) = {
+  def addChild(c: Frag) = {
     val newChildren = increment(children, childIndex)
     if (newChildren != null) children = newChildren
     children(childIndex) = c
@@ -55,8 +56,8 @@ class Builder(var children: Array[Child] = new Array(4),
     }
   }
 }
-
-trait Child extends Node[Builder]{
+trait Frag extends generic.Frag[Builder, String]{
   def writeTo(strb: StringBuilder): Unit
+  def render: String
   def applyTo(b: Builder) = b.addChild(this)
 }

@@ -9,7 +9,7 @@ import scalatags._
  */
 trait Util[Builder, Output] {
 
-  type ConcreteHtmlTag[T <: Output] <: TypedTag[T, Builder]
+  type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttr: AttrValue[Builder, String]
   protected[this] implicit def stringStyle: StyleValue[Builder, String]
@@ -63,7 +63,7 @@ trait Util[Builder, Output] {
    * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
    */
-  implicit class SeqNode[A <% Node[Builder]](xs: Seq[A]) extends Node[Builder]{
+  implicit class SeqNode[A <% Modifier[Builder]](xs: Seq[A]) extends Modifier[Builder]{
     def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
   }
 
@@ -71,18 +71,18 @@ trait Util[Builder, Output] {
    * Allows you to modify a [[HtmlTag]] by adding an Option containing other nest-able
    * objects to its list of children.
    */
-  implicit def OptionNode[A <% Node[Builder]](xs: Option[A]) = new SeqNode(xs.toSeq)
+  implicit def OptionNode[A <% Modifier[Builder]](xs: Option[A]) = new SeqNode(xs.toSeq)
 
   /**
    * Allows you to modify a [[HtmlTag]] by adding an Array containing other nest-able
    * objects to its list of children.
    */
-  implicit def ArrayNode[A <% Node[Builder]](xs: Array[A]) = new SeqNode[A](xs.toSeq)
+  implicit def ArrayNode[A <% Modifier[Builder]](xs: Array[A]) = new SeqNode[A](xs.toSeq)
 
   /**
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
-  implicit def UnitNode(u: Unit) = new Node[Builder]{
+  implicit def UnitNode(u: Unit) = new Modifier[Builder]{
     def applyTo(t: Builder) = ()
   }
 }
