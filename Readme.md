@@ -93,7 +93,7 @@ And you should be good to go generating HTML fragments in the browser! Scalatags
 Why Scalatags
 =============
 
-The core functionality of Scalatags is less than [500 lines of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost *everything*, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
+The core functionality of Scalatags is a [tiny amount of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost *everything*, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
 
 Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
 
@@ -900,31 +900,152 @@ The rest of the code involved in this micro-benchmark can be found in [PerfTests
 Internals
 =========
 
-The primary data structure, the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag):
+The primary data structure Scalatags uses are the [TypedTag](http://lihaoyi.github.io/scalatags/#scalatags.generic.TypedTag):
 
 ```scala
-case class HtmlTag(tag: String,
-                   children: List[Node],
-                   attrs: SortedMap[String, String],
-                   void: Boolean) extends Node
+trait TypedTag[Builder, +Output] extends Frag[Builder, Output]{
+  def tag: String
+
+  /**
+   * The modifiers that are applied to a TypedTag are kept in this linked-Seq
+   * (which are actually WrappedArrays) data-structure in order for maximum
+   * performance.
+   */
+  def modifiers: List[Seq[Modifier[Builder]]]
+
+  /**
+   * Add the given modifications (e.g. additional children, or new attributes)
+   * to the [[TypedTag]].
+   */
+  def apply(xs: Modifier[Builder]*): Self
+
+  /**
+   * Collapses this scalatags tag tree and returns an [[Output]]
+   */
+  def render: Output
+}
 ```
 
-is a simple, immutable representation of a single HTML tag. Its `.apply()` method takes a list of [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node) objects, which are really objects with a single `transform: HtmlTag => HtmlTag` method. These transforms are applied to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag) sequentially, returning a new HtmlTag at the end of the process.
+The [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.generic.Modifier):
 
-The current selection of [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node) (or implicitly convertable) types include
+```scala
+trait Modifier[Builder] {
+  /**
+   * Applies this modifier to the specified [[Builder]], such that when
+   * rendering is complete the effect of adding this modifier can be seen.
+   */
+  def applyTo(t: Builder): Unit
+}
+```
 
-- [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag)s and `String`s: appends itself to the parent's `children` list.
+And the [Frag](http://lihaoyi.github.io/scalatags/#scalatags.generic.Frag):
+
+```scala
+trait Frag[Builder, +Output] extends Modifier[Builder]{
+  def render: Output
+}```
+
+
+A `TypedTag` is basically a tag-name together with a loose bag of `Modifier`s, and is itself a `Modifier` so it can be nested within other `TypedTag`s. A `Modifier` is a tag, a sequence of tags, an attribute binding, a style binding, or anything else that can be used to modify how a tag will be rendered. Lastly, a `Frag` represents the smallest standalone atom, which includes tags, loose strings, numbers, and other things.
+
+Each Scalatags backend has its own refinements, e.g. `Text.TypedTag`, `Text.Frag` and `Text.Modifier` have the `Builder` type-parameter fixed as `text.Builder`, and the `Output` type-parameter fixed as `String`. Their `JsDom.*` counterparts have `Builder` fixed as `dom.Element`, and `Output`fixed to various subclasses of `dom.Element`. The various other classes/traits (e.g. `Attr`, `AttrPair`, StylePair`, etc.) are similarly abstract with concrete versions in each backend. 
+
+The current selection of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node) (or implicitly convertable) types include
+
+- [TypedTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag)s and `String`s: appends itself to the parent's `children` list.
 - [AttrPair](http://lihaoyi.github.io/scalatags/#scalatags.Text.AttrPair)s: sets a key in the parent's `attrs` list.
 - [StylePair](http://lihaoyi.github.io/scalatags/#scalatags.Text.StylePair)s: appends the inline `style: value;` to the parent's `style` attribute.
-
-Although these are the [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node)s which are provided, it is possible to come up with your own custom [Node](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node)s which do a variety of different things to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag). All it has to do is provide a `transform: HtmlTperag => HtmlTag` method, and it can do whatever it wants to the [HtmlTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag) being transformed, including:
-
-- Adding multiple attributes at once
-- Adding both attributes and children at once
-- Modifying existing attributes
-- Modifying or filtering the list of children
+- [StringFrag](http://lihaoyi.github.io/scalatags/#scalatags.Text.StringFrag)s: append the string as a child.
+- [RawFrag](http://lihaoyi.github.io/scalatags/#scalatags.Text.RawFrag)s: append the string to the parent as unescaped HTML.
 
 The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](shared/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](shared/main/scala/scalatags/package.scala).
+
+Architecture
+------------
+
+Scalatags has pretty odd internals in order to support code re-use between the Text and Dom packages. Essentially, each Scalatags package is an instance of 
+ 
+```scala
+trait Bundle[Builder, Output]{
+```
+
+Which is parametrized on the `Builder` used to generate the output, as well as the final `Output` type. The Text package is defined as 
+  
+```scala
+object Text extends Bundle[text.Builder, String] {
+```
+
+Since it uses a custom `text.Builder` object for maximum performance and spits out a `String`, while the Dom package is defined as as 
+
+```scala
+object JsDom extends generic.Bundle[dom.Element, dom.Element]
+```
+
+Since it uses `dom.Element`s both as the intermediate builder as well as the final result.
+
+This layout allows Scalatags to specify formally which types are common between the two backends (i.e. those in `generic.Bundle`) and which can vary. For example, both backends have a concept of `TypedTag`s, `Frag`s and `Modifier`s. On the other hand, The Text backend has `TypedTag[String]` aliased as `Tag` since it will always be `String`, while the Dom backend has it left as
+
+```scala
+TypedTag[+Output <: dom.Element]
+```
+
+With helper types bound as:
+
+```scala
+type HtmlTag = TypedTag[dom.HTMLElement]
+type SvgTag = TypedTag[dom.SVGElement]
+type Tag = TypedTag[dom.Element]
+```
+
+Since it is likely that working with the Dom backend you will want to distinguish these.
+
+Extensibility
+-------------
+
+A mix of typeclasses and implicit conversions is used to control what you can put into a Scalatags fragment. For example, the typeclasses
+
+```scala
+trait AttrValue[Builder, T]{
+  def apply(t: Builder, a: Attr, v: T)
+}
+trait StyleValue[Builder, T]{
+  def apply(t: Builder, s: Style, v: T)
+}
+```
+
+Allow you to specify what (and how) types can be used as attributes and styles respectively, while implicit conversions to `Modifier` or `Frag` are used to allow you to use arbitrary types as children. The use of implicit conversions in this case is to allow it to work with variable length argument lists (i.e. `(mods: *Modifier)`), which is difficult to do with typeclasses.
+
+Due to this design, and the parametrization of the bundles described earlier, it is possible to define behavior for a particular type only where it makes sense. e.g. there is a pair of typeclass instances
+ 
+```scala
+implicit object bindJsAny extends generic.AttrValue[dom.Element, js.Any]
+implicit def bindJsAnyLike[T <% js.Any] = new generic.AttrValue[dom.Element, T]
+```
+
+Which allows you to bind anything convertible to a `js.Any` into the JsDom fragments, since they can just be assigned directly to the attributes of the `dom.Element` objects. Doing the same thing for Text fragments doesn't make sense, and would correctly fail to compile. 
+
+You can easier add other typeclass instances to handle binding e.g. `Future`s (which will add a child or set an attr/style on completion), or reactive variables (which would constantly update the child/attr/style every time it changes).
+
+Cross-backend Code
+------------------
+
+If you wish to, it is possible to write code that is generic against the Scalatags backend used, and can be compiled and run on both Text and JsDom backends at the same time! This is done by adding an explicit dependency on `generic.Bundle[Builder, Output]`, e.g. how it is done in the unit tests:
+ 
+```scala
+class ExampleTests[Builder, Output](bundle: Bundle[Builder, Output]) extends TestSuite{
+  import bundle._
+  ...
+}
+```
+
+Inside this scope, you are limited to only using the common functionality defined in `generic.Bundle`, and can't use any Text or JsDom specific APIs. However, in exchange you can write code that works in either backend, by instantiating it with the respective bundle:
+ 
+```scala
+object ExampleTests extends generic.ExampleTests(scalatags.Text)
+object ExampleTests extends generic.ExampleTests(scalatags.JsDom)
+```
+
+This is currently used to shared the bulk of unit tests between the Text and JsDom backends, and could be useful in other scenarios where you may want to swap between them (e.g. using Text on the server, and JsDom on the client where it's available) while sharing as much code as possible.
 
 Prior Work
 ==========
