@@ -20,9 +20,9 @@ class Builder(var children: Array[Frag] = new Array(4),
   private[this] var styleIndex = -1
   private[this] def increment[T: ClassTag](arr: Array[T], index: Int) = {
     if (index >= arr.length){
-      val newArr = new Array[T](children.length * 2)
+      val newArr = new Array[T](arr.length * 2)
       var i = 0
-      while(i < children.length){
+      while(i < arr.length){
         newArr(i) = arr(i)
         i += 1
       }
