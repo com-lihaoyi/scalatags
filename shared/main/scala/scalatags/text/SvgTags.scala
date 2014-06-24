@@ -1,7 +1,7 @@
 package scalatags
 package text
+import acyclic.file
 
-import scalatags.generic.Util
 
 /**
  * Contains Tags which are only used for SVG. These are not imported by

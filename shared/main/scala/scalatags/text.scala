@@ -1,8 +1,7 @@
 package scalatags
-
+import acyclic.file
 import scalatags.generic._
 import scala.collection.SortedMap
-import acyclic.file
 import collection.mutable
 import scala.annotation.unchecked.uncheckedVariance
 
@@ -11,43 +10,65 @@ import scala.annotation.unchecked.uncheckedVariance
  * `String`s.
  */
 
-object Text extends Bundle[text.Builder, String, String] {
+object Text
+  extends generic.Bundle[text.Builder, String, String]
+  with Aliases[text.Builder, String, String]{
 
-  object all extends StringTags with Attrs with Styles with text.Tags with DataConverters
-  object short extends StringTags with Util with DataConverters with generic.AbstractShort[text.Builder, String, String]{
-    object * extends StringTags with Attrs with Styles
+  object attrs extends Text.Cap with Attrs
+  object tags extends Text.Cap with text.Tags
+  object tags2 extends Text.Cap with text.Tags2
+  object styles extends Text.Cap with Styles
+  object styles2 extends Text.Cap with Styles2
+  object svgTags extends Text.Cap with text.SvgTags
+  object svgStyles extends Text.Cap with SvgStyles
+
+  object all
+    extends Cap
+    with Attrs
+    with Styles
+    with text.Tags
+    with DataConverters
+    with Aggregate
+
+  object short
+    extends Cap
+    with Util
+    with DataConverters
+    with Aggregate
+    with AbstractShort{
+
+    object * extends Cap with Attrs with Styles
   }
 
-  object attrs extends StringTags with Attrs
-  object tags extends StringTags with text.Tags
-  object tags2 extends StringTags with text.Tags2
-  object styles extends StringTags with Styles
-  object styles2 extends StringTags with Styles2
-  object svgTags extends StringTags with text.SvgTags
-  object svgStyles extends StringTags with SvgStyles
-
-
-  trait StringTags extends Util{ self =>
+  trait Cap extends Util{ self =>
     type ConcreteHtmlTag[T <: String] = TypedTag[T]
 
-    protected[this] implicit def stringAttr = new GenericAttr[String]
-    protected[this] implicit def stringStyle = new GenericStyle[String]
+    protected[this] implicit def stringAttrX = new GenericAttr[String]
+    protected[this] implicit def stringStyleX = new GenericStyle[String]
 
     def makeAbstractTypedTag[T](tag: String, void: Boolean) = {
       TypedTag(tag, Nil, void)
     }
   }
 
-  implicit def byteFrag(v: Byte) = new StringFrag(v.toString)
-  implicit def shortFrag(v: Short) = new StringFrag(v.toString)
-  implicit def intFrag(v: Int) = new StringFrag(v.toString)
-  implicit def longFrag(v: Long) = new StringFrag(v.toString)
-  implicit def floatFrag(v: Float) = new StringFrag(v.toString)
-  implicit def doubleFrag(v: Double) = new StringFrag(v.toString)
-  implicit def stringFrag(v: String) = new StringFrag(v)
+  trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
+    def genericAttr[T] = new Text.GenericAttr[T]
+    def genericStyle[T] = new Text.GenericStyle[T]
 
+    implicit def stringFrag(v: String) = new Text.StringFrag(v)
 
-  object StringFrag extends Companion[StringFrag]
+    val RawFrag = Text.RawFrag
+    val StringFrag = Text.StringFrag
+    type StringFrag = Text.StringFrag
+    type RawFrag = Text.RawFrag
+    def raw(s: String) = RawFrag(s)
+  }
+
+  type Tag = Text.TypedTag[String]
+  val Tag = Text.TypedTag
+
+  type Frag = text.Frag
+
   case class StringFrag(v: String) extends Frag{
     def render = {
       val strb = new StringBuilder()
@@ -56,9 +77,7 @@ object Text extends Bundle[text.Builder, String, String] {
     }
     def writeTo(strb: StringBuilder) = Escaping.escape(v, strb)
   }
-
-  def raw(s: String) = new RawFrag(s)
-
+  object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends Frag {
     def render = v
@@ -70,9 +89,6 @@ object Text extends Bundle[text.Builder, String, String] {
       t.addAttr(a.name, v.toString)
     }
   }
-  implicit val stringAttr = new GenericAttr[String]
-  implicit val booleanAttr= new GenericAttr[Boolean]
-  implicit def numericAttr[T: Numeric] = new GenericAttr[T]
 
   class GenericStyle[T] extends StyleValue[T]{
     def apply(t: text.Builder, s: Style, v: T): Unit = {
@@ -84,12 +100,9 @@ object Text extends Bundle[text.Builder, String, String] {
       strb ++= ";"
 
       t.addAttr("style", strb.toString)
-
     }
   }
-  implicit val stringStyle = new GenericStyle[String]
-  implicit val booleanStyle = new GenericStyle[Boolean]
-  implicit def numericStyle[T: Numeric] = new GenericStyle[T]
+
 
   case class TypedTag[+Output <: String](tag: String = "",
                                          modifiers: List[Seq[Modifier]],
@@ -156,8 +169,6 @@ object Text extends Bundle[text.Builder, String, String] {
     }
     def render: Output = this.toString.asInstanceOf[Output]
   }
-  type Tag = TypedTag[String]
-  val Tag = TypedTag
-
-  type Frag = text.Frag
 }
+
+

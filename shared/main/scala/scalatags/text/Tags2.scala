@@ -1,8 +1,6 @@
 package scalatags
 package text
-
-import scalatags.generic.Util
-
+import acyclic.file
 /**
  * Contains HTML tags which are used less frequently. These are generally
  * imported individually as needed.

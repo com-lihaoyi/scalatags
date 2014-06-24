@@ -1,8 +1,7 @@
 package scalatags
 package text
+import acyclic.file
 
-import scala.collection.mutable
-import scalatags.generic.Modifier
 import scala.reflect.ClassTag
 
 /**

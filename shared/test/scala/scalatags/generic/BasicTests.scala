@@ -7,9 +7,9 @@ import utest._
 
 import TestUtil._
 
-  class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
+class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
   import omg.all._
-
+  private[this] type Omg = Attrs
   val tests = TestSuite{
 
     /**

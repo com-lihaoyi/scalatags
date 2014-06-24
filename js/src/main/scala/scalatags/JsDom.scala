@@ -1,11 +1,11 @@
 package scalatags
-
+import acyclic.file
 import org.scalajs.dom
 import scala.scalajs.js
 
 import org.scalajs.dom.Element
 import scala.annotation.unchecked.uncheckedVariance
-import scalatags.generic.Modifier
+import scalatags.generic.{Aliases, Modifier}
 
 
 /**
@@ -14,32 +14,61 @@ import scalatags.generic.Modifier
  * can bind structured objects to the attributes of your `dom.Element` without
  * serializing them first into strings.
  */
-object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with LowPriorityImplicits with jsdom.Aggregate{
+object JsDom
+  extends generic.Bundle[dom.Element, dom.Element, dom.Node]
+  with LowPriorityImplicits
+  with Aliases[dom.Element, dom.Element, dom.Node]{
+
+  object attrs extends JsDom.Cap with Attrs
+  object tags extends JsDom.Cap with jsdom.Tags
+  object tags2 extends JsDom.Cap with jsdom.Tags2
+  object styles extends JsDom.Cap with Styles
+  object styles2 extends JsDom.Cap with Styles2
+  object svgTags extends JsDom.Cap with jsdom.SvgTags
+  object svgStyles extends JsDom.Cap with SvgStyles
+
   object all
     extends Cap
     with Attrs
     with Styles
     with jsdom.Tags
     with DataConverters
-    with jsdom.Aggregate
-    with LowPriorityImplicits{
-    val RawFrag = JsDom.RawFrag
-    val StringFrag = JsDom.StringFrag
-    type StringFrag = JsDom.StringFrag
-    type RawFrag = JsDom.RawFrag
-  }
+    with Aggregate
+    with LowPriorityImplicits
+
   object short
     extends Cap
     with Util
     with DataConverters
     with AbstractShort
-    with jsdom.Aggregate
+    with Aggregate
     with LowPriorityImplicits{
+
+    object * extends Cap with Attrs with Styles
+  }
+
+
+  trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
+    def genericAttr[T] = new JsDom.GenericAttr[T]
+    def genericStyle[T] = new JsDom.GenericStyle[T]
+
+    implicit def stringFrag(v: String) = new JsDom.StringFrag(v)
+
+
     val RawFrag = JsDom.RawFrag
     val StringFrag = JsDom.StringFrag
     type StringFrag = JsDom.StringFrag
     type RawFrag = JsDom.RawFrag
-    object * extends Cap with Attrs with Styles
+    def raw(s: String) = RawFrag(s)
+
+    type HtmlTag = JsDom.TypedTag[dom.HTMLElement]
+    val HtmlTag = JsDom.TypedTag
+    type SvgTag = JsDom.TypedTag[dom.SVGElement]
+    val SvgTag = JsDom.TypedTag
+    type Tag = JsDom.TypedTag[dom.Element]
+    val Tag = JsDom.TypedTag
+
+    type Frag = jsdom.Frag
   }
 
   trait Cap extends Util{ self =>
@@ -54,7 +83,7 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with Low
   }
 
   object StringFrag extends Companion[StringFrag]
-  case class StringFrag(v: String) extends Frag{
+  case class StringFrag(v: String) extends jsdom.Frag{
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
@@ -83,7 +112,7 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with Low
                                               modifiers: List[Seq[Modifier]],
                                               void: Boolean = false)
                                               extends generic.TypedTag[dom.Element, Output, dom.Node]
-                                              with Frag{
+                                              with jsdom.Frag{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.

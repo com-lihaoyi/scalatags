@@ -1,8 +1,6 @@
 package scalatags
 package text
-
-import scalatags.generic.Util
-
+import acyclic.file
 /**
  * Trait that contains the contents of the `Tags` object, so they can be mixed
  * in to other objects if needed.

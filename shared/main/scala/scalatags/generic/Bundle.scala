@@ -92,14 +92,14 @@ trait Aliases[Builder, Output <: FragT, FragT]{
   /**
    * A [[Modifier]] which contains a String which will not be escaped.
    */
-  type RawFrag <: Modifier
-  val RawFrag: Companion[RawFrag]
+  protected[this] type RawFrag <: Modifier
+  protected[this] val RawFrag: Companion[RawFrag]
 
   /**
    * A [[Modifier]] which contains a String.
    */
-  type StringFrag <: Modifier
-  val StringFrag: Companion[StringFrag]
+  protected[this] type StringFrag <: Modifier
+  protected[this] val StringFrag: Companion[StringFrag]
 }
 trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT]{
 
