@@ -26,17 +26,21 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[Builder, Output <: FragT, FragT]{
+trait Bundle[Builder, Output <: FragT, FragT] extends Aggregate[Builder, Output, FragT]{
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
-  val all: Attrs with Styles with Tags with DataConverters with Util
+  val all: Attrs with Styles with Tags with DataConverters with Util with Aggregate[Builder, Output, FragT]
   /**
    * Convenience object for importing only Scalatags' tags (e.g. `div`, `p`)
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
-  val short: AbstractShort[Builder, Output, FragT]
+  val short: AbstractShort with Aggregate[Builder, Output, FragT]
+  type AbstractShort = generic.AbstractShort[Builder, Output, FragT]
+}
+
+trait Aggregate[Builder, Output <: FragT, FragT]{
   /**
    * Common attributes.
    */
@@ -137,7 +141,6 @@ trait Bundle[Builder, Output <: FragT, FragT]{
   type StringFrag <: Modifier
   val StringFrag: Companion[StringFrag]
 }
-
 trait AbstractShort[Builder, Output <: FragT, FragT]{
   val `*`: generic.Attrs[Builder, Output, FragT] with generic.Styles[Builder, Output, FragT]
 }

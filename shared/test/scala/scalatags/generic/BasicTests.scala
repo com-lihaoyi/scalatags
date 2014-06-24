@@ -8,8 +8,7 @@ import utest._
 import TestUtil._
 
   class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
-  import omg._
-  import all._
+  import omg.all._
 
   val tests = TestSuite{
 

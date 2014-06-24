@@ -14,45 +14,49 @@ import scalatags.generic.Modifier
  * can bind structured objects to the attributes of your `dom.Element` without
  * serializing them first into strings.
  */
-object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with LowPriorityImplicits{
-  object all extends StringTags with Attrs with Styles with jsdom.Tags with DataConverters
-  object short extends StringTags with Util with DataConverters with generic.AbstractShort[dom.Element, dom.Element, dom.Node]{
-    object * extends StringTags with Attrs with Styles
+object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with LowPriorityImplicits with jsdom.Aggregate{
+  object all
+    extends Cap
+    with Attrs
+    with Styles
+    with jsdom.Tags
+    with DataConverters
+    with jsdom.Aggregate
+    with LowPriorityImplicits{
+    val RawFrag = JsDom.RawFrag
+    val StringFrag = JsDom.StringFrag
+    type StringFrag = JsDom.StringFrag
+    type RawFrag = JsDom.RawFrag
+  }
+  object short
+    extends Cap
+    with Util
+    with DataConverters
+    with AbstractShort
+    with jsdom.Aggregate
+    with LowPriorityImplicits{
+    val RawFrag = JsDom.RawFrag
+    val StringFrag = JsDom.StringFrag
+    type StringFrag = JsDom.StringFrag
+    type RawFrag = JsDom.RawFrag
+    object * extends Cap with Attrs with Styles
   }
 
-  object attrs extends StringTags with Attrs
-  object tags extends StringTags with jsdom.Tags
-  object tags2 extends StringTags with jsdom.Tags2
-  object styles extends StringTags with Styles
-  object styles2 extends StringTags with Styles2
-  object svgTags extends StringTags with jsdom.SvgTags
-  object svgStyles extends StringTags with SvgStyles
-
-  trait StringTags extends Util{ self =>
+  trait Cap extends Util{ self =>
     type ConcreteHtmlTag[T <: dom.Element] = TypedTag[T]
 
-    protected[this] implicit def stringAttr = new GenericAttr[String]
-    protected[this] implicit def stringStyle = new GenericStyle[String]
+    protected[this] implicit def stringAttrX = new GenericAttr[String]
+    protected[this] implicit def stringStyleX = new GenericStyle[String]
 
     def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean): TypedTag[T] = {
       TypedTag(tag, Nil, void)
     }
   }
 
-  implicit def byteFrag(v: Byte) = new StringFrag(v.toString)
-  implicit def shortFrag(v: Short) = new StringFrag(v.toString)
-  implicit def intFrag(v: Int) = new StringFrag(v.toString)
-  implicit def longFrag(v: Long) = new StringFrag(v.toString)
-  implicit def floatFrag(v: Float) = new StringFrag(v.toString)
-  implicit def doubleFrag(v: Double) = new StringFrag(v.toString)
-  implicit def stringFrag(v: String) = new StringFrag(v)
-
   object StringFrag extends Companion[StringFrag]
   case class StringFrag(v: String) extends Frag{
     def render: dom.Text = dom.document.createTextNode(v)
   }
-
-  def raw(s: String) = new RawFrag(s)
 
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends Modifier{
@@ -66,9 +70,6 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with Low
       t.setAttribute(a.name, v.toString)
     }
   }
-  implicit def stringAttr = new GenericAttr[String]
-  implicit def booleanAttr= new GenericAttr[Boolean]
-  implicit def numericAttr[T: Numeric] = new GenericAttr[T]
 
   class GenericStyle[T] extends StyleValue[T]{
     def apply(t: dom.Element, s: Style, v: T): Unit = {
@@ -77,9 +78,6 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with Low
        .setProperty(s.cssName, v.toString)
     }
   }
-  implicit def stringStyle = new GenericStyle[String]
-  implicit def booleanStyle = new GenericStyle[Boolean]
-  implicit def numericStyle[T: Numeric] = new GenericStyle[T]
 
   case class TypedTag[+Output <: dom.Element](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
@@ -103,18 +101,6 @@ object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node] with Low
       this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
     override def toString = render.outerHTML
-  }
-  type HtmlTag = TypedTag[dom.HTMLElement]
-  val HtmlTag = TypedTag
-  type SvgTag = TypedTag[dom.SVGElement]
-  val SvgTag = TypedTag
-  type Tag = TypedTag[dom.Element]
-  val Tag = TypedTag
-
-  type Frag = DomFrag
-  trait DomFrag extends generic.Frag[dom.Element, dom.Element, dom.Node]{
-    def render: dom.Node
-    def applyTo(b: dom.Element) = b.appendChild(this.render)
   }
 }
 

@@ -4,8 +4,7 @@ import acyclic.file
 import utest._
 
 class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT]) extends PerfTests {
-  import bundle._
-  import all._
+  import bundle.all._
   import generic.PerfTests._
 
   def para(n: Int, m: generic.Modifier[Builder]*) = p(

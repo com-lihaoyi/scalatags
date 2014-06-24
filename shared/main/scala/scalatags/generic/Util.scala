@@ -11,8 +11,8 @@ trait Util[Builder, Output <: FragT, FragT] {
 
   type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T, FragT]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean): ConcreteHtmlTag[T]
-  protected[this] implicit def stringAttr: AttrValue[Builder, String]
-  protected[this] implicit def stringStyle: StyleValue[Builder, String]
+  protected[this] implicit def stringAttrX: AttrValue[Builder, String]
+  protected[this] implicit def stringStyleX: StyleValue[Builder, String]
 
   /**
    * Provides extension methods on strings to fit them into Scalatag fragments.

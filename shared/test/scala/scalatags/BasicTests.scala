@@ -10,8 +10,7 @@ import scala.collection.SortedMap
 
 object BasicTests extends TestSuite{
 
-  import scalatags.Text._
-  import all._
+  import scalatags.Text.all._
   def tests = TestSuite{
 
     'helloWorld{

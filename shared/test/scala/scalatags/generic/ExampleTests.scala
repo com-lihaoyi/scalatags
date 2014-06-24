@@ -5,8 +5,7 @@ import utest._
 import TestUtil.strCheck
 import acyclic.file
 class ExampleTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
-  import omg._
-  import all._
+  import omg.all._
 
   val tests = TestSuite{
     'splashExample-strCheck(
@@ -453,7 +452,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output,
 
     'manualImports-strCheck(
     {
-      import short._
+      import omg.short._
       div(
         p(*.color:="red")("Red Text"),
         img(*.href:="www.imgur.com/picture.jpg")
