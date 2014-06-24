@@ -16,7 +16,6 @@ import scalatags.generic.{Aliases, Modifier}
  */
 object JsDom
   extends generic.Bundle[dom.Element, dom.Element, dom.Node]
-  with LowPriorityImplicits
   with Aliases[dom.Element, dom.Element, dom.Node]{
 
   object attrs extends JsDom.Cap with Attrs
