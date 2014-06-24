@@ -26,7 +26,7 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[Builder, Output <: FragT, FragT] extends Aggregate[Builder, Output, FragT]{
+trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT] {
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
@@ -38,9 +38,8 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aggregate[Builder, Output,
    */
   val short: AbstractShort with Aggregate[Builder, Output, FragT]
   type AbstractShort = generic.AbstractShort[Builder, Output, FragT]
-}
 
-trait Aggregate[Builder, Output <: FragT, FragT]{
+
   /**
    * Common attributes.
    */
@@ -69,7 +68,9 @@ trait Aggregate[Builder, Output <: FragT, FragT]{
    * SVG only styles
    */
   val svgStyles: SvgStyles
+}
 
+trait Aliases[Builder, Output <: FragT, FragT]{
   type Attrs = generic.Attrs[Builder, Output, FragT]
   type Tags = generic.Tags[Builder, Output, FragT]
   type Tags2 = generic.Tags2[Builder, Output, FragT]
@@ -86,42 +87,6 @@ trait Aggregate[Builder, Output <: FragT, FragT]{
   type AttrValue[V] = generic.AttrValue[Builder, V]
   type StyleValue[V] = generic.StyleValue[Builder, V]
 
-  implicit def stringAttr: AttrValue[String]
-  implicit def booleanAttr: AttrValue[Boolean]
-  implicit def numericAttr[V: Numeric]: AttrValue[V]
-  implicit def stringStyle: StyleValue[String]
-  implicit def booleanStyle: StyleValue[Boolean]
-  implicit def numericStyle[V: Numeric]: StyleValue[V]
-
-  /**
-   * Allows you to modify a HtmlTag by adding a String to its list of children
-   */
-  implicit def stringFrag(v: String): Frag[Builder, Output, FragT]
-  /**
-   * Lets you put numbers into a scalatags tree, converting them to Strings
-   */
-  implicit def byteFrag(v: Byte): Frag[Builder, Output, FragT]
-  /**
-   * Lets you put numbers into a scalatags tree, converting them to Strings
-   */
-  implicit def shortFrag(v: Short): Frag[Builder, Output, FragT]
-  /**
-   * Lets you put numbers into a scalatags tree, converting them to Strings
-   */
-  implicit def intFrag(v: Int): Frag[Builder, Output, FragT]
-  /**
-   * Lets you put numbers into a scalatags tree, converting them to Strings
-   */
-  implicit def longFrag(v: Long): Frag[Builder, Output, FragT]
-  /**
-   * Lets you put numbers into a scalatags tree, converting them to Strings
-   */
-  implicit def floatFrag(v: Float): Frag[Builder, Output, FragT]
-  /**
-   * Lets you put numbers into a scalatags tree, converting them to Strings
-   */
-  implicit def doubleFrag(v: Double): Frag[Builder, Output, FragT]
-
   type Tag <: generic.TypedTag[Builder, Output, FragT]
 
   /**
@@ -131,15 +96,46 @@ trait Aggregate[Builder, Output <: FragT, FragT]{
   val RawFrag: Companion[RawFrag]
 
   /**
-   * Delimits a string that should be included in the result as raw,
-   * un-escaped HTML
-   */
-  def raw(s: String): RawFrag
-  /**
    * A [[Modifier]] which contains a String.
    */
   type StringFrag <: Modifier
   val StringFrag: Companion[StringFrag]
+}
+trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT]{
+
+  def genericAttr[T]: AttrValue[T]
+  implicit val stringAttr = genericAttr[String]
+  implicit val booleanAttr = genericAttr[Boolean]
+  implicit val byteAttr = genericAttr[Byte]
+  implicit val shortAttr = genericAttr[Short]
+  implicit val intAttr = genericAttr[Int]
+  implicit val longAttr = genericAttr[Long]
+  implicit val floatAttr = genericAttr[Float]
+  implicit val doubleAttr = genericAttr[Double]
+
+  def genericStyle[T]: StyleValue[T]
+  implicit val stringStyle = genericStyle[String]
+  implicit val booleanStyle = genericStyle[Boolean]
+  implicit val byteStyle = genericStyle[Byte]
+  implicit val shortStyle = genericStyle[Short]
+  implicit val intStyle = genericStyle[Int]
+  implicit val longStyle = genericStyle[Long]
+  implicit val floatStyle = genericStyle[Float]
+  implicit val doubleStyle = genericStyle[Double]
+
+  implicit def byteFrag(v: Byte) = stringFrag(v.toString)
+  implicit def shortFrag(v: Short) = stringFrag(v.toString)
+  implicit def intFrag(v: Int) = stringFrag(v.toString)
+  implicit def longFrag(v: Long) = stringFrag(v.toString)
+  implicit def floatFrag(v: Float) = stringFrag(v.toString)
+  implicit def doubleFrag(v: Double) = stringFrag(v.toString)
+  implicit def stringFrag(v: String): Frag[Builder, Output, FragT]
+
+  /**
+   * Delimits a string that should be included in the result as raw,
+   * un-escaped HTML
+   */
+  def raw(s: String): RawFrag
 }
 trait AbstractShort[Builder, Output <: FragT, FragT]{
   val `*`: generic.Attrs[Builder, Output, FragT] with generic.Styles[Builder, Output, FragT]

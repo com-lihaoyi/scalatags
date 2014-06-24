@@ -4,23 +4,11 @@ package jsdom
 import org.scalajs.dom
 
 trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
+  def genericAttr[T] = new JsDom.GenericAttr[T]
+  def genericStyle[T] = new JsDom.GenericStyle[T]
 
-  implicit val stringAttr = new JsDom.GenericAttr[String]
-  implicit val booleanAttr= new JsDom.GenericAttr[Boolean]
-  implicit def numericAttr[T: Numeric] = new JsDom.GenericAttr[T]
-  implicit val stringStyle = new JsDom.GenericStyle[String]
-  implicit val booleanStyle = new JsDom.GenericStyle[Boolean]
-  implicit def numericStyle[T: Numeric] = new JsDom.GenericStyle[T]
-
-
-  implicit def byteFrag(v: Byte) = new JsDom.StringFrag(v.toString)
-  implicit def shortFrag(v: Short) = new JsDom.StringFrag(v.toString)
-  implicit def intFrag(v: Int) = new JsDom.StringFrag(v.toString)
-  implicit def longFrag(v: Long) = new JsDom.StringFrag(v.toString)
-  implicit def floatFrag(v: Float) = new JsDom.StringFrag(v.toString)
-  implicit def doubleFrag(v: Double) = new JsDom.StringFrag(v.toString)
   implicit def stringFrag(v: String) = new JsDom.StringFrag(v)
-  
+
   object attrs extends JsDom.Cap with Attrs
   object tags extends JsDom.Cap with jsdom.Tags
   object tags2 extends JsDom.Cap with jsdom.Tags2
