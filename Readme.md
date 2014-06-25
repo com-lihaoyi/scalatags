@@ -1,4 +1,4 @@
-ScalaTags 0.3.5
+ScalaTags 0.3.6
 ===============
 
 ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
@@ -77,7 +77,7 @@ Getting Started
 ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cscalatags); to get started, simply add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.5"
+libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.6"
 ```
 
 And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
@@ -88,7 +88,7 @@ ScalaJS
 To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
 ```scala
-libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.5"
+libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.6"
 ```
 
 And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags is currently only compatibly with ScalaJS 0.5.x.
@@ -123,7 +123,6 @@ Hello World
 -----------
 
 ```scala
-import scalatags.Text._
 import scalatags.Text.all._
 
 val frag = html(
@@ -449,6 +448,81 @@ This prints:
     <svg style="stroke: blue;" />
 </div>
 ```
+
+Custom Bundles
+==============
+
+```scala
+object CustomBundle extends Text.Cap with text.Tags with text.Tags2 with Text.Aggregate{
+  object st extends Text.Cap with Text.Styles with Text.Styles2
+  object at extends Text.Cap with Text.Attrs
+}
+
+import CustomBundle._
+
+html(
+  head(
+    script("some script")
+  ),
+  body(
+    h1(st.backgroundColor:="blue", st.color:="red")("This is my title"),
+    div(st.backgroundColor:="blue", st.color:="red")(
+      p(at.cls := "contentpara first")(
+        "This is my first paragraph"
+      ),
+      a(st.opacity:=0.9)(
+        p(at.cls := "contentpara")("Goooogle")
+      )
+    )
+  )
+)
+```
+
+In addition to importing things piecemeal from various pre-defined namespaces, Scalatags allows you to build a custom bundle which can be used to provide a single-import syntax for whatever import convention you're using. For example, the above snippet sets up a custom bundle which dumps `Tags` and `Tags2` in the local namespace, assigns `Styles` and `Styles2` to the `st` object, `Attrs` to the `at` object, and ignores Svg-related styles and tags entirely. This lets you enforce a particular convention without having to duplicate the same import-renamings in multiple files in your application.
+
+The above snippet prints the following:
+```html
+<html>
+    <head>
+        <script>some script</script>
+    </head>
+    <body>
+        <h1 style="background-color: blue; color: red;">This is my title</h1>
+        <div style="background-color: blue; color: red;">
+        <p class="contentpara first">This is my first paragraph</p>
+        <a style="opacity: 0.9;">
+            <p class="contentpara">Goooogle</p>
+        </a>
+        </div>
+    </body>
+</html>
+```
+
+Despite its usefulness in enforcing a particular import convention, custom bundles are completely interoperable with each other or with the default `all` and `short` bundles, and the above snippet could equally be written as:
+
+```scala
+import CustomBundle.{st, at}
+import Text.all._
+
+CustomBundle.html(
+  head(
+    script("some script")
+  ),
+  CustomBundle.body(
+    h1(backgroundColor:="blue", st.color:="red")("This is my title"),
+    div(st.backgroundColor:="blue", color:="red")(
+      p(cls := "contentpara first")(
+        "This is my first paragraph"
+      ),
+      CustomBundle.a(st.opacity:=0.9)(
+        p(at.cls := "contentpara")("Goooogle")
+      )
+    )
+  )
+)
+```
+
+Mixing both things from the `all` bundle as well as `st` and `at` from our own `CustomBundle`. That's not to say you *should* do this, but if for some reason if e.g. you're using different conventions for different source files, you can be sure that they'll work together just fine.
 
 Variables
 =========

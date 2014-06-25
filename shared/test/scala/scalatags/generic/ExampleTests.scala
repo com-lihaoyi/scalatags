@@ -4,10 +4,12 @@ import utest._
 
 import TestUtil.strCheck
 import acyclic.file
-class ExampleTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
-  import omg.all._
+class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Output, FragT]) extends TestSuite{
+
 
   val tests = TestSuite{
+
+    import bundle.all._
     'splashExample-strCheck(
       html(
         head(
@@ -269,7 +271,6 @@ class ExampleTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output,
     )
     'classesAndCssCustom-strCheck(
     {
-
       html(
         head(
           script("some script")
@@ -452,15 +453,15 @@ class ExampleTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output,
 
     'manualImports-strCheck(
     {
-      import omg.short._
+      import bundle.short._
       div(
         p(*.color:="red")("Red Text"),
         img(*.href:="www.imgur.com/picture.jpg")
       )
     },
     {
-      import omg.{attrs => attr, styles => css, _}
-      import omg.tags._
+      import bundle.{attrs => attr, styles => css, _}
+      import bundle.tags._
       div(
         p(css.color:="red")("Red Text"),
         img(attr.href:="www.imgur.com/picture.jpg")
@@ -536,7 +537,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output,
     )
     'additionalImports-strCheck(
     {
-      import omg._
+      import bundle._
       import styles2.pageBreakBefore
       import tags2.address
       import svgTags.svg
