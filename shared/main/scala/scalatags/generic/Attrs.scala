@@ -227,6 +227,11 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    */ 
   val tpe = `type`
   /**
+   * alternate version of type that doesn't require backticks, similar in spirit to 
+   * the class => className alternative.
+   */
+  val typeName = `type`
+  /**
    *
    */
   val xmlns = "xmlns".attr
@@ -244,6 +249,10 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * Shorthand for the `class` attribute
    */
   val cls = `class`
+  /**
+   *  Alternate version of the `class` attribute, same as in the DOM API
+   */
+  val className = `class`
   /**
    * This attribute participates in defining the language of the element, the
    * language that non-editable elements are written in or the language that
@@ -341,6 +350,10 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * MDN
    */
   val `for` = "for".attr
+  /**
+   * alternate version of `for` same as in DOM API
+   */
+  val htmlFor = `for`
   /**
    * This Boolean attribute indicates that the user cannot modify the value of
    * the control. This attribute is ignored if the value of the type attribute
