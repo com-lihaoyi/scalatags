@@ -37,6 +37,14 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, F
    * via the `*` object
    */
   val short: AbstractShort with Aggregate[Builder, Output, FragT]
+  /**
+   * Convenience object for only importing Scalatag's implicits, without importing
+   * any of the tags, styles or attributes themselves. This includes conversions to
+   * [[Modifier]], typeclass instances for treating strings and numbers as attributes
+   * or style values, and other things.
+   */
+  val implicits: Aggregate[Builder, Output, FragT]
+
   type AbstractShort = generic.AbstractShort[Builder, Output, FragT]
 
 

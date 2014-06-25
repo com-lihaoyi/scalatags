@@ -22,6 +22,7 @@ object Text
   object svgTags extends Text.Cap with text.SvgTags
   object svgStyles extends Text.Cap with SvgStyles
 
+  object implicits extends Aggregate
   object all
     extends Cap
     with Attrs

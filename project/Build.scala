@@ -23,7 +23,7 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.3.6",
+    version := "0.3.7",
     publishTo <<= version { (v: String) =>
       Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },

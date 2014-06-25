@@ -26,6 +26,8 @@ object JsDom
   object svgTags extends JsDom.Cap with jsdom.SvgTags
   object svgStyles extends JsDom.Cap with SvgStyles
 
+  object implicits extends Aggregate
+
   object all
     extends Cap
     with Attrs
