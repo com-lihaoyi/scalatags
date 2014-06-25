@@ -2,7 +2,7 @@ import acyclic.file
 import scala.collection.immutable.Queue
 import scala.collection.{SortedMap, mutable}
 import scalatags.generic.{Attr, Style}
-import scalatags.Platform.Base
+
 
 /**
  * ScalaTags is a small XML/HTML construction library for Scala. See

@@ -3,7 +3,6 @@ package generic
 
 import acyclic.file
 import scala.collection.SortedMap
-import scalatags.Platform.Base
 import scalatags.generic
 
 
