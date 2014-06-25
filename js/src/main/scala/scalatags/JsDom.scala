@@ -69,7 +69,7 @@ object JsDom
     type Tag = JsDom.TypedTag[dom.Element]
     val Tag = JsDom.TypedTag
 
-    type Frag = jsdom.Frag
+
   }
 
   trait Cap extends Util{ self =>

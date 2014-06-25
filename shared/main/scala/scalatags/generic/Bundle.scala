@@ -108,6 +108,8 @@ trait Aliases[Builder, Output <: FragT, FragT]{
    */
   protected[this] type StringFrag <: Modifier
   protected[this] val StringFrag: Companion[StringFrag]
+
+  type Frag = generic.Frag[Builder, Output, FragT]
 }
 trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT]{
 
@@ -137,7 +139,7 @@ trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output
   implicit def longFrag(v: Long) = stringFrag(v.toString)
   implicit def floatFrag(v: Float) = stringFrag(v.toString)
   implicit def doubleFrag(v: Double) = stringFrag(v.toString)
-  implicit def stringFrag(v: String): Frag[Builder, Output, FragT]
+  implicit def stringFrag(v: String): Frag
 
   /**
    * Delimits a string that should be included in the result as raw,
