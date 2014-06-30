@@ -55,8 +55,7 @@ object Build extends sbt.Build{
     libraryDependencies ++= Seq(
       "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6" % "provided"
     ),
-    (jsEnv in Test) := new PhantomJSEnv,
-    (testLoader in Test) := JSClasspathLoader((execClasspath in Compile).value)
+    requiresDOM := true
   )
 
   lazy val jvm = cross.jvm
