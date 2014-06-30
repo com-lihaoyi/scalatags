@@ -115,6 +115,22 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    */
   val onkeydown = "onkeydown".attr
   /**
+   * The keyup event is raised when the user releases a key that's been pressed.
+   *
+   * MDN
+   */
+  val onkeyup = "onkeyup".attr
+  /**
+   * The keypress event should be raised when the user presses a key on the keyboard.
+   * However, not all browsers fire keypress events for certain keys.
+   *
+   * Webkit-based browsers (Google Chrome and Safari, for example) do not fire keypress events on the arrow keys.
+   * Firefox does not fire keypress events on modifier keys like SHIFT.
+   *
+   * MDN
+   */
+  val onkeypress = "onkeypress".attr
+  /**
    * The load event fires at the end of the document loading process. At this
    * point, all of the objects in the document are in the DOM, and all the
    * images and sub-frames have finished loading.
@@ -162,6 +178,12 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * MDN
    */
   val onselect = "onselect".attr
+  /**
+   * Specifies the function to be called when the window is scrolled.
+   *
+   * MDN
+   */
+  val onscroll = "onscroll".attr
   /**
    * The submit event is raised when the user clicks a submit button in a form
    * (<input type="submit"/>).
