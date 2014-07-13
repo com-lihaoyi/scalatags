@@ -842,7 +842,7 @@ Most of the time, functions are sufficient to keep things DRY, but if for some r
 
 DOM Backend
 ===========
-Although Scalatags was original a HTML-String generation library, it now ships with an additional backend that runs only on ScalaJS, available by replacing 
+Although Scalatags was originally a HTML-String generation library, it now ships with an additional backend that runs only on ScalaJS, available by replacing 
 
 ```scala
 import scalatags.Text._
