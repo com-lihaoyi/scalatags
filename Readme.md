@@ -96,7 +96,7 @@ And you should be good to go generating HTML fragments in the browser! Scalatags
 Why Scalatags
 =============
 
-The core functionality of Scalatags is a [tiny amount of code](shared/main/scala/scalatags/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost *everything*, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
+The core functionality of Scalatags is a [tiny amount of code](shared/main/scala/scalatags/generic/Core.scala), and yet it provides all the functionality of large frameworks like Python's [Jinja2](http://jinja.pocoo.org/docs/sandbox/) or C#'s [Razor](http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx), and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost *everything*, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
 
 Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
 
