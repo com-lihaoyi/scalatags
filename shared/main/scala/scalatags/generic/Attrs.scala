@@ -37,6 +37,23 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    */
   val action = "action".attr
   /**
+   * The HTTP method that the browser uses to submit the form. Possible values are:
+   * 
+   * - post: Corresponds to the HTTP POST method ; form data are included in the
+   *   body of the form and sent to the server.
+   *   
+   * - get: Corresponds to the HTTP GET method; form data are appended to the
+   *   action attribute URI with a '?' as a separator, and the resulting URI is
+   *   sent to the server. Use this method when the form has no side-effects and
+   *   contains only ASCII characters.
+   *   
+   * This value can be overridden by a formmethod attribute on a button or
+   * input element.
+   *
+   * MDN
+   */
+  val method = "method".attr
+  /**
    * This attribute defines a unique identifier (ID) which must be unique in
    * the whole document. Its purpose is to identify the element when linking
    * (using a fragment identifier), scripting, or styling (with CSS).
@@ -68,8 +85,14 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    */
   val target = "target".attr
   /**
-   * Name of the element. For example used by the server to identify the fields
-   * in form submits.
+   * On form elements (input etc.):
+   *   Name of the element. For example used by the server to identify the fields
+   *   in form submits.
+   * 
+   * On the meta tag: 
+   *   This attribute defines the name of a document-level metadata.
+   *   This document-level metadata name is associated with a value, contained by
+   *   the content attribute.
    *
    * MDN
    */
@@ -424,5 +447,42 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * An element with a 0 value, an invalid value, or no tabindex value should be placed after elements with a positive tabindex in the sequential keyboard navigation order.
    */
   val tabindex = "tabindex".attr
+  /**
+   * The attribute describes the role(s) the current element plays in the 
+   * context of the document. This can be used, for example, 
+   * by applications and assistive technologies to determine the purpose of 
+   * an element. This could allow a user to make informed decisions on which 
+   * actions may be taken on an element and activate the selected action in a
+   * device independent way. It could also be used as a mechanism for 
+   * annotating portions of a document in a domain specific way (e.g., 
+   * a legal term taxonomy). Although the role attribute may be used to add 
+   * semantics to an element, authors should use elements with inherent 
+   * semantics, such as p, rather than layering semantics on semantically 
+   * neutral elements, such as div role="paragraph".
+   * 
+   * @see: http://www.w3.org/TR/role-attribute/#s_role_module_attributes
+   */
+  val role = "role".attr
+  /**
+   * This attribute gives the value associated with the http-equiv or name
+   * attribute, depending of the context.
+   * 
+   * MDN
+   */
+  val content = "content".attr
+  /**
+   * This enumerated attribute defines the pragma that can alter servers and
+   * user-agents behavior. The value of the pragma is defined using the content
+   * attribute and can be one of the following:
+   *
+   *   - content-language 
+   *   - content-type 
+   *   - default-style
+   *   - refresh
+   *   - set-cookie
+   *   
+   * MDN
+   */
+  val httpEquiv = "http-equiv".attr
 }
 
