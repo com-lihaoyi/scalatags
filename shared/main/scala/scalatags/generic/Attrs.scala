@@ -425,9 +425,10 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    */
   val tabindex = "tabindex".attr
 
-  val rowspan = "rowspan".attr
-  val colspan = "colspan".attr
-  val shape   = "shape"  .attr
-
+  val rowspan   = "rowspan" .attr
+  val colspan   = "colspan" .attr
+  val shape     = "shape"   .attr
+  val dir       = "dir"     .attr
+  val selected  = "selected".attr
 }
 
