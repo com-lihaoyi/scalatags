@@ -424,5 +424,10 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * An element with a 0 value, an invalid value, or no tabindex value should be placed after elements with a positive tabindex in the sequential keyboard navigation order.
    */
   val tabindex = "tabindex".attr
+
+  val rowspan = "rowspan".attr
+  val colspan = "colspan".attr
+  val shape   = "shape"  .attr
+
 }
 
