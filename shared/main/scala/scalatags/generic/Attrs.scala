@@ -421,14 +421,66 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *   tabindex. If several elements share the same tabindex, their relative order
    *   follows their relative position in the document).
    *
-   * An element with a 0 value, an invalid value, or no tabindex value should be placed after elements with a positive tabindex in the sequential keyboard navigation order.
+   * An element with a 0 value, an invalid value, or no tabindex value should be
+   * placed after elements with a positive tabindex in the sequential keyboard navigation order.
+   *
+   * MDN
    */
   val tabindex = "tabindex".attr
 
-  val rowspan   = "rowspan" .attr
-  val colspan   = "colspan" .attr
-  val shape     = "shape"   .attr
-  val dir       = "dir"     .attr
-  val selected  = "selected".attr
-}
+  /**
+   * This attribute contains a non-negative integer value that indicates for how
+   * many rows the cell extends. Its default value is 1; if its value is set to 0, it
+   * extends until the end of the table section (<thead>, <tbody>, <tfoot>, even if
+   * implicitly defined, that the cell belongs to. Values higher than 65534 are
+   * clipped down to 65534.
+   *
+   * MDN
+   */
+  val rowspan   = "rowspan".attr
 
+  /**
+   * This attribute contains a non-negative integer value that indicates for how
+   * many columns the cell extends. Its default value is 1; if its value is set to 0, it
+   * extends until the end of the <colgroup>, even if implicitly defined, that the cell
+   * belongs to. Values higher than 1000 will be considered as incorrect and will be
+   * set to the default value (1).
+   *
+   * Note: In HTML5 this attribute only accepts values greater than zero since
+   * it must not be used to overlap cells. Besides, Firefox is the only browser
+   * to support the 0 value as defined in the HTML 4.01 specification.
+   *
+   * MDN
+   */
+  val colspan   = "colspan".attr
+
+  /**
+   * The direction in which the child elements of the element are placed.
+   *
+   * normal
+   *   For scales, the scale's values are ordered from left to right (for horizontal
+   *   scales) or from top to bottom (for vertical scales)  For other elements, the
+   *   elements are placed left to right or top to bottom in the order they appear in
+   *   the XUL code.
+   *
+   * reverse
+   *
+   *   For scales, the scale's values are ordered from right to left (for horizontal
+   *   scales) or from bottom to top (for vertical scales). For other elements, they
+   *   are placed right to left or bottom to top. This is reverse of the order in which
+   *   they appear in the XUL code.
+   *
+   * MDN
+   */
+  val dir       = "dir".attr
+
+  /**
+   * Indicates whether the element is selected or not. This value is read-only.
+   * To change the selection, set either the selectedIndex or selectedItem property of
+   * the containing element.
+   *
+   * MDN
+   */
+  val selected  = "selected".attr
+
+}
