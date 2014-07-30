@@ -3,7 +3,7 @@ import acyclic.file
 import org.scalajs.dom
 import scala.scalajs.js
 
-import org.scalajs.dom.Element
+import org.scalajs.dom.{Node, Element}
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{Aliases, Modifier}
 
@@ -81,6 +81,15 @@ object JsDom
     def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean): TypedTag[T] = {
       TypedTag(tag, Nil, void)
     }
+
+    implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
+      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      def render: dom.Node = {
+        val frag = org.scalajs.dom.document.createDocumentFragment()
+        xs.map(_.render).foreach(frag.appendChild)
+        frag
+      }
+    }
   }
 
   object StringFrag extends Companion[StringFrag]
@@ -145,7 +154,7 @@ trait LowPriorityImplicits{
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit class bindElement(e: dom.Element) extends generic.Modifier[dom.Element] {
+  implicit class bindNode(e: dom.Node) extends generic.Modifier[dom.Element] {
     override def applyTo(t: Element) = t.appendChild(e)
   }
 }

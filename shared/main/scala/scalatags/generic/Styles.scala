@@ -488,6 +488,15 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
 
 
   /**
+   * The content CSS property is used with the ::before and ::after pseudo-elements
+   * to generate content in an element. Objects inserted using the content
+   * property are anonymous replaced elements.
+   *
+   * MDN
+   */
+  val content = new Style("content", "content")
+
+  /**
    * The counter-increment CSS property is used to increase the value of CSS
    * Counters by a given value. The counter's value can be reset using the
    * counter-reset CSS property.
@@ -2549,16 +2558,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     val both = this := "both"
   }
-
-  /**
-   * The content CSS property is used with the ::before and ::after pseudo-elements
-   * to generate content in an element. Objects inserted using the content
-   * property are anonymous replaced elements.
-   *
-   * MDN
-   */
-  val content = new Style("content", "content")
-
 
   /**
    * The margin-bottom CSS property of an element sets the margin space required

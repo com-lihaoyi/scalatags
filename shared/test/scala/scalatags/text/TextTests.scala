@@ -1,14 +1,7 @@
-package scalatags
-import acyclic.file
-import utest.framework.TestSuite
+package scalatags.text
 import utest._
 
-
-import TestUtil._
-import scala.collection.SortedMap
-
-
-object BasicTests extends TestSuite{
+object TextTests extends TestSuite{
 
   import scalatags.Text.all._
   def tests = TestSuite{
@@ -33,6 +26,15 @@ object BasicTests extends TestSuite{
       assert(10.0.px == "10.0px" || 10.0.px == "10px")
       assert(10.em == "10em")
       assert(10.pt == "10pt")
+    }
+    'fragSeqsAreFrags{
+      val rendered = Seq(
+        h1("titless"),
+        div("lol")
+      )
+
+      val wrapped = div(rendered).toString
+      assert(wrapped == "<div><h1>titless</h1><div>lol</div></div>")
     }
   }
 }

@@ -52,6 +52,15 @@ object DomTests extends TestSuite{
       }
     }
     'fancy {
+      'fragSeqsAreFrags{
+        val rendered = Seq(
+          h1("titless"),
+          div("lol")
+        ).render
+
+        val wrapped = div(rendered).toString
+        assert(wrapped == "<div><h1>titless</h1><div>lol</div></div>")
+      }
       'boundAttributes {
         var count = 0
         val elem = div(

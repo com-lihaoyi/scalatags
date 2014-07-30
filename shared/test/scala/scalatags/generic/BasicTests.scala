@@ -7,6 +7,7 @@ import utest._
 
 import TestUtil._
 
+
 class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
   import omg.all._
   private[this] type Omg = Attrs
@@ -119,5 +120,6 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
       )
     }
+
   }
 }
