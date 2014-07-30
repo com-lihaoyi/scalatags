@@ -91,7 +91,7 @@ To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of
 libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.9"
 ```
 
-And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags is currently only compatibly with ScalaJS 0.5.3+.
+And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.3.9 is currently only compatibly with ScalaJS 0.5.3+.
 
 Why Scalatags
 =============
