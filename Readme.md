@@ -1,4 +1,4 @@
-ScalaTags 0.3.8
+ScalaTags 0.3.9
 ===============
 
 ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
@@ -77,7 +77,7 @@ Getting Started
 ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cscalatags); to get started, simply add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.8"
+libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.9"
 ```
 
 And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
@@ -88,10 +88,10 @@ ScalaJS
 To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
 ```scala
-libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.8"
+libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.9"
 ```
 
-And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags is currently only compatibly with ScalaJS 0.5.x.
+And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags is currently only compatibly with ScalaJS 0.5.3+.
 
 Why Scalatags
 =============
