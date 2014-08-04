@@ -28,13 +28,14 @@ object TextTests extends TestSuite{
       assert(10.pt == "10pt")
     }
     'fragSeqsAreFrags{
-      val rendered: Frag = Seq(
+      val frag1: Frag = Seq(
         h1("titless"),
         div("lol")
       )
-      val rendered2: Frag = Seq("i", "am", "cow")
-      val wrapped = div(rendered, rendered2).toString
-      assert(wrapped == "<div><h1>titless</h1><div>lol</div>iamcow</div>")
+      val frag2: Frag = Seq("i", "am", "cow")
+      val frag3: Frag = Seq(frag1, frag2)
+      val wrapped = div(frag1, frag2, frag3).toString
+      assert(wrapped == "<div><h1>titless</h1><div>lol</div>iamcow<h1>titless</h1><div>lol</div>iamcow</div>")
     }
   }
 }

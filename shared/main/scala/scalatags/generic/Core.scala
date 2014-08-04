@@ -4,6 +4,7 @@ package generic
 import acyclic.file
 import scala.collection.SortedMap
 import scalatags.generic
+import scala.annotation.implicitNotFound
 
 
 /**
@@ -126,6 +127,9 @@ case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extend
  * the value of a [[Attr]]. Only types with a specified [[AttrValue]] may
  * be used.
  */
+@implicitNotFound(
+  "No AttrValue defined for type ${T}; scalatags does not know how to use ${T} as an attribute"
+)
 trait AttrValue[Builder, T]{
   def apply(t: Builder, a: Attr, v: T)
 }
@@ -144,6 +148,9 @@ case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) ext
  * the value of a [[Style]]. Only types with a specified [[StyleValue]] may
  * be used.
  */
+@implicitNotFound(
+  "No StyleValue defined for type ${T}; scalatags does not know how to use ${T} as an style"
+)
 trait StyleValue[Builder, T]{
   def apply(t: Builder, s: Style, v: T)
 }
