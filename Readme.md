@@ -1227,6 +1227,45 @@ On top of fixing all the old problems, Scalatags targets some new ones:
 
 Scalatags is still a work in progress, but I think I've hit most of the pain points I was feeling with the old systems, and hope to continually improve it over time. Pull requests are welcome!
 
+
+Changelog
+=========
+
+0.3.9
+-----
+
+- Better error messages for missing implicits
+- Added attribuets `method`, `role`, `content`, `httpEquiv`, `onkeyup`, `onkeypress`
+- Added implicit conversion from `Seq[Frag]` to `Frag`
+
+0.3.8
+-----
+
+- Added `Frag` alias in `Bundle`, to match all the other aliases per-bundle
+  
+0.3.7
+-----
+
+- Added `implicits` object, for people who want to import all the implicit conversions/typeclasses without importing tags or other things
+
+0.3.6
+-----
+
+- Added unit test and readme-section to document making custom-bundles, to allow customizable single-import syntax to bring all the things you want into scope.
+- Deleted dead code in `Platform`
+- Enforce lack of cycles between internal files
+- Removed `StyleValue[T: Numeric]` and `AttrValue[T: Numeric]` in favor of `Byte`/`Short`/`Int`/etc. versions, to work around bug in type-inference in 2.10
+
+0.3.5
+-----
+
+- Fixed a bug in `Text` backend that blew up when you had more than 8 attributes
+
+0.3.4
+-----
+
+- Added a separate type parameter for `Frag.render`, distinct from the type of `TypedTag.render`, to more accurately type the API and allow the usage of `Frag`s on their own.
+
 License
 =======
 
