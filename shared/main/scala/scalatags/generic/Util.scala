@@ -7,7 +7,7 @@ import scalatags._
 /**
  * Created by haoyi on 6/2/14.
  */
-trait Util[Builder, Output <: FragT, FragT] {
+trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, FragT]{
 
   type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T, FragT]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean): ConcreteHtmlTag[T]
@@ -85,4 +85,24 @@ trait Util[Builder, Output <: FragT, FragT] {
   implicit def UnitNode(u: Unit) = new Modifier[Builder]{
     def applyTo(t: Builder) = ()
   }
+}
+
+trait LowPriUtil[Builder, Output <: FragT, FragT]{
+    /**
+     * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
+     * objects to its list of children.
+     */
+    implicit def SeqFrag[A <% Frag[Builder, Output, FragT]](xs: Seq[A]): Frag[Builder, Output, FragT]
+
+    /**
+     * Allows you to modify a [[HtmlTag]] by adding an Option containing other nest-able
+     * objects to its list of children.
+     */
+    implicit def OptionFrag[A <% Frag[Builder, Output, FragT]](xs: Option[A]) = SeqFrag(xs.toSeq)
+
+    /**
+     * Allows you to modify a [[HtmlTag]] by adding an Array containing other nest-able
+     * objects to its list of children.
+     */
+    implicit def ArrayFrag[A <% Frag[Builder, Output, FragT]](xs: Array[A]) = SeqFrag[A](xs.toSeq)
 }

@@ -23,10 +23,8 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.3.8",
-    publishTo <<= version { (v: String) =>
-      Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
-    },
+    version := "0.3.9",
+    publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=
       <url>https://github.com/lihaoyi/scalatags</url>
@@ -55,6 +53,7 @@ object Build extends sbt.Build{
     libraryDependencies ++= Seq(
       "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6" % "provided"
     ),
+    test in Test := (test in (Test, fastOptStage)).value,
     requiresDOM := true
   )
 

@@ -50,6 +50,10 @@ object Text
     def makeAbstractTypedTag[T](tag: String, void: Boolean) = {
       TypedTag(tag, Nil, void)
     }
+    implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
+      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
+      def render = xs.map(_.render).mkString
+    }
   }
 
   trait Aggregate extends generic.Aggregate[text.Builder, String, String]{

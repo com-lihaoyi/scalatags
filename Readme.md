@@ -1,4 +1,4 @@
-ScalaTags 0.3.8
+ScalaTags 0.3.9
 ===============
 
 ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
@@ -77,7 +77,7 @@ Getting Started
 ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cscalatags); to get started, simply add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.8"
+libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.9"
 ```
 
 And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
@@ -88,10 +88,10 @@ ScalaJS
 To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
 ```scala
-libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.8"
+libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.9"
 ```
 
-And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags is currently only compatibly with ScalaJS 0.5.x.
+And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.3.9 is currently only compatibly with ScalaJS 0.5.3+.
 
 Why Scalatags
 =============
@@ -1226,6 +1226,45 @@ On top of fixing all the old problems, Scalatags targets some new ones:
 - [Blazing fast](#performance)
 
 Scalatags is still a work in progress, but I think I've hit most of the pain points I was feeling with the old systems, and hope to continually improve it over time. Pull requests are welcome!
+
+
+Changelog
+=========
+
+0.3.9
+-----
+
+- Better error messages for missing implicits
+- Added attribuets `method`, `role`, `content`, `httpEquiv`, `onkeyup`, `onkeypress`
+- Added implicit conversion from `Seq[Frag]` to `Frag`
+
+0.3.8
+-----
+
+- Added `Frag` alias in `Bundle`, to match all the other aliases per-bundle
+  
+0.3.7
+-----
+
+- Added `implicits` object, for people who want to import all the implicit conversions/typeclasses without importing tags or other things
+
+0.3.6
+-----
+
+- Added unit test and readme-section to document making custom-bundles, to allow customizable single-import syntax to bring all the things you want into scope.
+- Deleted dead code in `Platform`
+- Enforce lack of cycles between internal files
+- Removed `StyleValue[T: Numeric]` and `AttrValue[T: Numeric]` in favor of `Byte`/`Short`/`Int`/etc. versions, to work around bug in type-inference in 2.10
+
+0.3.5
+-----
+
+- Fixed a bug in `Text` backend that blew up when you had more than 8 attributes
+
+0.3.4
+-----
+
+- Added a separate type parameter for `Frag.render`, distinct from the type of `TypedTag.render`, to more accurately type the API and allow the usage of `Frag`s on their own.
 
 License
 =======

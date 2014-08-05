@@ -7,6 +7,7 @@ import utest._
 
 import TestUtil._
 
+
 class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
   import omg.all._
   private[this] type Omg = Attrs
@@ -119,5 +120,16 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
       )
     }
+    'compileErrors{
+      'niceErrorsForAttributes{
+        val msg = compileError("""a(onclick := {() => "lol"})""").msg
+        assert(msg.contains("scalatags does not know how to use () => String as an attribute"))
+      }
+      'niceErrorsForStyles{
+        val msg = compileError("""a(opacity:= {() => "lol"})""").msg
+        assert(msg.contains("scalatags does not know how to use () => String as an style"))
+      }
+    }
+
   }
 }
