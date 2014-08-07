@@ -109,7 +109,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
   protected[this] type StringFrag <: Modifier
   protected[this] val StringFrag: Companion[StringFrag]
 
-  type Frag = generic.Frag[Builder, Output, FragT]
+  type Frag = generic.Frag[Builder, FragT]
 }
 trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT]{
 

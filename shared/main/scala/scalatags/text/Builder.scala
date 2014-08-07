@@ -55,7 +55,7 @@ class Builder(var children: Array[Frag] = new Array(4),
     }
   }
 }
-trait Frag extends generic.Frag[Builder, String, String]{
+trait Frag extends generic.Frag[Builder, String]{
   def writeTo(strb: StringBuilder): Unit
   def render: String
   def applyTo(b: Builder) = b.addChild(this)

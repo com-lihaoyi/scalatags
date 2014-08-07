@@ -92,17 +92,17 @@ trait LowPriUtil[Builder, Output <: FragT, FragT]{
      * Allows you to modify a [[HtmlTag]] by adding a Seq containing other nest-able
      * objects to its list of children.
      */
-    implicit def SeqFrag[A <% Frag[Builder, Output, FragT]](xs: Seq[A]): Frag[Builder, Output, FragT]
+    implicit def SeqFrag[A <% Frag[Builder, FragT]](xs: Seq[A]): Frag[Builder, FragT]
 
     /**
      * Allows you to modify a [[HtmlTag]] by adding an Option containing other nest-able
      * objects to its list of children.
      */
-    implicit def OptionFrag[A <% Frag[Builder, Output, FragT]](xs: Option[A]) = SeqFrag(xs.toSeq)
+    implicit def OptionFrag[A <% Frag[Builder, FragT]](xs: Option[A]) = SeqFrag(xs.toSeq)
 
     /**
      * Allows you to modify a [[HtmlTag]] by adding an Array containing other nest-able
      * objects to its list of children.
      */
-    implicit def ArrayFrag[A <% Frag[Builder, Output, FragT]](xs: Array[A]) = SeqFrag[A](xs.toSeq)
+    implicit def ArrayFrag[A <% Frag[Builder, FragT]](xs: Array[A]) = SeqFrag[A](xs.toSeq)
 }

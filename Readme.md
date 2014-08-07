@@ -1,4 +1,4 @@
-ScalaTags 0.3.9
+ScalaTags 0.4.0
 ===============
 
 ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
@@ -77,7 +77,7 @@ Getting Started
 ScalaTags is hosted on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cscalatags); to get started, simply add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.scalatags" %% "scalatags" % "0.3.9"
+libraryDependencies += "com.scalatags" %% "scalatags" % "0.4.0"
 ```
 
 And you're good to go! Open up a `sbt console` and you can start working through the [Examples](#Examples), which should just work when copied and pasted into the console.
@@ -88,7 +88,7 @@ ScalaJS
 To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
 ```scala
-libraryDependencies += "com.scalatags" %%% "scalatags" % "0.3.9"
+libraryDependencies += "com.scalatags" %%% "scalatags" % "0.4.0"
 ```
 
 And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.3.9 is currently only compatibly with ScalaJS 0.5.3+.
@@ -980,7 +980,7 @@ Internals
 The primary data structure Scalatags uses are the [TypedTag](http://lihaoyi.github.io/scalatags/#scalatags.generic.TypedTag):
 
 ```scala
-trait TypedTag[Builder, +Output, FragT] extends Frag[Builder, Output, FragT]{
+trait TypedTag[Builder, +Output, FragT] extends Frag[Builder, FragT]{
   def tag: String
 
   /**
@@ -1018,7 +1018,7 @@ trait Modifier[Builder] {
 And the [Frag](http://lihaoyi.github.io/scalatags/#scalatags.generic.Frag):
 
 ```scala
-trait Frag[Builder, +Output, FragT] extends Modifier[Builder]{
+trait Frag[Builder, FragT] extends Modifier[Builder]{
   def render: Output
 }
 ```
@@ -1230,6 +1230,12 @@ Scalatags is still a work in progress, but I think I've hit most of the pain poi
 
 Changelog
 =========
+
+0.4.0
+-----
+
+- Removed unused type param from `Frag`
+- Changed `bindNode` from `Modifier[dom.Element]` to `Frag[dom.Element, dom.Node]`
 
 0.3.9
 -----
