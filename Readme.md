@@ -1019,12 +1019,28 @@ And the [Frag](http://lihaoyi.github.io/scalatags/#scalatags.generic.Frag):
 
 ```scala
 trait Frag[Builder, FragT] extends Modifier[Builder]{
-  def render: Output
+  def render: FragT
 }
 ```
 
 
-A `TypedTag` is basically a tag-name together with a loose bag of `Modifier`s, and is itself a `Modifier` so it can be nested within other `TypedTag`s. A `Modifier` is a tag, a sequence of tags, an attribute binding, a style binding, or anything else that can be used to modify how a tag will be rendered. Lastly, a `Frag` represents the smallest standalone atom, which includes tags, loose strings, numbers, and other things.
+A `TypedTag` is basically a tag-name together with a loose bag of `Modifier`s, and is itself a `Modifier` so it can be nested within other `TypedTag`s. A `Modifier` is a tag, a sequence of tags, an attribute binding, a style binding, or anything else that can be used to modify how a tag will be rendered. Lastly, a `Frag` represents the smallest standalone atom, which includes tags, loose strings, numbers, and other things. 
+
+In the text backend you have the alias
+
+```scala
+type Tag = TypedTag[String]
+```
+
+Since everything renders to a string. In the DOM backend you have:
+
+```scala
+type HtmlTag = JsDom.TypedTag[dom.HTMLElement]
+type SvgTag = JsDom.TypedTag[dom.SVGElement]
+type Tag = JsDom.TypedTag[dom.Element]
+```
+
+These aliases help you keep your code short by letting you refer to the most common versions of `TypedTag` via concise names.
 
 Each Scalatags backend has its own refinements, e.g. `Text.TypedTag`, `Text.Frag` and `Text.Modifier` have the `Builder` type-parameter fixed as `text.Builder`, and the `Output` type-parameter fixed as `String`. Their `JsDom.*` counterparts have `Builder` fixed as `dom.Element`, and `Output`fixed to various subclasses of `dom.Element`. The various other classes/traits (e.g. `Attr`, `AttrPair`, StylePair`, etc.) are similarly abstract with concrete versions in each backend. 
 
