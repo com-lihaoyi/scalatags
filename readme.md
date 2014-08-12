@@ -977,7 +977,7 @@ The rest of the code involved in this micro-benchmark can be found in [PerfTests
 Internals
 =========
 
-The primary data structure Scalatags uses are the [TypedTag](http://lihaoyi.github.io/scalatags/#scalatags.generic.TypedTag):
+The primary data structure Scalatags uses are the `TypedTag`:
 
 ```scala
 trait TypedTag[Builder, +Output, FragT] extends Frag[Builder, FragT]{
@@ -1003,7 +1003,7 @@ trait TypedTag[Builder, +Output, FragT] extends Frag[Builder, FragT]{
 }
 ```
 
-The [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.generic.Modifier):
+The `Modifier`:
 
 ```scala
 trait Modifier[Builder] {
@@ -1015,7 +1015,7 @@ trait Modifier[Builder] {
 }
 ```
 
-And the [Frag](http://lihaoyi.github.io/scalatags/#scalatags.generic.Frag):
+And the `Frag`:
 
 ```scala
 trait Frag[Builder, FragT] extends Modifier[Builder]{
@@ -1044,13 +1044,13 @@ These aliases help you keep your code short by letting you refer to the most com
 
 Each Scalatags backend has its own refinements, e.g. `Text.TypedTag`, `Text.Frag` and `Text.Modifier` have the `Builder` type-parameter fixed as `text.Builder`, and the `Output` type-parameter fixed as `String`. Their `JsDom.*` counterparts have `Builder` fixed as `dom.Element`, and `Output`fixed to various subclasses of `dom.Element`. The various other classes/traits (e.g. `Attr`, `AttrPair`, StylePair`, etc.) are similarly abstract with concrete versions in each backend. 
 
-The current selection of [Modifier](http://lihaoyi.github.io/scalatags/#scalatags.Text.Node) (or implicitly convertable) types include
+The current selection of `Modifier` (or implicitly convertable) types include
 
-- [TypedTag](http://lihaoyi.github.io/scalatags/#scalatags.Text.HtmlTag)s and `String`s: appends itself to the parent's `children` list.
-- [AttrPair](http://lihaoyi.github.io/scalatags/#scalatags.Text.AttrPair)s: sets a key in the parent's `attrs` list.
-- [StylePair](http://lihaoyi.github.io/scalatags/#scalatags.Text.StylePair)s: appends the inline `style: value;` to the parent's `style` attribute.
-- [StringFrag](http://lihaoyi.github.io/scalatags/#scalatags.Text.StringFrag)s: append the string as a child.
-- [RawFrag](http://lihaoyi.github.io/scalatags/#scalatags.Text.RawFrag)s: append the string to the parent as unescaped HTML.
+- `TypedTag`s and `String`s: appends itself to the parent's `children` list.
+- `AttrPair`s: sets a key in the parent's `attrs` list.
+- `StylePair`s: appends the inline `style: value;` to the parent's `style` attribute.
+- `StringFrag`s: append the string as a child.
+- `RawFrag`s: append the string to the parent as unescaped HTML.
 
 The bulk of Scalatag's ~5000 lines of code is static bindings (and inline documentation!) for the myriad of CSS rules and HTML tags and attributes that exist. The core of Scalatags lives in [Core.scala](shared/main/scala/scalatags/Core.scala), with most of the implicit extensions and conversions living in [package.scala](shared/main/scala/scalatags/package.scala).
 
