@@ -428,8 +428,8 @@ The lesser used tags or styles are generally not imported wholesale by default, 
 ```scala
 import Styles2.pageBreakBefore
 import Tags2.address
-import SvgTags.svg
-import SvgStyles.stroke
+import scalatags.JsDom.svgTags._
+import scalatags.JsDom.svgStyles._
 div(
   p(pageBreakBefore.always, "a long paragraph which should not be broken"),
   address("500 Memorial Drive, Cambridge MA"),
