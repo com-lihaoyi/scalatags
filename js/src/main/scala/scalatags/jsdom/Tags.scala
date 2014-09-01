@@ -33,7 +33,7 @@ trait Tags extends generic.Tags[dom.Element, dom.Element, dom.Node]{
   val ul = "ul".tag[dom.HTMLUListElement]
   val li = "li".tag[dom.HTMLLIElement]
   val dl = "dl".tag[dom.HTMLDListElement]
-  val dt = "dl".tag[dom.HTMLDTElement]
+  val dt = "dt".tag[dom.HTMLDTElement]
   val dd = "dd".tag[dom.HTMLDDElement]
   val figure = "figure".tag[dom.HTMLElement]
   val figcaption = "figcaption".tag[dom.HTMLElement]

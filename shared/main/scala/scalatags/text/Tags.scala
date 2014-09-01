@@ -30,7 +30,7 @@ trait Tags extends generic.Tags[Builder, String, String]{
   val ul = "ul".tag
   val li = "li".tag
   val dl = "dl".tag
-  val dt = "dl".tag
+  val dt = "dt".tag
   val dd = "dd".tag
   val figure = "figure".tag
   val figcaption = "figcaption".tag
