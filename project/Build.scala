@@ -58,4 +58,11 @@ object Build extends sbt.Build{
   )
 
   lazy val jvm = cross.jvm
+
+  lazy val example = project.in(file("example"))
+                            .dependsOn(js)
+                            .settings(scalaJSSettings:_*)
+                            .settings(
+      libraryDependencies += "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6" % "provided"
+    )
 }

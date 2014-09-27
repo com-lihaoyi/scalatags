@@ -164,7 +164,7 @@ trait Tags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT]
     */
    val li: TypedTag[Builder, Output, FragT]
    /**
-    * Defines a definition list; al ist of terms and their associated definitions.
+    * Defines a definition list; a list of terms and their associated definitions.
     *
     *  MDN
     */
