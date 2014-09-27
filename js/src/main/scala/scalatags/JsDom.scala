@@ -5,7 +5,7 @@ import scala.scalajs.js
 
 import org.scalajs.dom.{Node, Element}
 import scala.annotation.unchecked.uncheckedVariance
-import scalatags.generic.{Aliases, Modifier}
+import scalatags.generic.{Namespace, Aliases, Modifier}
 
 
 /**
@@ -24,7 +24,6 @@ object JsDom
   object styles extends JsDom.Cap with Styles
   object styles2 extends JsDom.Cap with Styles2
   object svgTags extends JsDom.Cap with jsdom.SvgTags
-  object svgStyles extends JsDom.Cap with SvgStyles
   object svgAttrs extends JsDom.Cap with SvgAttrs
 
   object implicits extends Aggregate
@@ -79,8 +78,8 @@ object JsDom
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean): TypedTag[T] = {
-      TypedTag(tag, Nil, void)
+    def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
+      TypedTag(tag, Nil, void, namespaceConfig)
     }
 
     implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
@@ -121,7 +120,8 @@ object JsDom
 
   case class TypedTag[+Output <: dom.Element](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
-                                              void: Boolean = false)
+                                              void: Boolean = false,
+                                              namespace: Namespace)
                                               extends generic.TypedTag[dom.Element, Output, dom.Node]
                                               with jsdom.Frag{
     // unchecked because Scala 2.10.4 seems to not like this, even though
@@ -130,7 +130,7 @@ object JsDom
     protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
     def render: Output = {
-      val elem = dom.document.createElement(tag)
+      val elem = dom.document.createElementNS(namespace.uri, tag)
       build(elem)
       elem.asInstanceOf[Output]
     }

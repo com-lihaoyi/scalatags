@@ -33,42 +33,42 @@ trait DataConverters{
      *
      * MDN
      */
-    def px = (x + "px")
+    def px = x + "px"
 
     /**
-     * One point (which is 1/72 of an inch).
+     * One point which is 1/72 of an inch.
      *
      * MDN
      */
-    def pt = (x + "pt")
+    def pt = x + "pt"
 
     /**
      * One millimeter.
      *
      * MDN
      */
-    def mm = (x + "mm")
+    def mm = x + "mm"
 
     /**
-     * One centimeter (10 millimeters).
+     * One centimeter 10 millimeters.
      *
      * MDN
      */
-    def cm = (x + "cm")
+    def cm = x + "cm"
 
     /**
-     * One inch (2.54 centimeters).
+     * One inch 2.54 centimeters.
      *
      * MDN
      */
-    def in = (x + "in")
+    def in = x + "in"
 
     /**
-     * One pica (which is 12 points).
+     * One pica which is 12 points.
      *
      * MDN
      */
-    def pc = (x + "pc")
+    def pc = x + "pc"
     /**
      * This unit represents the calculated font-size of the element. If used on
      * the font-size property itself, it represents the inherited font-size
@@ -76,15 +76,15 @@ trait DataConverters{
      *
      * MDN
      */
-    def em = (x + "em")
+    def em = x + "em"
 
     /**
      * This unit represents the width, or more precisely the advance measure, of
-     * the glyph '0' (zero, the Unicode character U+0030) in the element's font.
+     * the glyph '0' zero, the Unicode character U+0030 in the element's font.
      *
      * MDN
      */
-    def ch = (x + "ch")
+    def ch = x + "ch"
 
     /**
      * This unit represents the x-height of the element's font. On fonts with the
@@ -93,21 +93,21 @@ trait DataConverters{
      *
      * MDN
      */
-    def ex = (x + "ex")
+    def ex = x + "ex"
 
     /**
-     * This unit represents the font-size of the root element (e.g. the font-size
-     * of the html element). When used on the font-size on this root element,
+     * This unit represents the font-size of the root element e.g. the font-size
+     * of the html element. When used on the font-size on this root element,
      * it represents its initial value.
      *
      * MDN
      */
-    def rem = (x + "rem")
+    def rem = x + "rem"
 
     /**
      * An angle in degrees. One full circle is 360deg. E.g. 0deg, 90deg, 360deg.
      */
-    def deg = (x + "deg")
+    def deg = x + "deg"
 
     /**
      * An angle in gradians. One full circle is 400grad. E.g. 0grad, 100grad,
@@ -115,7 +115,7 @@ trait DataConverters{
      *
      * MDN
      */
-    def grad = (x + "grad")
+    def grad = x + "grad"
 
     /**
      * An angle in radians.  One full circle is 2π radians which approximates
@@ -123,7 +123,7 @@ trait DataConverters{
      *
      * MDN
      */
-    def rad = (x + "rad")
+    def rad = x + "rad"
 
     /**
      * The number of turns the angle is. One full circle is 1turn. E.g. 0turn,
@@ -131,12 +131,12 @@ trait DataConverters{
      *
      * MDN
      */
-    def turn = (x + "turn")
+    def turn = x + "turn"
 
     /**
      * A percentage value
      */
-    def pct = (x + "%")
+    def pct = x + "%"
   }
 }
 

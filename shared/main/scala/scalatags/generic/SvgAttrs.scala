@@ -669,7 +669,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   val imageRendering = "imageRendering".attr
 
-
+  val id = "id".attr
 
   /**
    *
@@ -907,6 +907,8 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   val numOctaves = "numOctaves".attr
 
+
+  val offset = "offset".attr
 
   /**
    *

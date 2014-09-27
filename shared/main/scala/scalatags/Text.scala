@@ -13,14 +13,13 @@ import scala.annotation.unchecked.uncheckedVariance
 object Text
   extends generic.Bundle[text.Builder, String, String]
   with Aliases[text.Builder, String, String]{
-
   object attrs extends Text.Cap with Attrs
   object tags extends Text.Cap with text.Tags
   object tags2 extends Text.Cap with text.Tags2
   object styles extends Text.Cap with Styles
   object styles2 extends Text.Cap with Styles2
+
   object svgTags extends Text.Cap with text.SvgTags
-  object svgStyles extends Text.Cap with SvgStyles
   object svgAttrs extends Text.Cap with SvgAttrs
 
   object implicits extends Aggregate
@@ -48,7 +47,7 @@ object Text
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
 
-    def makeAbstractTypedTag[T](tag: String, void: Boolean) = {
+    def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
       TypedTag(tag, Nil, void)
     }
     implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
@@ -174,5 +173,3 @@ object Text
     def render: Output = this.toString.asInstanceOf[Output]
   }
 }
-
-

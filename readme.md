@@ -383,7 +383,7 @@ The main objects which you can import things from are:
 - [styles](http://lihaoyi.github.io/scalatags/#scalatags.Text.Styles): common CSS styles
 - [styles2](http://lihaoyi.github.io/scalatags/#scalatags.Text.Styles2): less common CSS styles
 - [svgTags](http://lihaoyi.github.io/scalatags/#scalatags.Text.Svg): SVG tags
-- [svgStyles](http://lihaoyi.github.io/scalatags/#scalatags.Text.SvgStyles): CSS styles only associated with SVG elements
+- [svgAttrs](http://lihaoyi.github.io/scalatags/#scalatags.Text.svgAttrs): attributes only associated with SVG elements
 - [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.Text.DataConverters): convenient extensions (e.g. `10.px`) to create the CSS datatypes
 
 You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
@@ -429,7 +429,7 @@ The lesser used tags or styles are generally not imported wholesale by default, 
 import Styles2.pageBreakBefore
 import Tags2.address
 import scalatags.JsDom.svgTags._
-import scalatags.JsDom.svgStyles._
+import scalatags.JsDom.svgAttrs._
 div(
   p(pageBreakBefore.always, "a long paragraph which should not be broken"),
   address("500 Memorial Drive, Cambridge MA"),
@@ -445,7 +445,7 @@ This prints:
         a long paragraph which should not be broken
     </p>
     <address>500 Memorial Drive, Cambridge MA</address>
-    <svg style="stroke: blue;" />
+    <svg stroke="blue" />
 </div>
 ```
 

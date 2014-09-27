@@ -541,7 +541,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       import styles2.pageBreakBefore
       import tags2.address
       import svgTags.svg
-      import svgStyles.stroke
+      import svgAttrs.stroke
       div(
         p(pageBreakBefore.always, "a long paragraph which should not be broken"),
         address("500 Memorial Drive, Cambridge MA"),
@@ -554,7 +554,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
                 a long paragraph which should not be broken
             </p>
             <address>500 Memorial Drive, Cambridge MA</address>
-            <svg style="stroke: #0000ff;"></svg>
+            <svg stroke="#0000ff"></svg>
         </div>
     """
     )

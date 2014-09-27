@@ -23,7 +23,7 @@ trait Modifier[Builder] {
 
 /**
  * Marker sub-type of [[Modifier]] which signifies that that type can be 
- * rendered as a standalone fragment of [[Output]]. This excludes things
+ * rendered as a standalone fragment of [[FragT]]. This excludes things
  * like [[AttrPair]]s or [[StylePair]]s which only make sense as part of
  * a parent fragment
  */
@@ -153,4 +153,22 @@ case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) ext
 )
 trait StyleValue[Builder, T]{
   def apply(t: Builder, s: Style, v: T)
+}
+
+/**
+ * Represents a single XML namespace. This is currently ignored in `scalatags.Text`,
+ * but used to create elements with the correct namespace in `scalatags.JsDom`. A
+ * [[Namespace]] can be provided implicitly (or explicitly) when creating tags via
+ * `"".tag`, with a default of "http://www.w3.org/1999/xhtml" if none is found.
+ */
+trait Namespace {
+  def uri: String
+}
+object Namespace{
+  implicit val htmlNamespaceConfig = new Namespace {
+    def uri = "http://www.w3.org/1999/xhtml"
+  }
+  val svgNamespaceConfig = new Namespace {
+    def uri = "http://www.w3.org/2000/svg"
+  }
 }
