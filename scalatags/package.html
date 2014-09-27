@@ -84,60 +84,19 @@ and documentation.
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="scalatags.Attr" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="AttrextendsAnyRef"></a>
-      <a id="Attr:Attr"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="Attr.html"><span class="name">Attr</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Wraps up a HTML attribute in an untyped value with an associated
-type; the := operator takes Strings.</p>
-    </li><li name="scalatags.AttrPair" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="AttrPairextendsModifierwithProductwithSerializable"></a>
-      <a id="AttrPair:AttrPair"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="AttrPair.html"><span class="name">AttrPair</span></a><span class="params">(<span name="attr">attr: <a href="Attr.html" class="extype" name="scalatags.Attr">Attr</a></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A key value pair representing the assignment of an attribute to a value.</p>
-    </li><li name="scalatags.Attrs" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="AttrsextendsAnyRef"></a>
-      <a id="Attrs:Attrs"></a>
+              <ol><li name="scalatags.Companion" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Companion[V]extendsString=&gt;V"></a>
+      <a id="Companion[V]:Companion[V]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Attrs.html"><span class="name">Attrs</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="package$$Companion.html"><span class="name">Companion</span></a><span class="tparams">[<span name="V">V</span>]</span><span class="result"> extends (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="scalatags.Companion.V">V</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Trait containing the contents of the <a href="Attrs.html" class="extype" name="scalatags.Attrs">Attrs</a> module, so they can be
-mixed in to other objects if needed.</p>
-    </li><li name="scalatags.Cls" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ClsextendsModifierwithProductwithSerializable"></a>
-      <a id="Cls:Cls"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="Cls.html"><span class="name">Cls</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Represents a single CSS class.</p>
+      
     </li><li name="scalatags.DataConverters" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="DataConvertersextendsAnyRef"></a>
       <a id="DataConverters:DataConverters"></a>
@@ -152,211 +111,19 @@ mixed in to other objects if needed.</p>
       </h4>
       <p class="comment cmt">Trait containing the contents of the <a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a> module, so it can be
 mixed in to other objects as needed.</p>
-    </li><li name="scalatags.ExtendedString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ExtendedStringextendsAnyRef"></a>
-      <a id="ExtendedString:ExtendedString"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="package$$ExtendedString.html"><span class="name">ExtendedString</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Provides extension methods on strings to fit them into Scalatag fragments.</p>
-    </li><li name="scalatags.HtmlTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="HtmlTagextendsNodewithProductwithSerializable"></a>
-      <a id="HtmlTag:HtmlTag"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="HtmlTag.html"><span class="name">HtmlTag</span></a><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="children">children: <span class="extype" name="scala.List">List</span>[<a href="Node.html" class="extype" name="scalatags.Node">Node</a>]</span>, <span name="attrs">attrs: <span class="extype" name="scala.collection.SortedMap">SortedMap</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="void">void: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result"> extends <a href="Node.html" class="extype" name="scalatags.Node">Node</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A single HTML tag.</p>
-    </li><li name="scalatags.Modifier" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ModifierextendsAnyRef"></a>
-      <a id="Modifier:Modifier"></a>
+    </li><li name="scalatags.LowPriorityImplicits" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LowPriorityImplicitsextendsAnyRef"></a>
+      <a id="LowPriorityImplicits:LowPriorityImplicits"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Modifier.html"><span class="name">Modifier</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Represents a value that can be nested within a <a href="Node.html" class="extype" name="scalatags.Node">Node</a>.</p>
-    </li><li name="scalatags.Node" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="NodeextendsModifier"></a>
-      <a id="Node:Node"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Node.html"><span class="name">Node</span></a><span class="result"> extends <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A general interface for all XML types which can appear in a ScalaTags fragment.</p>
-    </li><li name="scalatags.RawNode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RawNodeextendsNodewithProductwithSerializable"></a>
-      <a id="RawNode:RawNode"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="RawNode.html"><span class="name">RawNode</span></a><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Node.html" class="extype" name="scalatags.Node">Node</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A <a href="Node.html" class="extype" name="scalatags.Node">scalatags.Node</a> which contains a String which will not be escaped.</p>
-    </li><li name="scalatags.SeqModifier" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SeqModifier[A]extendsModifier"></a>
-      <a id="SeqModifier[A]:SeqModifier[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="package$$SeqModifier.html"><span class="name">SeqModifier</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Allows you to modify a <a href="HtmlTag.html" class="extype" name="scalatags.HtmlTag">HtmlTag</a> by adding a Seq containing other nest-able
-objects to its list of children.</p>
-    </li><li name="scalatags.StringNode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="StringNodeextendsNodewithProductwithSerializable"></a>
-      <a id="StringNode:StringNode"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="StringNode.html"><span class="name">StringNode</span></a><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Node.html" class="extype" name="scalatags.Node">Node</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A <span class="extype" name="scalatags.Node]">which contains a String.
-</span></p>
-    </li><li name="scalatags.Style" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="StyleextendsAnyRef"></a>
-      <a id="Style:Style"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="Style.html"><span class="name">Style</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A Style that only has a fixed set of possible values, provided by its members.</p>
-    </li><li name="scalatags.StylePair" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="StylePairextendsModifierwithProductwithSerializable"></a>
-      <a id="StylePair:StylePair"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="StylePair.html"><span class="name">StylePair</span></a><span class="params">(<span name="style">style: <a href="Style.html" class="extype" name="scalatags.Style">Style</a></span>, <span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Modifier.html" class="extype" name="scalatags.Modifier">Modifier</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A key value pair representing the assignment of a style to a value.</p>
-    </li><li name="scalatags.Styles" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="StylesextendsAnyRef"></a>
-      <a id="Styles:Styles"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Styles.html"><span class="name">Styles</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Trait that contains the contents of the <code>Styles</code> object, so they can
-be mixed in to other objects if needed.</p>
-    </li><li name="scalatags.Tags" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="TagsextendsAnyRef"></a>
-      <a id="Tags:Tags"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Tags.html"><span class="name">Tags</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Trait that contains the contents of the <code>Tags</code> object, so they can be mixed
-in to other objects if needed.</p>
-    </li><li name="scalatags.TypedAttr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="TypedAttr[T]extendsAttrwithProductwithSerializable"></a>
-      <a id="TypedAttr[T]:TypedAttr[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="TypedAttr.html"><span class="name">TypedAttr</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Attr.html" class="extype" name="scalatags.Attr">Attr</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Wraps up a HTML attribute in a statically-typed value with an associated
-type; overloads the := operator to also accept values of that type to convert
-to strings, allowing more concise and pseudo-typesafe use of that attribute.</p>
-    </li><li name="scalatags.TypedStyle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="TypedStyle[T]extendsStylewithProductwithSerializable"></a>
-      <a id="TypedStyle[T]:TypedStyle[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="TypedStyle.html"><span class="name">TypedStyle</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="jsName">jsName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="cssName">cssName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A <a href="Style.html" class="extype" name="scalatags.Style">Style</a> that takes any value of type T as a parameter; overloads the :=
-operator to also accept values of that type to convert to strings, allowing
-more concise and pseudo-typesafe use of that style.</p>
-    </li><li name="scalatags.UntypedAttr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="UntypedAttrextendsAttrwithProductwithSerializable"></a>
-      <a id="UntypedAttr:UntypedAttr"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="UntypedAttr.html"><span class="name">UntypedAttr</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Attr.html" class="extype" name="scalatags.Attr">Attr</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="LowPriorityImplicits.html"><span class="name">LowPriorityImplicits</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-    </li><li name="scalatags.UntypedStyle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="UntypedStyleextendsStylewithProductwithSerializable"></a>
-      <a id="UntypedStyle:UntypedStyle"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="UntypedStyle.html"><span class="name">UntypedStyle</span></a><span class="params">(<span name="jsName">jsName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="cssName">cssName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Style.html" class="extype" name="scalatags.Style">Style</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">A <a href="Style.html" class="extype" name="scalatags.Style">Style</a> which does not have a particular type, and takes strings as its
-values
-</p>
     </li></ol>
             </div>
 
@@ -364,20 +131,7 @@ values
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scalatags.Attrs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Attrs"></a>
-      <a id="Attrs:Attrs"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="Attrs$.html"><span class="name">Attrs</span></a><span class="result"> extends <a href="Attrs.html" class="extype" name="scalatags.Attrs">Attrs</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Module containing static bindings for common HTML attributes.</p>
-    </li><li name="scalatags.DataConverters" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="scalatags.DataConverters" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="DataConverters"></a>
       <a id="DataConverters:DataConverters"></a>
       <h4 class="signature">
@@ -391,20 +145,6 @@ values
       </h4>
       <p class="comment cmt">Module containing convenient ways of constructing CSS data types
 </p>
-    </li><li name="scalatags.DataTypes" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="DataTypes"></a>
-      <a id="DataTypes:DataTypes"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="DataTypes$.html"><span class="name">DataTypes</span></a>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains the trait and case class definitions for the most commonly used CSS
-data types.</p>
     </li><li name="scalatags.Escaping" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Escaping"></a>
       <a id="Escaping:Escaping"></a>
@@ -419,144 +159,97 @@ data types.</p>
       </h4>
       <p class="comment cmt">Utility methods related to validating and escaping XML; used internally but
 potentially useful outside of Scalatags.</p>
-    </li><li name="scalatags.Styles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Styles"></a>
-      <a id="Styles:Styles"></a>
+    </li><li name="scalatags.JsDom" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JsDom"></a>
+      <a id="JsDom:JsDom"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles$.html"><span class="name">Styles</span></a><span class="result"> extends <a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a></span>
+        <a href="JsDom$.html"><span class="name">JsDom</span></a><span class="result"> extends <a href="generic/Bundle.html" class="extype" name="scalatags.generic.Bundle">Bundle</a>[<span class="extype" name="org.scalajs.dom.Element">Element</span>, <span class="extype" name="org.scalajs.dom.Element">Element</span>, <span class="extype" name="org.scalajs.dom.Node">Node</span>] with <a href="generic/Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a>[<span class="extype" name="org.scalajs.dom.Element">Element</span>, <span class="extype" name="org.scalajs.dom.Element">Element</span>, <span class="extype" name="org.scalajs.dom.Node">Node</span>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Module that contains bindings for commonly-used CSS styles.</p>
-    </li><li name="scalatags.Styles2" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Styles2"></a>
-      <a id="Styles2:Styles2"></a>
+      <p class="comment cmt">A Scalatags module that generates <code>dom.Element</code>s when the tags are rendered.</p>
+    </li><li name="scalatags.Text" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Text"></a>
+      <a id="Text:Text"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Styles2$.html"><span class="name">Styles2</span></a>
+        <a href="Text$.html"><span class="name">Text</span></a><span class="result"> extends <a href="generic/Bundle.html" class="extype" name="scalatags.generic.Bundle">Bundle</a>[<a href="text/Builder.html" class="extype" name="scalatags.text.Builder">Builder</a>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] with <a href="generic/Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a>[<a href="text/Builder.html" class="extype" name="scalatags.text.Builder">Builder</a>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Contains CSS styles which are used less frequently.</p>
-    </li><li name="scalatags.SvgStyles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SvgStyles"></a>
-      <a id="SvgStyles:SvgStyles"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="SvgStyles$.html"><span class="name">SvgStyles</span></a>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains CSS styles which are only used for SVG.</p>
-    </li><li name="scalatags.SvgTags" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SvgTags"></a>
-      <a id="SvgTags:SvgTags"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="SvgTags$.html"><span class="name">SvgTags</span></a>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains Tags which are only used for SVG.</p>
-    </li><li name="scalatags.Tags" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Tags"></a>
-      <a id="Tags:Tags"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="Tags$.html"><span class="name">Tags</span></a><span class="result"> extends <a href="Tags.html" class="extype" name="scalatags.Tags">Tags</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Module containing static definitions for common HTML5 tags.</p>
-    </li><li name="scalatags.Tags2" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Tags2"></a>
-      <a id="Tags2:Tags2"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="Tags2$.html"><span class="name">Tags2</span></a>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains HTML tags which are used less frequently.</p>
-    </li><li name="scalatags.all" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="all"></a>
-      <a id="all:all"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="package$$all$.html"><span class="name">all</span></a><span class="result"> extends <a href="Attrs.html" class="extype" name="scalatags.Attrs">Attrs</a> with <a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a> with <a href="Tags.html" class="extype" name="scalatags.Tags">Tags</a> with <a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Convenience object to help import all <a href="Tags.html" class="extype" name="scalatags.Tags">Tags</a>, <a href="Attrs.html" class="extype" name="scalatags.Attrs">Attrs</a>, <a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a> and
-<span class="extype" name="Datatypes">Datatypes</span> into the global namespace via <code>import scalatags.all._</code>
-</p>
-    </li><li name="scalatags.package#raw" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="raw(s:String):scalatags.RawNode"></a>
-      <a id="raw(String):RawNode"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">raw</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="RawNode.html" class="extype" name="scalatags.RawNode">RawNode</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Mark the given string as &quot;raw&quot;, meaning it will not get escaped when the
-Scalatags fragment is serialized.</p><div class="fullcomment"><div class="comment cmt"><p>Mark the given string as &quot;raw&quot;, meaning it will not get escaped when the
-Scalatags fragment is serialized. This makes it easy to open up XSS holes
-and other vulnerabilities, but is sometimes necessary and useful.
-</p></div></div>
-    </li><li name="scalatags.short" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="short"></a>
-      <a id="short:short"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="package$$short$.html"><span class="name">short</span></a><span class="result"> extends <a href="Tags.html" class="extype" name="scalatags.Tags">Tags</a> with <a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Convenience object to help import all <a href="Tags.html" class="extype" name="scalatags.Tags">Tags</a>, and <a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a>, while
-aliases <a href="Attrs.html" class="extype" name="scalatags.Attrs">Attrs</a> as <code>attr</code> and <a href="Styles.html" class="extype" name="scalatags.Styles">Styles</a> as <code>css</code>.</p>
-    </li><li name="scalatags.package#stringNode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="stringNode(v:String):scalatags.StringNode"></a>
-      <a id="stringNode(String):StringNode"></a>
+      <p class="comment cmt">A Scalatags module that works with a text back-end, i.</p>
+    </li><li name="scalatags.attrOrdering" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="attrOrdering"></a>
+      <a id="attrOrdering:attrOrdering"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
-        <span class="kind">def</span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">stringNode</span><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="StringNode.html" class="extype" name="scalatags.StringNode">StringNode</a></span>
+        <a href="package$$attrOrdering$.html"><span class="name">attrOrdering</span></a><span class="result"> extends <span class="extype" name="scala.Ordering">Ordering</span>[<a href="generic/Attr.html" class="extype" name="scalatags.generic.Attr">Attr</a>]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Allows you to modify a HtmlTag by adding a String to its list of children
-</p>
+      
+    </li><li name="scalatags.generic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="generic"></a>
+      <a id="generic:generic"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="generic/package.html"><span class="name">generic</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="scalatags.jsdom" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="jsdom"></a>
+      <a id="jsdom:jsdom"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="jsdom/package.html"><span class="name">jsdom</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="scalatags.styleOrdering" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="styleOrdering"></a>
+      <a id="styleOrdering:styleOrdering"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="package$$styleOrdering$.html"><span class="name">styleOrdering</span></a><span class="result"> extends <span class="extype" name="scala.Ordering">Ordering</span>[<a href="generic/Style.html" class="extype" name="scalatags.generic.Style">Style</a>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="scalatags.text" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="text"></a>
+      <a id="text:text"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="text/package.html"><span class="name">text</span></a>
+      </span>
+      </h4>
+      
     </li></ol>
             </div>
 
