@@ -117,7 +117,7 @@ Take a look at the [prior work](#prior-work) section for a more detailed analysi
 Basic Examples
 ==============
 
-This is a bunch of simple examples to get you started using Scalatags. These examples are all in the [unit tests](shared/test/scala/scalatags/ExampleTests.scala). For more examples, take a look at the [demo page](http://lihaoyi.github.io/scalatags/demo.html), backed by the code in 
+This is a bunch of simple examples to get you started using Scalatags. These examples are all in the [unit tests](shared/test/scala/scalatags/ExampleTests.scala). For more examples, take a look at the [demo page](http://lihaoyi.github.io/scalatags/demo.html), backed by the code in [example/](https://github.com/lihaoyi/scalatags/blob/master/example/src/main/scala/example/ScalaJSExample.scala)
 
 Hello World
 -----------
