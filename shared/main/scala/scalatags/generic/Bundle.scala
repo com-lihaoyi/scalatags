@@ -6,7 +6,7 @@ import scalatags.text
 /**
  * An abstract representation of the Scalatags package. This allows you to
  * customize Scalatags to work with different backends, by defining your own
- * implementation of [[Bundle[T].Tag]], and specifying how the various [[Attr]]s
+ * implementation of `Tag`, and specifying how the various [[Attr]]s
  * and [[Style]]s contribute to construct the [[Builder]]. Apart from satisfying the
  * default String/Boolean/Numeric implementations of [[Attr]] and [[Style]],
  * you can also define your own, e.g. ScalaJS ships with an implicit conversion
@@ -17,7 +17,7 @@ import scalatags.text
  * on all platforms, and [[scalatags.JsDom]]: `Bundle[dom.Element]` on ScalaJS.
  *
  * It is possible to write entirely backend-agnostic Scalatags code by making
- * your code parametric on a `Bundle[T]` (or some subclass of it), and importing
+ * your code parametric on a [[Bundle]] (or some subclass of it), and importing
  * from that rather than importing directly from [[scalatags.JsDom]] or
  * [[scalatags.Text]]. You will naturally only be able to use functionality
  * (e.g. implicit conversions to [[Attr]]s and [[Style]]s which are present
