@@ -1137,7 +1137,9 @@ object ExampleTests extends generic.ExampleTests(scalatags.Text)
 object ExampleTests extends generic.ExampleTests(scalatags.JsDom)
 ```
 
-This is currently used to shared the bulk of unit tests between the Text and JsDom backends, and could be useful in other scenarios where you may want to swap between them (e.g. using Text on the server, and JsDom on the client where it's available) while sharing as much code as possible.
+This is currently used to shared the bulk of unit tests between the Text and JsDom backends, and could be useful in other scenarios where you may want to swap between them (e.g. using Text on the server, and JsDom on the client where it's available) while sharing as much code as possible. 
+
+For a concrete, self-contained example of this, look at the [demo page](https://github.com/lihaoyi/scalatags/blob/master/example/src/main/scala/example/ScalaJSExample.scala).
 
 Prior Work
 ==========
