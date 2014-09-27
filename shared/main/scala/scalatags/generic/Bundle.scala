@@ -76,6 +76,10 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, F
    * SVG only styles
    */
   val svgStyles: SvgStyles
+  /**
+   * SVG only attributes
+   */
+  val svgAttrs: SvgAttrs
 }
 
 trait Aliases[Builder, Output <: FragT, FragT]{
@@ -86,6 +90,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
   type Styles2 = generic.Styles2[Builder, Output, FragT]
   type SvgTags = generic.SvgTags[Builder, Output, FragT]
   type SvgStyles = generic.SvgStyles[Builder, Output, FragT]
+  type SvgAttrs = generic.SvgAttrs[Builder, Output, FragT]
   type Util = generic.Util[Builder, Output, FragT]
 
   type Attr = generic.Attr
