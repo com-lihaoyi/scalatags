@@ -750,7 +750,7 @@ Layouts
 -------
 
 ```scala
-def page(scripts: Seq[Node], content: Seq[Node]) =
+def page(scripts: Seq[Modifier], content: Seq[Modifier]) =
   html(
     head(scripts),
     body(
