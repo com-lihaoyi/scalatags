@@ -256,13 +256,13 @@ html(
     script("some script")
   ),
   body(
-    h1(style:="background-color: blue; color: red;")("This is my title"),
-    div(style:="background-color: blue; color: red;")(
-      p(`class`:="contentpara first")(
+    h1(backgroundColor:="blue", color:="red")("This is my title"),
+    div(backgroundColor:="blue", color:="red")(
+      p(cls := "contentpara first")(
         "This is my first paragraph"
       ),
-      a(style:="opacity: 0.9;")(
-        p("contentpara".cls)("Goooogle")
+      a(opacity:=0.9)(
+        p(cls := "contentpara")("Goooogle")
       )
     )
   )
