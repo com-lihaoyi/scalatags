@@ -363,8 +363,8 @@ Managing Imports
 ================
 
 ```scala
-import scalatags.Text.Text.{attrs => a, styles => s, _}
-import scalatags.Text.Text.tags._
+import scalatags.Text.{attrs => a, styles => s, _}
+import scalatags.Text.tags._
 div(
   p(s.color:="red")("Red Text"),
   img(a.href:="www.imgur.com/picture.jpg")
@@ -750,7 +750,7 @@ Layouts
 -------
 
 ```scala
-def page(scripts: Seq[Node], content: Seq[Node]) =
+def page(scripts: Seq[Modifier], content: Seq[Modifier]) =
   html(
     head(scripts),
     body(
