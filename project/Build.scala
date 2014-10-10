@@ -47,6 +47,16 @@ object Build extends sbt.Build{
         </developers>
 
   )
+
+  def sourceMapsToGithub: Project => Project =
+    p => p.settings(
+      scalacOptions ++= (if (isSnapshot.value) Seq.empty else Seq({
+        val a = p.base.toURI.toString.replaceFirst("[^/]+/?$", "")
+        val g = "https://raw.githubusercontent.com/lihaoyi/scalatags"
+        s"-P:scalajs:mapSourceURI:$a->$g/v${version.value}/"
+      }))
+    )
+
   lazy val root = cross.root
 
   lazy val js = cross.js.settings(
@@ -55,9 +65,9 @@ object Build extends sbt.Build{
     ),
     test in Test := (test in (Test, fastOptStage)).value,
     requiresDOM := true
-  )
+  ).configure(sourceMapsToGithub)
 
-  lazy val jvm = cross.jvm
+  lazy val jvm = cross.jvm.configure(sourceMapsToGithub)
 
   lazy val example = project.in(file("example"))
                             .dependsOn(js)
