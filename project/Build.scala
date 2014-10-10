@@ -67,7 +67,7 @@ object Build extends sbt.Build{
     requiresDOM := true
   ).configure(sourceMapsToGithub)
 
-  lazy val jvm = cross.jvm.configure(sourceMapsToGithub)
+  lazy val jvm = cross.jvm
 
   lazy val example = project.in(file("example"))
                             .dependsOn(js)
