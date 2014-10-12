@@ -484,5 +484,14 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * MDN
    */
   val httpEquiv = "http-equiv".attr
+  /**
+   * This attribute specifies the media which the linked resource applies to.
+   * Its value must be a media query. This attribute is mainly useful when
+   * linking to external stylesheets by allowing the user agent to pick
+   * the best adapted one for the device it runs on.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#attr-media
+   */
+  val media = "media".attr
 }
 
