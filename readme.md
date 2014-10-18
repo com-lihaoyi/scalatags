@@ -177,6 +177,14 @@ Executing the above prints out:
 </html>
 ```
 
+If you want to add a doctype to your HTML fragment, simply add it as a string:
+
+```scala
+"<!DOCTYPE html>" + html(
+  ...
+)
+```
+
 The following examples will simply show the initial Scalatag fragment and the final pretty-printed HTML, skipping the intermediate steps.
 
 Attributes
