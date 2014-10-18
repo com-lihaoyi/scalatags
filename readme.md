@@ -36,6 +36,16 @@ And turns them into HTML like this:
     </body>
 </html>
 ```
+
+If you want to add a `DOCTYPE`, please add it manually like this:
+
+```scala
+"<!DOCTYPE html>" +
+html(
+  ...
+)
+```
+
 Contents
 ========
 
@@ -331,7 +341,7 @@ div(
 )
 ```
 
-Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above. 
+Not all attributes and styles take strings; some, like `float`, have an enumeration of valid values, and can be referenced by `float.left`, `float.right`, etc.. Others, like `tabindex` or `disabled`, take Ints and Booleans respectively. These are used directly as shown in the example above.
 
 Even for styles or attributes which take values other than strings (e.g. `tabindex`), the `:=` operator can still be used to force assignment:
 
@@ -840,7 +850,7 @@ Most of the time, functions are sufficient to keep things DRY, but if for some r
 
 DOM Backend
 ===========
-Although Scalatags was originally a HTML-String generation library, it now ships with an additional backend that runs only on ScalaJS, available by replacing 
+Although Scalatags was originally a HTML-String generation library, it now ships with an additional backend that runs only on ScalaJS, available by replacing
 
 ```scala
 import scalatags.Text._
@@ -872,7 +882,7 @@ println(pElem.textContent) // "omgwtfbbq"
 As you can see, you can manipulate DOM elements directly, calling standard DOM APIs like `.children`, `.appendChild`, etc.
 
 In addition to the default ability to splice `String`s, `Boolean`s and `Int`s into the Scalatags fragment, the DOM backend allows you to bind arbitrary `js.Any`-convertible objects, e.g. the function literal shown below:
-  
+
 ```scala
 var count = 0
 val elem = div(
@@ -890,7 +900,7 @@ As you can see, the function literal is kept intact rather than being serialized
 Use Cases
 ---------
 Having direct access to the DOM allows a great deal of flexibility that you do not have when working with strings. For example, the example below defines an input-label pair which clears the label when you focus on the input, a common pattern:
- 
+
 ```scala
 val labelElem = label("Default").render
 
@@ -909,11 +919,11 @@ inputElem.onfocus(null)
 println(labelElem.textContent) // ""
 ```
 
-This allows a very convenient direct-binding of behaviors without having to trawl through the DOM with jquery selectors or creating lots of IDs and worrying about collisions. 
+This allows a very convenient direct-binding of behaviors without having to trawl through the DOM with jquery selectors or creating lots of IDs and worrying about collisions.
 
 -----------
 
-The DOM backend currently requires you to separately add a dependency on [scala-js-dom](https://github.com/scala-js/scala-js-dom) for it to function. 
+The DOM backend currently requires you to separately add a dependency on [scala-js-dom](https://github.com/scala-js/scala-js-dom) for it to function.
 
 Performance
 ===========
@@ -1022,7 +1032,7 @@ trait Frag[Builder, FragT] extends Modifier[Builder]{
 ```
 
 
-A `TypedTag` is basically a tag-name together with a loose bag of `Modifier`s, and is itself a `Modifier` so it can be nested within other `TypedTag`s. A `Modifier` is a tag, a sequence of tags, an attribute binding, a style binding, or anything else that can be used to modify how a tag will be rendered. Lastly, a `Frag` represents the smallest standalone atom, which includes tags, loose strings, numbers, and other things. 
+A `TypedTag` is basically a tag-name together with a loose bag of `Modifier`s, and is itself a `Modifier` so it can be nested within other `TypedTag`s. A `Modifier` is a tag, a sequence of tags, an attribute binding, a style binding, or anything else that can be used to modify how a tag will be rendered. Lastly, a `Frag` represents the smallest standalone atom, which includes tags, loose strings, numbers, and other things.
 
 In the text backend you have the alias
 
@@ -1040,7 +1050,7 @@ type Tag = JsDom.TypedTag[dom.Element]
 
 These aliases help you keep your code short by letting you refer to the most common versions of `TypedTag` via concise names.
 
-Each Scalatags backend has its own refinements, e.g. `Text.TypedTag`, `Text.Frag` and `Text.Modifier` have the `Builder` type-parameter fixed as `text.Builder`, and the `Output` type-parameter fixed as `String`. Their `JsDom.*` counterparts have `Builder` fixed as `dom.Element`, and `Output`fixed to various subclasses of `dom.Element`. The various other classes/traits (e.g. `Attr`, `AttrPair`, StylePair`, etc.) are similarly abstract with concrete versions in each backend. 
+Each Scalatags backend has its own refinements, e.g. `Text.TypedTag`, `Text.Frag` and `Text.Modifier` have the `Builder` type-parameter fixed as `text.Builder`, and the `Output` type-parameter fixed as `String`. Their `JsDom.*` counterparts have `Builder` fixed as `dom.Element`, and `Output`fixed to various subclasses of `dom.Element`. The various other classes/traits (e.g. `Attr`, `AttrPair`, StylePair`, etc.) are similarly abstract with concrete versions in each backend.
 
 The current selection of `Modifier` (or implicitly convertable) types include
 
@@ -1055,19 +1065,19 @@ The bulk of Scalatag's ~5000 lines of code is static bindings (and inline docume
 Architecture
 ------------
 
-Scalatags has pretty odd internals in order to support code re-use between the Text and Dom packages. Essentially, each Scalatags package is an instance of 
- 
+Scalatags has pretty odd internals in order to support code re-use between the Text and Dom packages. Essentially, each Scalatags package is an instance of
+
 ```scala
 trait Bundle[Builder, Output <: FragT, FragT]{
 ```
 
-Which is parametrized on the `Builder` used to generate the output, the type generated by rendering a `Frag`, as well as the final `Output` type generated by rendering a `TypedTag`. The Text package is defined as 
-  
+Which is parametrized on the `Builder` used to generate the output, the type generated by rendering a `Frag`, as well as the final `Output` type generated by rendering a `TypedTag`. The Text package is defined as
+
 ```scala
 object Text extends Bundle[text.Builder, String, String] {
 ```
 
-Since it uses a custom `text.Builder` object for maximum performance and spits out a `String`, while the Dom package is defined as as 
+Since it uses a custom `text.Builder` object for maximum performance and spits out a `String`, while the Dom package is defined as as
 
 ```scala
 object JsDom extends generic.Bundle[dom.Element, dom.Element, dom.Node]
@@ -1108,13 +1118,13 @@ trait StyleValue[Builder, T]{
 Allow you to specify what (and how) types can be used as attributes and styles respectively, while implicit conversions to `Modifier` or `Frag` are used to allow you to use arbitrary types as children. The use of implicit conversions in this case is to allow it to work with variable length argument lists (i.e. `(mods: *Modifier)`), which is difficult to do with typeclasses.
 
 Due to this design, and the parametrization of the bundles described earlier, it is possible to define behavior for a particular type only where it makes sense. e.g. there is a pair of typeclass instances
- 
+
 ```scala
 implicit object bindJsAny extends generic.AttrValue[dom.Element, js.Any]
 implicit def bindJsAnyLike[T <% js.Any] = new generic.AttrValue[dom.Element, T]
 ```
 
-Which allows you to bind anything convertible to a `js.Any` into the JsDom fragments, since they can just be assigned directly to the attributes of the `dom.Element` objects. Doing the same thing for Text fragments doesn't make sense, and would correctly fail to compile. 
+Which allows you to bind anything convertible to a `js.Any` into the JsDom fragments, since they can just be assigned directly to the attributes of the `dom.Element` objects. Doing the same thing for Text fragments doesn't make sense, and would correctly fail to compile.
 
 You can easier add other typeclass instances to handle binding e.g. `Future`s (which will add a child or set an attr/style on completion), or reactive variables (which would constantly update the child/attr/style every time it changes).
 
@@ -1122,7 +1132,7 @@ Cross-backend Code
 ------------------
 
 If you wish to, it is possible to write code that is generic against the Scalatags backend used, and can be compiled and run on both Text and JsDom backends at the same time! This is done by adding an explicit dependency on `generic.Bundle[Builder, Output, FragT]`, e.g. how it is done in the unit tests:
- 
+
 ```scala
 class ExampleTests[Builder, Output, FragT](bundle: Bundle[Builder, Output, FragT]) extends TestSuite{
   import bundle._
@@ -1131,13 +1141,13 @@ class ExampleTests[Builder, Output, FragT](bundle: Bundle[Builder, Output, FragT
 ```
 
 Inside this scope, you are limited to only using the common functionality defined in `generic.Bundle`, and can't use any Text or JsDom specific APIs. However, in exchange you can write code that works in either backend, by instantiating it with the respective bundle:
- 
+
 ```scala
 object ExampleTests extends generic.ExampleTests(scalatags.Text)
 object ExampleTests extends generic.ExampleTests(scalatags.JsDom)
 ```
 
-This is currently used to shared the bulk of unit tests between the Text and JsDom backends, and could be useful in other scenarios where you may want to swap between them (e.g. using Text on the server, and JsDom on the client where it's available) while sharing as much code as possible. 
+This is currently used to shared the bulk of unit tests between the Text and JsDom backends, and could be useful in other scenarios where you may want to swap between them (e.g. using Text on the server, and JsDom on the client where it's available) while sharing as much code as possible.
 
 For a concrete, self-contained example of this, look at the [demo page](https://github.com/lihaoyi/scalatags/blob/master/example/src/main/scala/example/ScalaJSExample.scala).
 
@@ -1255,7 +1265,7 @@ Changelog
 0.4.1
 -----
 
-- Added basic `Namespace` support, to allow for proper rendering of SVG elements in the `JsDom` backend 
+- Added basic `Namespace` support, to allow for proper rendering of SVG elements in the `JsDom` backend
 - Replaced unmaintained/untested `SvgStyles` with a semi-tested `SvgAttrs`
 - Added `example/` folder
 
@@ -1276,7 +1286,7 @@ Changelog
 -----
 
 - Added `Frag` alias in `Bundle`, to match all the other aliases per-bundle
-  
+
 0.3.7
 -----
 
