@@ -9,12 +9,14 @@
  */
 package scalatags
 package generic
+
 import acyclic.file
+
 /**
  * Trait containing the contents of the [[Attrs]] module, so they can be
  * mixed in to other objects if needed.
  */
-trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT]{
+trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
 
   /**
    * This is the single required attribute for anchors defining a hypertext
@@ -38,15 +40,15 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
   val action = "action".attr
   /**
    * The HTTP method that the browser uses to submit the form. Possible values are:
-   * 
+   *
    * - post: Corresponds to the HTTP POST method ; form data are included in the
-   *   body of the form and sent to the server.
-   *   
+   * body of the form and sent to the server.
+   *
    * - get: Corresponds to the HTTP GET method; form data are appended to the
-   *   action attribute URI with a '?' as a separator, and the resulting URI is
-   *   sent to the server. Use this method when the form has no side-effects and
-   *   contains only ASCII characters.
-   *   
+   * action attribute URI with a '?' as a separator, and the resulting URI is
+   * sent to the server. Use this method when the form has no side-effects and
+   * contains only ASCII characters.
+   *
    * This value can be overridden by a formmethod attribute on a button or
    * input element.
    *
@@ -69,30 +71,30 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * special meanings:
    *
    * - _self: Load the response into the same HTML 4 frame (or HTML5 browsing
-   *   context) as the current one. This value is the default if the attribute
-   *   is not specified.
+   * context) as the current one. This value is the default if the attribute
+   * is not specified.
    * - _blank: Load the response into a new unnamed HTML 4 window or HTML5
-   *   browsing context.
+   * browsing context.
    * - _parent: Load the response into the HTML 4 frameset parent of the current
-   *   frame or HTML5 parent browsing context of the current one. If there is no
-   *   parent, this option behaves the same way as _self.
+   * frame or HTML5 parent browsing context of the current one. If there is no
+   * parent, this option behaves the same way as _self.
    * - _top: HTML 4: Load the response into the full, original window, canceling
-   *   all other frames. HTML5: Load the response into the top-level browsing
-   *   context (that is, the browsing context that is an ancestor of the current
-   *   one, and has no parent). If there is no parent, this option behaves the
-   *   same way as _self.
+   * all other frames. HTML5: Load the response into the top-level browsing
+   * context (that is, the browsing context that is an ancestor of the current
+   * one, and has no parent). If there is no parent, this option behaves the
+   * same way as _self.
    * - iframename: The response is displayed in a named iframe.
    */
   val target = "target".attr
   /**
    * On form elements (input etc.):
-   *   Name of the element. For example used by the server to identify the fields
-   *   in form submits.
-   * 
+   * Name of the element. For example used by the server to identify the fields
+   * in form submits.
+   *
    * On the meta tag: 
-   *   This attribute defines the name of a document-level metadata.
-   *   This document-level metadata name is associated with a value, contained by
-   *   the content attribute.
+   * This attribute defines the name of a document-level metadata.
+   * This document-level metadata name is associated with a value, contained by
+   * the content attribute.
    *
    * MDN
    */
@@ -269,7 +271,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
   val `type` = "type".attr
   /**
    * Shorthand for the `type` attribute
-   */ 
+   */
   val tpe = `type`
   /**
    *
@@ -434,15 +436,15 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * if so, at what position. It can takes several values:
    *
    * - a negative value means that the element should be focusable, but should
-   *   not be reachable via sequential keyboard navigation;
+   * not be reachable via sequential keyboard navigation;
    * - 0 means that the element should be focusable and reachable via sequential
-   *   keyboard navigation, but its relative order is defined by the platform
-   *   convention;
+   * keyboard navigation, but its relative order is defined by the platform
+   * convention;
    * - a positive value which means should be focusable and reachable via
-   *   sequential keyboard navigation; its relative order is defined by the value
-   *   of the attribute: the sequential follow the increasing number of the
-   *   tabindex. If several elements share the same tabindex, their relative order
-   *   follows their relative position in the document).
+   * sequential keyboard navigation; its relative order is defined by the value
+   * of the attribute: the sequential follow the increasing number of the
+   * tabindex. If several elements share the same tabindex, their relative order
+   * follows their relative position in the document).
    *
    * An element with a 0 value, an invalid value, or no tabindex value should be placed after elements with a positive tabindex in the sequential keyboard navigation order.
    */
@@ -459,14 +461,14 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * semantics to an element, authors should use elements with inherent 
    * semantics, such as p, rather than layering semantics on semantically 
    * neutral elements, such as div role="paragraph".
-   * 
+   *
    * @see: http://www.w3.org/TR/role-attribute/#s_role_module_attributes
    */
   val role = "role".attr
   /**
    * This attribute gives the value associated with the http-equiv or name
    * attribute, depending of the context.
-   * 
+   *
    * MDN
    */
   val content = "content".attr
@@ -475,14 +477,37 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * user-agents behavior. The value of the pragma is defined using the content
    * attribute and can be one of the following:
    *
-   *   - content-language 
-   *   - content-type 
-   *   - default-style
-   *   - refresh
-   *   - set-cookie
-   *   
+   * - content-language
+   * - content-type
+   * - default-style
+   * - refresh
+   * - set-cookie
+   *
    * MDN
    */
   val httpEquiv = "http-equiv".attr
+
+  /**
+   * This class of attributes, called custom data attributes, allows proprietary
+   * information to be exchanged between the HTML and its DOM representation that
+   * may be used by scripts. All such custom data are available via the HTMLElement
+   * interface of the element the attribute is set on. The HTMLElement.dataset
+   * property gives access to them.
+   *
+   * The * may be replaced by any name following the production rule of xml names
+   * with the following restrictions:
+   *
+   * the name must not start with xml, whatever case is used for these letters;
+   * the name must not contain any semicolon (U+003A);
+   * the name must not contain capital A to Z letters.
+   *
+   * Note that the HTMLElement.dataset attribute is a StringMap and the name of the
+   * custom data attribute data-test-value will be accessible via
+   * HTMLElement.dataset.testValue as any dash (U+002D) is replaced by the capitalization
+   * of the next letter (camelcase).
+   *
+   * MDN
+   */
+  def dataWith(suffix: String) = ("data-" + suffix).attr
 }
 
