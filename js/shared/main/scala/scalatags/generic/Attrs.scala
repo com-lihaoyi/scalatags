@@ -126,6 +126,13 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    */
   val onclick = "onclick".attr
   /**
+   * The dblclick event is fired when a pointing device button (usually a
+   * mouse button) is clicked twice on a single element. 
+   *
+   * MDN
+   */
+  val ondblclick = "ondblclick".attr
+  /**
    * The focus event is raised when the user sets focus on the given element.
    *
    * MDN
