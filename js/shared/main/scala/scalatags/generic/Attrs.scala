@@ -323,7 +323,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val spellcheck = "value".attr
+  val spellcheck = "spellcheck".attr
   /**
    * The initial value of the control. This attribute is optional except when
    * the value of the type attribute is radio or checkbox.
