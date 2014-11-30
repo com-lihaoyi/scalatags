@@ -96,6 +96,10 @@ object DomTests extends TestSuite{
 
       }
     }
+    'tagType{
+      import scalatags.JsDom.all._
+      val thing: Tag = div
+    }
   }
 
 }

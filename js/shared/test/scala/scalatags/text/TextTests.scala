@@ -37,5 +37,9 @@ object TextTests extends TestSuite{
       val wrapped = div(frag1, frag2, frag3).toString
       assert(wrapped == "<div><h1>titless</h1><div>lol</div>iamcow<h1>titless</h1><div>lol</div>iamcow</div>")
     }
+    'tagType{
+      import scalatags.Text.all._
+      val thing: Tag = div
+    }
   }
 }

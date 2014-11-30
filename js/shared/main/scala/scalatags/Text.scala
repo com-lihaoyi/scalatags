@@ -67,10 +67,12 @@ object Text
     type StringFrag = Text.StringFrag
     type RawFrag = Text.RawFrag
     def raw(s: String) = RawFrag(s)
+
+    type Tag = Text.TypedTag[String]
+    val Tag = Text.TypedTag
   }
 
-  type Tag = Text.TypedTag[String]
-  val Tag = Text.TypedTag
+
 
   case class StringFrag(v: String) extends text.Frag{
     def render = {
