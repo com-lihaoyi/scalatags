@@ -5,7 +5,7 @@ import scala.scalajs.js
 
 import org.scalajs.dom.{Node, Element}
 import scala.annotation.unchecked.uncheckedVariance
-import scalatags.generic.{Namespace, Aliases, Modifier}
+import scalatags.generic.{StylePair, Namespace, Aliases, Modifier}
 
 
 /**
@@ -52,6 +52,8 @@ object JsDom
   trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
     def genericAttr[T] = new JsDom.GenericAttr[T]
     def genericStyle[T] = new JsDom.GenericStyle[T]
+    def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new JsDom.GenericPixelStyle[T](ev)
+    def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new JsDom.GenericPixelStylePx[T](ev)
 
     implicit def stringFrag(v: String) = new JsDom.StringFrag(v)
 
@@ -77,6 +79,7 @@ object JsDom
 
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
+    protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
 
     def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void, namespaceConfig)
@@ -117,7 +120,12 @@ object JsDom
        .setProperty(s.cssName, v.toString)
     }
   }
-
+  class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
+    def apply(s: Style, v: T) = StylePair(s, v, ev)
+  }
+  class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
+    def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
+  }
   case class TypedTag[+Output <: dom.Element](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
                                               void: Boolean = false,

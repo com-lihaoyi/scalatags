@@ -368,6 +368,17 @@ Both of the above examples print the same thing:
 </div>
 ```
 
+Passing in numbers to the styles which require a `px` at the end results in the `px` being appended automatically:
+
+```scala
+div(width:=100, zIndex:=100, padding:=100)
+```
+```html
+<div style="width: 100px; z-index: 100; padding: 100px;"></div>
+```
+
+Note how this doesn't affect other styles (e.g. `z-index`) which don't need this suffix. Generally, just pass in whatever you want and it'll do the right thing.
+
 Managing Imports
 ================
 

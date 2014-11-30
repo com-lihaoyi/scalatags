@@ -115,6 +115,21 @@ case class Style(jsName: String, cssName: String) {
   def :=[Builder, T](v: T)(implicit ev: StyleValue[Builder, T]) = StylePair(this, v, ev)
 }
 /**
+ * Wraps up a CSS style in a value.
+ */
+case class PixelStyle(jsName: String, cssName: String) {
+  val realStyle = Style(jsName, cssName)
+  /**
+   * Creates an [[StylePair]] from an [[Style]] and a value of type [[T]], if
+   * there is an [[StyleValue]] of the correct type.
+   */
+  def :=[Builder, T](v: T)(implicit ev: PixelStyleValue[Builder, T]) = ev(realStyle, v)
+
+}
+trait StyleProcessor{
+  def apply[T](t: T): String
+}
+/**
  * An [[Attr]], it's associated value, and an [[AttrValue]] of the correct type
  */
 case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extends Modifier[Builder] {
@@ -152,7 +167,14 @@ case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) ext
   "No StyleValue defined for type ${T}; scalatags does not know how to use ${T} as an style"
 )
 trait StyleValue[Builder, T]{
-  def apply(t: Builder, s: Style, v: T)
+  def apply(t: Builder, s: Style, v: T): Unit
+}
+
+@implicitNotFound(
+  "No PixelStyleValue defined for type ${T}; scalatags does not know how to use ${T} as an style"
+)
+trait PixelStyleValue[Builder, T]{
+  def apply(s: Style, v: T): StylePair[Builder, _]
 }
 
 /**

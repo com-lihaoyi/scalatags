@@ -46,6 +46,7 @@ object Text
 
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
+    protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
 
     def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
       TypedTag(tag, Nil, void)
@@ -59,6 +60,8 @@ object Text
   trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
     def genericAttr[T] = new Text.GenericAttr[T]
     def genericStyle[T] = new Text.GenericStyle[T]
+    def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new Text.GenericPixelStyle[T](ev)
+    def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new Text.GenericPixelStylePx[T](ev)
 
     implicit def stringFrag(v: String) = new Text.StringFrag(v)
 
@@ -107,6 +110,15 @@ object Text
       t.addAttr("style", strb.toString)
     }
   }
+  class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
+    def apply(s: Style, v: T) = StylePair(s, v, ev)
+  }
+  class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
+    def apply(s: Style, v: T) = {
+      StylePair(s, v + "px", ev)
+    }
+  }
+
 
 
   case class TypedTag[+Output <: String](tag: String = "",

@@ -16,21 +16,30 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
   /**
    * A Style that takes any value of type T as a parameter and has an auto value
    */
-  private[scalatags] class AutoStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags]
+  class AutoStyle(jsName: String, cssName: String)
+  extends Style(jsName, cssName) {
     val auto = this := "auto"
   }
+
+  private[scalatags]
+  class PixelAutoStyle(jsName: String, cssName: String)
+  extends PixelStyle(jsName, cssName) {
+    val auto = this := "auto"
+  }
+
 
   /**
    * A Style that takes any value of type T as a parameter and has an none value
    */
-  private[scalatags] class NoneOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class NoneOpenStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
     val none = this := "none"
   }
 
   /**
    * A Style that takes any value of type T as a parameter and has an normal value
    */
-  private[scalatags] class NormalOpenStyle[T](jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class NormalOpenStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
     val normal = this := "normal"
   }
 
@@ -196,7 +205,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
 
   private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName)
 
-  private[scalatags] trait MarginAuto extends Style {
+  private[scalatags] trait MarginAuto extends PixelStyle {
     /**
      * auto is replaced by some suitable value, e.g. it can be used for
      * centering of blocks.
@@ -372,7 +381,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    *
    * MDN
    */
-  val columnCount = new AutoStyle[Int]("columnCount", "column-count")
+  val columnCount = new AutoStyle("columnCount", "column-count")
 
   /**
    * The column-fill CSS property controls how contents are partitioned into
@@ -404,7 +413,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    *
    * MDN
    */
-  val columnGap = new NormalOpenStyle[String]("columnGap", "column-gap")
+  val columnGap = new NormalOpenStyle("columnGap", "column-gap")
 
   /**
    * In multi-column layouts, the column-rule CSS property specifies a straight
@@ -453,7 +462,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    *
    * MDN
    */
-  val columnWidth = new AutoStyle[String]("columnWidth", "column-width")
+  val columnWidth = new AutoStyle("columnWidth", "column-width")
 
   /**
    * The column-rule-color CSS property lets you set the color of the rule drawn
@@ -575,7 +584,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    *
    * MDN
    */
-  val perspective = new NoneOpenStyle[String]("perspective", "perspective")
+  val perspective = new NoneOpenStyle("perspective", "perspective")
 
   /**
    * The perspective-origin CSS property determines the position the viewer is
@@ -1994,7 +2003,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val height = new AutoStyle[String]("height", "height")
+  val height = new PixelAutoStyle("height", "height")
 
 
   /**
@@ -2005,7 +2014,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val paddingRight = new Style("paddingRight", "padding-right")
+  val paddingRight = new PixelStyle("paddingRight", "padding-right")
 
   /**
    * The padding-top CSS property of an element sets the padding space required
@@ -2015,7 +2024,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val paddingTop = new Style("paddingTop", "padding-top")
+  val paddingTop = new PixelStyle("paddingTop", "padding-top")
 
   /**
    * The padding-left CSS property of an element sets the padding space required
@@ -2024,7 +2033,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val paddingLeft = new Style("paddingLeft", "padding-left")
+  val paddingLeft = new PixelStyle("paddingLeft", "padding-left")
 
   /**
    * The padding CSS property sets the required padding space on all sides of an
@@ -2036,7 +2045,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val padding = new Style("padding", "padding")
+  val padding = new PixelStyle("padding", "padding")
 
   /**
    * The padding-bottom CSS property of an element sets the height of the padding
@@ -2046,7 +2055,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val paddingBottom = new Style("paddingBottom", "padding-bottom")
+  val paddingBottom = new PixelStyle("paddingBottom", "padding-bottom")
 
   /**
    * The right CSS property specifies part of the position of positioned elements.
@@ -2066,7 +2075,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val right = new AutoStyle[String]("right", "right")
+  val right = new PixelAutoStyle("right", "right")
 
 
 
@@ -2081,7 +2090,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val lineHeight = new NormalOpenStyle[String]("lineHeight", "lineheight")
+  val lineHeight = new NormalOpenStyle("lineHeight", "lineheight")
 
   /**
    * The left CSS property specifies part of the position of positioned elements.
@@ -2092,7 +2101,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val left = new AutoStyle[String]("left", "left")
+  val left = new PixelAutoStyle("left", "left")
 
 
 
@@ -2565,7 +2574,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val marginBottom = new AutoStyle[String]("marginBottom", "margin-bottom")
+  val marginBottom = new PixelAutoStyle("marginBottom", "margin-bottom")
 
   /**
    * The margin-right CSS property of an element sets the margin space required
@@ -2573,7 +2582,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val marginRight = new Style("marginRight", "margin-right") with MarginAuto
+  val marginRight = new PixelStyle("marginRight", "margin-right") with MarginAuto
 
 
   /**
@@ -2582,7 +2591,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val marginTop = new Style("marginTop", "margin-top") with MarginAuto
+  val marginTop = new PixelStyle("marginTop", "margin-top") with MarginAuto
 
 
   /**
@@ -2595,7 +2604,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val marginLeft = new Style("marginLeft", "margin-left") with MarginAuto
+  val marginLeft = new PixelStyle("marginLeft", "margin-left") with MarginAuto
   /**
    * The margin CSS property sets the margin for all four sides. It is a
    * shorthand to avoid setting each side separately with the other margin
@@ -2605,7 +2614,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object margin extends Style("margin", "margin") {
+  object margin extends PixelStyle("margin", "margin") {
     /**
      * auto is replaced by some suitable value, e.g. it can be used for
      * centering of blocks.
@@ -2634,7 +2643,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val top = new AutoStyle[String]("top", "top")
+  val top = new PixelAutoStyle("top", "top")
 
 
   /**
@@ -2645,7 +2654,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val width = new AutoStyle[String]("width", "width")
+  val width = new PixelAutoStyle("width", "width")
 
   /**
    * The bottom CSS property participates in specifying the position of
@@ -2664,7 +2673,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val bottom = new AutoStyle[String]("bottom", "bottom")
+  val bottom = new PixelAutoStyle("bottom", "bottom")
 
   /**
    * The letter-spacing CSS property specifies spacing behavior between text
@@ -2672,7 +2681,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val letterSpacing = new NormalOpenStyle[String]("letterSpacing", "letter-spacing")
+  val letterSpacing = new NormalOpenStyle("letterSpacing", "letter-spacing")
 
 
   /**
@@ -2684,7 +2693,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val maxHeight = new NoneOpenStyle[String]("maxHeight", "max-height")
+  val maxHeight = new NoneOpenStyle("maxHeight", "max-height")
 
   /**
    * The min-width CSS property is used to set the minimum width of a given
@@ -3009,7 +3018,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val textShadow = new NoneOpenStyle[String]("textShadow", "text-shadow")
+  val textShadow = new NoneOpenStyle("textShadow", "text-shadow")
 
   object visibility extends Style("visibility", "visibility") {
     /**
@@ -3088,7 +3097,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val wordSpacing = new NormalOpenStyle[String]("wordSpacing", "word-spacing")
+  val wordSpacing = new NormalOpenStyle("wordSpacing", "word-spacing")
   /**
    * The z-index CSS property specifies the z-order of an element and its
    * descendants. When elements overlap, z-order determines which one covers the
@@ -3097,7 +3106,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val zIndex = new AutoStyle[Int]("zIndex", "z-index")
+  val zIndex = new AutoStyle("zIndex", "z-index")
 
 
 

@@ -95,6 +95,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
 
   type AttrValue[V] = generic.AttrValue[Builder, V]
   type StyleValue[V] = generic.StyleValue[Builder, V]
+  type PixelStyleValue[V] = generic.PixelStyleValue[Builder, V]
 
   type Tag <: generic.TypedTag[Builder, Output, FragT]
 
@@ -133,6 +134,17 @@ trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output
   implicit val longStyle = genericStyle[Long]
   implicit val floatStyle = genericStyle[Float]
   implicit val doubleStyle = genericStyle[Double]
+
+  def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T]
+  def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T]
+  implicit val stringPixelStyle = genericPixelStyle[String]
+  implicit val booleanPixelStyle = genericPixelStyle[Boolean]
+  implicit val bytePixelStyle = genericPixelStylePx[Byte]
+  implicit val shortPixelStyle = genericPixelStylePx[Short]
+  implicit val intPixelStyle = genericPixelStylePx[Int]
+  implicit val longPixelStyle = genericPixelStylePx[Long]
+  implicit val floatPixelStyle = genericPixelStylePx[Float]
+  implicit val doublePixelStyle = genericPixelStylePx[Double]
 
   implicit def byteFrag(v: Byte) = stringFrag(v.toString)
   implicit def shortFrag(v: Short) = stringFrag(v.toString)

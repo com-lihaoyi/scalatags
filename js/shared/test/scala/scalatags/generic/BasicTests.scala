@@ -120,7 +120,14 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
       )
     }
-
+    'autoPixel{
+      strCheck(
+        div(width:=100, zIndex:=100, height:=100),
+        """
+          |<div style="width: 100px; z-index: 100; height: 100px;"></div>
+        """.stripMargin
+      )
+    }
     'compileErrors{
       'niceErrorsForAttributes{
         val msg = compileError("""a(onclick := {() => "lol"})""").msg

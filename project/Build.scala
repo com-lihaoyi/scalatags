@@ -57,8 +57,9 @@ object Build extends sbt.Build{
 
   lazy val js = cross.js.settings(
     libraryDependencies ++= Seq(
-      "org.scala-lang.modules.scalajs" %%%! "scalajs-dom" % "0.6" % "provided"
+      "org.scala-js" %%%! "scalajs-dom" % "0.7.0" % "provided"
     ),
+    resolvers += Resolver.sonatypeRepo("releases"),
     scalaJSStage in Test := FastOptStage,
     requiresDOM := true
   ).configure(sourceMapsToGithub)
