@@ -120,6 +120,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
       )
     }
+
     'compileErrors{
       'niceErrorsForAttributes{
         val msg = compileError("""a(onclick := {() => "lol"})""").msg
@@ -133,3 +134,4 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
 
   }
 }
+

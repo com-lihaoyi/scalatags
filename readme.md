@@ -55,6 +55,7 @@ Contents
   - [Auto-escaping and unsanitized Input](#auto-escaping-and-unsanitized-input)
   - [Layouts](#layouts)
   - [Inheritance](#inheritance)
+  - [Data and Aria](#data-and-aria)
 - [DOM Backend](#dom-backend)
   - [Using the DOM](#using-the-dom)
 - [Performance](#performance)
@@ -846,6 +847,59 @@ Most of the time, functions are sufficient to keep things DRY, but if for some r
 </html>
 ```
 
+Data and Aria
+=============
+
+Data attributes work by separating the sections of the attribute with `.` instead of `-`:
+
+```scala
+div(
+  id:="electriccars",
+  data.columns:="3",
+  data.index.number:="12314",
+  data.parent:="cars",
+  "..."
+)
+```
+```html
+<div
+  id="electriccars"
+  data-columns="3"
+  data-index-number="12314"
+  data-parent="cars">
+  ...
+</div>
+```
+Aria attributes work too:
+
+```scala
+div(
+  div(id:="ch1Panel", role:="tabpanel", aria.labelledby:="ch1Tab")(
+    "Chapter 1 content goes here"
+  ),
+  div(id:="ch2Panel", role:="tabpanel", aria.labelledby:="ch2Tab")(
+    "Chapter 2 content goes here"
+  ),
+  div(id:="quizPanel", role:="tabpanel", aria.labelledby:="quizTab")(
+    "Quiz content goes here"
+  )
+)
+```
+
+```html
+<div>
+  <div id="ch1Panel" role="tabpanel" aria-labelledby="ch1Tab">
+    Chapter 1 content goes here
+  </div>
+  <div id="ch2Panel" role="tabpanel" aria-labelledby="ch2Tab">
+    Chapter 2 content goes here
+  </div>
+  <div id="quizPanel" role="tabpanel" aria-labelledby="quizTab">
+    Quiz content goes here
+  </div>
+</div>
+```
+
 DOM Backend
 ===========
 Although Scalatags was originally a HTML-String generation library, it now ships with an additional backend that runs only on ScalaJS, available by replacing 
@@ -943,11 +997,9 @@ The numbers speak for themselves; Scalatags is almost twice as fast as splicing/
 This is the Scalatags fragment that was rendered:
 
 ```scala
-val contentpara = "contentpara".cls
-val first = "first".cls
 
 def para(n: Int) = p(
-  contentpara,
+  cls:="contentpara",
   title:=s"this is paragraph $n"
 )
 
@@ -962,7 +1014,7 @@ html(
     h1(color:="red")(titleString),
     div(backgroundColor:="blue")(
       para(0)(
-        first,
+        cls := "contentpara first",
         firstParaString
       ),
       a(href:="www.google.com")(

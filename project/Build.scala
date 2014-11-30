@@ -1,12 +1,8 @@
 import sbt._
 import Keys._
-import scala.scalajs.sbtplugin.env.nodejs.NodeJSEnv
-import scala.scalajs.sbtplugin._
-
-import scala.scalajs.sbtplugin.env.phantomjs.PhantomJSEnv
-import scala.scalajs.sbtplugin.testing.JSClasspathLoader
-import ScalaJSPlugin._
-import ScalaJSKeys._
+import org.scalajs.sbtplugin.ScalaJSPlugin
+import org.scalajs.sbtplugin.ScalaJSPlugin._
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import twirl.sbt.TwirlPlugin._
 import Twirl._
 object Build extends sbt.Build{
@@ -23,7 +19,7 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.4.2",
+    version := "0.4.3-M",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=
@@ -61,9 +57,9 @@ object Build extends sbt.Build{
 
   lazy val js = cross.js.settings(
     libraryDependencies ++= Seq(
-      "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6" % "provided"
+      "org.scala-lang.modules.scalajs" %%%! "scalajs-dom" % "0.6" % "provided"
     ),
-    test in Test := (test in (Test, fastOptStage)).value,
+    scalaJSStage in Test := FastOptStage,
     requiresDOM := true
   ).configure(sourceMapsToGithub)
 
@@ -71,8 +67,8 @@ object Build extends sbt.Build{
 
   lazy val example = project.in(file("example"))
                             .dependsOn(js)
-                            .settings(scalaJSSettings:_*)
+                            .enablePlugins(ScalaJSPlugin)
                             .settings(
-      libraryDependencies += "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6" % "provided"
+      libraryDependencies += "org.scala-lang.modules.scalajs" %%%! "scalajs-dom" % "0.6" % "provided"
     )
 }
