@@ -770,12 +770,12 @@ Layouts
 -------
 
 ```scala
-def page(scripts: Seq[Modifier], content: Seq[Modifier]) =
+def page(scripts: Seq[Frag], content: Seq[Frag]) =
   html(
     head(scripts),
     body(
       h1("This is my title"),
-      div("content".cls)(content)
+      div(cls:="content")(content)
     )
   )
 
