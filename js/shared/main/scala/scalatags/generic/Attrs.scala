@@ -325,7 +325,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val spellcheck = "spellcheck".attr
+  val spellcheck = "spellcheck".attr := "spellcheck"
   /**
    * The initial value of the control. This attribute is optional except when
    * the value of the type attribute is radio or checkbox.
@@ -361,7 +361,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val autofocus = "autofocus".attr
+  val autofocus = "autofocus".attr := "autofocus"
   /**
    * When the value of the type attribute is radio or checkbox, the presence of
    * this Boolean attribute indicates that the control is selected by default;
@@ -387,7 +387,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val disabled = "disabled".attr
+  val disabled = "disabled".attr := "disabled"
   /**
    * Describes elements which belongs to this one. Used on labels and output
    * elements.
@@ -402,7 +402,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val readonly = "readonly".attr
+  val readonly = "readonly".attr := "readonly"
   /**
    * This attribute specifies that the user must fill in a value before
    * submitting a form. It cannot be used when the type attribute is hidden,
@@ -411,7 +411,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val required = "required".attr
+  val required = "required".attr := "required"
   /**
    * The number of visible text lines for the control.
    *

@@ -379,6 +379,23 @@ div(width:=100, zIndex:=100, padding:=100)
 
 Note how this doesn't affect other styles (e.g. `z-index`) which don't need this suffix. Generally, just pass in whatever you want and it'll do the right thing.
 
+Boolean attributes such as `readonly` can be passed in alone:
+
+```scala
+div(input(readonly))
+```
+```html
+<div><input readonly="readonly" /></div>
+```
+
+And will default to a value with the same name as the attribute. You can still set the value manually with `:=` if you wish
+
+```scala
+div(input(readonly:=1))
+```
+```html
+<div><input readonly="1" /></div>
+```
 Managing Imports
 ================
 

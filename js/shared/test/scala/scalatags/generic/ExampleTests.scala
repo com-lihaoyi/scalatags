@@ -364,7 +364,14 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         </div>
       """
     )
-
+    'booleanAttributes-strCheck(
+      div(input(readonly)),
+      """<div><input readonly="readonly" /></div>"""
+    )
+    'booleanAttributes2-strCheck(
+      div(input(readonly:=1)),
+      """<div><input readonly="1" /></div>"""
+    )
 
     'layouts-strCheck(
     {

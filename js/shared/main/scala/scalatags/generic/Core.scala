@@ -136,6 +136,7 @@ case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extend
   override def applyTo(t: Builder): Unit = {
     ev.apply(t, a, v)
   }
+  def :=[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = AttrPair(a, v, ev)
 }
 /**
  * Used to specify how to handle a particular type [[T]] when it is used as
