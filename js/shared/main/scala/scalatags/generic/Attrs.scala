@@ -503,6 +503,68 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    */
   val media = "media".attr
   /**
+   * This attribute contains a non-negative integer value that indicates for 
+   * how many columns the cell extends. Its default value is 1; if its value 
+   * is set to 0, it extends until the end of the <colgroup>, even if implicitly 
+   * defined, that the cell belongs to. Values higher than 1000 will be considered 
+   * as incorrect and will be set to the default value (1). 
+   *
+   * MDN
+   */
+  val colspan = "colSpan".attr
+  /**
+   * This attribute contains a non-negative integer value that indicates for how many 
+   * rows the cell extends. Its default value is 1; if its value is set to 0, it extends 
+   * until the end of the table section (<thead>, <tbody>, <tfoot>, even if implicitly 
+   * defined, that the cell belongs to. Values higher than 65534 are clipped down to 65534.
+   * 
+   * MDN
+   */
+  val rowspan = "rowSpan".attr
+  /**
+   * This enumerated attribute indicates whether the element can be dragged, using the 
+   * Drag and Drop API. It can have the following values:
+   *
+   *   - true, which indicates that the element may be dragged
+   *   - false, which indicates that the element may not be dragged.
+   *
+   * If this attribute is not set, its default value is auto, meaning the behavior should 
+   * be the one defined by default by the browser.
+   *
+   * MDN
+   */
+  val draggable = "draggable".attr
+  /**
+   * When a user begins to drag, the dragstart event is fired.
+   */
+  val onDragStart = "onDragStart".attr
+  /**
+   * Once the drag is complete, a dragend event is fired at the 
+   * source of the drag (the same element that received the dragstart event).
+   */
+  val onDragEnd = "onDragEnd".attr
+  /**
+   * The ondragenter event occurs when a draggable element or text selection enters a valid 
+   * drop target.
+   */
+  val onDragEnter = "onDragEnter".attr
+  /**
+   * The ondragover attribute fires when a draggable element or text selection is being 
+   * dragged over a valid drop target.
+   */
+  val onDragOver = "onDragOver".attr  
+  /**
+   * The ondragleave event occurs when a draggable element or text selection leaves a valid 
+   * drop target.
+   */
+  val onDragLeave = "onDragLeave".attr  
+  /**
+   * The ondrop event occurs when a draggable element or text selection is dropped on a valid
+   * drop target.
+   */
+  val onDrop = "onDrop".attr  
+  
+  /**
    * This class of attributes, called custom data attributes, allows proprietary
    * information to be exchanged between the HTML and its DOM representation that
    * may be used by scripts. All such custom data are available via the HTMLElement
