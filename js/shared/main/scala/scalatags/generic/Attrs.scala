@@ -511,7 +511,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val colspan = "colspan".attr
+  val colspan = "colSpan".attr
   /**
    * This attribute contains a non-negative integer value that indicates for how many 
    * rows the cell extends. Its default value is 1; if its value is set to 0, it extends 
@@ -520,7 +520,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * 
    * MDN
    */
-  val rowspan = "rowspan".attr
+  val rowspan = "rowSpan".attr
   /**
    * This enumerated attribute indicates whether the element can be dragged, using the 
    * Drag and Drop API. It can have the following values:
@@ -537,32 +537,32 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
   /**
    * When a user begins to drag, the dragstart event is fired.
    */
-  val ondragstart = "ondragstart".attr
+  val onDragStart = "onDragStart".attr
   /**
    * Once the drag is complete, a dragend event is fired at the 
    * source of the drag (the same element that received the dragstart event).
    */
-  val ondragend = "ondragend".attr
+  val onDragEnd = "onDragEnd".attr
   /**
    * The ondragenter event occurs when a draggable element or text selection enters a valid 
    * drop target.
    */
-  val ondragenter = "ondragenter".attr
+  val onDragEnter = "onDragEnter".attr
   /**
    * The ondragover attribute fires when a draggable element or text selection is being 
    * dragged over a valid drop target.
    */
-  val ondragover = "ondragover".attr
+  val onDragOver = "onDragOver".attr  
   /**
    * The ondragleave event occurs when a draggable element or text selection leaves a valid 
    * drop target.
    */
-  val ondragleave = "ondragleave".attr
+  val onDragLeave = "onDragLeave".attr  
   /**
    * The ondrop event occurs when a draggable element or text selection is dropped on a valid
    * drop target.
    */
-  val ondrop = "ondrop".attr
+  val onDrop = "onDrop".attr  
   
   /**
    * This class of attributes, called custom data attributes, allows proprietary
