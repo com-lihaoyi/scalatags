@@ -537,32 +537,32 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
   /**
    * When a user begins to drag, the dragstart event is fired.
    */
-  val onDragStart = "onDragStart".attr
+  val ondragstart = "ondragstart".attr
   /**
    * Once the drag is complete, a dragend event is fired at the 
    * source of the drag (the same element that received the dragstart event).
    */
-  val onDragEnd = "onDragEnd".attr
+  val ondragend = "ondragend".attr
   /**
    * The ondragenter event occurs when a draggable element or text selection enters a valid 
    * drop target.
    */
-  val onDragEnter = "onDragEnter".attr
+  val ondragenter = "ondragenter".attr
   /**
    * The ondragover attribute fires when a draggable element or text selection is being 
    * dragged over a valid drop target.
    */
-  val onDragOver = "onDragOver".attr  
+  val ondragover = "ondragover".attr  
   /**
    * The ondragleave event occurs when a draggable element or text selection leaves a valid 
    * drop target.
    */
-  val onDragLeave = "onDragLeave".attr  
+  val ondragleave = "ondragleave".attr  
   /**
    * The ondrop event occurs when a draggable element or text selection is dropped on a valid
    * drop target.
    */
-  val onDrop = "onDrop".attr  
+  val ondrop = "ondrop".attr  
   
   /**
    * This class of attributes, called custom data attributes, allows proprietary
