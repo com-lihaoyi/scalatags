@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="example"
+		module="example_sjs0.6.0-M1_2.10"
+		revision="0.1-SNAPSHOT"
+		conf="test"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool, phantom-js-jetty"
+		date="20141215115557"/>
+	<dependencies>
+		<module organisation="com.scalatags" name="scalatags_sjs0.6.0-M1_2.10">
+			<revision name="0.4.3-M1" status="integration" pubdate="20141215115557" resolver="inter-project" artresolver="inter-project" downloaded="false" searched="false" default="false" conf="default(compile), compile" position="1">
+				<metadata-artifact status="failed" details="" size="0" time="0" searched="false"/>
+				<caller organisation="example" name="example_sjs0.6.0-M1_2.10" conf="test, compile, runtime" rev="0.4.3-M1" rev-constraint-default="0.4.3-M1" rev-constraint-dynamic="0.4.3-M1" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-js" name="scalajs-library_2.10">
+			<revision name="0.6.0-M1" status="release" pubdate="20141129220411" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://scala-js.org/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="2">
+				<license name="BSD New" url="https://github.com/scala-js/scala-js/blob/master/LICENSE"/>
+				<metadata-artifact status="no" details="" size="2574" time="0" location="C:\Users\sis\.ivy2\cache\org.scala-js\scalajs-library_2.10\ivy-0.6.0-M1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-js/scalajs-library_2.10/0.6.0-M1/scalajs-library_2.10-0.6.0-M1.pom"/>
+				<caller organisation="com.scalatags" name="scalatags_sjs0.6.0-M1_2.10" conf="compile" rev="0.6.0-M1" rev-constraint-default="0.6.0-M1" rev-constraint-dynamic="0.6.0-M1" callerrev="0.4.3-M1"/>
+				<caller organisation="example" name="example_sjs0.6.0-M1_2.10" conf="test, compile, runtime" rev="0.6.0-M1" rev-constraint-default="0.6.0-M1" rev-constraint-dynamic="0.6.0-M1" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="scalajs-library_2.10" type="jar" ext="jar" status="no" details="" size="7685450" time="0" location="C:\Users\sis\.ivy2\cache\org.scala-js\scalajs-library_2.10\jars\scalajs-library_2.10-0.6.0-M1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-js/scalajs-library_2.10/0.6.0-M1/scalajs-library_2.10-0.6.0-M1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-library">
+			<revision name="2.10.4" status="release" pubdate="20140318214629" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.10.4/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, compile(*), runtime, runtime(*), master(compile), master" position="0">
+				<license name="BSD-like" url="http://www.scala-lang.org/downloads/license.html          "/>
+				<metadata-artifact status="no" details="" size="2701" time="0" location="C:\Users\sis\.ivy2\cache\org.scala-lang\scala-library\ivy-2.10.4.xml" searched="false" origin-is-local="false" origin-location="http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.pom"/>
+				<caller organisation="com.scalatags" name="scalatags_sjs0.6.0-M1_2.10" conf="compile" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.4.3-M1"/>
+				<caller organisation="example" name="example_sjs0.6.0-M1_2.10" conf="test, compile, runtime" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.1-SNAPSHOT"/>
+				<caller organisation="org.scala-js" name="scalajs-library_2.10" conf="default, compile, runtime, master" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.6.0-M1"/>
+				<artifacts>
+					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="7126372" time="0" location="C:\Users\sis\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.10.4.jar">
+						<origin-location is-local="false" location="http://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>
