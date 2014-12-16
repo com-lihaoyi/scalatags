@@ -511,7 +511,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    *
    * MDN
    */
-  val colspan = "colSpan".attr
+  val colspan = "colspan".attr
   /**
    * This attribute contains a non-negative integer value that indicates for how many 
    * rows the cell extends. Its default value is 1; if its value is set to 0, it extends 
@@ -520,7 +520,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT
    * 
    * MDN
    */
-  val rowspan = "rowSpan".attr
+  val rowspan = "rowspan".attr
   /**
    * This enumerated attribute indicates whether the element can be dragged, using the 
    * Drag and Drop API. It can have the following values:
