@@ -282,7 +282,7 @@ In HTML, `style` attributes are often thought of not as normal attributes (which
 
 Note that in this case, `backgroundColor`, `color` and `opacity` are all statically typed identifiers. These are all instances of [Style](http://lihaoyi.github.io/scalatags/#scalatags.generic.Style)) are [defined by Scalatags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles).
 
-Of course, `style` is in the end just an attribute, so you can treat itas such and bind them directly without any fuss:
+Of course, `style` is in the end just an attribute, so you can treat it as such and bind them directly without any fuss:
 
 ```scala
 html(
