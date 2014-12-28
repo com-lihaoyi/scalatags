@@ -9,6 +9,7 @@ object Build extends sbt.Build{
   val cross = new utest.jsrunner.JsCrossBuild(
     organization := "com.scalatags",
     name := "scalatags",
+    scalaVersion := "2.11.4",
     autoCompilerPlugins := true,
     libraryDependencies += "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
@@ -19,7 +20,7 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.4.3-M1",
+    version := "0.5.0-SNAPSHOT",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=
@@ -53,7 +54,7 @@ object Build extends sbt.Build{
       }))
     )
 
-  lazy val root = cross.root
+  lazy val root = cross.root.enablePlugins(ScalaJSPlugin)
 
   lazy val js = cross.js.settings(
     libraryDependencies ++= Seq(
@@ -63,6 +64,7 @@ object Build extends sbt.Build{
     scalaJSStage in Test := FastOptStage,
     requiresDOM := true
   ).configure(sourceMapsToGithub)
+
 
   lazy val jvm = cross.jvm
 

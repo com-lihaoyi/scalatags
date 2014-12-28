@@ -8,8 +8,8 @@ import scala.annotation.implicitNotFound
 
 
 /**
- * Represents a value that can be nested within a [[TypedTag]]. This can be
- * another [[Modifier]], but can also be a CSS style or HTML attribute binding,
+ * Represents a value that can be nested within a [[scalatags.generic.TypedTag]]. This can be
+ * another [[scalatags.generic.Modifier]], but can also be a CSS style or HTML attribute binding,
  * which will add itself to the node's attributes but not appear in the final
  * `children` list.
  */
@@ -22,9 +22,9 @@ trait Modifier[Builder] {
 }
 
 /**
- * Marker sub-type of [[Modifier]] which signifies that that type can be 
+ * Marker sub-type of [[scalatags.generic.Modifier]] which signifies that that type can be
  * rendered as a standalone fragment of [[FragT]]. This excludes things
- * like [[AttrPair]]s or [[StylePair]]s which only make sense as part of
+ * like [[scalatags.generic.AttrPair]]s or [[scalatags.generic.StylePair]]s which only make sense as part of
  * a parent fragment
  */
 trait Frag[Builder, +FragT] extends Modifier[Builder]{
