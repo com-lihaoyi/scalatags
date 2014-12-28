@@ -2090,7 +2090,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val lineHeight = new NormalOpenStyle("lineHeight", "lineheight")
+  val lineHeight = new NormalOpenStyle("lineHeight", "line-height")
 
   /**
    * The left CSS property specifies part of the position of positioned elements.
