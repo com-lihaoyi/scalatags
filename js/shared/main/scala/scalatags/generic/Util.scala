@@ -80,12 +80,7 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
    */
   implicit def ArrayNode[A <% Modifier[Builder]](xs: Array[A]) = new SeqNode[A](xs.toSeq)
 
-  /**
-   * Lets you put Unit into a scalatags tree, as a no-op.
-   */
-  implicit def UnitNode(u: Unit) = new Modifier[Builder]{
-    def applyTo(t: Builder) = ()
-  }
+
 }
 
 trait LowPriUtil[Builder, Output <: FragT, FragT]{
@@ -103,4 +98,9 @@ trait LowPriUtil[Builder, Output <: FragT, FragT]{
    * Renders an Seq of [[FragT]] into a single [[FragT]]
    */
   implicit def ArrayFrag[A <% Frag[Builder, FragT]](xs: Array[A]) = SeqFrag[A](xs.toSeq)
+
+  /**
+   * Lets you put Unit into a scalatags tree, as a no-op.
+   */
+  implicit def UnitFrag(u: Unit): Frag[Builder, FragT]
 }
