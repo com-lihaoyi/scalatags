@@ -88,6 +88,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
   type SvgTags = generic.SvgTags[Builder, Output, FragT]
   type SvgAttrs = generic.SvgAttrs[Builder, Output, FragT]
   type Util = generic.Util[Builder, Output, FragT]
+  type AttrPair = generic.AttrPair[Builder, FragT]
 
   type Attr = generic.Attr
   type Style = generic.Style
