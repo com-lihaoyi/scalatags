@@ -7,7 +7,7 @@ import twirl.sbt.TwirlPlugin._
 import Twirl._
 object Build extends sbt.Build{
   val cross = new utest.jsrunner.JsCrossBuild(
-    organization := "com.scalatags",
+    organization := "com.lihaoyi",
     name := "scalatags",
     scalaVersion := "2.11.4",
     autoCompilerPlugins := true,
@@ -20,7 +20,7 @@ object Build extends sbt.Build{
     ),
 
     // Sonatype
-    version := "0.4.3-M3",
+    version := "0.4.3-RC1",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=
@@ -61,7 +61,7 @@ object Build extends sbt.Build{
       "org.scala-js" %%%! "scalajs-dom" % "0.7.0" % "provided"
     ),
     resolvers += Resolver.sonatypeRepo("releases"),
-    scalaJSStage in Test := FastOptStage,
+    scalaJSStage in Test := FullOptStage,
     requiresDOM := true
   ).configure(sourceMapsToGithub)
 

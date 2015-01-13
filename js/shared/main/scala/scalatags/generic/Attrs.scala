@@ -9,7 +9,7 @@
  */
 package scalatags
 package generic
-// import acyclic.file
+import acyclic.file
 import scala.language.dynamics
 
 /**
@@ -971,77 +971,6 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    * MDN
    */
   val rowspan = "rowspan".attr
-  /**
-   * This enumerated attribute indicates whether the element can be dragged, using the 
-   * Drag and Drop API. It can have the following values:
-   *
-   *   - true, which indicates that the element may be dragged
-   *   - false, which indicates that the element may not be dragged.
-   *
-   * If this attribute is not set, its default value is auto, meaning the behavior should 
-   * be the one defined by default by the browser.
-   *
-   * MDN
-   */
-  val draggable = "draggable".attr
-  /**
-   * When a user begins to drag, the dragstart event is fired.
-   */
-  val ondragstart = "ondragstart".attr
-  /**
-   * Once the drag is complete, a dragend event is fired at the 
-   * source of the drag (the same element that received the dragstart event).
-   */
-  val ondragend = "ondragend".attr
-  /**
-   * The ondragenter event occurs when a draggable element or text selection enters a valid 
-   * drop target.
-   */
-  val ondragenter = "ondragenter".attr
-  /**
-   * The ondragover attribute fires when a draggable element or text selection is being 
-   * dragged over a valid drop target.
-   */
-  val ondragover = "ondragover".attr  
-  /**
-   * The ondragleave event occurs when a draggable element or text selection leaves a valid 
-   * drop target.
-   */
-  val ondragleave = "ondragleave".attr  
-  /**
-   * The ondrop event occurs when a draggable element or text selection is dropped on a valid
-   * drop target.
-   */
-  val ondrop = "ondrop".attr  
-  
-  /**
-   * This class of attributes, called custom data attributes, allows proprietary
-   * information to be exchanged between the HTML and its DOM representation that
-   * may be used by scripts. All such custom data are available via the HTMLElement
-   * interface of the element the attribute is set on. The HTMLElement.dataset
-   * property gives access to them.
-   *
-   * The * may be replaced by any name following the production rule of xml names
-   * with the following restrictions:
-   *
-   * the name must not start with xml, whatever case is used for these letters;
-   * the name must not contain any semicolon (U+003A);
-   * the name must not contain capital A to Z letters.
-   *
-   * Note that the HTMLElement.dataset attribute is a StringMap and the name of the
-   * custom data attribute data-test-value will be accessible via
-   * HTMLElement.dataset.testValue as any dash (U+002D) is replaced by the capitalization
-   * of the next letter (camelcase).
-   *
-   * MDN
-   */
-  object data extends DataAttribute(List("data"))
-  class DataAttribute(sections: List[String]) extends Dynamic{
-    def selectDynamic(s: String) = new DataAttribute(s :: sections)
-    def :=[T](v: T)(implicit ev: AttrValue[Builder, T]) =
-      AttrPair(sections.reverse.mkString("-").attr, v, ev)
-  }
-  def data(suffix: String) = ("data-" + suffix).attr
 
   /**
    * ARIA is a set of special accessibility attributes which can be added
