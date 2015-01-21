@@ -1183,6 +1183,15 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
+  val spreadMethod = "spreadMethod".attr
+
+
+
+  /**
+   *
+   *
+   * MDN
+   */
   val stdDeviation = "stdDeviation".attr
 
 
