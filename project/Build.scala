@@ -72,6 +72,7 @@ object Build extends sbt.Build{
                             .dependsOn(js)
                             .enablePlugins(ScalaJSPlugin)
                             .settings(
+      scalaVersion := "2.11.5",
       libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.7.1-SNAPSHOT"
     )
 }
