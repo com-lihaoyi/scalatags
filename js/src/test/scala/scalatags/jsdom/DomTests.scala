@@ -2,13 +2,12 @@ package scalatags
 package jsdom
 import acyclic.file
 import utest._
-import JsDom._
 import JsDom.all._
 
 
-import TestUtil._
 import org.scalajs.dom
-import scala.scalajs.js
+import org.scalajs.dom.html.Paragraph
+
 object DomTests extends TestSuite{
   def tests = TestSuite{
     'basic {
@@ -17,7 +16,7 @@ object DomTests extends TestSuite{
         assert(elem.children.length == 0)
         elem.appendChild(p(1, "wtf", "bbq").render)
         assert(elem.children.length == 1)
-        val pElem = elem.children(0).asInstanceOf[dom.HTMLParagraphElement]
+        val pElem = elem.children(0).asInstanceOf[Paragraph]
         assert(pElem.childNodes.length == 3)
         assert(pElem.textContent == "1wtfbbq")
       }
@@ -46,8 +45,9 @@ object DomTests extends TestSuite{
         assert(elem.style.cssFloat == "left")
         assert(elem.style.backgroundColor == "yellow")
         // styles end up being sorted in alphabetical order
+        val styleAttr = elem.getAttribute("style")
         assert(
-          elem.getAttribute("style") == "color: red; float: left; background-color: yellow; "
+          styleAttr == "color: red; float: left; background-color: yellow;"
         )
       }
     }

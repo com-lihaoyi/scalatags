@@ -9,7 +9,7 @@ object Build extends sbt.Build{
   val cross = new utest.jsrunner.JsCrossBuild(
     organization := "com.lihaoyi",
     name := "scalatags",
-    scalaVersion := "2.11.4",
+    scalaVersion := "2.11.5",
     autoCompilerPlugins := true,
     libraryDependencies += "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
@@ -58,7 +58,7 @@ object Build extends sbt.Build{
 
   lazy val js = cross.js.settings(
     libraryDependencies ++= Seq(
-      "org.scala-js" %%%! "scalajs-dom" % "0.7.0" % "provided"
+      "org.scala-js" %%% "scalajs-dom" % "0.7.1-SNAPSHOT"
     ),
     resolvers += Resolver.sonatypeRepo("releases"),
     scalaJSStage in Test := FullOptStage,
@@ -72,6 +72,7 @@ object Build extends sbt.Build{
                             .dependsOn(js)
                             .enablePlugins(ScalaJSPlugin)
                             .settings(
-      libraryDependencies += "org.scala-lang.modules.scalajs" %%%! "scalajs-dom" % "0.6" % "provided"
+      scalaVersion := "2.11.5",
+      libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.7.1-SNAPSHOT"
     )
 }

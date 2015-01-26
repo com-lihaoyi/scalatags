@@ -3,9 +3,9 @@ import acyclic.file
 import org.scalajs.dom
 import scala.scalajs.js
 
-import org.scalajs.dom.{Node, Element}
+import org.scalajs.dom.{html, svg, Element}
 import scala.annotation.unchecked.uncheckedVariance
-import scalatags.generic.{StylePair, Namespace, Aliases, Modifier}
+import scalatags.generic.{StylePair, Namespace, Aliases}
 
 
 /**
@@ -64,9 +64,9 @@ object JsDom
     type RawFrag = JsDom.RawFrag
     def raw(s: String) = RawFrag(s)
 
-    type HtmlTag = JsDom.TypedTag[dom.HTMLElement]
+    type HtmlTag = JsDom.TypedTag[html.Html]
     val HtmlTag = JsDom.TypedTag
-    type SvgTag = JsDom.TypedTag[dom.SVGElement]
+    type SvgTag = JsDom.TypedTag[svg.Element]
     val SvgTag = JsDom.TypedTag
     type Tag = JsDom.TypedTag[dom.Element]
     val Tag = JsDom.TypedTag
@@ -115,7 +115,7 @@ object JsDom
 
   class GenericStyle[T] extends StyleValue[T]{
     def apply(t: dom.Element, s: Style, v: T): Unit = {
-      t.asInstanceOf[dom.HTMLElement]
+      t.asInstanceOf[html.Html]
        .style
        .setProperty(s.cssName, v.toString)
     }
