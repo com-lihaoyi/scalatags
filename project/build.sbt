@@ -1,3 +1,3 @@
-addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.0-RC2")
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.0-RC1")
 
-addSbtPlugin("io.spray" % "sbt-twirl" % "0.7.0")
+addSbtPlugin("com.typesafe.sbt" % "sbt-twirl" % "1.0.4")

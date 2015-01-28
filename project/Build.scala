@@ -4,8 +4,8 @@ import org.scalajs.sbtplugin.ScalaJSPlugin
 import org.scalajs.sbtplugin.ScalaJSPlugin._
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import org.scalajs.sbtplugin._
-import twirl.sbt.TwirlPlugin._
-import Twirl._
+import play.twirl.sbt.SbtTwirl
+
 object Build extends sbt.Build{
 
   lazy val scalatags = crossProject
