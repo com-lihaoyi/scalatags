@@ -7,7 +7,7 @@
 		revision="0.1-SNAPSHOT"
 		conf="default"
 		confs="default"
-		date="20150128120510"/>
+		date="20150128121057"/>
 	<dependencies>
 		<module organisation="io.spray" name="sbt-twirl">
 			<revision name="0.7.0" status="release" pubdate="20140317164942" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/spray/sbt-twirl" extra-scalaVersion="2.10" extra-sbtVersion="0.13" downloaded="false" searched="false" default="false" conf="compile, default(compile)" position="80">

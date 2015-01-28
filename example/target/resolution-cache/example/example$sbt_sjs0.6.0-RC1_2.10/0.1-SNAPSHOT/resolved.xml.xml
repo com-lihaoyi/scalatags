@@ -4,7 +4,7 @@
 		module="example$sbt_sjs0.6.0-RC1_2.10"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20150128120510"
+		publication="20150128121057"
 	/>
 	<configurations>
 		<conf name="default" visibility="public"/>

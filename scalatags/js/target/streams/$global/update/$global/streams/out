@@ -1,4 +1,0 @@
-[warn] There may be incompatibilities among your library dependencies.
-[warn] Here are some of the libraries that were evicted:
-[warn] 	* org.scala-js:scalajs-library_2.10:0.6.0-RC1 -> 0.6.0-RC2
-[warn] Run 'evicted' to see detailed eviction warnings

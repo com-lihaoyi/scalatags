@@ -1,6 +1,0 @@
-[0m[[0minfo[0m] [0m3/48    scalatags.text.TextTests.helloWorld		[32mSuccess[0m[0m
-[0m[[0minfo[0m] [0m24/48   scalatags.text.TextTests.tagCreation		[32mSuccess[0m[0m
-[0m[[0minfo[0m] [0m32/48   scalatags.text.TextTests.cssHelpers		[32mSuccess[0m[0m
-[0m[[0minfo[0m] [0m37/48   scalatags.text.TextTests.fragSeqsAreFrags		[32mSuccess[0m[0m
-[0m[[0minfo[0m] [0m38/48   scalatags.text.TextTests.tagType		[32mSuccess[0m[0m
-[0m[[0minfo[0m] [0m39/48   scalatags.text.TextTests		[32mSuccess[0m[0m

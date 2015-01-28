@@ -1461,9 +1461,9 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#cache;0.13.7!cache.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#test-agent;0.13.7!test-agent.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.7!apply-macro.jar
-[debug] :: resolution report :: resolve 518ms :: artifacts dl 35ms
+[debug] :: resolution report :: resolve 387ms :: artifacts dl 22ms
 [debug] 	report for example#example$sbt_sjs0.6.0-RC1_2.10;0.1-SNAPSHOT default produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/target/resolution-cache/reports/example-example$sbt_sjs0.6.0-RC1_2.10-default.xml
-[debug] 	resolve done (518ms resolve - 35ms download)
+[debug] 	resolve done (387ms resolve - 22ms download)
 [debug] Using inline dependencies specified in Scala.
 [debug] :: resolving dependencies :: example#example$sources_sjs0.6.0-RC1_2.10;0.1-SNAPSHOT
 [debug] 	confs: [default]
@@ -2083,6 +2083,6 @@
 [debug] 	[NOT REQUIRED] com.github.scala-incubator.io#scala-io-file_2.10;0.4.2!scala-io-file_2.10.jar(src)
 [debug] 	[NOT REQUIRED] com.github.scala-incubator.io#scala-io-core_2.10;0.4.2!scala-io-core_2.10.jar(src)
 [debug] 	[NOT REQUIRED] com.jsuereth#scala-arm_2.10;1.3!scala-arm_2.10.jar(src)
-[debug] :: resolution report :: resolve 169ms :: artifacts dl 29ms
+[debug] :: resolution report :: resolve 93ms :: artifacts dl 19ms
 [debug] 	report for example#example$sources_sjs0.6.0-RC1_2.10;0.1-SNAPSHOT default produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/target/resolution-cache/reports/example-example$sources_sjs0.6.0-RC1_2.10-default.xml
-[debug] 	resolve done (169ms resolve - 29ms download)
+[debug] 	resolve done (93ms resolve - 19ms download)

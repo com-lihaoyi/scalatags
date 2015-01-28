@@ -52,7 +52,7 @@ object Build extends sbt.Build{
     .jvmSettings()
     .jsSettings(
       libraryDependencies ++= Seq(
-        "org.scala-js" %%% "scalajs-dom" % "0.7.0"
+        "org.scala-js" %%% "scalajs-dom" % "0.7.1-SNAPSHOT"
       ),
       resolvers += Resolver.sonatypeRepo("releases"),
       scalaJSStage in Test := FullOptStage,
