@@ -1,4 +1,5 @@
 target/*
+example/target/*
 scalatags/target/*
 scalatags/js/target/*
 scalatags/jvm/target/*

@@ -12,7 +12,7 @@ object Build extends sbt.Build{
     .settings(
       organization := "com.lihaoyi",
       name := "scalatags",
-      scalaVersion := "2.10.4",
+      scalaVersion := "2.11.4",
       crossScalaVersions := Seq("2.11.4", "2.10.4"),
       autoCompilerPlugins := true,
       libraryDependencies ++= Seq(
@@ -74,6 +74,6 @@ object Build extends sbt.Build{
                             .dependsOn(scalatagsJS)
                             .enablePlugins(ScalaJSPlugin)
                             .settings(
-      scalaVersion := "2.10.4"
+      scalaVersion := "2.11.4"
     )
 }
