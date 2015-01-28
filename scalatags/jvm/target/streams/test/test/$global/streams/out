@@ -1,0 +1,65 @@
+[0m[[0mdebug[0m] [0mRunning TaskDef(scalatags.text.BasicTests, utest.runner.Framework$$anon$1@2ca70818, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(scalatags.text.ExampleTests, utest.runner.Framework$$anon$1@2ca70818, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(scalatags.text.TextTests, utest.runner.Framework$$anon$1@2ca70818, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(scalatags.text.BundlingTests, utest.runner.Framework$$anon$1@2ca70818, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(scalatags.text.ScalatagsPerf, utest.runner.Framework$$anon$1@2ca70818, false, [SuiteSelector])[0m
+[0m[[0minfo[0m] [0m-----------------------------------Results-----------------------------------[0m
+[0m[[0minfo[0m] [0mscalatags.text.ScalatagsPerf		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    correctness		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m        performance		[32mSuccess [0m
+[0m[[0minfo[0m] [0m                   [32mScalatagsPerf       427332 in 10000[0m[0m
+[0m[[0minfo[0m] [0mscalatags.text.ExampleTests		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    splashExample		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    helloWorld		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    variables		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    controlFlow		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    functions		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    customAttributes		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    attributes		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    classesAndCssCustom		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    nonStringAttributesAndStyles		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    forceStringifyingAttributesAndStyles		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    booleanAttributes		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    booleanAttributes2		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    layouts		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    inheritence		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    manualImports		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    properEscaping		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    unsanitizedInput		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    additionalImports		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    typesafeCSS		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    customAttributesAndStyles		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    aria		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    data		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0mscalatags.text.TextTests		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    helloWorld		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    tagCreation		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    cssHelpers		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    fragSeqsAreFrags		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    tagType		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0mscalatags.text.BasicTests		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    cssChaining		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    cssChaining2		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    attributeChaining		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    mixingAttributesStylesAndChildren		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    classStyleAttrOverwriting		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    intSeq		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    stringArray		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    applyChaining		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    autoPixel		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    compileErrors		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m        niceErrorsForAttributes		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m        niceErrorsForStyles		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0mscalatags.text.BundlingTests		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    custom		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m    interop		[32mSuccess[0m[0m
+[0m[[0minfo[0m] [0m[0m
+[0m[[0minfo[0m] [0mTests: 48[0m
+[0m[[0minfo[0m] [0mPassed: 48[0m
+[0m[[0minfo[0m] [0mFailed: 0[0m
+[0m[[0mdebug[0m] [0mPassed tests:[0m
+[0m[[0mdebug[0m] [0m	scalatags.text.BundlingTests[0m
+[0m[[0mdebug[0m] [0m	scalatags.text.ScalatagsPerf[0m
+[0m[[0mdebug[0m] [0m	scalatags.text.BasicTests[0m
+[0m[[0mdebug[0m] [0m	scalatags.text.TextTests[0m
+[0m[[0mdebug[0m] [0m	scalatags.text.ExampleTests[0m

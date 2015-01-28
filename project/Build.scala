@@ -7,6 +7,7 @@ import org.scalajs.sbtplugin._
 import twirl.sbt.TwirlPlugin._
 import Twirl._
 object Build extends sbt.Build{
+
   lazy val scalatags = crossProject
     .settings(
       organization := "com.lihaoyi",
@@ -19,7 +20,6 @@ object Build extends sbt.Build{
         "com.lihaoyi" %%% "utest" % "0.2.5-RC1" % "test"
       ),
       addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
-
       libraryDependencies ++= (
         if (scalaVersion.value.startsWith("2.10")) Nil
         else Seq("org.scala-lang.modules" %% "scala-xml" % "1.0.1" % "test")
@@ -64,9 +64,11 @@ object Build extends sbt.Build{
       }))*/
     )
 
+
   // Needed, so sbt finds the projects
   lazy val scalatagsJVM = scalatags.jvm
   lazy val scalatagsJS = scalatags.js
+
 
   lazy val example = project.in(file("example"))
                             .dependsOn(scalatagsJS)

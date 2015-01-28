@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="com.lihaoyi"
+		module="scalatags_sjs0.6.0-RC1_2.10"
+		revision="0.4.3-RC1"
+		conf="test"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool, phantom-js-jetty"
+		date="20150128115604"/>
+	<dependencies>
+		<module organisation="com.lihaoyi" name="utest_sjs0.6.0-RC1_2.10">
+			<revision name="0.2.5-RC1" status="release" pubdate="20150110064548" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/lihaoyi/utest" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="3">
+				<license name="MIT license" url="http://www.opensource.org/licenses/mit-license.php"/>
+				<metadata-artifact status="no" details="" size="3161" time="0" location="/Users/haoyi/.ivy2/cache/com.lihaoyi/utest_sjs0.6.0-RC1_2.10/ivy-0.2.5-RC1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/lihaoyi/utest_sjs0.6.0-RC1_2.10/0.2.5-RC1/utest_sjs0.6.0-RC1_2.10-0.2.5-RC1.pom"/>
+				<caller organisation="com.lihaoyi" name="scalatags_sjs0.6.0-RC1_2.10" conf="test, compile, runtime" rev="0.2.5-RC1" rev-constraint-default="0.2.5-RC1" rev-constraint-dynamic="0.2.5-RC1" callerrev="0.4.3-RC1"/>
+				<artifacts>
+					<artifact name="utest_sjs0.6.0-RC1_2.10" type="jar" ext="jar" status="no" details="" size="411954" time="0" location="/Users/haoyi/.ivy2/cache/com.lihaoyi/utest_sjs0.6.0-RC1_2.10/jars/utest_sjs0.6.0-RC1_2.10-0.2.5-RC1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/lihaoyi/utest_sjs0.6.0-RC1_2.10/0.2.5-RC1/utest_sjs0.6.0-RC1_2.10-0.2.5-RC1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-js" name="scalajs-test-interface_2.10">
+			<revision name="0.6.0-RC1" status="release" pubdate="20150110021646" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://scala-js.org/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="6">
+				<license name="BSD New" url="https://github.com/scala-js/scala-js/blob/master/LICENSE"/>
+				<metadata-artifact status="no" details="" size="2719" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-test-interface_2.10/ivy-0.6.0-RC1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-js/scalajs-test-interface_2.10/0.6.0-RC1/scalajs-test-interface_2.10-0.6.0-RC1.pom"/>
+				<caller organisation="com.lihaoyi" name="utest_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="0.6.0-RC1" rev-constraint-default="0.6.0-RC1" rev-constraint-dynamic="0.6.0-RC1" callerrev="0.2.5-RC1"/>
+				<artifacts>
+					<artifact name="scalajs-test-interface_2.10" type="jar" ext="jar" status="no" details="" size="153614" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-test-interface_2.10/jars/scalajs-test-interface_2.10-0.6.0-RC1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-js/scalajs-test-interface_2.10/0.6.0-RC1/scalajs-test-interface_2.10-0.6.0-RC1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scalamacros" name="quasiquotes_2.10">
+			<revision name="2.0.0" status="release" pubdate="20140417020710" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/scalamacros/paradise" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="5">
+				<license name="BSD-like" url="http://www.scala-lang.org/downloads/license.html"/>
+				<metadata-artifact status="no" details="" size="2742" time="0" location="/Users/haoyi/.ivy2/cache/org.scalamacros/quasiquotes_2.10/ivy-2.0.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.0/quasiquotes_2.10-2.0.0.pom"/>
+				<caller organisation="com.lihaoyi" name="utest_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="2.0.0" rev-constraint-default="2.0.0" rev-constraint-dynamic="2.0.0" callerrev="0.2.5-RC1"/>
+				<artifacts>
+					<artifact name="quasiquotes_2.10" type="jar" ext="jar" status="no" details="" size="720997" time="0" location="/Users/haoyi/.ivy2/cache/org.scalamacros/quasiquotes_2.10/jars/quasiquotes_2.10-2.0.0.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scalamacros/quasiquotes_2.10/2.0.0/quasiquotes_2.10-2.0.0.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-reflect">
+			<revision name="2.10.4" status="release" pubdate="20140318144707" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.10.4/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="4">
+				<license name="BSD-like" url="http://www.scala-lang.org/downloads/license.html    "/>
+				<metadata-artifact status="no" details="" size="2835" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-lang/scala-reflect/ivy-2.10.4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.10.4/scala-reflect-2.10.4.pom"/>
+				<caller organisation="org.scalamacros" name="quasiquotes_2.10" conf="compile, runtime" rev="2.10.3" rev-constraint-default="2.10.3" rev-constraint-dynamic="2.10.3" callerrev="2.0.0"/>
+				<caller organisation="com.lihaoyi" name="utest_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.2.5-RC1"/>
+				<artifacts>
+					<artifact name="scala-reflect" type="jar" ext="jar" status="no" details="" size="3203471" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.10.4.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.10.4/scala-reflect-2.10.4.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+			<revision name="2.10.3" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<evicted-by rev="2.10.4"/>
+				<caller organisation="org.scalamacros" name="quasiquotes_2.10" conf="compile, runtime" rev="2.10.3" rev-constraint-default="2.10.3" rev-constraint-dynamic="2.10.3" callerrev="2.0.0"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-js" name="scalajs-dom_sjs0.6.0-RC1_2.10">
+			<revision name="0.7.0" status="release" pubdate="20150110025347" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://scala-js.org/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="2">
+				<license name="MIT" url="http://opensource.org/licenses/mit-license.php"/>
+				<metadata-artifact status="no" details="" size="2694" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-dom_sjs0.6.0-RC1_2.10/ivy-0.7.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs0.6.0-RC1_2.10/0.7.0/scalajs-dom_sjs0.6.0-RC1_2.10-0.7.0.pom"/>
+				<caller organisation="com.lihaoyi" name="scalatags_sjs0.6.0-RC1_2.10" conf="test, compile, runtime" rev="0.7.0" rev-constraint-default="0.7.0" rev-constraint-dynamic="0.7.0" callerrev="0.4.3-RC1"/>
+				<artifacts>
+					<artifact name="scalajs-dom_sjs0.6.0-RC1_2.10" type="jar" ext="jar" status="no" details="" size="1100019" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-dom_sjs0.6.0-RC1_2.10/jars/scalajs-dom_sjs0.6.0-RC1_2.10-0.7.0.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs0.6.0-RC1_2.10/0.7.0/scalajs-dom_sjs0.6.0-RC1_2.10-0.7.0.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-js" name="scalajs-library_2.10">
+			<revision name="0.6.0-RC2" status="release" pubdate="20150122133824" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://scala-js.org/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master, runtime(*), master(compile), compile(*)" position="1">
+				<license name="BSD New" url="https://github.com/scala-js/scala-js/blob/master/LICENSE"/>
+				<metadata-artifact status="no" details="" size="2543" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-library_2.10/ivy-0.6.0-RC2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-js/scalajs-library_2.10/0.6.0-RC2/scalajs-library_2.10-0.6.0-RC2.pom"/>
+				<caller organisation="org.scala-js" name="scalajs-test-interface_2.10" conf="compile, runtime" rev="0.6.0-RC1" rev-constraint-default="0.6.0-RC1" rev-constraint-dynamic="0.6.0-RC1" callerrev="0.6.0-RC1"/>
+				<caller organisation="org.scala-js" name="scalajs-dom_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="0.6.0-RC1" rev-constraint-default="0.6.0-RC1" rev-constraint-dynamic="0.6.0-RC1" callerrev="0.7.0"/>
+				<caller organisation="com.lihaoyi" name="scalatags_sjs0.6.0-RC1_2.10" conf="test, compile, runtime" rev="0.6.0-RC2" rev-constraint-default="0.6.0-RC2" rev-constraint-dynamic="0.6.0-RC2" callerrev="0.4.3-RC1"/>
+				<caller organisation="com.lihaoyi" name="utest_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="0.6.0-RC1" rev-constraint-default="0.6.0-RC1" rev-constraint-dynamic="0.6.0-RC1" callerrev="0.2.5-RC1"/>
+				<artifacts>
+					<artifact name="scalajs-library_2.10" type="jar" ext="jar" status="no" details="" size="7261690" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-library_2.10/jars/scalajs-library_2.10-0.6.0-RC2.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-js/scalajs-library_2.10/0.6.0-RC2/scalajs-library_2.10-0.6.0-RC2.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+			<revision name="0.6.0-RC1" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<evicted-by rev="0.6.0-RC2"/>
+				<caller organisation="org.scala-js" name="scalajs-test-interface_2.10" conf="compile, runtime" rev="0.6.0-RC1" rev-constraint-default="0.6.0-RC1" rev-constraint-dynamic="0.6.0-RC1" callerrev="0.6.0-RC1"/>
+				<caller organisation="org.scala-js" name="scalajs-dom_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="0.6.0-RC1" rev-constraint-default="0.6.0-RC1" rev-constraint-dynamic="0.6.0-RC1" callerrev="0.7.0"/>
+				<caller organisation="com.lihaoyi" name="utest_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="0.6.0-RC1" rev-constraint-default="0.6.0-RC1" rev-constraint-dynamic="0.6.0-RC1" callerrev="0.2.5-RC1"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-library">
+			<revision name="2.10.4" status="release" pubdate="20140318144629" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.10.4/" downloaded="false" searched="false" default="false" conf="default, compile, runtime(*), master(compile), runtime, default(compile), compile(*), master" position="0">
+				<license name="BSD-like" url="http://www.scala-lang.org/downloads/license.html          "/>
+				<metadata-artifact status="no" details="" size="2669" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-lang/scala-library/ivy-2.10.4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.pom"/>
+				<caller organisation="org.scala-js" name="scalajs-test-interface_2.10" conf="compile, runtime" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.6.0-RC1"/>
+				<caller organisation="org.scala-js" name="scalajs-dom_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.7.0"/>
+				<caller organisation="org.scalamacros" name="quasiquotes_2.10" conf="compile, runtime" rev="2.10.3" rev-constraint-default="2.10.3" rev-constraint-dynamic="2.10.3" callerrev="2.0.0"/>
+				<caller organisation="com.lihaoyi" name="scalatags_sjs0.6.0-RC1_2.10" conf="test, compile, runtime" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.4.3-RC1"/>
+				<caller organisation="org.scala-lang" name="scala-reflect" conf="compile, runtime" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="2.10.4"/>
+				<caller organisation="org.scala-js" name="scalajs-library_2.10" conf="default, compile, runtime, master" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.6.0-RC2"/>
+				<caller organisation="com.lihaoyi" name="utest_sjs0.6.0-RC1_2.10" conf="default, compile, runtime, master" rev="2.10.4" rev-constraint-default="2.10.4" rev-constraint-dynamic="2.10.4" callerrev="0.2.5-RC1"/>
+				<artifacts>
+					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="7126372" time="0" location="/Users/haoyi/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.10.4.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.10.4/scala-library-2.10.4.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+			<revision name="2.10.3" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+				<evicted-by rev="2.10.4"/>
+				<caller organisation="org.scalamacros" name="quasiquotes_2.10" conf="compile, runtime" rev="2.10.3" rev-constraint-default="2.10.3" rev-constraint-dynamic="2.10.3" callerrev="2.0.0"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>

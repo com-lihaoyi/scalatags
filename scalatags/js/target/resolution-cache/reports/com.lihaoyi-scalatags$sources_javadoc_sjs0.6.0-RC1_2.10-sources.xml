@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="com.lihaoyi"
+		module="scalatags$sources_javadoc_sjs0.6.0-RC1_2.10"
+		revision="0.4.3-RC1"
+		conf="sources"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool, phantom-js-jetty"
+		date="20150128120513"/>
+	<dependencies>
+	</dependencies>
+</ivy-report>

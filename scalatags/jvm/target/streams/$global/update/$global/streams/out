@@ -1,0 +1,281 @@
+[info] Updating {file:/Users/haoyi/Dropbox%20(Personal)/Workspace/scalatags-new/}scalatagsJVM...
+[debug] :: resolving dependencies :: com.lihaoyi#scalatags_2.10;0.4.3-RC1
+[debug] 	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool]
+[debug] 	validate = true
+[debug] 	refresh = false
+[debug] resolving dependencies for configuration 'compile'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->default(compile)]
+[info] Resolving org.scala-lang#scala-library;2.10.4 ...
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@18f6492d
+[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4
+[debug] 	found org.scala-lang#scala-library;2.10.4 in sbt-chain
+[debug] 	[2.10.4] org.scala-lang#scala-library;2.10.4
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->master]
+[debug] resolving dependencies for configuration 'runtime'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [runtime]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->master]
+[debug] resolving dependencies for configuration 'test'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [test]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [runtime]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->master]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->default(compile)]
+[info] Resolving com.lihaoyi#utest_2.10;0.2.5-RC1 ...
+[debug] sbt-chain: Checking cache for: dependency: com.lihaoyi#utest_2.10;0.2.5-RC1 {test=[default(compile)]}
+[debug] sbt-chain: module revision found in cache: com.lihaoyi#utest_2.10;0.2.5-RC1
+[debug] 	found com.lihaoyi#utest_2.10;0.2.5-RC1 in sbt-chain
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [compile->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [compile->master(compile)]
+[info] Resolving org.scala-lang#scala-reflect;2.10.4 ...
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-reflect;2.10.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.10.4
+[debug] 	found org.scala-lang#scala-reflect;2.10.4 in sbt-chain
+[debug] 	[2.10.4] org.scala-lang#scala-reflect;2.10.4
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [compile->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [compile->compile]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [compile->master(compile)]
+[info] Resolving org.scalamacros#quasiquotes_2.10;2.0.0 ...
+[debug] sbt-chain: Checking cache for: dependency: org.scalamacros#quasiquotes_2.10;2.0.0 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: org.scalamacros#quasiquotes_2.10;2.0.0
+[debug] 	found org.scalamacros#quasiquotes_2.10;2.0.0 in sbt-chain
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.3 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.3 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.3 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.3 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [compile->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [compile->compile]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.3 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.3 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [compile->master(compile)]
+[info] Resolving org.scala-sbt#test-interface;1.0 ...
+[debug] sbt-chain: Checking cache for: dependency: org.scala-sbt#test-interface;1.0 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: org.scala-sbt#test-interface;1.0
+[debug] 	found org.scala-sbt#test-interface;1.0 in sbt-chain
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [compile->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->master]
+[debug] resolving dependencies for configuration 'provided'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [provided]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->default(compile)]
+[info] Resolving com.lihaoyi#acyclic_2.10;0.1.2 ...
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1d40cce6
+[debug] sbt-chain: module revision found in cache: com.lihaoyi#acyclic_2.10;0.1.2
+[debug] 	found com.lihaoyi#acyclic_2.10;0.1.2 in sbt-chain
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->compile]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->master]
+[debug] resolving dependencies for configuration 'optional'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [optional]
+[debug] resolving dependencies for configuration 'compile-internal'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [compile-internal]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->master]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [optional]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [provided]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->compile]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->master]
+[debug] resolving dependencies for configuration 'runtime-internal'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [runtime-internal]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [runtime]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->master]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [optional]
+[debug] resolving dependencies for configuration 'test-internal'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [test-internal]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [test]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [runtime]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [compile->master]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.3 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.3 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.3 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.3 [compile->compile(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-lang#scala-reflect;2.10.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scalamacros#quasiquotes_2.10;2.0.0 [runtime->compile]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.3 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.3 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scalamacros#quasiquotes_2.10;2.0.0->org.scala-lang#scala-reflect;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#utest_2.10;0.2.5-RC1->org.scala-sbt#test-interface;1.0 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#utest_2.10;0.2.5-RC1 [test->master]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [optional]
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [provided]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->compile]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [provided->master]
+[debug] resolving dependencies for configuration 'plugin'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [plugin]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [plugin->default(compile)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [plugin->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [plugin->compile]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.lihaoyi#acyclic_2.10;0.1.2->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->com.lihaoyi#acyclic_2.10;0.1.2 [plugin->master]
+[debug] resolving dependencies for configuration 'sources'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [sources]
+[debug] resolving dependencies for configuration 'docs'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [docs]
+[debug] resolving dependencies for configuration 'pom'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [pom]
+[debug] resolving dependencies for configuration 'scala-tool'
+[debug] == resolving dependencies for com.lihaoyi#scalatags_2.10;0.4.3-RC1 [scala-tool]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-compiler;2.10.4 [scala-tool->default]
+[info] Resolving org.scala-lang#scala-compiler;2.10.4 ...
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang#scala-compiler;2.10.4 {scala-tool=[default, optional(default)]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang#scala-compiler;2.10.4
+[debug] 	found org.scala-lang#scala-compiler;2.10.4 in sbt-chain
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-compiler;2.10.4 [scala-tool->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-compiler;2.10.4 [scala-tool->compile]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->default]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->runtime]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->compile]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->master]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->optional(default)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-reflect;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-reflect;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-reflect;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#scala-reflect;2.10.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang#scala-reflect;2.10.4->org.scala-lang#scala-library;2.10.4 [runtime->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-compiler;2.10.4 [scala-tool->master]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-compiler;2.10.4 [scala-tool->optional(default)]
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#jline;2.10.4 [optional->master(compile)]
+[info] Resolving org.scala-lang#jline;2.10.4 ...
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang#jline;2.10.4 {optional=[compile(*), master(compile)]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang#jline;2.10.4
+[debug] 	found org.scala-lang#jline;2.10.4 in sbt-chain
+[debug] == resolving dependencies org.scala-lang#scala-compiler;2.10.4->org.scala-lang#jline;2.10.4 [optional->compile(*)]
+[debug] == resolving dependencies org.scala-lang#jline;2.10.4->org.fusesource.jansi#jansi;1.4 [compile->master(compile)]
+[info] Resolving org.fusesource.jansi#jansi;1.4 ...
+[debug] sbt-chain: Checking cache for: dependency: org.fusesource.jansi#jansi;1.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: org.fusesource.jansi#jansi;1.4
+[debug] 	found org.fusesource.jansi#jansi;1.4 in sbt-chain
+[debug] == resolving dependencies org.scala-lang#jline;2.10.4->org.fusesource.jansi#jansi;1.4 [compile->compile(*)]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [scala-tool->default]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [scala-tool->runtime]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [scala-tool->compile]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [scala-tool->master]
+[debug] == resolving dependencies com.lihaoyi#scalatags_2.10;0.4.3-RC1->org.scala-lang#scala-library;2.10.4 [scala-tool->optional(default)]
+[debug] 	resolved ivy file produced in cache
+[debug] :: downloading artifacts ::
+[debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.10.4!scala-library.jar
+[debug] 	[NOT REQUIRED] com.lihaoyi#utest_2.10;0.2.5-RC1!utest_2.10.jar
+[debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.10.4!scala-reflect.jar
+[debug] 	[NOT REQUIRED] org.scalamacros#quasiquotes_2.10;2.0.0!quasiquotes_2.10.jar
+[debug] 	[NOT REQUIRED] org.scala-sbt#test-interface;1.0!test-interface.jar
+[debug] 	[NOT REQUIRED] com.lihaoyi#acyclic_2.10;0.1.2!acyclic_2.10.jar
+[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.10.4!scala-compiler.jar
+[debug] 	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar
+[debug] 	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar
+[debug] :: resolution report :: resolve 62ms :: artifacts dl 2ms
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 compile produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-compile.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 runtime produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-runtime.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 test produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-test.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 provided produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-provided.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 optional produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-optional.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 compile-internal produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-compile-internal.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 runtime-internal produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-runtime-internal.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 test-internal produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-test-internal.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 plugin produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-plugin.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 sources produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-sources.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 docs produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-docs.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 pom produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-pom.xml
+[debug] 	report for com.lihaoyi#scalatags_2.10;0.4.3-RC1 scala-tool produced in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/jvm/target/resolution-cache/reports/com.lihaoyi-scalatags_2.10-scala-tool.xml
+[debug] 	resolve done (62ms resolve - 2ms download)
+[info] Done updating.

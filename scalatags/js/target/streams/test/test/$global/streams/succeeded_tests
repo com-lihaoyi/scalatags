@@ -1,0 +1,11 @@
+#Successful Tests
+#Wed Jan 28 12:02:58 PST 2015
+scalatags.text.ScalatagsPerf=1422475378066
+scalatags.jsdom.ScalatagsPerf=1422475378916
+scalatags.jsdom.ExampleTests=1422475368174
+scalatags.jsdom.DomTests=1422475368133
+scalatags.text.TextTests=1422475368053
+scalatags.text.BundlingTests=1422475368124
+scalatags.text.BasicTests=1422475368136
+scalatags.jsdom.BasicTests=1422475368116
+scalatags.text.ExampleTests=1422475368182

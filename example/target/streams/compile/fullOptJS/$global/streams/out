@@ -1,0 +1,20 @@
+[0m[[0minfo[0m] [0mFull Optimizing /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/target/scala-2.11/example-opt.js[0m
+[0m[[0mdebug[0m] [0mLinker: Read info: 199419 us[0m
+[0m[[0mdebug[0m] [0mLinker: Compute reachability: 123982 us[0m
+[0m[[0mdebug[0m] [0mLinker: Assemble LinkedClasses: 608186 us[0m
+[0m[[0mdebug[0m] [0mLinker: cache stats: reused: 0 -- invalidated: 3566 -- trees read: 492[0m
+[0m[[0mdebug[0m] [0mLinker: 933856 us[0m
+[0m[[0mdebug[0m] [0mInc. optimizer: Batch mode: true[0m
+[0m[[0mdebug[0m] [0mInc. optimizer: Incremental part: 32305 us[0m
+[0m[[0mdebug[0m] [0mInc. optimizer: Optimizing 4044 methods.[0m
+[0m[[0mdebug[0m] [0mInc. optimizer: Optimizer part: 261862 us[0m
+[0m[[0mdebug[0m] [0mInc. optimizer: 299411 us[0m
+[0m[[0mdebug[0m] [0mRefiner: Compute reachability: 53975 us[0m
+[0m[[0mdebug[0m] [0mRefiner: Assemble LinkedClasses: 5295 us[0m
+[0m[[0mdebug[0m] [0mRefiner: 59432 us[0m
+[0m[[0mdebug[0m] [0mEmitter: Class tree cache stats: reused: 0 -- invalidated: 374[0m
+[0m[[0mdebug[0m] [0mEmitter: Method tree cache stats: resued: 0 -- invalidated: 2415[0m
+[0m[[0mdebug[0m] [0mEmitter (write output): 895872 us[0m
+[0m[[0minfo[0m] [0mClosure: 0 error(s), 0 warning(s)[0m
+[0m[[0mdebug[0m] [0mClosure: Compiler pass: 8880450 us[0m
+[0m[[0mdebug[0m] [0mClosure: Write result: 544645 us[0m

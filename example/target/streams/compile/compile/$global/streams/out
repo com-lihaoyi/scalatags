@@ -1,0 +1,122 @@
+[0m[[0mdebug[0m] [0mInvalidating /Users/haoyi/.ivy2/cache/org.scala-js/scalajs-dom_sjs0.6.0-RC1_2.10/jars/scalajs-dom_sjs0.6.0-RC1_2.10-0.7.0.jar: could not find class org.scalajs.dom.Element on the classpath.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.text.Builder source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	==, !=.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.text.Builder: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.text.Builder.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.generic.Aggregate source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	==, !=.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.generic.Aggregate: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.generic.Aggregate.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.generic.Tags source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	==, !=.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.generic.Tags: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.generic.Tags.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.generic.Bundle source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	==, !=.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.generic.Bundle: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.generic.Bundle.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.generic.Attr source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	!=, ==.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.generic.Attr: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.generic.Attr.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.generic.TypedTag source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	!=, ==.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.generic.TypedTag: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.generic.TypedTag.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.generic.SvgAttrs source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	!=, ==.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.generic.SvgAttrs: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.generic.SvgAttrs.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.generic.SvgTags source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	!=, ==.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.generic.SvgTags: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.generic.SvgTags.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.JsDom$ source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	cssName, ==, !=, jsName.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.JsDom$: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.JsDom$.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0mThe scalatags.Text$ source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	jsName, cssName, !=, ==.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mFiles invalidated by inheriting from (external) scalatags.Text$: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0mdebug[0m] [0mGetting direct dependencies of all sources transitively invalidated by inheritance.[0m
+[0m[[0mdebug[0m] [0mGetting sources that directly depend on (external) scalatags.Text$.[0m
+[0m[[0mdebug[0m] [0mNone of the modified names appears in /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala. This dependency is not being considered for invalidation.[0m
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mInitial source changes: [0m
+[0m[[0mdebug[0m] [0m	removed:Set()[0m
+[0m[[0mdebug[0m] [0m	added: Set()[0m
+[0m[[0mdebug[0m] [0m	modified: Set(/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala)[0m
+[0m[[0mdebug[0m] [0mRemoved products: Set()[0m
+[0m[[0mdebug[0m] [0mExternal API changes: API Changes: Set(NamesChange(scalatags.text.Builder,ModifiedNames(regularNames = ==, !=, implicitNames = )), NamesChange(scalatags.generic.Aggregate,ModifiedNames(regularNames = ==, !=, implicitNames = )), NamesChange(scalatags.generic.Tags,ModifiedNames(regularNames = ==, !=, implicitNames = )), NamesChange(scalatags.generic.Bundle,ModifiedNames(regularNames = ==, !=, implicitNames = )), NamesChange(scalatags.generic.Attr,ModifiedNames(regularNames = !=, ==, implicitNames = )), NamesChange(scalatags.generic.TypedTag,ModifiedNames(regularNames = !=, ==, implicitNames = )), NamesChange(scalatags.generic.SvgAttrs,ModifiedNames(regularNames = !=, ==, implicitNames = )), NamesChange(scalatags.generic.SvgTags,ModifiedNames(regularNames = !=, ==, implicitNames = )), NamesChange(scalatags.JsDom$,ModifiedNames(regularNames = cssName, ==, !=, jsName, implicitNames = )), NamesChange(scalatags.Text$,ModifiedNames(regularNames = jsName, cssName, !=, ==, implicitNames = )))[0m
+[0m[[0mdebug[0m] [0mModified binary dependencies: Set(/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-dom_sjs0.6.0-RC1_2.10/jars/scalajs-dom_sjs0.6.0-RC1_2.10-0.7.0.jar)[0m
+[0m[[0mdebug[0m] [0mInitial directly invalidated sources: Set(/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala)[0m
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mSources indirectly invalidated by:[0m
+[0m[[0mdebug[0m] [0m	product: Set()[0m
+[0m[[0mdebug[0m] [0m	binary dep: Set(/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala)[0m
+[0m[[0mdebug[0m] [0m	external source: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala)[0m
+[0m[[0mdebug[0m] [0mRecompiling all 1 sources: invalidated sources (1) exceeded 50.0% of all sources[0m
+[0m[[0minfo[0m] [0mCompiling 1 Scala source to /Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/target/scala-2.10/classes...[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.4[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.4[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler 44e71a9f, interfacing (CompilerInterface) with Scala compiler version 2.10.4[0m
+[0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
+[0m[[0mdebug[0m] [0m	-Xplugin:/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-compiler_2.10.4/jars/scalajs-compiler_2.10.4-0.6.0-RC2.jar[0m
+[0m[[0mdebug[0m] [0m	-bootclasspath[0m
+[0m[[0mdebug[0m] [0m	/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre/classes:/Users/haoyi/.sbt/boot/scala-2.10.4/lib/scala-library.jar[0m
+[0m[[0mdebug[0m] [0m	-classpath[0m
+[0m[[0mdebug[0m] [0m	/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/target/scala-2.10/classes:/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/scalatags/js/target/scala-2.10/classes:/Users/haoyi/.ivy2/cache/com.lihaoyi/scalatags_sjs0.6.0-RC1_2.10/jars/scalatags_sjs0.6.0-RC1_2.10-0.4.3-RC1.jar:/Users/haoyi/.ivy2/cache/org.scala-js/scalajs-library_2.10/jars/scalajs-library_2.10-0.6.0-RC2.jar[0m
+[0m[[31merror[0m] [0m/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala:3: object scalajs is not a member of package org[0m
+[0m[[31merror[0m] [0mimport org.scalajs.dom[0m
+[0m[[31merror[0m] [0m           ^[0m
+[0m[[31merror[0m] [0mbad symbolic reference. A signature in JsDom.class refers to term scalajs[0m
+[0m[[31merror[0m] [0min package org which is not available.[0m
+[0m[[31merror[0m] [0mIt may be completely missing from the current classpath, or the version on[0m
+[0m[[31merror[0m] [0mthe classpath might be incompatible with the version used when compiling JsDom.class.[0m
+[0m[[31merror[0m] [0m/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala:197: bad symbolic reference. A signature in JsDom.class refers to term dom[0m
+[0m[[31merror[0m] [0min value org.scalajs which is not available.[0m
+[0m[[31merror[0m] [0mIt may be completely missing from the current classpath, or the version on[0m
+[0m[[31merror[0m] [0mthe classpath might be incompatible with the version used when compiling JsDom.class.[0m
+[0m[[31merror[0m] [0m    val jsDomExample = new Example(scalatags.JsDom, "scalatags.JsDom Example")[0m
+[0m[[31merror[0m] [0m                                             ^[0m
+[0m[[31merror[0m] [0m/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala:198: not found: value dom[0m
+[0m[[31merror[0m] [0m    dom.document.body.innerHTML = textExample.htmlFrag.render + textExample.svgFrag.render[0m
+[0m[[31merror[0m] [0m    ^[0m
+[0m[[31merror[0m] [0m/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala:199: not found: value dom[0m
+[0m[[31merror[0m] [0m    dom.document.body.appendChild(jsDomExample.htmlFrag.render)[0m
+[0m[[31merror[0m] [0m    ^[0m
+[0m[[31merror[0m] [0m/Users/haoyi/Dropbox (Personal)/Workspace/scalatags-new/example/src/main/scala/example/ScalaJSExample.scala:200: not found: value dom[0m
+[0m[[31merror[0m] [0m    dom.document.body.appendChild(jsDomExample.svgFrag.render)[0m
+[0m[[31merror[0m] [0m    ^[0m
+[0m[[31merror[0m] [0m6 errors found[0m
+[0m[[0mdebug[0m] [0mCompilation failed (CompilerInterface)[0m
+[0m[[31merror[0m] [0m(example/compile:[31mcompile[0m) Compilation failed[0m
