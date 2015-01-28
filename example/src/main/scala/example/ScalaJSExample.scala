@@ -115,7 +115,7 @@ class Example[Builder, Output <: FragT, FragT]
       ),
       line(
         x1 := 175, y1 := 100,
-        x2 := 275, y2 := 000,
+        x2 := 275, y2 := 0,
         stroke := "rgb(255,0,0)",
         strokeWidth := 10
       ),
