@@ -1,13 +1,15 @@
+crossScalaVersions := Seq("2.11.4", "2.10.4")
+
 lazy val scalatags = crossProject
   .settings(
     organization := "com.lihaoyi",
     name := "scalatags",
     scalaVersion := "2.11.4",
-    crossScalaVersions := Seq("2.11.4", "2.10.4"),
+
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
-      "com.lihaoyi" %%% "utest" % "0.2.5-RC1" % "test"
+      "com.lihaoyi" %%% "utest" % "0.2.5" % "test"
     ),
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
     libraryDependencies ++= (
@@ -16,7 +18,7 @@ lazy val scalatags = crossProject
       ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     // Sonatype
-    version := "0.4.3-RC1",
+    version := "0.4.4",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=
@@ -42,16 +44,16 @@ lazy val scalatags = crossProject
   .jvmSettings()
   .jsSettings(
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.7.1"
+      "org.scala-js" %%% "scalajs-dom" % "0.8.0"
     ),
     resolvers += Resolver.sonatypeRepo("releases"),
     scalaJSStage in Test := FullOptStage,
-    requiresDOM := true/*,
-      scalacOptions ++= (if (isSnapshot.value) Seq.empty else Seq({
-        val a = p.base.toURI.toString.replaceFirst("[^/]+/?$", "")
-        val g = "https://raw.githubusercontent.com/lihaoyi/scalatags"
-        s"-P:scalajs:mapSourceURI:$a->$g/v${version.value}/"
-      }))*/
+    requiresDOM := true,
+    scalacOptions ++= (if (isSnapshot.value) Seq.empty else Seq({
+      val a = baseDirectory.value.toURI.toString.replaceFirst("[^/]+/?$", "")
+      val g = "https://raw.githubusercontent.com/lihaoyi/scalatags"
+      s"-P:scalajs:mapSourceURI:$a->$g/v${version.value}/"
+    }))
   )
 
 
