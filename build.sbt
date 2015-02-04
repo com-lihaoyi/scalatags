@@ -9,7 +9,7 @@ lazy val scalatags = crossProject
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
-      "com.lihaoyi" %%% "utest" % "0.2.5" % "test"
+      "com.lihaoyi" %%% "utest" % "0.3.0" % "test"
     ),
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
     libraryDependencies ++= (
@@ -18,7 +18,7 @@ lazy val scalatags = crossProject
       ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     // Sonatype
-    version := "0.4.4",
+    version := "0.4.5",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=

@@ -64,7 +64,7 @@ object JsDom
     type RawFrag = JsDom.RawFrag
     def raw(s: String) = RawFrag(s)
 
-    type HtmlTag = JsDom.TypedTag[html.Html]
+    type HtmlTag = JsDom.TypedTag[html.Element]
     val HtmlTag = JsDom.TypedTag
     type SvgTag = JsDom.TypedTag[svg.Element]
     val SvgTag = JsDom.TypedTag
