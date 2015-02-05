@@ -1345,6 +1345,8 @@ Changelog
 
 - Updated to scala-js-dom 0.8.0
 - Add missing SVG `spreadMethod`
+- `()` is now a `Frag` rather than a `Modifer`, rendering to `""`
+- Added a ton of missing attribtues
 
 0.4.2
 -----
