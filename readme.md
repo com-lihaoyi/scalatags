@@ -1335,6 +1335,17 @@ Scalatags is still a work in progress, but I think I've hit most of the pain poi
 Changelog
 =========
 
+0.4.5
+-----
+
+- Fixed regression in definition of `JsDom.HtmlTag` introduced in 0.4.4
+
+0.4.4
+-----
+
+- Updated to scala-js-dom 0.8.0
+- Add missing SVG `spreadMethod`
+
 0.4.2
 -----
 
