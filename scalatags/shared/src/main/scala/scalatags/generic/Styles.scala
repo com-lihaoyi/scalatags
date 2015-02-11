@@ -1003,7 +1003,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val borderRightStyle = new BorderStyle("bocrderRightStyle", "border-right-style")
+  val borderRightStyle = new BorderStyle("borderRightStyle", "border-right-style")
 
   /**
    * The border-right-width CSS property sets the width of the right border of
