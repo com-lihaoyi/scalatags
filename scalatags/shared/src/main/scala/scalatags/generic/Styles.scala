@@ -2704,7 +2704,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val minWidth = new Style("minWidth", "minWidth")
+  val minWidth = new Style("minWidth", "min-width")
 
 
   /**
