@@ -9,8 +9,9 @@ lazy val scalatags = crossProject
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
-      "com.lihaoyi" %%% "utest" % "0.3.0" % "test"
+      "com.lihaoyi" %%% "utest" % "0.3.1" % "test"
     ),
+    initialCommands in console := "ammonite.repl.Repl.main(null)",
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),
     libraryDependencies ++= (
       if (scalaVersion.value.startsWith("2.10")) Nil
@@ -18,7 +19,7 @@ lazy val scalatags = crossProject
       ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     // Sonatype
-    version := "0.4.5",
+    version := "0.4.6",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=

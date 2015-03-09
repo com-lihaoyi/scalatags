@@ -2,7 +2,7 @@ package scalatags
 import acyclic.file
 object TestUtil {
   def clean(s: String) = {
-    " +<".r.replaceAllIn("\\n\\s*".r.replaceAllIn(s, "").trim(), "<").replace(" ", "").replace("\"/>", "\">")
+    " +<".r.replaceAllIn("\\n\\s*".r.replaceAllIn(s, "").trim(), "<").replace(" ", "").replace("\"/>", "\">").sorted
   }
   def strCheck(x: Any*) = {
     for (Seq(a, b) <- x.grouped(2)) {
@@ -18,5 +18,5 @@ object TestUtil {
       }
     }
   }
-
 }
+

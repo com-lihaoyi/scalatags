@@ -1,4 +1,4 @@
-ScalaTags 0.4.5
+ScalaTags 0.4.6
 ===============
 
 ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
@@ -1334,6 +1334,13 @@ Scalatags is still a work in progress, but I think I've hit most of the pain poi
 
 Changelog
 =========
+
+0.4.6
+-----
+
+- Attribute is now "min-width" instead of "minWidth"
+- Fixed typo in borderRightStyle
+- Published for Scala.js 0.6.1
 
 0.4.5
 -----
