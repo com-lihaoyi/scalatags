@@ -1335,6 +1335,11 @@ Scalatags is still a work in progress, but I think I've hit most of the pain poi
 Changelog
 =========
 
+0.4.7
+-----
+
+- First implementation of Scalatags `StyleSheet`s
+
 0.4.6
 -----
 

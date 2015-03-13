@@ -42,7 +42,7 @@ class Builder(var children: Array[Frag] = new Array(4),
         val newAttrs = increment(attrs, attrIndex)
         if (newAttrs!= null) attrs = newAttrs
         styleIndex = attrIndex
-        attrs(attrIndex) = (k -> v)
+        attrs(attrIndex) = k -> v
         attrIndex += 1
       case ("style", n) =>
         val (oldK, oldV) = attrs(styleIndex)
@@ -50,7 +50,7 @@ class Builder(var children: Array[Frag] = new Array(4),
       case _ =>
         val newAttrs = increment(attrs, attrIndex)
         if (newAttrs!= null) attrs = newAttrs
-        attrs(attrIndex) = (k -> v)
+        attrs(attrIndex) = k -> v
         attrIndex += 1
     }
   }
