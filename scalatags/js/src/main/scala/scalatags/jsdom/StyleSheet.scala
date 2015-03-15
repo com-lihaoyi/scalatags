@@ -14,6 +14,7 @@ case class Cls(classes: Seq[String]) extends scalatags.generic.Cls[dom.Element](
 }
 
 class StyleSheet extends scalatags.generic.StyleSheet[dom.Element]{
+  type StyleSheetCls = Cls
   def styleSheetText = styleSheetBuilder
   var styleSheetBuilder = ""
 
@@ -24,7 +25,8 @@ class StyleSheet extends scalatags.generic.StyleSheet[dom.Element]{
     styles.foreach{_.applyTo(el)}
     val body = Option(el.getAttribute("style")).getOrElse("")
 
-    render(stringify(className, suffix, body))
+    if (body != "")
+      render(stringify(className, suffix, body))
 
     val seq = collection.mutable.Buffer.empty[String]
     seq.append(className)

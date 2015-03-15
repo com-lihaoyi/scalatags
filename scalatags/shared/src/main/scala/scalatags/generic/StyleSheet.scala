@@ -2,9 +2,12 @@ package scalatags.generic
 
 import java.util.concurrent.atomic.AtomicInteger
 
-abstract class Cls[Builder](classes: Seq[String]) extends Modifier[Builder]
+import scala.collection.SortedSet
+
+abstract class Cls[Builder](classes: SortedSet[String]) extends Modifier[Builder]
 
 abstract class StyleSheet[Builder]{
+  type StyleSheetCls <: Cls[Builder]
   def styleSheetText: String
   def stylesheetName = this.getClass.getName.replaceAll("[.$]", "-")
   val count = new AtomicInteger()
@@ -16,7 +19,7 @@ abstract class StyleSheet[Builder]{
     |""".stripMargin
 
   protected def render(styles: String): Unit
-  protected def create(suffix: String, styles: Modifier[Builder]*): Cls[Builder]
+  protected def create(suffix: String, styles: Modifier[Builder]*): StyleSheetCls
   object *{
     def apply(styles: Modifier[Builder]*) = create("", styles:_*)
 

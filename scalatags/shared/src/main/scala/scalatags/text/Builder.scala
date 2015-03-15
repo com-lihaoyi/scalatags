@@ -54,6 +54,9 @@ class Builder(var children: Array[Frag] = new Array(4),
         attrIndex += 1
     }
   }
+  def attrIndex(k: String): Int = {
+    attrs.indexWhere(x => x != null && x._1 == k)
+  }
 }
 trait Frag extends generic.Frag[Builder, String]{
   def writeTo(strb: StringBuilder): Unit

@@ -10,7 +10,7 @@ object StyleSheetTests extends TestSuite{
     )
     val y = *hover(
       opacity := 0.5
-      )
+    )
   }
 
   val tests = TestSuite{
