@@ -5,18 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger
 import scala.collection.{SortedMap, SortedSet}
 import scalatags.text
 
-abstract class Cls[Builder](classes: SortedSet[String]) extends Modifier[Builder]
-case class Rule(selector: String, styles: SortedMap[String, String]){
-  override def toString = {
-    val body = styles.map{ case (k, v) => s"  $k: $v;\n" }
-    s"$selector{\n$body}"
-  }
-}
-object Rule{
-  implicit def StylePair[T](s: StylePair[text.Builder, T]): Rule = ???
-  implicit def Cls[T](s: text.Cls): Rule = ???
-  implicit def RuleSeq[T](s: Seq[Rule]): Rule = ???
-}
+abstract class Cls[Builder](classes: SortedSet[String],
+                            styles: SortedMap[String, String]) extends Modifier[Builder]
 
 trait PseudoSelectors[T <: PseudoSelectors[T]]{
 
@@ -56,6 +46,106 @@ trait PseudoSelectors[T <: PseudoSelectors[T]]{
   def valid = extend(":valid")
   def visited = extend(":visited")
 }
+
+
+trait StyleSheetTags{
+  //  implicit def StylePairToRule[T](s: StylePair[text.Builder, T]): Rule = {
+  //    s.s
+  //
+  //  }
+  case class Tag(tag: String) extends PseudoSelectors[Tag]{
+    def extend(s: String) = new Tag(tag + s)
+  }
+  // Root Element
+  val html = Tag("html")
+  // Document Metadata
+  val head = Tag("head")
+  val base = Tag("base")
+  val link = Tag("link")
+  val meta = Tag("meta")
+  // Scripting
+  val script = Tag("script")
+  // Sections
+  val body = Tag("body")
+  val h1 = Tag("h1")
+  val h2 = Tag("h2")
+  val h3 = Tag("h3")
+  val h4 = Tag("h4")
+  val h5 = Tag("h5")
+  val h6 = Tag("h6")
+  val header = Tag("header")
+  val footer = Tag("footer")
+  // Grouping content
+  val p = Tag("p")
+  val hr = Tag("hr")
+  val pre = Tag("pre")
+  val blockquote = Tag("blockquote")
+  val ol = Tag("ol")
+  val ul = Tag("ul")
+  val li = Tag("li")
+  val dl = Tag("dl")
+  val dt = Tag("dt")
+  val dd = Tag("dd")
+  val figure = Tag("figure")
+  val figcaption = Tag("figcaption")
+  val div = Tag("div")
+  // Text-level semantics
+  val a = Tag("a")
+  val em = Tag("em")
+  val strong = Tag("strong")
+  val small = Tag("small")
+  val s = Tag("s")
+  val cite = Tag("cite")
+  val code = Tag("code")
+  val sub = Tag("sub")
+  val sup = Tag("sup")
+  val i = Tag("i")
+  val b = Tag("b")
+  val u = Tag("u")
+  val span = Tag("span")
+  val br = Tag("br")
+  val wbr = Tag("wbr")
+  // Edits
+  val ins = Tag("ins")
+  val del = Tag("del")
+  // Embedded content
+  val img = Tag("img")
+  val iframe = Tag("iframe")
+  val embed = Tag("embed")
+  val `object` = Tag("object")
+  val param = Tag("param")
+  val video = Tag("video")
+  val audio = Tag("audio")
+  val source = Tag("source")
+  val track = Tag("track")
+  val canvas = Tag("canvas")
+  val map = Tag("map")
+  val area = Tag("area")
+  // Tabular data
+  val table = Tag("table")
+  val caption = Tag("caption")
+  val colgroup = Tag("colgroup")
+  val col = Tag("col")
+  val tbody = Tag("tbody")
+  val thead = Tag("thead")
+  val tfoot = Tag("tfoot")
+  val tr = Tag("tr")
+  val td = Tag("td")
+  val th = Tag("th")
+  // Forms
+  val form = Tag("form")
+  val fieldset = Tag("fieldset")
+  val legend = Tag("legend")
+  val label = Tag("label")
+  val input = Tag("input")
+  val button = Tag("button")
+  val select = Tag("select")
+  val datalist = Tag("datalist")
+  val optgroup = Tag("optgroup")
+  val option = Tag("option")
+  val textarea = Tag("textarea")
+}
+
 abstract class StyleSheet[Builder]{
   type StyleSheetCls <: Cls[Builder]
   def styleSheetText: String
@@ -68,12 +158,15 @@ abstract class StyleSheet[Builder]{
     |}
     |""".stripMargin
 
+  type StyleFragCls
   protected def render(styles: String): Unit
-  protected def create(suffix: String, styles: Modifier[Builder]*): StyleSheetCls
+  protected def create(suffix: String, styles: StyleFragCls*): StyleSheetCls
+
+  def cascade(t: StyleSheetTags#Tag) = new DefaultConstructor(" " + t.tag)
   object * extends DefaultConstructor("")
   class DefaultConstructor(selector: String)
                           extends PseudoSelectors[DefaultConstructor]{
-    def apply(styles: Modifier[Builder]*) = create(selector, styles:_*)
+    def apply(styles: StyleFragCls*) = create(selector, styles:_*)
     def extend(s: String) = new DefaultConstructor(selector + s)
   }
 }

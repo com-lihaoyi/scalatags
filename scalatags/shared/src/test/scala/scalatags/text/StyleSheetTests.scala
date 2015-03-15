@@ -3,6 +3,7 @@ import scalatags.Text.all._
 import utest._
 
 object StyleSheetTests extends TestSuite{
+
   object SS extends StyleSheet{
     val x = *(
       backgroundColor := "red",
@@ -22,26 +23,30 @@ object StyleSheetTests extends TestSuite{
       opacity := 0.5
     )
   }
-//  object Cascade extends StyleSheet{
-//    val x = *(
-//      cascade(a)(
-//        backgroundColor := "red",
-//        textDecoration.none
-//      ),
-//      cascade(a).hover(
-//        backgroundColor := "blue",
-//        textDecoration.underline
-//      ),
-//      border := "1px solid red"
-//    )
-//  }
+  object Cascade extends StyleSheet{
+    val x = *(
+      cascade(a)(
+        backgroundColor := "red",
+        textDecoration.none
+      ),
+      cascade(a).hover(
+        backgroundColor := "blue",
+        textDecoration.underline
+      ),
+      border := "1px solid red"
+    )
+  }
   val tests = TestSuite{
+    'failures{
+      compileError("""object X extends StyleSheet{val cls = *(div)}""")
+    }
     'basic{
       'hello{
         val txt = SS.styleSheetText
         assert(txt ==
           """.scalatags-text-StyleSheetTests-SS--0 {
-            |  background-color: red;height: 125px;
+            |  background-color: red;
+            |  height: 125px;
             |}
             |.scalatags-text-StyleSheetTests-SS--1:hover {
             |  opacity: 0.5;
@@ -67,16 +72,21 @@ object StyleSheetTests extends TestSuite{
         "scalatags-text-StyleSheetTests-Inline--1"
       ))
     }
-//    'cascade{
-//      val txt = Cascade.styleSheetText
-//      assert(txt ==
-//        """.scalatags-text-StyleSheetTests-SS2--0 a{
-//          |  background-color: red;text-decoration: none;
-//          |}
-//          |.scalatags-text-StyleSheetTests-SS2--1 *{
-//          |  border: 1px solid red;
-//          |}
-//          |""".stripMargin)
-//    }
+    'cascade{
+      val txt = Cascade.styleSheetText
+      assert(txt ==
+        """.scalatags-text-StyleSheetTests-Cascade--0 a {
+          |  background-color: red;
+          |  text-decoration: none;
+          |}
+          |.scalatags-text-StyleSheetTests-Cascade--1 a:hover {
+          |  background-color: blue;
+          |  text-decoration: underline;
+          |}
+          |.scalatags-text-StyleSheetTests-Cascade--2 {
+          |  border: 1px solid red;
+          |}
+          |""".stripMargin)
+    }
   }
 }
