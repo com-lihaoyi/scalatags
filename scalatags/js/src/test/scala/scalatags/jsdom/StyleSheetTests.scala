@@ -1,29 +1,41 @@
-package scalatags.jsdom
+package scalatags
+package jsdom
 import scalatags.JsDom.all._
 import utest._
 
-object StyleSheetTests extends TestSuite{
-  object SS extends StyleSheet{
+object StyleSheetTests extends generic.StyleSheetTests(scalatags.JsDom){
+  def pkg = "jsdom"
+  object Simple extends StyleSheet{
     val x = *(
       backgroundColor := "red",
       height := 125
     )
     val y = *hover(
       opacity := 0.5
+      )
+
+    val z = *(x, y)
+  }
+  object Inline extends StyleSheet{
+    val w = *(
+      *hover(
+        backgroundColor := "red"
+        ),
+      opacity := 0.5
     )
   }
+  object Cascade extends StyleSheet{
+    val x = *.cascade(a)(
+      backgroundColor := "red",
+      textDecoration.none
+    )
+    val y = *.cascade(a.hover)(
+      backgroundColor := "blue",
+      textDecoration.underline
+    )
+    val z = *.cascade(a.hover, div)(
+      opacity := 0
+    )
 
-  val tests = TestSuite{
-    'hello{
-      val txt = SS.styleSheetText
-      assert(txt ==
-        """.scalatags-jsdom-StyleSheetTests-SS--0 {
-          |  background-color: red; height: 125px;
-          |}
-          |.scalatags-jsdom-StyleSheetTests-SS--1:hover {
-          |  opacity: 0.5;
-          |}
-          |""".stripMargin)
-    }
   }
 }

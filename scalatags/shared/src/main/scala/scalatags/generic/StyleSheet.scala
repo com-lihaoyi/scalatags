@@ -5,8 +5,11 @@ import java.util.concurrent.atomic.AtomicInteger
 import scala.collection.{SortedMap, SortedSet}
 import scalatags.text
 
-abstract class Cls[Builder](classes: SortedSet[String],
-                            styles: SortedMap[String, String]) extends Modifier[Builder]
+
+abstract class Cls[Builder] extends Modifier[Builder]{
+  def classes: SortedSet[String]
+  def styles: SortedMap[String, String]
+}
 
 trait PseudoSelectors[T <: PseudoSelectors[T]]{
 
@@ -49,10 +52,6 @@ trait PseudoSelectors[T <: PseudoSelectors[T]]{
 
 
 trait StyleSheetTags{
-  //  implicit def StylePairToRule[T](s: StylePair[text.Builder, T]): Rule = {
-  //    s.s
-  //
-  //  }
   case class Tag(tag: String) extends PseudoSelectors[Tag]{
     def extend(s: String) = new Tag(tag + s)
   }
@@ -145,9 +144,14 @@ trait StyleSheetTags{
   val option = Tag("option")
   val textarea = Tag("textarea")
 }
-
-abstract class StyleSheet[Builder]{
+trait StyleFrag[StyleSheetCls]{
+  def applyTo(c: StyleSheetCls): StyleSheetCls
+}
+abstract class StyleSheet[Builder] extends StyleSheetTags{
+  implicit def StylePairFrag(p: StylePair[Builder, _]): StyleFragCls
+  implicit def ClsFrag(p: StyleSheetCls): StyleFragCls
   type StyleSheetCls <: Cls[Builder]
+  type StyleFragCls <: StyleFrag[StyleSheetCls]
   def styleSheetText: String
   def stylesheetName = this.getClass.getName.replaceAll("[.$]", "-")
   val count = new AtomicInteger()
@@ -158,15 +162,24 @@ abstract class StyleSheet[Builder]{
     |}
     |""".stripMargin
 
-  type StyleFragCls
-  protected def render(styles: String): Unit
-  protected def create(suffix: String, styles: StyleFragCls*): StyleSheetCls
 
-  def cascade(t: StyleSheetTags#Tag) = new DefaultConstructor(" " + t.tag)
+  protected def render(styles: String): Unit
+
+  def newCls(className: String): StyleSheetCls
+  def create(suffix: String, styles: StyleFragCls*) = {
+    val className = makeClassName
+    val cls = styles.foldLeft(newCls(className))(
+      (cls, frag) => frag.applyTo(cls)
+    )
+    val body = cls.styles.map{ case (k, v) => s"  $k:$v\n" }.mkString
+    if (body != "") render(s".$className$suffix {\n$body}\n")
+    cls
+  }
   object * extends DefaultConstructor("")
   class DefaultConstructor(selector: String)
                           extends PseudoSelectors[DefaultConstructor]{
     def apply(styles: StyleFragCls*) = create(selector, styles:_*)
     def extend(s: String) = new DefaultConstructor(selector + s)
+    def cascade(t: StyleSheetTags#Tag*) = new DefaultConstructor(t.map(" "+_.tag).mkString)
   }
 }
