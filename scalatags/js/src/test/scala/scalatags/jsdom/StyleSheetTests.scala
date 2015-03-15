@@ -3,6 +3,10 @@ package jsdom
 import scalatags.JsDom.all._
 import utest._
 
+object MySheet extends Sheet[MySheet]
+trait MySheet{
+
+}
 object StyleSheetTests extends generic.StyleSheetTests(scalatags.JsDom){
   def pkg = "jsdom"
   object Simple extends StyleSheet{
@@ -12,7 +16,7 @@ object StyleSheetTests extends generic.StyleSheetTests(scalatags.JsDom){
     )
     val y = *hover(
       opacity := 0.5
-      )
+    )
 
     val z = *(x, y)
   }
@@ -25,15 +29,15 @@ object StyleSheetTests extends generic.StyleSheetTests(scalatags.JsDom){
     )
   }
   object Cascade extends StyleSheet{
-    val x = *.cascade(a)(
+    val x = cascade(a)(
       backgroundColor := "red",
       textDecoration.none
     )
-    val y = *.cascade(a.hover)(
+    val y = cascade(a.hover)(
       backgroundColor := "blue",
       textDecoration.underline
     )
-    val z = *.cascade(a.hover, div)(
+    val z = cascade(a.hover, div)(
       opacity := 0
     )
 

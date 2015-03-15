@@ -180,6 +180,6 @@ abstract class StyleSheet[Builder] extends StyleSheetTags{
                           extends PseudoSelectors[DefaultConstructor]{
     def apply(styles: StyleFragCls*) = create(selector, styles:_*)
     def extend(s: String) = new DefaultConstructor(selector + s)
-    def cascade(t: StyleSheetTags#Tag*) = new DefaultConstructor(t.map(" "+_.tag).mkString)
   }
+  def cascade(t: StyleSheetTags#Tag*) = new DefaultConstructor(t.map(" "+_.tag).mkString)
 }

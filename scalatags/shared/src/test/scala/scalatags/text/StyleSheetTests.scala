@@ -25,15 +25,15 @@ object StyleSheetTests extends generic.StyleSheetTests(scalatags.Text){
     )
   }
   object Cascade extends StyleSheet{
-    val x = *.cascade(a)(
+    val x = cascade(a)(
       backgroundColor := "red",
       textDecoration.none
     )
-    val y = *.cascade(a.hover)(
+    val y = cascade(a.hover)(
       backgroundColor := "blue",
       textDecoration.underline
     )
-    val z = *.cascade(a.hover, div)(
+    val z = cascade(a.hover, div)(
       opacity := 0
     )
 
