@@ -1,77 +1,115 @@
 package scalatags.generic
+
+import utest.*
 import utest._
-//
-//abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
-//                     (bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
-//  import bundle.all._
-//  def pkg: String
-//
-//  def Simple: StyleSheet[Builder] {
-//    def x: Cls[Builder]
-//    def y: Cls[Builder]
-//    def z: Cls[Builder]
-//  }
-//
-//  def Inline: StyleSheet[Builder] {
-//    def w: Cls[Builder]
-//  }
-//  def Cascade: StyleSheet[Builder] {
-//    def x: Cls[Builder]
-//    def y: Cls[Builder]
-//    def z: Cls[Builder]
-//  }
-//
-//  val tests = TestSuite{
-//    'failures{
-//      compileError("""object X extends StyleSheet{val cls = *(div)}""")
-//    }
-//    'basic{
-//      'hello{
-//        val txt = Simple.styleSheetText
-//        assert(txt ==
-//          s""".scalatags-$pkg-StyleSheetTests-Simple--0 {
-//            |  background-color: red;
-//            |  height: 125px;
-//            |}
-//            |.scalatags-$pkg-StyleSheetTests-Simple--1:hover {
-//            |  opacity: 0.5;
-//            |}
-//            |""".stripMargin)
-//      }
-//      'combinations{
-//        assert(Simple.x.classes ++ Simple.y.classes subsetOf Simple.z.classes )
-//      }
-//    }
-//    'inline{
-//      val txt = Inline.styleSheetText
-//      assert(txt ==
-//        s""".scalatags-$pkg-StyleSheetTests-Inline--0:hover {
-//          |  background-color: red;
-//          |}
-//          |.scalatags-$pkg-StyleSheetTests-Inline--1 {
-//          |  opacity: 0.5;
-//          |}
-//          |""".stripMargin)
-//      assert(Inline.w.classes == Set(
-//        s"scalatags-$pkg-StyleSheetTests-Inline--0",
-//        s"scalatags-$pkg-StyleSheetTests-Inline--1"
-//      ))
-//    }
-//    'cascade{
-//      val txt = Cascade.styleSheetText
-//      assert(txt ==
-//        s""".scalatags-$pkg-StyleSheetTests-Cascade--0 a {
-//          |  background-color: red;
-//          |  text-decoration: none;
-//          |}
-//          |.scalatags-$pkg-StyleSheetTests-Cascade--1 a:hover {
-//          |  background-color: blue;
-//          |  text-decoration: underline;
-//          |}
-//          |.scalatags-$pkg-StyleSheetTests-Cascade--2 a:hover div {
-//          |  opacity: 0;
-//          |}
-//          |""".stripMargin)
-//    }
-//  }
-//}
+
+
+abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
+                     (bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
+
+  import bundle.all._
+  implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
+
+  object Simple extends StyleSheet{
+    val x = *(
+      backgroundColor := "red",
+      height := 125
+    )
+    val y = *hover(
+      opacity := 0.5
+      )
+
+    val z = *(x, y)
+  }
+  object Inline extends StyleSheet{
+    val w = *(
+      &hover(
+        backgroundColor := "red"
+        ),
+      &active(
+        backgroundColor := "blue"
+        ),
+      &.hover.active(
+        backgroundColor := "yellow"
+      ),
+      opacity := 0.5
+    )
+  }
+  object Cascade extends CascadingStyleSheet{
+    val y = *()
+    val x = *(
+      a(
+        backgroundColor := "red",
+        textDecoration.none
+      ),
+      a.hover(
+        backgroundColor := "blue",
+        textDecoration.underline
+      ),
+      (a.hover ~ div ~ y.cls)(
+        opacity := 0
+      )
+    )
+  }
+
+  def check(txt: String, rawExpected: String) = {
+    val rendered = txt.lines.map(_.trim).mkString
+    val expected = rawExpected.lines.map(_.trim).mkString
+    assert(rendered == expected)
+  }
+  val tests = TestSuite{
+    'hello{
+      check(
+        Simple.styleSheetText,
+        """.cls0{
+          |  background-color: red;
+          |  height: 125px;
+          |}
+          |.cls1:hover{
+          |  opacity: 0.5;
+          |}
+          |.cls2{
+          |  background-color: red;
+          |  height: 125px;
+          |  opacity: 0.5;
+          |}
+        """.stripMargin
+      )
+    }
+    'inline{
+      check(
+        Inline.styleSheetText,
+        """.cls0{
+          |  opacity: 0.5;
+          |}
+          |.cls0:hover{
+          |  background-color: red;
+          |}
+          |.cls0:active{
+          |  background-color: blue;
+          |}
+          |.cls0:hover:active{
+          |  background-color: yellow;
+          |}
+        """.stripMargin
+      )
+    }
+    'cascade{
+      check(
+        Cascade.styleSheetText,
+        """.cls1 a{
+          |  background-color: red;
+          |  text-decoration: none;
+          |}
+          |.cls1 a:hover{
+          |  background-color: blue;
+          |  text-decoration: underline;
+          |}
+          |.cls1 a:hover div .cls0{
+          |  opacity: 0;
+          |}
+        """.stripMargin
+      )
+    }
+  }
+}
