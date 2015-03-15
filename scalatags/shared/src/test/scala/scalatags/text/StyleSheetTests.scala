@@ -31,6 +31,7 @@ object StyleSheetTests extends TestSuite{
     )
   }
   object Cascade extends CascadingStyleSheet{
+    val y = *()
     val x = *(
       a(
         backgroundColor := "red",
@@ -40,14 +41,16 @@ object StyleSheetTests extends TestSuite{
         backgroundColor := "blue",
         textDecoration.underline
       ),
-      (a.hover ~ div)(
+      (a.hover ~ div ~ y.cls)(
         opacity := 0
       )
     )
   }
 
-  def check(txt: String, expected: String) = {
-    assert(txt.lines.map(_.trim).mkString == expected.lines.map(_.trim).mkString)
+  def check(txt: String, rawExpected: String) = {
+    val rendered = txt.lines.map(_.trim).mkString
+    val expected = rawExpected.lines.map(_.trim).mkString
+    assert(rendered == expected)
   }
   val tests = TestSuite{
     'hello{
@@ -89,15 +92,15 @@ object StyleSheetTests extends TestSuite{
     'cascade{
       check(
         Cascade.styleSheetText,
-        """.cls0 a{
+        """.cls1 a{
           |  background-color: red;
           |  text-decoration: none;
           |}
-          |.cls0 a:hover{
+          |.cls1 a:hover{
           |  background-color: blue;
           |  text-decoration: underline;
           |}
-          |.cls0 a:hover div{
+          |.cls1 a:hover div .cls0{
           |  opacity: 0;
           |}
         """.stripMargin
