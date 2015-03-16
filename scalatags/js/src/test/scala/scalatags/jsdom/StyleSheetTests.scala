@@ -3,4 +3,6 @@ package jsdom
 import scalatags.JsDom.all._
 import utest._
 
-object StyleSheetTests extends generic.StyleSheetTests(scalatags.JsDom) with StyleSheetImplicits
+object StyleSheetTests
+  extends generic.StyleSheetTests(scalatags.JsDom)
+  with StyleSheetImplicits

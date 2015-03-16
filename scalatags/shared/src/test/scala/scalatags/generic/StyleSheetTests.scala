@@ -1,6 +1,5 @@
 package scalatags.generic
 
-import utest.*
 import utest._
 
 
@@ -9,7 +8,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 
   import bundle.all._
   implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
-
+  val pkg = "scalatags-generic-StyleSheetTests"
   object Simple extends StyleSheet{
     val x = *(
       backgroundColor := "red",
@@ -61,14 +60,14 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     'hello{
       check(
         Simple.styleSheetText,
-        """.cls0{
+        s""".$pkg-Simple-0{
           |  background-color: red;
           |  height: 125px;
           |}
-          |.cls1:hover{
+          |.$pkg-Simple-1:hover{
           |  opacity: 0.5;
           |}
-          |.cls2{
+          |.$pkg-Simple-2{
           |  background-color: red;
           |  height: 125px;
           |  opacity: 0.5;
@@ -79,16 +78,16 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     'inline{
       check(
         Inline.styleSheetText,
-        """.cls0{
+        s""".$pkg-Inline-0{
           |  opacity: 0.5;
           |}
-          |.cls0:hover{
+          |.$pkg-Inline-0:hover{
           |  background-color: red;
           |}
-          |.cls0:active{
+          |.$pkg-Inline-0:active{
           |  background-color: blue;
           |}
-          |.cls0:hover:active{
+          |.$pkg-Inline-0:hover:active{
           |  background-color: yellow;
           |}
         """.stripMargin
@@ -97,15 +96,15 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     'cascade{
       check(
         Cascade.styleSheetText,
-        """.cls1 a{
+        s""".$pkg-Cascade-1 a{
           |  background-color: red;
           |  text-decoration: none;
           |}
-          |.cls1 a:hover{
+          |.$pkg-Cascade-1 a:hover{
           |  background-color: blue;
           |  text-decoration: underline;
           |}
-          |.cls1 a:hover div .cls0{
+          |.$pkg-Cascade-1 a:hover div .$pkg-Cascade-0{
           |  opacity: 0;
           |}
         """.stripMargin

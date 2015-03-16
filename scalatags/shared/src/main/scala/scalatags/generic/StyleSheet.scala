@@ -9,6 +9,8 @@ import scala.collection.{SortedMap, SortedSet}
 
 trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
 trait StyleSheet {
+  def sheetName = getClass.getName.replaceAll("[.$]", "-")
+
   object & extends TreeBuilder
   var styleSheetText = ""
   val count = new AtomicInteger()
@@ -22,7 +24,7 @@ trait StyleSheet {
      * [[Cls]]
      */
     def apply(args: StyleSheetFrag*): Cls = {
-      val name = ".cls" + count.getAndIncrement
+      val name = "." + sheetName + count.getAndIncrement
       val constructed = args.foldLeft(StyleTree(name + selectors, SortedMap.empty, Nil))(
         (c, f) => f.applyTo(c)
       )
