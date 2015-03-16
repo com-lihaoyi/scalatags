@@ -22,13 +22,13 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   }
   object Inline extends StyleSheet{
     val w = *(
-      &hover(
+      hover(
         backgroundColor := "red"
         ),
-      &active(
+      active(
         backgroundColor := "blue"
         ),
-      &.hover.active(
+      hover.active(
         backgroundColor := "yellow"
       ),
       opacity := 0.5
@@ -109,6 +109,23 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
           |}
         """.stripMargin
       )
+    }
+    'noCascade{
+      // Cascading stylesheets have to be enabled manually, to encourage
+      // usage only for the rare cases you actually want things to cascade
+      compileError("""
+        object Cascade extends StyleSheet{
+          val x = *(
+            a(
+              backgroundColor := "red",
+              textDecoration.none
+            )
+          )
+        }
+      """).check("""
+            a(
+             ^
+      """, "type mismatch")
     }
   }
 }

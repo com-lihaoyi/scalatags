@@ -4,14 +4,10 @@ import java.util.concurrent.atomic.AtomicInteger
 
 import scala.collection.{SortedMap, SortedSet}
 
-
-
-
 trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
-trait StyleSheet {
+trait StyleSheet extends TreeBuilder{
   def sheetName = getClass.getName.replaceAll("[.$]", "-")
 
-  object & extends TreeBuilder
   var styleSheetText = ""
   val count = new AtomicInteger()
   object * extends Creator("")
@@ -146,7 +142,9 @@ trait StyleSheetTags{
   // Document Metadata
   val head = Selector("head")
   val base = Selector("base")
-  val link = Selector("link")
+  // Don't let you style these because they
+  // shouldn't be visible in the first place
+  //  val link = Selector("link")
   val meta = Selector("meta")
   // Scripting
   val script = Selector("script")
