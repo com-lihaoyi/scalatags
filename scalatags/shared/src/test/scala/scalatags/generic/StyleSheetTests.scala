@@ -2,12 +2,14 @@ package scalatags.generic
 
 import utest._
 
+import scalatags.stylesheet.{CascadingStyleSheet, StyleSheet}
+
 
 abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
-                     (bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
+                              (bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
 
   import bundle.all._
-  implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
+
   val pkg = "scalatags-generic-StyleSheetTests"
   object Simple extends StyleSheet{
     val x = *(
@@ -16,7 +18,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     )
     val y = *hover(
       opacity := 0.5
-      )
+    )
 
     val z = *(x, y)
   }

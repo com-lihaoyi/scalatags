@@ -6,6 +6,7 @@ import scala.scalajs.js
 import org.scalajs.dom.{html, svg, Element}
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{StylePair, Namespace, Aliases}
+import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
 
 /**
@@ -50,6 +51,16 @@ object JsDom
 
 
   trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
+    implicit class StyleFrag(s: generic.StylePair[dom.Element, _]) extends StyleSheetFrag{
+      def applyTo(c: StyleTree) = {
+        val b = dom.document.createElement("div")
+        s.applyTo(b)
+        val Array(style, value) = b.getAttribute("style").split(":", 2)
+        c.copy(styles = c.styles.updated(style, value))
+      }
+    }
+
+
     def genericAttr[T] = new JsDom.GenericAttr[T]
     def genericStyle[T] = new JsDom.GenericStyle[T]
     def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new JsDom.GenericPixelStyle[T](ev)
@@ -150,6 +161,7 @@ object JsDom
     }
     override def toString = render.outerHTML
   }
+
 }
 
 trait LowPriorityImplicits{

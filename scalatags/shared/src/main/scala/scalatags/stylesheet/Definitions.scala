@@ -1,92 +1,14 @@
-package scalatags.generic
+package scalatags.stylesheet
 
-import java.util.concurrent.atomic.AtomicInteger
+import scala.collection.SortedMap
 
-import scala.collection.{SortedMap, SortedSet}
-
-trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
-trait StyleSheet extends TreeBuilder{
-  def sheetName = getClass.getName.replaceAll("[.$]", "-")
-
-  var styleSheetText = ""
-  val count = new AtomicInteger()
-  object * extends Creator("")
-  class Creator(selectors: String) extends PseudoSelectors[Creator]{
-    def extend(s: String) = new Creator(selectors + s)
-
-    /**
-     * Collapse the tree of [[StyleSheetFrag]]s into a single [[Cls]],
-     * side-effect all the output into the styleSheetText, and return the
-     * [[Cls]]
-     */
-    def apply(args: StyleSheetFrag*): Cls = {
-      val name = "." + sheetName + count.getAndIncrement
-      val constructed = args.foldLeft(StyleTree(name + selectors, SortedMap.empty, Nil))(
-        (c, f) => f.applyTo(c)
-      )
-
-      styleSheetText += constructed.stringify("")
-      Cls(name, constructed)
-    }
-  }
-
-}
-
-
-
-case class StyleTree(selectors: String,
-                     styles: SortedMap[String, String],
-                     children: Seq[StyleTree]){
-  def stringify(prefix: String): String = {
-    val body = styles.map{case (k, v) => s"  $k:$v"}.mkString("\n")
-    val ours =
-      if (body == "") ""
-      else s"$prefix$selectors{\n$body\n}\n"
-    (ours +: children.map(_.stringify(prefix + selectors))).mkString
-  }
-}
-case class Cls(name: String, structure: StyleTree){
-  def cls = new Selector(name)
-}
-class TreeBuilder(val built: String = "") extends PseudoSelectors[TreeBuilder]{ b =>
-
-  def extend(s: String) = {
-    new TreeBuilder(b.built + s)
-  }
-  def apply(args: StyleSheetFrag*) = {
-    args.foldLeft(StyleTree(built, SortedMap.empty, Nil))(
-      (c, f) => f.applyTo(c)
-    )
-  }
-}
-
-
-trait StyleSheetFrag{
-  def applyTo(c: StyleTree): StyleTree
-}
-object StyleSheetFrag{
-
-  implicit class StyleTreeFrag(st: StyleTree) extends StyleSheetFrag{
-    def applyTo(c: StyleTree) = {
-      new StyleTree(
-        c.selectors,
-        c.styles,
-        c.children ++ Seq(st)
-      )
-    }
-  }
-  implicit class ClsFrag(c: Cls) extends StyleSheetFrag{
-    def applyTo(st: StyleTree) = {
-      new StyleTree(
-        st.selectors,
-        c.structure.styles ++ st.styles,
-        c.structure.children ++ st.children
-      )
-
-    }
-  }
-}
-trait PseudoSelectors[T <: PseudoSelectors[T]]{
+/**
+ * Provides all the CSS pseudo-selectors as strongly-typed
+ * properties when mixed in. The only requirement is that you
+ * define `extend` to tell it what each of these properties
+ * returns
+ */
+trait PseudoSelectors[T]{
 
   def extend(s: String): T
   // Pseudo-selectors
@@ -125,17 +47,36 @@ trait PseudoSelectors[T <: PseudoSelectors[T]]{
   def visited = extend(":visited")
 }
 
-
+/**
+ * A selector that can be used in a cascading stylesheet, or combined
+ * with other selectors to form a larger rule
+ */
 case class Selector(tag: String) extends PseudoSelectors[Selector]{
   def extend(s: String) = Selector(tag + s)
+  /**
+   * Combine these two selectors, allowing the right-hand-side
+   * selector to cascade.
+   */
   def ~(other: Selector) = Selector(tag + " " + other.tag)
+
+  /**
+   * Combine these two selectors using the `>` child selector,
+   * which prevents cascading.
+   */
   def >(other: Selector) = Selector(tag + " > " + other.tag)
-  def apply(args: StyleSheetFrag*) = {
-    args.foldLeft(StyleTree(" " + tag, SortedMap.empty, Nil))(
-      (c, f) => f.applyTo(c)
-    )
-  }
+
+  /**
+   * Builds this selector into a [[StyleTree]] using the given
+   * [[StyleSheetFrag]]s. This doesn't create a [[Cls]] on its own,
+   * but can be used as part of the definition of an outer [[Cls]].
+   */
+  def apply(args: StyleSheetFrag*) = StyleTree.build(" " + tag, args)
 }
+
+/**
+ * Provides a strongly-typed list of all the HTML tags that can be
+ * used as [[Selector]]s.
+ */
 trait StyleSheetTags{
   // Root Element
   val html = Selector("html")

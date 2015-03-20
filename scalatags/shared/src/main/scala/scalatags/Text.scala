@@ -4,6 +4,8 @@ import scalatags.generic._
 import scala.collection.SortedMap
 import collection.mutable
 import scala.annotation.unchecked.uncheckedVariance
+import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
+import scalatags.text.Builder
 
 /**
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
@@ -58,6 +60,15 @@ object Text
   }
 
   trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
+    implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
+      def applyTo(c: StyleTree) = {
+        val b = new Builder()
+        s.applyTo(b)
+        val Array(style, value) = b.attrs(b.attrIndex("style"))._2.split(":", 2)
+        c.copy(styles = c.styles.updated(style, value))
+      }
+    }
+
     def genericAttr[T] = new Text.GenericAttr[T]
     def genericStyle[T] = new Text.GenericStyle[T]
     def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new Text.GenericPixelStyle[T](ev)
@@ -186,4 +197,6 @@ object Text
     }
     def render: Output = this.toString.asInstanceOf[Output]
   }
+
+
 }

@@ -5,4 +5,4 @@ import utest._
 
 object StyleSheetTests
   extends generic.StyleSheetTests(scalatags.Text)
-  with StyleSheetImplicits
+
