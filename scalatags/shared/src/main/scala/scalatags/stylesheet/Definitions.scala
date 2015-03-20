@@ -10,74 +10,83 @@ import scala.collection.SortedMap
  */
 trait PseudoSelectors[T]{
 
-  def extend(s: String): T
+  def pseudoExtend(s: String): T
   // Pseudo-selectors
   // https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes
-  def active = extend(":active")
-  def checked = extend(":checked")
-  def default = extend(":default")
-  def disabled = extend(":disabled")
-  def empty = extend(":empty")
-  def enabled = extend(":enabled")
-  def first = extend(":first")
-  def firstChild = extend(":first-child")
-  def firstOfType = extend(":first-of-type")
-  def fullscreen = extend(":fullscreen")
-  def focus = extend(":focus")
-  def hover = extend(":hover")
-  def indeterminate = extend(":indeterminate")
-  def inRange = extend(":in-range")
-  def invalid = extend(":invalid")
-  def lastChild = extend(":last-child")
-  def lastOfType = extend(":last-of-type")
-  def left = extend(":left")
-  def link = extend(":link")
-  def onlyChild = extend(":only-child")
-  def onlyOfType = extend(":onlyOfType")
-  def optional = extend(":optional")
-  def outOfRange = extend(":out-of-range")
-  def readOnly = extend(":read-only")
-  def readWrite = extend(":read-write")
-  def required = extend(":required")
-  def right = extend(":right")
-  def root = extend(":root")
-  def scope = extend(":scope")
-  def target = extend(":target")
-  def valid = extend(":valid")
-  def visited = extend(":visited")
+  def active = pseudoExtend(":active")
+  def checked = pseudoExtend(":checked")
+  def default = pseudoExtend(":default")
+  def disabled = pseudoExtend(":disabled")
+  def empty = pseudoExtend(":empty")
+  def enabled = pseudoExtend(":enabled")
+  def first = pseudoExtend(":first")
+  def firstChild = pseudoExtend(":first-child")
+  def firstOfType = pseudoExtend(":first-of-type")
+  def fullscreen = pseudoExtend(":fullscreen")
+  def focus = pseudoExtend(":focus")
+  def hover = pseudoExtend(":hover")
+  def indeterminate = pseudoExtend(":indeterminate")
+  def inRange = pseudoExtend(":in-range")
+  def invalid = pseudoExtend(":invalid")
+  def lastChild = pseudoExtend(":last-child")
+  def lastOfType = pseudoExtend(":last-of-type")
+  def left = pseudoExtend(":left")
+  def link = pseudoExtend(":link")
+  def onlyChild = pseudoExtend(":only-child")
+  def onlyOfType = pseudoExtend(":onlyOfType")
+  def optional = pseudoExtend(":optional")
+  def outOfRange = pseudoExtend(":out-of-range")
+  def readOnly = pseudoExtend(":read-only")
+  def readWrite = pseudoExtend(":read-write")
+  def required = pseudoExtend(":required")
+  def right = pseudoExtend(":right")
+  def root = pseudoExtend(":root")
+  def scope = pseudoExtend(":scope")
+  def target = pseudoExtend(":target")
+  def valid = pseudoExtend(":valid")
+  def visited = pseudoExtend(":visited")
 }
 
-/**
- * A selector that can be used in a cascading stylesheet, or combined
- * with other selectors to form a larger rule
- */
-case class Selector(tag: String) extends PseudoSelectors[Selector]{
-  def extend(s: String) = Selector(tag + s)
-  /**
-   * Combine these two selectors, allowing the right-hand-side
-   * selector to cascade.
-   */
-  def ~(other: Selector) = Selector(tag + " " + other.tag)
 
-  /**
-   * Combine these two selectors using the `>` child selector,
-   * which prevents cascading.
-   */
-  def >(other: Selector) = Selector(tag + " > " + other.tag)
+/**
+ * Lets you chain pseudo-selectors e.g. `hover.visited` and have it properly
+ * translate into `:hover:visited` when rendered.
+ */
+class Selector(val built: Seq[String] = Nil) extends PseudoSelectors[Selector]{ b =>
+  def pseudoExtend(s: String) = {
+    if(b.built == Nil) new Selector(Seq(s))
+    else new Selector(b.built.init :+ (b.built.last + s))
+  }
 
   /**
    * Builds this selector into a [[StyleTree]] using the given
    * [[StyleSheetFrag]]s. This doesn't create a [[Cls]] on its own,
    * but can be used as part of the definition of an outer [[Cls]].
    */
-  def apply(args: StyleSheetFrag*) = StyleTree.build(" " + tag, args)
+  def apply(args: StyleSheetFrag*) = StyleTree.build(built, args)
+
+  /**
+   * Combine these two selectors, allowing the right-hand-side
+   * selector to cascade.
+   */
+  def ~(other: Selector) = new Selector(built ++ other.built)
+
+  /**
+   * Combine these two selectors using the `>` child selector,
+   * which prevents cascading.
+   */
+  def >(other: Selector) = new Selector(built ++ Seq(">") ++ other.built)
 }
 
+object Selector{
+  def apply(s: String) = new Selector(Seq(s))
+}
 /**
  * Provides a strongly-typed list of all the HTML tags that can be
  * used as [[Selector]]s.
  */
 trait StyleSheetTags{
+
   // Root Element
   val html = Selector("html")
   // Document Metadata

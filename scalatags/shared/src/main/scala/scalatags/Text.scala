@@ -60,6 +60,9 @@ object Text
   }
 
   trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
+    implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
+      def applyTo(t: text.Builder) = t.appendAttr("class", " " + s.name)
+    }
     implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
       def applyTo(c: StyleTree) = {
         val b = new Builder()
@@ -105,7 +108,7 @@ object Text
 
   class GenericAttr[T] extends AttrValue[T]{
     def apply(t: text.Builder, a: Attr, v: T): Unit = {
-      t.addAttr(a.name, v.toString)
+      t.setAttr(a.name, v.toString)
     }
   }
 
@@ -118,7 +121,7 @@ object Text
       Escaping.escape(v.toString, strb)
       strb ++= ";"
 
-      t.addAttr("style", strb.toString)
+      t.appendAttr("style", strb.toString)
     }
   }
   class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{

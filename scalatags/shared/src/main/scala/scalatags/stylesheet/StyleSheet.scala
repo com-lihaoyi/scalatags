@@ -17,14 +17,14 @@ trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
  * styles which get serialized to a `String`. Does not allow the use
  * of cascading tag/class selectors; use [[CascadingStyleSheet]] for that.
  */
-trait StyleSheet extends SelectorBuilder{
+trait StyleSheet extends Selector{
   def sheetName = getClass.getName.replaceAll("[.$]", "-")
 
   var styleSheetText = ""
   val count = new AtomicInteger()
   object * extends Creator("")
   class Creator(selectors: String) extends PseudoSelectors[Creator]{
-    def extend(s: String) = new Creator(selectors + s)
+    def pseudoExtend(s: String) = new Creator(selectors + s)
 
     /**
      * Collapse the tree of [[StyleSheetFrag]]s into a single [[Cls]],
@@ -32,12 +32,12 @@ trait StyleSheet extends SelectorBuilder{
      * [[Cls]]
      */
     def apply(args: StyleSheetFrag*): Cls = {
-      val name = "." + sheetName + count.getAndIncrement
-      val constructed = args.foldLeft(StyleTree(name + selectors, SortedMap.empty, Nil))(
+      val name = sheetName + count.getAndIncrement
+      val constructed = args.foldLeft(StyleTree(Seq("." + name + selectors), SortedMap.empty, Nil))(
         (c, f) => f.applyTo(c)
       )
 
-      styleSheetText += constructed.stringify("")
+      styleSheetText += constructed.stringify(Nil)
       Cls(name, constructed)
     }
   }
@@ -47,19 +47,22 @@ trait StyleSheet extends SelectorBuilder{
  * A structure representing a set of CSS rules which has not been
  * rendered into a `String` and a [[Cls]].
  */
-case class StyleTree(selectors: String,
+case class StyleTree(selectors: Seq[String],
                      styles: SortedMap[String, String],
                      children: Seq[StyleTree]){
-  def stringify(prefix: String): String = {
+  def stringify(prefix: Seq[String]): String = {
     val body = styles.map{case (k, v) => s"  $k:$v"}.mkString("\n")
+    val (first +: rest) = prefix ++ selectors
+    val all = first +: rest.map(x => if(x(0) == ':') x else " " + x)
     val ours =
       if (body == "") ""
-      else s"$prefix$selectors{\n$body\n}\n"
-    (ours +: children.map(_.stringify(prefix + selectors))).mkString
+      else s"${all.mkString}{\n$body\n}\n"
+
+    (ours +: children.map(_.stringify(prefix ++ selectors))).mkString
   }
 }
 object StyleTree{
-  def build(start: String, args: Seq[StyleSheetFrag]) = {
+  def build(start: Seq[String], args: Seq[StyleSheetFrag]) = {
     args.foldLeft(StyleTree(start, SortedMap.empty, Nil))(
       (c, f) => f.applyTo(c)
     )
@@ -69,25 +72,19 @@ object StyleTree{
  * A rendered class; both the class `name` (used when injected into Scalatags
  * fragments) and the `structure` (used when injected into further class definitions)
  */
-case class Cls(name: String, structure: StyleTree){
-  def cls = new Selector(name)
-}
+case class Cls(name: String, structure: StyleTree) extends Selector(Seq("." + name)){
 
-/**
- * Lets you chain pseudo-selectors e.g. `hover.visited` and have it properly
- * translate into `:hover:visited` when rendered.
- */
-class SelectorBuilder(val built: String = "") extends PseudoSelectors[SelectorBuilder]{ b =>
-
-  def extend(s: String) = {
-    new SelectorBuilder(b.built + s)
-  }
-  def apply(args: StyleSheetFrag*) = {
-    args.foldLeft(StyleTree(built, SortedMap.empty, Nil))(
-      (c, f) => f.applyTo(c)
-    )
+  def splice = new StyleSheetFrag{
+    def applyTo(st: StyleTree) = {
+      new StyleTree(
+        st.selectors,
+        structure.styles ++ st.styles,
+        structure.children ++ st.children
+      )
+    }
   }
 }
+
 
 /**
  * Something which can be used as part of a [[StyleSheet]]
@@ -105,14 +102,5 @@ object StyleSheetFrag{
       )
     }
   }
-  implicit class ClsFrag(c: Cls) extends StyleSheetFrag{
-    def applyTo(st: StyleTree) = {
-      new StyleTree(
-        st.selectors,
-        c.structure.styles ++ st.styles,
-        c.structure.children ++ st.children
-      )
 
-    }
-  }
 }

@@ -117,6 +117,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
 }
 trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT]{
   implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
+  implicit def ClsModifier(s: stylesheet.Cls): Modifier
   def genericAttr[T]: AttrValue[T]
   implicit val stringAttr = genericAttr[String]
   implicit val booleanAttr = genericAttr[Boolean]

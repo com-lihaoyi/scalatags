@@ -6,7 +6,7 @@ import scalatags.stylesheet.{CascadingStyleSheet, StyleSheet}
 
 
 abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
-                              (bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
+                              (val bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
 
   import bundle.all._
 
@@ -20,16 +20,16 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
       opacity := 0.5
     )
 
-    val z = *(x, y)
+    val z = *(x.splice, y.splice)
   }
   object Inline extends StyleSheet{
     val w = *(
       hover(
         backgroundColor := "red"
-        ),
+      ),
       active(
         backgroundColor := "blue"
-        ),
+      ),
       hover.active(
         backgroundColor := "yellow"
       ),
@@ -47,11 +47,19 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         backgroundColor := "blue",
         textDecoration.underline
       ),
-      (a.hover ~ div ~ y.cls)(
+      (a.hover ~ div ~ y)(
         opacity := 0
+      ),
+      div.hover(
+        div(
+          y(
+            opacity := 0
+          )
+        )
       )
     )
   }
+
 
   def check(txt: String, rawExpected: String) = {
     val rendered = txt.lines.map(_.trim).mkString
@@ -109,6 +117,9 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
           |.$pkg-Cascade-1 a:hover div .$pkg-Cascade-0{
           |  opacity: 0;
           |}
+          |.$pkg-Cascade-1 div:hover div .$pkg-Cascade-0{
+          |  opacity: 0;
+          |}
         """.stripMargin
       )
     }
@@ -128,6 +139,17 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
             a(
              ^
       """, "type mismatch")
+    }
+    'htmlFrag{
+      val x = div(
+        Simple.x,
+        Simple.y
+      )
+      val expected = s"""<div class=" ${Simple.x.name} ${Simple.y.name}"></div>"""
+      assert(
+        x.toString.replaceAll("\\s", "") ==
+        expected.replaceAll("\\s", "")
+      )
     }
   }
 }

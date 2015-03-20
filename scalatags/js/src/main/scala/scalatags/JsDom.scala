@@ -51,6 +51,9 @@ object JsDom
 
 
   trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
+    implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
+      def applyTo(t: dom.Element) = t.classList.add(s.name)
+    }
     implicit class StyleFrag(s: generic.StylePair[dom.Element, _]) extends StyleSheetFrag{
       def applyTo(c: StyleTree) = {
         val b = dom.document.createElement("div")

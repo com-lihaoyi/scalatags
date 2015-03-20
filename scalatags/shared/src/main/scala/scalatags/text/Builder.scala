@@ -16,7 +16,7 @@ class Builder(var children: Array[Frag] = new Array(4),
               var attrs: Array[(String, String)] = new Array(4)){
   final var childIndex = 0
   final var attrIndex = 0
-  private[this] var styleIndex = -1
+
   private[this] def increment[T: ClassTag](arr: Array[T], index: Int) = {
     if (index >= arr.length){
       val newArr = new Array[T](arr.length * 2)
@@ -36,22 +36,31 @@ class Builder(var children: Array[Frag] = new Array(4),
     children(childIndex) = c
     childIndex += 1
   }
-  def addAttr(k: String, v: String) = {
-    (k, styleIndex) match{
-      case ("style", -1) =>
+  def appendAttr(k: String, v: String) = {
+
+    attrIndex(k) match{
+      case -1 =>
         val newAttrs = increment(attrs, attrIndex)
         if (newAttrs!= null) attrs = newAttrs
-        styleIndex = attrIndex
+
         attrs(attrIndex) = k -> v
         attrIndex += 1
-      case ("style", n) =>
-        val (oldK, oldV) = attrs(styleIndex)
-        attrs(styleIndex) = (oldK, oldV + v)
-      case _ =>
+      case n =>
+        val (oldK, oldV) = attrs(n)
+        attrs(n) = (oldK, oldV + v)
+    }
+  }
+  def setAttr(k: String, v: String) = {
+    attrIndex(k) match{
+      case -1 =>
         val newAttrs = increment(attrs, attrIndex)
         if (newAttrs!= null) attrs = newAttrs
         attrs(attrIndex) = k -> v
         attrIndex += 1
+      case n =>
+      case n =>
+        val (oldK, oldV) = attrs(n)
+        attrs(n) = (oldK, v)
     }
   }
   def attrIndex(k: String): Int = {
