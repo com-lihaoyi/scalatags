@@ -24,13 +24,13 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   }
   object Inline extends StyleSheet{
     val w = *(
-      hover(
+      &.hover(
         backgroundColor := "red"
       ),
-      active(
+      &.active(
         backgroundColor := "blue"
       ),
-      hover.active(
+      &.hover.active(
         backgroundColor := "yellow"
       ),
       opacity := 0.5

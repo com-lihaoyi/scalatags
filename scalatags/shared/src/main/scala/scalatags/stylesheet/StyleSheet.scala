@@ -17,7 +17,8 @@ trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
  * styles which get serialized to a `String`. Does not allow the use
  * of cascading tag/class selectors; use [[CascadingStyleSheet]] for that.
  */
-trait StyleSheet extends Selector{
+trait StyleSheet{
+  val & = new Selector
   def sheetName = getClass.getName.replaceAll("[.$]", "-")
 
   var styleSheetText = ""

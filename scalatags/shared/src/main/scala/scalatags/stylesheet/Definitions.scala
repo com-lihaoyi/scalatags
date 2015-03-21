@@ -92,9 +92,8 @@ trait StyleSheetTags{
   // Document Metadata
   val head = Selector("head")
   val base = Selector("base")
-  // Don't let you style these because they
-  // shouldn't be visible in the first place
-  //  val link = Selector("link")
+
+  val link = Selector("link")
   val meta = Selector("meta")
   // Scripting
   val script = Selector("script")
