@@ -13,19 +13,19 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   val pkg = "scalatags-generic-StyleSheetTests"
   object Simple extends Sheet[Simple]
   trait Simple extends StyleSheet{
-    def x = *(
+    def x = cls(
       backgroundColor := "red",
       height := 125
     )
-    def y = *hover(
+    def y = cls.hover(
       opacity := 0.5
     )
 
-    def z = *(x.splice, y.splice)
+    def z = cls(x.splice, y.splice)
   }
   object Inline extends Sheet[Inline]
   trait Inline extends StyleSheet{
-    def w = *(
+    def w = cls(
       &.hover(
         backgroundColor := "red"
       ),
@@ -40,8 +40,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   }
   object Cascade extends Sheet[Cascade]
   trait Cascade extends CascadingStyleSheet{
-    def y = *()
-    def x = *(
+    def y = cls()
+    def x = cls(
       a(
         backgroundColor := "red",
         textDecoration.none
@@ -66,21 +66,21 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   object Custom extends Sheet[Custom]
   trait Custom extends CascadingStyleSheet{
     override def customSheetName = Some("CuStOm")
-    def x = *(
+    def x = cls(
       backgroundColor := "red",
       height := 125
     )
-    def y = *hover(
+    def y = cls.hover(
       opacity := 0.5
     )
 
   }
 
 
-  def check(txt: String, rawExpected: String) = {
-    val rendered = txt.lines.map(_.trim).mkString
-    val expected = rawExpected.lines.map(_.trim).mkString
-    assert(rendered == expected)
+  def check(txt: String, expected: String) = {
+    def normalize(s: String) = s.lines.map(_.trim).mkString
+
+    assert(normalize(txt) == normalize(expected))
   }
   val tests = TestSuite{
     'feature{

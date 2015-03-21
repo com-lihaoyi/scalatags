@@ -38,10 +38,10 @@ trait StyleSheet{
    */
   val & = new Selector
 
-
-  object * extends Creator("")
-  class Creator(selectors: String) extends PseudoSelectors[Creator]{
-    def pseudoExtend(s: String) = new Creator(selectors + s)
+  object * extends Selector(Seq("*"))
+  object cls extends Creator(Nil)
+  class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
+    def pseudoExtend(s: String) = new Creator(selectors :+ s)
 
     /**
      * Collapse the tree of [[StyleSheetFrag]]s into a single [[Cls]],
@@ -49,7 +49,7 @@ trait StyleSheet{
      * [[Cls]]
      */
     def apply(args: StyleSheetFrag*): Cls = {
-      Cls(selectors, args)
+      Cls("", selectors, args)
     }
   }
 
@@ -96,7 +96,7 @@ object Mangled{
         ..$clsOverrides
 
         def defaultSheetName = $typeName
-        val allClasses = Seq(..$names)
+        lazy val allClasses = Seq(..$names)
       })"""
 
     c.Expr[T](res)
@@ -107,8 +107,8 @@ object Mangled{
  * A rendered class; both the class `name` (used when injected into Scalatags
  * fragments) and the `structure` (used when injected into further class definitions)
  */
-case class Cls(name: String, args: Seq[StyleSheetFrag]) extends Selector(Seq("." + name)){
-  lazy val structure = args.foldLeft(StyleTree(Seq("." + name), SortedMap.empty, Nil))(
+case class Cls(name: String, pseudoSelectors: Seq[String], args: Seq[StyleSheetFrag]) extends Selector(Seq("." + name)){
+  lazy val structure = args.foldLeft(StyleTree(Seq("." + name + pseudoSelectors.map(':'+_).mkString), SortedMap.empty, Nil))(
     (c, f) => f.applyTo(c)
   )
   def splice = new StyleSheetFrag{

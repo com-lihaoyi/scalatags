@@ -14,11 +14,10 @@ case class StyleTree(selectors: Seq[String],
                      children: Seq[StyleTree]){
   def stringify(prefix: Seq[String]): String = {
     val body = styles.map{case (k, v) => s"  $k:$v"}.mkString("\n")
-    val (first +: rest) = prefix ++ selectors
-    val all = first +: rest.map(x => if(x(0) == ':') x else " " + x)
+    val all = (prefix ++ selectors).mkString(" ")
     val ours =
       if (body == "") ""
-      else s"${all.mkString}{\n$body\n}\n"
+      else s"${all}{\n$body\n}\n"
 
     (ours +: children.map(_.stringify(prefix ++ selectors))).mkString
   }
@@ -64,38 +63,38 @@ trait PseudoSelectors[T]{
   def pseudoExtend(s: String): T
   // Pseudo-selectors
   // https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes
-  def active = pseudoExtend(":active")
-  def checked = pseudoExtend(":checked")
-  def default = pseudoExtend(":default")
-  def disabled = pseudoExtend(":disabled")
-  def empty = pseudoExtend(":empty")
-  def enabled = pseudoExtend(":enabled")
-  def first = pseudoExtend(":first")
-  def firstChild = pseudoExtend(":first-child")
-  def firstOfType = pseudoExtend(":first-of-type")
-  def fullscreen = pseudoExtend(":fullscreen")
-  def focus = pseudoExtend(":focus")
-  def hover = pseudoExtend(":hover")
-  def indeterminate = pseudoExtend(":indeterminate")
-  def inRange = pseudoExtend(":in-range")
-  def invalid = pseudoExtend(":invalid")
-  def lastChild = pseudoExtend(":last-child")
-  def lastOfType = pseudoExtend(":last-of-type")
-  def left = pseudoExtend(":left")
-  def link = pseudoExtend(":link")
-  def onlyChild = pseudoExtend(":only-child")
-  def onlyOfType = pseudoExtend(":onlyOfType")
-  def optional = pseudoExtend(":optional")
-  def outOfRange = pseudoExtend(":out-of-range")
-  def readOnly = pseudoExtend(":read-only")
-  def readWrite = pseudoExtend(":read-write")
-  def required = pseudoExtend(":required")
-  def right = pseudoExtend(":right")
-  def root = pseudoExtend(":root")
-  def scope = pseudoExtend(":scope")
-  def target = pseudoExtend(":target")
-  def valid = pseudoExtend(":valid")
-  def visited = pseudoExtend(":visited")
+  def active = pseudoExtend("active")
+  def checked = pseudoExtend("checked")
+  def default = pseudoExtend("default")
+  def disabled = pseudoExtend("disabled")
+  def empty = pseudoExtend("empty")
+  def enabled = pseudoExtend("enabled")
+  def first = pseudoExtend("first")
+  def firstChild = pseudoExtend("first-child")
+  def firstOfType = pseudoExtend("first-of-type")
+  def fullscreen = pseudoExtend("fullscreen")
+  def focus = pseudoExtend("focus")
+  def hover = pseudoExtend("hover")
+  def indeterminate = pseudoExtend("indeterminate")
+  def inRange = pseudoExtend("in-range")
+  def invalid = pseudoExtend("invalid")
+  def lastChild = pseudoExtend("last-child")
+  def lastOfType = pseudoExtend("last-of-type")
+  def left = pseudoExtend("left")
+  def link = pseudoExtend("link")
+  def onlyChild = pseudoExtend("only-child")
+  def onlyOfType = pseudoExtend("onlyOfType")
+  def optional = pseudoExtend("optional")
+  def outOfRange = pseudoExtend("out-of-range")
+  def readOnly = pseudoExtend("read-only")
+  def readWrite = pseudoExtend("read-write")
+  def required = pseudoExtend("required")
+  def right = pseudoExtend("right")
+  def root = pseudoExtend("root")
+  def scope = pseudoExtend("scope")
+  def target = pseudoExtend("target")
+  def valid = pseudoExtend("valid")
+  def visited = pseudoExtend("visited")
 }
 
 
@@ -105,8 +104,8 @@ trait PseudoSelectors[T]{
  */
 class Selector(val built: Seq[String] = Nil) extends PseudoSelectors[Selector]{ b =>
   def pseudoExtend(s: String) = {
-    if(b.built == Nil) new Selector(Seq(s))
-    else new Selector(b.built.init :+ (b.built.last + s))
+    if(b.built == Nil) new Selector(Seq(":"+s))
+    else new Selector(b.built.init :+ (b.built.last + ":"+s))
   }
 
   /**
