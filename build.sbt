@@ -6,6 +6,11 @@ lazy val scalatags = crossProject
     organization := "com.lihaoyi",
     name := "scalatags",
     scalaVersion := "2.11.4",
+    // Will not be necessary with sbt 0.13.8
+    unmanagedSourceDirectories in Compile ++= {
+      if (scalaVersion.value startsWith "2.10.") Seq(baseDirectory.value / ".."/"shared"/"src"/ "main" / "scala-2.10")
+      else Seq(baseDirectory.value / ".."/"shared" / "src"/"main" / "scala-2.11")
+    },
 
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(

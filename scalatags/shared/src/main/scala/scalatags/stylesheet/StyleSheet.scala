@@ -2,7 +2,7 @@ package scalatags.stylesheet
 import acyclic.file
 import scala.language.experimental.macros
 import scala.collection.SortedMap
-import scala.reflect.macros.blackbox.Context
+import scalatags.ScalaVersionStubs.Context
 
 /**
  * A [[StyleSheet]] which lets you define cascading tag/class
