@@ -1,6 +1,5 @@
 package scalatags.stylesheet
-
-import java.util.concurrent.atomic.AtomicInteger
+import acyclic.file
 import scala.language.experimental.macros
 import scala.collection.SortedMap
 import scala.reflect.macros.blackbox.Context
@@ -19,11 +18,26 @@ trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
  * of cascading tag/class selectors; use [[CascadingStyleSheet]] for that.
  */
 trait StyleSheet{
-  def nameFor(typeName: String, memberName: String, baseName: String) = {
-    (typeName.split('.') :+ memberName).mkString("-") + baseName
+  /**
+   * The name of this CSS stylesheet. Defaults to the name of the trait,
+   * but you can overrid
+   */
+  def customSheetName: Option[String] = None
+
+  /**
+   * Converts the name of the [[StyleSheet]]'s, the name of the member, and
+   * any applicable pseudo-selectors into the name of the CSS class.
+   */
+  def nameFor(memberName: String, pseudoSelectors: String) = {
+    customSheetName.getOrElse(defaultSheetName.replace(".", "-")) + "-" + memberName + pseudoSelectors
   }
+
+  /**
+   * Namespace that holds all the css pseudo-selectors, to avoid collisions
+   * with tags and style-names and other things.
+   */
   val & = new Selector
-  def sheetName = getClass.getName.replaceAll("[.$]", "-")
+
 
   object * extends Creator("")
   class Creator(selectors: String) extends PseudoSelectors[Creator]{
@@ -39,6 +53,13 @@ trait StyleSheet{
     }
   }
 
+  /**
+   * The default name of a stylesheet, filled in with the [[Sheet]] implicit macro
+   */
+  def defaultSheetName: String
+  /**
+   * All classes defined in this stylesheet, filled in with the [[Sheet]] implicit macro
+   */
   def allClasses: Seq[Cls]
 
   def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
@@ -67,43 +88,18 @@ object Mangled{
       if member.typeSignature.toString == "=> scalatags.stylesheet.Cls"
     } yield member.name.toTermName
 
-    val overrides = for(name<- names) yield q"""
-        override lazy val $name = super.$name.copy(name = nameFor($typeName, ${name.decodedName.toString}, super.$name.name))
-      """
+    val clsOverrides = for(name<- names) yield q"""
+      override lazy val $name = super.$name.copy(name = nameFor(${name.decodedName.toString}, super.$name.name))
+    """
 
     val res = q"""scalatags.stylesheet.Mangled(new $weakType{
-        ..$overrides
+        ..$clsOverrides
+
+        def defaultSheetName = $typeName
         val allClasses = Seq(..$names)
       })"""
 
     c.Expr[T](res)
-  }
-}
-
-/**
- * A structure representing a set of CSS rules which has not been
- * rendered into a `String` and a [[Cls]].
- */
-case class StyleTree(selectors: Seq[String],
-                     styles: SortedMap[String, String],
-                     children: Seq[StyleTree]){
-  def stringify(prefix: Seq[String]): String = {
-    val body = styles.map{case (k, v) => s"  $k:$v"}.mkString("\n")
-    val (first +: rest) = prefix ++ selectors
-    val all = first +: rest.map(x => if(x(0) == ':') x else " " + x)
-    val ours =
-      if (body == "") ""
-      else s"${all.mkString}{\n$body\n}\n"
-
-    (ours +: children.map(_.stringify(prefix ++ selectors))).mkString
-  }
-}
-
-object StyleTree{
-  def build(start: Seq[String], args: Seq[StyleSheetFrag]) = {
-    args.foldLeft(StyleTree(start, SortedMap.empty, Nil))(
-      (c, f) => f.applyTo(c)
-    )
   }
 }
 
@@ -124,24 +120,4 @@ case class Cls(name: String, args: Seq[StyleSheetFrag]) extends Selector(Seq("."
       )
     }
   }
-}
-
-/**
- * Something which can be used as part of a [[StyleSheet]]
- */
-trait StyleSheetFrag{
-
-  def applyTo(c: StyleTree): StyleTree
-}
-object StyleSheetFrag{
-  implicit class StyleTreeFrag(st: StyleTree) extends StyleSheetFrag{
-    def applyTo(c: StyleTree) = {
-      new StyleTree(
-        c.selectors,
-        c.styles,
-        c.children ++ Seq(st)
-      )
-    }
-  }
-
 }

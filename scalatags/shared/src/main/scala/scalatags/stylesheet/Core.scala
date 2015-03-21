@@ -1,6 +1,57 @@
 package scalatags.stylesheet
 
+import acyclic.file
+
 import scala.collection.SortedMap
+
+
+/**
+ * A structure representing a set of CSS rules which has not been
+ * rendered into a `String` and a [[Cls]].
+ */
+case class StyleTree(selectors: Seq[String],
+                     styles: SortedMap[String, String],
+                     children: Seq[StyleTree]){
+  def stringify(prefix: Seq[String]): String = {
+    val body = styles.map{case (k, v) => s"  $k:$v"}.mkString("\n")
+    val (first +: rest) = prefix ++ selectors
+    val all = first +: rest.map(x => if(x(0) == ':') x else " " + x)
+    val ours =
+      if (body == "") ""
+      else s"${all.mkString}{\n$body\n}\n"
+
+    (ours +: children.map(_.stringify(prefix ++ selectors))).mkString
+  }
+}
+
+object StyleTree{
+  def build(start: Seq[String], args: Seq[StyleSheetFrag]) = {
+    args.foldLeft(StyleTree(start, SortedMap.empty, Nil))(
+      (c, f) => f.applyTo(c)
+    )
+  }
+}
+
+
+/**
+ * Something which can be used as part of a [[StyleSheet]]
+ */
+trait StyleSheetFrag{
+
+  def applyTo(c: StyleTree): StyleTree
+}
+object StyleSheetFrag{
+  implicit class StyleTreeFrag(st: StyleTree) extends StyleSheetFrag{
+    def applyTo(c: StyleTree) = {
+      new StyleTree(
+        c.selectors,
+        c.styles,
+        c.children ++ Seq(st)
+      )
+    }
+  }
+
+}
 
 /**
  * Provides all the CSS pseudo-selectors as strongly-typed
