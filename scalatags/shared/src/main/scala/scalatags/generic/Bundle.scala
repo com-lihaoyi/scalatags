@@ -1,7 +1,7 @@
 package scalatags
 package generic
 import acyclic.file
-import scalatags.stylesheet.StyleSheetFrag
+import scalatags.stylesheet.{Sheet, StyleSheetFrag}
 import scalatags.text
 
 /**
@@ -116,6 +116,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
   type Frag = generic.Frag[Builder, FragT]
 }
 trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT]{
+  implicit def UnSheet[T](s: Sheet[T]): T = s()
   implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
   def genericAttr[T]: AttrValue[T]

@@ -1,5 +1,6 @@
 crossScalaVersions := Seq("2.11.4", "2.10.4")
 
+
 lazy val scalatags = crossProject
   .settings(
     organization := "com.lihaoyi",
@@ -9,7 +10,14 @@ lazy val scalatags = crossProject
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
-      "com.lihaoyi" %%% "utest" % "0.3.1" % "test"
+      "com.lihaoyi" %%% "utest" % "0.3.1" % "test",
+      "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided"
+    ) ++ (
+      if (scalaVersion.value startsWith "2.11.") Nil
+      else Seq(
+        "org.scalamacros" %% s"quasiquotes" % "2.0.0" % "provided",
+        compilerPlugin("org.scalamacros" % s"paradise" % "2.0.0" cross CrossVersion.full)
+      )
     ),
     initialCommands in console := "ammonite.repl.Repl.main(null)",
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.2"),

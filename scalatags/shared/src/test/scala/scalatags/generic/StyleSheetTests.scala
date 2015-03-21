@@ -1,9 +1,9 @@
-package scalatags.generic
+package scalatags
+package generic
 
 import utest._
 
-import scalatags.stylesheet.{CascadingStyleSheet, StyleSheet}
-
+import scalatags.stylesheet.{CascadingStyleSheet, StyleSheet, Sheet}
 
 abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
                               (val bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
@@ -11,19 +11,21 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   import bundle.all._
 
   val pkg = "scalatags-generic-StyleSheetTests"
-  object Simple extends StyleSheet{
-    val x = *(
+  object Simple extends Sheet[Simple]
+  trait Simple extends StyleSheet{
+    def x = *(
       backgroundColor := "red",
       height := 125
     )
-    val y = *hover(
+    def y = *hover(
       opacity := 0.5
     )
 
-    val z = *(x.splice, y.splice)
+    def z = *(x.splice, y.splice)
   }
-  object Inline extends StyleSheet{
-    val w = *(
+  object Inline extends Sheet[Inline]
+  trait Inline extends StyleSheet{
+    def w = *(
       &.hover(
         backgroundColor := "red"
       ),
@@ -36,9 +38,10 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
       opacity := 0.5
     )
   }
-  object Cascade extends CascadingStyleSheet{
-    val y = *()
-    val x = *(
+  object Cascade extends Sheet[Cascade]
+  trait Cascade extends CascadingStyleSheet{
+    def y = *()
+    def x = *(
       a(
         backgroundColor := "red",
         textDecoration.none
@@ -68,16 +71,17 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   }
   val tests = TestSuite{
     'hello{
+
       check(
         Simple.styleSheetText,
-        s""".$pkg-Simple-0{
+        s""".$pkg-Simple-x{
           |  background-color: red;
           |  height: 125px;
           |}
-          |.$pkg-Simple-1:hover{
+          |.$pkg-Simple-y:hover{
           |  opacity: 0.5;
           |}
-          |.$pkg-Simple-2{
+          |.$pkg-Simple-z{
           |  background-color: red;
           |  height: 125px;
           |  opacity: 0.5;
@@ -85,19 +89,20 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         """.stripMargin
       )
     }
+
     'inline{
       check(
         Inline.styleSheetText,
-        s""".$pkg-Inline-0{
+        s""".$pkg-Inline-w{
           |  opacity: 0.5;
           |}
-          |.$pkg-Inline-0:hover{
+          |.$pkg-Inline-w:hover{
           |  background-color: red;
           |}
-          |.$pkg-Inline-0:active{
+          |.$pkg-Inline-w:active{
           |  background-color: blue;
           |}
-          |.$pkg-Inline-0:hover:active{
+          |.$pkg-Inline-w:hover:active{
           |  background-color: yellow;
           |}
         """.stripMargin
@@ -106,40 +111,40 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     'cascade{
       check(
         Cascade.styleSheetText,
-        s""".$pkg-Cascade-1 a{
+        s""".$pkg-Cascade-x a{
           |  background-color: red;
           |  text-decoration: none;
           |}
-          |.$pkg-Cascade-1 a:hover{
+          |.$pkg-Cascade-x a:hover{
           |  background-color: blue;
           |  text-decoration: underline;
           |}
-          |.$pkg-Cascade-1 a:hover div .$pkg-Cascade-0{
+          |.$pkg-Cascade-x a:hover div .$pkg-Cascade-y{
           |  opacity: 0;
           |}
-          |.$pkg-Cascade-1 div:hover div .$pkg-Cascade-0{
+          |.$pkg-Cascade-x div:hover div .$pkg-Cascade-y{
           |  opacity: 0;
           |}
         """.stripMargin
       )
     }
-    'noCascade{
-      // Cascading stylesheets have to be enabled manually, to encourage
-      // usage only for the rare cases you actually want things to cascade
-      compileError("""
-        object Cascade extends StyleSheet{
-          val x = *(
-            a(
-              backgroundColor := "red",
-              textDecoration.none
-            )
-          )
-        }
-      """).check("""
-            a(
-             ^
-      """, "type mismatch")
-    }
+//    'noCascade{
+//      // Cascading stylesheets have to be enabled manually, to encourage
+//      // usage only for the rare cases you actually want things to cascade
+//      compileError("""
+//        object Cascade extends StyleSheet{
+//          val x = *(
+//            a(
+//              backgroundColor := "red",
+//              textDecoration.none
+//            )
+//          )
+//        }
+//      """).check("""
+//            a(
+//             ^
+//      """, "type mismatch")
+//    }
     'htmlFrag{
       val x = div(
         Simple.x,

@@ -1,8 +1,9 @@
 package scalatags.stylesheet
 
 import java.util.concurrent.atomic.AtomicInteger
-
+import scala.language.experimental.macros
 import scala.collection.SortedMap
+import scala.reflect.macros.blackbox.Context
 
 /**
  * A [[StyleSheet]] which lets you define cascading tag/class
@@ -18,11 +19,12 @@ trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
  * of cascading tag/class selectors; use [[CascadingStyleSheet]] for that.
  */
 trait StyleSheet{
+  def nameFor(typeName: String, memberName: String, baseName: String) = {
+    (typeName.split('.') :+ memberName).mkString("-") + baseName
+  }
   val & = new Selector
   def sheetName = getClass.getName.replaceAll("[.$]", "-")
 
-  var styleSheetText = ""
-  val count = new AtomicInteger()
   object * extends Creator("")
   class Creator(selectors: String) extends PseudoSelectors[Creator]{
     def pseudoExtend(s: String) = new Creator(selectors + s)
@@ -33,14 +35,48 @@ trait StyleSheet{
      * [[Cls]]
      */
     def apply(args: StyleSheetFrag*): Cls = {
-      val name = sheetName + count.getAndIncrement
-      val constructed = args.foldLeft(StyleTree(Seq("." + name + selectors), SortedMap.empty, Nil))(
-        (c, f) => f.applyTo(c)
-      )
-
-      styleSheetText += constructed.stringify(Nil)
-      Cls(name, constructed)
+      Cls(selectors, args)
     }
+  }
+
+  def allClasses: Seq[Cls]
+
+  def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
+}
+
+class Sheet[T](implicit i: Mangled[T]){
+  def apply() = i.t
+}
+
+/**
+ * Wraps a type [[T]], so we can demand an implicit `Mangled[T]` in a way
+ * that triggers a macro to instantiate that type.
+ */
+case class Mangled[T](t: T)
+object Mangled{
+  implicit def mangler[T]: Mangled[T] = macro manglerImpl[T]
+  def manglerImpl[T: c.WeakTypeTag](c: Context) = {
+    import c.universe._
+
+    val weakType = weakTypeOf[T]
+
+    val typeName = weakType.typeSymbol.fullName
+    val names = for {
+      member <- weakType.members.toSeq.reverse
+      // Not sure if there's a better way to capture by-name types
+      if member.typeSignature.toString == "=> scalatags.stylesheet.Cls"
+    } yield member.name.toTermName
+
+    val overrides = for(name<- names) yield q"""
+        override lazy val $name = super.$name.copy(name = nameFor($typeName, ${name.decodedName.toString}, super.$name.name))
+      """
+
+    val res = q"""scalatags.stylesheet.Mangled(new $weakType{
+        ..$overrides
+        val allClasses = Seq(..$names)
+      })"""
+
+    c.Expr[T](res)
   }
 }
 
@@ -62,6 +98,7 @@ case class StyleTree(selectors: Seq[String],
     (ours +: children.map(_.stringify(prefix ++ selectors))).mkString
   }
 }
+
 object StyleTree{
   def build(start: Seq[String], args: Seq[StyleSheetFrag]) = {
     args.foldLeft(StyleTree(start, SortedMap.empty, Nil))(
@@ -69,12 +106,15 @@ object StyleTree{
     )
   }
 }
+
 /**
  * A rendered class; both the class `name` (used when injected into Scalatags
  * fragments) and the `structure` (used when injected into further class definitions)
  */
-case class Cls(name: String, structure: StyleTree) extends Selector(Seq("." + name)){
-
+case class Cls(name: String, args: Seq[StyleSheetFrag]) extends Selector(Seq("." + name)){
+  lazy val structure = args.foldLeft(StyleTree(Seq("." + name), SortedMap.empty, Nil))(
+    (c, f) => f.applyTo(c)
+  )
   def splice = new StyleSheetFrag{
     def applyTo(st: StyleTree) = {
       new StyleTree(
@@ -86,11 +126,11 @@ case class Cls(name: String, structure: StyleTree) extends Selector(Seq("." + na
   }
 }
 
-
 /**
  * Something which can be used as part of a [[StyleSheet]]
  */
 trait StyleSheetFrag{
+
   def applyTo(c: StyleTree): StyleTree
 }
 object StyleSheetFrag{
