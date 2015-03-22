@@ -41,7 +41,7 @@ trait StyleSheet{
   object * extends Selector(Seq("*"))
   object cls extends Creator(Nil)
   class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
-    def pseudoExtend(s: String) = new Creator(selectors :+ s)
+    def pseudoExtend(s: String): Creator = new Creator(selectors :+ s)
 
     /**
      * Collapse the tree of [[StyleSheetFrag]]s into a single [[Cls]],

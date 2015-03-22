@@ -5,19 +5,31 @@ import acyclic.file
 import scala.collection.SortedMap
 
 
+/*
+
+.cls1
+  .cls2
+    :hover
+  :hover
+    cls2
+
+.cls1 .cls2:hover
+.cls1:hover .cls2
+ */
 /**
  * A structure representing a set of CSS rules which has not been
- * rendered into a `String` and a [[Cls]].
+ * rendered into a [[Cls]].
  */
 case class StyleTree(selectors: Seq[String],
                      styles: SortedMap[String, String],
                      children: Seq[StyleTree]){
   def stringify(prefix: Seq[String]): String = {
     val body = styles.map{case (k, v) => s"  $k:$v"}.mkString("\n")
-    val all = (prefix ++ selectors).mkString(" ")
+    val (first +: rest) = prefix ++ selectors
+    val all = (first +: rest.map(x => if (x(0) == ':') x else " " + x)).mkString("")
     val ours =
       if (body == "") ""
-      else s"${all}{\n$body\n}\n"
+      else s"$all{\n$body\n}\n"
 
     (ours +: children.map(_.stringify(prefix ++ selectors))).mkString
   }
