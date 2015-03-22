@@ -1,4 +1,4 @@
-ScalaTags 0.4.6
+ScalaTags 0.5.0
 ===============
 
 ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
@@ -1005,6 +1005,165 @@ This allows a very convenient direct-binding of behaviors without having to traw
 
 The DOM backend currently requires you to separately add a dependency on [scala-js-dom](https://github.com/scala-js/scala-js-dom) for it to function. 
 
+CSS
+===
+
+Scalatags offsets an internal DSL for constructing CSS Stylesheets. The basic construction looks like:
+
+```scala
+import scalatags.stylesheet._
+val Simple = Sheet[Simple]
+trait Simple extends StyleSheet{
+  def x = cls(
+    backgroundColor := "red",
+    height := 125
+  )
+  def y = cls.hover(
+    opacity := 0.5
+  )
+
+  def z = cls(x.splice, y.splice)
+}
+```
+
+This generates a stylesheet that looks like
+
+```css
+.$pkg-Simple-x{
+  background-color: red;
+  height: 125px;
+}
+.$pkg-Simple-y:hover{
+  opacity: 0.5;
+}
+.$pkg-Simple-z{
+  background-color: red;
+  height: 125px;
+  opacity: 0.5;
+}
+```
+
+Note that you need to use a separate `trait` and `val` in order for this to work; you cannot just have an `object Simple` extend `StyleSheet` directly.
+ 
+You can then access `Simple.styleSheetText` in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a `script` tag.
+
+Only `cls`s defined on `trait Simple` are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names `$pkg-$class-$def`. You can override `customSheetName` to replace the `$pkg-$class` part with something else.
+
+Once the stylesheet is defined, you can then immediately start using styles within your Scalatags fragments, just like any other `Modifier`:
+
+
+```scala
+val x = div(
+  Simple.x,
+  Simple.y
+)
+```
+```html
+<div class="pkg-Simple-x pkg-Simple-y"></div>
+```
+
+By default, Scalatag's `StyleSheet`s have no cascading: you only can define styles for a single class (and it's pseudo-selectors) at a single time. If you want to define styles for multiple tags without a larger HTML fragment, you should define multiple classes. The fact that Scalatag's `cls` definitions are just normal `def`s makes managing these classes very easy: you can use standard IDE's or tools to jump-to-definitions, auto-rename them, etc.. Many common mistakes in CSS, such as accidentally mis-spelling a class-name or botching a renaming, become compilation errors.
+
+Since Scalatags `StyleSheet`s are just Scala, you can feel free to use normal Scala techniques (constants, functions, traits, etc.) to DRY up your code without having to learn any special Scalatags-specific mechanisms.
+
+Inline Modifiers
+----------------
+
+The above example contains a single `hover` pseudo-selector, but what if you want the same class to have a whole range of pseudo-selectors? To do that, simply nest the selectors inline inside the `cls` fragment:
+
+```scala
+val Inline = Sheet[Inline]
+trait Inline extends StyleSheet{
+  def w = cls(
+    &.hover(
+      backgroundColor := "red"
+    ),
+    &.active(
+      backgroundColor := "blue"
+    ),
+    &.hover.active(
+      backgroundColor := "yellow"
+    ),
+    opacity := 0.5
+  )
+}
+```
+
+This generates the stylesheet:
+
+```css
+.$pkg-Inline-w{
+  opacity: 0.5;
+}
+.$pkg-Inline-w:hover{
+  background-color: red;
+}
+.$pkg-Inline-w:active{
+  background-color: blue;
+}
+.$pkg-Inline-w:hover:active{
+  background-color: yellow;
+}
+```
+
+Cascading
+---------
+
+Occassionally, you really do want your CSS stylesheets to cascade. This may be e.g. because you want to define styles for a large HTML document, and don't want to repeat the "default" classes throughout your HTML. In order to do this with Scalatags, you have to opt in by inheriting from `CascadingStyleSheet`:
+
+```scala
+val Cascade = Sheet[Cascade]
+trait Cascade extends CascadingStyleSheet{
+  def y = cls()
+  def x = cls(
+    a(
+      backgroundColor := "red",
+      textDecoration.none
+    ),
+    a.hover(
+      backgroundColor := "blue",
+      textDecoration.underline
+    ),
+    (a.hover ~ div ~ y)(
+      opacity := 0
+    ),
+    div.hover(
+      div(
+        y(
+          opacity := 0
+        )
+      )
+    )
+  )
+}
+```
+
+This generates:
+
+```css
+.$pkg-Cascade-x a{
+  background-color: red;
+  text-decoration: none;
+}
+.$pkg-Cascade-x a:hover{
+  background-color: blue;
+  text-decoration: underline;
+}
+.$pkg-Cascade-x a:hover div .$pkg-Cascade-y{
+  opacity: 0;
+}
+.$pkg-Cascade-x div:hover div .$pkg-Cascade-y{
+  opacity: 0;
+}
+```
+
+With Scalatags, even cascadin styles must start with a "root" class. However,inside that class, you then have two ways of defining cascades:
+
+- Via nesting: you can nest Scalatags HTML tags such as `a` or `div`, or other pre-defined classes such as `Cascade.y`
+- Via the `~` or `>` operators, for defining a chain with or without the `>` child-selector
+
+You shouldn't need cascading often, but when you do, it's useful to have around. Scalatags gives you the best of both worlds by exposing it where necessary but preventing you from using it by accident.
+
 Performance
 ===========
 
@@ -1335,7 +1494,7 @@ Scalatags is still a work in progress, but I think I've hit most of the pain poi
 Changelog
 =========
 
-0.4.7
+0.5.0
 -----
 
 - First implementation of Scalatags `StyleSheet`s

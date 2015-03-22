@@ -4,13 +4,16 @@ import scala.language.experimental.macros
 import scala.collection.SortedMap
 import scalatags.ScalaVersionStubs.Context
 
+
 /**
  * A [[StyleSheet]] which lets you define cascading tag/class
  * selectors. Separate from [[StyleSheet]] because you almost
  * never need these things, so it's good to make it explicit
  * when you do to prevent accidental cascading.
  */
-trait CascadingStyleSheet extends StyleSheet with StyleSheetTags
+trait CascadingStyleSheet extends StyleSheet with StyleSheetTags{
+  implicit def clsSelector(c: Cls) = new Selector(Seq("." + c.name))
+}
 
 /**
  * Inherit from me to define a stylesheet which you can use to define
@@ -65,17 +68,13 @@ trait StyleSheet{
   def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
 }
 
-class Sheet[T](implicit i: Mangled[T]){
-  def apply() = i.t
-}
 
 /**
  * Wraps a type [[T]], so we can demand an implicit `Mangled[T]` in a way
  * that triggers a macro to instantiate that type.
  */
-case class Mangled[T](t: T)
-object Mangled{
-  implicit def mangler[T]: Mangled[T] = macro manglerImpl[T]
+object Sheet{
+  implicit def apply[T]: T = macro manglerImpl[T]
   def manglerImpl[T: c.WeakTypeTag](c: Context) = {
     import c.universe._
 
@@ -92,12 +91,12 @@ object Mangled{
       override lazy val $name = super.$name.copy(name = nameFor(${name.decodedName.toString}, super.$name.name))
     """
 
-    val res = q"""scalatags.stylesheet.Mangled(new $weakType{
+    val res = q"""new $weakType{
         ..$clsOverrides
 
         def defaultSheetName = $typeName
         lazy val allClasses = Seq(..$names)
-      })"""
+      }"""
 
     c.Expr[T](res)
   }
@@ -107,7 +106,7 @@ object Mangled{
  * A rendered class; both the class `name` (used when injected into Scalatags
  * fragments) and the `structure` (used when injected into further class definitions)
  */
-case class Cls(name: String, pseudoSelectors: Seq[String], args: Seq[StyleSheetFrag]) extends Selector(Seq("." + name)){
+case class Cls(name: String, pseudoSelectors: Seq[String], args: Seq[StyleSheetFrag]){
   lazy val structure = args.foldLeft(StyleTree(Seq("." + name + pseudoSelectors.map(':'+_).mkString), SortedMap.empty, Nil))(
     (c, f) => f.applyTo(c)
   )

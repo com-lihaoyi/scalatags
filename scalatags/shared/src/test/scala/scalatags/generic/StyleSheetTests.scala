@@ -11,7 +11,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   import bundle.all._
 
   val pkg = "scalatags-generic-StyleSheetTests"
-  object Simple extends Sheet[Simple]
+  val Simple = Sheet[Simple]
   trait Simple extends StyleSheet{
     def x = cls(
       backgroundColor := "red",
@@ -23,7 +23,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 
     def z = cls(x.splice, y.splice)
   }
-  object Inline extends Sheet[Inline]
+
+  val Inline = Sheet[Inline]
   trait Inline extends StyleSheet{
     def w = cls(
       &.hover(
@@ -38,7 +39,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
       opacity := 0.5
     )
   }
-  object Cascade extends Sheet[Cascade]
+  val Cascade = Sheet[Cascade]
   trait Cascade extends CascadingStyleSheet{
     def y = cls()
     def x = cls(
@@ -63,7 +64,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     )
   }
 
-  object Custom extends Sheet[Custom]
+  val Custom = Sheet[Custom]
   trait Custom extends CascadingStyleSheet{
     override def customSheetName = Some("CuStOm")
     def x = cls(
@@ -169,12 +170,27 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   //      """, "object creation impossible")
       }
       'noCascade{
+        compileError("""
+          val Cascade1 = Sheet[Cascade1]
+          trait Cascade1 extends StyleSheet{
+            def c = cls()
+            def x = cls(
+              c(
+                backgroundColor := "red",
+                textDecoration.none
+              )
+            )
+          }
+        """).check("""
+              c(
+               ^
+        """, "Cls does not take parameters")
         // Cascading stylesheets have to be enabled manually, to encourage
         // usage only for the rare cases you actually want things to cascade
         compileError("""
-          object Cascade extends Sheet[Cascade]
-          trait Cascade extends StyleSheet{
-            val x = *(
+          val Cascade2 = Sheet[Cascade2]
+          trait Cascade2 extends StyleSheet{
+            def x = cls(
               a(
                 backgroundColor := "red",
                 textDecoration.none
