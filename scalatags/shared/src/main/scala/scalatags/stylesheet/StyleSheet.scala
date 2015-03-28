@@ -41,7 +41,15 @@ trait StyleSheet{
    */
   val & = new Selector
 
+  /**
+   * `*` in a CSS selector.
+   */
   object * extends Selector(Seq("*"))
+
+  /**
+   * Used to define a new, uniquely-named class with a set of
+   * styles associated with it.
+   */
   object cls extends Creator(Nil)
   class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
     def pseudoExtend(s: String): Creator = new Creator(selectors :+ s)

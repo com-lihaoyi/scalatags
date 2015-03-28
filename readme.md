@@ -1494,6 +1494,12 @@ Scalatags is still a work in progress, but I think I've hit most of the pain poi
 Changelog
 =========
 
+0.5.1
+-----
+
+- Add `transition` style
+- Add extension method `dom.Element#applyTags(mods: Modifier*)` to easily apply Scalatags modifiers to existing elements.
+
 0.5.0
 -----
 

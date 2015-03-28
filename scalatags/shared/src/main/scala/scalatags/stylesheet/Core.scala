@@ -4,21 +4,22 @@ import acyclic.file
 
 import scala.collection.SortedMap
 
-
-/*
-
-.cls1
-  .cls2
-    :hover
-  :hover
-    cls2
-
-.cls1 .cls2:hover
-.cls1:hover .cls2
- */
 /**
  * A structure representing a set of CSS rules which has not been
  * rendered into a [[Cls]].
+ *
+ * e.g. a StyleTree that looks like
+ *
+ * .cls1
+ *  .cls2
+ *   :hover
+ * :hover
+ *   cls2
+ *
+ * Flattens out via `stringify` into CSS rules like
+ *
+ * .cls1 .cls2:hover
+ * .cls1:hover .cls2
  */
 case class StyleTree(selectors: Seq[String],
                      styles: SortedMap[String, String],

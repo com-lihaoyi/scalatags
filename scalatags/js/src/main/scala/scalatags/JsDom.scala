@@ -51,6 +51,9 @@ object JsDom
 
 
   trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
+    implicit class ApplyTags(e: dom.Element){
+      def applyTags(mods: Modifier*) = mods.foreach(_.applyTo(e))
+    }
     implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
       def applyTo(t: dom.Element) = t.classList.add(s.name)
     }

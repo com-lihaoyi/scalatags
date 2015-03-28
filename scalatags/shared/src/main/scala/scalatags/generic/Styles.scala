@@ -3020,6 +3020,11 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   val textShadow = new NoneOpenStyle("textShadow", "text-shadow")
 
+  /**
+   * Lets you define CSS transitions
+   */
+  val transition = new Style("transition", "transition")
+
   object visibility extends Style("visibility", "visibility") {
     /**
      * Default value, the box is visible
