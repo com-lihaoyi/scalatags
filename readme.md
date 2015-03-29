@@ -1,7 +1,7 @@
 ScalaTags 0.5.1
 ===============
 
-ScalaTags is a small, [fast](#performance) XML/HTML construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
+ScalaTags is a small, [fast](#performance) XML/HTML/CSS construction library for [Scala](http://www.scala-lang.org/) that takes fragments in plain Scala code that look like this:
 
 ```scala
 html(
