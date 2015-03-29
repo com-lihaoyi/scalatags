@@ -1165,6 +1165,10 @@ With Scalatags, even cascadin styles must start with a "root" class. However,ins
 
 You shouldn't need cascading often, but when you do, it's useful to have around. Scalatags gives you the best of both worlds by exposing it where necessary but preventing you from using it by accident.
 
+-------
+
+Scalatags' CSS support is minimal and opinionated, and intentionally much less featureful than [Scala-CSS](https://japgolly.github.io/scalacss/book/). While the feature set will probably grow slightly to accommodate people's needs, it will always be a comparatively small, spartan API.
+
 Performance
 ===========
 
