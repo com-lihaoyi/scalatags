@@ -83,3 +83,10 @@ lazy val example = project.in(file("example"))
     crossScalaVersions := Seq("2.11.4", "2.10.4"),
     scalaVersion := "2.11.4"
   )
+
+lazy val readme = scalatex.ScalatexReadme(
+  folder = "readme",
+  url = "https://github.com/lihaoyi/scalatags/tree/master",
+  source = "Readme",
+  targetFolder = "target/site"
+)

@@ -48,25 +48,25 @@ object PerfTests{
   val first = "first"
   val expected =
     """
-    <html>
-      <head>
-        <script>console.log(1)</script>
-      </head>
-      <body>
-        <h1 style="color: red;">This is my title</h1>
-        <div style="background-color: blue;">
-          <p class="contentpara first" title="this is paragraph 0">This is my first paragraph</p>
-          <a href="www.google.com">
-            <p>Goooogle</p>
-          </a>
-          <p class="contentpara" style="color: red;" title="this is paragraph 0">Paragraph 0</p>
-          <p class="contentpara" style="color: green;" title="this is paragraph 1">Paragraph 1</p>
-          <p class="contentpara" style="color: red;" title="this is paragraph 2">Paragraph 2</p>
-          <p class="contentpara" style="color: green;" title="this is paragraph 3">Paragraph 3</p>
-          <p class="contentpara" style="color: red;" title="this is paragraph 4">Paragraph 4</p>
-        </div>
-      </body>
-    </html>
+      <html>
+        <head>
+          <script>console.log(1)</script>
+        </head>
+        <body>
+          <h1 style="color: red;">This is my title</h1>
+          <div style="background-color: blue;">
+            <p class="contentpara first" title="this is paragraph 0">This is my first paragraph</p>
+            <a href="www.google.com">
+              <p>Goooogle</p>
+            </a>
+            <p class="contentpara" style="color: red;" title="this is paragraph 0">Paragraph 0</p>
+            <p class="contentpara" style="color: green;" title="this is paragraph 1">Paragraph 1</p>
+            <p class="contentpara" style="color: red;" title="this is paragraph 2">Paragraph 2</p>
+            <p class="contentpara" style="color: green;" title="this is paragraph 3">Paragraph 3</p>
+            <p class="contentpara" style="color: red;" title="this is paragraph 4">Paragraph 4</p>
+          </div>
+        </body>
+      </html>
     """
 }
 trait PerfTests extends TestSuite{

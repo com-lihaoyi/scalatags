@@ -19,7 +19,7 @@ object DomTests extends TestSuite{
         val pElem = elem.children(0).asInstanceOf[Paragraph]
         assert(pElem.childNodes.length == 3)
         assert(pElem.textContent == "1wtfbbq")
-      }
+      }//end
 
       'attributes {
         val url = "https://www.google.com/"
@@ -33,7 +33,7 @@ object DomTests extends TestSuite{
         assert(elem.childNodes.length == 1)
         val textNode = elem.childNodes(0).asInstanceOf[dom.Text]
         assert(textNode.textContent == "Google")
-      }
+      }//end
 
       'styles {
         val elem = div(
@@ -49,7 +49,7 @@ object DomTests extends TestSuite{
         assert(
           styleAttr == "color: red; float: left; background-color: yellow;"
         )
-      }
+      }//end
     }
     'fancy {
       'fragSeqsAreFrags{
@@ -60,7 +60,7 @@ object DomTests extends TestSuite{
 
         val wrapped = div(rendered).toString
         assert(wrapped == "<div><h1>titless</h1><div>lol</div></div>")
-      }
+      }//end
       'boundAttributes {
         var count = 0
         val elem = div(
@@ -71,7 +71,7 @@ object DomTests extends TestSuite{
         assert(count == 0)
         elem.onclick(null)
         assert(count == 1)
-      }
+      }//end
       'triggers {
         // Wrapping this, because for some reason if I leave it top-level
         // the compiler crashes =(
@@ -94,12 +94,12 @@ object DomTests extends TestSuite{
         }
         runTriggers()
 
-      }
+      }//end
     }
     'tagType{
       import scalatags.JsDom.all._
       val thing: Tag = div
-    }
+    }//end
   }
 
 }

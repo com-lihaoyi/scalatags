@@ -89,7 +89,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 
         check(
           Simple.styleSheetText,
-          s""".$pkg-Simple-x{
+          s"""
+            |.$pkg-Simple-x{
             |  background-color: red;
             |  height: 125px;
             |}
@@ -208,7 +209,9 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         Simple.x,
         Simple.y
       )
-      val expected = s"""<div class=" ${Simple.x.name} ${Simple.y.name}"></div>"""
+      val expected = s"""
+        <div class=" $pkg-Simple-x $pkg-Simple-y"></div>
+      """
       assert(
         x.toString.replaceAll("\\s", "") ==
         expected.replaceAll("\\s", "")

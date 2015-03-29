@@ -24,7 +24,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
             p("This is a big paragraph of text")
           )
         )
-      ),
+      )
+      ,
       """
       <html>
           <head>
@@ -52,7 +53,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
             p("This is my second paragraph")
           )
         )
-      ),
+      )
+      ,
       """
         <html>
             <head>
@@ -85,7 +87,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           )
         )
       )
-    },
+    }
+    ,
     """
         <html>
             <head>
@@ -125,7 +128,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           else p("Please post below...")
         )
       )
-    },
+    }
+    ,
     """
         <html>
             <head>
@@ -173,7 +177,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           )
         )
       )
-    },
+    }
+    ,
     """
         <html>
             <head>
@@ -200,40 +205,6 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         </html>
     """
     )
-    'customAttributes-strCheck(
-      html(
-        head(
-          script("some script")
-        ),
-        body(
-          h1("This is my title"),
-          div(
-            p("onclick".attr:="... do some js")(
-              "This is my first paragraph"
-            ),
-            a("href".attr:="www.google.com")(
-              p("Goooogle")
-            )
-          )
-        )
-      ),
-      """
-        <html>
-            <head>
-                <script>some script</script>
-            </head>
-            <body>
-                <h1>This is my title</h1>
-                <div>
-                    <p onclick="... do some js">This is my first paragraph</p>
-                    <a href="www.google.com">
-                        <p>Goooogle</p>
-                    </a>
-                </div>
-            </body>
-        </html>
-      """
-    )
     'attributes-strCheck(
       html(
         head(
@@ -250,7 +221,25 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
             )
           )
         )
-      ),
+      )
+      ,
+      html(
+        head(
+          script("some script")
+        ),
+        body(
+          h1("This is my title"),
+          div(
+            p("onclick".attr:="... do some js")(
+              "This is my first paragraph"
+            ),
+            a("href".attr:="www.google.com")(
+              p("Goooogle")
+            )
+          )
+        )
+      )
+      ,
       """
         <html>
             <head>
@@ -270,7 +259,6 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       """
     )
     'classesAndCssCustom-strCheck(
-    {
       html(
         head(
           script("some script")
@@ -287,24 +275,25 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           )
         )
       )
-    },
-    html(
-      head(
-        script("some script")
-      ),
-      body(
-        h1(style:="background-color: blue; color: red;")("This is my title"),
-        div(style:="background-color: blue; color: red;")(
-          p(`class`:="contentpara first")(
-            "This is my first paragraph"
-          ),
-          a(style:="opacity: 0.9;")(
-            p(cls := "contentpara")("Goooogle")
+      ,
+      html(
+        head(
+          script("some script")
+        ),
+        body(
+          h1(style:="background-color: blue; color: red;")("This is my title"),
+          div(style:="background-color: blue; color: red;")(
+            p(`class`:="contentpara first")(
+              "This is my first paragraph"
+            ),
+            a(style:="opacity: 0.9;")(
+              p(cls := "contentpara")("Goooogle")
+            )
           )
         )
       )
-    ),
-    """
+      ,
+      """
         <html>
             <head>
                 <script>some script</script>
@@ -319,7 +308,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
                 </div>
             </body>
         </html>
-    """
+      """
     )
     'nonStringAttributesAndStyles-strCheck(
       div(
@@ -330,10 +319,9 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         a(tabindex:=10)(
           p("Goooogle")
         ),
-
-
         input(disabled:=true)
-      ),
+      )
+      ,
       """
         <div>
             <p style="float: left;">This is my first paragraph</p>
@@ -353,7 +341,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           p("Goooogle")
         ),
         input(disabled:="true")
-      ),
+      )
+      ,
       """
         <div>
             <p style="float: left;">This is my first paragraph</p>
@@ -365,12 +354,18 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       """
     )
     'booleanAttributes-strCheck(
-      div(input(readonly)),
-      """<div><input readonly="readonly" /></div>"""
+      div(input(readonly))
+      ,
+      """
+        <div><input readonly="readonly" /></div>
+      """
     )
     'booleanAttributes2-strCheck(
-      div(input(readonly:=1)),
-      """<div><input readonly="1" /></div>"""
+      div(input(readonly:=1))
+      ,
+      """
+        <div><input readonly="1" /></div>
+      """
     )
 
     'layouts-strCheck(
@@ -394,7 +389,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           p("blah blah blah i am text")
         )
       )
-    },
+    }
+    ,
     """
       <html>
           <head>
@@ -440,7 +436,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
 
 
       Child.render
-    },
+    }
+    ,
     """
         <html>
             <head>
@@ -458,15 +455,13 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     )
 
 
-    'manualImports-strCheck(
-    {
+    'manualImports-strCheck({
       import bundle.short._
       div(
         p(*.color:="red")("Red Text"),
         img(*.href:="www.imgur.com/picture.jpg")
       )
-    },
-    {
+    }, {
       import bundle.{attrs => attr, styles => css, _}
       import bundle.tags._
       div(
@@ -482,8 +477,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     """
     )
 
-    'properEscaping-strCheck(
-    {
+    'properEscaping-strCheck({
       val evilInput1 = "\"><script>alert('hello!')</script>"
       val evilInput2 = "<script>alert('hello!')</script>"
 
@@ -516,8 +510,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     """
     )
 
-    'unsanitizedInput-strCheck(
-    {
+    'unsanitizedInput-strCheck({
       val evilInput = "<script>alert('hello!')</script>"
 
       html(
@@ -542,8 +535,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         </html>
     """
     )
-    'additionalImports-strCheck(
-    {
+    'additionalImports-strCheck({
       import bundle._
       import styles2.pageBreakBefore
       import tags2.address
@@ -569,16 +561,18 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       div(zIndex:=10),
       """<div style="z-index: 10;"></div>"""
     )
-    'customAttributesAndStyles-strCheck(
-    {
+    'customAttributesAndStyles-strCheck({
       val dataAppKey = "data-app-key".attr
       val customBackgroundStyle = "background-color".style
       div(
         dataAppKey:="YOUR_APP_KEY",
         customBackgroundStyle:="red"
       )
-    },
-    """<div data-app-key="YOUR_APP_KEY" style="background-color: red;"></div>"""
+    }
+    ,
+    """
+      <div data-app-key="YOUR_APP_KEY" style="background-color: red;"></div>
+    """
     )
     'aria{
       strCheck(
@@ -592,20 +586,21 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           div(id:="quizPanel", role:="tabpanel", aria.labelledby:="quizTab")(
             "Quiz content goes here"
           )
-        ),
+        )
+        ,
         """
-          |<div>
-          |  <div id="ch1Panel" role="tabpanel" aria-labelledby="ch1Tab">
-          |    Chapter 1 content goes here
-          |  </div>
-          |  <div id="ch2Panel" role="tabpanel" aria-labelledby="ch2Tab">
-          |    Chapter 2 content goes here
-          |  </div>
-          |  <div id="quizPanel" role="tabpanel" aria-labelledby="quizTab">
-          |    Quiz content goes here
-          |  </div>
-          |</div>
-        """.stripMargin
+          <div>
+            <div id="ch1Panel" role="tabpanel" aria-labelledby="ch1Tab">
+              Chapter 1 content goes here
+            </div>
+            <div id="ch2Panel" role="tabpanel" aria-labelledby="ch2Tab">
+              Chapter 2 content goes here
+            </div>
+            <div id="quizPanel" role="tabpanel" aria-labelledby="quizTab">
+              Quiz content goes here
+            </div>
+          </div>
+        """
       )
     }
     'data{
@@ -616,16 +611,17 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           data.index.number:="12314",
           data.parent:="cars",
           "..."
-        ),
+        )
+        ,
         """
-          |<div
-          |  id="electriccars"
-          |  data-columns="3"
-          |  data-index-number="12314"
-          |  data-parent="cars">
-          |...
-          |</div>
-        """.stripMargin
+          <div
+            id="electriccars"
+            data-columns="3"
+            data-index-number="12314"
+            data-parent="cars">
+          ...
+          </div>
+        """
       )
     }
   }
