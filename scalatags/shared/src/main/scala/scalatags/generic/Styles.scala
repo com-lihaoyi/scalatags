@@ -596,73 +596,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
 
 
   /**
-   * The transition-delay CSS property specifies the amount of time to wait
-   * between a change being requested to a property that is to be transitioned
-   * and the start of the transition effect.
-   *
-   * A value of 0s, or 0ms, indicates that the property will begin to animate its
-   * transition immediately when the value changes; positive values will delay
-   * the start of the transition effect for the corresponding number of seconds.
-   * Negative values cause the transition to begin immediately, but to cause the
-   * transition to seem to begin partway through the animation effect.
-   *
-   * You may specify multiple delays; each delay will be applied to the
-   * corresponding property as specified by the transition-property property,
-   * which acts as a master list. If there are fewer delays specified than in the
-   * master list, missing values are set to the initial value (0s). If there are
-   * more delays, the list is simply truncated to the right size. In both case
-   * the CSS declaration stays valid.
-   *
-   * MDN
-   */
-  val transitionDelay = new MultiTimeStyle("transitionDelay", "transition-delay")
-
-  /**
-   * The CSS transition property is a shorthand property for transition-property,
-   * transition-duration, transition-timing-function, and transition-delay. It
-   * allows to define the transition between two states of an element. Different
-   * states may be defined using pseudo-classes like :hover or :active or
-   * dynamically set using JavaScript.
-   *
-   * MDN
-   */
-  val transition = new Style("transition", "transition")
-
-  /**
-   * The CSS transition-timing-function property is used to describe how the
-   * intermediate values of the CSS properties being affected by a transition
-   * effect are calculated. This in essence lets you establish an acceleration
-   * curve, so that the speed of the transition can vary over its duration.
-   *
-   * MDN
-   */
-  val transitionTimingFunction = new Style("transitionTimingFunction", "transition-timing-function")
-
-  /**
-   * The transition-duration CSS property specifies the number of seconds or
-   * milliseconds a transition animation should take to complete. By default,
-   * the value is 0s, meaning that no animation will occur.
-   *
-   * You may specify multiple durations; each duration will be applied to the
-   * corresponding property as specified by the transition-property property,
-   * which acts as a master list. If there are fewer durations specified than in
-   * the master list, the user agent repeat the list of durations. If there are
-   * more durations, the list is simply truncated to the right size. In both
-   * case the CSS declaration stays valid.
-   *
-   * MDN
-   */
-  val transitionDuration = new MultiTimeStyle("transitionDuration", "transition-duration")
-
-  /**
-   * The transition-property CSS property is used to specify the names of CSS
-   * properties to which a transition effect should be applied.
-   *
-   * MDN
-   */
-  val transitionProperty = new Style("transitionProperty", "transition-property")
-
-  /**
    * The CSS transform property lets you modify the coordinate space of the CSS
    * visual formatting model. Using it, elements can be translated, rotated,
    * scaled, and skewed according to the values set.
@@ -3020,10 +2953,74 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   val textShadow = new NoneOpenStyle("textShadow", "text-shadow")
 
+
   /**
-   * Lets you define CSS transitions
+   * The transition-delay CSS property specifies the amount of time to wait
+   * between a change being requested to a property that is to be transitioned
+   * and the start of the transition effect.
+   *
+   * A value of 0s, or 0ms, indicates that the property will begin to animate its
+   * transition immediately when the value changes; positive values will delay
+   * the start of the transition effect for the corresponding number of seconds.
+   * Negative values cause the transition to begin immediately, but to cause the
+   * transition to seem to begin partway through the animation effect.
+   *
+   * You may specify multiple delays; each delay will be applied to the
+   * corresponding property as specified by the transition-property property,
+   * which acts as a master list. If there are fewer delays specified than in the
+   * master list, missing values are set to the initial value (0s). If there are
+   * more delays, the list is simply truncated to the right size. In both case
+   * the CSS declaration stays valid.
+   *
+   * MDN
+   */
+  val transitionDelay = new MultiTimeStyle("transitionDelay", "transition-delay")
+
+  /**
+   * The CSS transition property is a shorthand property for transition-property,
+   * transition-duration, transition-timing-function, and transition-delay. It
+   * allows to define the transition between two states of an element. Different
+   * states may be defined using pseudo-classes like :hover or :active or
+   * dynamically set using JavaScript.
+   *
+   * MDN
    */
   val transition = new Style("transition", "transition")
+
+  /**
+   * The CSS transition-timing-function property is used to describe how the
+   * intermediate values of the CSS properties being affected by a transition
+   * effect are calculated. This in essence lets you establish an acceleration
+   * curve, so that the speed of the transition can vary over its duration.
+   *
+   * MDN
+   */
+  val transitionTimingFunction = new Style("transitionTimingFunction", "transition-timing-function")
+
+  /**
+   * The transition-duration CSS property specifies the number of seconds or
+   * milliseconds a transition animation should take to complete. By default,
+   * the value is 0s, meaning that no animation will occur.
+   *
+   * You may specify multiple durations; each duration will be applied to the
+   * corresponding property as specified by the transition-property property,
+   * which acts as a master list. If there are fewer durations specified than in
+   * the master list, the user agent repeat the list of durations. If there are
+   * more durations, the list is simply truncated to the right size. In both
+   * case the CSS declaration stays valid.
+   *
+   * MDN
+   */
+  val transitionDuration = new MultiTimeStyle("transitionDuration", "transition-duration")
+
+  /**
+   * The transition-property CSS property is used to specify the names of CSS
+   * properties to which a transition effect should be applied.
+   *
+   * MDN
+   */
+  val transitionProperty = new Style("transitionProperty", "transition-property")
+
 
   object visibility extends Style("visibility", "visibility") {
     /**

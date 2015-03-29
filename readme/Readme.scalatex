@@ -450,7 +450,7 @@
     @p
       This generates a stylesheet that looks like
     
-    @hl.ref(cssTests, "$pkg-Simple", "\"\"\"")
+    @hl.ref(cssTests, "$pkg-Simple", "\"\"\"", className = "css")
 
     @p
       Note that you need to use a separate @hl.scala{trait} and @hl.scala{val} in order for this to work; you cannot just have an @hl.scala{object Simple} extend @hl.scala{StyleSheet} directly.
@@ -465,7 +465,7 @@
 
 
     @hl.ref(cssTests, Seq("htmlFrag", "val x = div"), "val")
-    @hl.ref(cssTests, Seq("htmlFrag", "val expected", ""), "\"\"\"")
+    @hl.ref(cssTests, Seq("htmlFrag", "val expected", ""), "\"\"\"", className = "xml")
 
     @p
       By default, Scalatag's @hl.scala{StyleSheet}s have no cascading: you only can define styles for a single class (and it's pseudo-selectors) at a single time. If you want to define styles for multiple tags without a larger HTML fragment, you should define multiple classes. The fact that Scalatag's @hl.scala{cls} definitions are just normal @hl.scala{def}s makes managing these classes very easy: you can use standard IDE's or tools to jump-to-definitions, auto-rename them, etc.. Many common mistakes in CSS, such as accidentally mis-spelling a class-name or botching a renaming, become compilation errors.
@@ -482,7 +482,7 @@
       @p
         This generates the stylesheet:
         
-      @hl.ref(cssTests, "$pkg-Inline", "\"\"\"")
+      @hl.ref(cssTests, "$pkg-Inline", "\"\"\"", className = "css")
 
     @sect{Cascading}
 
@@ -492,7 +492,7 @@
       @p
         This generates:
 
-      @hl.ref(cssTests, "$pkg-Cascade", "\"\"\"")
+      @hl.ref(cssTests, "$pkg-Cascade", "\"\"\"", className = "css")
       @p
         With Scalatags, even cascadin styles must start with a "root" class. However,inside that class, you then have two ways of defining cascades:
       @ul
@@ -514,11 +514,16 @@
       @thead
         @th{Template Engine} @th{Renders}
       @tbody
-        @td{Scalatags} @td{7436041}
-        @td{scala-xml} @td{3794707}
-        @td{Twirl} @td{1902274}
-        @td{Scalate-Mustache} @td{500975}
-        @td{Scalate-Jade} @td{396224}
+        @tr
+          @td{Scalatags} @td{7436041}
+        @tr
+          @td{scala-xml} @td{3794707}
+        @tr
+          @td{Twirl} @td{1902274}
+        @tr
+          @td{Scalate-Mustache} @td{500975}
+        @tr
+          @td{Scalate-Jade} @td{396224}
     @p
 
       These numbers are the number of times each template engine is able to render (to a String) a simple, dynamic HTML fragment in 60 seconds.

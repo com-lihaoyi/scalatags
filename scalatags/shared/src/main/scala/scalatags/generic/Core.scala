@@ -33,7 +33,7 @@ trait Frag[Builder, +FragT] extends Modifier[Builder]{
 
 /**
  * A generic representation of a Scalatags tag.
- *    
+ *
  * @tparam Output The base type that this tag represents. On Scala-JVM, this is all
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.

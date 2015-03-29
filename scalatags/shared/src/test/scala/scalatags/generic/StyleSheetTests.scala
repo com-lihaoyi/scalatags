@@ -90,72 +90,75 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         check(
           Simple.styleSheetText,
           s"""
-            |.$pkg-Simple-x{
-            |  background-color: red;
-            |  height: 125px;
-            |}
-            |.$pkg-Simple-y:hover{
-            |  opacity: 0.5;
-            |}
-            |.$pkg-Simple-z{
-            |  background-color: red;
-            |  height: 125px;
-            |  opacity: 0.5;
-            |}
-          """.stripMargin
+            .$pkg-Simple-x{
+              background-color: red;
+              height: 125px;
+            }
+            .$pkg-Simple-y:hover{
+              opacity: 0.5;
+            }
+            .$pkg-Simple-z{
+              background-color: red;
+              height: 125px;
+              opacity: 0.5;
+            }
+          """
         )
       }
 
       'inline{
         check(
           Inline.styleSheetText,
-          s""".$pkg-Inline-w{
-            |  opacity: 0.5;
-            |}
-            |.$pkg-Inline-w:hover{
-            |  background-color: red;
-            |}
-            |.$pkg-Inline-w:active{
-            |  background-color: blue;
-            |}
-            |.$pkg-Inline-w:hover:active{
-            |  background-color: yellow;
-            |}
+          s"""
+            .$pkg-Inline-w{
+              opacity: 0.5;
+            }
+            .$pkg-Inline-w:hover{
+              background-color: red;
+            }
+            .$pkg-Inline-w:active{
+              background-color: blue;
+            }
+            .$pkg-Inline-w:hover:active{
+              background-color: yellow;
+            }
           """.stripMargin
         )
       }
       'cascade{
         check(
           Cascade.styleSheetText,
-          s""".$pkg-Cascade-x a{
-            |  background-color: red;
-            |  text-decoration: none;
-            |}
-            |.$pkg-Cascade-x a:hover{
-            |  background-color: blue;
-            |  text-decoration: underline;
-            |}
-            |.$pkg-Cascade-x a:hover div .$pkg-Cascade-y{
-            |  opacity: 0;
-            |}
-            |.$pkg-Cascade-x div:hover div .$pkg-Cascade-y{
-            |  opacity: 0;
-            |}
-          """.stripMargin
+          s"""
+            .$pkg-Cascade-x a{
+              background-color: red;
+              text-decoration: none;
+            }
+            .$pkg-Cascade-x a:hover{
+              background-color: blue;
+              text-decoration: underline;
+            }
+            .$pkg-Cascade-x a:hover div .$pkg-Cascade-y{
+              opacity: 0;
+            }
+            .$pkg-Cascade-x div:hover div .$pkg-Cascade-y{
+              opacity: 0;
+            }
+          """
         )
       }
     }
     'customization{
       check(
         Custom.styleSheetText,
-        s""".CuStOm-x{
-           |  background-color: red;
-           |  height: 125px;
-           |}
-           |.CuStOm-y:hover{
-           |  opacity: 0.5;
-           |}
-         """.stripMargin
+        s"""
+          .CuStOm-x{
+            background-color: red;
+            height: 125px;
+          }
+          .CuStOm-y:hover{
+            opacity: 0.5;
+          }
+         """
       )
     }
     'failure{
