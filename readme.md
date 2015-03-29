@@ -58,6 +58,7 @@ Contents
   - [Data and Aria](#data-and-aria)
 - [DOM Backend](#dom-backend)
   - [Using the DOM](#using-the-dom)
+- [CSS Stylesheets](#css)
 - [Performance](#performance)
 - [Internals](#internals)
   - [Architecture](#architecture)
