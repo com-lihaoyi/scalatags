@@ -13,7 +13,7 @@
 
 @sect{ScalaTags 0.5.1}
   @p
-    ScalaTags is a small, [fast](#performance) XML/HTML/CSS construction library for @lnk("Scala", "http://www.scala-lang.org/") that takes fragments in plain Scala code that look like this:
+    ScalaTags is a small, @sect.ref("Performance", "fast") XML/HTML/CSS construction library for @lnk("Scala", "http://www.scala-lang.org/") that takes fragments in plain Scala code that look like this:
 
   @exampleIn("splashExample")
 
@@ -45,7 +45,7 @@
         And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.5.1 is currently only compatibly with ScalaJS 0.5.3+.
   @sect{Why Scalatags}
     @p
-      The core functionality of Scalatags is a [tiny amount of code](shared/main/scala/scalatags/generic/Core.scala), and yet it provides all the functionality of large frameworks like Python's @lnk("Jinja2", "http://jinja.pocoo.org/docs/sandbox/") or C#'s @lnk("Razor", "http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx"), and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost @b{everything}, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
+      The core functionality of Scalatags is a @lnk("tiny amount of code", "shared/main/scala/scalatags/generic/Core.scala"), and yet it provides all the functionality of large frameworks like Python's @lnk("Jinja2", "http://jinja.pocoo.org/docs/sandbox/") or C#'s @lnk("Razor", "http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx"), and out-performs the competition by a @sect.ref("Performance", "large margin"). It does this by leveraging the functionality of the Scala language to do almost @b{everything}, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
     @p
       Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
     
@@ -64,7 +64,7 @@
     @p
       And all the other good things (@b{jump to definition}, @b{extract method}, etc.) you're used to in a statically typed language. No more digging around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
     @p
-      Take a look at the [prior work](#prior-work) section for a more detailed analysis of Scalatags in comparison to other popular libraries.
+      Take a look at the @sect.ref("Prior Work") section for a more detailed analysis of Scalatags in comparison to other popular libraries.
 
   @sect{Basic Examples}
 
@@ -76,7 +76,7 @@
       @exampleIn("helloWorld")
 
       @p
-        The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.Text.all._`. See [below](#managing-imports) if you want more fine-grained control over what's imported.
+        The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.Text.all._`. See @sect.ref("Managing Imports", "below") if you want more fine-grained control over what's imported.
       @p
         This example code creates a Scalatags fragment. We could do many things with a fragment: store it, return it, etc. since it's just a normal Scala value. Eventually, though, you will want to convert it into HTML. To do this, simply use:
 
@@ -108,7 +108,7 @@
         In Scalatags, each attribute has an associated value which can be used to set it. This example shows how you set the @code{onclick} and @code{href} attributes with the @code{:=} operator. Attributes are all instances of the @hl.scala{Attr} class.
 
       @p
-        The common HTML attributes all have static values to use in your fragments, and the list can be seen [here](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs). This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the `.attr` method that Scalatags adds to Strings:
+        The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the `.attr` method that Scalatags adds to Strings:
 
       @exampleIn2("attributes")
 
@@ -144,7 +144,7 @@
       @exampleOut("classesAndCssCustom")
 
       @p
-        A list of the attributes and styles provided by ScalaTags can be found in [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles). This of course won't include any which you define yourself.
+        A list of the attributes and styles provided by ScalaTags can be found in @lnk("Attrs", "https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Attrs.scala") and @lnk("Styles", "https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Styles.scala"). This of course won't include any which you define yourself.
 
 
     @sect{Non-String Attributes and Styles}
@@ -185,46 +185,46 @@
       
     @sect{Managing Imports} 
 
-      @exampleIn2("manualImports")
+      @exampleIn("manualImports")
 
       @p
-        Apart from using @hl.scala{import scalatags.Text.all._}, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. @code{value}, @code{id}, etc.) that you may not use.
+        Apart from using @hl.scala{import scalatags.Text.all._}, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports @code{Attrs} and @code{Styles} aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. @code{value}, @code{id}, etc.) that you may not use.
       @p
         The main objects which you can import things from are:
       @ul
         @li
-          [tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags): common HTML tags
+          @code{tags}: common HTML tags
         @li
-          [tags2](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags2): less common HTML tags
+          @code{tags2}: less common HTML tags
         @li
-          [attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs): common HTML attributes
+          @code{attrs}: common HTML attributes
         @li
-          [styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles): common CSS styles
+          @code{styles}: common CSS styles
         @li
-          [styles2](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles2): less common CSS styles
+          @code{styles2}: less common CSS styles
         @li
-          [svgTags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Svg): SVG tags
+          @code{svgTags}: SVG tags
         @li
-          [svgAttrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.SvgAttrs): attributes only associated with SVG elements
+          @code{svgAttrs}: attributes only associated with SVG elements
         @li
-          [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.generic.DataConverters): convenient extensions (e.g. `10.px`) to create the CSS datatypes
+          @code{DataConverters}: convenient extensions (e.g. `10.px`) to create the CSS datatypes
 
       @p
         You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
 
       @ul
         @li
-          [all](http://lihaoyi.github.io/scalatags/#scalatags.Text$$all$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Text.Attrs), [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.generic.DataConverters)
+          @code{all}: this imports the contents of @code{Tags}, @code{Attrs}, @code{Styles} and @code{DataConverters}
 
         @li
-          [short](http://lihaoyi.github.io/scalatags/#scalatags.Text$$short$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.generic.Tags) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.generic.DataConverters), but aliases [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) as `*`
+          @code{short}: this imports the contents of @code{Tags} and @code{DataConverters}, but aliases @code{Attrs} and @code{Styles} as @code{*}
       @p
         Thus, you can choose exactly what you want to import, and how:
 
       @exampleIn2("manualImports")
 
       @p
-        Or you can rely on a aggregator like [all](http://lihaoyi.github.io/scalatags/#scalatags.Text$$all$) (which the rest of the examples use) or [short](http://lihaoyi.github.io/scalatags/#scalatags.Text$$short$). [short](http://lihaoyi.github.io/scalatags/#scalatags.Text$$short$) imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) as `*`, making them quick to access without cluttering the global namespace:
+        Or you can rely on a aggregator like @code{all} (which the rest of the examples use) or @code{short}. @code{short} imports @code{Attrs} and @code{Styles} as @code{*}, making them quick to access without cluttering the global namespace:
 
       @exampleIn("manualImports")
       @p

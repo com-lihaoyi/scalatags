@@ -461,14 +461,17 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         p(*.color:="red")("Red Text"),
         img(*.href:="www.imgur.com/picture.jpg")
       )
-    }, {
+    }
+    ,
+    {
       import bundle.{attrs => attr, styles => css, _}
       import bundle.tags._
       div(
         p(css.color:="red")("Red Text"),
         img(attr.href:="www.imgur.com/picture.jpg")
       )
-    },
+    }
+    ,
     """
         <div>
             <p style="color: red;">Red Text</p>
@@ -494,7 +497,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         )
       )
 
-    },
+    }
+    ,
     """
         <html>
             <head>
@@ -522,7 +526,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           raw(evilInput)
         )
       )
-    },
+    }
+    ,
     """
         <html>
             <head>
@@ -546,7 +551,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         address("500 Memorial Drive, Cambridge MA"),
         svg(stroke:="#0000ff")
       )
-    },
+    }
+    ,
     """
         <div>
             <p style="page-break-before: always;">
