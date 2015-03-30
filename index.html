@@ -61,7 +61,7 @@ span.hljs-tag, span.hljs-symbol{
 
 <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="ScalaTags0.5.1" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">ScalaTags 0.5.1<a class=" scalatex-site-Styles-headerLink" href="#ScalaTags0.5.1" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div><div class=" scalatex-site-Styles-content">
   <p>
-    ScalaTags is a small, [fast](#performance) XML/HTML/CSS construction library for <a href="http://www.scala-lang.org/">Scala</a> that takes fragments in plain Scala code that look like this:
+    ScalaTags is a small, <a href="#Performance">fast</a> XML/HTML/CSS construction library for <a href="http://www.scala-lang.org/">Scala</a> that takes fragments in plain Scala code that look like this:
 </p>
   <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">html(
   head(
@@ -115,7 +115,7 @@ span.hljs-tag, span.hljs-symbol{
         And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.5.1 is currently only compatibly with ScalaJS 0.5.3+.</p>
   <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="WhyScalatags" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;" id="WhyScalatags">Why Scalatags<a class=" scalatex-site-Styles-headerLink" href="#WhyScalatags" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div>
     <p>
-      The core functionality of Scalatags is a [tiny amount of code](shared/main/scala/scalatags/generic/Core.scala), and yet it provides all the functionality of large frameworks like Python's <a href="http://jinja.pocoo.org/docs/sandbox/">Jinja2</a> or C#'s <a href="http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx">Razor</a>, and out-performs the competition by a [large margin](#performance). It does this by leveraging the functionality of the Scala language to do almost <b>everything</b>, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together</p>
+      The core functionality of Scalatags is a <a href="shared/main/scala/scalatags/generic/Core.scala">tiny amount of code</a>, and yet it provides all the functionality of large frameworks like Python's <a href="http://jinja.pocoo.org/docs/sandbox/">Jinja2</a> or C#'s <a href="http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx">Razor</a>, and out-performs the competition by a <a href="#Performance">large margin</a>. It does this by leveraging the functionality of the Scala language to do almost <b>everything</b>, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together</p>
     <p>
       Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
 </p>
@@ -134,7 +134,7 @@ span.hljs-tag, span.hljs-symbol{
     <p>
       And all the other good things (<b>jump to definition</b>, <b>extract method</b>, etc.) you're used to in a statically typed language. No more digging around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.</p>
     <p>
-      Take a look at the [prior work](#prior-work) section for a more detailed analysis of Scalatags in comparison to other popular libraries.
+      Take a look at the <a href="#PriorWork">Prior Work</a> section for a more detailed analysis of Scalatags in comparison to other popular libraries.
 </p>
   <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="BasicExamples" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;" id="BasicExamples">Basic Examples<a class=" scalatex-site-Styles-headerLink" href="#BasicExamples" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div>
 
@@ -157,7 +157,7 @@ span.hljs-tag, span.hljs-symbol{
 )</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L44-L56" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
-        The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.Text.all._`. See [below](#managing-imports) if you want more fine-grained control over what's imported.</p>
+        The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.Text.all._`. See <a href="#ManagingImports">below</a> if you want more fine-grained control over what's imported.</p>
       <p>
         This example code creates a Scalatags fragment. We could do many things with a fragment: store it, return it, etc. since it's just a normal Scala value. Eventually, though, you will want to convert it into HTML. To do this, simply use:
 </p>
@@ -213,7 +213,7 @@ span.hljs-tag, span.hljs-symbol{
         In Scalatags, each attribute has an associated value which can be used to set it. This example shows how you set the <code>onclick</code> and <code>href</code> attributes with the <code>:=</code> operator. Attributes are all instances of the <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">Attr</code> class.
 </p>
       <p>
-        The common HTML attributes all have static values to use in your fragments, and the list can be seen [here](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs). This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the `.attr` method that Scalatags adds to Strings:
+        The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the `.attr` method that Scalatags adds to Strings:
 </p>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">html(
   head(
@@ -240,7 +240,7 @@ val customBackgroundStyle = &quot;background-color&quot;.style
 div(
   dataAppKey:=&quot;YOUR_APP_KEY&quot;,
   customBackgroundStyle:=&quot;red&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L564-L571" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L570-L577" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Both the above examples print the same thing:
@@ -326,7 +326,7 @@ div(
 &lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L296-L310" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
-        A list of the attributes and styles provided by ScalaTags can be found in [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles). This of course won't include any which you define yourself.
+        A list of the attributes and styles provided by ScalaTags can be found in <a href="https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Attrs.scala">Attrs</a> and <a href="https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Styles.scala">Styles</a>. This of course won't include any which you define yourself.
 
 </p>
     <h1 id="Non-StringAttributesandStyles" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Non-StringAttributesandStyles" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Non-String Attributes and Styles</h1>
@@ -385,198 +385,70 @@ div(
 
     <h1 id="ManagingImports" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#ManagingImports" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Managing Imports</h1>
 
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">&quot;&quot;&quot;
-  &lt;div data-app-key=&quot;YOUR_APP_KEY&quot; style=&quot;background-color: red;&quot;&gt;&lt;/div&gt;
-&quot;&quot;&quot;
-)
-'aria{
-  strCheck(
-    div(
-      div(id:=&quot;ch1Panel&quot;, role:=&quot;tabpanel&quot;, aria.labelledby:=&quot;ch1Tab&quot;)(
-        &quot;Chapter 1 content goes here&quot;
-      ),
-      div(id:=&quot;ch2Panel&quot;, role:=&quot;tabpanel&quot;, aria.labelledby:=&quot;ch2Tab&quot;)(
-        &quot;Chapter 2 content goes here&quot;
-      ),
-      div(id:=&quot;quizPanel&quot;, role:=&quot;tabpanel&quot;, aria.labelledby:=&quot;quizTab&quot;)(
-        &quot;Quiz content goes here&quot;
-      )
-    )</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L572-L589" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">import bundle.short._
+div(
+  p(*.color:=&quot;red&quot;)(&quot;Red Text&quot;),
+  img(*.href:=&quot;www.imgur.com/picture.jpg&quot;)
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L458-L464" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
-        Apart from using <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">import scalatags.Text.all._</code>, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. <code>value</code>, <code>id</code>, etc.) that you may not use.</p>
+        Apart from using <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">import scalatags.Text.all._</code>, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports <code>Attrs</code> and <code>Styles</code> aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. <code>value</code>, <code>id</code>, etc.) that you may not use.</p>
       <p>
         The main objects which you can import things from are:</p>
       <ul>
         <li>
-          [tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags): common HTML tags</li>
+          <code>tags</code>: common HTML tags</li>
         <li>
-          [tags2](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags2): less common HTML tags</li>
+          <code>tags2</code>: less common HTML tags</li>
         <li>
-          [attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs): common HTML attributes</li>
+          <code>attrs</code>: common HTML attributes</li>
         <li>
-          [styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles): common CSS styles</li>
+          <code>styles</code>: common CSS styles</li>
         <li>
-          [styles2](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles2): less common CSS styles</li>
+          <code>styles2</code>: less common CSS styles</li>
         <li>
-          [svgTags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Svg): SVG tags</li>
+          <code>svgTags</code>: SVG tags</li>
         <li>
-          [svgAttrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.SvgAttrs): attributes only associated with SVG elements</li>
+          <code>svgAttrs</code>: attributes only associated with SVG elements</li>
         <li>
-          [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.generic.DataConverters): convenient extensions (e.g. `10.px`) to create the CSS datatypes
+          <code>DataConverters</code>: convenient extensions (e.g. `10.px`) to create the CSS datatypes
 </li></ul>
       <p>
         You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
 </p>
       <ul>
         <li>
-          [all](http://lihaoyi.github.io/scalatags/#scalatags.Text$$all$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.Tags), [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.Text.Attrs), [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.generic.DataConverters)
+          <code>all</code>: this imports the contents of <code>Tags</code>, <code>Attrs</code>, <code>Styles</code> and <code>DataConverters</code>
 </li>
         <li>
-          [short](http://lihaoyi.github.io/scalatags/#scalatags.Text$$short$): this imports the contents of [Tags](http://lihaoyi.github.io/scalatags/#scalatags.generic.generic.Tags) and [DataConverters](http://lihaoyi.github.io/scalatags/#scalatags.generic.DataConverters), but aliases [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) as `*`</li></ul>
+          <code>short</code>: this imports the contents of <code>Tags</code> and <code>DataConverters</code>, but aliases <code>Attrs</code> and <code>Styles</code> as <code>*</code></li></ul>
       <p>
         Thus, you can choose exactly what you want to import, and how:
 </p>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">&quot;&quot;&quot;
-  &lt;div data-app-key=&quot;YOUR_APP_KEY&quot; style=&quot;background-color: red;&quot;&gt;&lt;/div&gt;
-&quot;&quot;&quot;
-)
-'aria{
-  strCheck(
-    div(
-      div(id:=&quot;ch1Panel&quot;, role:=&quot;tabpanel&quot;, aria.labelledby:=&quot;ch1Tab&quot;)(
-        &quot;Chapter 1 content goes here&quot;
-      ),
-      div(id:=&quot;ch2Panel&quot;, role:=&quot;tabpanel&quot;, aria.labelledby:=&quot;ch2Tab&quot;)(
-        &quot;Chapter 2 content goes here&quot;
-      ),
-      div(id:=&quot;quizPanel&quot;, role:=&quot;tabpanel&quot;, aria.labelledby:=&quot;quizTab&quot;)(
-        &quot;Quiz content goes here&quot;
-      )
-    )</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L572-L589" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">{
+  import bundle.{attrs =&gt; attr, styles =&gt; css, _}
+  import bundle.tags._
+  div(
+    p(css.color:=&quot;red&quot;)(&quot;Red Text&quot;),
+    img(attr.href:=&quot;www.imgur.com/picture.jpg&quot;)
+  )
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L465-L473" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
-        Or you can rely on a aggregator like [all](http://lihaoyi.github.io/scalatags/#scalatags.Text$$all$) (which the rest of the examples use) or [short](http://lihaoyi.github.io/scalatags/#scalatags.Text$$short$). [short](http://lihaoyi.github.io/scalatags/#scalatags.Text$$short$) imports [Attrs](http://lihaoyi.github.io/scalatags/#scalatags.generic.Attrs) and [Styles](http://lihaoyi.github.io/scalatags/#scalatags.generic.Styles) as `*`, making them quick to access without cluttering the global namespace:
+        Or you can rely on a aggregator like <code>all</code> (which the rest of the examples use) or <code>short</code>. <code>short</code> imports <code>Attrs</code> and <code>Styles</code> as <code>*</code>, making them quick to access without cluttering the global namespace:
 </p>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">import bundle.short._
 div(
   p(*.color:=&quot;red&quot;)(&quot;Red Text&quot;),
   img(*.href:=&quot;www.imgur.com/picture.jpg&quot;)
-)
- {
-import bundle.{attrs =&gt; attr, styles =&gt; css, _}
-import bundle.tags._
-div(
-  p(css.color:=&quot;red&quot;)(&quot;Red Text&quot;),
-  img(attr.href:=&quot;www.imgur.com/picture.jpg&quot;)
-)
-
-&quot;
-  &lt;div&gt;
-      &lt;p style=&quot;color: red;&quot;&gt;Red Text&lt;/p&gt;
-      &lt;img href=&quot;www.imgur.com/picture.jpg&quot; /&gt;
-  &lt;/div&gt;
-&quot;
-
-
-roperEscaping-strCheck({
-val evilInput1 = &quot;\&quot;&gt;&lt;script&gt;alert('hello!')&lt;/script&gt;&quot;
-val evilInput2 = &quot;&lt;script&gt;alert('hello!')&lt;/script&gt;&quot;
-
-html(
-  head(
-    script(&quot;some script&quot;)
-  ),
-  body(
-    h1(
-      title:=evilInput1,
-      &quot;This is my title&quot;
-    ),
-    evilInput2
-  )
-)
-
-
-&quot;
-  &lt;html&gt;
-      &lt;head&gt;
-          &lt;script&gt;some script&lt;/script&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-          &lt;h1 title=&quot;&amp;quot;&amp;gt;&amp;lt;script&amp;gt;alert('hello!')&amp;lt;/script&amp;gt;&quot;&gt;
-              This is my title
-          &lt;/h1&gt;
-          &amp;lt;script&amp;gt;alert('hello!')&amp;lt;/script&amp;gt;
-      &lt;/body&gt;
-  &lt;/html&gt;
-&quot;
-
-
-nsanitizedInput-strCheck({
-val evilInput = &quot;&lt;script&gt;alert('hello!')&lt;/script&gt;&quot;
-
-html(
-  head(
-    script(&quot;some script&quot;)
-  ),
-  body(
-    h1(&quot;This is my title&quot;),
-    raw(evilInput)
-  )
-)
-
-&quot;
-  &lt;html&gt;
-      &lt;head&gt;
-          &lt;script&gt;some script&lt;/script&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-          &lt;h1&gt;This is my title&lt;/h1&gt;
-          &lt;script&gt;alert('hello!')&lt;/script&gt;
-      &lt;/body&gt;
-  &lt;/html&gt;
-&quot;
-
-dditionalImports-strCheck({
-import bundle._
-import styles2.pageBreakBefore
-import tags2.address
-import svgTags.svg
-import svgAttrs.stroke
-div(
-  p(pageBreakBefore.always, &quot;a long paragraph which should not be broken&quot;),
-  address(&quot;500 Memorial Drive, Cambridge MA&quot;),
-  svg(stroke:=&quot;#0000ff&quot;)
-)
-
-&quot;
-  &lt;div&gt;
-      &lt;p style=&quot;page-break-before: always;&quot;&gt;
-          a long paragraph which should not be broken
-      &lt;/p&gt;
-      &lt;address&gt;500 Memorial Drive, Cambridge MA&lt;/address&gt;
-      &lt;svg stroke=&quot;#0000ff&quot;&gt;&lt;/svg&gt;
-  &lt;/div&gt;
-&quot;
-
-ypesafeCSS-strCheck(
-div(zIndex:=10),
-&quot;&quot;&quot;&lt;div style=&quot;z-index: 10;&quot;&gt;&lt;/div&gt;&quot;&quot;&quot;
-
-ustomAttributesAndStyles-strCheck({
-val dataAppKey = &quot;data-app-key&quot;.attr
-val customBackgroundStyle = &quot;background-color&quot;.style
-div(
-  dataAppKey:=&quot;YOUR_APP_KEY&quot;,
-  customBackgroundStyle:=&quot;red&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L458-L571" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L458-L464" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         Both these examples print:
 </p>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;
     &lt;p style=&quot;color: red;&quot;&gt;Red Text&lt;/p&gt;
     &lt;img href=&quot;www.imgur.com/picture.jpg&quot; /&gt;
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L472-L476" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L475-L479" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         This custom import object also provides you a place to define your own custom tags that will be imported throughout your project e.g. a <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">js(s: String)</code> tag as shorthand for <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">script(src:=s)</code>. You can even override the default definitions, e.g. making <code>script</code> be a shorthand for <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">script(type:=&quot;javascript&quot;)</code> so that you can never forget to use your own custom version.
 </p>
@@ -592,29 +464,7 @@ div(
   p(pageBreakBefore.always, &quot;a long paragraph which should not be broken&quot;),
   address(&quot;500 Memorial Drive, Cambridge MA&quot;),
   svg(stroke:=&quot;#0000ff&quot;)
-)
-
-&quot;
-  &lt;div&gt;
-      &lt;p style=&quot;page-break-before: always;&quot;&gt;
-          a long paragraph which should not be broken
-      &lt;/p&gt;
-      &lt;address&gt;500 Memorial Drive, Cambridge MA&lt;/address&gt;
-      &lt;svg stroke=&quot;#0000ff&quot;&gt;&lt;/svg&gt;
-  &lt;/div&gt;
-&quot;
-
-ypesafeCSS-strCheck(
-div(zIndex:=10),
-&quot;&quot;&quot;&lt;div style=&quot;z-index: 10;&quot;&gt;&lt;/div&gt;&quot;&quot;&quot;
-
-ustomAttributesAndStyles-strCheck({
-val dataAppKey = &quot;data-app-key&quot;.attr
-val customBackgroundStyle = &quot;background-color&quot;.style
-div(
-  dataAppKey:=&quot;YOUR_APP_KEY&quot;,
-  customBackgroundStyle:=&quot;red&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L538-L571" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L543-L554" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         This prints:
 </p>
@@ -624,7 +474,7 @@ div(
     &lt;/p&gt;
     &lt;address&gt;500 Memorial Drive, Cambridge MA&lt;/address&gt;
     &lt;svg stroke=&quot;#0000ff&quot;&gt;&lt;/svg&gt;
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L550-L557" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L556-L563" target="_blank"><i class="fa fa-link "></i></a></pre>
     <h1 id="CustomBundles" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#CustomBundles" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Custom Bundles</h1>
 
 
@@ -853,82 +703,7 @@ html(
     ),
     evilInput2
   )
-)
-
-
-&quot;
-  &lt;html&gt;
-      &lt;head&gt;
-          &lt;script&gt;some script&lt;/script&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-          &lt;h1 title=&quot;&amp;quot;&amp;gt;&amp;lt;script&amp;gt;alert('hello!')&amp;lt;/script&amp;gt;&quot;&gt;
-              This is my title
-          &lt;/h1&gt;
-          &amp;lt;script&amp;gt;alert('hello!')&amp;lt;/script&amp;gt;
-      &lt;/body&gt;
-  &lt;/html&gt;
-&quot;
-
-
-nsanitizedInput-strCheck({
-val evilInput = &quot;&lt;script&gt;alert('hello!')&lt;/script&gt;&quot;
-
-html(
-  head(
-    script(&quot;some script&quot;)
-  ),
-  body(
-    h1(&quot;This is my title&quot;),
-    raw(evilInput)
-  )
-)
-
-&quot;
-  &lt;html&gt;
-      &lt;head&gt;
-          &lt;script&gt;some script&lt;/script&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-          &lt;h1&gt;This is my title&lt;/h1&gt;
-          &lt;script&gt;alert('hello!')&lt;/script&gt;
-      &lt;/body&gt;
-  &lt;/html&gt;
-&quot;
-
-dditionalImports-strCheck({
-import bundle._
-import styles2.pageBreakBefore
-import tags2.address
-import svgTags.svg
-import svgAttrs.stroke
-div(
-  p(pageBreakBefore.always, &quot;a long paragraph which should not be broken&quot;),
-  address(&quot;500 Memorial Drive, Cambridge MA&quot;),
-  svg(stroke:=&quot;#0000ff&quot;)
-)
-
-&quot;
-  &lt;div&gt;
-      &lt;p style=&quot;page-break-before: always;&quot;&gt;
-          a long paragraph which should not be broken
-      &lt;/p&gt;
-      &lt;address&gt;500 Memorial Drive, Cambridge MA&lt;/address&gt;
-      &lt;svg stroke=&quot;#0000ff&quot;&gt;&lt;/svg&gt;
-  &lt;/div&gt;
-&quot;
-
-ypesafeCSS-strCheck(
-div(zIndex:=10),
-&quot;&quot;&quot;&lt;div style=&quot;z-index: 10;&quot;&gt;&lt;/div&gt;&quot;&quot;&quot;
-
-ustomAttributesAndStyles-strCheck({
-val dataAppKey = &quot;data-app-key&quot;.attr
-val customBackgroundStyle = &quot;background-color&quot;.style
-div(
-  dataAppKey:=&quot;YOUR_APP_KEY&quot;,
-  customBackgroundStyle:=&quot;red&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L480-L571" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L483-L500" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         By default, any text that's put into the Scalatags templates, whether as a attribute value or a text node, is properly escaped when it is rendered. Thus, when you run the following snippet, you get this:</p>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;html&gt;
@@ -941,7 +716,7 @@ div(
         &lt;/h1&gt;
         &amp;lt;script&amp;gt;alert('hello!')&amp;lt;/script&amp;gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L498-L509" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L502-L513" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         As you can see, the contents of the variables <code>evilInput1</code> and <code>evilInput2</code> have been HTML-escaped, so you do not have to worry about un-escaped user input messing up your DOM or causing XSS injections. Furthermore, the names of the tags (e.g. &quot;html&quot;) and attributes (e.g. &quot;href&quot;) are themselves validated: passing in an invalid name to either of those (e.g. a tag or attribute name with a space inside) will throw an `IllegalArgumentException`).
 </p>
@@ -958,53 +733,7 @@ html(
     h1(&quot;This is my title&quot;),
     raw(evilInput)
   )
-)
-
-&quot;
-  &lt;html&gt;
-      &lt;head&gt;
-          &lt;script&gt;some script&lt;/script&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-          &lt;h1&gt;This is my title&lt;/h1&gt;
-          &lt;script&gt;alert('hello!')&lt;/script&gt;
-      &lt;/body&gt;
-  &lt;/html&gt;
-&quot;
-
-dditionalImports-strCheck({
-import bundle._
-import styles2.pageBreakBefore
-import tags2.address
-import svgTags.svg
-import svgAttrs.stroke
-div(
-  p(pageBreakBefore.always, &quot;a long paragraph which should not be broken&quot;),
-  address(&quot;500 Memorial Drive, Cambridge MA&quot;),
-  svg(stroke:=&quot;#0000ff&quot;)
-)
-
-&quot;
-  &lt;div&gt;
-      &lt;p style=&quot;page-break-before: always;&quot;&gt;
-          a long paragraph which should not be broken
-      &lt;/p&gt;
-      &lt;address&gt;500 Memorial Drive, Cambridge MA&lt;/address&gt;
-      &lt;svg stroke=&quot;#0000ff&quot;&gt;&lt;/svg&gt;
-  &lt;/div&gt;
-&quot;
-
-ypesafeCSS-strCheck(
-div(zIndex:=10),
-&quot;&quot;&quot;&lt;div style=&quot;z-index: 10;&quot;&gt;&lt;/div&gt;&quot;&quot;&quot;
-
-ustomAttributesAndStyles-strCheck({
-val dataAppKey = &quot;data-app-key&quot;.attr
-val customBackgroundStyle = &quot;background-color&quot;.style
-div(
-  dataAppKey:=&quot;YOUR_APP_KEY&quot;,
-  customBackgroundStyle:=&quot;red&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L513-L571" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L517-L529" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         prints
 </p>
@@ -1016,7 +745,7 @@ div(
         &lt;h1&gt;This is my title&lt;/h1&gt;
         &lt;script&gt;alert('hello!')&lt;/script&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L526-L535" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L531-L540" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         As you can see, the <code class="xml scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">&lt;script&gt;</code> tags in <code>evilInput</code> have been passed through to the resultant HTML string unchanged. Although this makes it easy to open up XSS holes (as shown above!), if you know what you're doing, go ahead.</p>
       <p>
@@ -1115,8 +844,8 @@ div(
 div(
   dataAppKey:=&quot;YOUR_APP_KEY&quot;,
   customBackgroundStyle:=&quot;red&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L565-L571" target="_blank"><i class="fa fa-link "></i></a></pre>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div data-app-key=&quot;YOUR_APP_KEY&quot; style=&quot;background-color: red;&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L573-L574" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L571-L577" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div data-app-key=&quot;YOUR_APP_KEY&quot; style=&quot;background-color: red;&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L579-L580" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         Aria attributes work too:
 </p>
