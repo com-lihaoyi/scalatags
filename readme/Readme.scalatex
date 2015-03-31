@@ -49,17 +49,17 @@
     @p
       Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
     
-    @img(alt:="Autocomplete", src:="docs/Autocomplete.png")
+    @img(width:="100%", alt:="Autocomplete", src:="Autocomplete.png")
 
     @p
       and Error Highlighting:
 
-    @img(alt:="Error Highlighting", src:="docs/ErrorHighlighting.png")
+    @img(width:="100%", alt:="Error Highlighting", src:="ErrorHighlighting.png")
 
     @p
       and in-editor documentation:
 
-    @img(alt:="Inline Documentation", src:="docs/InlineDocs.png")
+    @img(width:="100%", alt:="Inline Documentation", src:="InlineDocs.png")
 
     @p
       And all the other good things (@b{jump to definition}, @b{extract method}, etc.) you're used to in a statically typed language. No more digging around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
