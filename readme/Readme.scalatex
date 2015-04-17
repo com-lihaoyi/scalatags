@@ -540,6 +540,54 @@
     @p
       The rest of the code involved in this micro-benchmark can be found in @lnk("PerfTests.scala", "shared/test/scala/scalatags/PerfTests.scala")
 
+   @sect{Utilities}
+
+    @p
+      There's a custom text renderer to produce indented text with one fragment per line.  This allows you to inspect the html output.  Using scala.xml to prettyprint the output would somtimes render the html invalid.
+
+    @hl.scala
+
+              scala> import scalatags.Text.all._
+              import scalatags.Text.all._
+
+              scala> html(
+                   |   head(
+                   |     script(src := "..."),
+                   |     script(
+                   |       "alert('Hello World')"
+                   |     )
+                   |   ),
+                   |   body(
+                   |     div(
+                   |       h1(id := "title", "This is a title"),
+                   |       p("This is a big paragraph of text")
+                   |     )
+                   |   )
+                   | ).pretty
+              res1: String =
+              <html>
+                  <head>
+                      <script src = "..." >
+                      </script>
+                      <script>
+                          alert('Hello World')
+                      </script>
+                  </head>
+                  <body>
+                      <div>
+                          <h1 id = "title" >
+                              This is a title
+                          </h1>
+                          <p>
+                              This is a big paragraph of text
+                          </p>
+                      </div>
+                  </body>
+              </html>
+
+
+    @p
+      Don't use @hl.scala{pretty} in production: it has not been written with any regard to performance.
 
   @sect{Internals}
     @p
