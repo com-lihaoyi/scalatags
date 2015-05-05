@@ -119,17 +119,17 @@ span.hljs-tag, span.hljs-symbol{
     <p>
       Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
 </p>
-    <img alt="Autocomplete" src="docs/Autocomplete.png" />
+    <img style="width: 100%;" alt="Autocomplete" src="//raw.githubusercontent.com/lihaoyi/scalatags/master/docs/Autocomplete.png" />
 
     <p>
       and Error Highlighting:
 </p>
-    <img alt="Error Highlighting" src="docs/ErrorHighlighting.png" />
+    <img style="width: 100%;" alt="Error Highlighting" src="//raw.githubusercontent.com/lihaoyi/scalatags/master/docs/ErrorHighlighting.png" />
 
     <p>
       and in-editor documentation:
 </p>
-    <img alt="Inline Documentation" src="docs/InlineDocs.png" />
+    <img style="width: 100%;" alt="Inline Documentation" src="//raw.githubusercontent.com/lihaoyi/scalatags/master/docs/InlineDocs.png" />
 
     <p>
       And all the other good things (<b>jump to definition</b>, <b>extract method</b>, etc.) you're used to in a statically typed language. No more digging around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.</p>
@@ -996,7 +996,7 @@ trait Simple extends StyleSheet{
       Note that you need to use a separate <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">trait</code> and <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">val</code> in order for this to work; you cannot just have an <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">object Simple</code> extend <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">StyleSheet</code> directly.</p>
     <p>
 
-      You can then access <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">Simple.styleSheetText</code> in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a `script` tag.</p>
+      You can then access <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">Simple.styleSheetText</code> in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a `style` tag.</p>
     <p>
       Only <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">cls</code>s defined on `trait Simple` are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">$pkg-$class-$def</code>. You can override <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">customSheetName</code> to replace the <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">pkg-$class</code> part with something else.</p>
     <p>
