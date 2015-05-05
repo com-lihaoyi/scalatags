@@ -84,8 +84,8 @@ lazy val example = project.in(file("example"))
   )
 
 lazy val readme = scalatex.ScalatexReadme(
-  projectId = "readme",
-  wd = file(""),
+  folder = "readme",
   url = "https://github.com/lihaoyi/scalatags/tree/master",
-  source = "Readme"
+  source = "Readme",
+  targetFolder = "target/site"
 )
