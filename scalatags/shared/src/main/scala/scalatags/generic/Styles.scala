@@ -224,6 +224,75 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
 
   private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName)
 
+  private[scalatags] class MinLengthStyle(jsName: String, cssName: String) extends PixelAutoStyle(jsName, cssName){
+
+    /**
+     * The intrinsic preferred length.
+     *
+     * MDN
+     */
+    val maxContent = this := "max-content"
+
+    /**
+     * The intrinsic minimum length.
+     *
+     * MDN
+     */
+    val minContent = this := "min-content"
+
+    /**
+     * Defined as min(max-content, max(min-content, fill-available).
+     *
+     * MDN
+     */
+    val fitContent = this := "fit-content"
+
+    /**
+     * The containing block width minus margin, border and padding.
+     *
+     * MDN
+     */
+    val fillAvailable = this := "fill-available"
+  }
+
+  private[scalatags] class MaxLengthStyle(jsName: String, cssName: String) extends PixelStyle(jsName, cssName){
+
+    /**
+     * The length has no maximum value.
+     *
+     * MDN
+     */
+    val none = this := "none"
+
+    /**
+     * The intrinsic preferred length.
+     *
+     * MDN
+     */
+    val maxContent = this := "max-content"
+
+    /**
+     * The intrinsic minimum length.
+     *
+     * MDN
+     */
+    val minContent = this := "min-content"
+
+    /**
+     * Defined as min(max-content, max(min-content, fill-available).
+     *
+     * MDN
+     */
+    val fitContent = this := "fit-content"
+
+    /**
+     * The containing block width minus margin, border and padding.
+     *
+     * MDN
+     */
+    val fillAvailable = this := "fill-available"
+  }
+
 }
 /**
  * Contains CSS styles which are used less frequently. These are not imported by
@@ -1826,7 +1895,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val maxWidth = new Style("maxWidth", "max-width")
+  val maxWidth = new MaxLengthStyle("maxWidth", "max-width")
 
 
   /**
@@ -2626,7 +2695,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val maxHeight = new NoneOpenStyle("maxHeight", "max-height")
+  val maxHeight = new MaxLengthStyle("maxHeight", "max-height")
 
   /**
    * The min-width CSS property is used to set the minimum width of a given
@@ -2637,7 +2706,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val minWidth = new Style("minWidth", "min-width")
+  val minWidth = new MinLengthStyle("minWidth", "min-width")
 
 
   /**
@@ -2649,7 +2718,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  val minHeight = new Style("minHeight", "min-height")
+  val minHeight = new MinLengthStyle("minHeight", "min-height")
 
 
   /**

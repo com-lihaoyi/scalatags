@@ -49,17 +49,17 @@
     @p
       Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
     
-    @img(width:="100%", alt:="Autocomplete", src:="Autocomplete.png")
+    @img(width:="100%", alt:="Autocomplete", src:="//raw.githubusercontent.com/lihaoyi/scalatags/master/docs/Autocomplete.png")
 
     @p
       and Error Highlighting:
 
-    @img(width:="100%", alt:="Error Highlighting", src:="ErrorHighlighting.png")
+    @img(width:="100%", alt:="Error Highlighting", src:="//raw.githubusercontent.com/lihaoyi/scalatags/master/docs/ErrorHighlighting.png")
 
     @p
       and in-editor documentation:
 
-    @img(width:="100%", alt:="Inline Documentation", src:="InlineDocs.png")
+    @img(width:="100%", alt:="Inline Documentation", src:="//raw.githubusercontent.com/lihaoyi/scalatags/master/docs/InlineDocs.png")
 
     @p
       And all the other good things (@b{jump to definition}, @b{extract method}, etc.) you're used to in a statically typed language. No more digging around in templates which mess up the highlighting of your HTML editor, or waiting months for the correct plugin to materialize.
@@ -456,7 +456,7 @@
       Note that you need to use a separate @hl.scala{trait} and @hl.scala{val} in order for this to work; you cannot just have an @hl.scala{object Simple} extend @hl.scala{StyleSheet} directly.
     @p
 
-      You can then access @hl.scala{Simple.styleSheetText} in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a `script` tag.
+      You can then access @hl.scala{Simple.styleSheetText} in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a `style` tag.
     @p
       Only @hl.scala{cls}s defined on `trait Simple` are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names @hl.scala{$pkg-$class-$def}. You can override @hl.scala{customSheetName} to replace the @hl.scala{pkg-$class} part with something else.
     @p
