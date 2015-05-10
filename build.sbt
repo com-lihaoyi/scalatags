@@ -89,5 +89,4 @@ lazy val readme = scalatex.ScalatexReadme(
   source = "Readme",
   targetFolder = "target/site",
   autoResources = Seq("Autocomplete.png", "ErrorHighlighting.png", "InlineDocs.png")
-
 )
