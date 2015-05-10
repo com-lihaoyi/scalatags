@@ -31,7 +31,7 @@ lazy val scalatags = crossProject
       ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     // Sonatype
-    version := "0.5.1",
+    version := "0.5.2",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=
@@ -87,5 +87,7 @@ lazy val readme = scalatex.ScalatexReadme(
   folder = "readme",
   url = "https://github.com/lihaoyi/scalatags/tree/master",
   source = "Readme",
-  targetFolder = "target/site"
+  targetFolder = "target/site",
+  autoResources = Seq("Autocomplete.png", "ErrorHighlighting.png", "InlineDocs.png")
+
 )

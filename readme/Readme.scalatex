@@ -11,7 +11,17 @@
 @def lnk(txt: String, src: String) = a(txt, href:=src)
 @val perfTests = wd/'scalatags/'shared/'src/'test/'scala/'scalatags/'generic/"PerfTests.scala"
 
-@sect{ScalaTags 0.5.1}
+@a(
+  href:="https://github.com/lihaoyi/scalatags",
+  position.absolute,
+  top:=0,right:=0,border:=0,
+  img(
+    src:="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67",
+    alt:="Fork me on GitHub"
+  )
+)
+
+@sect{ScalaTags 0.5.2}
   @p
     ScalaTags is a small, @sect.ref("Performance", "fast") XML/HTML/CSS construction library for @lnk("Scala", "http://www.scala-lang.org/") that takes fragments in plain Scala code that look like this:
 
@@ -28,7 +38,7 @@
       ScalaTags is hosted on @lnk("Maven Central", "http://search.maven.org/#search%7Cga%7C1%7Cscalatags"); to get started, simply add the following to your `build.sbt`:
 
     @hl.scala
-      libraryDependencies += "com.lihaoyi" %% "scalatags" % "0.5.1"
+      libraryDependencies += "com.lihaoyi" %% "scalatags" % "0.5.2"
   
     @p
       And you're good to go! Open up a @code{sbt console} and you can start working through the @lnk("Examples", "#Examples"), which should just work when copied and pasted into the console.
@@ -39,10 +49,10 @@
         To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
       @hl.scala
-        libraryDependencies += "com.lihaoyi" %%% "scalatags" % "0.5.1"
+        libraryDependencies += "com.lihaoyi" %%% "scalatags" % "0.5.2"
 
       @p
-        And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.5.1 is currently only compatibly with ScalaJS 0.5.3+.
+        And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.5.2 is currently only compatibly with ScalaJS 0.5.3+.
   @sect{Why Scalatags}
     @p
       The core functionality of Scalatags is a @lnk("tiny amount of code", "shared/main/scala/scalatags/generic/Core.scala"), and yet it provides all the functionality of large frameworks like Python's @lnk("Jinja2", "http://jinja.pocoo.org/docs/sandbox/") or C#'s @lnk("Razor", "http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx"), and out-performs the competition by a @sect.ref("Performance", "large margin"). It does this by leveraging the functionality of the Scala language to do almost @b{everything}, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
@@ -874,6 +884,10 @@
 
   @sect{Changelog}
 
+    @sect{0.5.2}
+      @ul
+        @li
+          Made `maxHeight`, `maxWidth`, `minHeight`, and `minWidth` into `PixelStyles` so passing in an integer does the right thing.
 
     @sect{0.5.1}
 
