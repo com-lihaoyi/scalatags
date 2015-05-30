@@ -12,8 +12,10 @@ package generic
 
 import acyclic.file
 
-
-trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
+/**
+ * A list of SVG Attributes not also found in Attrs
+ */
+trait SvgOnlyAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
 
   /**
    * This attribute defines the distance from the origin to the top of accent characters,
@@ -189,23 +191,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   val calcMode = "calcMode".attr
-
-
-  /**
-   * Assigns a class name or set of class names to an element. You may assign the same
-   * class name or names to any number of elements. If you specify multiple class names,
-   * they must be separated by whitespace characters.
-   * The class name of an element has two key roles:
-   * -As a style sheet selector, for use when an author wants to assign style
-   * information to a set of elements.
-   * -For general usage by the browser.
-   * The class can be used to style SVG content using CSS.
-   *
-   * Value 	<list-of-class-names>
-   *
-   * MDN
-   */
-  val `class` = "class".attr
 
 
   /**
@@ -669,8 +654,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   val imageRendering = "imageRendering".attr
 
-  val id = "id".attr
-
   /**
    *
    *
@@ -872,24 +855,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   val mask = "mak".attr
-
-
-
-  /**
-   *
-   *
-   * MDN
-   */
-  val max = "max".attr
-
-
-
-  /**
-   *
-   *
-   * MDN
-   */
-  val min = "min".attr
 
 
   /**
@@ -1292,15 +1257,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val style = "style".attr
-
-
-
-  /**
-   *
-   *
-   * MDN
-   */
   val surfaceScale = "surfaceScale".attr
 
 
@@ -1358,14 +1314,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   val transform = "transform".attr
-
-
-  /*
-   *
-   *
-   * MDN
-   */
-  val `type`= "type".attr
 
 
   /*
@@ -1479,14 +1427,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
   val xmlSpace = "xml:space".attr
 
 
-  /**
-   *
-   *
-   * MDN
-   */
-  val xmlns = "xmlns".attr
-
-
   /*
    *
    *
@@ -1525,4 +1465,67 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   val z = "z".attr
+}
+
+/**
+ * All SVG Attributes
+ */
+trait SvgAttrs[Builder, Output <: FragT, FragT] extends SvgOnlyAttrs[Builder, Output, FragT] {
+  /**
+   * Assigns a class name or set of class names to an element. You may assign the same
+   * class name or names to any number of elements. If you specify multiple class names,
+   * they must be separated by whitespace characters.
+   * The class name of an element has two key roles:
+   * -As a style sheet selector, for use when an author wants to assign style
+   * information to a set of elements.
+   * -For general usage by the browser.
+   * The class can be used to style SVG content using CSS.
+   *
+   * Value 	<list-of-class-names>
+   *
+   * MDN
+   */
+  val `class` = "class".attr
+
+  val id = "id".attr
+
+
+  /**
+   *
+   *
+   * MDN
+   */
+  val max = "max".attr
+
+
+  /**
+   *
+   *
+   * MDN
+   */
+  val min = "min".attr
+
+
+  /**
+   *
+   *
+   * MDN
+   */
+  val style = "style".attr
+
+
+  /*
+   *
+   *
+   * MDN
+   */
+  val `type`= "type".attr
+
+
+  /**
+   *
+   *
+   * MDN
+   */
+  val xmlns = "xmlns".attr
 }
