@@ -49,7 +49,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element, dom.Node]{
   val `font-face-name` = "font-face-name".tag[dom.svg.Element]
   val `font-face-src` = "font-face-src".tag[dom.svg.Element]
   val `font-face-uri` = "font-face-uri".tag[dom.svg.Element]
-  val foreignobject = "foreignobject".tag[dom.svg.Element]
+  val foreignObject = "foreignObject".tag[dom.svg.Element]
   val g = "g".tag[dom.svg.G]
   val glyph = "glyph".tag[dom.svg.Element]
   val glyphref = "glyphref".tag[dom.svg.Element]

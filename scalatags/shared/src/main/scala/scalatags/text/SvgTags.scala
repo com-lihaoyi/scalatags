@@ -46,7 +46,7 @@ trait SvgTags extends generic.SvgTags[Builder, String, String]{
   val `font-face-name` = "font-face-name".tag
   val `font-face-src` = "font-face-src".tag
   val `font-face-uri` = "font-face-uri".tag
-  val foreignobject = "foreignobject".tag
+  val foreignObject = "foreignObject".tag
   val g = "g".tag
   val glyph = "glyph".tag
   val glyphref = "glyphref".tag

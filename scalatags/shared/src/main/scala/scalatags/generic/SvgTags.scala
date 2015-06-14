@@ -353,7 +353,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val foreignobject: TypedTag[Builder, Output, FragT]
+  val foreignObject: TypedTag[Builder, Output, FragT]
   /**
    * The g element is a container used to group objects. Transformations applied
    * to the g element are performed on all of its child elements. Attributes
