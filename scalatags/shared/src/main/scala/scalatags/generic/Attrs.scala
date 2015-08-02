@@ -116,7 +116,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  val spellcheck = "spellcheck".attr := "spellcheck"
+  val spellcheck = "spellcheck".emptyAttr
   /**
    * This attribute contains CSS styling declarations to be applied to the
    * element. Note that it is recommended for styles to be defined in a separate
@@ -586,7 +586,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val autofocus = "autofocus".attr := "autofocus"
+  val autofocus = "autofocus".emptyAttr
   /**
    * When the value of the type attribute is radio or checkbox, the presence of
    * this Boolean attribute indicates that the control is selected by default;
@@ -719,7 +719,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val readonly = "readonly".attr := "readonly"
+  val readonly = "readonly".emptyAttr
   /**
    * This attribute specifies that the user must fill in a value before
    * submitting a form. It cannot be used when the type attribute is hidden,
@@ -728,7 +728,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val required = "required".attr := "required"
+  val required = "required".emptyAttr
   /**
    * The initial size of the control. This value is in pixels unless the value
    * of the type attribute is text or password, in which case, it is an integer
@@ -883,7 +883,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val disabled = "disabled".attr := "disabled"
+  val disabled = "disabled".emptyAttr
   /**
    * Describes elements which belongs to this one. Used on labels and output
    * elements.
