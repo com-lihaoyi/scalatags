@@ -115,7 +115,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  lazy val spellcheck = "spellcheck".attr := "spellcheck"
+  lazy val spellcheck = "spellcheck".emptyAttr
   /**
    * This attribute contains CSS styling declarations to be applied to the
    * element. Note that it is recommended for styles to be defined in a separate
@@ -478,7 +478,7 @@ trait MouseEventAttrs[Builder, Output<: FragT, FragT] extends Util[Builder, Outp
   /**
    * Script to be run when an element is dragged
    */
-  lazy val ondrag = "ondrag".attr
+  val ondrag = "ondrag".attr
   /**
    * Script to be run at the end of a drag operation
    */
@@ -585,7 +585,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val autofocus = "autofocus".attr := "autofocus"
+  lazy val autofocus = "autofocus".emptyAttr
   /**
    * When the value of the type attribute is radio or checkbox, the presence of
    * this Boolean attribute indicates that the control is selected by default;
@@ -718,7 +718,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val readonly = "readonly".attr := "readonly"
+  lazy val readonly = "readonly".emptyAttr
   /**
    * This attribute specifies that the user must fill in a value before
    * submitting a form. It cannot be used when the type attribute is hidden,
@@ -727,7 +727,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val required = "required".attr := "required"
+  lazy val required = "required".emptyAttr
   /**
    * The initial size of the control. This value is in pixels unless the value
    * of the type attribute is text or password, in which case, it is an integer
@@ -882,7 +882,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  lazy val disabled = "disabled".attr := "disabled"
+  lazy val disabled = "disabled".emptyAttr
   /**
    * Describes elements which belongs to this one. Used on labels and output
    * elements.
