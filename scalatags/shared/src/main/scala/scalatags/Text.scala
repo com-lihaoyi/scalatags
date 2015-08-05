@@ -97,7 +97,7 @@ object Text
       writeTo(strb)
       strb.toString()
     }
-    def writeTo(strb: StringBuilder) = Escaping.escape(v, strb)
+    def writeTo(strb: StringBuilder) = Escaping.escape(if (v == null) "null" else v, strb)
   }
   object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
