@@ -1155,5 +1155,37 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
      */
     def valuetext = "aria-valuetext".attr
   }
+
+  /**
+   * For use in &lt;style&gt; tags.
+   *
+   * If this attribute is present, then the style applies only to its parent element.
+   * If absent, the style applies to the whole document.
+   */
+  def scoped = "scoped".attr
+
+  /**
+   * For use in &lt;meter&gt; tags.
+   *
+   * @see https://css-tricks.com/html5-meter-element/
+   */
+  def high = "high".attr
+
+  /**
+   * For use in &lt;meter&gt; tags.
+   *
+   * @see https://css-tricks.com/html5-meter-element/
+   */
+  def low = "low".attr
+
+  /**
+   * For use in &lt;meter&gt; tags.
+   *
+   * @see https://css-tricks.com/html5-meter-element/
+   */
+  def optimum = "optimum".attr
+
+  /** IE-specific property to prevent user selection */
+  def unselectable = "unselectable".attr
 }
 
