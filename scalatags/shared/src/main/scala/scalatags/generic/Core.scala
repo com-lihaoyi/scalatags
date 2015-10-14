@@ -70,7 +70,8 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
       val frag = arr(j)
       var i = 0
       while(i < frag.length){
-        frag(i).applyTo(b)
+        val f = frag(i)
+        if(f != null) f.applyTo(b)
         i += 1
       }
     }

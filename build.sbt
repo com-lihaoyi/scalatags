@@ -1,11 +1,11 @@
-crossScalaVersions := Seq("2.11.4", "2.10.4")
+crossScalaVersions := Seq("2.11.7", "2.10.4")
 
 
 lazy val scalatags = crossProject
   .settings(
     organization := "com.lihaoyi",
     name := "scalatags",
-    scalaVersion := "2.11.4",
+    scalaVersion := "2.11.7",
     // Will not be necessary with sbt 0.13.8
     unmanagedSourceDirectories in Compile ++= {
       if (scalaVersion.value startsWith "2.10.") Seq(baseDirectory.value / ".."/"shared"/"src"/ "main" / "scala-2.10")
@@ -31,7 +31,7 @@ lazy val scalatags = crossProject
       ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     // Sonatype
-    version := "0.5.2",
+    version := "0.5.3-SNAPSHOT",
     publishTo := Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"),
 
     pomExtra :=
@@ -79,8 +79,8 @@ lazy val example = project.in(file("example"))
   .dependsOn(scalatagsJS)
   .enablePlugins(ScalaJSPlugin)
   .settings(
-    crossScalaVersions := Seq("2.11.4", "2.10.4"),
-    scalaVersion := "2.11.4"
+    crossScalaVersions := Seq("2.11.7", "2.10.4"),
+    scalaVersion := "2.11.7"
   )
 
 lazy val readme = scalatex.ScalatexReadme(
