@@ -126,7 +126,12 @@ object JsDom
 
   class GenericAttr[T] extends AttrValue[T]{
     def apply(t: dom.Element, a: Attr, v: T): Unit = {
-      t.setAttribute(a.name, v.toString)
+      a.namespace match {
+        case None =>
+          t.setAttribute(a.name, v.toString)
+        case Some(namespace) =>
+          t.setAttributeNS(namespace.uri, a.name, v.toString)
+      }
     }
   }
 

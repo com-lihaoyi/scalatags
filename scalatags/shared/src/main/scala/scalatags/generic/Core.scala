@@ -90,7 +90,7 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
 /**
  * Wraps up a HTML attribute in a value which isn't a string.
  */
-case class Attr(name: String) {
+case class Attr(name: String, namespace: Option[Namespace] = None) {
 
   if (!Escaping.validAttrName(name))
     throw new IllegalArgumentException(
@@ -193,5 +193,8 @@ object Namespace{
   }
   val svgNamespaceConfig = new Namespace {
     def uri = "http://www.w3.org/2000/svg"
+  }
+  val svgXlinkNamespaceConfig = new Namespace {
+    def uri = "http://www.w3.org/1999/xlink"
   }
 }
