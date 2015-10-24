@@ -56,7 +56,7 @@ trait SvgTags extends generic.SvgTags[dom.Element, dom.Element, dom.Node]{
   val hkern = "hkern".tag[dom.svg.Element]
   val image = "image".tag[dom.svg.Image]
   val line = "line".tag[dom.svg.Line]
-  val lineargradient = "lineargradient".tag[dom.svg.LinearGradient]
+  val linearGradient = "linearGradient".tag[dom.svg.LinearGradient]
   val marker = "marker".tag[dom.svg.Marker]
   val mask = "mask".tag[dom.svg.Mask]
   val metadata = "metadata".tag[dom.svg.Metadata]

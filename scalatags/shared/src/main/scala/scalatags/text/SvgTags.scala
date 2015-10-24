@@ -53,7 +53,7 @@ trait SvgTags extends generic.SvgTags[Builder, String, String]{
   val hkern = "hkern".tag
   val image = "image".tag
   val line = "line".tag
-  val lineargradient = "lineargradient".tag
+  val linearGradient = "linearGradient".tag
   val marker = "marker".tag
   val mask = "mask".tag
   val metadata = "metadata".tag

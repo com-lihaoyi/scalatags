@@ -403,7 +403,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val lineargradient: TypedTag[Builder, Output, FragT]
+  val linearGradient: TypedTag[Builder, Output, FragT]
   /**
    * The marker element defines the graphics that is to be used for drawing
    * arrowheads or polymarkers on a given path, line, polyline or

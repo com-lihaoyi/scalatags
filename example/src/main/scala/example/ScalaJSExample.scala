@@ -165,7 +165,7 @@ class Example[Builder, Output <: FragT, FragT]
         tspan(x := 350, y := 410, "Second line.")
       ),
       defs(
-        lineargradient(
+        linearGradient(
           id := "grad1",
           x1 := "0%",
           y1 := "0%",
