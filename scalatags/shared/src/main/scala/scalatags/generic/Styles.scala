@@ -3196,21 +3196,21 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  final val flexBasis = new Style("flexBasis", "flexBasis")
+  final val flexBasis = new Style("flexBasis", "flex-basis")
 
   /**
    * The CSS flex-grow property specifies the flex grow factor of a flex item.
    *
    * MDN
    */
-  final val flexGrow = new Style("flexGrow", "flexGrow")
+  final val flexGrow = new Style("flexGrow", "flex-grow")
 
   /**
    * The CSS flex-shrink property specifies the flex shrink factor of a flex item.
    *
    * MDN
    */
-  final val flexShrink = new Style("flexShrink", "flexShrink")
+  final val flexShrink = new Style("flexShrink", "flex-shrink")
 
   /**
    * The CSS align-content property aligns a flex container's lines within the flex container when there is extra
@@ -3218,7 +3218,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object alignContent extends Style("alignContent", "alignContent") {
+  object alignContent extends Style("alignContent", "align-content") {
 
     /**
      * Lines are packed starting from the cross-start. Cross-start edge of the first line and cross-start edge of
@@ -3276,7 +3276,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object alignSelf extends Style("alignSelf", "alignSelf") {
+  object alignSelf extends Style("alignSelf", "align-self") {
     /**
      * Computes to parent's align-items value or stretch if the element has no parent.
      *
@@ -3329,7 +3329,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object flexWrap extends Style("flexWrap", "flexWrap") {
+  object flexWrap extends Style("flexWrap", "flex-wrap") {
 
     /**
      * The flex items are laid out in a single line which may cause the flex container to overflow. The cross-start
@@ -3362,7 +3362,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object alignItems extends Style("alignItems", "alignItems") {
+  object alignItems extends Style("alignItems", "align-items") {
 
     /**
      * The cross-start margin edge of the flex item is flushed with the cross-start edge of the line.
@@ -3413,7 +3413,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object justifyContent extends Style("justifyContent", "justifyContent") {
+  object justifyContent extends Style("justifyContent", "justify-content") {
 
     /**
      * The flex items are packed starting from the main-start. Margins of the first flex item is flushed with the
@@ -3469,7 +3469,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object flexDirection extends Style("flexDirection", "flexDirection") {
+  object flexDirection extends Style("flexDirection", "flex-direction") {
 
     /**
      * The flex container's main-axis is the same as the block-axis.
