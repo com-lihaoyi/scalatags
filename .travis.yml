@@ -3,6 +3,6 @@ script:
 - sbt ++2.11.7 readme/run
 - sbt ++$TRAVIS_SCALA_VERSION scalatagsJVM/test scalatagsJS/test
 scala:
-  - 2.10.5
-  - 2.11.7
+  - 2.10.4
+  - 2.11.5
 sudo: alse
