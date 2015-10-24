@@ -58,7 +58,6 @@ class Builder(var children: Array[Frag] = new Array(4),
         attrs(attrIndex) = k -> v
         attrIndex += 1
       case n =>
-      case n =>
         val (oldK, oldV) = attrs(n)
         attrs(n) = (oldK, v)
     }
