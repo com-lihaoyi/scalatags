@@ -9,7 +9,6 @@
  */
 package scalatags
 package generic
-import acyclic.file
 import scala.language.dynamics
 
 /**
@@ -80,7 +79,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
   /**
    * A Boolean attribute that specifies whether an element is draggable or not
    */
-  val draggable	= "draggable".attr
+  val draggable	= "draggable".attr := "draggable"
   /**
    * Specifies whether the dragged data is copied, moved, or linked, when dropped
    */
@@ -89,7 +88,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    * Specifies that an element is not yet, or is no longer, relevant and
    * consequently hidden from view of the user.
    */
-  val hidden = "hidden".attr
+  val hidden = "hidden".attr := "hidden"
   /**
    * This attribute defines a unique identifier (ID) which must be unique in
    * the whole document. Its purpose is to identify the element when linking
@@ -156,7 +155,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
   /**
    * Specifies whether the content of an element should be translated or not
    */
-  val translate	= "translate".attr
+  val translate	= "translate".attr := "translate"
 }
 
 trait SharedEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
@@ -427,7 +426,7 @@ trait FormEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output
   /**
    * Indicates a selected option in an option list of a <select> element.
    */
-  val selected = "selected".attr
+  val selected = "selected".attr := "selected"
 }
 
 /**
@@ -594,7 +593,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val checked = "checked".attr
+  val checked = "checked".attr := "checked"
   /**
    * The form attribute specifies one or more forms an `<input>` element belongs to.
    */
@@ -660,7 +659,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    * It can also be provided to the <select> element to allow selecting more than one
    * option.
    */
-  val multiple = "multiple".attr
+  val multiple = "multiple".attr := "multiple"
   /**
    * The maximum allowed length for the input field. This attribute forces the input control
    * to accept no more than the allowed number of characters. It does not produce any
