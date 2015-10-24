@@ -580,55 +580,53 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       <div data-app-key="YOUR_APP_KEY" style="background-color: red;"></div>
     """
     )
-    'aria{
-      strCheck(
-        div(
-          div(id:="ch1Panel", role:="tabpanel", aria.labelledby:="ch1Tab")(
-            "Chapter 1 content goes here"
-          ),
-          div(id:="ch2Panel", role:="tabpanel", aria.labelledby:="ch2Tab")(
-            "Chapter 2 content goes here"
-          ),
-          div(id:="quizPanel", role:="tabpanel", aria.labelledby:="quizTab")(
-            "Quiz content goes here"
-          )
+    'aria- strCheck(
+      div(
+        div(id:="ch1Panel", role:="tabpanel", aria.labelledby:="ch1Tab")(
+          "Chapter 1 content goes here"
+        ),
+        div(id:="ch2Panel", role:="tabpanel", aria.labelledby:="ch2Tab")(
+          "Chapter 2 content goes here"
+        ),
+        div(id:="quizPanel", role:="tabpanel", aria.labelledby:="quizTab")(
+          "Quiz content goes here"
         )
-        ,
-        """
-          <div>
-            <div id="ch1Panel" role="tabpanel" aria-labelledby="ch1Tab">
-              Chapter 1 content goes here
-            </div>
-            <div id="ch2Panel" role="tabpanel" aria-labelledby="ch2Tab">
-              Chapter 2 content goes here
-            </div>
-            <div id="quizPanel" role="tabpanel" aria-labelledby="quizTab">
-              Quiz content goes here
-            </div>
-          </div>
-        """
       )
-    }
-    'data{
-      strCheck(
-        div(
-          id:="electriccars",
-          data.columns:="3",
-          data.index.number:="12314",
-          data.parent:="cars",
-          "..."
-        )
-        ,
-        """
-          <div
-            id="electriccars"
-            data-columns="3"
-            data-index-number="12314"
-            data-parent="cars">
-          ...
+      ,
+      """
+        <div>
+          <div id="ch1Panel" role="tabpanel" aria-labelledby="ch1Tab">
+            Chapter 1 content goes here
           </div>
-        """
+          <div id="ch2Panel" role="tabpanel" aria-labelledby="ch2Tab">
+            Chapter 2 content goes here
+          </div>
+          <div id="quizPanel" role="tabpanel" aria-labelledby="quizTab">
+            Quiz content goes here
+          </div>
+        </div>
+      """
+    )
+
+    'data- strCheck(
+      div(
+        id:="electriccars",
+        data.columns:="3",
+        data.index.number:="12314",
+        data.parent:="cars",
+        "..."
       )
-    }
+      ,
+      """
+        <div
+          id="electriccars"
+          data-columns="3"
+          data-index-number="12314"
+          data-parent="cars">
+        ...
+        </div>
+      """
+    )
+
   }
 }

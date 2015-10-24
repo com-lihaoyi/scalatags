@@ -11,21 +11,21 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val altglyph: TypedTag[Builder, Output, FragT]
+  val altGlyph: TypedTag[Builder, Output, FragT]
   /**
    * The altGlyphDef element defines a substitution representation for glyphs.
    *
    * MDN
    */
-  val altglyphdef: TypedTag[Builder, Output, FragT]
+  val altGlyphDef: TypedTag[Builder, Output, FragT]
 
   /**
    * The altGlyphItem element provides a set of candidates for glyph substitution
-   * by the altglyph element.
+   * by the altGlyph element.
    *
    * MDN
    */
-  val altglyphitem: TypedTag[Builder, Output, FragT]
+  val altGlyphItem: TypedTag[Builder, Output, FragT]
   /**
    * The animate element is put inside a shape element and defines how an
    * attribute of an element changes over the animation
@@ -39,7 +39,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val animatemotion: TypedTag[Builder, Output, FragT]
+  val animateMotion: TypedTag[Builder, Output, FragT]
   /**
    * The animateTransform element animates a transformation attribute on a target
    * element, thereby allowing animations to control translation, scaling,
@@ -47,7 +47,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val animatetransform: TypedTag[Builder, Output, FragT]
+  val animateTransform: TypedTag[Builder, Output, FragT]
   /**
    * The circle element is an SVG basic shape, used to create circles based on a
    * center point and a radius.
@@ -62,7 +62,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val clippath: TypedTag[Builder, Output, FragT]
+  val clipPath: TypedTag[Builder, Output, FragT]
   /**
    * The element allows describing the color profile used for the image.
    *
@@ -121,7 +121,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val feblend: TypedTag[Builder, Output, FragT]
+  val feBlend: TypedTag[Builder, Output, FragT]
   /**
    * This filter changes colors based on a transformation matrix. Every pixel's
    * color value (represented by an [R,G,B,A] vector) is matrix multiplied to
@@ -129,15 +129,15 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val fecolormatrix: TypedTag[Builder, Output, FragT]
+  val feColorMatrix: TypedTag[Builder, Output, FragT]
   /**
    * The color of each pixel is modified by changing each channel (R, G, B, and
-   * A) to the result of what the children fefuncr, fefuncb, fefuncg,
-   * and fefunca return.
+   * A) to the result of what the children feFuncR, feFuncB, feFuncG,
+   * and feFuncA return.
    *
    * MDN
    */
-  val fecomponenttransfer: TypedTag[Builder, Output, FragT]
+  val feComponentTransfer: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive performs the combination of two input images pixel-wise
    * in image space using one of the Porter-Duff compositing operations: over,
@@ -146,7 +146,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val fecomposite: TypedTag[Builder, Output, FragT]
+  val feComposite: TypedTag[Builder, Output, FragT]
   /**
    * the feConvolveMatrix element applies a matrix convolution filter effect.
    * A convolution combines pixels in the input image with neighboring pixels
@@ -156,7 +156,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val feconvolvematrix: TypedTag[Builder, Output, FragT]
+  val feConvolveMatrix: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive lights an image using the alpha channel as a bump map.
    * The resulting image, which is an RGBA opaque image, depends on the light
@@ -164,64 +164,64 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val fediffuselighting: TypedTag[Builder, Output, FragT]
+  val feDiffuseLighting: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive uses the pixels values from the image from in2 to
    * spatially displace the image from in.
    *
    * MDN
    */
-  val fedisplacementmap: TypedTag[Builder, Output, FragT]
+  val feDisplacementMap: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive define a distant light source that can be used
-   * within a lighting filter primitive: fediffuselighting or
-   * fespecularlighting.
+   * within a lighting filter primitive: feDiffuseLighting or
+   * feSpecularLighting.
    *
    * MDN
    */
-  val fedistantlighting: TypedTag[Builder, Output, FragT]
+  val feDistantLighting: TypedTag[Builder, Output, FragT]
   /**
    * The filter fills the filter subregion with the color and opacity defined by
    * flood-color and flood-opacity.
    *
    * MDN
    */
-  val feflood: TypedTag[Builder, Output, FragT]
+  val feFlood: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive defines the transfer function for the alpha component
-   * of the input graphic of its parent fecomponenttransfer element.
+   * of the input graphic of its parent feComponentTransfer element.
    *
    * MDN
    */
-  val fefunca: TypedTag[Builder, Output, FragT]
+  val feFuncA: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive defines the transfer function for the blue component
-   * of the input graphic of its parent fecomponenttransfer element.
+   * of the input graphic of its parent feComponentTransfer element.
    *
    * MDN
    */
-  val fefuncb: TypedTag[Builder, Output, FragT]
+  val feFuncB: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive defines the transfer function for the green component
-   * of the input graphic of its parent fecomponenttransfer element.
+   * of the input graphic of its parent feComponentTransfer element.
    *
    * MDN
    */
-  val fefuncg: TypedTag[Builder, Output, FragT]
+  val feFuncG: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive defines the transfer function for the red component
-   * of the input graphic of its parent fecomponenttransfer element.
+   * of the input graphic of its parent feComponentTransfer element.
    *
    * MDN
    */
-  val fefuncr: TypedTag[Builder, Output, FragT]
+  val feFuncR: TypedTag[Builder, Output, FragT]
   /**
    * The filter blurs the input image by the amount specified in stdDeviation,
    * which defines the bell-curve.
    *
    * MDN
    */
-  val fegaussianblur: TypedTag[Builder, Output, FragT]
+  val feGaussianBlur: TypedTag[Builder, Output, FragT]
 
   /**
    * The feImage filter fetches image data from an external source and provides
@@ -230,40 +230,40 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val feimage: TypedTag[Builder, Output, FragT]
+  val feImage: TypedTag[Builder, Output, FragT]
 
   /**
    * The feMerge filter allows filter effects to be applied concurrently
    * instead of sequentially. This is achieved by other filters storing their
-   * output via the result attribute and then accessing it in a femergenode
+   * output via the result attribute and then accessing it in a feMergeNode
    * child.
    *
    * MDN
    */
-  val femerge: TypedTag[Builder, Output, FragT]
+  val feMerge: TypedTag[Builder, Output, FragT]
 
   /**
    * The feMergeNode takes the result of another filter to be processed by its
-   * parent femerge.
+   * parent feMerge.
    *
    * MDN
    */
-  val femergenode: TypedTag[Builder, Output, FragT]
+  val feMergeNode: TypedTag[Builder, Output, FragT]
   /**
    * This filter is used to erode or dilate the input image. It's usefulness
    * lies especially in fattening or thinning effects.
    *
    * MDN
    */
-  val femorphology: TypedTag[Builder, Output, FragT]
+  val feMorphology: TypedTag[Builder, Output, FragT]
   /**
    * The input image as a whole is offset by the values specified in the dx
    * and dy attributes. It's used in creating drop-shadows.
    *
    * MDN
    */
-  val feoffset: TypedTag[Builder, Output, FragT]
-  val fepointlight: TypedTag[Builder, Output, FragT]
+  val feOffset: TypedTag[Builder, Output, FragT]
+  val fePointLight: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive lights a source graphic using the alpha channel as a
    * bump map. The resulting image is an RGBA image based on the light color.
@@ -275,18 +275,18 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val fespecularlighting: TypedTag[Builder, Output, FragT]
+  val feSpecularLighting: TypedTag[Builder, Output, FragT]
   /**
    *
    */
-  val fespotlight: TypedTag[Builder, Output, FragT]
+  val feSpotlight: TypedTag[Builder, Output, FragT]
   /**
    * An input image is tiled and the result used to fill a target. The effect
    * is similar to the one of a pattern.
    *
    * MDN
    */
-  val fetile: TypedTag[Builder, Output, FragT]
+  val feTile: TypedTag[Builder, Output, FragT]
   /**
    * This filter primitive creates an image using the Perlin turbulence
    * function. It allows the synthesis of artificial textures like clouds or
@@ -294,7 +294,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val feturbulance: TypedTag[Builder, Output, FragT]
+  val feTurbulance: TypedTag[Builder, Output, FragT]
   /**
    * The filter element serves as container for atomic filter operations. It is
    * never rendered directly. A filter is referenced by using the filter
@@ -371,11 +371,11 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
   val glyph: TypedTag[Builder, Output, FragT]
   /**
    * The glyphRef element provides a single possible glyph to the referencing
-   * altglyph substitution.
+   * altGlyph substitution.
    *
    * MDN
    */
-  val glyphref: TypedTag[Builder, Output, FragT]
+  val glyphRef: TypedTag[Builder, Output, FragT]
   /**
    * The horizontal distance between two glyphs can be fine-tweaked with an
    * hkern Element. This process is known as Kerning.
@@ -438,7 +438,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    */
   val `missing-glyph`: TypedTag[Builder, Output, FragT]
   /**
-   * the mpath sub-element for the animatemotion element provides the ability
+   * the mpath sub-element for the animateMotion element provides the ability
    * to reference an external path element as the definition of a motion path.
    *
    * MDN
@@ -481,7 +481,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val radialgradient: TypedTag[Builder, Output, FragT]
+  val radialGradient: TypedTag[Builder, Output, FragT]
   /**
    * The rect element is an SVG basic shape, used to create rectangles based on
    * the position of a corner and their width and height. It may also be used to
@@ -503,7 +503,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
   /**
    * The ramp of colors to use on a gradient is defined by the stop elements
    * that are child elements to either the lineargradient element or the
-   * radialgradient element.
+   * radialGradient element.
    *
    * MDN
    */
@@ -558,7 +558,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    *
    * MDN
    */
-  val textpath: TypedTag[Builder, Output, FragT]
+  val textPath: TypedTag[Builder, Output, FragT]
   /**
    * The textual content for a text can be either character data directly
    * embedded within the text element or the character data content of a

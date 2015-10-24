@@ -21,7 +21,7 @@
   )
 )
 
-@sect{ScalaTags 0.5.2}
+@sect{ScalaTags @scalatags.Constants.version}
   @p
     ScalaTags is a small, @sect.ref("Performance", "fast") XML/HTML/CSS construction library for @lnk("Scala", "http://www.scala-lang.org/") that takes fragments in plain Scala code that look like this:
 
@@ -32,30 +32,42 @@
 
   @exampleOut("splashExample")
 
+  @p
+    This document should contain enough to get you started using Scalatags to start generating your HTML, whether on a web-server on in the browser using @sect.ref{Scala.js}. For more information checkout the:
+
+  @ul
+    @li
+      @a("Mailing List", href:="https://groups.google.com/forum/#!forum/scalatags")
+    @li
+      @a("Gitter Channel", href:="https://gitter.im/lihaoyi/scalatags")
+    @li
+      @a("Scaladoc", href:="api/index.html")
+
   @sect{Getting Started}
 
     @p  
       ScalaTags is hosted on @lnk("Maven Central", "http://search.maven.org/#search%7Cga%7C1%7Cscalatags"); to get started, simply add the following to your `build.sbt`:
 
     @hl.scala
-      libraryDependencies += "com.lihaoyi" %% "scalatags" % "0.5.2"
+      libraryDependencies += "com.lihaoyi" %% "scalatags" % "@scalatags.Constants.version"
   
     @p
       And you're good to go! Open up a @code{sbt console} and you can start working through the @lnk("Examples", "#Examples"), which should just work when copied and pasted into the console.
 
-    @sect{ScalaJS}
+    @sect{Scala.js}
 
       @p
         To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 
       @hl.scala
-        libraryDependencies += "com.lihaoyi" %%% "scalatags" % "0.5.2"
+        libraryDependencies += "com.lihaoyi" %%% "scalatags" % "@scalatags.Constants.version"
 
       @p
         And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.5.2 is currently only compatibly with ScalaJS 0.5.3+.
+
   @sect{Why Scalatags}
     @p
-      The core functionality of Scalatags is a @lnk("tiny amount of code", "shared/main/scala/scalatags/generic/Core.scala"), and yet it provides all the functionality of large frameworks like Python's @lnk("Jinja2", "http://jinja.pocoo.org/docs/sandbox/") or C#'s @lnk("Razor", "http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx"), and out-performs the competition by a @sect.ref("Performance", "large margin"). It does this by leveraging the functionality of the Scala language to do almost @b{everything}, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
+      The core functionality of Scalatags is a @lnk("tiny amount of code", "https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Core.scala"), and yet it provides all the functionality of large frameworks like Python's @lnk("Jinja2", "http://jinja.pocoo.org/docs/sandbox/") or C#'s @lnk("Razor", "http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx"), and out-performs the competition by a @sect.ref("Performance", "large margin"). It does this by leveraging the functionality of the Scala language to do almost @b{everything}, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together
     @p
       Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
     
@@ -234,7 +246,7 @@
       @exampleIn2("manualImports")
 
       @p
-        Or you can rely on a aggregator like @code{all} (which the rest of the examples use) or @code{short}. @code{short} imports @code{Attrs} and @code{Styles} as @code{*}, making them quick to access without cluttering the global namespace:
+        Or you can rely on a aggregator like @code{all}, which the rest of the examples use, or @code{short}. @code{short} imports @code{Attrs} and @code{Styles} as @code{*}, making them quick to access without cluttering the global namespace:
 
       @exampleIn("manualImports")
       @p
@@ -394,13 +406,13 @@
       @p
         Data attributes work by separating the sections of the attribute with @code{.} instead of @code{-}:
 
-      @exampleIn("data")
-      @exampleOut("data")
+      @exampleIn("'data")
+      @exampleOut("'data")
       @p
         Aria attributes work too:
 
-      @exampleIn("aria")
-      @exampleOut("aria")
+      @exampleIn("'aria")
+      @exampleOut("'aria")
 
 
   @sect{DOM Backend}
@@ -450,7 +462,25 @@
     @hr 
     @p
       The DOM backend currently requires you to separately add a dependency on @lnk("scala-js-dom", "https://github.com/scala-js/scala-js-dom") for it to function.
+  @sect{Live Examples}
+    @p
+      Here are a few live examples, all generated from the same source code at
 
+    @a
+      https://github.com/lihaoyi/scalatags/blob/master/example/src/main/scala/example/ScalaJSExample.scala
+
+    @p
+      Using Scalatag's @a("Cross-Backend Code", "cross-building") support. Thus the same code is used to generate both the @code{Text} and @code{JsDom} examples that you see below. If done correctly, both examples should appear identical
+
+    @sect{scalatags.Text HTML}
+      @div(id := "text-html")
+    @sect{scalatags.Text SVG}
+      @div(id := "text-svg")
+    @sect{scalatags.JsDom HTML}
+      @div(id := "jsdom-html")
+    @sect{scalatags.JsDom SVG}
+      @div(id := "jsdom-svg")
+    @script(raw("""example.ScalaJSExample().main("text-html", "text-svg", "jsdom-html", "jsdom-svg")"""))
   @sect{CSS Stylesheets}
     @p
       Scalatags offsets an internal DSL for constructing CSS Stylesheets. The basic construction looks like:
@@ -540,7 +570,7 @@
     @p
       The fragment (shown below) is designed to exercise a bunch of different functionality in each template engine: functions/partials, loops, value-interpolation, etc.. The templates were structured identically despite the different languages used by the various engines. All templates were loaded and rendered once before the benchmarking begun, to allow for any file-operations/pre-compilation to happen.
     @p
-      The numbers speak for themselves; Scalatags is almost twice as fast as splicing/serializing @code{scala-xml} literals, almost four times as fast as @lnk("Twirl", "http://www.playframework.com/documentation/2.2.x/ScalaTemplates"), and 10-15 times as fast as the various @lnk("Scalate", "http://scalate.fusesource.org/") alternatives. This is likely due to overhead from the somewhat bloated data structures used by @code{scala-xml} (which Twirl also uses) and the heavy-use of dictionaries used to implement the custom scoping in the Scalate templates. Although this is a microbenchmark, and probably does not perfectly match real-world usage patterns, the conclusion is pretty clear: Scalatags is fast!
+      The numbers speak for themselves; Scalatags is almost twice as fast as splicing/serializing @code{scala-xml} literals, almost four times as fast as @lnk("Twirl", "http://www.playframework.com/documentation/2.2.x/ScalaTemplates"), and 10-15 times as fast as the various @lnk("Scalate", "http://scalate.fusesource.org/") alternatives. This is likely due to overhead from the somewhat bloated data structures used by @code{scala-xml}, which Twirl also uses, and the heavy-use of dictionaries used to implement the custom scoping in the Scalate templates. Although this is a microbenchmark, and probably does not perfectly match real-world usage patterns, the conclusion is pretty clear: Scalatags is fast!
     @p
       This is the Scalatags fragment that was rendered:
 
@@ -769,7 +799,7 @@
     @sect{Razor and Play Templates}
 
       @p
-        @lnk("Razor", "https://github.com/Antaris/RazorEngine") (the ASP.NET MVC template engine) and the Play framework's @lnk("template engine", "http://www.playframework.com/documentation/2.3-SNAPSHOT/ScalaTemplates") go in a new direction. Their templates generally:
+        @lnk("Razor", "https://github.com/Antaris/RazorEngine"), the ASP.NET MVC template engine, and the Play framework's @lnk("template engine", "http://www.playframework.com/documentation/2.3-SNAPSHOT/ScalaTemplates") go in a new direction. Their templates generally:
       @ul
         @li
           Are statically-compiled
@@ -884,10 +914,21 @@
 
   @sect{Changelog}
 
+    @sect{0.5.3}
+      @ul
+        @li
+          Camel-cased a large number of SVG tags so they match what is listed in the spec
+        @li
+          Merged example page into the readme
+        @li
+          Added the flex-box related styles
+        @li
+          @def pr(s: Int) = a(s, href:="https://github.com/lihaoyi/scalatags/pull/"+s)
+          Merged a bunch of PRs: @pr(105), @pr(103), @pr(95), @pr(94), @pr(88)
     @sect{0.5.2}
       @ul
         @li
-          Made `maxHeight`, `maxWidth`, `minHeight`, and `minWidth` into `PixelStyles` so passing in an integer does the right thing.
+          Made @code{maxHeight}, @code{maxWidth}, @code{minHeight}, and @code{minWidth} into @code{PixelStyles} so passing in an integer does the right thing.
 
     @sect{0.5.1}
 

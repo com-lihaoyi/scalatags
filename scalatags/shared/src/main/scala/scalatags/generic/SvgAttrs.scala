@@ -167,7 +167,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
 
   /**
    * The bias attribute shifts the range of the filter. After applying the kernelMatrix
-   * of the <feconvolvematrix> element to the input image to yield a number and applied
+   * of the <feConvolveMatrix> element to the input image to yield a number and applied
    * the divisor attribute, the bias attribute is added to each component. This allows
    * representation of values that would otherwise be clamped to 0 or 1.
    * If bias is not specified, then the effect is as if a value of 0 were specified.
@@ -224,7 +224,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
 
 
   /**
-   * The clip-path attribute bind the element is applied to with a given <clippath> element
+   * The clip-path attribute bind the element is applied to with a given <clipPath> element
    * As a presentation attribute, it also can be used as a property directly inside a CSS stylesheet
    *
    * Value 	<FuncIRI> | none | inherit
@@ -235,9 +235,9 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
 
   /**
    * The clipPathUnits attribute defines the coordinate system for the contents
-   * of the <clippath> element. the clipPathUnits attribute is not specified,
+   * of the <clipPath> element. the clipPathUnits attribute is not specified,
    * then the effect is as if a value of userSpaceOnUse were specified.
-   * Note that values defined as a percentage inside the content of the <clippath>
+   * Note that values defined as a percentage inside the content of the <clipPath>
    * are not affected by this attribute. It means that even if you set the value of
    * maskContentUnits to objectBoundingBox, percentage values will be calculated as
    * if the value of the attribute were userSpaceOnUse.
@@ -250,8 +250,8 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
 
   /**
    * The clip-rule attribute only applies to graphics elements that are contained within a
-   * <clippath> element. The clip-rule attribute basically works as the fill-rule attribute,
-   * except that it applies to <clippath> definitions.
+   * <clipPath> element. The clip-rule attribute basically works as the fill-rule attribute,
+   * except that it applies to <clipPath> definitions.
    *
    * Value 	nonezero | evenodd | inherit
    *
@@ -386,7 +386,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
   /**
    * For the <circle> and the <ellipse> element, this attribute define the x-axis coordinate
    * of the center of the element. If the attribute is not specified, the effect is as if a
-   * value of "0" were specified.For the <radialgradient> element, this attribute define
+   * value of "0" were specified.For the <radialGradient> element, this attribute define
    * the x-axis coordinate of the largest (i.e., outermost) circle for the radial gradient.
    * The gradient will be drawn such that the 100% gradient stop is mapped to the perimeter
    * of this largest (i.e., outermost) circle. If the attribute is not specified, the effect
@@ -401,7 +401,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
   /**
    * For the <circle> and the <ellipse> element, this attribute define the y-axis coordinate
    * of the center of the element. If the attribute is not specified, the effect is as if a
-   * value of "0" were specified.For the <radialgradient> element, this attribute define
+   * value of "0" were specified.For the <radialGradient> element, this attribute define
    * the x-axis coordinate of the largest (i.e., outermost) circle for the radial gradient.
    * The gradient will be drawn such that the 100% gradient stop is mapped to the perimeter
    * of this largest (i.e., outermost) circle. If the attribute is not specified, the effect
