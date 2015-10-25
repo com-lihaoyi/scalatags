@@ -1,0 +1,1069 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>Bundle - scalatags.generic.Bundle</title>
+          <meta name="description" content="Bundle - scalatags.generic.Bundle" />
+          <meta name="keywords" content="Bundle scalatags.generic.Bundle" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'scalatags.generic.Bundle';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <img src="../../lib/trait_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="scalatags">scalatags</a>.<a href="package.html" class="extype" name="scalatags.generic">generic</a></p>
+        <h1>Bundle</h1> <span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Bundle</span><span class="tparams">[<span name="Builder">Builder</span>, <span name="Output">Output &lt;: <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span></span>, <span name="FragT">FragT</span>]</span><span class="result"> extends <a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An abstract representation of the Scalatags package. This allows you to
+customize Scalatags to work with different backends, by defining your own
+implementation of <code>Tag</code>, and specifying how the various <a href="#Attr=scalatags.generic.Attr" class="extmbr" name="scalatags.generic.Bundle.Attr">Attr</a>s
+and <a href="#Style=scalatags.generic.Style" class="extmbr" name="scalatags.generic.Bundle.Style">Style</a>s contribute to construct the <span class="extype" name="Builder">Builder</span>. Apart from satisfying the
+default String/Boolean/Numeric implementations of <a href="#Attr=scalatags.generic.Attr" class="extmbr" name="scalatags.generic.Bundle.Attr">Attr</a> and <a href="#Style=scalatags.generic.Style" class="extmbr" name="scalatags.generic.Bundle.Style">Style</a>,
+you can also define your own, e.g. ScalaJS ships with an implicit conversion
+from <code>js.Any</code> to <code>Attr</code>, so that you can attach objects to the resultant
+<code>dom.Element</code> without serializing them.</p><p>By default, Scalatags ships with <a href="../Text$.html" class="extype" name="scalatags.Text">scalatags.Text</a>: <code>Bundle[StringBuilder]</code>
+on all platforms, and <a href="../JsDom$.html" class="extype" name="scalatags.JsDom">scalatags.JsDom</a>: <code>Bundle[dom.Element]</code> on ScalaJS.</p><p>It is possible to write entirely backend-agnostic Scalatags code by making
+your code parametric on a <a href="" class="extype" name="scalatags.generic.Bundle">Bundle</a> (or some subclass of it), and importing
+from that rather than importing directly from <a href="../JsDom$.html" class="extype" name="scalatags.JsDom">scalatags.JsDom</a> or
+<a href="../Text$.html" class="extype" name="scalatags.Text">scalatags.Text</a>. You will naturally only be able to use functionality
+(e.g. implicit conversions to <a href="#Attr=scalatags.generic.Attr" class="extmbr" name="scalatags.generic.Bundle.Attr">Attr</a>s and <a href="#Style=scalatags.generic.Style" class="extmbr" name="scalatags.generic.Bundle.Style">Style</a>s which are present
+in the common interface.
+</p></div><dl class="paramcmts block"><dt class="tparam">Builder</dt><dd class="cmt"><p>The type to which <a href="#Attr=scalatags.generic.Attr" class="extmbr" name="scalatags.generic.Bundle.Attr">Attr</a>s and <a href="#Style=scalatags.generic.Style" class="extmbr" name="scalatags.generic.Bundle.Style">Style</a>s are applied to when the
+                <code>Tag</code> is being rendered to give a final result.
+</p></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div><div class="toggleContainer block">
+            <span class="toggle">Known Subclasses</span>
+            <div class="subClasses hiddenContent"><a href="../JsDom$.html" class="extype" name="scalatags.JsDom">JsDom</a>, <a href="../Text$.html" class="extype" name="scalatags.Text">Text</a></div>
+          </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="scalatags.generic.Bundle"><span>Bundle</span></li><li class="in" name="scalatags.generic.Aliases"><span>Aliases</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="scalatags.generic.Bundle.AbstractShort" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AbstractShort=scalatags.generic.AbstractShort[Builder,Output,FragT]"></a>
+      <a id="AbstractShort:AbstractShort"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">AbstractShort</span><span class="result"> = <a href="AbstractShort.html" class="extype" name="scalatags.generic.AbstractShort">generic.AbstractShort</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@AbstractShort=scalatags.generic.AbstractShort[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="scalatags.generic.Aliases.Attr" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Attr=scalatags.generic.Attr"></a>
+      <a id="Attr:Attr"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Attr</span><span class="result"> = <a href="Attr.html" class="extype" name="scalatags.generic.Attr">generic.Attr</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Attr=scalatags.generic.Attr" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.AttrPair" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="AttrPair=scalatags.generic.AttrPair[Builder,FragT]"></a>
+      <a id="AttrPair:AttrPair"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">AttrPair</span><span class="result"> = <a href="AttrPair.html" class="extype" name="scalatags.generic.AttrPair">generic.AttrPair</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@AttrPair=scalatags.generic.AttrPair[Builder,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.AttrValue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="AttrValue[V]=scalatags.generic.AttrValue[Builder,V]"></a>
+      <a id="AttrValue[V]:AttrValue[V]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">AttrValue</span><span class="tparams">[<span name="V">V</span>]</span><span class="result"> = <a href="AttrValue.html" class="extype" name="scalatags.generic.AttrValue">generic.AttrValue</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Aliases.AttrValue.V">V</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@AttrValue[V]=scalatags.generic.AttrValue[Builder,V]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Attrs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Attrs=scalatags.generic.Attrs[Builder,Output,FragT]"></a>
+      <a id="Attrs:Attrs"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Attrs</span><span class="result"> = <a href="Attrs.html" class="extype" name="scalatags.generic.Attrs">generic.Attrs</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Attrs=scalatags.generic.Attrs[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Frag" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Frag=scalatags.generic.Frag[Builder,FragT]"></a>
+      <a id="Frag:Frag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Frag</span><span class="result"> = <a href="Frag.html" class="extype" name="scalatags.generic.Frag">generic.Frag</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Frag=scalatags.generic.Frag[Builder,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Modifier" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Modifier=scalatags.generic.Modifier[Builder]"></a>
+      <a id="Modifier:Modifier"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Modifier</span><span class="result"> = <a href="Modifier.html" class="extype" name="scalatags.generic.Modifier">generic.Modifier</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Modifier=scalatags.generic.Modifier[Builder]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.PixelStyleValue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PixelStyleValue[V]=scalatags.generic.PixelStyleValue[Builder,V]"></a>
+      <a id="PixelStyleValue[V]:PixelStyleValue[V]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PixelStyleValue</span><span class="tparams">[<span name="V">V</span>]</span><span class="result"> = <a href="PixelStyleValue.html" class="extype" name="scalatags.generic.PixelStyleValue">generic.PixelStyleValue</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Aliases.PixelStyleValue.V">V</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@PixelStyleValue[V]=scalatags.generic.PixelStyleValue[Builder,V]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.RawFrag" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="RawFrag&lt;:Aliases.this.Modifier"></a>
+      <a id="RawFrag:RawFrag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RawFrag</span><span class="result"> &lt;: <a href="#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.generic.Bundle.Modifier">Modifier</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@RawFrag&lt;:Aliases.this.Modifier" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A <a href="#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.generic.Bundle.Modifier">Modifier</a> which contains a String which will not be escaped.</p><div class="fullcomment"><div class="comment cmt"><p>A <a href="#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.generic.Bundle.Modifier">Modifier</a> which contains a String which will not be escaped.
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected[this] </dd><dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.StringFrag" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="StringFrag&lt;:Aliases.this.Modifier"></a>
+      <a id="StringFrag:StringFrag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StringFrag</span><span class="result"> &lt;: <a href="#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.generic.Bundle.Modifier">Modifier</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@StringFrag&lt;:Aliases.this.Modifier" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A <a href="#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.generic.Bundle.Modifier">Modifier</a> which contains a String.</p><div class="fullcomment"><div class="comment cmt"><p>A <a href="#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.generic.Bundle.Modifier">Modifier</a> which contains a String.
+</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected[this] </dd><dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Style" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Style=scalatags.generic.Style"></a>
+      <a id="Style:Style"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Style</span><span class="result"> = <a href="Style.html" class="extype" name="scalatags.generic.Style">generic.Style</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Style=scalatags.generic.Style" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.StyleValue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="StyleValue[V]=scalatags.generic.StyleValue[Builder,V]"></a>
+      <a id="StyleValue[V]:StyleValue[V]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StyleValue</span><span class="tparams">[<span name="V">V</span>]</span><span class="result"> = <a href="StyleValue.html" class="extype" name="scalatags.generic.StyleValue">generic.StyleValue</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Aliases.StyleValue.V">V</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@StyleValue[V]=scalatags.generic.StyleValue[Builder,V]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Styles" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Styles=scalatags.generic.Styles[Builder,Output,FragT]"></a>
+      <a id="Styles:Styles"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Styles</span><span class="result"> = <a href="Styles.html" class="extype" name="scalatags.generic.Styles">generic.Styles</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Styles=scalatags.generic.Styles[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Styles2" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Styles2=scalatags.generic.Styles2[Builder,Output,FragT]"></a>
+      <a id="Styles2:Styles2"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Styles2</span><span class="result"> = <a href="Styles2.html" class="extype" name="scalatags.generic.Styles2">generic.Styles2</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Styles2=scalatags.generic.Styles2[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.SvgAttrs" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SvgAttrs=scalatags.generic.SvgAttrs[Builder,Output,FragT]"></a>
+      <a id="SvgAttrs:SvgAttrs"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SvgAttrs</span><span class="result"> = <a href="SvgAttrs.html" class="extype" name="scalatags.generic.SvgAttrs">generic.SvgAttrs</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@SvgAttrs=scalatags.generic.SvgAttrs[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.SvgTags" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SvgTags=scalatags.generic.SvgTags[Builder,Output,FragT]"></a>
+      <a id="SvgTags:SvgTags"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SvgTags</span><span class="result"> = <a href="SvgTags.html" class="extype" name="scalatags.generic.SvgTags">generic.SvgTags</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@SvgTags=scalatags.generic.SvgTags[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Tag" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Tag&lt;:scalatags.generic.TypedTag[Builder,Output,FragT]"></a>
+      <a id="Tag:Tag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Tag</span><span class="result"> &lt;: <a href="TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Tag&lt;:scalatags.generic.TypedTag[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Tags" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Tags=scalatags.generic.Tags[Builder,Output,FragT]"></a>
+      <a id="Tags:Tags"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Tags</span><span class="result"> = <a href="Tags.html" class="extype" name="scalatags.generic.Tags">generic.Tags</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Tags=scalatags.generic.Tags[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Tags2" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Tags2=scalatags.generic.Tags2[Builder,Output,FragT]"></a>
+      <a id="Tags2:Tags2"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Tags2</span><span class="result"> = <a href="Tags2.html" class="extype" name="scalatags.generic.Tags2">generic.Tags2</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Tags2=scalatags.generic.Tags2[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases.Util" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Util=scalatags.generic.Util[Builder,Output,FragT]"></a>
+      <a id="Util:Util"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Util</span><span class="result"> = <a href="Util.html" class="extype" name="scalatags.generic.Util">generic.Util</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@Util=scalatags.generic.Util[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div id="values" class="values members">
+              <h3>Abstract Value Members</h3>
+              <ol><li name="scalatags.generic.Aliases#RawFrag" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="RawFrag:scalatags.Companion[Aliases.this.RawFrag]"></a>
+      <a id="RawFrag:Companion[RawFrag]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RawFrag</span><span class="result">: <a href="../package$$Companion.html" class="extype" name="scalatags.Companion">Companion</a>[<a href="#RawFrag&lt;:Aliases.this.Modifier" class="extmbr" name="scalatags.generic.Bundle.RawFrag">RawFrag</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@RawFrag:scalatags.Companion[Aliases.this.RawFrag]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[this] </dd><dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Aliases#StringFrag" visbl="prt" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="StringFrag:scalatags.Companion[Aliases.this.StringFrag]"></a>
+      <a id="StringFrag:Companion[StringFrag]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StringFrag</span><span class="result">: <a href="../package$$Companion.html" class="extype" name="scalatags.Companion">Companion</a>[<a href="#StringFrag&lt;:Aliases.this.Modifier" class="extmbr" name="scalatags.generic.Bundle.StringFrag">StringFrag</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@StringFrag:scalatags.Companion[Aliases.this.StringFrag]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[this] </dd><dt>Definition Classes</dt><dd><a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.generic.Bundle#all" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="all:Bundle.this.AttrswithBundle.this.StyleswithBundle.this.Tagswithscalatags.DataConverterswithBundle.this.Utilwithscalatags.generic.Aggregate[Builder,Output,FragT]"></a>
+      <a id="all:AttrswithStyleswithTagswithDataConverterswithUtilwithAggregate[Builder,Output,FragT]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">all</span><span class="result">: <a href="#Attrs=scalatags.generic.Attrs[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Attrs">Attrs</a> with <a href="#Styles=scalatags.generic.Styles[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Styles">Styles</a> with <a href="#Tags=scalatags.generic.Tags[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Tags">Tags</a> with <a href="../DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a> with <a href="#Util=scalatags.generic.Util[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Util">Util</a> with <a href="Aggregate.html" class="extype" name="scalatags.generic.Aggregate">Aggregate</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@all:Bundle.this.AttrswithBundle.this.StyleswithBundle.this.Tagswithscalatags.DataConverterswithBundle.this.Utilwithscalatags.generic.Aggregate[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Convenience object for importing all of Scalatags' functionality at once
+</p>
+    </li><li name="scalatags.generic.Bundle#attrs" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="attrs:Bundle.this.Attrs"></a>
+      <a id="attrs:Attrs"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">attrs</span><span class="result">: <a href="#Attrs=scalatags.generic.Attrs[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Attrs">Attrs</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@attrs:Bundle.this.Attrs" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Common attributes.</p>
+    </li><li name="scalatags.generic.Bundle#implicits" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="implicits:scalatags.generic.Aggregate[Builder,Output,FragT]"></a>
+      <a id="implicits:Aggregate[Builder,Output,FragT]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">implicits</span><span class="result">: <a href="Aggregate.html" class="extype" name="scalatags.generic.Aggregate">Aggregate</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@implicits:scalatags.generic.Aggregate[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Convenience object for only importing Scalatag's implicits, without importing
+any of the tags, styles or attributes themselves.</p><div class="fullcomment"><div class="comment cmt"><p>Convenience object for only importing Scalatag's implicits, without importing
+any of the tags, styles or attributes themselves. This includes conversions to
+<a href="#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.generic.Bundle.Modifier">Modifier</a>, typeclass instances for treating strings and numbers as attributes
+or style values, and other things.
+</p></div></div>
+    </li><li name="scalatags.generic.Bundle#short" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="short:Bundle.this.AbstractShortwithscalatags.generic.Aggregate[Builder,Output,FragT]"></a>
+      <a id="short:AbstractShortwithAggregate[Builder,Output,FragT]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">short</span><span class="result">: <a href="#AbstractShort=scalatags.generic.AbstractShort[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.AbstractShort">AbstractShort</a> with <a href="Aggregate.html" class="extype" name="scalatags.generic.Aggregate">Aggregate</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@short:Bundle.this.AbstractShortwithscalatags.generic.Aggregate[Builder,Output,FragT]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Convenience object for importing only Scalatags' tags (e.g.</p><div class="fullcomment"><div class="comment cmt"><p>Convenience object for importing only Scalatags' tags (e.g. <code>div</code>, <code>p</code>)
+into the local namespace, while leaving Styles and Attributes accessible
+via the <code>*</code> object
+</p></div></div>
+    </li><li name="scalatags.generic.Bundle#styles" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="styles:Bundle.this.Styles"></a>
+      <a id="styles:Styles"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">styles</span><span class="result">: <a href="#Styles=scalatags.generic.Styles[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Styles">Styles</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@styles:Bundle.this.Styles" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Common styles
+</p>
+    </li><li name="scalatags.generic.Bundle#styles2" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="styles2:Bundle.this.Styles2"></a>
+      <a id="styles2:Styles2"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">styles2</span><span class="result">: <a href="#Styles2=scalatags.generic.Styles2[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Styles2">Styles2</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@styles2:Bundle.this.Styles2" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Less common styles
+</p>
+    </li><li name="scalatags.generic.Bundle#svgAttrs" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="svgAttrs:Bundle.this.SvgAttrs"></a>
+      <a id="svgAttrs:SvgAttrs"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">svgAttrs</span><span class="result">: <a href="#SvgAttrs=scalatags.generic.SvgAttrs[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.SvgAttrs">SvgAttrs</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@svgAttrs:Bundle.this.SvgAttrs" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">SVG only attributes
+</p>
+    </li><li name="scalatags.generic.Bundle#svgTags" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="svgTags:Bundle.this.SvgTags"></a>
+      <a id="svgTags:SvgTags"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">svgTags</span><span class="result">: <a href="#SvgTags=scalatags.generic.SvgTags[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.SvgTags">SvgTags</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@svgTags:Bundle.this.SvgTags" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">SVG only tags
+</p>
+    </li><li name="scalatags.generic.Bundle#tags" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="tags:Bundle.this.Tags"></a>
+      <a id="tags:Tags"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tags</span><span class="result">: <a href="#Tags=scalatags.generic.Tags[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Tags">Tags</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@tags:Bundle.this.Tags" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Common tags
+</p>
+    </li><li name="scalatags.generic.Bundle#tags2" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="tags2:Bundle.this.Tags2"></a>
+      <a id="tags2:Tags2"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tags2</span><span class="result">: <a href="#Tags2=scalatags.generic.Tags2[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.Bundle.Tags2">Tags2</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@tags2:Bundle.this.Tags2" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Less common tags
+</p>
+    </li></ol>
+            </div>
+
+        <div id="values" class="values members">
+              <h3>Concrete Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@hashCode():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@toString():String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Bundle@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scalatags.generic.Aliases">
+              <h3>Inherited from <a href="Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a>[<span class="extype" name="scalatags.generic.Bundle.Builder">Builder</span>, <span class="extype" name="scalatags.generic.Bundle.Output">Output</span>, <span class="extype" name="scalatags.generic.Bundle.FragT">FragT</span>]</h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

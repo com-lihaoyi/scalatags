@@ -1,0 +1,337 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>stylesheet - scalatags.stylesheet</title>
+          <meta name="description" content="stylesheet - scalatags.stylesheet" />
+          <meta name="keywords" content="stylesheet scalatags.stylesheet" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'scalatags.stylesheet.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="scalatags">scalatags</a></p>
+        <h1>stylesheet</h1> <span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">stylesheet</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="scalatags.stylesheet.CascadingStyleSheet" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="CascadingStyleSheetextendsStyleSheetwithStyleSheetTags"></a>
+      <a id="CascadingStyleSheet:CascadingStyleSheet"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="CascadingStyleSheet.html"><span class="name">CascadingStyleSheet</span></a><span class="result"> extends <a href="StyleSheet.html" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a> with <a href="StyleSheetTags.html" class="extype" name="scalatags.stylesheet.StyleSheetTags">StyleSheetTags</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@CascadingStyleSheetextendsStyleSheetwithStyleSheetTags" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A <a href="StyleSheet.html" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a> which lets you define cascading tag/class
+selectors.</p><div class="fullcomment"><div class="comment cmt"><p>A <a href="StyleSheet.html" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a> which lets you define cascading tag/class
+selectors. Separate from <a href="StyleSheet.html" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a> because you almost
+never need these things, so it's good to make it explicit
+when you do to prevent accidental cascading.
+</p></div></div>
+    </li><li name="scalatags.stylesheet.Cls" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ClsextendsProductwithSerializable"></a>
+      <a id="Cls:Cls"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Cls.html"><span class="name">Cls</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pseudoSelectors">pseudoSelectors: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="args">args: <span class="extype" name="scala.Seq">Seq</span>[<a href="StyleSheetFrag.html" class="extype" name="scalatags.stylesheet.StyleSheetFrag">StyleSheetFrag</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@ClsextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A rendered class; both the class <code>name</code> (used when injected into Scalatags
+fragments) and the <code>structure</code> (used when injected into further class definitions)
+</p>
+    </li><li name="scalatags.stylesheet.PseudoSelectors" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="PseudoSelectors[T]extendsAnyRef"></a>
+      <a id="PseudoSelectors[T]:PseudoSelectors[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="PseudoSelectors.html"><span class="name">PseudoSelectors</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@PseudoSelectors[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides all the CSS pseudo-selectors as strongly-typed
+properties when mixed in.</p><div class="fullcomment"><div class="comment cmt"><p>Provides all the CSS pseudo-selectors as strongly-typed
+properties when mixed in. The only requirement is that you
+define <code>extend</code> to tell it what each of these properties
+returns
+</p></div></div>
+    </li><li name="scalatags.stylesheet.Selector" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SelectorextendsPseudoSelectors[scalatags.stylesheet.Selector]"></a>
+      <a id="Selector:Selector"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Selector.html"><span class="name">Selector</span></a><span class="result"> extends <a href="PseudoSelectors.html" class="extype" name="scalatags.stylesheet.PseudoSelectors">PseudoSelectors</a>[<a href="Selector.html" class="extype" name="scalatags.stylesheet.Selector">Selector</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@SelectorextendsPseudoSelectors[scalatags.stylesheet.Selector]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Lets you chain pseudo-selectors e.g.</p><div class="fullcomment"><div class="comment cmt"><p>Lets you chain pseudo-selectors e.g. <code>hover.visited</code> and have it properly
+translate into <code>:hover:visited</code> when rendered.
+</p></div></div>
+    </li><li name="scalatags.stylesheet.StyleSheet" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="StyleSheetextendsAnyRef"></a>
+      <a id="StyleSheet:StyleSheet"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="StyleSheet.html"><span class="name">StyleSheet</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@StyleSheetextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Inherit from me to define a stylesheet which you can use to define
+styles which get serialized to a <code>String</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Inherit from me to define a stylesheet which you can use to define
+styles which get serialized to a <code>String</code>. Does not allow the use
+of cascading tag/class selectors; use <a href="CascadingStyleSheet.html" class="extype" name="scalatags.stylesheet.CascadingStyleSheet">CascadingStyleSheet</a> for that.
+</p></div></div>
+    </li><li name="scalatags.stylesheet.StyleSheetFrag" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="StyleSheetFragextendsAnyRef"></a>
+      <a id="StyleSheetFrag:StyleSheetFrag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="StyleSheetFrag.html"><span class="name">StyleSheetFrag</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@StyleSheetFragextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Something which can be used as part of a <a href="StyleSheet.html" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a>
+</p>
+    </li><li name="scalatags.stylesheet.StyleSheetTags" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="StyleSheetTagsextendsAnyRef"></a>
+      <a id="StyleSheetTags:StyleSheetTags"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="StyleSheetTags.html"><span class="name">StyleSheetTags</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@StyleSheetTagsextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides a strongly-typed list of all the HTML tags that can be
+used as <a href="Selector.html" class="extype" name="scalatags.stylesheet.Selector">Selector</a>s.</p>
+    </li><li name="scalatags.stylesheet.StyleTree" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="StyleTreeextendsProductwithSerializable"></a>
+      <a id="StyleTree:StyleTree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="StyleTree.html"><span class="name">StyleTree</span></a><span class="params">(<span name="selectors">selectors: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="styles">styles: <span class="extype" name="scala.collection.SortedMap">SortedMap</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="children">children: <span class="extype" name="scala.Seq">Seq</span>[<a href="StyleTree.html" class="extype" name="scalatags.stylesheet.StyleTree">StyleTree</a>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@StyleTreeextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A structure representing a set of CSS rules which has not been
+rendered into a <a href="Cls.html" class="extype" name="scalatags.stylesheet.Cls">Cls</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A structure representing a set of CSS rules which has not been
+rendered into a <a href="Cls.html" class="extype" name="scalatags.stylesheet.Cls">Cls</a>.</p><p>e.g. a StyleTree that looks like</p><p>.cls1
+ .cls2
+  :hover
+:hover
+  cls2</p><p>Flattens out via <code>stringify</code> into CSS rules like</p><p>.cls1 .cls2:hover
+.cls1:hover .cls2
+</p></div></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scalatags.stylesheet.Selector" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Selector"></a>
+      <a id="Selector:Selector"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Selector$.html"><span class="name">Selector</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@Selector" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="scalatags.stylesheet.Sheet" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Sheet"></a>
+      <a id="Sheet:Sheet"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Sheet$.html"><span class="name">Sheet</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@Sheet" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Wraps a type <span class="extype" name="T">T</span>, so we can demand an implicit <code>Mangled[T]</code> in a way
+that triggers a macro to instantiate that type.</p>
+    </li><li name="scalatags.stylesheet.StyleSheetFrag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StyleSheetFrag"></a>
+      <a id="StyleSheetFrag:StyleSheetFrag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="StyleSheetFrag$.html"><span class="name">StyleSheetFrag</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@StyleSheetFrag" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="scalatags.stylesheet.StyleTree" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StyleTree"></a>
+      <a id="StyleTree:StyleTree"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="StyleTree$.html"><span class="name">StyleTree</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.package@StyleTree" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
