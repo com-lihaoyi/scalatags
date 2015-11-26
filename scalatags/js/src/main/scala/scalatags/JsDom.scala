@@ -41,6 +41,7 @@ object JsDom
   object short
     extends Cap
     with Util
+    with jsdom.Tags
     with DataConverters
     with AbstractShort
     with Aggregate

@@ -37,7 +37,7 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, F
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
-  val short: AbstractShort with Aggregate[Builder, Output, FragT]
+  val short: AbstractShort with Tags with Aggregate[Builder, Output, FragT]
   /**
    * Convenience object for only importing Scalatag's implicits, without importing
    * any of the tags, styles or attributes themselves. This includes conversions to
