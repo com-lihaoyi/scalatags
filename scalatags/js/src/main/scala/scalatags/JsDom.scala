@@ -40,11 +40,10 @@ object JsDom
 
   object short
     extends Cap
-    with Util
     with jsdom.Tags
     with DataConverters
-    with AbstractShort
     with Aggregate
+    with AbstractShort
     with LowPriorityImplicits{
 
     object * extends Cap with Attrs with Styles
