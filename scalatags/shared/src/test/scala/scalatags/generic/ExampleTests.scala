@@ -16,16 +16,16 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       )
     }
     ,
-    /* Commented until we fix the tests for short._
     {
       import bundle.{attrs => attr, styles => css, _}
       import bundle.tags._
+      import bundle.implicits._
       div(
         p(css.color:="red")("Red Text"),
         img(attr.href:="www.imgur.com/picture.jpg")
       )
     }
-    ,*/
+    ,
     """
         <div>
             <p style="color: red;">Red Text</p>
