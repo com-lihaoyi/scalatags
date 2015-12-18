@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><link href="META-INF/resources/webjars/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" /><link href="styles.css" rel="stylesheet" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style>
+<!DOCTYPE html><html><head><link href="META-INF/resources/webjars/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" /><link href="styles.css" rel="stylesheet" /><link rel="shortcut icon" type="image/png" href="favicon.png" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style>
 .scalatex-site-Styles-headerLink{
   color: #777;
   opacity: 0.05;
@@ -57,11 +57,11 @@
 span.hljs-tag, span.hljs-symbol{
     background: none;
 }
-    </style><script src="scripts.js"></script></head><body><div>
+    </style><title>ScalaTags </title><script src="scripts.js"></script></head><body><div>
 
 <a href="https://github.com/lihaoyi/scalatags" style="position: absolute;top: 0px;right: 0px;border: 0;"><img src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" /></a>
 
-<div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="ScalaTags" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">ScalaTags <a class=" scalatex-site-Styles-headerLink" href="#ScalaTags" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /><h2 style="font-weight: 300;color: #ccc;padding: 0px;margin-top: 0px;">0.5.3</h2></div><div class=" scalatex-site-Styles-content">
+<div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="ScalaTags" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">ScalaTags <a class=" scalatex-site-Styles-headerLink" href="#ScalaTags" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /><h2 style="font-weight: 300;color: #ccc;padding: 0px;margin-top: 0px;">0.5.4-SNAPSHOT</h2></div><div class=" scalatex-site-Styles-content">
   <p>
     ScalaTags is a small, <a href="#Performance">fast</a> XML/HTML/CSS construction library for <a href="http://www.scala-lang.org/">Scala</a> that takes fragments in plain Scala code that look like this:
 </p>
@@ -109,10 +109,10 @@ span.hljs-tag, span.hljs-symbol{
 </li></ul>
   <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="GettingStarted" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">Getting Started<a class=" scalatex-site-Styles-headerLink" href="#GettingStarted" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div>
 
-    <p>
+    <p></p>  
       ScalaTags is hosted on <a href="http://search.maven.org/#search%7Cga%7C1%7Cscalatags">Maven Central</a>; to get started, simply add the following to your `build.sbt`:
-</p>
-    <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %% &quot;scalatags&quot; % &quot;0.5.3&quot;
+
+    <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %% &quot;scalatags&quot; % &quot;0.5.4-SNAPSHOT&quot;
 </code></pre>
     <p>
       And you're good to go! Open up a <code>sbt console</code> and you can start working through the <a href="#Examples">Examples</a>, which should just work when copied and pasted into the console.
@@ -122,7 +122,7 @@ span.hljs-tag, span.hljs-symbol{
       <p>
         To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
 </p>
-      <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %%% &quot;scalatags&quot; % &quot;0.5.3&quot;
+      <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %%% &quot;scalatags&quot; % &quot;0.5.4-SNAPSHOT&quot;
 </code></pre>
       <p>
         And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.5.2 is currently only compatibly with ScalaJS 0.5.3+.
@@ -132,7 +132,7 @@ span.hljs-tag, span.hljs-symbol{
       The core functionality of Scalatags is a <a href="https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Core.scala">tiny amount of code</a>, and yet it provides all the functionality of large frameworks like Python's <a href="http://jinja.pocoo.org/docs/sandbox/">Jinja2</a> or C#'s <a href="http://msdn.microsoft.com/en-us/vs2010trainingcourse_aspnetmvc3razor.aspx">Razor</a>, and out-performs the competition by a <a href="#Performance">large margin</a>. It does this by leveraging the functionality of the Scala language to do almost <b>everything</b>, meaning you don't need to learn a second template pseudo-language just to stitch your HTML fragments together</p>
     <p>
       Since ScalaTags is pure Scala, any editor that understands Scala will understand scalatags.Text. Not only do you get syntax highlighting, you also get code completion:
-</p>
+    </p>
     <img style="width: 100%;" alt="Autocomplete" src="https://raw.githubusercontent.com/lihaoyi/scalatags/master/readme/resources/Autocomplete.png" />
 
     <p>
@@ -363,18 +363,13 @@ div(
       <p>
         The above example prints:
 </p>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;html&gt;
-    &lt;head&gt;
-        &lt;script src=&quot;...&quot;&gt;&lt;/script&gt;
-        &lt;script&gt;alert('Hello World')&lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;div&gt;
-            &lt;h1 id=&quot;title&quot;&gt;This is a title&lt;/h1&gt;
-            &lt;p&gt;This is a big paragraph of text&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L29-L41" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;
+    &lt;p style=&quot;float: left;&quot;&gt;This is my first paragraph&lt;/p&gt;
+    &lt;a tabindex=&quot;10&quot;&gt;
+        &lt;p&gt;Goooogle&lt;/p&gt;
+    &lt;/a&gt;
+    &lt;input disabled=&quot;true&quot; /&gt;
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L325-L332" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Passing in numbers to the styles which require a <code>px</code> at the end results in the <code>px</code> being appended automatically:
@@ -515,9 +510,9 @@ html(
     )
   )
 )</code></pre>
-      <p>
+      <p></p>  
 
-        In addition to importing things piecemeal from various pre-defined namespaces, Scalatags allows you to build a custom bundle which can be used to provide a single-import syntax for whatever import convention you're using. For example, the above snippet sets up a custom bundle which dumps <code>Tags</code> and <code>Tags2</code> in the local namespace, assigns <code>Styles</code> and <code>Styles2</code> to the <code>st</code> object, <code>Attrs</code> to the <code>at</code> object, and ignores Svg-related styles and tags entirely. This lets you enforce a particular convention without having to duplicate the same import-renamings in multiple files in your application.</p>
+        In addition to importing things piecemeal from various pre-defined namespaces, Scalatags allows you to build a custom bundle which can be used to provide a single-import syntax for whatever import convention you're using. For example, the above snippet sets up a custom bundle which dumps <code>Tags</code> and <code>Tags2</code> in the local namespace, assigns <code>Styles</code> and <code>Styles2</code> to the <code>st</code> object, <code>Attrs</code> to the <code>at</code> object, and ignores Svg-related styles and tags entirely. This lets you enforce a particular convention without having to duplicate the same import-renamings in multiple files in your application.
       <p>
         The above snippet prints the following:</p>
       <pre><code class="xml scalatex-site-Styles-highlightMe">&lt;html&gt;
@@ -970,7 +965,7 @@ runTriggers()</code><a class=" scalatex-site-Styles-headerLink" style="position:
       <p>
         This allows a very convenient direct-binding of behaviors without having to trawl through the DOM with jquery selectors or creating lots of IDs and worrying about collisions.
 </p>
-    <hr />
+    <hr /> 
     <p>
       The DOM backend currently requires you to separately add a dependency on <a href="https://github.com/scala-js/scala-js-dom">scala-js-dom</a> for it to function.</p>
   <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="LiveExamples" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">Live Examples<a class=" scalatex-site-Styles-headerLink" href="#LiveExamples" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div>
@@ -1011,7 +1006,7 @@ trait Simple extends StyleSheet{
 
     <p>
       This generates a stylesheet that looks like
-</p>
+    </p>
     <pre class=" scalatex-site-Styles-hoverContainer"><code class="css scalatex-site-Styles-highlightMe">.$pkg-Simple-x{
   background-color: red;
   height: 125px;
@@ -1071,7 +1066,7 @@ trait Inline extends StyleSheet{
 
       <p>
         This generates the stylesheet:
-</p>
+        </p>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="css scalatex-site-Styles-highlightMe">.$pkg-Inline-w{
   opacity: 0.5;
 }
@@ -1141,12 +1136,12 @@ trait Cascade extends CascadingStyleSheet{
       <p>
         You shouldn't need cascading often, but when you do, it's useful to have around. Scalatags gives you the best of both worlds by exposing it where necessary but preventing you from using it by accident.
 </p>
-  <hr />
+  <hr /> 
   <p>
     Scalatags' CSS support is minimal and opinionated, and intentionally much less featureful than <a href="https://japgolly.github.io/scalacss/book/">Scala-CSS</a>. While the feature set will probably grow slightly to accommodate people's needs, it will always be a comparatively small, spartan API.
 </p>
   <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="Performance" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">Performance<a class=" scalatex-site-Styles-headerLink" href="#Performance" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div>
-
+   
     <table>
       <thead>
         <th>Template Engine</th> <th>Renders</th></thead>
@@ -1171,6 +1166,7 @@ trait Cascade extends CascadingStyleSheet{
     <p>
       This is the Scalatags fragment that was rendered:
 </p>
+    
     <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">html(
   head(
     script(&quot;console.log(1)&quot;)
@@ -1195,7 +1191,7 @@ trait Cascade extends CascadingStyleSheet{
       }
     )
   )
-).toString</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/PerfTests.scala#L15-L40" target="_blank"><i class="fa fa-link "></i></a></pre>
+).toString</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/PerfTests.scala#L15-L40" target="_blank"><i class="fa fa-link "></i></a>
     <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">&lt;html&gt;
   &lt;head&gt;
     &lt;script&gt;console.log(1)&lt;/script&gt;
@@ -1215,11 +1211,10 @@ trait Cascade extends CascadingStyleSheet{
     &lt;/div&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/PerfTests.scala#L50-L69" target="_blank"><i class="fa fa-link "></i></a></pre>
-
     <p>
       The rest of the code involved in this micro-benchmark can be found in <a href="shared/test/scala/scalatags/PerfTests.scala">PerfTests.scala</a>
 
-</p>
+</p></pre>
   <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="Internals" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">Internals<a class=" scalatex-site-Styles-headerLink" href="#Internals" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div>
     <p>
 
@@ -1292,8 +1287,8 @@ type Tag = JsDom.TypedTag[dom.Element]
     <ul>
       <li>
         <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">TypedTag</code>s and <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">String</code>s: appends itself to the parent's <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">children</code> list.</li>
-      <li>
-        <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">AttrPair</code>s: sets a key in the parent's <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">attrs</code> list.</li>
+      <li></li> 
+        <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">AttrPair</code>s: sets a key in the parent's <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">attrs</code> list.
       <li>
         <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">StylePair</code>s: appends the inline <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">style: value;</code> to the parent's <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">style</code> attribute.</li>
       <li>
