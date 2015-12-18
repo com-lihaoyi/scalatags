@@ -180,7 +180,7 @@
       @p
         The above example prints:
 
-      @exampleOut("nonStringAttribuetsAndStyles")
+      @exampleOut("nonStringAttributesAndStyles")
 
       @p
         Passing in numbers to the styles which require a @code{px} at the end results in the @code{px} being appended automatically:
@@ -204,8 +204,8 @@
 
       @exampleIn("booleanAttributes2")
       @exampleOut("booleanAttributes2")
-      
-    @sect{Managing Imports} 
+
+    @sect{Managing Imports}
 
       @exampleIn("manualImports")
 
@@ -574,9 +574,11 @@
     @p
       This is the Scalatags fragment that was rendered:
 
-    @hl.ref(perfTests, Seq("def calc", ""))
-    @hl.ref(perfTests, Seq("val expected", "\"\"\"", ""))
+    @val x =  hl.ref(perfTests, Seq("def calc", ""))
 
+    @val y = hl.ref(perfTests, Seq("val expected", "\"\"\"", ""))
+    @x
+    @y
     @p
       The rest of the code involved in this micro-benchmark can be found in @lnk("PerfTests.scala", "shared/test/scala/scalatags/PerfTests.scala")
 
@@ -626,7 +628,7 @@
     @p
       And the @hl.scala{Frag}:
 
-    @hl.scala 
+    @hl.scala
       trait Frag[Builder, FragT] extends Modifier[Builder]{
         def render: FragT
       }
