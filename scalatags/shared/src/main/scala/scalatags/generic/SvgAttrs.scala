@@ -25,7 +25,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val accentHeight = "accent-height".attr
+  lazy val accentHeight = "accent-height".attr
 
   /**
    * This attribute controls whether or not the animation is cumulative.
@@ -37,7 +37,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val accumulate = "accumulate".attr
+  lazy val accumulate = "accumulate".attr
 
   /**
    * This attribute controls whether or not the animation is additive.
@@ -50,7 +50,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val additive = "additive".attr
+  lazy val additive = "additive".attr
 
   /**
    * The alignment-baseline attribute specifies how an object is aligned
@@ -68,7 +68,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val alignmentBaseline = "alignment-baseline".attr
+  lazy val alignmentBaseline = "alignment-baseline".attr
 
 
   /**
@@ -81,7 +81,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val ascent = "ascent".attr
+  lazy val ascent = "ascent".attr
 
 
   /**
@@ -92,7 +92,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val attributeName = "attributeName".attr
+  lazy val attributeName = "attributeName".attr
 
 
   /**
@@ -103,7 +103,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val attributeType = "attributeType".attr
+  lazy val attributeType = "attributeType".attr
 
 
   /**
@@ -116,7 +116,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val azimuth = "azimuth".attr
+  lazy val azimuth = "azimuth".attr
 
 
   /**
@@ -133,7 +133,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val baseFrequency = "baseFrequency".attr
+  lazy val baseFrequency = "baseFrequency".attr
 
 
   /**
@@ -147,7 +147,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val baselineShift = "baseline-shift".attr
+  lazy val baselineShift = "baseline-shift".attr
 
 
   /**
@@ -162,7 +162,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val begin = "begin".attr
+  lazy val begin = "begin".attr
 
 
   /**
@@ -176,7 +176,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val bias = "bias".attr
+  lazy val bias = "bias".attr
 
 
   /**
@@ -188,7 +188,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val calcMode = "calcMode".attr
+  lazy val calcMode = "calcMode".attr
 
 
   /**
@@ -205,7 +205,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val `class` = "class".attr
+  lazy val `class` = "class".attr
 
 
   /**
@@ -220,7 +220,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val clip = "clip".attr
+  lazy val clip = "clip".attr
 
 
   /**
@@ -231,7 +231,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val clipPath = "clip-path".attr
+  lazy val clipPath = "clip-path".attr
 
   /**
    * The clipPathUnits attribute defines the coordinate system for the contents
@@ -246,7 +246,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val clipPathUnits = "clipPathUnits".attr
+  lazy val clipPathUnits = "clipPathUnits".attr
 
   /**
    * The clip-rule attribute only applies to graphics elements that are contained within a
@@ -257,7 +257,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val clipRule = "clip-rule".attr
+  lazy val clipRule = "clip-rule".attr
 
   /**
    * The color attribute is used to provide a potential indirect value (currentColor)
@@ -269,7 +269,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val color = "color".attr
+  lazy val color = "color".attr
 
 
   /**
@@ -289,7 +289,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val colorInterpolation = "color-interpolation".attr
+  lazy val colorInterpolation = "color-interpolation".attr
 
 
   /**
@@ -306,7 +306,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val colorInterpolationFilters = "color-interpolation-filters".attr
+  lazy val colorInterpolationFilters = "color-interpolation-filters".attr
 
 
   /**
@@ -319,7 +319,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val colorProfile = "color-profile".attr
+  lazy val colorProfile = "color-profile".attr
 
 
   /**
@@ -337,7 +337,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val colorRendering = "color-rendering".attr
+  lazy val colorRendering = "color-rendering".attr
 
 
   /**
@@ -352,7 +352,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val contentScriptType = "contentScriptType".attr
+  lazy val contentScriptType = "contentScriptType".attr
 
 
   /**
@@ -364,7 +364,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val contentStyleType = "contentStyleType".attr
+  lazy val contentStyleType = "contentStyleType".attr
 
 
   /**
@@ -380,7 +380,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val cursor = "cursor".attr
+  lazy val cursor = "cursor".attr
 
 
   /**
@@ -396,7 +396,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val cx = "cx".attr
+  lazy val cx = "cx".attr
 
   /**
    * For the <circle> and the <ellipse> element, this attribute define the y-axis coordinate
@@ -411,7 +411,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val cy = "cy".attr
+  lazy val cy = "cy".attr
 
 
   /**
@@ -419,7 +419,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val d = "d".attr
+  lazy val d = "d".attr
 
 
   /**
@@ -427,7 +427,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val diffuseConstant = "diffuseConstant".attr
+  lazy val diffuseConstant = "diffuseConstant".attr
 
 
   /**
@@ -435,7 +435,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val direction = "direction".attr
+  lazy val direction = "direction".attr
 
 
   /**
@@ -443,7 +443,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val display = "display".attr
+  lazy val display = "display".attr
 
 
   /**
@@ -451,7 +451,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val divisor = "divisor".attr
+  lazy val divisor = "divisor".attr
 
 
   /**
@@ -459,7 +459,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val dominantBaseline = "dominant-baseline".attr
+  lazy val dominantBaseline = "dominant-baseline".attr
 
 
   /**
@@ -467,7 +467,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val dur = "dur".attr
+  lazy val dur = "dur".attr
 
 
   /**
@@ -475,7 +475,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val dx = "dx".attr
+  lazy val dx = "dx".attr
 
 
   /**
@@ -483,7 +483,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val dy = "dy".attr
+  lazy val dy = "dy".attr
 
 
   /**
@@ -491,7 +491,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val edgeMode = "edgeMode".attr
+  lazy val edgeMode = "edgeMode".attr
 
 
   /**
@@ -499,7 +499,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val elevation = "elevation".attr
+  lazy val elevation = "elevation".attr
 
 
   /**
@@ -507,7 +507,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val end = "end".attr
+  lazy val end = "end".attr
 
 
   /**
@@ -515,7 +515,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val externalResourcesRequired = "externalResourcesRequired".attr
+  lazy val externalResourcesRequired = "externalResourcesRequired".attr
 
 
   /**
@@ -523,7 +523,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fill = "fill".attr
+  lazy val fill = "fill".attr
 
 
   /**
@@ -531,7 +531,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fillOpacity = "fill-opacity".attr
+  lazy val fillOpacity = "fill-opacity".attr
 
 
   /**
@@ -539,7 +539,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fillRule = "fill-rule".attr
+  lazy val fillRule = "fill-rule".attr
 
 
   /**
@@ -547,7 +547,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val filter = "filter".attr
+  lazy val filter = "filter".attr
 
 
   /**
@@ -555,7 +555,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val filterRes = "filterRes".attr
+  lazy val filterRes = "filterRes".attr
 
 
   /**
@@ -563,7 +563,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val filterUnits = "filterUnits".attr
+  lazy val filterUnits = "filterUnits".attr
 
 
   /**
@@ -571,7 +571,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val floodColor = "flood-color".attr
+  lazy val floodColor = "flood-color".attr
 
 
   /**
@@ -579,7 +579,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val floodOpacity = "flood-opacity".attr
+  lazy val floodOpacity = "flood-opacity".attr
 
 
   /**
@@ -587,7 +587,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fontFamily = "font-family".attr
+  lazy val fontFamily = "font-family".attr
 
 
   /**
@@ -595,7 +595,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fontSize = "font-size".attr
+  lazy val fontSize = "font-size".attr
 
 
   /**
@@ -603,7 +603,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fontSizeAdjust = "font-size-adjust".attr
+  lazy val fontSizeAdjust = "font-size-adjust".attr
 
 
   /**
@@ -611,7 +611,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fontStretch = "font-stretch".attr
+  lazy val fontStretch = "font-stretch".attr
 
 
   /**
@@ -619,7 +619,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fontVariant = "font-variant".attr
+  lazy val fontVariant = "font-variant".attr
 
 
   /**
@@ -627,7 +627,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val fontWeight = "font-weight".attr
+  lazy val fontWeight = "font-weight".attr
 
 
   /**
@@ -635,7 +635,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val from = "from".attr
+  lazy val from = "from".attr
 
 
   /**
@@ -643,7 +643,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val gradientTransform = "gradientTransform".attr
+  lazy val gradientTransform = "gradientTransform".attr
 
 
   /**
@@ -651,7 +651,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val gradientUnits = "gradientUnits".attr
+  lazy val gradientUnits = "gradientUnits".attr
 
 
   /**
@@ -659,7 +659,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val height = "height".attr
+  lazy val height = "height".attr
 
 
   /**
@@ -667,16 +667,16 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val imageRendering = "imageRendering".attr
+  lazy val imageRendering = "imageRendering".attr
 
-  val id = "id".attr
+  lazy val id = "id".attr
 
   /**
    *
    *
    * MDN
    */
-  val in = "in".attr
+  lazy val in = "in".attr
 
 
 
@@ -685,7 +685,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val in2 = "in2".attr
+  lazy val in2 = "in2".attr
 
 
 
@@ -694,7 +694,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val k1 = "k1".attr
+  lazy val k1 = "k1".attr
 
 
   /**
@@ -702,7 +702,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val k2 = "k2".attr
+  lazy val k2 = "k2".attr
 
 
   /**
@@ -710,7 +710,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val k3 = "k3".attr
+  lazy val k3 = "k3".attr
 
 
   /**
@@ -718,7 +718,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val k4 = "k4".attr
+  lazy val k4 = "k4".attr
 
 
 
@@ -727,7 +727,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val kernelMatrix = "kernelMatrix".attr
+  lazy val kernelMatrix = "kernelMatrix".attr
 
 
 
@@ -736,7 +736,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val kernelUnitLength = "kernelUnitLength".attr
+  lazy val kernelUnitLength = "kernelUnitLength".attr
 
 
   /**
@@ -744,7 +744,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val kerning = "kerning".attr
+  lazy val kerning = "kerning".attr
 
 
   /**
@@ -752,7 +752,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val keySplines = "keySplines".attr
+  lazy val keySplines = "keySplines".attr
 
 
 
@@ -761,7 +761,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val keyTimes = "keyTimes".attr
+  lazy val keyTimes = "keyTimes".attr
 
 
 
@@ -771,7 +771,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val letterSpacing = "letter-spacing".attr
+  lazy val letterSpacing = "letter-spacing".attr
 
 
 
@@ -780,7 +780,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val lightingColor = "lighting-color".attr
+  lazy val lightingColor = "lighting-color".attr
 
 
 
@@ -789,7 +789,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val limitingConeAngle = "limitingConeAngle".attr
+  lazy val limitingConeAngle = "limitingConeAngle".attr
 
 
 
@@ -798,7 +798,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val local = "local".attr
+  lazy val local = "local".attr
 
 
 
@@ -807,7 +807,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val markerEnd = "marker-end".attr
+  lazy val markerEnd = "marker-end".attr
 
 
   /**
@@ -815,7 +815,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val markerMid = "marker-mid".attr
+  lazy val markerMid = "marker-mid".attr
 
 
   /**
@@ -823,7 +823,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val markerStart = "marker-start".attr
+  lazy val markerStart = "marker-start".attr
 
 
   /**
@@ -831,7 +831,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val markerHeight = "markerHeight".attr
+  lazy val markerHeight = "markerHeight".attr
 
 
   /**
@@ -839,7 +839,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val markerUnits = "markerUnits".attr
+  lazy val markerUnits = "markerUnits".attr
 
 
   /**
@@ -847,7 +847,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val markerWidth = "markerWidth".attr
+  lazy val markerWidth = "markerWidth".attr
 
 
   /**
@@ -855,7 +855,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val maskContentUnits = "maskContentUnits".attr
+  lazy val maskContentUnits = "maskContentUnits".attr
 
 
   /**
@@ -863,7 +863,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val maskUnits = "maskUnits".attr
+  lazy val maskUnits = "maskUnits".attr
 
 
   /**
@@ -871,7 +871,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val mask = "mak".attr
+  lazy val mask = "mak".attr
 
 
 
@@ -880,7 +880,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val max = "max".attr
+  lazy val max = "max".attr
 
 
 
@@ -889,7 +889,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val min = "min".attr
+  lazy val min = "min".attr
 
 
   /**
@@ -897,7 +897,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val mode = "mode".attr
+  lazy val mode = "mode".attr
 
 
   /**
@@ -905,17 +905,17 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val numOctaves = "numOctaves".attr
+  lazy val numOctaves = "numOctaves".attr
 
 
-  val offset = "offset".attr
+  lazy val offset = "offset".attr
 
   /**
    *
    *
    * MDN
    */
-  val opacity = "opacity".attr
+  lazy val opacity = "opacity".attr
 
 
 
@@ -924,7 +924,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val operator = "operator".attr
+  lazy val operator = "operator".attr
 
 
   /**
@@ -932,7 +932,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val order = "order".attr
+  lazy val order = "order".attr
 
 
   /**
@@ -940,7 +940,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val overflow = "overflow".attr
+  lazy val overflow = "overflow".attr
 
 
 
@@ -949,7 +949,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val paintOrder = "paint-order".attr
+  lazy val paintOrder = "paint-order".attr
 
 
 
@@ -958,7 +958,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val pathLength = "pathLength".attr
+  lazy val pathLength = "pathLength".attr
 
 
 
@@ -967,7 +967,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val patternContentUnits = "patternContentUnits".attr
+  lazy val patternContentUnits = "patternContentUnits".attr
 
 
   /**
@@ -975,7 +975,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val patternTransform = "patternTransform".attr
+  lazy val patternTransform = "patternTransform".attr
 
 
 
@@ -984,7 +984,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val patternUnits = "patternUnits".attr
+  lazy val patternUnits = "patternUnits".attr
 
 
 
@@ -993,7 +993,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val pointerEvents = "pointer-events".attr
+  lazy val pointerEvents = "pointer-events".attr
 
 
   /**
@@ -1001,7 +1001,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val points = "points".attr
+  lazy val points = "points".attr
 
 
   /**
@@ -1009,7 +1009,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val pointsAtX = "pointsAtX".attr
+  lazy val pointsAtX = "pointsAtX".attr
 
 
   /**
@@ -1017,7 +1017,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val pointsAtY = "pointsAtY".attr
+  lazy val pointsAtY = "pointsAtY".attr
 
 
   /**
@@ -1025,7 +1025,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val pointsAtZ = "pointsAtZ".attr
+  lazy val pointsAtZ = "pointsAtZ".attr
 
 
   /**
@@ -1033,7 +1033,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val preserveAlpha = "preserveAlpha".attr
+  lazy val preserveAlpha = "preserveAlpha".attr
 
 
 
@@ -1042,7 +1042,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val preserveAspectRatio = "preserveAspectRatio".attr
+  lazy val preserveAspectRatio = "preserveAspectRatio".attr
 
 
 
@@ -1051,7 +1051,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val primitiveUnits = "primitiveUnits".attr
+  lazy val primitiveUnits = "primitiveUnits".attr
 
 
   /**
@@ -1059,7 +1059,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val r = "r".attr
+  lazy val r = "r".attr
 
 
 
@@ -1068,7 +1068,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val radius = "radius".attr
+  lazy val radius = "radius".attr
 
 
   /**
@@ -1076,7 +1076,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val repeatCount = "repeatCount".attr
+  lazy val repeatCount = "repeatCount".attr
 
 
   /**
@@ -1084,7 +1084,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val repeatDur = "repeatDur".attr
+  lazy val repeatDur = "repeatDur".attr
 
 
 
@@ -1093,7 +1093,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val requiredFeatures = "requiredFeatures".attr
+  lazy val requiredFeatures = "requiredFeatures".attr
 
 
 
@@ -1102,7 +1102,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val restart = "restart".attr
+  lazy val restart = "restart".attr
 
 
 
@@ -1111,7 +1111,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val result = "result".attr
+  lazy val result = "result".attr
 
 
 
@@ -1120,7 +1120,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val rx = "rx".attr
+  lazy val rx = "rx".attr
 
 
 
@@ -1129,7 +1129,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val ry = "ry".attr
+  lazy val ry = "ry".attr
 
 
 
@@ -1138,7 +1138,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val scale = "scale".attr
+  lazy val scale = "scale".attr
 
 
 
@@ -1147,7 +1147,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val seed = "seed".attr
+  lazy val seed = "seed".attr
 
 
 
@@ -1156,7 +1156,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val shapeRendering = "shape-rendering".attr
+  lazy val shapeRendering = "shape-rendering".attr
 
 
 
@@ -1165,7 +1165,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val specularConstant = "specularConstant".attr
+  lazy val specularConstant = "specularConstant".attr
 
 
 
@@ -1174,7 +1174,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val specularExponent = "specularExponent".attr
+  lazy val specularExponent = "specularExponent".attr
 
 
 
@@ -1183,7 +1183,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val spreadMethod = "spreadMethod".attr
+  lazy val spreadMethod = "spreadMethod".attr
 
 
 
@@ -1192,7 +1192,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val stdDeviation = "stdDeviation".attr
+  lazy val stdDeviation = "stdDeviation".attr
 
 
 
@@ -1201,7 +1201,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val stitchTiles = "stitchTiles".attr
+  lazy val stitchTiles = "stitchTiles".attr
 
 
 
@@ -1210,7 +1210,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val stopColor = "stop-color".attr
+  lazy val stopColor = "stop-color".attr
 
 
 
@@ -1219,7 +1219,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val stopOpacity = "stop-opacity".attr
+  lazy val stopOpacity = "stop-opacity".attr
 
 
 
@@ -1228,7 +1228,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val stroke = "stroke".attr
+  lazy val stroke = "stroke".attr
 
 
   /**
@@ -1236,7 +1236,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val strokeDasharray= "stroke-dasharray".attr
+  lazy val strokeDasharray= "stroke-dasharray".attr
 
 
   /**
@@ -1244,7 +1244,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val strokeDashoffset = "stroke-dashoffset".attr
+  lazy val strokeDashoffset = "stroke-dashoffset".attr
 
 
   /**
@@ -1252,7 +1252,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val strokeLinecap = "stroke-linecap".attr
+  lazy val strokeLinecap = "stroke-linecap".attr
 
 
   /**
@@ -1260,7 +1260,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val strokeLinejoin = "stroke-linejoin".attr
+  lazy val strokeLinejoin = "stroke-linejoin".attr
 
 
   /**
@@ -1268,7 +1268,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val strokeMiterlimit = "stroke-miterlimit".attr
+  lazy val strokeMiterlimit = "stroke-miterlimit".attr
 
 
   /**
@@ -1276,7 +1276,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val strokeOpacity = "stroke-opacity".attr
+  lazy val strokeOpacity = "stroke-opacity".attr
 
 
   /**
@@ -1284,7 +1284,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val strokeWidth = "stroke-width".attr
+  lazy val strokeWidth = "stroke-width".attr
 
 
   /**
@@ -1292,7 +1292,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val style = "style".attr
+  lazy val style = "style".attr
 
 
 
@@ -1301,7 +1301,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val surfaceScale = "surfaceScale".attr
+  lazy val surfaceScale = "surfaceScale".attr
 
 
   /**
@@ -1309,7 +1309,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val targetX = "targetX".attr
+  lazy val targetX = "targetX".attr
 
 
   /**
@@ -1317,7 +1317,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val targetY = "targetY".attr
+  lazy val targetY = "targetY".attr
 
 
   /**
@@ -1325,7 +1325,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val textAnchor = "text-anchor".attr
+  lazy val textAnchor = "text-anchor".attr
 
 
   /**
@@ -1333,7 +1333,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val textDecoration = "text-decoration".attr
+  lazy val textDecoration = "text-decoration".attr
 
 
   /**
@@ -1341,7 +1341,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val textRendering = "text-rendering".attr
+  lazy val textRendering = "text-rendering".attr
 
 
   /**
@@ -1349,7 +1349,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val to = "to".attr
+  lazy val to = "to".attr
 
 
   /*
@@ -1357,7 +1357,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val transform = "transform".attr
+  lazy val transform = "transform".attr
 
 
   /*
@@ -1365,7 +1365,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val `type`= "type".attr
+  lazy val `type`= "type".attr
 
 
   /*
@@ -1373,7 +1373,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val values = "values".attr
+  lazy val values = "values".attr
 
 
   /**
@@ -1381,7 +1381,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val viewBox = "viewBox".attr
+  lazy val viewBox = "viewBox".attr
 
 
   /*
@@ -1389,7 +1389,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val visibility = "visibility".attr
+  lazy val visibility = "visibility".attr
 
 
   /*
@@ -1397,7 +1397,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val width = "width".attr
+  lazy val width = "width".attr
 
 
   /*
@@ -1405,22 +1405,14 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val wordSpacing = "word-spacing".attr
+  lazy val wordSpacing = "word-spacing".attr
 
   /*
    *
    *
    * MDN
    */
-  val writingMode = "writing-mode".attr
-
-
-  /*
-   *
-   *
-   * MDN
-   */
-  val x = "x".attr
+  lazy val writingMode = "writing-mode".attr
 
 
   /*
@@ -1428,7 +1420,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val x1 = "x1".attr
+  lazy val x = "x".attr
 
 
   /*
@@ -1436,7 +1428,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val x2 = "x2".attr
+  lazy val x1 = "x1".attr
 
 
   /*
@@ -1444,7 +1436,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val xChannelSelector = "xChannelSelector".attr
+  lazy val x2 = "x2".attr
 
 
   /*
@@ -1452,7 +1444,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val xLinkHref= "xlink:href".attr
+  lazy val xChannelSelector = "xChannelSelector".attr
 
 
   /*
@@ -1460,7 +1452,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val xLink = "xlink:role".attr
+  lazy val xLinkHref= "xlink:href".attr
 
 
   /*
@@ -1468,7 +1460,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val xLinkTitle = "xlink:title".attr
+  lazy val xLink = "xlink:role".attr
 
 
   /*
@@ -1476,7 +1468,15 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val xmlSpace = "xml:space".attr
+  lazy val xLinkTitle = "xlink:title".attr
+
+
+  /*
+   *
+   *
+   * MDN
+   */
+  lazy val xmlSpace = "xml:space".attr
 
 
   /**
@@ -1484,7 +1484,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val xmlns = "xmlns".attr
+  lazy val xmlns = "xmlns".attr
 
 
   /*
@@ -1492,7 +1492,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val y = "y".attr
+  lazy val y = "y".attr
 
 
   /*
@@ -1500,7 +1500,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val y1 = "y1".attr
+  lazy val y1 = "y1".attr
 
 
   /*
@@ -1508,7 +1508,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val y2 = "y2".attr
+  lazy val y2 = "y2".attr
 
 
   /*
@@ -1516,7 +1516,7 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val yChannelSelector = "yChannelSelector".attr
+  lazy val yChannelSelector = "yChannelSelector".attr
 
 
   /*
@@ -1524,5 +1524,5 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    *
    * MDN
    */
-  val z = "z".attr
+  lazy val z = "z".attr
 }

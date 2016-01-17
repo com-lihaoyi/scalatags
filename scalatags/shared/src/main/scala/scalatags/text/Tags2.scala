@@ -3,41 +3,41 @@ package text
 import acyclic.file
 trait Tags2 extends generic.Tags2[Builder, String, String]{
   // Document Metadata
-  val title = "title".tag
-  val style = "style".tag
+ lazy val title = "title".tag
+ lazy val style = "style".tag
   // Scripting
-  val noscript = "noscript".tag
+ lazy val noscript = "noscript".tag
   // Sections
-  val section = "section".tag
-  val nav = "nav".tag
-  val article = "article".tag
-  val aside = "aside".tag
-  val address = "address".tag
-  val main = "main".tag
+ lazy val section = "section".tag
+ lazy val nav = "nav".tag
+ lazy val article = "article".tag
+ lazy val aside = "aside".tag
+ lazy val address = "address".tag
+ lazy val main = "main".tag
   // Text level semantics
-  val q = "q".tag
-  val dfn = "dfn".tag
-  val abbr = "abbr".tag
-  val data = "data".tag
-  val time = "time".tag
-  val `var` = "var".tag
-  val samp = "samp".tag
-  val kbd = "kbd".tag
-  val math = "math".tag
-  val mark = "mark".tag
-  val ruby = "ruby".tag
-  val rt = "rt".tag
-  val rp = "rp".tag
-  val bdi = "bdi".tag
-  val bdo = "bdo".tag
+ lazy val q = "q".tag
+ lazy val dfn = "dfn".tag
+ lazy val abbr = "abbr".tag
+ lazy val data = "data".tag
+ lazy val time = "time".tag
+ lazy val `var` = "var".tag
+ lazy val samp = "samp".tag
+ lazy val kbd = "kbd".tag
+ lazy val math = "math".tag
+ lazy val mark = "mark".tag
+ lazy val ruby = "ruby".tag
+ lazy val rt = "rt".tag
+ lazy val rp = "rp".tag
+ lazy val bdi = "bdi".tag
+ lazy val bdo = "bdo".tag
   // Forms
-  val keygen = "keygen".voidTag
-  val output = "output".tag
-  val progress = "progress".tag
-  val meter = "meter".tag
+ lazy val keygen = "keygen".voidTag
+ lazy val output = "output".tag
+ lazy val progress = "progress".tag
+ lazy val meter = "meter".tag
   // Interactive elements
-  val details = "details".tag
-  val summary = "summary".tag
-  val command = "command".voidTag
-  val menu = "menu".tag
+ lazy val details = "details".tag
+ lazy val summary = "summary".tag
+ lazy val command = "command".voidTag
+ lazy val menu = "menu".tag
 }

@@ -37,6 +37,9 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
 
     import bundle.all._
     'splashExample-strCheck(
+      // import scalatags.Text.all._
+      // OR
+      // import scalatags.JsDom.all._
       html(
         head(
           script(src:="..."),

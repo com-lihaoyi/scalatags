@@ -46,7 +46,7 @@
   @sect{Getting Started}
 
     @p  
-      ScalaTags is hosted on @lnk("Maven Central", "http://search.maven.org/#search%7Cga%7C1%7Cscalatags"); to get started, simply add the following to your `build.sbt`:
+      ScalaTags is hosted on @lnk("Maven Central", "http://search.maven.org/#search%7Cga%7C1%7Cscalatags"); to get started, simply add the following to your @code{build.sbt}:
 
     @hl.scala
       libraryDependencies += "com.lihaoyi" %% "scalatags" % "@scalatags.Constants.version"
@@ -57,7 +57,7 @@
     @sect{Scala.js}
 
       @p
-        To use Scalatags with a ScalaJS project, add the following to the `built.sbt` of your ScalaJS project:
+        To use Scalatags with a ScalaJS project, add the following to the @code{built.sbt} of your ScalaJS project:
 
       @hl.scala
         libraryDependencies += "com.lihaoyi" %%% "scalatags" % "@scalatags.Constants.version"
@@ -98,7 +98,7 @@
       @exampleIn("helloWorld")
 
       @p
-        The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as `head`, `script`, and so on, which are automatically imported into your program when you `import scalatags.Text.all._`. See @sect.ref("Managing Imports", "below") if you want more fine-grained control over what's imported.
+        The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as @code{head}, @code{script}, and so on, which are automatically imported into your program when you @code{import scalatags.Text.all._}. See @sect.ref("Managing Imports", "below") if you want more fine-grained control over what's imported.
       @p
         This example code creates a Scalatags fragment. We could do many things with a fragment: store it, return it, etc. since it's just a normal Scala value. Eventually, though, you will want to convert it into HTML. To do this, simply use:
 
@@ -130,7 +130,7 @@
         In Scalatags, each attribute has an associated value which can be used to set it. This example shows how you set the @code{onclick} and @code{href} attributes with the @code{:=} operator. Attributes are all instances of the @hl.scala{Attr} class.
 
       @p
-        The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the `.attr` method that Scalatags adds to Strings:
+        The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the @code{.attr} method that Scalatags adds to Strings:
 
       @exampleIn2("attributes")
 
@@ -229,7 +229,7 @@
         @li
           @code{svgAttrs}: attributes only associated with SVG elements
         @li
-          @code{DataConverters}: convenient extensions (e.g. `10.px`) to create the CSS datatypes
+          @code{DataConverters}: convenient extensions (e.g. @hl.scala{10.px}) to create the CSS datatypes
 
       @p
         You can pick and choose exactly which bits you want to import, or you can use one of the provided aggregates:
@@ -372,7 +372,7 @@
         By default, any text that's put into the Scalatags templates, whether as a attribute value or a text node, is properly escaped when it is rendered. Thus, when you run the following snippet, you get this:
       @exampleOut("properEscaping")
       @p
-        As you can see, the contents of the variables @code{evilInput1} and @code{evilInput2} have been HTML-escaped, so you do not have to worry about un-escaped user input messing up your DOM or causing XSS injections. Furthermore, the names of the tags (e.g. "html") and attributes (e.g. "href") are themselves validated: passing in an invalid name to either of those (e.g. a tag or attribute name with a space inside) will throw an `IllegalArgumentException`).
+        As you can see, the contents of the variables @code{evilInput1} and @code{evilInput2} have been HTML-escaped, so you do not have to worry about un-escaped user input messing up your DOM or causing XSS injections. Furthermore, the names of the tags (e.g. "html") and attributes (e.g. "href") are themselves validated: passing in an invalid name to either of those (e.g. a tag or attribute name with a space inside) will throw an @hl.scala{IllegalArgumentException}).
 
       @p
         If you @b{really} want, for whatever reason, to put unsanitized input into your HTML, simply surround the string with a @code{raw} tag:
@@ -496,9 +496,9 @@
       Note that you need to use a separate @hl.scala{trait} and @hl.scala{val} in order for this to work; you cannot just have an @hl.scala{object Simple} extend @hl.scala{StyleSheet} directly.
     @p
 
-      You can then access @hl.scala{Simple.styleSheetText} in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a `style` tag.
+      You can then access @hl.scala{Simple.styleSheetText} in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a @hl.scala{style} tag.
     @p
-      Only @hl.scala{cls}s defined on `trait Simple` are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names @hl.scala{$pkg-$class-$def}. You can override @hl.scala{customSheetName} to replace the @hl.scala{pkg-$class} part with something else.
+      Only @hl.scala{cls}s defined on @hl.scala{trait Simple} are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names @hl.scala{$pkg-$class-$def}. You can override @hl.scala{customSheetName} to replace the @hl.scala{pkg-$class} part with something else.
     @p
       Once the stylesheet is defined, you can then immediately start using styles within your Scalatags fragments, just like any other @hl.scala{Modifier}:
 
@@ -794,7 +794,7 @@
         @li
           The syntax is completely new; finding an editor that properly supports all the quirks and semantics (or even simply highlighting things properly) is hard. You could hack together something quick and extremely fragile, or you could wait ages for a solid plugin to materialize.
         @li
-          Abstraction is clunky: inbuilt tags are used via `<div />`, while user-defined components are called e.g. by `{{ component() }}`. You're left with a choice between not using much abstraction and mainly sticking to inbuilt tags, or creating components and accepting the fact that your templates will basically be totally composed of `{{ curly braces }}`. Neither choice is satisfying.
+          Abstraction is clunky: inbuilt tags are used via @hl.scala{<div />}, while user-defined components are called e.g. by @code("{{ component() }}"). You're left with a choice between not using much abstraction and mainly sticking to inbuilt tags, or creating components and accepting the fact that your templates will basically be totally composed of @code("{{ curly braces }}"). Neither choice is satisfying.
         @li
           Have no sort of static checking at all; you're just passing dicts around, and waiting for silly mistakes to blow up at run-time so you can fix them.
 
@@ -899,7 +899,7 @@
         @li
           Custom components are trivial to create (@hl.scala{def component(x: Int, y: Int) = ...}) and trivial to use (@hl.scala{component(value1, value2)}) because they're just functions.
         @li
-          No dependencies! No need for SBT integration, filesystem loading, runtime compilation, caching, and all that jazz. You create a Scala object, call `.toString()`, and that's it!
+          No dependencies! No need for SBT integration, filesystem loading, runtime compilation, caching, and all that jazz. You create a Scala object, call @code{.toString()}, and that's it!
       @p
         On top of fixing all the old problems, Scalatags targets some new ones:
 
@@ -916,6 +916,12 @@
 
   @sect{Changelog}
 
+    @sect{0.5.4}
+      @ul
+        @li
+          #106: Fixed imports from @hl.scala{import scalatags.Text.short._}, thanks to @lnk("stewSquared", "https://github.com/stewSquared")
+        @li
+          #109: Improved initialization time for Scalatags package by making tag/attribute/style definitions lazy
     @sect{0.5.3}
       @ul
         @li

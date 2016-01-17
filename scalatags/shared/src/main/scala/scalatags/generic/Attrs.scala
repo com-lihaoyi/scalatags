@@ -20,7 +20,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
   /**
    * Specifies a shortcut key to activate/focus an element
    */
-  val accesskey	= "accesskey".attr
+  lazy val accesskey	= "accesskey".attr
   /**
    * This attribute is a space-separated list of the classes of the element.
    * Classes allows CSS and Javascript to select and access specific elements
@@ -30,13 +30,13 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  val `class` = "class".attr
+  lazy val `class` = "class".attr
   /**
    * Shorthand for the `class` attribute
    */
-  val cls = `class`
-  val contenteditable	= "contenteditable".attr // Specifies whether the content of an element is editable or not
-  val contextmenu	= "contextmenu".attr // Specifies a context menu for an element. The context menu appears when a user right-clicks on the element
+  lazy val cls = `class`
+  lazy val contenteditable	= "contenteditable".attr // Specifies whether the content of an element is editable or not
+  lazy val contextmenu	= "contextmenu".attr // Specifies a context menu for an element. The context menu appears when a user right-clicks on the element
   /**
    * This class of attributes, called custom data attributes, allows proprietary
    * information to be exchanged between the HTML and its DOM representation that
@@ -75,20 +75,20 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    * - `auto`	Let the browser figure out the text direction, based on the content,
    *          (only recommended if the text direction is unknown)
    */
-  val dir	= "dir".attr
+  lazy val dir	= "dir".attr
   /**
    * A Boolean attribute that specifies whether an element is draggable or not
    */
-  val draggable	= "draggable".attr := "draggable"
+  lazy val draggable	= "draggable".attr := "draggable"
   /**
    * Specifies whether the dragged data is copied, moved, or linked, when dropped
    */
-  val dropzone = "dropzone".attr
+  lazy val dropzone = "dropzone".attr
   /**
    * Specifies that an element is not yet, or is no longer, relevant and
    * consequently hidden from view of the user.
    */
-  val hidden = "hidden".attr := "hidden"
+  lazy val hidden = "hidden".attr := "hidden"
   /**
    * This attribute defines a unique identifier (ID) which must be unique in
    * the whole document. Its purpose is to identify the element when linking
@@ -96,7 +96,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  val id	= "id".attr
+  lazy val id	= "id".attr
   /**
    * This attribute participates in defining the language of the element, the
    * language that non-editable elements are written in or the language that
@@ -108,14 +108,14 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  val lang = "lang".attr
+  lazy val lang = "lang".attr
   /**
    * This enumerated attribute defines whether the element may be checked for
    * spelling errors.
    *
    * MDN
    */
-  val spellcheck = "spellcheck".attr := "spellcheck"
+  lazy val spellcheck = "spellcheck".attr := "spellcheck"
   /**
    * This attribute contains CSS styling declarations to be applied to the
    * element. Note that it is recommended for styles to be defined in a separate
@@ -124,7 +124,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  val style	= "style".attr
+  lazy val style	= "style".attr
   /**
    * This integer attribute indicates if the element can take input focus (is
    * focusable), if it should participate to sequential keyboard navigation, and
@@ -143,7 +143,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * An element with a 0 value, an invalid value, or no tabindex value should be placed after elements with a positive tabindex in the sequential keyboard navigation order.
    */
-  val tabindex = "tabindex".attr
+  lazy val tabindex = "tabindex".attr
   /**
    * This attribute contains a text representing advisory information related to
    * the element it belongs too. Such information can typically, but not
@@ -151,18 +151,18 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  val title	= "title". attr
+  lazy val title	= "title". attr
   /**
    * Specifies whether the content of an element should be translated or not
    */
-  val translate	= "translate".attr := "translate"
+  lazy val translate	= "translate".attr := "translate"
 }
 
 trait SharedEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
   /**
    * Script to be run when an error occurs when the file is being loaded
    */
-  val onerror = "onerror".attr
+  lazy val onerror = "onerror".attr
 }
 
 /**
@@ -172,15 +172,15 @@ trait ClipboardEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, O
   /**
    * Fires when the user copies the content of an element
    */
-  val oncopy = "oncopy".attr
+  lazy val oncopy = "oncopy".attr
   /**
    * Fires when the user cuts the content of an element
    */
-  val oncut = "oncut".attr
+  lazy val oncut = "oncut".attr
   /**
    * Fires when the user pastes some content in an element
    */
-  val onpaste = "onpaste".attr
+  lazy val onpaste = "onpaste".attr
 }
 
 /**
@@ -193,91 +193,91 @@ trait MediaEventAttrs[Builder, Output<:FragT, FragT] extends SharedEventAttrs[Bu
   /**
    * Script to be run on abort
    */
-  val onabort = "onabort".attr
+  lazy val onabort = "onabort".attr
   /**
    * Script to be run when a file is ready to start playing (when it has buffered enough to begin)
    */
-  val oncanplay = "oncanplay".attr
+  lazy val oncanplay = "oncanplay".attr
   /**
    * Script to be run when a file can be played all the way to the end without pausing for buffering
    */
-  val oncanplaythrough = "oncanplaythrough".attr
+  lazy val oncanplaythrough = "oncanplaythrough".attr
   /**
    * Script to be run when the cue changes in a <track> element
    */
-  val oncuechange = "oncuechange".attr
+  lazy val oncuechange = "oncuechange".attr
   /**
    * Script to be run when the length of the media changes
    */
-  val ondurationchange = "ondurationchange".attr
+  lazy val ondurationchange = "ondurationchange".attr
   /**
    * Script to be run when something bad happens and the file is suddenly unavailable (like unexpectedly disconnects)
    */
-  val onemptied = "onemptied".attr
+  lazy val onemptied = "onemptied".attr
   /**
    * Script to be run when the media has reach the end (a useful event for messages like "thanks for listening")
    */
-  val onended = "onended".attr
+  lazy val onended = "onended".attr
   /**
    * Script to be run when media data is loaded
    */
-  val onloadeddata = "onloadeddata".attr
+  lazy val onloadeddata = "onloadeddata".attr
   /**
    * Script to be run when meta data (like dimensions and duration) are loaded
    */
-  val onloadedmetadata = "onloadedmetadata".attr
+  lazy val onloadedmetadata = "onloadedmetadata".attr
   /**
    * Script to be run just as the file begins to load before anything is actually loaded
    */
-  val onloadstart = "onloadstart".attr
+  lazy val onloadstart = "onloadstart".attr
   /**
    * Script to be run when the media is paused either by the user or programmatically
    */
-  val onpause = "onpause".attr
+  lazy val onpause = "onpause".attr
   /**
    * Script to be run when the media is ready to start playing
    */
-  val onplay = "onplay".attr
+  lazy val onplay = "onplay".attr
   /**
    * Script to be run when the media actually has started playing
    */
-  val onplaying = "onplaying".attr
+  lazy val onplaying = "onplaying".attr
   /**
    * Script to be run when the browser is in the process of getting the media data
    */
-  val onprogress = "onprogress".attr
+  lazy val onprogress = "onprogress".attr
   /**
    * Script to be run each time the playback rate changes (like when a user switches to a slow motion or fast forward mode)
    */
-  val onratechange = "onratechange".attr
+  lazy val onratechange = "onratechange".attr
   /**
    * Script to be run when the seeking attribute is set to false indicating that seeking has ended
    */
-  val onseeked = "onseeked".attr
+  lazy val onseeked = "onseeked".attr
   /**
    * Script to be run when the seeking attribute is set to true indicating that seeking is active
    */
-  val onseeking = "onseeking".attr
+  lazy val onseeking = "onseeking".attr
   /**
    * Script to be run when the browser is unable to fetch the media data for whatever reason
    */
-  val onstalled = "onstalled".attr
+  lazy val onstalled = "onstalled".attr
   /**
    * Script to be run when fetching the media data is stopped before it is completely loaded for whatever reason
    */
-  val onsuspend = "onsuspend".attr
+  lazy val onsuspend = "onsuspend".attr
   /**
    * Script to be run when the playing position has changed (like when the user fast forwards to a different point in the media)
    */
-  val ontimeupdate = "ontimeupdate".attr
+  lazy val ontimeupdate = "ontimeupdate".attr
   /**
    * Script to be run each time the volume is changed which (includes setting the volume to "mute")
    */
-  val onvolumechange = "onvolumechange".attr
+  lazy val onvolumechange = "onvolumechange".attr
   /**
    * Script to be run when the media has paused but is expected to resume (like when the media pauses to buffer more data)
    */
-  val onwaiting = "onwaiting".attr
+  lazy val onwaiting = "onwaiting".attr
 }
 
 /**
@@ -287,11 +287,11 @@ trait MiscellaneousEventAttrs[Builder, Output<:FragT, FragT] extends SharedEvent
   /**
    * Fires when a <menu> element is shown as a context menu
    */
-  val onshow = "onshow".attr
+  lazy val onshow = "onshow".attr
   /**
    * Fires when the user opens or closes the <details> element
    */
-  val ontoggle = "ontoggle".attr
+  lazy val ontoggle = "ontoggle".attr
 }
 
 /**
@@ -306,59 +306,59 @@ trait WindowEventAttrs[Builder, Output<:FragT, FragT] extends SharedEventAttrs[B
    *
    * MDN
    */
-  val onload = "onload".attr
+  lazy val onload = "onload".attr
   /**
    * Script to be run after the document is printed
    */
-  val onafterprint = "onafterprint".attr
+  lazy val onafterprint = "onafterprint".attr
   /**
    * Script to be run before the document is printed
    */
-  val onbeforeprint = "onbeforeprint".attr
+  lazy val onbeforeprint = "onbeforeprint".attr
   /**
    * Script to be run when the document is about to be unloaded
    */
-  val onbeforeunload = "onbeforeunload".attr
+  lazy val onbeforeunload = "onbeforeunload".attr
   /**
    * Script to be run when there has been changes to the anchor part of the a URL
    */
-  val onhashchange = "onhashchange".attr
+  lazy val onhashchange = "onhashchange".attr
   /**
    * Script to be run when the message is triggered
    */
-  val onmessage = "onmessage".attr
+  lazy val onmessage = "onmessage".attr
   /**
    * Script to be run when the browser starts to work offline
    */
-  val onoffline = "onoffline".attr
+  lazy val onoffline = "onoffline".attr
   /**
    * Script to be run when the browser starts to work online
    */
-  val ononline = "ononline".attr
+  lazy val ononline = "ononline".attr
   /**
    * Script to be run when a user navigates away from a page
    */
-  val onpagehide = "onpagehide".attr
+  lazy val onpagehide = "onpagehide".attr
   /**
    * Script to be run when a user navigates to a page
    */
-  val onpageshow = "onpageshow".attr
+  lazy val onpageshow = "onpageshow".attr
   /**
    * Script to be run when the window's history changes
    */
-  val onpopstate = "onpopstate".attr
+  lazy val onpopstate = "onpopstate".attr
   /**
    * Fires when the browser window is resized
    */
-  val onresize = "onresize".attr
+  lazy val onresize = "onresize".attr
   /**
    * Script to be run when a Web Storage area is updated
    */
-  val onstorage = "onstorage".attr
+  lazy val onstorage = "onstorage".attr
   /**
    * Fires once a page has unloaded (or the browser window has been closed)
    */
-  val onunload = "onunload".attr
+  lazy val onunload = "onunload".attr
 }
 
 /**
@@ -371,62 +371,62 @@ trait FormEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output
    *
    * MDN
    */
-  val onblur = "onblur".attr
+  lazy val onblur = "onblur".attr
   /**
    * The change event is fired for input, select, and textarea elements
    * when a change to the element's value is committed by the user.
    *
    * MDN
    */
-  val onchange = "onchange".attr
+  lazy val onchange = "onchange".attr
 
   /**
    * The focus event is raised when the user sets focus on the given element.
    *
    * MDN
    */
-  val onfocus = "onfocus".attr
+  lazy val onfocus = "onfocus".attr
   /**
    * The select event only fires when text inside a text input or textarea is
    * selected. The event is fired after the text has been selected.
    *
    * MDN
    */
-  val onselect = "onselect".attr
+  lazy val onselect = "onselect".attr
   /**
    * The submit event is raised when the user clicks a submit button in a form
    * (<input type="submit"/>).
    *
    * MDN
    */
-  val onsubmit = "onsubmit".attr
+  lazy val onsubmit = "onsubmit".attr
   /**
    * The reset event is fired when a form is reset.
    *
    * MDN
    */
-  val onreset = "onreset".attr
+  lazy val onreset = "onreset".attr
   /**
     * Script to be run when a context menu is triggered
     */
-  val oncontextmenu = "oncontextmenu".attr
+  lazy val oncontextmenu = "oncontextmenu".attr
   /**
    * Script to be run when an element gets user input
    */
-  val oninput = "oninput".attr
+  lazy val oninput = "oninput".attr
   /**
    * Script to be run when an element is invalid
    */
-  val oninvalid = "oninvalid".attr
+  lazy val oninvalid = "oninvalid".attr
   /**
    * Fires when the user writes something in a search field (for <input="search">)
    */
-  val onsearch = "onsearch".attr
+  lazy val onsearch = "onsearch".attr
 
   /**
    * Indicates a selected option in an option list of a <select> element.
    */
-  val selected = "selected".attr := "selected"
+  lazy val selected = "selected".attr := "selected"
 }
 
 /**
@@ -438,13 +438,13 @@ trait KeyboardEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Ou
    *
    * MDN
    */
-  val onkeydown = "onkeydown".attr
+  lazy val onkeydown = "onkeydown".attr
   /**
    * The keyup event is raised when the user releases a key that's been pressed.
    *
    * MDN
    */
-  val onkeyup = "onkeyup".attr
+  lazy val onkeyup = "onkeyup".attr
   /**
    * The keypress event should be raised when the user presses a key on the keyboard.
    * However, not all browsers fire keypress events for certain keys.
@@ -454,7 +454,7 @@ trait KeyboardEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Ou
    *
    * MDN
    */
-  val onkeypress = "onkeypress".attr
+  lazy val onkeypress = "onkeypress".attr
 }
 
 /**
@@ -467,54 +467,54 @@ trait MouseEventAttrs[Builder, Output<: FragT, FragT] extends Util[Builder, Outp
    *
    * MDN
    */
-  val onclick = "onclick".attr
+  lazy val onclick = "onclick".attr
   /**
    * The dblclick event is fired when a pointing device button (usually a
    * mouse button) is clicked twice on a single element.
    *
    * MDN
    */
-  val ondblclick = "ondblclick".attr
+  lazy val ondblclick = "ondblclick".attr
   /**
    * Script to be run when an element is dragged
    */
-  val ondrag = "ondrag".attr
+  lazy val ondrag = "ondrag".attr
   /**
    * Script to be run at the end of a drag operation
    */
-  val ondragend = "ondragend".attr
+  lazy val ondragend = "ondragend".attr
   /**
    * Script to be run when an element has been dragged to a valid drop target
    */
-  val ondragenter = "ondragenter".attr
+  lazy val ondragenter = "ondragenter".attr
   /**
    * Script to be run when an element leaves a valid drop target
    */
-  val ondragleave = "ondragleave".attr
+  lazy val ondragleave = "ondragleave".attr
   /**
    * Script to be run when an element is being dragged over a valid drop target
    */
-  val ondragover = "ondragover".attr
+  lazy val ondragover = "ondragover".attr
   /**
    * Script to be run at the start of a drag operation
    */
-  val ondragstart = "ondragstart".attr
+  lazy val ondragstart = "ondragstart".attr
   /**
    * Script to be run when dragged element is being dropped
    */
-  val ondrop = "ondrop".attr
+  lazy val ondrop = "ondrop".attr
   /**
    * The mousedown event is raised when the user presses the mouse button.
    *
    * MDN
    */
-  val onmousedown = "onmousedown".attr
+  lazy val onmousedown = "onmousedown".attr
   /**
    * The mousemove event is raised when the user moves the mouse.
    *
    * MDN
    */
-  val onmousemove = "onmousemove".attr
+  lazy val onmousemove = "onmousemove".attr
   /**
    * The mouseout event is raised when the mouse leaves an element (e.g, when
    * the mouse moves off of an image in the web page, the mouseout event is
@@ -522,30 +522,30 @@ trait MouseEventAttrs[Builder, Output<: FragT, FragT] extends Util[Builder, Outp
    *
    * MDN
    */
-  val onmouseout = "onmouseout".attr
+  lazy val onmouseout = "onmouseout".attr
   /**
    * The mouseover event is raised when the user moves the mouse over a
    * particular element.
    *
    * MDN
    */
-  val onmouseover = "onmouseover".attr
+  lazy val onmouseover = "onmouseover".attr
   /**
    * The mouseup event is raised when the user releases the mouse button.
    *
    * MDN
    */
-  val onmouseup = "onmouseup".attr
+  lazy val onmouseup = "onmouseup".attr
   /**
    * Specifies the function to be called when the window is scrolled.
    *
    * MDN
    */
-  val onscroll = "onscroll".attr
+  lazy val onscroll = "onscroll".attr
   /**
    * Fires when the mouse wheel rolls up or down over an element
    */
-  val onwheel = "onwheel".attr
+  lazy val onwheel = "onwheel".attr
 }
 
 /**
@@ -563,7 +563,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val action = "action".attr
+  lazy val action = "action".attr
   /**
    * This attribute indicates whether the value of the control can be
    * automatically completed by the browser. This attribute is ignored if the
@@ -574,7 +574,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val autocomplete = "autocomplete".attr
+  lazy val autocomplete = "autocomplete".attr
   /**
    * This Boolean attribute lets you specify that a form control should have
    * input focus when the page loads, unless the user overrides it, for example
@@ -585,7 +585,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val autofocus = "autofocus".attr := "autofocus"
+  lazy val autofocus = "autofocus".attr := "autofocus"
   /**
    * When the value of the type attribute is radio or checkbox, the presence of
    * this Boolean attribute indicates that the control is selected by default;
@@ -593,79 +593,79 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val checked = "checked".attr := "checked"
+  lazy val checked = "checked".attr := "checked"
   /**
    * The form attribute specifies one or more forms an `<input>` element belongs to.
    */
-  val formA = "form".attr // TODO: Conflicts with "form" element
+  lazy val formA = "form".attr // TODO: Conflicts with "form" element
   /**
    * The `formaction` attribute provides the URL that will process the input control
    * when the form is submitted and overrides the default `action` attribute of the
    * `form` element. This should be used only with `input` elements of `type`
    * submit or image.
    */
-  val formaction = "formaction".attr
+  lazy val formaction = "formaction".attr
   /**
    * The `formenctype` attribute provides the encoding type of the form when it is
    * submitted (for forms with a method of "POST") and overrides the default
    * `enctype` attribute of the `form` element. THis should be used only with the
    * `input` elements of `type` "submit" or "image"
    */
-  val formenctype = "formenctype".attr
+  lazy val formenctype = "formenctype".attr
   /**
    * The `formmethod` attribute specifies the HTTP Method the form should use when
    * it is submitted and overrides the default `method` attribute of the `form`
    * element. This should be used only with the `input` elements of `type` "submit"
    * or "image".
    */
-  val formmethod = "formmethod".attr
+  lazy val formmethod = "formmethod".attr
   /**
    * The `formnovalidate` Boolean attribute specifies that the input of the form
    * should not be validated upon submit and overrides the default `novalidate`
    * attribute of the `form`. This should only be used with `input` elements of
    * of `type` "submit".
    */
-  val formnovalidate = "formnovalidate".attr
+  lazy val formnovalidate = "formnovalidate".attr
   /**
    * The `formtarget` provides a name or keyword that indicates where to display
    * the response that is received after submitting the form and overrides the
    * `target` attribute of them `form` element. This should only be used with
    * the `input` elements of `type` "submit" or "image"
    */
-  val formtarget = "formtarget".attr
+  lazy val formtarget = "formtarget".attr
   /**
    * The `height` attribute specifies the height of an `input` element of
    * `type` "image".
    */
-  val heightA = "height".attr // TODO: Conflicts with "height" in Styles -
+  lazy val heightA = "height".attr // TODO: Conflicts with "height" in Styles -
   /**
    * The list attribute refers to a <datalist> element that contains the options
    * for an input element the presents a select list.
    */
-  val list = "list".attr
+  lazy val list = "list".attr
   /**
    * The max attribute specifies the maximum value for an <input> element of type
    * number, range, date, datetime, datetime-local, month, time, or week.
    */
-  val max = "max".attr
+  lazy val max = "max".attr
   /**
    * The min attribute specifies the minimum value for an <input> element of type
    * number, range, date, datetime, datetime-local, month, time, or week.
    */
-  val min = "min".attr
+  lazy val min = "min".attr
   /**
    * This Boolean attribute specifies, when present/true, that the user is allowed
    * to enter more than one value for the <input> element for types "email" or "file".
    * It can also be provided to the <select> element to allow selecting more than one
    * option.
    */
-  val multiple = "multiple".attr := "multiple"
+  lazy val multiple = "multiple".attr := "multiple"
   /**
    * The maximum allowed length for the input field. This attribute forces the input control
    * to accept no more than the allowed number of characters. It does not produce any
    * feedback to the user; you must write Javascript to make that happen.
    */
-  val maxlength = "maxlength".attr
+  lazy val maxlength = "maxlength".attr
   /**
    * The HTTP method that the browser uses to submit the form. Possible values are:
    *
@@ -682,7 +682,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val method = "method".attr
+  lazy val method = "method".attr
   /**
    * On form elements (input etc.):
    *   Name of the element. For example used by the server to identify the fields
@@ -695,13 +695,13 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val name = "name".attr
+  lazy val name = "name".attr
   /**
    * Specifies a regular expression to validate the input. The pattern attribute
    * works with the following input types: text, search, url, tel, email, and
    * password. Use the `title` attribute to describe the pattern to the user.
    */
-  val pattern = "pattern".attr
+  lazy val pattern = "pattern".attr
   /**
    * A hint to the user of what can be entered in the control. The placeholder
    * text must not contain carriage returns or line-feeds. This attribute
@@ -710,7 +710,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val placeholder = "placeholder".attr
+  lazy val placeholder = "placeholder".attr
   /**
    * This Boolean attribute indicates that the user cannot modify the value of
    * the control. This attribute is ignored if the value of the type attribute
@@ -718,7 +718,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val readonly = "readonly".attr := "readonly"
+  lazy val readonly = "readonly".attr := "readonly"
   /**
    * This attribute specifies that the user must fill in a value before
    * submitting a form. It cannot be used when the type attribute is hidden,
@@ -727,7 +727,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val required = "required".attr := "required"
+  lazy val required = "required".attr := "required"
   /**
    * The initial size of the control. This value is in pixels unless the value
    * of the type attribute is text or password, in which case, it is an integer
@@ -738,7 +738,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val size = "size".attr
+  lazy val size = "size".attr
   /**
    * The step attribute specifies the numeric intervals for an <input> element
    * that should be considered legal for the input. For example, if step is 2
@@ -748,7 +748,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    * The step attribute is applicable to <input> elements of the following
    * types: number, range, date, datetime, datetime-local, month, time and week.
    */
-  val step = "step".attr
+  lazy val step = "step".attr
   /**
    * A name or keyword indicating where to display the response that is received
    * after submitting the form. In HTML 4, this is the name of, or a keyword
@@ -771,7 +771,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *   same way as _self.
    * - iframename: The response is displayed in a named iframe.
    */
-  val target = "target".attr
+  lazy val target = "target".attr
   /**
    * This attribute is used to define the type of the content linked to. The
    * value of the attribute should be a MIME type such as text/html, text/css,
@@ -782,23 +782,23 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  val `type` = "type".attr
+  lazy val `type` = "type".attr
   /**
    * Shorthand for the `type` attribute
    */
-  val tpe = `type`
+  lazy val tpe = `type`
   /**
    * The initial value of the control. This attribute is optional except when
    * the value of the type attribute is radio or checkbox.
    *
    * MDN
    */
-  val value = "value".attr
+  lazy val value = "value".attr
   /**
    * The `width` attribute specifies the width of an `input` element of
    * `type` "image".
    */
-  val widthA = "width".attr // TODO: Conflicts with "width" in Styles
+  lazy val widthA = "width".attr // TODO: Conflicts with "width" in Styles
 }
 
 /**
@@ -826,7 +826,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val href = "href".attr
+  lazy val href = "href".attr
   /**
    * This attribute defines the alternative text describing the image. Users
    * will see this displayed if the image URL is wrong, the image is not in one
@@ -834,7 +834,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val alt = "alt".attr
+  lazy val alt = "alt".attr
   /**
    * This attribute names a relationship of the linked document to the current
    * document. The attribute must be a space-separated list of the link types
@@ -845,7 +845,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val rel = "rel".attr
+  lazy val rel = "rel".attr
   /**
    * If the value of the type attribute is image, this attribute specifies a URI
    * for the location of an image to display on the graphical submit button;
@@ -853,25 +853,25 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val src = "src".attr
+  lazy val src = "src".attr
   /**
    *
    */
-  val xmlns = "xmlns".attr
+  lazy val xmlns = "xmlns".attr
   /**
    * If the value of the type attribute is file, this attribute indicates the
    * types of files that the server accepts; otherwise it is ignored.
    *
    * MDN
    */
-  val accept = "accept".attr
+  lazy val accept = "accept".attr
   /**
    * Declares the character encoding of the page or script. Used on meta and
    * script elements.
    *
    * MDN
    */
-  val charset = "charset".attr
+  lazy val charset = "charset".attr
   /**
    * This Boolean attribute indicates that the form control is not available for
    * interaction. In particular, the click event will not be dispatched on
@@ -882,20 +882,20 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val disabled = "disabled".attr := "disabled"
+  lazy val disabled = "disabled".attr := "disabled"
   /**
    * Describes elements which belongs to this one. Used on labels and output
    * elements.
    *
    * MDN
    */
-  val `for` = "for".attr
+  lazy val `for` = "for".attr
   /**
    * The number of visible text lines for the control.
    *
    * MDN
    */
-  val rows = "rows".attr
+  lazy val rows = "rows".attr
   /**
    * The visible width of the text control, in average character widths. If it
    * is specified, it must be a positive integer. If it is not specified, the
@@ -903,7 +903,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val cols = "cols".attr
+  lazy val cols = "cols".attr
   /**
    * The attribute describes the role(s) the current element plays in the
    * context of the document. This can be used, for example,
@@ -919,14 +919,14 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * See: [[http://www.w3.org/TR/role-attribute/#s_role_module_attributes]]
    */
-  val role = "role".attr
+  lazy val role = "role".attr
   /**
    * This attribute gives the value associated with the http-equiv or name
    * attribute, depending of the context.
    *
    * MDN
    */
-  val content = "content".attr
+  lazy val content = "content".attr
   /**
    * This enumerated attribute defines the pragma that can alter servers and
    * user-agents behavior. The value of the pragma is defined using the content
@@ -940,7 +940,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val httpEquiv = "http-equiv".attr
+  lazy val httpEquiv = "http-equiv".attr
   /**
    * This attribute specifies the media which the linked resource applies to.
    * Its value must be a media query. This attribute is mainly useful when
@@ -949,7 +949,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#attr-media
    */
-  val media = "media".attr
+  lazy val media = "media".attr
   /**
 
    * This attribute contains a non-negative integer value that indicates for 
@@ -960,7 +960,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  val colspan = "colspan".attr
+  lazy val colspan = "colspan".attr
   /**
    * This attribute contains a non-negative integer value that indicates for how many 
    * rows the cell extends. Its default value is 1; if its value is set to 0, it extends 
@@ -969,7 +969,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    * 
    * MDN
    */
-  val rowspan = "rowspan".attr
+  lazy val rowspan = "rowspan".attr
 
   /**
    * ARIA is a set of special accessibility attributes which can be added
@@ -984,175 +984,175 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
     /**
      * Identifies the currently active descendant of a composite widget.
      */
-    def activedescendant = "aria-activedescendant".attr
+    lazy val activedescendant = "aria-activedescendant".attr
     /**
      * Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. See related aria-relevant.
      */
-    def atomic = "aria-atomic".attr
+    lazy val atomic = "aria-atomic".attr
 
     /**
      * Indicates whether user input completion suggestions are provided.
      */
-    def autocomplete = "aria-autocomplete".attr
+    lazy val autocomplete = "aria-autocomplete".attr
     /**
      * Indicates whether an element, and its subtree, are currently being updated.
      */
-    def busy = "aria-busy".attr
+    lazy val busy = "aria-busy".attr
 
     /**
      * Indicates the current "checked" state of checkboxes, radio buttons, and other widgets. See related aria-pressed and aria-selected.
      */
-    def checked = "aria-checked".attr
+    lazy val checked = "aria-checked".attr
 
     /**
      * Identifies the element (or elements) whose contents or presence are controlled by the current element. See related aria-owns.
      */
-    def controls = "aria-controls".attr
+    lazy val controls = "aria-controls".attr
 
     /**
      * Identifies the element (or elements) that describes the object. See related aria-labelledby.
      */
-    def describedby = "aria-describedby".attr
+    lazy val describedby = "aria-describedby".attr
 
     /**
      * Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable. See related aria-hidden and aria-readonly.
      */
-    def disabled = "aria-disabled".attr
+    lazy val disabled = "aria-disabled".attr
 
     /**
      * Indicates what functions can be performed when the dragged object is released on the drop target. This allows assistive technologies to convey the possible drag options available to users, including whether a pop-up menu of choices is provided by the application. Typically, drop effect functions can only be provided once an object has been grabbed for a drag operation as the drop effect functions available are dependent on the object being dragged.
      */
-    def dropeffect = "aria-dropeffect".attr
+    lazy val dropeffect = "aria-dropeffect".attr
 
     /**
      * Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed.
      */
-    def expanded = "aria-expanded".attr
+    lazy val expanded = "aria-expanded".attr
 
     /**
      * Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion, allows assistive technology to override the general default of reading in document source order.
      */
-    def flowto = "aria-flowto".attr
+    lazy val flowto = "aria-flowto".attr
 
     /**
      * Indicates an element's "grabbed" state in a drag-and-drop operation.
      */
-    def grabbed = "aria-grabbed".attr
+    lazy val grabbed = "aria-grabbed".attr
 
     /**
      * Indicates that the element has a popup context menu or sub-level menu.
      */
-    def haspopup = "aria-haspopup".attr
+    lazy val haspopup = "aria-haspopup".attr
 
     /**
      * Indicates that the element and all of its descendants are not visible or perceivable to any user as implemented by the author. See related aria-disabled.
      */
-    def hidden = "aria-hidden".attr
+    lazy val hidden = "aria-hidden".attr
 
     /**
      * Indicates the entered value does not conform to the format expected by the application.
      */
-    def invalid = "aria-invalid".attr
+    lazy val invalid = "aria-invalid".attr
 
     /**
      * Defines a string value that labels the current element. See related aria-labelledby.
      */
-    def label = "aria-label".attr
+    lazy val label = "aria-label".attr
 
     /**
      * Identifies the element (or elements) that labels the current element. See related aria-label and aria-describedby.
      */
-    def labelledby = "aria-labelledby".attr
+    lazy val labelledby = "aria-labelledby".attr
 
     /**
      * Defines the hierarchical level of an element within a structure.
      */
-    def level = "aria-level".attr
+    lazy val level = "aria-level".attr
 
     /**
      * Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.
      */
-    def live = "aria-live".attr
+    lazy val live = "aria-live".attr
 
     /**
      * Indicates whether a text box accepts multiple lines of input or only a single line.
      */
-    def multiline = "aria-multiline".attr
+    lazy val multiline = "aria-multiline".attr
 
     /**
      * Indicates that the user may select more than one item from the current selectable descendants.
      */
-    def multiselectable = "aria-multiselectable".attr
+    lazy val multiselectable = "aria-multiselectable".attr
 
     /**
      * Indicates whether the element and orientation is horizontal or vertical.
      */
-    def orientation = "aria-orientation".attr
+    lazy val orientation = "aria-orientation".attr
 
     /**
      * Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship between DOM elements where the DOM hierarchy cannot be used to represent the relationship. See related aria-controls.
      */
-    def owns = "aria-owns".attr
+    lazy val owns = "aria-owns".attr
 
     /**
      * Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. See related aria-setsize.
      */
-    def posinset = "aria-posinset".attr
+    lazy val posinset = "aria-posinset".attr
 
     /**
      * Indicates the current "pressed" state of toggle buttons. See related aria-checked and aria-selected.
      */
-    def pressed = "aria-pressed".attr
+    lazy val pressed = "aria-pressed".attr
 
     /**
      * Indicates that the element is not editable, but is otherwise operable. See related aria-disabled.
      */
-    def readonly = "aria-readonly".attr
+    lazy val readonly = "aria-readonly".attr
 
     /**
      * Indicates what user agent change notifications (additions, removals, etc.) assistive technologies will receive within a live region. See related aria-atomic.
      */
-    def relevant = "aria-relevant".attr
+    lazy val relevant = "aria-relevant".attr
 
     /**
      * Indicates that user input is required on the element before a form may be submitted.
      */
-    def required = "aria-required".attr
+    lazy val required = "aria-required".attr
 
     /**
      * Indicates the current "selected" state of various widgets. See related aria-checked and aria-pressed.
      */
-    def selected = "aria-selected".attr
+    lazy val selected = "aria-selected".attr
 
     /**
      * Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. See related aria-posinset.
      */
-    def setsize = "aria-setsize".attr
+    lazy val setsize = "aria-setsize".attr
 
     /**
      * Indicates if items in a table or grid are sorted in ascending or descending order.
      */
-    def sort = "aria-sort".attr
+    lazy val sort = "aria-sort".attr
 
     /**
      * Defines the maximum allowed value for a range widget.
      */
-    def valuemax = "aria-valuemax".attr
+    lazy val valuemax = "aria-valuemax".attr
 
     /**
      * Defines the minimum allowed value for a range widget.
      */
-    def valuemin = "aria-valuemin".attr
+    lazy val valuemin = "aria-valuemin".attr
 
     /**
      * Defines the current value for a range widget. See related aria-valuetext.
      */
-    def valuenow = "aria-valuenow".attr
+    lazy val valuenow = "aria-valuenow".attr
 
     /**
      * Defines the human readable text alternative of aria-valuenow for a range widget.
      */
-    def valuetext = "aria-valuetext".attr
+    lazy val valuetext = "aria-valuetext".attr
   }
 
   /**
@@ -1161,30 +1161,30 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    * If this attribute is present, then the style applies only to its parent element.
    * If absent, the style applies to the whole document.
    */
-  def scoped = "scoped".attr
+  lazy val scoped = "scoped".attr
 
   /**
    * For use in &lt;meter&gt; tags.
    *
    * @see https://css-tricks.com/html5-meter-element/
    */
-  def high = "high".attr
+  lazy val high = "high".attr
 
   /**
    * For use in &lt;meter&gt; tags.
    *
    * @see https://css-tricks.com/html5-meter-element/
    */
-  def low = "low".attr
+  lazy val low = "low".attr
 
   /**
    * For use in &lt;meter&gt; tags.
    *
    * @see https://css-tricks.com/html5-meter-element/
    */
-  def optimum = "optimum".attr
+  lazy val optimum = "optimum".attr
 
   /** IE-specific property to prevent user selection */
-  def unselectable = "unselectable".attr
+  lazy val unselectable = "unselectable".attr
 }
 
