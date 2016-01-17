@@ -3,7 +3,7 @@ package generic
 
 import utest._
 
-import scalatags.stylesheet.{CascadingStyleSheet, StyleSheet, Sheet}
+import scalatags.stylesheet._
 
 abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
                               (val bundle: Bundle[Builder, Output, FragT])  extends TestSuite{

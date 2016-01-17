@@ -481,9 +481,13 @@
     @sect{scalatags.JsDom SVG}
       @div(id := "jsdom-svg")
     @script(raw("""example.ScalaJSExample().main("text-html", "text-svg", "jsdom-html", "jsdom-svg")"""))
+
   @sect{CSS Stylesheets}
     @p
       Scalatags offsets an internal DSL for constructing CSS Stylesheets. The basic construction looks like:
+
+    @hl.scala
+      import scalatags.stylesheet._
 
     @hl.ref(cssTests, "val Simple", "val Inline")
 
