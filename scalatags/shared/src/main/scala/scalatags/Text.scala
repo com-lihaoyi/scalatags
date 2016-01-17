@@ -35,7 +35,7 @@ object Text
 
   object short
     extends Cap
-    with Util
+    with text.Tags
     with DataConverters
     with Aggregate
     with AbstractShort{

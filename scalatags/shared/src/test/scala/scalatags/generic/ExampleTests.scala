@@ -8,6 +8,32 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
 
 
   val tests = TestSuite{
+    'manualImports-strCheck({
+      import bundle.short._
+      div(
+        p(*.color:="red", *.fontSize:=64.pt)("Big Red Text"),
+        img(*.href:="www.imgur.com/picture.jpg")
+      )
+    }
+    ,
+    {
+      import bundle.{attrs => attr, styles => css, _}
+      import bundle.tags._
+      import bundle.implicits._
+      import scalatags.DataConverters._
+      div(
+        p(css.color:="red", css.fontSize:=64.pt)("Big Red Text"),
+        img(attr.href:="www.imgur.com/picture.jpg")
+      )
+    }
+    ,
+    """
+        <div>
+            <p style="color: red;">Red Text</p>
+            <img href="www.imgur.com/picture.jpg" />
+        </div>
+    """
+    )
 
     import bundle.all._
     'splashExample-strCheck(
@@ -454,31 +480,6 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     """
     )
 
-
-    'manualImports-strCheck({
-      import bundle.short._
-      div(
-        p(*.color:="red")("Red Text"),
-        img(*.href:="www.imgur.com/picture.jpg")
-      )
-    }
-    ,
-    {
-      import bundle.{attrs => attr, styles => css, _}
-      import bundle.tags._
-      div(
-        p(css.color:="red")("Red Text"),
-        img(attr.href:="www.imgur.com/picture.jpg")
-      )
-    }
-    ,
-    """
-        <div>
-            <p style="color: red;">Red Text</p>
-            <img href="www.imgur.com/picture.jpg" />
-        </div>
-    """
-    )
 
     'properEscaping-strCheck({
       val evilInput1 = "\"><script>alert('hello!')</script>"
