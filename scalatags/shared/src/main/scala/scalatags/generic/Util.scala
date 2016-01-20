@@ -54,6 +54,7 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
      *  Converts a string to an empty [[Attr]]. An empty attribute in HTML 
      *  is one that doesn't have an have a value (often represents a boolean
      *  in HTML)
+     *  https://www.w3.org/TR/2000/REC-xhtml1-20000126/#h-4.5
      */
     def emptyAttr = {
       s.attr:=s
