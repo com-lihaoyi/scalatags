@@ -247,6 +247,9 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
             ),
             a(href:="www.google.com")(
               p("Goooogle")
+            ),
+            p(hidden)(
+              "I am hidden"
             )
           )
         )
@@ -264,6 +267,9 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
             ),
             a("href".attr:="www.google.com")(
               p("Goooogle")
+            ),
+            p("hidden".emptyAttr)(
+              "I am hidden"
             )
           )
         )
@@ -282,6 +288,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
                     <a href="www.google.com">
                         <p>Goooogle</p>
                     </a>
+                    <p hidden="hidden">
+                        I am hidden</p>
                 </div>
             </body>
         </html>

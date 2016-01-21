@@ -56,7 +56,7 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
      *  in HTML)
      *  https://www.w3.org/TR/2000/REC-xhtml1-20000126/#h-4.5
      */
-    def emptyAttr = {
+    @inline def emptyAttr = {
       s.attr:=s
     }
     /**
