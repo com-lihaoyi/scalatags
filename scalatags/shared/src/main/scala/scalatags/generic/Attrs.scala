@@ -79,7 +79,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
   /**
    * A Boolean attribute that specifies whether an element is draggable or not
    */
-  lazy val draggable	= "draggable".attr := "draggable"
+  lazy val draggable	= "draggable".emptyAttr
   /**
    * Specifies whether the dragged data is copied, moved, or linked, when dropped
    */
@@ -88,7 +88,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    * Specifies that an element is not yet, or is no longer, relevant and
    * consequently hidden from view of the user.
    */
-  lazy val hidden = "hidden".attr := "hidden"
+  lazy val hidden = "hidden".emptyAttr
   /**
    * This attribute defines a unique identifier (ID) which must be unique in
    * the whole document. Its purpose is to identify the element when linking
@@ -115,7 +115,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
    *
    * MDN
    */
-  lazy val spellcheck = "spellcheck".attr := "spellcheck"
+  lazy val spellcheck = "spellcheck".emptyAttr
   /**
    * This attribute contains CSS styling declarations to be applied to the
    * element. Note that it is recommended for styles to be defined in a separate
@@ -155,7 +155,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output,
   /**
    * Specifies whether the content of an element should be translated or not
    */
-  lazy val translate	= "translate".attr := "translate"
+  lazy val translate	= "translate".emptyAttr
 }
 
 trait SharedEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
@@ -426,7 +426,7 @@ trait FormEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output
   /**
    * Indicates a selected option in an option list of a <select> element.
    */
-  lazy val selected = "selected".attr := "selected"
+  lazy val selected = "selected".emptyAttr
 }
 
 /**
@@ -478,7 +478,7 @@ trait MouseEventAttrs[Builder, Output<: FragT, FragT] extends Util[Builder, Outp
   /**
    * Script to be run when an element is dragged
    */
-  lazy val ondrag = "ondrag".attr
+  val ondrag = "ondrag".attr
   /**
    * Script to be run at the end of a drag operation
    */
@@ -585,7 +585,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val autofocus = "autofocus".attr := "autofocus"
+  lazy val autofocus = "autofocus".emptyAttr
   /**
    * When the value of the type attribute is radio or checkbox, the presence of
    * this Boolean attribute indicates that the control is selected by default;
@@ -593,7 +593,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val checked = "checked".attr := "checked"
+  lazy val checked = "checked".emptyAttr
   /**
    * The form attribute specifies one or more forms an `<input>` element belongs to.
    */
@@ -659,7 +659,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    * It can also be provided to the <select> element to allow selecting more than one
    * option.
    */
-  lazy val multiple = "multiple".attr := "multiple"
+  lazy val multiple = "multiple".emptyAttr
   /**
    * The maximum allowed length for the input field. This attribute forces the input control
    * to accept no more than the allowed number of characters. It does not produce any
@@ -718,7 +718,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val readonly = "readonly".attr := "readonly"
+  lazy val readonly = "readonly".emptyAttr
   /**
    * This attribute specifies that the user must fill in a value before
    * submitting a form. It cannot be used when the type attribute is hidden,
@@ -727,7 +727,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val required = "required".attr := "required"
+  lazy val required = "required".emptyAttr
   /**
    * The initial size of the control. This value is in pixels unless the value
    * of the type attribute is text or password, in which case, it is an integer
@@ -882,7 +882,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  lazy val disabled = "disabled".attr := "disabled"
+  lazy val disabled = "disabled".emptyAttr
   /**
    * Describes elements which belongs to this one. Used on labels and output
    * elements.
