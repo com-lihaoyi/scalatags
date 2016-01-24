@@ -1,8 +1,6 @@
 package scalatags
 import acyclic.file
 import scalatags.generic._
-import scala.collection.SortedMap
-import collection.mutable
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder

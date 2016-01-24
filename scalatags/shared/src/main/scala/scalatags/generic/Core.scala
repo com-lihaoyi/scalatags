@@ -2,8 +2,6 @@ package scalatags
 package generic
 
 import acyclic.file
-import scala.collection.SortedMap
-import scalatags.generic
 import scala.annotation.implicitNotFound
 
 

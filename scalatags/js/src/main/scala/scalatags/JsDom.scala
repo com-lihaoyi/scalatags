@@ -1,6 +1,7 @@
 package scalatags
 import acyclic.file
 import org.scalajs.dom
+import scala.language.implicitConversions
 import scala.scalajs.js
 
 import org.scalajs.dom.{html, svg, Element}
@@ -72,7 +73,7 @@ object JsDom
     def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new JsDom.GenericPixelStyle[T](ev)
     def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new JsDom.GenericPixelStylePx[T](ev)
 
-    implicit def stringFrag(v: String) = new JsDom.StringFrag(v)
+    implicit def stringFrag(v: String): StringFrag = new JsDom.StringFrag(v)
 
 
     val RawFrag = JsDom.RawFrag
@@ -97,12 +98,12 @@ object JsDom
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
-    implicit def UnitFrag(u: Unit) = new JsDom.StringFrag("")
+    implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
     def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void, namespaceConfig)
     }
 
-    implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
+    implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
@@ -176,7 +177,7 @@ trait LowPriorityImplicits{
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit def bindJsAnyLike[T <% js.Any] = new generic.AttrValue[dom.Element, T]{
+  implicit def bindJsAnyLike[T](implicit ev: T => js.Any) = new generic.AttrValue[dom.Element, T]{
     def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
