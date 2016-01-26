@@ -59,8 +59,8 @@ trait StyleSheet{
      * side-effect all the output into the styleSheetText, and return the
      * [[Cls]]
      */
-    def apply(args: StyleSheetFrag*): Cls = {
-      Cls("", selectors, args)
+    def apply(args: StyleSheetFrag*)(implicit name: sourcecode.Name): Cls = {
+      Cls(nameFor(name.value, ""), selectors, args)
     }
   }
 
@@ -95,13 +95,7 @@ object Sheet{
       if member.typeSignature.toString == "=> scalatags.stylesheet.Cls"
     } yield member.name.toTermName
 
-    val clsOverrides = for(name<- names) yield q"""
-      override lazy val $name = super.$name.copy(name = nameFor(${name.decodedName.toString}, super.$name.name))
-    """
-
     val res = q"""new $weakType{
-        ..$clsOverrides
-
         def defaultSheetName = $typeName
         lazy val allClasses = Seq(..$names)
       }"""

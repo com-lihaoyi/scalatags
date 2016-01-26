@@ -16,6 +16,7 @@ lazy val scalatags = crossProject
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
       "com.lihaoyi" %%% "utest" % "0.3.1" % "test",
+      "com.lihaoyi" %%% "sourcecode" % "0.1.0",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided"
     ) ++ (
       if (scalaVersion.value startsWith "2.11.") Nil
