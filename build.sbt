@@ -57,6 +57,7 @@ lazy val scalatags = crossProject
   )
   .jvmSettings()
   .jsSettings(
+    scalaJSUseRhino in Global := false,
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.8.2"
     ),
