@@ -130,7 +130,7 @@
         In Scalatags, each attribute has an associated value which can be used to set it. This example shows how you set the @code{onclick} and @code{href} attributes with the @code{:=} operator. Attributes are all instances of the @hl.scala{Attr} class.
 
       @p
-        The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the @code{.attr} method that Scalatags adds to Strings:
+        The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the @code{.attr} method that Scalatags adds to Strings, if you want to create an empty attribute, you can use @code{.emptyAttr}:
 
       @exampleIn2("attributes")
 
@@ -919,7 +919,10 @@
 
 
   @sect{Changelog}
-
+    @sect{0.5.5}
+      @ul
+        @li
+          #100: Added .emptyAttr which is shorthand for "someAttr".attr := "someAttr" according to https://www.w3.org/TR/2000/REC-xhtml1-20000126/#h-4.5, thanks to @lnk("mdedetrich", "https://github.com/mdedetrich")
     @sect{0.5.4}
       @ul
         @li
