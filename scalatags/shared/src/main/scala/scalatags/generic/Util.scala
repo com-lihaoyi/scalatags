@@ -43,12 +43,13 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
     /**
      * Converts the string to a [[Attr]]
      */
-    def attr = {
+    def attr: Attr = nsAttr(null)
+    def nsAttr(implicit namespaceConfig: Namespace): Attr = {
       if (!Escaping.validAttrName(s))
         throw new IllegalArgumentException(
           s"Illegal attribute name: $s is not a valid XML attribute name"
         )
-      Attr(s)
+      Attr(s, Option(namespaceConfig))
     }
     /**
      *  Converts a string to an empty [[Attr]]. An empty attribute in HTML 
