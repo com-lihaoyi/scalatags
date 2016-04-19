@@ -1,11 +1,12 @@
-crossScalaVersions := Seq("2.11.4", "2.10.4")
+scalaVersion := "2.11.8"
 
+crossScalaVersions := Seq("2.11.8", "2.10.4")
 
 lazy val scalatags = crossProject
   .settings(
     organization := "com.lihaoyi",
     name := "scalatags",
-    scalaVersion := "2.11.4",
+    scalaVersion := "2.11.8",
 
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
@@ -76,8 +77,8 @@ lazy val example = project.in(file("example"))
   .dependsOn(scalatagsJS)
   .enablePlugins(ScalaJSPlugin)
   .settings(
-    crossScalaVersions := Seq("2.11.4", "2.10.4"),
-    scalaVersion := "2.11.4"
+    crossScalaVersions := Seq("2.11.8", "2.10.4"),
+    scalaVersion := "2.11.8"
   )
 
 lazy val readme = scalatex.ScalatexReadme(
@@ -87,7 +88,7 @@ lazy val readme = scalatex.ScalatexReadme(
   source = "Readme",
   autoResources = Seq("Autocomplete.png", "ErrorHighlighting.png", "InlineDocs.png", "example-opt.js")
 ).settings(
-  scalaVersion := "2.11.7",
+  scalaVersion := "2.11.8",
   (unmanagedSources in Compile) += baseDirectory.value/".."/"project"/"Constants.scala",
   (resources in Compile) += (fullOptJS in (example, Compile)).value.data,
   (resources in Compile) += (doc in (scalatagsJS, Compile)).value,
