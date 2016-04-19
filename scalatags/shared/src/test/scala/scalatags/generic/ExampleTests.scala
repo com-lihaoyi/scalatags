@@ -20,7 +20,6 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       import bundle.{attrs => attr, styles => css, _}
       import bundle.tags._
       import bundle.implicits._
-      import scalatags.DataConverters._
       div(
         p(css.color:="red", css.fontSize:=64.pt)("Big Red Text"),
         img(attr.href:="www.imgur.com/picture.jpg")
