@@ -4,5 +4,6 @@ script:
 - sbt ++$TRAVIS_SCALA_VERSION scalatagsJVM/test scalatagsJS/test
 scala:
   - 2.10.4
-  - 2.11.5
+  - 2.11.4
+  - 2.11.8
 sudo: false
