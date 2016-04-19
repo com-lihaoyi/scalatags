@@ -1,6 +1,9 @@
 package scalatags
 package generic
+import java.util.Objects
+
 import acyclic.file
+
 import scala.language.higherKinds
 
 /**
@@ -74,6 +77,7 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
    * objects to its list of children.
    */
   implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => Modifier[Builder]) extends Modifier[Builder]{
+    Objects.requireNonNull(xs)
     def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
   }
 

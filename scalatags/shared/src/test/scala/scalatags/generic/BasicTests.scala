@@ -141,6 +141,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     'nulls{
       val nullString: String = null
       * - intercept[NullPointerException](div(nullString))
+      * - intercept[NullPointerException](div(null: Seq[Int]))
       * - intercept[NullPointerException](div(height := nullString))
       * - intercept[NullPointerException](div(opacity := nullString))
     }

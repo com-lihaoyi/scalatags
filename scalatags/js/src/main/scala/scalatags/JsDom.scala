@@ -1,12 +1,15 @@
 package scalatags
+import java.util.Objects
+
 import acyclic.file
 import org.scalajs.dom
+
 import scala.language.implicitConversions
 import scala.scalajs.js
+import org.scalajs.dom.{Element, html, svg}
 
-import org.scalajs.dom.{html, svg, Element}
 import scala.annotation.unchecked.uncheckedVariance
-import scalatags.generic.{StylePair, Namespace, Aliases}
+import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
 
@@ -104,6 +107,7 @@ object JsDom
     }
 
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
+      Objects.requireNonNull(xs)
       def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
@@ -115,11 +119,13 @@ object JsDom
 
   object StringFrag extends Companion[StringFrag]
   case class StringFrag(v: String) extends jsdom.Frag{
+    Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends Modifier{
+    Objects.requireNonNull(v)
     def applyTo(elem: dom.Element): Unit = {
       elem.insertAdjacentHTML("beforeend", v)
     }
