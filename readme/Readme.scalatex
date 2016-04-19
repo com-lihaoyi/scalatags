@@ -922,7 +922,9 @@
     @sect{0.5.5}
       @ul
         @li
-          #100: Added .emptyAttr which is shorthand for "someAttr".attr := "someAttr" according to https://www.w3.org/TR/2000/REC-xhtml1-20000126/#h-4.5, thanks to @lnk("mdedetrich", "https://github.com/mdedetrich")
+          #100: Added @code{.emptyAttr} which is shorthand for "someAttr".attr := "someAttr" according to https://www.w3.org/TR/2000/REC-xhtml1-20000126/#h-4.5, thanks to @lnk("mdedetrich", "https://github.com/mdedetrich")
+        @li
+          Fail fast when someone passes in a @hl.scala{null} to provide useful stack traces
     @sect{0.5.4}
       @ul
         @li

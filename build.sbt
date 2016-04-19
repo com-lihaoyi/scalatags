@@ -1,21 +1,18 @@
-crossScalaVersions := Seq("2.11.4", "2.10.4")
+scalaVersion := "2.11.8"
 
+crossScalaVersions := Seq("2.11.8", "2.10.4")
 
 lazy val scalatags = crossProject
   .settings(
     organization := "com.lihaoyi",
     name := "scalatags",
-    scalaVersion := "2.11.4",
-    // Will not be necessary with sbt 0.13.8
-    unmanagedSourceDirectories in Compile ++= {
-      if (scalaVersion.value startsWith "2.10.") Seq(baseDirectory.value / ".."/"shared"/"src"/ "main" / "scala-2.10")
-      else Seq(baseDirectory.value / ".."/"shared" / "src"/"main" / "scala-2.11")
-    },
+    scalaVersion := "2.11.8",
 
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "acyclic" % "0.1.2" % "provided",
       "com.lihaoyi" %%% "utest" % "0.3.1" % "test",
+      "com.lihaoyi" %%% "sourcecode" % "0.1.0",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided"
     ) ++ (
       if (scalaVersion.value startsWith "2.11.") Nil
@@ -56,8 +53,9 @@ lazy val scalatags = crossProject
   )
   .jvmSettings()
   .jsSettings(
+    scalaJSUseRhino in Global := false,
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.8.0"
+      "org.scala-js" %%% "scalajs-dom" % "0.8.2"
     ),
     resolvers += Resolver.sonatypeRepo("releases"),
     scalaJSStage in Test := FullOptStage,
@@ -101,7 +99,7 @@ lazy val readme = scalatex.ScalatexReadme(
   source = "Readme",
   autoResources = Seq("Autocomplete.png", "ErrorHighlighting.png", "InlineDocs.png", "example-opt.js")
 ).settings(
-  scalaVersion := "2.11.7",
+  scalaVersion := "2.11.8",
   (unmanagedSources in Compile) += baseDirectory.value/".."/"project"/"Constants.scala",
   (resources in Compile) += (fullOptJS in (example, Compile)).value.data,
   (resources in Compile) += (doc in (scalatagsJS, Compile)).value,

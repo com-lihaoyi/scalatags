@@ -12,6 +12,8 @@ object TestUtil {
           clean(a.toString()) == clean(b.toString())
         )
       catch {case e: AssertionError =>
+        println(a)
+        println(b)
         println(clean(a.toString()))
         println(clean(b.toString()))
         throw e

@@ -1,5 +1,8 @@
 package scalatags
+import java.util.Objects
+
 import acyclic.file
+
 import scalatags.generic._
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
@@ -90,6 +93,7 @@ object Text
 
 
   case class StringFrag(v: String) extends text.Frag{
+    Objects.requireNonNull(v)
     def render = {
       val strb = new StringBuilder()
       writeTo(strb)
@@ -100,6 +104,7 @@ object Text
   object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends text.Frag {
+    Objects.requireNonNull(v)
     def render = v
     def writeTo(strb: StringBuilder) = strb ++= v
   }

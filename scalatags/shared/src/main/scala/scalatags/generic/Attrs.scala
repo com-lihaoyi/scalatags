@@ -595,6 +595,11 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    */
   lazy val checked = "checked".emptyAttr
   /**
+    * The `enctype` attribute provides the encoding type of the form when it is
+    * submitted (for forms with a method of "POST").
+    */
+  lazy val enctype = "enctype".attr
+  /**
    * The form attribute specifies one or more forms an `<input>` element belongs to.
    */
   lazy val formA = "form".attr // TODO: Conflicts with "form" element
@@ -608,7 +613,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
   /**
    * The `formenctype` attribute provides the encoding type of the form when it is
    * submitted (for forms with a method of "POST") and overrides the default
-   * `enctype` attribute of the `form` element. THis should be used only with the
+   * `enctype` attribute of the `form` element. This should be used only with the
    * `input` elements of `type` "submit" or "image"
    */
   lazy val formenctype = "formenctype".attr
