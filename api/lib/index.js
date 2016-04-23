@@ -94,7 +94,7 @@ function setFrameSrcFromUrlFragment() {
         if (memberSig) {
             locWithMemeberSig += "#" + memberSig;
         }
-        frames["template"].location.replace(locWithMemeberSig);
+        frames["template"].location.replace(location.protocol + locWithMemeberSig);
     } else {
         console.log("empty fragment detected");
         frames["template"].location.replace("package.html");
@@ -412,7 +412,17 @@ function textFilter() {
     var query = $("#textfilter input").attr("value") || '';
     var queryRegExp = compilePattern(query);
 
-    if ((typeof textFilter.lastQuery === "undefined") || (textFilter.lastQuery !== query)) {
+    // if we are filtering on types, then we have to display types
+    // ("display packages only" is not possible when filtering)
+    if (query !== "") {
+        kindFilter("all");
+    }
+
+    // Three things trigger a reload of the left pane list:
+    // typeof textFilter.lastQuery === "undefined" <-- first load, there is nothing yet in the left pane
+    // textFilter.lastQuery !== query              <-- the filter text has changed
+    // focusFilterState != null                    <-- a package has been "focused"
+    if ((typeof textFilter.lastQuery === "undefined") || (textFilter.lastQuery !== query) || (focusFilterState != null)) {
 
         textFilter.lastQuery = query;
 
