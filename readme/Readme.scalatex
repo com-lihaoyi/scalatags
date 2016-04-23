@@ -926,7 +926,7 @@
         @li
           Fail fast when someone passes in a @hl.scala{null} to provide useful stack traces
         @li
-          #112: add @code{endtype} attribute for forms
+          #112: add @code{enctype} attribute for forms
         @li
           #111: add the ability to namespace @hl.scala{Attr}s
     @sect{0.5.4}
