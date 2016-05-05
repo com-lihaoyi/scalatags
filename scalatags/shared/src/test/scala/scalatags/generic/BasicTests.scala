@@ -138,6 +138,13 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         assert(msg.contains("scalatags does not know how to use () => String as an style"))
       }
     }
+    'nulls{
+      val nullString: String = null
+      * - intercept[NullPointerException](div(nullString))
+      * - intercept[NullPointerException](div(null: Seq[Int]))
+      * - intercept[NullPointerException](div(height := nullString))
+      * - intercept[NullPointerException](div(opacity := nullString))
+    }
 
   }
 }

@@ -1,8 +1,9 @@
 package scalatags
+import java.util.Objects
+
 import acyclic.file
+
 import scalatags.generic._
-import scala.collection.SortedMap
-import collection.mutable
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder
@@ -55,6 +56,7 @@ object Text
       TypedTag(tag, Nil, void)
     }
     implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
+      Objects.requireNonNull(xs)
       def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
       def render = xs.map(_.render).mkString
     }
@@ -93,6 +95,7 @@ object Text
 
 
   case class StringFrag(v: String) extends text.Frag{
+    Objects.requireNonNull(v)
     def render = {
       val strb = new StringBuilder()
       writeTo(strb)
@@ -103,6 +106,7 @@ object Text
   object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends text.Frag {
+    Objects.requireNonNull(v)
     def render = v
     def writeTo(strb: StringBuilder) = strb ++= v
   }

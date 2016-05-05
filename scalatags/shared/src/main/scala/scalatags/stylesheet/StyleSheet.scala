@@ -12,7 +12,7 @@ import scalatags.ScalaVersionStubs.Context
  * when you do to prevent accidental cascading.
  */
 trait CascadingStyleSheet extends StyleSheet with StyleSheetTags{
-  implicit def clsSelector(c: Cls) = new Selector(Seq("." + c.name))
+  implicit def clsSelector(c: Cls): Selector = new Selector(Seq("." + c.name))
 }
 
 /**
@@ -23,7 +23,7 @@ trait CascadingStyleSheet extends StyleSheet with StyleSheetTags{
 trait StyleSheet{
   /**
    * The name of this CSS stylesheet. Defaults to the name of the trait,
-   * but you can overrid
+   * but you can override
    */
   def customSheetName: Option[String] = None
 

@@ -1,11 +1,15 @@
 package scalatags
+import java.util.Objects
+
 import acyclic.file
 import org.scalajs.dom
-import scala.scalajs.js
 
-import org.scalajs.dom.{html, svg, Element}
+import scala.language.implicitConversions
+import scala.scalajs.js
+import org.scalajs.dom.{Element, html, svg}
+
 import scala.annotation.unchecked.uncheckedVariance
-import scalatags.generic.{StylePair, Namespace, Aliases}
+import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
 
@@ -72,7 +76,7 @@ object JsDom
     def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new JsDom.GenericPixelStyle[T](ev)
     def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new JsDom.GenericPixelStylePx[T](ev)
 
-    implicit def stringFrag(v: String) = new JsDom.StringFrag(v)
+    implicit def stringFrag(v: String): StringFrag = new JsDom.StringFrag(v)
 
 
     val RawFrag = JsDom.RawFrag
@@ -97,12 +101,13 @@ object JsDom
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
-    implicit def UnitFrag(u: Unit) = new JsDom.StringFrag("")
+    implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
     def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void, namespaceConfig)
     }
 
-    implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
+    implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
+      Objects.requireNonNull(xs)
       def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
@@ -114,11 +119,13 @@ object JsDom
 
   object StringFrag extends Companion[StringFrag]
   case class StringFrag(v: String) extends jsdom.Frag{
+    Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends Modifier{
+    Objects.requireNonNull(v)
     def applyTo(elem: dom.Element): Unit = {
       elem.insertAdjacentHTML("beforeend", v)
     }
@@ -126,7 +133,12 @@ object JsDom
 
   class GenericAttr[T] extends AttrValue[T]{
     def apply(t: dom.Element, a: Attr, v: T): Unit = {
-      t.setAttribute(a.name, v.toString)
+      a.namespace match {
+        case None =>
+          t.setAttribute(a.name, v.toString)
+        case Some(namespace) =>
+          t.setAttributeNS(namespace.uri, a.name, v.toString)
+      }
     }
   }
 
@@ -176,7 +188,7 @@ trait LowPriorityImplicits{
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit def bindJsAnyLike[T <% js.Any] = new generic.AttrValue[dom.Element, T]{
+  implicit def bindJsAnyLike[T](implicit ev: T => js.Any) = new generic.AttrValue[dom.Element, T]{
     def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }

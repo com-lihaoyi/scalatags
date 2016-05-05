@@ -47,7 +47,7 @@ object DomTests extends TestSuite{
         // styles end up being sorted in alphabetical order
         val styleAttr = elem.getAttribute("style")
         assert(
-          styleAttr == "color: red; float: left; background-color: yellow; "
+          styleAttr.trim == "color: red; float: left; background-color: yellow;"
         )
       }//end
     }

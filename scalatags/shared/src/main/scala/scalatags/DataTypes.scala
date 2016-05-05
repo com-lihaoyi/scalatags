@@ -11,12 +11,12 @@ object DataConverters extends DataConverters
  * mixed in to other objects as needed.
  */
 trait DataConverters{
-  implicit def Int2CssNumber(x: Int) = new CssNumber(x)
-  implicit def Double2CssNumber(x: Double) = new CssNumber(x)
-  implicit def Float2CssNumber(x: Float) = new CssNumber(x)
-  implicit def Long2CssNumber(x: Long) = new CssNumber(x)
-  implicit def Short2CssNumber(x: Short) = new CssNumber(x)
-  implicit def Byte2CssNumber(x: Byte) = new CssNumber(x)
+  implicit def Int2CssNumber(x: Int): CssNumber[Int] = new CssNumber(x)
+  implicit def Double2CssNumber(x: Double): CssNumber[Double] = new CssNumber(x)
+  implicit def Float2CssNumber(x: Float): CssNumber[Float] = new CssNumber(x)
+  implicit def Long2CssNumber(x: Long): CssNumber[Long] = new CssNumber(x)
+  implicit def Short2CssNumber(x: Short): CssNumber[Short] = new CssNumber(x)
+  implicit def Byte2CssNumber(x: Byte): CssNumber[Byte] = new CssNumber(x)
   /**
    * Extends numbers to provide a bunch of useful methods, allowing you to write
    * CSS-lengths in a nice syntax without resorting to strings.

@@ -149,12 +149,12 @@ trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output
   implicit val floatPixelStyle = genericPixelStylePx[Float]
   implicit val doublePixelStyle = genericPixelStylePx[Double]
 
-  implicit def byteFrag(v: Byte) = stringFrag(v.toString)
-  implicit def shortFrag(v: Short) = stringFrag(v.toString)
-  implicit def intFrag(v: Int) = stringFrag(v.toString)
-  implicit def longFrag(v: Long) = stringFrag(v.toString)
-  implicit def floatFrag(v: Float) = stringFrag(v.toString)
-  implicit def doubleFrag(v: Double) = stringFrag(v.toString)
+  implicit def byteFrag(v: Byte): Frag = stringFrag(v.toString)
+  implicit def shortFrag(v: Short): Frag = stringFrag(v.toString)
+  implicit def intFrag(v: Int): Frag = stringFrag(v.toString)
+  implicit def longFrag(v: Long): Frag = stringFrag(v.toString)
+  implicit def floatFrag(v: Float): Frag = stringFrag(v.toString)
+  implicit def doubleFrag(v: Double): Frag = stringFrag(v.toString)
   implicit def stringFrag(v: String): Frag
 
   /**

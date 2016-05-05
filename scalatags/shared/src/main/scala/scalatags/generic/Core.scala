@@ -1,9 +1,10 @@
 package scalatags
 package generic
 
+import java.util.Objects.requireNonNull
+
 import acyclic.file
-import scala.collection.SortedMap
-import scalatags.generic
+
 import scala.annotation.implicitNotFound
 
 
@@ -90,7 +91,7 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
 /**
  * Wraps up a HTML attribute in a value which isn't a string.
  */
-case class Attr(name: String) {
+case class Attr(name: String, namespace: Option[Namespace] = None) {
 
   if (!Escaping.validAttrName(name))
     throw new IllegalArgumentException(
@@ -101,7 +102,10 @@ case class Attr(name: String) {
    * Creates an [[AttrPair]] from an [[Attr]] and a value of type [[T]], if
    * there is an [[AttrValue]] of the correct type.
    */
-  def :=[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = AttrPair(this, v, ev)
+  def :=[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = {
+    requireNonNull(v)
+    AttrPair(this, v, ev)
+  }
 }
 
 /**
@@ -112,7 +116,10 @@ case class Style(jsName: String, cssName: String) {
    * Creates an [[StylePair]] from an [[Style]] and a value of type [[T]], if
    * there is an [[StyleValue]] of the correct type.
    */
-  def :=[Builder, T](v: T)(implicit ev: StyleValue[Builder, T]) = StylePair(this, v, ev)
+  def :=[Builder, T](v: T)(implicit ev: StyleValue[Builder, T]) = {
+    requireNonNull(v)
+    StylePair(this, v, ev)
+  }
 }
 /**
  * Wraps up a CSS style in a value.
@@ -123,7 +130,10 @@ case class PixelStyle(jsName: String, cssName: String) {
    * Creates an [[StylePair]] from an [[Style]] and a value of type [[T]], if
    * there is an [[StyleValue]] of the correct type.
    */
-  def :=[Builder, T](v: T)(implicit ev: PixelStyleValue[Builder, T]) = ev(realStyle, v)
+  def :=[Builder, T](v: T)(implicit ev: PixelStyleValue[Builder, T]) = {
+    requireNonNull(v)
+    ev(realStyle, v)
+  }
 
 }
 trait StyleProcessor{
@@ -136,7 +146,10 @@ case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extend
   override def applyTo(t: Builder): Unit = {
     ev.apply(t, a, v)
   }
-  def :=[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = AttrPair(a, v, ev)
+  def :=[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = {
+    requireNonNull(v)
+    AttrPair(a, v, ev)
+  }
 }
 /**
  * Used to specify how to handle a particular type [[T]] when it is used as
@@ -193,5 +206,8 @@ object Namespace{
   }
   val svgNamespaceConfig = new Namespace {
     def uri = "http://www.w3.org/2000/svg"
+  }
+  val svgXlinkNamespaceConfig = new Namespace {
+    def uri = "http://www.w3.org/1999/xlink"
   }
 }

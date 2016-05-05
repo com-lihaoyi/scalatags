@@ -77,8 +77,19 @@ lazy val example = project.in(file("example"))
   .dependsOn(scalatagsJS)
   .enablePlugins(ScalaJSPlugin)
   .settings(
-    crossScalaVersions := Seq("2.11.8", "2.10.4"),
-    scalaVersion := "2.11.8"
+    crossScalaVersions := Seq("2.11.4", "2.10.4"),
+    scalaVersion := "2.11.4",
+    scalacOptions ++= Seq(
+      "-deprecation", // warning and location for usages of deprecated APIs
+      "-feature", // warning and location for usages of features that should be imported explicitly
+      "-unchecked", // additional warnings where generated code depends on assumptions
+      "-Xlint", // recommended additional warnings
+      "-Xcheckinit", // runtime error when a val is not initialized due to trait hierarchies (instead of NPE somewhere else)
+      "-Ywarn-adapted-args", // Warn if an argument list is modified to match the receiver
+      "-Ywarn-value-discard", // Warn when non-Unit expression results are unused
+      "-Ywarn-inaccessible",
+      "-Ywarn-dead-code"
+    )
   )
 
 lazy val readme = scalatex.ScalatexReadme(
