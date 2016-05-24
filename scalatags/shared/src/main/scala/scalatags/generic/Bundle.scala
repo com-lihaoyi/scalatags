@@ -44,7 +44,7 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, F
    * [[Modifier]], typeclass instances for treating strings and numbers as attributes
    * or style values, and other things.
    */
-  val implicits: Aggregate[Builder, Output, FragT]
+  val implicits: Aggregate[Builder, Output, FragT] with DataConverters
 
   type AbstractShort = generic.AbstractShort[Builder, Output, FragT]
 
