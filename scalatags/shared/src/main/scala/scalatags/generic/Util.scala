@@ -54,6 +54,13 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
       Attr(s, Option(namespaceConfig))
     }
     /**
+      * Same as attr, but will not check for valid XML chars.
+      */
+    def rawAttr: Attr = rawNsAttr(null)
+    def rawNsAttr(implicit namespaceConfig: Namespace): Attr = {
+      Attr(s, Option(namespaceConfig), false)
+    }
+    /**
      *  Converts a string to an empty [[Attr]]. An empty attribute in HTML 
      *  is one that doesn't have an have a value (often represents a boolean
      *  in HTML)
