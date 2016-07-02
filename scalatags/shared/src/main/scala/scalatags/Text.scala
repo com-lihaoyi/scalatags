@@ -165,9 +165,6 @@ object Text
       val indenting = indentBy > 0
       val inlineContent = builder.childIndex == 1 && !builder.children(0).isInstanceOf[TypedTag[Output]]
 
-      println(s"scalatags: inlineContent=$inlineContent children=${builder.children.length} ${
-        if(builder.children.length == 1) !builder.children(0).isInstanceOf[TypedTag[Output]] else builder.children.to[List]}")
-
       // tag
       var i = 0
       while (i < ind) {
