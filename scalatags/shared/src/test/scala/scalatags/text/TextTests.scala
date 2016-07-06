@@ -10,6 +10,62 @@ object TextTests extends TestSuite{
       val sample = div("omg")
       assert(sample.toString == "<div>omg</div>")
     }
+
+    'helloWorld_indent{
+      val sample = div("omg").render(2)
+      val expected = "<div>omg</div>\n"
+      assert(sample == expected)
+    }
+
+    'nested_indent{
+      val sample = div(span("omg")).render(2)
+      val expected =
+        """<div>
+          |  <span>omg</span>
+          |</div>
+          |""".stripMargin
+      assert(sample == expected)
+    }
+
+    'voidTag_indent{
+      val sample = "void".voidTag[String].render(2)
+      val expected = "<void />\n"
+      assert(sample == expected)
+    }
+
+    'tag_indent{
+      val sample = "tag".tag[String].render(2)
+      val expected = "<tag></tag>\n"
+      assert(sample == expected)
+    }
+
+    'aList_indent{
+      val sample = ol(
+        `class` := "myList",
+        li("one"),
+        li(float.right),
+        li(
+          span(3)
+        )
+      ).render(2)
+      val expected =
+        """<ol class="myList">
+          |  <li>one</li>
+          |  <li style="float: right;"></li>
+          |  <li>
+          |    <span>3</span>
+          |  </li>
+          |</ol>
+          |""".stripMargin
+      assert(sample == expected)
+    }
+
+    'multiSeq_indent{
+      val sample = span("one", "two", "three").render(2)
+      val expected = "<span>onetwothree</span>\n"
+      assert(sample == expected)
+    }
+
     /**
      * Tests the usage of the pre-defined tags, as well as creating
      * the tags on the fly from Strings
@@ -41,5 +97,6 @@ object TextTests extends TestSuite{
       import scalatags.Text.all._
       val thing: Tag = div
     }
+
   }
 }

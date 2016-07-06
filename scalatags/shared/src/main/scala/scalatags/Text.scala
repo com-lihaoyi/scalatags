@@ -118,17 +118,17 @@ object Text
     Objects.requireNonNull(v)
     def render = {
       val strb = new StringBuilder()
-      writeTo(strb)
+      writeTo(strb, 0, 0)
       strb.toString()
     }
-    def writeTo(strb: StringBuilder) = Escaping.escape(v, strb)
+    def writeTo(strb: StringBuilder, indentBy: Int, depth: Int) = Escaping.escape(v, strb)
   }
   object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends text.Frag {
     Objects.requireNonNull(v)
     def render = v
-    def writeTo(strb: StringBuilder) = strb ++= v
+    def writeTo(strb: StringBuilder, indentBy: Int, depth: Int) = strb ++= v
   }
 
   class GenericAttr[T] extends AttrValue[T] {
@@ -170,15 +170,25 @@ object Text
      * because I've inlined a whole lot of things to improve the performance of this code
      * ~4x from what it originally was, which is a pretty nice speedup
      */
-    def writeTo(strb: StringBuilder): Unit = {
+    override def writeTo(strb: StringBuilder, indentBy: Int, depth: Int): Unit = {
       val builder = new text.Builder()
       build(builder)
 
+      val ind = indentBy * depth
+      val indenting = indentBy > 0
+      val startsWithString = builder.childIndex > 0 && !builder.children(0).isInstanceOf[TypedTag[Output]]
+      val endsWithString = builder.childIndex > 0 && !builder.children(builder.childIndex - 1).isInstanceOf[TypedTag[Output]]
+
       // tag
+      var i = 0
+      while (i < ind) {
+        strb += ' '
+        i+=1
+      }
       strb += '<' ++= tag
 
       // attributes
-      var i = 0
+      i = 0
       while (i < builder.attrIndex){
         val pair = builder.attrs(i)
         strb += ' ' ++= pair._1 ++= "=\""
@@ -187,20 +197,38 @@ object Text
         i += 1
       }
 
-      if (builder.childIndex == 0 && void) {
-        // No children - close tag
-        strb ++= " />"
+      if (builder.childIndex == 0) {
+        if (void) {
+          // No children - self-closing tag
+          strb ++= " />"
+        } else {
+          // no children - close tag
+          strb ++= "></" ++= tag += '>'
+        }
+        if (indenting) strb += '\n'
       } else {
         strb += '>'
+        if (indenting & !startsWithString) strb += '\n'
         // Childrens
+        val d = depth + 1
         var i = 0
         while(i < builder.childIndex){
-          builder.children(i).writeTo(strb)
+          builder.children(i).writeTo(strb, indentBy, d)
           i += 1
         }
 
         // Closing tag
+
+        if(!endsWithString) {
+          val ind = indentBy * depth
+          i = 0
+          while (i < ind) {
+            strb += ' '
+            i += 1
+          }
+        }
         strb ++= "</" ++= tag += '>'
+        if (indenting) strb += '\n'
       }
     }
 
@@ -211,12 +239,20 @@ object Text
     /**
      * Converts an ScalaTag fragment into an html string
      */
-    override def toString = {
+    final def toString(indentBy: Int) = {
       val strb = new StringBuilder
-      writeTo(strb)
+      writeTo(strb, indentBy, 0)
       strb.toString()
     }
-    def render: Output = this.toString.asInstanceOf[Output]
+
+    /**
+      * Converts an ScalaTag fragment into an html string
+      */
+    override final def toString = toString(0)
+
+    def render(indentBy: Int): Output = this.toString(indentBy).asInstanceOf[Output]
+
+    def render: Output = render(0)
   }
 
 
