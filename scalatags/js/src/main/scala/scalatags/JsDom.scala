@@ -2,11 +2,12 @@ package scalatags
 import java.util.Objects
 
 import acyclic.file
+import org.scalajs
 import org.scalajs.dom
 
 import scala.language.implicitConversions
 import scala.scalajs.js
-import org.scalajs.dom.{Element, html, svg}
+import org.scalajs.dom.{Element, html, raw, svg}
 
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{Aliases, Namespace, StylePair}
@@ -135,7 +136,17 @@ object JsDom
     def apply(t: dom.Element, a: Attr, v: T): Unit = {
       a.namespace match {
         case None =>
-          t.setAttribute(a.name, v.toString)
+          if (a.checkValidAttrName) {
+            t.setAttribute(a.name, v.toString)
+          } else {
+
+            // Ugly workaround for https://www.w3.org/Bugs/Public/show_bug.cgi?id=27228
+            val tmpElm = dom.document.createElement("p")
+            tmpElm.innerHTML = s"""<p ${a.name}="${v.toString}"><p>"""
+            val newAttr = tmpElm.children(0).attributes(0).cloneNode(true)
+            t.setAttributeNode(newAttr.asInstanceOf[raw.Attr])
+
+          }
         case Some(namespace) =>
           t.setAttributeNS(namespace.uri, a.name, v.toString)
       }
