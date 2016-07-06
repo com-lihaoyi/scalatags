@@ -41,17 +41,28 @@ object TextTests extends TestSuite{
 
     'aList_indent{
       val sample = ol(
+        `class` := "myList",
         li("one"),
-        li(),
-        li("three")
+        li(float.right),
+        li(
+          span(3)
+        )
       ).render(2)
       val expected =
-        """<ol>
+        """<ol class="myList">
           |  <li>one</li>
-          |  <li></li>
-          |  <li>three</li>
+          |  <li style="float: right;"></li>
+          |  <li>
+          |    <span>3</span>
+          |  </li>
           |</ol>
           |""".stripMargin
+      assert(sample == expected)
+    }
+
+    'multiSeq_indent{
+      val sample = span("one", "two", "three").render(2)
+      val expected = "<span>onetwothree</span>\n"
       assert(sample == expected)
     }
 

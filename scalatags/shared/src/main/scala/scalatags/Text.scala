@@ -163,7 +163,8 @@ object Text
 
       val ind = indentBy * depth
       val indenting = indentBy > 0
-      val inlineContent = builder.childIndex == 1 && !builder.children(0).isInstanceOf[TypedTag[Output]]
+      val startsWithString = builder.childIndex > 0 && !builder.children(0).isInstanceOf[TypedTag[Output]]
+      val endsWithString = builder.childIndex > 0 && !builder.children(builder.childIndex - 1).isInstanceOf[TypedTag[Output]]
 
       // tag
       var i = 0
@@ -192,14 +193,9 @@ object Text
           strb ++= "></" ++= tag += '>'
         }
         if (indenting) strb += '\n'
-      } else if (inlineContent) {
-        strb += '>'
-        builder.children(0).writeTo(strb, indentBy, 0)
-        strb ++= "</" ++= tag += '>'
-        if (indenting) strb += '\n'
       } else {
         strb += '>'
-        if (indenting) strb += '\n'
+        if (indenting & !startsWithString) strb += '\n'
         // Childrens
         val d = depth + 1
         var i = 0
@@ -210,11 +206,13 @@ object Text
 
         // Closing tag
 
-        val ind = indentBy * depth
-        i = 0
-        while (i < ind) {
-          strb += ' '
-          i+=1
+        if(!endsWithString) {
+          val ind = indentBy * depth
+          i = 0
+          while (i < ind) {
+            strb += ' '
+            i += 1
+          }
         }
         strb ++= "</" ++= tag += '>'
         if (indenting) strb += '\n'
