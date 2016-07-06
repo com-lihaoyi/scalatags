@@ -55,7 +55,7 @@ lazy val scalatags = crossProject
   .jsSettings(
     scalaJSUseRhino in Global := false,
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.8.2"
+      "org.scala-js" %%% "scalajs-dom" % "0.9.1"
     ),
     resolvers += Resolver.sonatypeRepo("releases"),
     scalaJSStage in Test := FullOptStage,
