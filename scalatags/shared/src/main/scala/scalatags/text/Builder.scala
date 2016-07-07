@@ -67,6 +67,15 @@ class Builder(var children: Array[Frag] = new Array(4),
   }
 }
 trait Frag extends generic.Frag[Builder, String]{
-  def writeTo(strb: StringBuilder, indentBy: Int, depth: Int): Unit
+  /**
+    * Write into a string buffer.
+    *
+    * @param strb     buffer to write into
+    * @param indentBy the amount to indent per unit depth
+    * @param depth    depth of this node
+    * @param fromTag  true if the previous node to be written to strb is a tag
+    * @return         true if the last thing to be written to strb by this method was a tag
+    */
+  def writeTo(strb: StringBuilder, indentBy: Int, depth: Int, fromTag: Boolean): Boolean
   override def applyTo(b: Builder) = b.addChild(this)
 }

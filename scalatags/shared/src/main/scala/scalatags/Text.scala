@@ -98,17 +98,23 @@ object Text
     Objects.requireNonNull(v)
     def render = {
       val strb = new StringBuilder()
-      writeTo(strb, 0, 0)
+      writeTo(strb, 0, 0, false)
       strb.toString()
     }
-    def writeTo(strb: StringBuilder, indentBy: Int, depth: Int) = Escaping.escape(v, strb)
+    def writeTo(strb: StringBuilder, indentBy: Int, depth: Int, fromTag: Boolean) = {
+      Escaping.escape(v, strb)
+      false
+    }
   }
   object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends text.Frag {
     Objects.requireNonNull(v)
     def render = v
-    def writeTo(strb: StringBuilder, indentBy: Int, depth: Int) = strb ++= v
+    def writeTo(strb: StringBuilder, indentBy: Int, depth: Int, fromTag: Boolean) = {
+      strb ++= v
+      false
+    }
   }
 
   class GenericAttr[T] extends AttrValue[T]{
@@ -157,31 +163,30 @@ object Text
      * because I've inlined a whole lot of things to improve the performance of this code
      * ~4x from what it originally was, which is a pretty nice speedup
      */
-    override def writeTo(strb: StringBuilder, indentBy: Int, depth: Int): Unit = {
+    override def writeTo(strb: StringBuilder, indentBy: Int, depth: Int, fromTag: Boolean) = {
       val builder = new text.Builder()
       build(builder)
 
-      val ind = indentBy * depth
       val indenting = indentBy > 0
-      val startsWithString = builder.childIndex > 0 && !builder.children(0).isInstanceOf[TypedTag[Output]]
-      val endsWithString = builder.childIndex > 0 && !builder.children(builder.childIndex - 1).isInstanceOf[TypedTag[Output]]
+      val indent: String = if(indenting) " " * (indentBy * depth) else null
 
       // tag
-      var i = 0
-      while (i < ind) {
-        strb += ' '
-        i+=1
+      if(indenting && fromTag) {
+        strb += '\n'
+        strb ++= indent
       }
       strb += '<' ++= tag
 
       // attributes
-      i = 0
-      while (i < builder.attrIndex){
-        val pair = builder.attrs(i)
-        strb += ' ' ++= pair._1 ++= "=\""
-        Escaping.escape(pair._2, strb)
-        strb += '\"'
-        i += 1
+      {
+        var i = 0
+        while (i < builder.attrIndex){
+          val pair = builder.attrs(i)
+          strb += ' ' ++= pair._1 ++= "=\""
+          Escaping.escape(pair._2, strb)
+          strb += '\"'
+          i += 1
+        }
       }
 
       if (builder.childIndex == 0) {
@@ -192,31 +197,29 @@ object Text
           // no children - close tag
           strb ++= "></" ++= tag += '>'
         }
-        if (indenting) strb += '\n'
       } else {
         strb += '>'
-        if (indenting & !startsWithString) strb += '\n'
+        var ft = true
+
         // Childrens
-        val d = depth + 1
-        var i = 0
-        while(i < builder.childIndex){
-          builder.children(i).writeTo(strb, indentBy, d)
-          i += 1
-        }
-
-        // Closing tag
-
-        if(!endsWithString) {
-          val ind = indentBy * depth
-          i = 0
-          while (i < ind) {
-            strb += ' '
+        {
+          val d = depth + 1
+          var i = 0
+          while (i < builder.childIndex) {
+            ft = builder.children(i).writeTo(strb, indentBy, d, ft)
             i += 1
           }
         }
+
+        // Closing tag
+        if(indenting && ft) {
+          strb += '\n'
+          strb ++= indent
+        }
         strb ++= "</" ++= tag += '>'
-        if (indenting) strb += '\n'
       }
+
+      true
     }
 
     def apply(xs: Modifier*): TypedTag[Output] = {
@@ -228,7 +231,7 @@ object Text
      */
     final def toString(indentBy: Int) = {
       val strb = new StringBuilder
-      writeTo(strb, indentBy, 0)
+      writeTo(strb, indentBy, 0, false)
       strb.toString()
     }
 

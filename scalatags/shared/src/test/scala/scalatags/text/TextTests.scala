@@ -13,7 +13,7 @@ object TextTests extends TestSuite{
 
     'helloWorld_indent{
       val sample = div("omg").render(2)
-      val expected = "<div>omg</div>\n"
+      val expected = "<div>omg</div>"
       assert(sample == expected)
     }
 
@@ -22,20 +22,19 @@ object TextTests extends TestSuite{
       val expected =
         """<div>
           |  <span>omg</span>
-          |</div>
-          |""".stripMargin
+          |</div>""".stripMargin
       assert(sample == expected)
     }
 
     'voidTag_indent{
       val sample = "void".voidTag[String].render(2)
-      val expected = "<void />\n"
+      val expected = "<void />"
       assert(sample == expected)
     }
 
     'tag_indent{
       val sample = "tag".tag[String].render(2)
-      val expected = "<tag></tag>\n"
+      val expected = "<tag></tag>"
       assert(sample == expected)
     }
 
@@ -55,14 +54,22 @@ object TextTests extends TestSuite{
           |  <li>
           |    <span>3</span>
           |  </li>
-          |</ol>
-          |""".stripMargin
+          |</ol>""".stripMargin
       assert(sample == expected)
     }
 
     'multiSeq_indent{
       val sample = span("one", "two", "three").render(2)
-      val expected = "<span>onetwothree</span>\n"
+      val expected = "<span>onetwothree</span>"
+      assert(sample == expected)
+    }
+
+    'mixedContent_indent{
+      val sample = div("one", span("two"), "three", span(span("four")), "five").render(2)
+      val expected =
+        """<div>one<span>two</span>three<span>
+          |    <span>four</span>
+          |  </span>five</div>""".stripMargin
       assert(sample == expected)
     }
 
