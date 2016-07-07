@@ -73,6 +73,14 @@ object TextTests extends TestSuite{
       assert(sample == expected)
     }
 
+    'whitespaceContent_indent{
+      val sample = span("one", " and ", "two\n").render(2)
+      val expected =
+        """<span>one and two
+          |</span>""".stripMargin
+      assert(sample == expected)
+    }
+
     /**
      * Tests the usage of the pre-defined tags, as well as creating
      * the tags on the fly from Strings
