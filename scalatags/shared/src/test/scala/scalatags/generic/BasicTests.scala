@@ -22,7 +22,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         html(
           head(
             x,
-            "string-tag".tag
+            tag("string-tag")
           ),
           body(
             div(

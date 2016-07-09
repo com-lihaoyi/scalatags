@@ -45,9 +45,9 @@ object Text
     object * extends Cap with Attrs with Styles
   }
 
-  trait Cap extends Util{ self =>
+  trait Cap extends Util with text.TagFactory{ self =>
     type ConcreteHtmlTag[T <: String] = TypedTag[T]
-
+    type BaseTagType = TypedTag[String]
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)

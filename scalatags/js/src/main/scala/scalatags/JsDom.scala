@@ -95,7 +95,7 @@ object JsDom
 
   }
 
-  trait Cap extends Util{ self =>
+  trait Cap extends Util with jsdom.TagFactory{ self =>
     type ConcreteHtmlTag[T <: dom.Element] = TypedTag[T]
 
     protected[this] implicit def stringAttrX = new GenericAttr[String]

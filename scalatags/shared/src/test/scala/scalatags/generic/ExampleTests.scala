@@ -261,13 +261,13 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         body(
           h1("This is my title"),
           div(
-            p("onclick".attr:="... do some js")(
+            p(attr("onclick"):="... do some js")(
               "This is my first paragraph"
             ),
-            a("href".attr:="www.google.com")(
+            a(attr("href"):="www.google.com")(
               p("Goooogle")
             ),
-            p("hidden".emptyAttr)(
+            p(emptyAttr("hidden"))(
               "I am hidden"
             )
           )
@@ -579,11 +579,9 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       """<div style="z-index: 10;"></div>"""
     )
     'customAttributesAndStyles-strCheck({
-      val dataAppKey = "data-app-key".attr
-      val customBackgroundStyle = "background-color".style
       div(
-        dataAppKey:="YOUR_APP_KEY",
-        customBackgroundStyle:="red"
+        attr("data-app-key") := "YOUR_APP_KEY",
+        css("background-color") := "red"
       )
     }
     ,

@@ -1,43 +1,43 @@
 package scalatags
 package text
 import acyclic.file
-trait Tags2 extends generic.Tags2[Builder, String, String]{
+trait Tags2 extends generic.Tags2[Builder, String, String] with TagFactory{
   // Document Metadata
- lazy val title = "title".tag
- lazy val style = "style".tag
+ lazy val title = tag("title")
+ lazy val style = tag("style")
   // Scripting
- lazy val noscript = "noscript".tag
+ lazy val noscript = tag("noscript")
   // Sections
- lazy val section = "section".tag
- lazy val nav = "nav".tag
- lazy val article = "article".tag
- lazy val aside = "aside".tag
- lazy val address = "address".tag
- lazy val main = "main".tag
+ lazy val section = tag("section")
+ lazy val nav = tag("nav")
+ lazy val article = tag("article")
+ lazy val aside = tag("aside")
+ lazy val address = tag("address")
+ lazy val main = tag("main")
   // Text level semantics
- lazy val q = "q".tag
- lazy val dfn = "dfn".tag
- lazy val abbr = "abbr".tag
- lazy val data = "data".tag
- lazy val time = "time".tag
- lazy val `var` = "var".tag
- lazy val samp = "samp".tag
- lazy val kbd = "kbd".tag
- lazy val math = "math".tag
- lazy val mark = "mark".tag
- lazy val ruby = "ruby".tag
- lazy val rt = "rt".tag
- lazy val rp = "rp".tag
- lazy val bdi = "bdi".tag
- lazy val bdo = "bdo".tag
+ lazy val q = tag("q")
+ lazy val dfn = tag("dfn")
+ lazy val abbr = tag("abbr")
+ lazy val data = tag("data")
+ lazy val time = tag("time")
+ lazy val `var` = tag("var")
+ lazy val samp = tag("samp")
+ lazy val kbd = tag("kbd")
+ lazy val math = tag("math")
+ lazy val mark = tag("mark")
+ lazy val ruby = tag("ruby")
+ lazy val rt = tag("rt")
+ lazy val rp = tag("rp")
+ lazy val bdi = tag("bdi")
+ lazy val bdo = tag("bdo")
   // Forms
- lazy val keygen = "keygen".voidTag
- lazy val output = "output".tag
- lazy val progress = "progress".tag
- lazy val meter = "meter".tag
+ lazy val keygen = tag("keygen", void = true)
+ lazy val output = tag("output")
+ lazy val progress = tag("progress")
+ lazy val meter = tag("meter")
   // Interactive elements
- lazy val details = "details".tag
- lazy val summary = "summary".tag
- lazy val command = "command".voidTag
- lazy val menu = "menu".tag
+ lazy val details = tag("details")
+ lazy val summary = tag("summary")
+ lazy val command = tag("command", void = true)
+ lazy val menu = tag("menu")
 }

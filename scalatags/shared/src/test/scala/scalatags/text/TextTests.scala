@@ -10,6 +10,7 @@ object TextTests extends TestSuite{
       val sample = div("omg")
       assert(sample.toString == "<div>omg</div>")
     }
+
     /**
      * Tests the usage of the pre-defined tags, as well as creating
      * the tags on the fly from Strings
@@ -17,8 +18,8 @@ object TextTests extends TestSuite{
     'tagCreation{
       assert(a.toString == "<a></a>")
       assert(html.toString == "<html></html>")
-      assert("this_is_an_unusual_tag".tag.toString == "<this_is_an_unusual_tag></this_is_an_unusual_tag>")
-      assert("this-is-a-string-with-dashes".voidTag.toString == "<this-is-a-string-with-dashes />")
+      assert(tag("this_is_an_unusual_tag").toString == "<this_is_an_unusual_tag></this_is_an_unusual_tag>")
+      assert(tag("this-is-a-string-with-dashes", void = true).toString == "<this-is-a-string-with-dashes />")
     }
 
     'cssHelpers{

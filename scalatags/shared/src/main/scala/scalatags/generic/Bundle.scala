@@ -78,6 +78,8 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, F
    * SVG only attributes
    */
   val svgAttrs: SvgAttrs
+
+
 }
 
 trait Aliases[Builder, Output <: FragT, FragT]{

@@ -4,93 +4,93 @@ package jsdom
 import acyclic.file
 import org.scalajs.dom
 import scalatags.generic.Util
-trait Tags extends generic.Tags[dom.Element, dom.Element, dom.Node]{
+trait Tags extends generic.Tags[dom.Element, dom.Element, dom.Node] with TagFactory{
   // Root Element
-  lazy val html = "html".tag[dom.html.Html]
+  lazy val html = typedTag[dom.html.Html]("html")
   // Document Metadata
-  lazy val head = "head".tag[dom.html.Head]
-  lazy val base = "base".voidTag[dom.html.Base]
-  lazy val link = "link".voidTag[dom.html.Link]
-  lazy val meta = "meta".voidTag[dom.html.Meta]
+  lazy val head = typedTag[dom.html.Head]("head")
+  lazy val base = typedTag[dom.html.Base]("base", void = true)
+  lazy val link = typedTag[dom.html.Link]("link", void = true)
+  lazy val meta = typedTag[dom.html.Meta]("meta", void = true)
   // Scripting
-  lazy val script = "script".tag[dom.html.Script]
+  lazy val script = typedTag[dom.html.Script]("script")
   // Sections
-  lazy val body = "body".tag[dom.html.Body]
-  lazy val h1 = "h1".tag[dom.html.Heading]
-  lazy val h2 = "h2".tag[dom.html.Heading]
-  lazy val h3 = "h3".tag[dom.html.Heading]
-  lazy val h4 = "h4".tag[dom.html.Heading]
-  lazy val h5 = "h5".tag[dom.html.Heading]
-  lazy val h6 = "h6".tag[dom.html.Heading]
-  lazy val header = "header".tag[dom.html.Element]
-  lazy val footer = "footer".tag[dom.html.Element]
+  lazy val body = typedTag[dom.html.Body]("body")
+  lazy val h1 = typedTag[dom.html.Heading]("h1")
+  lazy val h2 = typedTag[dom.html.Heading]("h2")
+  lazy val h3 = typedTag[dom.html.Heading]("h3")
+  lazy val h4 = typedTag[dom.html.Heading]("h4")
+  lazy val h5 = typedTag[dom.html.Heading]("h5")
+  lazy val h6 = typedTag[dom.html.Heading]("h6")
+  lazy val header = typedTag[dom.html.Element]("header")
+  lazy val footer = typedTag[dom.html.Element]("footer")
   // Grouping content
-  lazy val p = "p".tag[dom.html.Paragraph]
-  lazy val hr = "hr".voidTag[dom.html.HR]
-  lazy val pre = "pre".tag[dom.html.Pre]
-  lazy val blockquote = "blockquote".tag[dom.html.Quote]
-  lazy val ol = "ol".tag[dom.html.OList]
-  lazy val ul = "ul".tag[dom.html.UList]
-  lazy val li = "li".tag[dom.html.LI]
-  lazy val dl = "dl".tag[dom.html.DList]
-  lazy val dt = "dt".tag[dom.html.DT]
-  lazy val dd = "dd".tag[dom.html.DD]
-  lazy val figure = "figure".tag[dom.html.Element]
-  lazy val figcaption = "figcaption".tag[dom.html.Element]
-  lazy val div = "div".tag[dom.html.Div]
+  lazy val p = typedTag[dom.html.Paragraph]("p")
+  lazy val hr = typedTag[dom.html.HR]("hr", void = true)
+  lazy val pre = typedTag[dom.html.Pre]("pre")
+  lazy val blockquote = typedTag[dom.html.Quote]("blockquote")
+  lazy val ol = typedTag[dom.html.OList]("ol")
+  lazy val ul = typedTag[dom.html.UList]("ul")
+  lazy val li = typedTag[dom.html.LI]("li")
+  lazy val dl = typedTag[dom.html.DList]("dl")
+  lazy val dt = typedTag[dom.html.DT]("dt")
+  lazy val dd = typedTag[dom.html.DD]("dd")
+  lazy val figure = typedTag[dom.html.Element]("figure")
+  lazy val figcaption = typedTag[dom.html.Element]("figcaption")
+  lazy val div = typedTag[dom.html.Div]("div")
   // Text-level semantics
-  lazy val a = "a".tag[dom.html.Anchor]
-  lazy val em = "em".tag[dom.html.Element]
-  lazy val strong = "strong".tag[dom.html.Element]
-  lazy val small = "small".tag[dom.html.Element]
-  lazy val s = "s".tag[dom.html.Element]
-  lazy val cite = "cite".tag[dom.html.Element]
-  lazy val code = "code".tag[dom.html.Element]
-  lazy val sub = "sub".tag[dom.html.Element]
-  lazy val sup = "sup".tag[dom.html.Element]
-  lazy val i = "i".tag[dom.html.Element]
-  lazy val b = "b".tag[dom.html.Element]
-  lazy val u = "u".tag[dom.html.Element]
-  lazy val span = "span".tag[dom.html.Span]
-  lazy val br = "br".voidTag[dom.html.BR]
-  lazy val wbr = "wbr".voidTag[dom.html.Element]
+  lazy val a = typedTag[dom.html.Anchor]("a")
+  lazy val em = typedTag[dom.html.Element]("em")
+  lazy val strong = typedTag[dom.html.Element]("strong")
+  lazy val small = typedTag[dom.html.Element]("small")
+  lazy val s = typedTag[dom.html.Element]("s")
+  lazy val cite = typedTag[dom.html.Element]("cite")
+  lazy val code = typedTag[dom.html.Element]("code")
+  lazy val sub = typedTag[dom.html.Element]("sub")
+  lazy val sup = typedTag[dom.html.Element]("sup")
+  lazy val i = typedTag[dom.html.Element]("i")
+  lazy val b = typedTag[dom.html.Element]("b")
+  lazy val u = typedTag[dom.html.Element]("u")
+  lazy val span = typedTag[dom.html.Span]("span")
+  lazy val br = typedTag[dom.html.BR]("br", void = true)
+  lazy val wbr = typedTag[dom.html.Element]("wbr", void = true)
   // Edits
-  lazy val ins = "ins".tag[dom.html.Mod]
-  lazy val del = "del".tag[dom.html.Mod]
+  lazy val ins = typedTag[dom.html.Mod]("ins")
+  lazy val del = typedTag[dom.html.Mod]("del")
   // Embedded content
-  lazy val img = "img".voidTag[dom.html.Image]
-  lazy val iframe = "iframe".tag[dom.html.IFrame]
-  lazy val embed = "embed".voidTag[dom.html.Embed]
-  lazy val `object` = "object".tag[dom.html.Object]
-  lazy val param = "param".voidTag[dom.html.Param]
-  lazy val video = "video".tag[dom.html.Video]
-  lazy val audio = "audio".tag[dom.html.Audio]
-  lazy val source = "source".voidTag[dom.html.Source]
-  lazy val track = "track".voidTag[dom.html.Track]
-  lazy val canvas = "canvas".tag[dom.html.Canvas]
-  lazy val map = "map".tag[dom.html.Map]
-  lazy val area = "area".voidTag[dom.html.Area]
+  lazy val img = typedTag[dom.html.Image]("img", void = true)
+  lazy val iframe = typedTag[dom.html.IFrame]("iframe")
+  lazy val embed = typedTag[dom.html.Embed]("embed", void = true)
+  lazy val `object` = typedTag[dom.html.Object]("object")
+  lazy val param = typedTag[dom.html.Param]("param", void = true)
+  lazy val video = typedTag[dom.html.Video]("video")
+  lazy val audio = typedTag[dom.html.Audio]("audio")
+  lazy val source = typedTag[dom.html.Source]("source", void = true)
+  lazy val track = typedTag[dom.html.Track]("track", void = true)
+  lazy val canvas = typedTag[dom.html.Canvas]("canvas")
+  lazy val map = typedTag[dom.html.Map]("map")
+  lazy val area = typedTag[dom.html.Area]("area", void = true)
   // Tabular data
-  lazy val table = "table".tag[dom.html.Table]
-  lazy val caption = "caption".tag[dom.html.TableCaption]
-  lazy val colgroup = "colgroup".tag[dom.html.TableCol]
-  lazy val col = "col".voidTag[dom.html.TableCol]
-  lazy val tbody = "tbody".tag[dom.html.TableSection]
-  lazy val thead = "thead".tag[dom.html.TableSection]
-  lazy val tfoot = "tfoot".tag[dom.html.TableSection]
-  lazy val tr = "tr".tag[dom.html.TableRow]
-  lazy val td = "td".tag[dom.html.TableCell]
-  lazy val th = "th".tag[dom.html.TableHeaderCell]
+  lazy val table = typedTag[dom.html.Table]("table")
+  lazy val caption = typedTag[dom.html.TableCaption]("caption")
+  lazy val colgroup = typedTag[dom.html.TableCol]("colgroup")
+  lazy val col = typedTag[dom.html.TableCol]("col", void = true)
+  lazy val tbody = typedTag[dom.html.TableSection]("tbody")
+  lazy val thead = typedTag[dom.html.TableSection]("thead")
+  lazy val tfoot = typedTag[dom.html.TableSection]("tfoot")
+  lazy val tr = typedTag[dom.html.TableRow]("tr")
+  lazy val td = typedTag[dom.html.TableCell]("td")
+  lazy val th = typedTag[dom.html.TableHeaderCell]("th")
   // Forms
-  lazy val form = "form".tag[dom.html.Form]
-  lazy val fieldset = "fieldset".tag[dom.html.FieldSet]
-  lazy val legend = "legend".tag[dom.html.Legend]
-  lazy val label = "label".tag[dom.html.Label]
-  lazy val input = "input".voidTag[dom.html.Input]
-  lazy val button = "button".tag[dom.html.Button]
-  lazy val select = "select".tag[dom.html.Select]
-  lazy val datalist = "datalist".tag[dom.html.DataList]
-  lazy val optgroup = "optgroup".tag[dom.html.OptGroup]
-  lazy val option = "option".tag[dom.html.Option]
-  lazy val textarea = "textarea".tag[dom.html.TextArea]
+  lazy val form = typedTag[dom.html.Form]("form")
+  lazy val fieldset = typedTag[dom.html.FieldSet]("fieldset")
+  lazy val legend = typedTag[dom.html.Legend]("legend")
+  lazy val label = typedTag[dom.html.Label]("label")
+  lazy val input = typedTag[dom.html.Input]("input", void = true)
+  lazy val button = typedTag[dom.html.Button]("button")
+  lazy val select = typedTag[dom.html.Select]("select")
+  lazy val datalist = typedTag[dom.html.DataList]("datalist")
+  lazy val optgroup = typedTag[dom.html.OptGroup]("optgroup")
+  lazy val option = typedTag[dom.html.Option]("option")
+  lazy val textarea = typedTag[dom.html.TextArea]("textarea")
 }
