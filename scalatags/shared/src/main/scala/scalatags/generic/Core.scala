@@ -89,15 +89,19 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
 }
 
 /**
- * Wraps up a HTML attribute in a value which isn't a string.
- */
-case class Attr(name: String, namespace: Option[Namespace] = None) {
+  * Wraps up a HTML attribute in a value which isn't a string.
+  *
+  * @param name the name of this particular attribute
+  * @param namespace An n
+  * @param raw
+  */
+case class Attr(name: String, namespace: Option[Namespace] = None, raw: Boolean = false) {
 
-  if (!Escaping.validAttrName(name))
+  if (!raw && !Escaping.validAttrName(name)) {
     throw new IllegalArgumentException(
       s"Illegal attribute name: $name is not a valid XML attribute name"
     )
-
+  }
   /**
    * Creates an [[AttrPair]] from an [[Attr]] and a value of type [[T]], if
    * there is an [[AttrValue]] of the correct type.
@@ -106,6 +110,8 @@ case class Attr(name: String, namespace: Option[Namespace] = None) {
     requireNonNull(v)
     AttrPair(this, v, ev)
   }
+
+  def empty[Builder](implicit ev: AttrValue[Builder, String]) = this := name
 }
 
 /**

@@ -267,7 +267,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
             a(attr("href"):="www.google.com")(
               p("Goooogle")
             ),
-            p(emptyAttr("hidden"))(
+            p(attr("hidden").empty)(
               "I am hidden"
             )
           )

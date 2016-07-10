@@ -37,21 +37,7 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
     *   )
     * }}}
     */
-  def attr(s: String) = Attr(s, None)
-
-  /**
-    * Same as [[attr]] above, but creates an [[Attr]] that can be used "empty",
-    * i.e. it renders to its own string-value in HTML
-    */
-  def emptyAttr(s: String) = {
-    val a = Attr(s, None)
-    a := s
-  }
-
-  /**
-    * Creates an attr which takes an implicit namespace
-    */
-  def nsAttr(s: String)(implicit ns: Namespace) = Attr(s, Some(ns))
+  def attr(s: String, ns: Namespace = null, raw: Boolean = false) = Attr(s, Option(ns), raw)
 
   /**
     * Constructs a CSS [[Style]] from a string, can be used inline

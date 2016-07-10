@@ -80,7 +80,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
   /**
    * A Boolean attribute that specifies whether an element is draggable or not
    */
-  lazy val draggable	= emptyAttr("draggable")
+  lazy val draggable	= attr("draggable").empty
   /**
    * Specifies whether the dragged data is copied, moved, or linked, when dropped
    */
@@ -89,7 +89,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
    * Specifies that an element is not yet, or is no longer, relevant and
    * consequently hidden from view of the user.
    */
-  lazy val hidden = emptyAttr("hidden")
+  lazy val hidden = attr("hidden").empty
   /**
    * This attribute defines a unique identifier (ID) which must be unique in
    * the whole document. Its purpose is to identify the element when linking
@@ -116,7 +116,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
    *
    * MDN
    */
-  lazy val spellcheck = emptyAttr("spellcheck")
+  lazy val spellcheck = attr("spellcheck").empty
   /**
    * This attribute contains CSS styling declarations to be applied to the
    * element. Note that it is recommended for styles to be defined in a separate
@@ -156,7 +156,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
   /**
    * Specifies whether the content of an element should be translated or not
    */
-  lazy val translate	= emptyAttr("translate")
+  lazy val translate	= attr("translate").empty
 }
 
 trait SharedEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
@@ -427,7 +427,7 @@ trait FormEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output
   /**
    * Indicates a selected option in an option list of a <select> element.
    */
-  lazy val selected = emptyAttr("selected")
+  lazy val selected = attr("selected").empty
 }
 
 /**
@@ -586,7 +586,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val autofocus = emptyAttr("autofocus")
+  lazy val autofocus = attr("autofocus").empty
   /**
    * When the value of the type attribute is radio or checkbox, the presence of
    * this Boolean attribute indicates that the control is selected by default;
@@ -594,7 +594,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val checked = emptyAttr("checked")
+  lazy val checked = attr("checked").empty
   /**
     * The `enctype` attribute provides the encoding type of the form when it is
     * submitted (for forms with a method of "POST").
@@ -665,7 +665,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    * It can also be provided to the <select> element to allow selecting more than one
    * option.
    */
-  lazy val multiple = emptyAttr("multiple")
+  lazy val multiple = attr("multiple").empty
   /**
    * The maximum allowed length for the input field. This attribute forces the input control
    * to accept no more than the allowed number of characters. It does not produce any
@@ -724,7 +724,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val readonly = emptyAttr("readonly")
+  lazy val readonly = attr("readonly").empty
   /**
    * This attribute specifies that the user must fill in a value before
    * submitting a form. It cannot be used when the type attribute is hidden,
@@ -733,7 +733,7 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    *
    * MDN
    */
-  lazy val required = emptyAttr("required")
+  lazy val required = attr("required").empty
   /**
    * The initial size of the control. This value is in pixels unless the value
    * of the type attribute is text or password, in which case, it is an integer
@@ -888,7 +888,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    *
    * MDN
    */
-  lazy val disabled = emptyAttr("disabled")
+  lazy val disabled = attr("disabled").empty
   /**
    * Describes elements which belongs to this one. Used on labels and output
    * elements.

@@ -145,6 +145,19 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
       * - intercept[NullPointerException](div(height := nullString))
       * - intercept[NullPointerException](div(opacity := nullString))
     }
+    'rawAttrs-{
+      strCheck(
+        button(
+          attr("[class.active]", raw = true):= "isActive",
+          attr("(click)", raw = true) := "myEvent()"
+        ),
+        """<button [class.active]="isActive" (click)="myEvent()"></button>"""
+
+      )
+    }
+    'specialChars- {
+      * - intercept[java.lang.IllegalArgumentException](div(attr("[(ngModel)]") := "myModel"))
+    }
 
   }
 }
