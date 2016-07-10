@@ -92,8 +92,11 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
   * Wraps up a HTML attribute in a value which isn't a string.
   *
   * @param name the name of this particular attribute
-  * @param namespace An n
-  * @param raw
+  * @param namespace an XML [[Namespace]] that this attribute lives in
+  * @param raw all [[Attr]]s are checked to fail fast if their names are
+  *            invalid XML attrs; flagging them as [[raw]] disables the checks
+  *            in the few cases you actually want invalid XML attrs
+  *            (e.g. AngularJS)
   */
 case class Attr(name: String, namespace: Option[Namespace] = None, raw: Boolean = false) {
 
