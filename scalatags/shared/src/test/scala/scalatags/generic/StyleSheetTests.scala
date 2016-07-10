@@ -11,21 +11,20 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   import bundle.all._
 
   val pkg = "scalatags-generic-StyleSheetTests"
-  val Simple = Sheet[Simple]
-  trait Simple extends StyleSheet{
-    def x = cls(
+  object Simple extends StyleSheet{
+    val x = cls(
       backgroundColor := "red",
       height := 125
     )
-    def y = cls.hover(
+    val y = cls.hover(
       opacity := 0.5
     )
 
-    def z = cls(x.splice, y.splice)
+    val z = cls(x.splice, y.splice)
   }
 
-  val Inline = Sheet[Inline]
-  trait Inline extends StyleSheet{
+
+  object Inline extends StyleSheet{
     def w = cls(
       &.hover(
         backgroundColor := "red"
@@ -39,8 +38,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
       opacity := 0.5
     )
   }
-  val Cascade = Sheet[Cascade]
-  trait Cascade extends CascadingStyleSheet{
+
+  object Cascade extends CascadingStyleSheet{
     def y = cls()
     def x = cls(
       a(
@@ -64,8 +63,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     )
   }
 
-  val Custom = Sheet[Custom]
-  trait Custom extends CascadingStyleSheet{
+  object Custom extends CascadingStyleSheet{
     override def customSheetName = Some("CuStOm")
     def x = cls(
       backgroundColor := "red",

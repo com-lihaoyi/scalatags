@@ -11,7 +11,7 @@ import scalatags.ScalaVersionStubs.Context
  * never need these things, so it's good to make it explicit
  * when you do to prevent accidental cascading.
  */
-trait CascadingStyleSheet extends StyleSheet with StyleSheetTags{
+abstract class CascadingStyleSheet(implicit sourceName: sourcecode.FullName) extends StyleSheet with StyleSheetTags{
   implicit def clsSelector(c: Cls): Selector = new Selector(Seq("." + c.name))
 }
 
@@ -20,7 +20,7 @@ trait CascadingStyleSheet extends StyleSheet with StyleSheetTags{
  * styles which get serialized to a `String`. Does not allow the use
  * of cascading tag/class selectors; use [[CascadingStyleSheet]] for that.
  */
-trait StyleSheet{
+abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
   /**
    * The name of this CSS stylesheet. Defaults to the name of the trait,
    * but you can override
@@ -65,42 +65,40 @@ trait StyleSheet{
   }
 
   /**
-   * The default name of a stylesheet, filled in with the [[Sheet]] implicit macro
+   * The default name of a stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
-  def defaultSheetName: String
+  def defaultSheetName = sourceName.value.replace(' ', '.').replace('#', '.')
   /**
-   * All classes defined in this stylesheet, filled in with the [[Sheet]] implicit macro
+   * All classes defined in this stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
-  def allClasses: Seq[Cls]
+  def allClasses(implicit sourceClasses: SourceClasses[this.type]): Seq[Cls] = sourceClasses.value(this)
 
-  def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
+  def styleSheetText(implicit sourceClasses: SourceClasses[this.type]) = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
 }
-
-
-/**
- * Wraps a type [[T]], so we can demand an implicit `Mangled[T]` in a way
- * that triggers a macro to instantiate that type.
- */
-object Sheet{
-  implicit def apply[T]: T = macro manglerImpl[T]
+class SourceClasses[T](val value: T => Seq[Cls])
+object SourceClasses{
+  implicit def apply[T]: SourceClasses[T] = macro manglerImpl[T]
   def manglerImpl[T: c.WeakTypeTag](c: Context) = {
     import c.universe._
 
     val weakType = weakTypeOf[T]
 
-    val typeName = weakType.typeSymbol.fullName
+    val stylesheetName = newTermName("stylesheet")
     val names = for {
       member <- weakType.members.toSeq.reverse
       // Not sure if there's a better way to capture by-name types
-      if member.typeSignature.toString == "=> scalatags.stylesheet.Cls"
-    } yield member.name.toTermName
+      if member.typeSignature.toString == "=> scalatags.stylesheet.Cls" ||
+         member.typeSignature.toString == "scalatags.stylesheet.Cls"
+      if member.isPublic
+    } yield q"$stylesheetName.${member.name.toTermName}"
 
-    val res = q"""new $weakType{
-        def defaultSheetName = $typeName
-        lazy val allClasses = Seq(..$names)
-      }"""
+    val res = q"""
+    new scalatags.stylesheet.SourceClasses[$weakType](
+      ($stylesheetName: $weakType) => Seq[scalatags.stylesheet.Cls](..$names)
+    )
+    """
 
-    c.Expr[T](res)
+    c.Expr[SourceClasses[T]](res)
   }
 }
 

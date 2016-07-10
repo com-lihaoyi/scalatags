@@ -1,7 +1,7 @@
 package scalatags
 package generic
 import acyclic.file
-import scalatags.stylesheet.{Sheet, StyleSheetFrag}
+import scalatags.stylesheet.StyleSheetFrag
 import scalatags.text
 
 /**
