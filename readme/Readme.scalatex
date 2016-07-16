@@ -127,15 +127,23 @@
       @exampleIn("attributes")
 
       @p
-        In Scalatags, each attribute has an associated value which can be used to set it. This example shows how you set the @code{onclick} and @code{href} attributes with the @code{:=} operator. Attributes are all instances of the @hl.scala{Attr} class.
+        In Scalatags, each attribute has an associated value which can be used
+        to set it. This example shows how you set the @code{onclick} and
+        @code{href} attributes with the @code{:=} operator. Attributes are all
+        instances of the @hl.scala{Attr} class.
 
       @p
-        The common HTML attributes all have static values to use in your fragments. This keeps things concise and statically checked. However, inevitably you'll want to set some attribute which isn't in the initial list defined by scalatags.Text. This can be done with the @code{.attr} method that Scalatags adds to Strings, if you want to create an empty attribute, you can use @code{.emptyAttr}:
+        The common HTML attributes all have static values to use in your
+        fragments. This keeps things concise and statically checked. However,
+        inevitably you'll want to set some attribute which isn't in the
+        initial list defined by scalatags.Text. This can be done with the
+        @code{attr(s: String)} functions that Scalatags provides. If you want
+        to create an empty attribute, you can use @code{attr(...).empty}:
 
       @exampleIn2("attributes")
 
       @p
-        If you wish to, you can also take the result of the @code{.attr} call and assign it to a variable for you to use later in an identical way.
+        If you wish to, you can also take the result of the @code{attr} call and assign it to a variable for you to use later in an identical way.
 
       @exampleIn("customAttributesAndStyles")
 
@@ -484,12 +492,13 @@
 
   @sect{CSS Stylesheets}
     @p
-      Scalatags offsets an internal DSL for constructing CSS Stylesheets. The basic construction looks like:
+      Scalatags offsers an internal DSL for constructing CSS Stylesheets. The
+      basic construction looks like:
 
     @hl.scala
       import scalatags.stylesheet._
 
-    @hl.ref(cssTests, "val Simple", "val Inline")
+    @hl.ref(cssTests, "object Simple", "val Inline")
 
     @p
       This generates a stylesheet that looks like
@@ -497,9 +506,6 @@
     @hl.ref(cssTests, "$pkg-Simple", "\"\"\"", className = "css")
 
     @p
-      Note that you need to use a separate @hl.scala{trait} and @hl.scala{val} in order for this to work; you cannot just have an @hl.scala{object Simple} extend @hl.scala{StyleSheet} directly.
-    @p
-
       You can then access @hl.scala{Simple.styleSheetText} in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a @hl.scala{style} tag.
     @p
       Only @hl.scala{cls}s defined on @hl.scala{trait Simple} are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names @hl.scala{$pkg-$class-$def}. You can override @hl.scala{customSheetName} to replace the @hl.scala{pkg-$class} part with something else.
@@ -521,7 +527,7 @@
       @p
         The above example contains a single @code{hover} pseudo-selector, but what if you want the same class to have a whole range of pseudo-selectors? To do that, simply nest the selectors inline inside the @code{cls} fragment:
 
-      @hl.ref(cssTests, "val Inline", "val Cascade")
+      @hl.ref(cssTests, "object Inline", "val Cascade")
 
       @p
         This generates the stylesheet:
@@ -919,6 +925,30 @@
 
 
   @sect{Changelog}
+    @sect{0.6.0}
+      @ul
+        @li
+          @sect.ref{CSS Stylesheets} API has been simplified; your stylesheets can
+          now be simple @hl.scala{object}s, rather than needing to define traits
+          and call @hl.scala{Sheet[...]} on them
+        @li
+          Defining custom @sect.ref{Attributes}, tags, and styles has been changed
+          from @hl.scala{.attr}, @hl.scala{.tag} and @hl.scala{.style} to
+          @hl.scala{attr(...)}, @hl.scala{tag(...)} and @hl.scala{css(...)}
+        @li
+          About a 50% performance increase from
+          @lnk("#126", "https://github.com/lihaoyi/scalatags/pull/126"), thanks
+          to @hl.scala("Rory Graves", "https://github.com/rorygraves")
+        @li
+          @lnk("Updated scala-js-dom dependency to 0.9.1",
+          "https://github.com/lihaoyi/scalatags/pull/129"), thanks to
+          @lnk("Gabriel Bezerra", "https://github.com/gabriel-bezerra")
+        @li
+          @lnk("Added raw attribute capability",
+          "https://github.com/lihaoyi/scalatags/pull/125") to let you render
+          malformed XML, e.g. for AngularJS and friends, thanks to
+          @lnk("Mardo Del Cid", "https://github.com/mardo")
+
     @sect{0.5.5}
       @ul
         @li
