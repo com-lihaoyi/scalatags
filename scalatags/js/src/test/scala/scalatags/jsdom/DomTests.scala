@@ -73,26 +73,21 @@ object DomTests extends TestSuite{
         assert(count == 1)
       }//end
       'triggers {
-        // Wrapping this, because for some reason if I leave it top-level
-        // the compiler crashes =(
-        def runTriggers() = {
-          val labelElem = label("Default").render
+        val labelElem = label("Default").render
 
-          val inputElem = input(
-            `type`:="text",
-            onfocus := { () => labelElem.textContent = ""}
-          ).render
+        val inputElem = input(
+          `type`:="text",
+          onfocus := { () => labelElem.textContent = ""}
+        ).render
 
-          val box = div(
-            inputElem,
-            labelElem
-          ).render
+        val box = div(
+          inputElem,
+          labelElem
+        ).render
 
-          assert(labelElem.textContent == "Default")
-          inputElem.onfocus(null)
-          assert(labelElem.textContent == "")
-        }
-        runTriggers()
+        assert(labelElem.textContent == "Default")
+        inputElem.onfocus(null)
+        assert(labelElem.textContent == "")
 
       }//end
     }
