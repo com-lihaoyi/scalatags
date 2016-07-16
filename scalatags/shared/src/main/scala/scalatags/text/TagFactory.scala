@@ -8,7 +8,7 @@ import scalatags.generic.Namespace
   */
 trait TagFactory extends scalatags.generic.Util[Builder, String, String]{
 
-  def tag(s: String, void: Boolean = false)(implicit ns: Namespace): ConcreteHtmlTag[String] = {
+  def tag(s: String, void: Boolean = false): ConcreteHtmlTag[String] = {
     if (!Escaping.validTag(s))
       throw new IllegalArgumentException(
         s"Illegal tag name: $s is not a valid XML tag name"

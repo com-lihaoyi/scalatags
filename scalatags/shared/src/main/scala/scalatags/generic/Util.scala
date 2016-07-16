@@ -12,7 +12,7 @@ import scala.language.higherKinds
 trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, FragT]{
 
   type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T, FragT]
-  def tag(s: String, void: Boolean = false)(implicit ns: Namespace): TypedTag[Builder, Output, FragT]
+  def tag(s: String, void: Boolean = false): TypedTag[Builder, Output, FragT]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: Namespace): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttrX: AttrValue[Builder, String]
   protected[this] implicit def stringStyleX: StyleValue[Builder, String]

@@ -130,27 +130,15 @@
         In Scalatags, each attribute has an associated value which can be used
         to set it. This example shows how you set the @code{onclick} and
         @code{href} attributes with the @code{:=} operator. Attributes are all
-        instances of the @hl.scala{Attr} class.
-
-      @p
-        The common HTML attributes all have static values to use in your
-        fragments. This keeps things concise and statically checked. However,
-        inevitably you'll want to set some attribute which isn't in the
-        initial list defined by scalatags.Text. This can be done with the
-        @code{attr(s: String)} functions that Scalatags provides. If you want
-        to create an empty attribute, you can use @code{attr(...).empty}:
-
-      @exampleIn2("attributes")
-
-      @p
-        If you wish to, you can also take the result of the @code{attr} call and assign it to a variable for you to use later in an identical way.
-
-      @exampleIn("customAttributesAndStyles")
-
-      @p
-        Both the above examples print the same thing:
+        instances of the @hl.scala{Attr} class. This prints:
 
       @exampleOut("attributes")
+
+      @p
+        All the attributes included in HTML are included in the default import.
+        @code{onclick}, @code{id}, @code{`class`}, @code{href}, etc.; the
+        @lnk("Scaladoc", "http://www.lihaoyi.com/scalatags/api/index.html#scalatags.generic.Attrs")
+        lists out what is available.
 
     @sect{Inline Styles & Classes}
 
@@ -166,6 +154,7 @@
 
       @p
         Of course, @code{style} is in the end just an attribute, so you can treat it as such and bind them directly without any fuss:
+
       @exampleIn2("classesAndCssCustom")
 
       @p
@@ -176,6 +165,81 @@
       @p
         A list of the attributes and styles provided by ScalaTags can be found in @lnk("Attrs", "https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Attrs.scala") and @lnk("Styles", "https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Styles.scala"). This of course won't include any which you define yourself.
 
+
+    @sect{Custom Attributes, Styles, Tag Names}
+      @p
+        The common HTML attributes all have static values to use in your
+        fragments. This keeps things concise and statically checked. However,
+        inevitably you'll want to set some attribute which isn't in the
+        initial list defined by scalatags.Text. This can be done with the
+        @code{attr(s: String)} functions that Scalatags provides. If you want
+        to create an empty attribute, you can use @code{attr(...).empty}:
+
+      @exampleIn2("attributes")
+
+      @exampleOut("attributes")
+
+      @p
+        You can also use @hl.scala{css(...)} to create a custom inline style, if for some reason the style you want isn't available in the default set:
+
+      @exampleIn("customAttributesAndStyles")
+
+      @p
+        If you wish to, you can also take the result of the @code{attr} call and assign it to a variable for you to use later in an identical way.
+
+      @exampleIn2("customAttributesAndStyles")
+
+      @p
+        Both the above examples print the same thing:
+
+      @exampleOut("customAttributesAndStyles")
+
+      @p
+        You can also create custom tags, using the @hl.scala{tag(...)} function. For example, if we take the earlier snippet:
+
+      @exampleIn("customTagNames")
+
+      @p
+        And imagine that all these are special XML/HTML tags that aren't included by default, you can still construct them yourself:
+
+      @exampleIn2("customTagNames")
+
+      @p
+        Both these examples print:
+
+      @exampleOut("customTagNames")
+
+      @p
+        Like custom attributes and styles, custom tag names can be assigned to a @hl.scala{val} and re-used, or they can just be used in-line.
+
+      @p
+        As a larger example snippet, here is the code snippet that generates the RSS feed for @lnk("Haoyi's Programming Blog", "http://www.lihaoyi.com/"):
+
+      @hl.scala
+        val rssXml = {
+          val snippet = tag("rss")(attr("version") := "2.0")(
+            tag("channel")(
+              tag("title")("Haoyi's Programming Blog"),
+              tag("link")("http://www.lihaoyi.com/"),
+              tag("description"),
+
+              for((name, rawHtmlContent, rawHtmlSnippet, updates) <- posts) yield tag("item")(
+                tag("title")(name),
+                tag("link")(s"http://www.lihaoyi.com/post/${sanitize(name)}.html"),
+                tag("description")(rawHtmlSnippet),
+                for ((sha, date) <- updates.lastOption)
+                yield tag("pubDate")(formatRssDate(date)),
+                for ((sha, date) <- updates.headOption)
+                yield tag("lastBuildDate")(formatRssDate(date))
+              )
+
+            )
+          )
+          """<?xml version="1.0"?>""" + snippet.render
+        }
+
+      @p
+        Since Scalatags is meant to generate HTML, it does not include the RSS tags in the default import. Nevertheless,
 
     @sect{Non-String Attributes and Styles}
       @exampleIn("nonStringAttributesAndStyles")
@@ -498,7 +562,7 @@
     @hl.scala
       import scalatags.stylesheet._
 
-    @hl.ref(cssTests, "object Simple", "val Inline")
+    @hl.ref(cssTests, "object Simple", "object Inline")
 
     @p
       This generates a stylesheet that looks like
@@ -527,7 +591,7 @@
       @p
         The above example contains a single @code{hover} pseudo-selector, but what if you want the same class to have a whole range of pseudo-selectors? To do that, simply nest the selectors inline inside the @code{cls} fragment:
 
-      @hl.ref(cssTests, "object Inline", "val Cascade")
+      @hl.ref(cssTests, "object Inline", "object Cascade")
 
       @p
         This generates the stylesheet:
@@ -538,7 +602,7 @@
 
       @p
         Occassionally, you really do want your CSS stylesheets to cascade. This may be e.g. because you want to define styles for a large HTML document, and don't want to repeat the "default" classes throughout your HTML. In order to do this with Scalatags, you have to opt in by inheriting from @hl.scala{CascadingStyleSheet}:
-      @hl.ref(cssTests, "val Cascade", "val Custom")
+      @hl.ref(cssTests, "object Cascade", "object Custom")
       @p
         This generates:
 

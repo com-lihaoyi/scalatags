@@ -9,6 +9,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
 
   val tests = TestSuite{
     'manualImports-strCheck({
+      // bundle is scalatags.Text or scalatags.JsDom
       import bundle.short._
       div(
         p(*.color:="red", *.fontSize:=64.pt)("Big Red Text"),
@@ -17,6 +18,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     }
     ,
     {
+      // bundle is scalatags.Text or scalatags.JsDom
       import bundle.{attrs => attr, styles => css, _}
       import bundle.tags._
       import bundle.implicits._
@@ -34,6 +36,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     """
     )
 
+    // bundle is scalatags.Text or scalatags.JsDom
     import bundle.all._
     'splashExample-strCheck(
       // import scalatags.Text.all._
@@ -552,6 +555,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     """
     )
     'additionalImports-strCheck({
+      // bundle is scalatags.Text or scalatags.JsDom
       import bundle._
       import styles2.pageBreakBefore
       import tags2.address
@@ -585,8 +589,53 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       )
     }
     ,
+    {
+      val dataAppKey = attr("data-app-key")
+      val customBackgroundColorStyle = css("background-color")
+      div(
+        dataAppKey := "YOUR_APP_KEY",
+        customBackgroundColorStyle := "red"
+      )
+    }
+    ,
     """
       <div data-app-key="YOUR_APP_KEY" style="background-color: red;"></div>
+    """
+    )
+
+    'customTagNames-strCheck({
+      html(
+        head(
+          script("some script")
+        ),
+        body(
+          h1("This is my title"),
+          p("Hello")
+        )
+      )
+
+    }
+    ,
+    tag("html")(
+      tag("head")(
+        tag("script")("some script")
+      ),
+      tag("body")(
+        tag("h1")("This is my title"),
+        tag("p")("Hello")
+      )
+    )
+    ,
+    """
+      <html>
+          <head>
+              <script>some script</script>
+          </head>
+          <body>
+              <h1>This is my title</h1>
+              <p>Hello</p>
+          </body>
+      </html>
     """
     )
     'aria- strCheck(
