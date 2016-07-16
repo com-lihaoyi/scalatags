@@ -28,7 +28,7 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img alt="Trait" src="../../lib/trait_big.png" />
+        <img alt="Class" src="../../lib/class_big.png" />
         <p id="owner"><a href="../package.html" class="extype" name="scalatags">scalatags</a>.<a href="package.html" class="extype" name="scalatags.stylesheet">stylesheet</a></p>
         <h1>StyleSheet</h1><h3><span class="morelinks"><div>Related Doc:
             <a href="package.html" class="extype" name="scalatags.stylesheet">package stylesheet</a>
@@ -41,8 +41,8 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
         <span class="name">StyleSheet</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
@@ -57,7 +57,7 @@ of cascading tag/class selectors; use <a href="CascadingStyleSheet.html" class="
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
             <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="../jsdom/AutoStyleSheet.html" class="extype" name="scalatags.jsdom.AutoStyleSheet">AutoStyleSheet</a>, <a href="CascadingStyleSheet.html" class="extype" name="scalatags.stylesheet.CascadingStyleSheet">CascadingStyleSheet</a></div>
+            <div class="subClasses hiddenContent"><a href="CascadingStyleSheet.html" class="extype" name="scalatags.stylesheet.CascadingStyleSheet">CascadingStyleSheet</a></div>
           </div></div>
         
 
@@ -92,7 +92,27 @@ of cascading tag/class selectors; use <a href="CascadingStyleSheet.html" class="
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="scalatags.stylesheet.StyleSheet#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;()(implicitsourceName:sourcecode.FullName):scalatags.stylesheet.StyleSheet"></a>
+      <a id="&lt;init&gt;:StyleSheet"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StyleSheet</span><span class="params">()</span><span class="params">(<span class="implicit">implicit </span><span name="sourceName">sourceName: <span class="extype" name="sourcecode.FullName">FullName</span></span>)</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.StyleSheet@&lt;init&gt;()(implicitsourceName:sourcecode.FullName):scalatags.stylesheet.StyleSheet" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
@@ -116,49 +136,10 @@ of cascading tag/class selectors; use <a href="CascadingStyleSheet.html" class="
     </li></ol>
             </div>
 
-        <div id="values" class="values members">
-              <h3>Abstract Value Members</h3>
-              <ol><li name="scalatags.stylesheet.StyleSheet#allClasses" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="allClasses:Seq[scalatags.stylesheet.Cls]"></a>
-      <a id="allClasses:Seq[Cls]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">allClasses</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="Cls.html" class="extype" name="scalatags.stylesheet.Cls">Cls</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#scalatags.stylesheet.StyleSheet@allClasses:Seq[scalatags.stylesheet.Cls]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">All classes defined in this stylesheet, filled in with the <a href="Sheet$.html" class="extype" name="scalatags.stylesheet.Sheet">Sheet</a> implicit macro
-</p>
-    </li><li name="scalatags.stylesheet.StyleSheet#defaultSheetName" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="defaultSheetName:String"></a>
-      <a id="defaultSheetName:String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">defaultSheetName</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#scalatags.stylesheet.StyleSheet@defaultSheetName:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">The default name of a stylesheet, filled in with the <a href="Sheet$.html" class="extype" name="scalatags.stylesheet.Sheet">Sheet</a> implicit macro
-</p>
-    </li></ol>
-            </div>
+        
 
         <div id="values" class="values members">
-              <h3>Concrete Value Members</h3>
+              <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
@@ -245,6 +226,24 @@ with tags and style-names and other things.</p>
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scalatags.stylesheet.StyleSheet#allClasses" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="allClasses(implicitsourceClasses:scalatags.stylesheet.SourceClasses[StyleSheet.this.type]):Seq[scalatags.stylesheet.Cls]"></a>
+      <a id="allClasses(SourceClasses[StyleSheet.this.type]):Seq[Cls]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">allClasses</span><span class="params">(<span class="implicit">implicit </span><span name="sourceClasses">sourceClasses: <a href="SourceClasses.html" class="extype" name="scalatags.stylesheet.SourceClasses">SourceClasses</a>[<a href="" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a>.this.type]</span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="Cls.html" class="extype" name="scalatags.stylesheet.Cls">Cls</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.StyleSheet@allClasses(implicitsourceClasses:scalatags.stylesheet.SourceClasses[StyleSheet.this.type]):Seq[scalatags.stylesheet.Cls]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">All classes defined in this stylesheet, filled in with the <a href="" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a> implicit macro
+</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -322,6 +321,24 @@ styles associated with it.</p>
       <p class="shortcomment cmt">The name of this CSS stylesheet.</p><div class="fullcomment"><div class="comment cmt"><p>The name of this CSS stylesheet. Defaults to the name of the trait,
 but you can override
 </p></div></div>
+    </li><li name="scalatags.stylesheet.StyleSheet#defaultSheetName" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="defaultSheetName:String"></a>
+      <a id="defaultSheetName:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">defaultSheetName</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.stylesheet.StyleSheet@defaultSheetName:String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The default name of a stylesheet, filled in with the <a href="" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a> implicit macro
+</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -500,18 +517,18 @@ any applicable pseudo-selectors into the name of the CSS class.</p>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scalatags.stylesheet.StyleSheet#styleSheetText" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="styleSheetText:String"></a>
-      <a id="styleSheetText:String"></a>
+      <a id="styleSheetText(implicitsourceClasses:scalatags.stylesheet.SourceClasses[StyleSheet.this.type]):String"></a>
+      <a id="styleSheetText(SourceClasses[StyleSheet.this.type]):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">styleSheetText</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">styleSheetText</span><span class="params">(<span class="implicit">implicit </span><span name="sourceClasses">sourceClasses: <a href="SourceClasses.html" class="extype" name="scalatags.stylesheet.SourceClasses">SourceClasses</a>[<a href="" class="extype" name="scalatags.stylesheet.StyleSheet">StyleSheet</a>.this.type]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#scalatags.stylesheet.StyleSheet@styleSheetText:String" title="Permalink" target="_top">
+      <a href="../../index.html#scalatags.stylesheet.StyleSheet@styleSheetText(implicitsourceClasses:scalatags.stylesheet.SourceClasses[StyleSheet.this.type]):String" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>

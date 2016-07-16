@@ -45,12 +45,15 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Attr</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="namespace">namespace: <span class="extype" name="scala.Option">Option</span>[<a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a>] = <span class="symbol">None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Attr</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="namespace">namespace: <span class="extype" name="scala.Option">Option</span>[<a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a>] = <span class="symbol">None</span></span>, <span name="raw">raw: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Wraps up a HTML attribute in a value which isn't a string.
-</p></div><div class="toggleContainer block">
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the name of this particular attribute</p></dd><dt class="param">namespace</dt><dd class="cmt"><p>an XML <a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a> that this attribute lives in</p></dd><dt class="param">raw</dt><dd class="cmt"><p>all <a href="" class="extype" name="scalatags.generic.Attr">Attr</a>s are checked to fail fast if their names are
+           invalid XML attrs; flagging them as <a href="#raw:Boolean" class="extmbr" name="scalatags.generic.Attr#raw">raw</a> disables the checks
+           in the few cases you actually want invalid XML attrs
+           (e.g. AngularJS)</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -89,8 +92,8 @@
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="scalatags.generic.Attr#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(name:String,namespace:Option[scalatags.generic.Namespace]):scalatags.generic.Attr"></a>
+              <ol><li name="scalatags.generic.Attr#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(name:String,namespace:Option[scalatags.generic.Namespace],raw:Boolean):scalatags.generic.Attr"></a>
       <a id="&lt;init&gt;:Attr"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -98,14 +101,17 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Attr</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="namespace">namespace: <span class="extype" name="scala.Option">Option</span>[<a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a>] = <span class="symbol">None</span></span>)</span>
+        <span class="name">Attr</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="namespace">namespace: <span class="extype" name="scala.Option">Option</span>[<a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a>] = <span class="symbol">None</span></span>, <span name="raw">raw: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#scalatags.generic.Attr@&lt;init&gt;(name:String,namespace:Option[scalatags.generic.Namespace]):scalatags.generic.Attr" title="Permalink" target="_top">
+      <a href="../../index.html#scalatags.generic.Attr@&lt;init&gt;(name:String,namespace:Option[scalatags.generic.Namespace],raw:Boolean):scalatags.generic.Attr" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the name of this particular attribute</p></dd><dt class="param">namespace</dt><dd class="cmt"><p>an XML <a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a> that this attribute lives in</p></dd><dt class="param">raw</dt><dd class="cmt"><p>all <a href="" class="extype" name="scalatags.generic.Attr">Attr</a>s are checked to fail fast if their names are
+           invalid XML attrs; flagging them as <a href="#raw:Boolean" class="extmbr" name="scalatags.generic.Attr#raw">raw</a> disables the checks
+           in the few cases you actually want invalid XML attrs
+           (e.g. AngularJS)</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -224,6 +230,23 @@ there is an <a href="AttrValue.html" class="extype" name="scalatags.generic.Attr
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="scalatags.generic.Attr#empty" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="empty[Builder](implicitev:scalatags.generic.AttrValue[Builder,String]):scalatags.generic.AttrPair[Builder,String]"></a>
+      <a id="empty[Builder](AttrValue[Builder,String]):AttrPair[Builder,String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">empty</span><span class="tparams">[<span name="Builder">Builder</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="ev">ev: <a href="AttrValue.html" class="extype" name="scalatags.generic.AttrValue">AttrValue</a>[<span class="extype" name="scalatags.generic.Attr.empty.Builder">Builder</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="AttrPair.html" class="extype" name="scalatags.generic.AttrPair">AttrPair</a>[<span class="extype" name="scalatags.generic.Attr.empty.Builder">Builder</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Attr@empty[Builder](implicitev:scalatags.generic.AttrValue[Builder,String]):scalatags.generic.AttrPair[Builder,String]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -314,7 +337,7 @@ there is an <a href="AttrValue.html" class="extype" name="scalatags.generic.Attr
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">the name of this particular attribute</p>
     </li><li name="scalatags.generic.Attr#namespace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="namespace:Option[scalatags.generic.Namespace]"></a>
       <a id="namespace:Option[Namespace]"></a>
@@ -331,7 +354,7 @@ there is an <a href="AttrValue.html" class="extype" name="scalatags.generic.Attr
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">an XML <a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a> that this attribute lives in</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -383,6 +406,29 @@ there is an <a href="AttrValue.html" class="extype" name="scalatags.generic.Attr
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scalatags.generic.Attr#raw" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="raw:Boolean"></a>
+      <a id="raw:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">raw</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.Attr@raw:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">all <a href="" class="extype" name="scalatags.generic.Attr">Attr</a>s are checked to fail fast if their names are
+           invalid XML attrs; flagging them as <a href="#raw:Boolean" class="extmbr" name="scalatags.generic.Attr#raw">raw</a> disables the checks
+           in the few cases you actually want invalid XML attrs
+           (e.g.</p><div class="fullcomment"><div class="comment cmt"><p>all <a href="" class="extype" name="scalatags.generic.Attr">Attr</a>s are checked to fail fast if their names are
+           invalid XML attrs; flagging them as <a href="#raw:Boolean" class="extmbr" name="scalatags.generic.Attr#raw">raw</a> disables the checks
+           in the few cases you actually want invalid XML attrs
+           (e.g. AngularJS)</p></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

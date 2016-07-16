@@ -117,7 +117,7 @@
       </a>
     </span>
       
-    </li><li name="scalatags.generic.Attr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="scalatags.generic.Attr" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="AttrextendsProductwithSerializable"></a>
       <a id="Attr:Attr"></a>
       <h4 class="signature">
@@ -126,14 +126,18 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Attr.html"><span class="name">Attr</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="namespace">namespace: <span class="extype" name="scala.Option">Option</span>[<a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a>] = <span class="symbol">None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Attr.html"><span class="name">Attr</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="namespace">namespace: <span class="extype" name="scala.Option">Option</span>[<a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a>] = <span class="symbol">None</span></span>, <span name="raw">raw: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#scalatags.generic.package@AttrextendsProductwithSerializable" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Wraps up a HTML attribute in a value which isn't a string.</p>
+      <p class="shortcomment cmt">Wraps up a HTML attribute in a value which isn't a string.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps up a HTML attribute in a value which isn't a string.
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the name of this particular attribute</p></dd><dt class="param">namespace</dt><dd class="cmt"><p>an XML <a href="Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a> that this attribute lives in</p></dd><dt class="param">raw</dt><dd class="cmt"><p>all <a href="Attr.html" class="extype" name="scalatags.generic.Attr">Attr</a>s are checked to fail fast if their names are
+           invalid XML attrs; flagging them as <a href="Attr.html#raw:Boolean" class="extmbr" name="scalatags.generic.Attr#raw">raw</a> disables the checks
+           in the few cases you actually want invalid XML attrs
+           (e.g. AngularJS)</p></dd></dl></div>
     </li><li name="scalatags.generic.AttrPair" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="AttrPair[Builder,T]extendsModifier[Builder]withProductwithSerializable"></a>
       <a id="AttrPair[Builder,T]:AttrPair[Builder,T]"></a>

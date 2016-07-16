@@ -45,7 +45,7 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">implicits</span><span class="result"> extends <a href="Text$$Aggregate.html" class="extype" name="scalatags.Text.Aggregate">Aggregate</a></span>
+        <span class="name">implicits</span><span class="result"> extends <a href="Text$$Aggregate.html" class="extype" name="scalatags.Text.Aggregate">Aggregate</a> with <a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></span>
       </span>
       </h4>
       
@@ -55,7 +55,7 @@ any of the tags, styles or attributes themselves. This includes conversions to
 or style values, and other things.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Text$.html" class="extype" name="scalatags.Text">Text</a> → <a href="generic/Bundle.html" class="extype" name="scalatags.generic.Bundle">Bundle</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="Text$$Aggregate.html" class="extype" name="scalatags.Text.Aggregate">Aggregate</a>, <a href="generic/Aggregate.html" class="extype" name="scalatags.generic.Aggregate">generic.Aggregate</a>[<a href="text/Builder.html" class="extype" name="scalatags.text.Builder">Builder</a>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>], <a href="generic/Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a>[<a href="text/Builder.html" class="extype" name="scalatags.text.Builder">Builder</a>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a>, <a href="Text$$Aggregate.html" class="extype" name="scalatags.Text.Aggregate">Aggregate</a>, <a href="generic/Aggregate.html" class="extype" name="scalatags.generic.Aggregate">generic.Aggregate</a>[<a href="text/Builder.html" class="extype" name="scalatags.text.Builder">Builder</a>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>], <a href="generic/Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a>[<a href="text/Builder.html" class="extype" name="scalatags.text.Builder">Builder</a>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -73,7 +73,7 @@ or style values, and other things.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalatags.Text.implicits"><span>implicits</span></li><li class="in" name="scalatags.Text.Aggregate"><span>Aggregate</span></li><li class="in" name="scalatags.generic.Aggregate"><span>Aggregate</span></li><li class="in" name="scalatags.generic.Aliases"><span>Aliases</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalatags.Text.implicits"><span>implicits</span></li><li class="in" name="scalatags.DataConverters"><span>DataConverters</span></li><li class="in" name="scalatags.Text.Aggregate"><span>Aggregate</span></li><li class="in" name="scalatags.generic.Aggregate"><span>Aggregate</span></li><li class="in" name="scalatags.generic.Aliases"><span>Aliases</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -162,6 +162,26 @@ or style values, and other things.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="generic/Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.DataConverters.CssNumber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="CssNumber[T]extendsAnyRef"></a>
+      <a id="CssNumber[T]:CssNumber[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DataConverters$CssNumber.html"><span class="name">CssNumber</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalatags.DataConverters@CssNumber[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Extends numbers to provide a bunch of useful methods, allowing you to write
+CSS-lengths in a nice syntax without resorting to strings.</p><div class="fullcomment"><div class="comment cmt"><p>Extends numbers to provide a bunch of useful methods, allowing you to write
+CSS-lengths in a nice syntax without resorting to strings.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></dd></dl></div>
     </li><li name="scalatags.generic.Aliases.Frag" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Frag=scalatags.generic.Frag[Builder,FragT]"></a>
       <a id="Frag:Frag"></a>
@@ -494,6 +514,23 @@ or style values, and other things.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scalatags.DataConverters#Byte2CssNumber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Byte2CssNumber(x:Byte):DataConverters.this.CssNumber[Byte]"></a>
+      <a id="Byte2CssNumber(Byte):CssNumber[Byte]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Byte2CssNumber</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Byte">Byte</span></span>)</span><span class="result">: <a href="#CssNumber[T]extendsAnyRef" class="extmbr" name="scalatags.DataConverters.CssNumber">CssNumber</a>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalatags.Text$$implicits$@Byte2CssNumber(x:Byte):DataConverters.this.CssNumber[Byte]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></dd></dl></div>
     </li><li name="scalatags.Text.Aggregate#ClsModifier" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ClsModifier(s:scalatags.stylesheet.Cls):Aggregate.this.Modifier"></a>
       <a id="ClsModifier(Cls):Modifier"></a>
@@ -511,6 +548,74 @@ or style values, and other things.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Text$$Aggregate.html" class="extype" name="scalatags.Text.Aggregate">Aggregate</a> → <a href="generic/Aggregate.html" class="extype" name="scalatags.generic.Aggregate">Aggregate</a></dd></dl></div>
+    </li><li name="scalatags.DataConverters#Double2CssNumber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Double2CssNumber(x:Double):DataConverters.this.CssNumber[Double]"></a>
+      <a id="Double2CssNumber(Double):CssNumber[Double]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Double2CssNumber</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Double">Double</span></span>)</span><span class="result">: <a href="#CssNumber[T]extendsAnyRef" class="extmbr" name="scalatags.DataConverters.CssNumber">CssNumber</a>[<span class="extype" name="scala.Double">Double</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalatags.Text$$implicits$@Double2CssNumber(x:Double):DataConverters.this.CssNumber[Double]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></dd></dl></div>
+    </li><li name="scalatags.DataConverters#Float2CssNumber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Float2CssNumber(x:Float):DataConverters.this.CssNumber[Float]"></a>
+      <a id="Float2CssNumber(Float):CssNumber[Float]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Float2CssNumber</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Float">Float</span></span>)</span><span class="result">: <a href="#CssNumber[T]extendsAnyRef" class="extmbr" name="scalatags.DataConverters.CssNumber">CssNumber</a>[<span class="extype" name="scala.Float">Float</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalatags.Text$$implicits$@Float2CssNumber(x:Float):DataConverters.this.CssNumber[Float]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></dd></dl></div>
+    </li><li name="scalatags.DataConverters#Int2CssNumber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Int2CssNumber(x:Int):DataConverters.this.CssNumber[Int]"></a>
+      <a id="Int2CssNumber(Int):CssNumber[Int]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Int2CssNumber</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#CssNumber[T]extendsAnyRef" class="extmbr" name="scalatags.DataConverters.CssNumber">CssNumber</a>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalatags.Text$$implicits$@Int2CssNumber(x:Int):DataConverters.this.CssNumber[Int]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></dd></dl></div>
+    </li><li name="scalatags.DataConverters#Long2CssNumber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Long2CssNumber(x:Long):DataConverters.this.CssNumber[Long]"></a>
+      <a id="Long2CssNumber(Long):CssNumber[Long]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Long2CssNumber</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <a href="#CssNumber[T]extendsAnyRef" class="extmbr" name="scalatags.DataConverters.CssNumber">CssNumber</a>[<span class="extype" name="scala.Long">Long</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalatags.Text$$implicits$@Long2CssNumber(x:Long):DataConverters.this.CssNumber[Long]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></dd></dl></div>
     </li><li name="scalatags.Text.Aggregate#RawFrag" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="RawFrag:scalatags.Text.RawFrag.type"></a>
       <a id="RawFrag:Text.RawFrag.type"></a>
@@ -528,6 +633,23 @@ or style values, and other things.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Text$$Aggregate.html" class="extype" name="scalatags.Text.Aggregate">Aggregate</a> → <a href="generic/Aliases.html" class="extype" name="scalatags.generic.Aliases">Aliases</a></dd></dl></div>
+    </li><li name="scalatags.DataConverters#Short2CssNumber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Short2CssNumber(x:Short):DataConverters.this.CssNumber[Short]"></a>
+      <a id="Short2CssNumber(Short):CssNumber[Short]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Short2CssNumber</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Short">Short</span></span>)</span><span class="result">: <a href="#CssNumber[T]extendsAnyRef" class="extmbr" name="scalatags.DataConverters.CssNumber">CssNumber</a>[<span class="extype" name="scala.Short">Short</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#scalatags.Text$$implicits$@Short2CssNumber(x:Short):DataConverters.this.CssNumber[Short]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></dd></dl></div>
     </li><li name="scalatags.Text.Aggregate#StringFrag" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="StringFrag:scalatags.Text.StringFrag.type"></a>
       <a id="StringFrag:Text.StringFrag.type"></a>
@@ -1489,7 +1611,9 @@ un-escaped HTML
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scalatags.Text.Aggregate">
+        <div class="parent" name="scalatags.DataConverters">
+              <h3>Inherited from <a href="DataConverters.html" class="extype" name="scalatags.DataConverters">DataConverters</a></h3>
+            </div><div class="parent" name="scalatags.Text.Aggregate">
               <h3>Inherited from <a href="Text$$Aggregate.html" class="extype" name="scalatags.Text.Aggregate">Aggregate</a></h3>
             </div><div class="parent" name="scalatags.generic.Aggregate">
               <h3>Inherited from <a href="generic/Aggregate.html" class="extype" name="scalatags.generic.Aggregate">generic.Aggregate</a>[<a href="text/Builder.html" class="extype" name="scalatags.text.Builder">Builder</a>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</h3>
