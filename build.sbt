@@ -63,7 +63,7 @@ lazy val scalatags = crossProject
     scalacOptions ++= (if (isSnapshot.value) Seq.empty else Seq({
       val a = baseDirectory.value.toURI.toString.replaceFirst("[^/]+/?$", "")
       val g = "https://raw.githubusercontent.com/lihaoyi/scalatags"
-      s"-P:scalajs:mapSourceURI:$a->$g/v${version.value}/"
+      s"-P:scalajs:mapSourceURI:$a->$g/${version.value}/scalatags/"
     }))
   )
 

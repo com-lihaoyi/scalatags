@@ -996,13 +996,13 @@
           now be simple @hl.scala{object}s, rather than needing to define traits
           and call @hl.scala{Sheet[...]} on them
         @li
-          Defining custom @sect.ref{Attributes}, tags, and styles has been changed
+          Defining @sect.ref{Custom Attributes, Styles, Tag Names} has been changed
           from @hl.scala{.attr}, @hl.scala{.tag} and @hl.scala{.style} to
           @hl.scala{attr(...)}, @hl.scala{tag(...)} and @hl.scala{css(...)}
         @li
           About a 50% performance increase from
           @lnk("#126", "https://github.com/lihaoyi/scalatags/pull/126"), thanks
-          to @hl.scala("Rory Graves", "https://github.com/rorygraves")
+          to @lnk("Rory Graves", "https://github.com/rorygraves")
         @li
           @lnk("Updated scala-js-dom dependency to 0.9.1",
           "https://github.com/lihaoyi/scalatags/pull/129"), thanks to
