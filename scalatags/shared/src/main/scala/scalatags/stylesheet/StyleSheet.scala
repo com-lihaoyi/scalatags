@@ -12,7 +12,7 @@ import scalatags.ScalaVersionStubs.Context
  * when you do to prevent accidental cascading.
  */
 abstract class CascadingStyleSheet(implicit sourceName: sourcecode.FullName) extends StyleSheet with StyleSheetTags{
-  implicit def clsSelector(c: Cls): Selector = new Selector(Seq("." + c.name))
+  protected[this] implicit def clsSelector(c: Cls): Selector = new Selector(Seq("." + c.name))
 }
 
 /**
@@ -31,7 +31,7 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
    * Converts the name of the [[StyleSheet]]'s, the name of the member, and
    * any applicable pseudo-selectors into the name of the CSS class.
    */
-  def nameFor(memberName: String, pseudoSelectors: String) = {
+  protected[this] def nameFor(memberName: String, pseudoSelectors: String) = {
     customSheetName.getOrElse(defaultSheetName.replace(".", "-")) + "-" + memberName + pseudoSelectors
   }
 
@@ -39,19 +39,19 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
    * Namespace that holds all the css pseudo-selectors, to avoid collisions
    * with tags and style-names and other things.
    */
-  val & = new Selector
+  protected[this] val & = new Selector
 
   /**
    * `*` in a CSS selector.
    */
-  object * extends Selector(Seq("*"))
+  protected[this] object * extends Selector(Seq("*"))
 
   /**
    * Used to define a new, uniquely-named class with a set of
    * styles associated with it.
    */
-  object cls extends Creator(Nil)
-  class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
+  protected[this] object cls extends Creator(Nil)
+  protected[this] class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
     def pseudoExtend(s: String): Creator = new Creator(selectors :+ s)
 
     /**
@@ -67,7 +67,7 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
   /**
    * The default name of a stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
-  def defaultSheetName = sourceName.value.replace(' ', '.').replace('#', '.')
+  protected[this] def defaultSheetName = sourceName.value.replace(' ', '.').replace('#', '.')
   /**
    * All classes defined in this stylesheet, filled in with the [[StyleSheet]] implicit macro
    */

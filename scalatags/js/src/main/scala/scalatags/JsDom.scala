@@ -90,7 +90,7 @@ object JsDom
     val HtmlTag = JsDom.TypedTag
     type SvgTag = JsDom.TypedTag[svg.Element]
     val SvgTag = JsDom.TypedTag
-    type Tag = JsDom.TypedTag[dom.Element]
+
     val Tag = JsDom.TypedTag
 
 

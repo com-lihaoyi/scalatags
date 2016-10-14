@@ -2,7 +2,7 @@ package scalatags
 package jsdom
 import acyclic.file
 import utest._
-import JsDom.all._
+
 
 
 import org.scalajs.dom
@@ -11,6 +11,7 @@ import org.scalajs.dom.html.Paragraph
 object DomTests extends TestSuite{
   def tests = TestSuite{
     'basic {
+      import scalatags.JsDom.all._
       'children {
         val elem = div.render
         assert(elem.children.length == 0)
@@ -19,7 +20,7 @@ object DomTests extends TestSuite{
         val pElem = elem.children(0).asInstanceOf[Paragraph]
         assert(pElem.childNodes.length == 3)
         assert(pElem.textContent == "1wtfbbq")
-      }//end
+      }
 
       'attributes {
         val url = "https://www.google.com/"
@@ -33,7 +34,7 @@ object DomTests extends TestSuite{
         assert(elem.childNodes.length == 1)
         val textNode = elem.childNodes(0).asInstanceOf[dom.Text]
         assert(textNode.textContent == "Google")
-      }//end
+      }
 
       'styles {
         val elem = div(
@@ -49,9 +50,10 @@ object DomTests extends TestSuite{
         assert(
           styleAttr.trim == "color: red; float: left; background-color: yellow;"
         )
-      }//end
+      }
     }
     'fancy {
+      import scalatags.JsDom.all._
       'fragSeqsAreFrags{
         val rendered = Seq(
           h1("titless"),
@@ -60,7 +62,7 @@ object DomTests extends TestSuite{
 
         val wrapped = div(rendered).toString
         assert(wrapped == "<div><h1>titless</h1><div>lol</div></div>")
-      }//end
+      }
       'boundAttributes {
         var count = 0
         val elem = div(
@@ -71,7 +73,7 @@ object DomTests extends TestSuite{
         assert(count == 0)
         elem.onclick(null)
         assert(count == 1)
-      }//end
+      }
       'triggers {
         val labelElem = label("Default").render
 
@@ -89,12 +91,33 @@ object DomTests extends TestSuite{
         inputElem.onfocus(null)
         assert(labelElem.textContent == "")
 
-      }//end
+      }
     }
     'tagType{
       import scalatags.JsDom.all._
       val thing: Tag = div
-    }//end
+    }
+
+    'crossTag{
+      class SharedTemplates[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
+        import bundle.all._
+        val widget: Tag = div("hello")
+      }
+
+      object JsTemplates extends SharedTemplates(scalatags.JsDom)
+      object TextTemplates extends SharedTemplates(scalatags.Text)
+
+      val jsVersion: dom.Element = JsTemplates.widget.render
+      val txtVersion: String = TextTemplates.widget.render
+
+      println("XZY\t"+jsVersion.tagName)
+
+      assert(
+        jsVersion.tagName.toLowerCase == "div",
+        jsVersion.textContent == "hello",
+        txtVersion == "<div>hello</div>"
+      )
+    }
   }
 
 }

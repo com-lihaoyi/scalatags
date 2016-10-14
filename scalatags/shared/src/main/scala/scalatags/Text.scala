@@ -94,7 +94,7 @@ object Text
     type RawFrag = Text.RawFrag
     def raw(s: String) = RawFrag(s)
 
-    type Tag = Text.TypedTag[String]
+
     val Tag = Text.TypedTag
   }
 

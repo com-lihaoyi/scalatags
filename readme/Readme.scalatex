@@ -7,7 +7,7 @@
 
 @val domTests = wd/'scalatags/'js/'src/'test/'scala/'scalatags/'jsdom/"DomTests.scala"
 @val cssTests = wd/'scalatags/'shared/'src/'test/'scala/'scalatags/'generic/"StyleSheetTests.scala"
-@def domExample(name: String) = hl.ref(domTests, Seq(name, ""), "//end")
+@def domExample(name: String) = hl.ref(domTests, Seq(name, ""))
 @def lnk(txt: String, src: String) = a(txt, href:=src)
 @val perfTests = wd/'scalatags/'shared/'src/'test/'scala/'scalatags/'generic/"PerfTests.scala"
 
@@ -534,6 +534,53 @@
     @hr 
     @p
       The DOM backend currently requires you to separately add a dependency on @lnk("scala-js-dom", "https://github.com/scala-js/scala-js-dom") for it to function.
+
+  @sect{Cross-backend Code}
+    @p
+      If you wish to, it is possible to write code that is generic against the Scalatags backend used, and can be compiled and run on both Text and JsDom backends at the same time! This is done by adding an explicit dependency on @hl.scala{generic.Bundle[Builder, Output, FragT]}, e.g. how it is done in the unit tests:
+
+    @hl.scala
+      class ExampleTests[Builder, Output, FragT](bundle: Bundle[Builder, Output, FragT]) extends TestSuite{
+        import bundle._
+        ...
+      }
+
+    @p
+      Inside this scope, you are limited to only using the common functionality defined in @hl.scala{generic.Bundle}, and can't use any Text or JsDom specific APIs. However, in exchange you can write code that works in either backend, by instantiating it with the respective bundle:
+
+    @hl.scala
+      object ExampleTests extends generic.ExampleTests(scalatags.Text)
+      object ExampleTests extends generic.ExampleTests(scalatags.JsDom)
+
+    @p
+      For example, here is an example defining a simple HTML widget in a
+      cross-platform way, which can then be used to render both
+      @code{String}s on both Scala.js and Scala-JVM, or @code{dom.Element}s
+      on Scala.js:
+
+    @domExample("crossTag")
+
+    @p
+      There's a small amount of boilerplate in setting up the generic
+      @code{SharedTemplates} class to take a generic @code{bundle}, but once
+      done you can define as many templates inside it as you wish. You can then
+      instantiate @code{SharedTemplates} twice, once for @code{scalatags.Text}
+      and once for @code{scalatags.JsDom}, and can freely use any of the
+      templates on either backend implementation.
+
+    @p
+      In general, when writing cross-backend code against an abstract
+      @code{bundle}, you are limited to the APIs that are common between
+      both @code{Text} and @code{JsDom} backends. That means e.g. you cannot
+      pass in callbacks to @code{onclick} functions, as that is only possible
+      in @code{JsDom} and not in @code{Text}. Stepping outside the bounds of
+      the common API is a compile error.
+
+    @p
+      This is currently used to shared the bulk of unit tests between the Text and JsDom backends, and could be useful in other scenarios where you may want to swap between them (e.g. using Text on the server, and JsDom on the client where it's available) while sharing as much code as possible.
+    @p
+      For a concrete, self-contained example of this, look at the @lnk("demo page", "https://github.com/lihaoyi/scalatags/blob/master/example/src/main/scala/example/ScalaJSExample.scala").
+
   @sect{Live Examples}
     @p
       Here are a few live examples, all generated from the same source code at
@@ -812,30 +859,6 @@
         Which allows you to bind anything convertible to a @code{js.Any} into the JsDom fragments, since they can just be assigned directly to the attributes of the @code{dom.Element} objects. Doing the same thing for Text fragments doesn't make sense, and would correctly fail to compile.
       @p
         You can easier add other typeclass instances to handle binding e.g. @code{Future}s (which will add a child or set an attr/style on completion), or reactive variables (which would constantly update the child/attr/style every time it changes).
-
-    @sect{Cross-backend Code}
-
-
-      @p
-        If you wish to, it is possible to write code that is generic against the Scalatags backend used, and can be compiled and run on both Text and JsDom backends at the same time! This is done by adding an explicit dependency on @hl.scala{generic.Bundle[Builder, Output, FragT]}, e.g. how it is done in the unit tests:
-
-      @hl.scala
-        class ExampleTests[Builder, Output, FragT](bundle: Bundle[Builder, Output, FragT]) extends TestSuite{
-          import bundle._
-          ...
-        }
-        
-      @p
-        Inside this scope, you are limited to only using the common functionality defined in @hl.scala{generic.Bundle}, and can't use any Text or JsDom specific APIs. However, in exchange you can write code that works in either backend, by instantiating it with the respective bundle:
-
-      @hl.scala
-        object ExampleTests extends generic.ExampleTests(scalatags.Text)
-        object ExampleTests extends generic.ExampleTests(scalatags.JsDom)
-      @p
-
-        This is currently used to shared the bulk of unit tests between the Text and JsDom backends, and could be useful in other scenarios where you may want to swap between them (e.g. using Text on the server, and JsDom on the client where it's available) while sharing as much code as possible.
-      @p
-        For a concrete, self-contained example of this, look at the @lnk("demo page", "https://github.com/lihaoyi/scalatags/blob/master/example/src/main/scala/example/ScalaJSExample.scala").
 
   @sect{Prior Work}
 
