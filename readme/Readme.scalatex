@@ -1015,7 +1015,7 @@
     @sect{0.6.1}
       @ul
         @li
-          Scalatags' @sectl.ref{CSS Stylesheets} has had many of its internals
+          Scalatags' @sect.ref{CSS Stylesheets} has had many of its internals
           marked as protected, so if you @hl.scala{import MyStyleSheet._} you
           don't end up with as much trash polluting your namespace.
         @li
