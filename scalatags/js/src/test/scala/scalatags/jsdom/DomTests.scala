@@ -110,8 +110,6 @@ object DomTests extends TestSuite{
       val jsVersion: dom.Element = JsTemplates.widget.render
       val txtVersion: String = TextTemplates.widget.render
 
-      println("XZY\t"+jsVersion.tagName)
-
       assert(
         jsVersion.tagName.toLowerCase == "div",
         jsVersion.textContent == "hello",
