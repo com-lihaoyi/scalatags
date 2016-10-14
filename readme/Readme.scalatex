@@ -1012,6 +1012,16 @@
 
 
   @sect{Changelog}
+    @sect{0.6.1}
+      @ul
+        @li
+          Scalatags' @sectl.ref{CSS Stylesheets} has had many of its internals
+          marked as protected, so if you @hl.scala{import MyStyleSheet._} you
+          don't end up with as much trash polluting your namespace.
+        @li
+          Fixed #140: @code{Tag} type alias doesn't seem to work when writing
+          cross-backend code
+
     @sect{0.6.0}
       @ul
         @li
