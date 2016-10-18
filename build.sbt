@@ -1,6 +1,6 @@
 scalaVersion := "2.11.8"
 
-crossScalaVersions := Seq("2.11.8", "2.10.4")
+crossScalaVersions := Seq("2.12.0-RC1", "2.11.8", "2.10.4")
 
 lazy val scalatags = crossProject
   .settings(
