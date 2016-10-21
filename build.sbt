@@ -60,6 +60,7 @@ lazy val scalatags = crossProject
     resolvers += Resolver.sonatypeRepo("releases"),
     scalaJSStage in Test := FullOptStage,
     requiresDOM := true,
+    jsEnv := PhantomJSEnv().value,
     scalacOptions ++= (if (isSnapshot.value) Seq.empty else Seq({
       val a = baseDirectory.value.toURI.toString.replaceFirst("[^/]+/?$", "")
       val g = "https://raw.githubusercontent.com/lihaoyi/scalatags"
