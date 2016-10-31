@@ -60,7 +60,6 @@ lazy val scalatags = crossProject
   )
   .jvmSettings()
   .jsSettings(
-    scalaJSUseRhino in Global := false,
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.9.1"
     ),
@@ -109,11 +108,11 @@ lazy val readme = scalatex.ScalatexReadme(
   (unmanagedSources in Compile) += baseDirectory.value/".."/"project"/"Constants.scala",
   (resources in Compile) += (fullOptJS in (example, Compile)).value.data,
   (resources in Compile) += (doc in (scalatagsJS, Compile)).value,
-  (run in Compile) <<= (run in Compile).dependsOn(Def.task{
+  (run in Compile) := (run in Compile).dependsOn(Def.task{
     sbt.IO.copyDirectory(
       (doc in (scalatagsJS, Compile)).value,
       (target in Compile).value/"scalatex"/"api",
       overwrite = true
     )
-  })
+  }).evaluated
 )
