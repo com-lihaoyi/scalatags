@@ -5,12 +5,12 @@ script:
 scala:
   - 2.10.6
   - 2.11.8
-  - 2.12.0-RC2
+  - 2.12.0
 jdk:
   - openjdk7
   - oraclejdk8
 matrix:
   exclude:
-    - scala: 2.12.0-RC2
+    - scala: 2.12.0
       jdk: openjdk7
 sudo: false
