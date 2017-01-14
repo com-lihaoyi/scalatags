@@ -139,6 +139,7 @@ object Builder{
   case class ChainedAttributeValueSource(head: ValueSource, tail: ValueSource) extends ValueSource {
     override def appendAttrValue(strb: StringBuilder): Unit = {
       head.appendAttrValue(strb)
+      strb.append(" ")
       tail.appendAttrValue(strb)
     }
   }

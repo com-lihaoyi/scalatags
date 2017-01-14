@@ -158,6 +158,24 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
       * - intercept[java.lang.IllegalArgumentException](div(attr("[(ngModel)]") := "myModel"))
     }
 
+    'classConcatenation- {
+      // strCheck gets rid of spaces -- which is exactly the issue we're testing for.  So don't use it.
+      val html = div(cls := "red", cls := "yellow")("body")
+      assert(html.toString == """<div class="red yellow">body</div>""")
+    }
+
+    'classStyleSheetConcatenation- {
+      object Foo extends stylesheet.StyleSheet {
+        val myCls = cls(color := "red")
+      }
+      // Classes have a leading space on the JVM that isn't present in jsDom.
+      val htmlLeft = div(Foo.myCls, cls := "red")
+      assert(htmlLeft.toString.replaceAll("\" ", "\"") == """<div class="scalatags-generic-BasicTests-Foo-myCls red"></div>""")
+
+      val htmlRight = div(cls := "red", Foo.myCls)
+      assert(htmlRight.toString.replaceAll(" +", " ") == """<div class="red scalatags-generic-BasicTests-Foo-myCls"></div>""")
+    }
+
   }
 }
 
