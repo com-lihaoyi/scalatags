@@ -686,5 +686,68 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
       """
     )
 
+    'frag-strCheck(
+      {
+        div(
+          h1("Hello"),
+          p("World")
+        )
+      },
+      {
+        val children = Seq[Frag](
+          h1("Hello"),
+          p("World")
+        )
+        div(
+          children
+        )
+      },
+      {
+        val children: Frag = frag(
+          h1("Hello"),
+          p("World")
+        )
+        div(
+          children
+        )
+      }
+      ,
+      """
+        <div>
+            <h1>Hello</h1>
+            <p>World</p>
+        </div>
+    """
+    )
+    'modifier-strCheck(
+      {
+        div(
+          cls := "my-bootstrap-class",
+          color := "red"
+        )
+      },
+      {
+        val mods = Seq[Modifier](
+          cls := "my-bootstrap-class",
+          color := "red"
+        )
+        div(
+          mods
+        )
+      },
+      {
+        val mods: Modifier = modifier(
+          cls := "my-bootstrap-class",
+          color := "red"
+        )
+        div(
+          mods
+        )
+      }
+      ,
+      """
+        <div class="my-bootstrap-class" style="color: red;"></div>
+      """
+    )
   }
 }

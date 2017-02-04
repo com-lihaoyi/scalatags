@@ -12,6 +12,10 @@ import scala.language.higherKinds
 trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, FragT]{
 
   type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T, FragT]
+
+  def frag(frags: Frag[Builder, FragT]*): Frag[Builder, FragT] = SeqFrag(frags)
+  def modifier(mods: Modifier[Builder]*): Modifier[Builder] = SeqNode(mods)
+
   def tag(s: String, void: Boolean = false): TypedTag[Builder, Output, FragT]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: Namespace): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttrX: AttrValue[Builder, String]

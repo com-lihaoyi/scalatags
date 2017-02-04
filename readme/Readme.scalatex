@@ -3,6 +3,7 @@
 
 @def exampleIn(name: String) = hl.ref(exampleTests, Seq(name, ""), Seq("  ,"))
 @def exampleIn2(name: String) = hl.ref(exampleTests, Seq(name, "  ,", ""), Seq("  ,"))
+@def exampleIn3(name: String) = hl.ref(exampleTests, Seq(name, "  ,", "  ,", ""), Seq("  ,"))
 @def exampleOut(name: String) = hl.ref(exampleTests, Seq(name, "\"\"\"", ""), Seq("\"\"\""), className = "xml")
 
 @val domTests = wd/'scalatags/'js/'src/'test/'scala/'scalatags/'jsdom/"DomTests.scala"
@@ -351,6 +352,80 @@
 
       @exampleIn("'aria")
       @exampleOut("'aria")
+
+    @sect{Grouping Frags and Modifiers}
+      @p
+        Renderable fragments are of the type @hl.scala{Frag}; these may
+        represent a single HTML tag, multiple HTML tags, or even a mix of HTML
+        tags and strings. For example, the @code{h1} and @code{p} in the below
+        snippet can be thought of as a single @code{Frag}:
+
+      @exampleIn("'frag")
+
+      @p
+        These can be
+        grouped together as a @code{Seq[Frag](...)} and used together:
+
+      @exampleIn2("'frag")
+
+      @p
+        Or via the helper method @code{frag(...)}, that aggregates it into a
+        single @code{Frag}:
+
+      @exampleIn3("'frag")
+
+      @p
+        All of these render to the same output:
+
+      @exampleOut("'frag")
+
+      @p
+        Similarly, @code{Modifier}s such as @sect.ref{Attributes} or
+        @sect.ref{Inline Styles & Classes} can also be grouped together as
+        aggregate @code{Modifier}s. Taking the modifiers from this snippet:
+
+      @exampleIn("'modifier")
+
+      @p
+        We can group them together in a @code{Seq[Modifier]} and apply them together:
+
+      @exampleIn2("'modifier")
+
+      @p
+        Or we can aggregate them into a single @code{Modifier} using
+        @code{modifier(...)}
+
+      @exampleIn3("'modifier")
+
+      @p
+        All of these generate the same output:
+
+      @exampleOut("'modifier")
+
+      @p
+        Any "arbitrary HTML blob" that isn't guaranteed to have
+        a single root tag is basically a @code{Frag}, which is a pretty common
+        thing to take as an argument or return as the result of a function, and
+        @code{frag} makes it convenient to deal with these.
+        In general, aggregating things together using @code{frag} is useful if
+        you want to pass around HTML snippets without necessarily wrapping them
+        in a HTML tag.
+
+      @p
+        Similarly, the @code{Modifier} type lets you represent any ad-hoc
+        collection of zero-or-more attributes, styles or children that you can
+        apply to a HTML tag. This is a common requirement: For example, when
+        defining @sect.ref{Functions} that represent complex, re-usable
+        components, you often want to let the caller pass in arbitrary sets of
+        styles or attributes to apply to various parts of that component. This
+        is easily done by making the function take in various @code{Modifier}
+        arguments that are then applied to the relevant tags, and the
+        @code{modifiers(...)} function helps you easily deal with such groups
+        of @code{Modifier}s.
+
+      @p
+        More details about @code{Modifier}s and @code{Frag}s can be seen in
+        the documentation of Scalatags' @sect.ref{Internals}
 
     @sect{Managing Imports}
 
@@ -707,7 +782,8 @@
   @sect{Internals}
     @p
 
-      The primary data structure Scalatags uses are the @hl.scala{TypedTag}:
+      The primary data structure Scalatags uses are the @hl.scala{TypedTag},
+      representing some kind of HTML/XML tag:
 
     @hl.scala
       trait TypedTag[Builder, +Output, FragT] extends Frag[Builder, FragT]{
@@ -734,7 +810,18 @@
       
 
     @p
-      The @hl.scala{Modifier}:
+      The @hl.scala{Frag}, representing a renderable snippet, containing zero
+      or more HTML/XML tags and string nodes:
+
+    @hl.scala
+      trait Frag[Builder, FragT] extends Modifier[Builder]{
+        def render: FragT
+      }
+
+    @p
+      And the @hl.scala{Modifier}, representing anything that can be applied
+      to a @hl.scala{Tag}: styles, classes, attributes, as well as any sort of
+      @hl.scala{Frag} which can be appended to it's children:
 
     @hl.scala
       trait Modifier[Builder] {
@@ -743,15 +830,6 @@
          * rendering is complete the effect of adding this modifier can be seen.
          */
         def applyTo(t: Builder): Unit
-      }
-
-
-    @p
-      And the @hl.scala{Frag}:
-
-    @hl.scala
-      trait Frag[Builder, FragT] extends Modifier[Builder]{
-        def render: FragT
       }
 
     @p
