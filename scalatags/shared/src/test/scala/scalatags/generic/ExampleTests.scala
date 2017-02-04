@@ -692,7 +692,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           h1("Hello"),
           p("World")
         )
-      },
+      }
+      ,
       {
         val children = Seq[Frag](
           h1("Hello"),
@@ -701,7 +702,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         div(
           children
         )
-      },
+      }
+      ,
       {
         val children: Frag = frag(
           h1("Hello"),
@@ -725,7 +727,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
           cls := "my-bootstrap-class",
           color := "red"
         )
-      },
+      }
+      ,
       {
         val mods = Seq[Modifier](
           cls := "my-bootstrap-class",
@@ -734,7 +737,8 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
         div(
           mods
         )
-      },
+      }
+      ,
       {
         val mods: Modifier = modifier(
           cls := "my-bootstrap-class",

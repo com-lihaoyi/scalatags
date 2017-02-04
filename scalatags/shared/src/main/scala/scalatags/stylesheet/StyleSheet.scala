@@ -71,9 +71,21 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
   /**
    * All classes defined in this stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
-  def allClasses(implicit sourceClasses: SourceClasses[this.type]): Seq[Cls] = sourceClasses.value(this)
+  protected[this] def initStyleSheet()(implicit sourceClasses: SourceClasses[this.type]) =
+    allClasses0 = Some(() => sourceClasses.value(this))
 
-  def styleSheetText(implicit sourceClasses: SourceClasses[this.type]) = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
+  private[this] var allClasses0: Option[() => Seq[Cls]] = None
+  def allClasses = allClasses0 match {
+    case Some(f) => f()
+    case None =>
+
+      throw new Exception(
+        "No CSS classes found on stylesheet " + this +
+          ". Did you forget to call `initStyleSheet()` in the body of the style sheet?"
+      )
+  }
+
+  def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
 }
 class SourceClasses[T](val value: T => Seq[Cls])
 object SourceClasses{
