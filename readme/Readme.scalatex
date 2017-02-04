@@ -1090,6 +1090,22 @@
 
 
   @sect{Changelog}
+    @sect{0.6.3}
+      @ul
+        @li
+          Add @code{frag} and @code{modifier} helper methods to simplify
+          @sect.ref{Grouping Frags and Modifiers}
+
+        @li
+          Tweak the syntax for defining @sect.ref{CSS Stylesheets} to avoid
+          problems with @code{.styleSheetText} being unreliable
+          (@lnk("147", "https://github.com/lihaoyi/scalatags/issues/147"))
+
+        @li
+          Mark stylesheet tags in @code{CascadingStyleSheet}s as
+          @hl.scala{protected[this]}, to avoid them polluting your autocomplete
+          or leaking when you import from a stylesheet.
+
     @sect{0.6.2}
       @ul
         @li
