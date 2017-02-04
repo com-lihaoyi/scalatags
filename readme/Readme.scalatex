@@ -239,7 +239,7 @@
         }
 
       @p
-        Since Scalatags is meant to generate HTML, it does not include the RSS tags in the default import. Nevertheless,
+        Since Scalatags is meant to generate HTML, it does not include the RSS tags in the default import. Nevertheless, you can use custom tags and attributes to build whatever XML structure you desire, regardless of whether Scalatags has those specific tags/attributes built in or not.
 
     @sect{Non-String Attributes and Styles}
       @exampleIn("nonStringAttributesAndStyles")
@@ -247,7 +247,7 @@
       @p
         Not all attributes and styles take strings; some, like @code{float}, have an enumeration of valid values, and can be referenced by @code{float.left}, @code{float.right}, etc.. Others, like @code{tabindex} or @code{disabled}, take Ints and Booleans respectively. These are used directly as shown in the example above.
       @p
-        Even for styles or attributes which take values other than strings (e.g. @code{tabindex}), the @code{:=} operator can still be used to force assignment:
+        Even for styles or attributes which take values other than strings (e.g. @code{float}), the @code{:=} operator can still be used to force assignment:
 
       @p
         The above example prints:
@@ -276,6 +276,81 @@
 
       @exampleIn("booleanAttributes2")
       @exampleOut("booleanAttributes2")
+
+    @sect{Variables}
+      @exampleIn("variables")
+      @p
+        Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints:
+
+      @exampleOut("variables")
+    @sect{Control Flow}
+      @exampleIn("controlFlow")
+      @p
+
+        Like most other XML templating languages, ScalaTags contains control flow statements like @hl.scala{if} and @hl.scala{for}. Unlike other templating languages which have their own @lnk("crufty little programming language embedded inside them for control flow", "http://jinja.pocoo.org/docs/templates/#list-of-control-structures"), you probably already know how to use ScalaTags' control flow syntax. It's just Scala after all.
+      @p
+        This prints out:
+
+      @exampleOut("controlFlow")
+
+    @sect{Functions}
+      @exampleIn("functions")
+      @p
+
+        Many other templating systems define @lnk("incredibly", "http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials") @lnk("roundabout", "http://jinja.pocoo.org/docs/templates/#macros") ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because Scala has these amazing things called *functions*.
+
+      @p
+        The above example prints:
+
+      @exampleOut("functions")
+    @sect{Auto-escaping and unsanitized Input}
+
+      @exampleIn("properEscaping")
+      @p
+        By default, any text that's put into the Scalatags templates, whether as a attribute value or a text node, is properly escaped when it is rendered. Thus, when you run the following snippet, you get this:
+      @exampleOut("properEscaping")
+      @p
+        As you can see, the contents of the variables @code{evilInput1} and @code{evilInput2} have been HTML-escaped, so you do not have to worry about un-escaped user input messing up your DOM or causing XSS injections. Furthermore, the names of the tags (e.g. "html") and attributes (e.g. "href") are themselves validated: passing in an invalid name to either of those (e.g. a tag or attribute name with a space inside) will throw an @hl.scala{IllegalArgumentException}).
+
+      @p
+        If you @b{really} want, for whatever reason, to put unsanitized input into your HTML, simply surround the string with a @code{raw} tag:
+
+      @exampleIn("unsanitizedInput")
+      @p
+        prints
+
+      @exampleOut("unsanitizedInput")
+      @p
+        As you can see, the @hl.xml{<script>} tags in @code{evilInput} have been passed through to the resultant HTML string unchanged. Although this makes it easy to open up XSS holes (as shown above!), if you know what you're doing, go ahead.
+      @p
+        There isn't any way to put unescaped text inside tag names, attribute names, or attribute values.
+
+    @sect{Layouts}
+      @exampleIn("layouts")
+      @p
+
+        Again, this is something that many other templating languages have their own @lnk("special", "http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts") @lnk("implementations", "http://jinja.pocoo.org/docs/templates/#template-inheritance") of. In ScalaTags, this can be done simply by just using functions! The above snippet gives you:
+
+      @exampleOut("layouts")
+
+    @sect{Inheritance}
+      @exampleIn("inheritence")
+      @p
+        Most of the time, functions are sufficient to keep things DRY, but if for some reason you want to use inheritance to structure your code, you probably already know how to do so. Again, unlike @lnk("other", "http://wsgiarea.pocoo.org/jinja/docs/inheritance.html") @lnk("frameworks", "http://docs.makotemplates.org/en/latest/inheritance.html") that have implemented complex inheritance systems themselves, Scalatags is just Scala, and it behaves as you'd expect.
+
+      @exampleOut("inheritence")
+    @sect{Data and Aria}
+
+      @p
+        Data attributes work by separating the sections of the attribute with @code{.} instead of @code{-}:
+
+      @exampleIn("'data")
+      @exampleOut("'data")
+      @p
+        Aria attributes work too:
+
+      @exampleIn("'aria")
+      @exampleOut("'aria")
 
     @sect{Managing Imports}
 
@@ -363,7 +438,7 @@
             )
           )
         )
-      @p  
+      @p
 
         In addition to importing things piecemeal from various pre-defined namespaces, Scalatags allows you to build a custom bundle which can be used to provide a single-import syntax for whatever import convention you're using. For example, the above snippet sets up a custom bundle which dumps @code{Tags} and @code{Tags2} in the local namespace, assigns @code{Styles} and @code{Styles2} to the @code{st} object, @code{Attrs} to the @code{at} object, and ignores Svg-related styles and tags entirely. This lets you enforce a particular convention without having to duplicate the same import-renamings in multiple files in your application.
       @p
@@ -410,81 +485,6 @@
       @p
 
         Mixing both things from the @code{all} bundle as well as @code{st} and @code{at} from our own @code{CustomBundle}. That's not to say you @b{should} do this, but if for some reason if e.g. you're using different conventions for different source files, you can be sure that they'll work together just fine.
-
-    @sect{Variables}
-      @exampleIn("variables")
-      @p
-        Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints:
-
-      @exampleOut("variables")
-    @sect{Control Flow}
-      @exampleIn("controlFlow")
-      @p
-
-        Like most other XML templating languages, ScalaTags contains control flow statements like @hl.scala{if} and @hl.scala{for}. Unlike other templating languages which have their own @lnk("crufty little programming language embedded inside them for control flow", "http://jinja.pocoo.org/docs/templates/#list-of-control-structures"), you probably already know how to use ScalaTags' control flow syntax. It's just Scala after all.
-      @p
-        This prints out:
-
-      @exampleOut("controlFlow")
-
-    @sect{Functions}
-      @exampleIn("functions")
-      @p
-
-        Many other templating systems define @lnk("incredibly", "http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials") @lnk("roundabout", "http://jinja.pocoo.org/docs/templates/#macros") ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because Scala has these amazing things called *functions*.
-
-      @p
-        The above example prints:
-
-      @exampleOut("functions")
-    @sect{Auto-escaping and unsanitized Input}
-
-      @exampleIn("properEscaping")
-      @p
-        By default, any text that's put into the Scalatags templates, whether as a attribute value or a text node, is properly escaped when it is rendered. Thus, when you run the following snippet, you get this:
-      @exampleOut("properEscaping")
-      @p
-        As you can see, the contents of the variables @code{evilInput1} and @code{evilInput2} have been HTML-escaped, so you do not have to worry about un-escaped user input messing up your DOM or causing XSS injections. Furthermore, the names of the tags (e.g. "html") and attributes (e.g. "href") are themselves validated: passing in an invalid name to either of those (e.g. a tag or attribute name with a space inside) will throw an @hl.scala{IllegalArgumentException}).
-
-      @p
-        If you @b{really} want, for whatever reason, to put unsanitized input into your HTML, simply surround the string with a @code{raw} tag:
-
-      @exampleIn("unsanitizedInput")
-      @p
-        prints
-
-      @exampleOut("unsanitizedInput")
-      @p
-        As you can see, the @hl.xml{<script>} tags in @code{evilInput} have been passed through to the resultant HTML string unchanged. Although this makes it easy to open up XSS holes (as shown above!), if you know what you're doing, go ahead.
-      @p
-        There isn't any way to put unescaped text inside tag names, attribute names, or attribute values.
-
-    @sect{Layouts}
-      @exampleIn("layouts")
-      @p
-
-        Again, this is something that many other templating languages have their own @lnk("special", "http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts") @lnk("implementations", "http://jinja.pocoo.org/docs/templates/#template-inheritance") of. In ScalaTags, this can be done simply by just using functions! The above snippet gives you:
-
-      @exampleOut("layouts")
-
-    @sect{Inheritance}
-      @exampleIn("inheritence")
-      @p
-        Most of the time, functions are sufficient to keep things DRY, but if for some reason you want to use inheritance to structure your code, you probably already know how to do so. Again, unlike @lnk("other", "http://wsgiarea.pocoo.org/jinja/docs/inheritance.html") @lnk("frameworks", "http://docs.makotemplates.org/en/latest/inheritance.html") that have implemented complex inheritance systems themselves, Scalatags is just Scala, and it behaves as you'd expect.
-
-      @exampleOut("inheritence")
-    @sect{Data and Aria}
-
-      @p
-        Data attributes work by separating the sections of the attribute with @code{.} instead of @code{-}:
-
-      @exampleIn("'data")
-      @exampleOut("'data")
-      @p
-        Aria attributes work too:
-
-      @exampleIn("'aria")
-      @exampleOut("'aria")
 
 
   @sect{DOM Backend}
@@ -1012,6 +1012,11 @@
 
 
   @sect{Changelog}
+    @sect{0.6.2}
+      @ul
+        @li
+          Published for Scala 2.12.x
+
     @sect{0.6.1}
       @ul
         @li
