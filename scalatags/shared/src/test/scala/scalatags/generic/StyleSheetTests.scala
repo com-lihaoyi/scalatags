@@ -11,22 +11,25 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   import bundle.all._
 
   val pkg = "scalatags-generic-StyleSheetTests"
-  val Simple = Sheet[Simple]
-  trait Simple extends StyleSheet{
-    def x = cls(
+  object Simple extends StyleSheet {
+    initStyleSheet()
+
+    val x = cls(
       backgroundColor := "red",
       height := 125
     )
-    def y = cls.hover(
+    val y = cls.hover(
       opacity := 0.5
     )
 
-    def z = cls(x.splice, y.splice)
+    val z = cls(x.splice, y.splice)
   }
 
-  val Inline = Sheet[Inline]
-  trait Inline extends StyleSheet{
-    def w = cls(
+
+  object Inline extends StyleSheet{
+    initStyleSheet()
+
+    val w = cls(
       &.hover(
         backgroundColor := "red"
       ),
@@ -39,10 +42,12 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
       opacity := 0.5
     )
   }
-  val Cascade = Sheet[Cascade]
-  trait Cascade extends CascadingStyleSheet{
-    def y = cls()
-    def x = cls(
+
+  object Cascade extends CascadingStyleSheet{
+    initStyleSheet()
+
+    val y = cls()
+    val x = cls(
       a(
         backgroundColor := "red",
         textDecoration.none
@@ -64,14 +69,15 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     )
   }
 
-  val Custom = Sheet[Custom]
-  trait Custom extends CascadingStyleSheet{
+  object Custom extends CascadingStyleSheet{
+    initStyleSheet()
+
     override def customSheetName = Some("CuStOm")
-    def x = cls(
+    val x = cls(
       backgroundColor := "red",
       height := 125
     )
-    def y = cls.hover(
+    val y = cls.hover(
       opacity := 0.5
     )
 

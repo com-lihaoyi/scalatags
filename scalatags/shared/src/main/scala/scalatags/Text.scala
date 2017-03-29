@@ -13,20 +13,6 @@ import scalatags.text.Builder
  * `String`s.
  */
 
-case class StyleAttrValueSource[T](s: Style, v: T) extends AttrValueSource {
-  override def appendAttrValue(strb: StringBuilder): Unit = {
-    Escaping.escape(s.cssName, strb)
-    strb ++=  ": "
-    Escaping.escape(v.toString, strb)
-    strb ++= ";"
-  }
-}
-
-case class GenericAttrValueSource[T](v: T) extends AttrValueSource {
-  override def appendAttrValue(strb: StringBuilder): Unit = {
-    Escaping.escape(v.toString,strb)
-  }
-}
 
 object Text
   extends generic.Bundle[text.Builder, String, String]
@@ -78,7 +64,7 @@ object Text
   }
 
   trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
-    implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with AttrValueSource {
+    implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with text.Builder.ValueSource{
       def applyTo(t: text.Builder) = t.appendAttr("class",this)
 
       override def appendAttrValue(sb: StringBuilder): Unit = {
@@ -108,7 +94,7 @@ object Text
     type RawFrag = Text.RawFrag
     def raw(s: String) = RawFrag(s)
 
-    type Tag = Text.TypedTag[String]
+
     val Tag = Text.TypedTag
   }
 
@@ -133,13 +119,13 @@ object Text
 
   class GenericAttr[T] extends AttrValue[T] {
     def apply(t: text.Builder, a: Attr, v: T): Unit = {
-      t.setAttr(a.name, GenericAttrValueSource(v))
+      t.setAttr(a.name, Builder.GenericAttrValueSource(v.toString))
     }
   }
 
   class GenericStyle[T] extends StyleValue[T] {
     def apply(t: text.Builder, s: Style, v: T): Unit = {
-      t.appendAttr("style", StyleAttrValueSource(s,v))
+      t.appendAttr("style", Builder.StyleValueSource(s, v.toString))
     }
   }
   class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{

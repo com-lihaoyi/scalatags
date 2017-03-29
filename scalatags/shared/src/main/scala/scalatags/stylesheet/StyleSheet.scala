@@ -11,8 +11,8 @@ import scalatags.ScalaVersionStubs.Context
  * never need these things, so it's good to make it explicit
  * when you do to prevent accidental cascading.
  */
-trait CascadingStyleSheet extends StyleSheet with StyleSheetTags{
-  implicit def clsSelector(c: Cls): Selector = new Selector(Seq("." + c.name))
+abstract class CascadingStyleSheet(implicit sourceName: sourcecode.FullName) extends StyleSheet with StyleSheetTags{
+  protected[this] implicit def clsSelector(c: Cls): Selector = new Selector(Seq("." + c.name))
 }
 
 /**
@@ -20,7 +20,7 @@ trait CascadingStyleSheet extends StyleSheet with StyleSheetTags{
  * styles which get serialized to a `String`. Does not allow the use
  * of cascading tag/class selectors; use [[CascadingStyleSheet]] for that.
  */
-trait StyleSheet{
+abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
   /**
    * The name of this CSS stylesheet. Defaults to the name of the trait,
    * but you can override
@@ -31,7 +31,7 @@ trait StyleSheet{
    * Converts the name of the [[StyleSheet]]'s, the name of the member, and
    * any applicable pseudo-selectors into the name of the CSS class.
    */
-  def nameFor(memberName: String, pseudoSelectors: String) = {
+  protected[this] def nameFor(memberName: String, pseudoSelectors: String) = {
     customSheetName.getOrElse(defaultSheetName.replace(".", "-")) + "-" + memberName + pseudoSelectors
   }
 
@@ -39,19 +39,19 @@ trait StyleSheet{
    * Namespace that holds all the css pseudo-selectors, to avoid collisions
    * with tags and style-names and other things.
    */
-  val & = new Selector
+  protected[this] val & = new Selector
 
   /**
    * `*` in a CSS selector.
    */
-  object * extends Selector(Seq("*"))
+  protected[this] object * extends Selector(Seq("*"))
 
   /**
    * Used to define a new, uniquely-named class with a set of
    * styles associated with it.
    */
-  object cls extends Creator(Nil)
-  class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
+  protected[this] object cls extends Creator(Nil)
+  protected[this] class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
     def pseudoExtend(s: String): Creator = new Creator(selectors :+ s)
 
     /**
@@ -65,42 +65,52 @@ trait StyleSheet{
   }
 
   /**
-   * The default name of a stylesheet, filled in with the [[Sheet]] implicit macro
+   * The default name of a stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
-  def defaultSheetName: String
+  protected[this] def defaultSheetName = sourceName.value.replace(' ', '.').replace('#', '.')
   /**
-   * All classes defined in this stylesheet, filled in with the [[Sheet]] implicit macro
+   * All classes defined in this stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
-  def allClasses: Seq[Cls]
+  protected[this] def initStyleSheet()(implicit sourceClasses: SourceClasses[this.type]) =
+    allClasses0 = Some(() => sourceClasses.value(this))
+
+  private[this] var allClasses0: Option[() => Seq[Cls]] = None
+  def allClasses = allClasses0 match {
+    case Some(f) => f()
+    case None =>
+
+      throw new Exception(
+        "No CSS classes found on stylesheet " + this +
+          ". Did you forget to call `initStyleSheet()` in the body of the style sheet?"
+      )
+  }
 
   def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
 }
-
-
-/**
- * Wraps a type [[T]], so we can demand an implicit `Mangled[T]` in a way
- * that triggers a macro to instantiate that type.
- */
-object Sheet{
-  implicit def apply[T]: T = macro manglerImpl[T]
+class SourceClasses[T](val value: T => Seq[Cls])
+object SourceClasses{
+  implicit def apply[T]: SourceClasses[T] = macro manglerImpl[T]
   def manglerImpl[T: c.WeakTypeTag](c: Context) = {
     import c.universe._
 
     val weakType = weakTypeOf[T]
 
-    val typeName = weakType.typeSymbol.fullName
+    val stylesheetName = newTermName("stylesheet")
     val names = for {
       member <- weakType.members.toSeq.reverse
       // Not sure if there's a better way to capture by-name types
-      if member.typeSignature.toString == "=> scalatags.stylesheet.Cls"
-    } yield member.name.toTermName
+      if member.typeSignature.toString == "=> scalatags.stylesheet.Cls" ||
+         member.typeSignature.toString == "scalatags.stylesheet.Cls"
+      if member.isPublic
+    } yield q"$stylesheetName.${member.name.toTermName}"
 
-    val res = q"""new $weakType{
-        def defaultSheetName = $typeName
-        lazy val allClasses = Seq(..$names)
-      }"""
+    val res = q"""
+    new scalatags.stylesheet.SourceClasses[$weakType](
+      ($stylesheetName: $weakType) => Seq[scalatags.stylesheet.Cls](..$names)
+    )
+    """
 
-    c.Expr[T](res)
+    c.Expr[SourceClasses[T]](res)
   }
 }
 

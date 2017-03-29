@@ -1,7 +1,7 @@
 package scalatags
 package generic
 import acyclic.file
-import scalatags.stylesheet.{Sheet, StyleSheetFrag}
+import scalatags.stylesheet.StyleSheetFrag
 import scalatags.text
 
 /**
@@ -101,7 +101,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
   type StyleValue[V] = generic.StyleValue[Builder, V]
   type PixelStyleValue[V] = generic.PixelStyleValue[Builder, V]
 
-  type Tag <: generic.TypedTag[Builder, Output, FragT]
+  type Tag = generic.TypedTag[Builder, Output, FragT]
 
   /**
    * A [[Modifier]] which contains a String which will not be escaped.

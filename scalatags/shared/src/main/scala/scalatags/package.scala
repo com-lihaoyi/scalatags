@@ -9,15 +9,6 @@ import language.experimental.macros
  */
 package object scalatags {
 
-  case class ChainedAttributeValueSource(head: AttrValueSource, tail: AttrValueSource) extends AttrValueSource {
-    override def appendAttrValue(strb: StringBuilder): Unit = {
-      head.appendAttrValue(strb)
-      tail.appendAttrValue(strb)
-    }
-  }
-  trait AttrValueSource {
-    def appendAttrValue(strb: StringBuilder): Unit
-  }
 
   private[scalatags] def camelCase(dashedString: String) = {
     val first :: rest = dashedString.split("-").toList
