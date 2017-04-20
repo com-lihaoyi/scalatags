@@ -1090,6 +1090,15 @@
 
 
   @sect{Changelog}
+    @sect{0.6.5}
+      @ul
+        @li Merge PRs @pr(131) @(162)
+
+    @sect{0.6.4}
+      @ul
+        @li
+         To Scalatex 0.3.7
+
     @sect{0.6.3}
       @ul
         @li
