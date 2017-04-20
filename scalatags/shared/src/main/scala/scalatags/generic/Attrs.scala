@@ -976,6 +976,18 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    * MDN
    */
   lazy val rowspan = attr("rowspan")
+  /**
+   * Indicates how the control wraps text. Possible values are:
+   *
+   * hard: The browser automatically inserts line breaks (CR+LF) so that each line has no more than the width of the control; the cols attribute must be specified.
+   * soft: The browser ensures that all line breaks in the value consist of a CR+LF pair, but does not insert any additional line breaks.
+   *
+   * If this attribute is not specified, soft is its default value.
+   * 
+   * MDN	
+   */
+   lazy val wrap = attr("wrap")	
+
 
   /**
    * ARIA is a set of special accessibility attributes which can be added

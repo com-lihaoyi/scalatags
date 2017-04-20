@@ -911,6 +911,13 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
   lazy val offset = attr("offset")
 
   /**
+    * The ‘orient’ attribute indicates how the marker is rotated when it is placed at its position on the markable element.
+    *
+    * W3C
+    */
+  lazy val orient = attr("orient")
+
+  /**
    *
    *
    * MDN
@@ -1070,6 +1077,24 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val radius = attr("radius")
 
+
+  /**
+    * The ‘refX’ attribute defines the reference point of the marker which is to be placed exactly at
+    * the marker's position on the markable element. It is interpreted as being in the coordinate system of
+    * the marker contents, after application of the ‘viewBox’ and ‘preserveAspectRatio’ attributes.
+    *
+    *  W3C
+    */
+  lazy val refX = attr("refX")
+
+  /**
+    * The ‘refY’ attribute defines the reference point of the marker which is to be placed exactly at
+    * the marker's position on the markable element. It is interpreted as being in the coordinate system of
+    * the marker contents, after application of the ‘viewBox’ and ‘preserveAspectRatio’ attributes.
+    *
+    *  W3C
+    */
+  lazy val refY = attr("refY")
 
   /**
    *
