@@ -1915,6 +1915,13 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val baseline = this := "baseline"
     /**
+     * Align the bottom of the element and its descendants with the bottom of
+     * the entire line.
+     *
+     * MDN
+     */
+    lazy val bottom = this := "bottom"
+    /**
      * Aligns the baseline of the element with the subscript-baseline of its
      * parent.
      *
@@ -1941,6 +1948,13 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `text-bottom` = this := "text-bottom"
+    /**
+     * Align the top of the element and its descendants with the top of the
+     * entire line.
+     *
+     * MDN
+     */
+    lazy val top = this := "top"
     /**
      * Aligns the middle of the element with the middle of lowercase letters in
      * the parent.
