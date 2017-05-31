@@ -1,6 +1,6 @@
 language: scala
 script:
-  - sbt ++2.12.2 readme/run
+  - sbt ++$TRAVIS_SCALA_VERSION readme/run
   - sbt ++$TRAVIS_SCALA_VERSION scalatagsJVM/test scalatagsJS/test
 scala:
   - 2.10.6
