@@ -639,6 +639,22 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
 
 
   /**
+    *
+    *
+    * MDN
+    */
+  lazy val fx = attr("fx")
+
+
+  /**
+    *
+    *
+    * MDN
+    */
+  lazy val fy = attr("fy")
+
+  
+  /**
    *
    *
    * MDN
