@@ -1,16 +1,22 @@
 language: scala
 script:
-  - sbt ++2.11.8 readme/run
+  - |
+    if [ "$TRAVIS_SCALA_VERSION" != "2.10.6" ]
+    then
+      sbt ++$TRAVIS_SCALA_VERSION readme/run
+    else
+      echo "readme unavailable for $TRAVIS_SCALA_VERSION"
+    fi
   - sbt ++$TRAVIS_SCALA_VERSION scalatagsJVM/test scalatagsJS/test
 scala:
   - 2.10.6
-  - 2.11.8
-  - 2.12.0
+  - 2.11.11
+  - 2.12.2
 jdk:
   - openjdk7
   - oraclejdk8
 matrix:
   exclude:
-    - scala: 2.12.0
+    - scala: 2.12.2
       jdk: openjdk7
 sudo: false
