@@ -1,5 +1,7 @@
 package scalatags
 import acyclic.file
+
+import scala.annotation.switch
 /**
  * Utility methods related to validating and escaping XML; used internally but
  * potentially useful outside of Scalatags.
@@ -54,7 +56,7 @@ object Escaping {
     var pos = 0
 
     while (pos < len) {
-      text.charAt(pos) match {
+      (text.charAt(pos): @switch) match {
         case '<' => s.append("&lt;")
         case '>' => s.append("&gt;")
         case '&' => s.append("&amp;")

@@ -18,7 +18,7 @@ class Builder(var children: Array[Frag] = null,
   final var childIndex = 0
   final var attrIndex = 0
 
-  private[this] def incrementChildren(arr: Array[Frag], index: Int): Array[Frag] = {
+  private[this] def incrementChildren(arr: Array[Frag], index: Int) = {
     if (children == null) new Array[Frag](4)
     else if (index < arr.length) children
     else {
@@ -28,9 +28,8 @@ class Builder(var children: Array[Frag] = null,
     }
   }
 
-  private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int)
-    : Array[(String, Builder.ValueSource)]= {
-    if (attrs == null) new Array(4)
+  private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int) = {
+    if (attrs == null) new Array[(String, Builder.ValueSource)](4)
     else if (index < arr.length) attrs
     else {
       val newArr = new Array[(String, Builder.ValueSource)](arr.length * 2)
@@ -58,19 +57,6 @@ class Builder(var children: Array[Frag] = null,
         attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
     }
   }
-  def setAttr(k: String, v: Builder.ValueSource) = {
-    attrIndex(k) match{
-      case -1 =>
-        val newAttrs = incrementAttr(attrs, attrIndex)
-        if (newAttrs!= null) attrs = newAttrs
-        attrs(attrIndex) = k -> v
-        attrIndex += 1
-      case n =>
-        val (oldK, oldV) = attrs(n)
-        attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
-    }
-  }
-
 
   def appendAttrStrings(v: Builder.ValueSource, sb: StringBuilder): Unit = {
     v.appendAttrValue(sb)

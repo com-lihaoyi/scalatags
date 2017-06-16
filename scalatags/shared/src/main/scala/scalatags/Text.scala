@@ -116,7 +116,7 @@ object Text
 
   class GenericAttr[T] extends AttrValue[T] {
     def apply(t: text.Builder, a: Attr, v: T): Unit = {
-      t.setAttr(a.name, Builder.GenericAttrValueSource(v.toString))
+      t.appendAttr(a.name, Builder.GenericAttrValueSource(v.toString))
     }
   }
 
@@ -156,16 +156,7 @@ object Text
       // tag
       strb += '<' ++= tag
       // attributes
-      if (builder != null){
-        var i = 0
-        while (i < builder.attrIndex){
-          val pair = builder.attrs(i)
-          strb += ' ' ++= pair._1 ++= "=\""
-          builder.appendAttrStrings(pair._2,strb)
-          strb += '\"'
-          i += 1
-        }
-      }
+      writeToAttrs(strb)
 
       if ((builder == null || builder.childIndex == 0) && void) {
         // No children - close tag
@@ -173,16 +164,33 @@ object Text
       } else {
         strb += '>'
         // Childrens
-        if (builder != null){
-          var i = 0
-          while(i < builder.childIndex){
-            builder.children(i).writeTo(strb)
-            i += 1
-          }
-        }
+        writeToChildren(strb)
 
         // Closing tag
         strb ++= "</" ++= tag += '>'
+      }
+    }
+
+    private def writeToChildren(strb: StringBuilder) = {
+      if (builder != null) {
+        var i = 0
+        while (i < builder.childIndex) {
+          builder.children(i).writeTo(strb)
+          i += 1
+        }
+      }
+    }
+
+    private def writeToAttrs(strb: StringBuilder) = {
+      if (builder != null) {
+        var i = 0
+        while (i < builder.attrIndex) {
+          val pair = builder.attrs(i)
+          strb += ' ' ++= pair._1 ++= "=\""
+          builder.appendAttrStrings(pair._2, strb)
+          strb += '\"'
+          i += 1
+        }
       }
     }
 
