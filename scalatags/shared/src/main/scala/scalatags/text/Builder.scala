@@ -13,7 +13,7 @@ import scalatags.generic.Style
  * exposes more of its internals than it probably should for performance,
  * so even though the stuff isn't private, don't touch it!
  */
-class Builder(val children: StringBuilder = new StringBuilder){
+class Builder(val children: StringBuilder){
 
   var mode: Option[String] = Some("")
 

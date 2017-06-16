@@ -58,7 +58,10 @@ object Text
     }
     implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
+      def applyTo(t: text.Builder) = {
+        val i = xs.iterator
+        while(i.hasNext) i.next().applyTo(t)
+      }
       def render = xs.map(_.render).mkString
     }
   }
@@ -157,8 +160,7 @@ object Text
      * ~4x from what it originally was, which is a pretty nice speedup
      */
     def writeTo(strb: StringBuilder): Unit = {
-      strb.append(builder.children)
-
+      strb.append(builder.children.toString)
       if (builder == null && void) {
         // No children - close tag
         strb ++= " />"
@@ -171,13 +173,17 @@ object Text
     def apply(xs: Modifier*): TypedTag[Output] = {
       val dest =
         if (builder != null) this
-        else this.copy(builder = new Builder(new StringBuilder("<" + tag)))
+        else {
+          val b = new StringBuilder()
+          b.append('<')
+          b.append(tag)
+          this.copy(builder = new Builder(b))
+        }
 
       val iter = xs.iterator
       while(iter.nonEmpty){
         iter.next().applyTo(dest.builder)
       }
-
       dest
     }
 
