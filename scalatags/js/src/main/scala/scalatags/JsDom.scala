@@ -176,22 +176,15 @@ object JsDom
     // and so just force this.
     protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
-    private[this] def makeElement() = dom.document.createElementNS(namespace.uri, tag)
+    def makeBuilder() = dom.document.createElementNS(namespace.uri, tag)
+
+    def copyWithBuilder() = copy(builder = makeBuilder())
+
     def render: Output = {
-      if (builder == null) makeElement().asInstanceOf[Output]
+      if (builder == null) makeBuilder().asInstanceOf[Output]
       else builder.asInstanceOf[Output]
     }
-    /**
-     * Trivial override, not strictly necessary, but it makes IntelliJ happy...
-     */
-    def apply(xs: Modifier*): TypedTag[Output] = {
-      val dest =
-        if (builder != null) this
-        else this.copy(builder = makeElement())
 
-      xs.foreach(_.applyTo(dest.builder))
-      dest
-    }
     override def toString = render.outerHTML
   }
 

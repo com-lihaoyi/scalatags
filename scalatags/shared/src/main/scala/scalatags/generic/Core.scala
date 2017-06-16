@@ -43,16 +43,28 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
   protected[this] type Self <: TypedTag[Builder, Output, FragT]
   def tag: String
 
-  /**
-   * Add the given modifications (e.g. additional children, or new attributes)
-   * to the [[TypedTag]].
-   */
-  def apply(xs: Modifier[Builder]*): Self
+  def builder: Builder
+  def makeBuilder(): Builder
+
+  def copyWithBuilder(): TypedTag[Builder, Output, FragT]
 
   /**
    * Collapses this scalatags tag tree and returns an [[Output]]
    */
   def render: Output
+  /**
+    * Add the given modifications (e.g. additional children, or new attributes)
+    * to the [[TypedTag]].
+    */
+  def apply(xs: Modifier[Builder]*): TypedTag[Builder, Output, FragT] = {
+    val dest =
+      if (builder != null) this
+      else copyWithBuilder()
+
+    xs.foreach(_.applyTo(dest.builder))
+    dest
+  }
+
 }
 
 /**

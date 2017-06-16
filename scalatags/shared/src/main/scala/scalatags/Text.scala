@@ -145,6 +145,10 @@ object Text
     // and so just force this.
     protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
+    def makeBuilder() = new Builder()
+
+    def copyWithBuilder() = copy(builder = makeBuilder())
+
     /**
      * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.
      *
@@ -156,51 +160,36 @@ object Text
       // tag
       strb += '<' ++= tag
       // attributes
-      writeToAttrs(strb)
+      if (builder != null) writeToAttrs(strb)
 
-      if ((builder == null || builder.childIndex == 0) && void) {
-        // No children - close tag
-        strb ++= " />"
-      } else {
+      if (void) strb ++= " />" // Void elements cannot have children - close tag
+      else {
         strb += '>'
         // Childrens
-        writeToChildren(strb)
+        if (builder != null) writeToChildren(strb)
 
         // Closing tag
         strb ++= "</" ++= tag += '>'
       }
     }
 
-    private def writeToChildren(strb: StringBuilder) = {
-      if (builder != null) {
-        var i = 0
-        while (i < builder.childIndex) {
-          builder.children(i).writeTo(strb)
-          i += 1
-        }
+    private[this] def writeToChildren(strb: StringBuilder) = {
+      var i = 0
+      while (i < builder.childIndex) {
+        builder.children(i).writeTo(strb)
+        i += 1
       }
     }
 
-    private def writeToAttrs(strb: StringBuilder) = {
-      if (builder != null) {
-        var i = 0
-        while (i < builder.attrIndex) {
-          val pair = builder.attrs(i)
-          strb += ' ' ++= pair._1 ++= "=\""
-          builder.appendAttrStrings(pair._2, strb)
-          strb += '\"'
-          i += 1
-        }
+    private[this] def writeToAttrs(strb: StringBuilder) = {
+      var i = 0
+      while (i < builder.attrIndex) {
+        val pair = builder.attrs(i)
+        strb += ' ' ++= pair._1 ++= "=\""
+        builder.appendAttrStrings(pair._2, strb)
+        strb += '\"'
+        i += 1
       }
-    }
-
-    def apply(xs: Modifier*): TypedTag[Output] = {
-      val dest =
-        if (builder != null) this
-        else this.copy(builder = new Builder())
-
-      xs.foreach(_.applyTo(dest.builder))
-      dest
     }
 
     /**
