@@ -54,7 +54,7 @@ object Text
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
     implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
     def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
-      TypedTag(tag, Nil, void)
+      TypedTag(tag, new Builder(), void)
     }
     implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
       Objects.requireNonNull(xs)
@@ -138,9 +138,8 @@ object Text
   }
 
 
-
   case class TypedTag[+Output <: String](tag: String = "",
-                                         modifiers: List[Seq[Modifier]],
+                                         builder: Builder,
                                          void: Boolean = false)
                                          extends generic.TypedTag[text.Builder, Output, String]
                                          with text.Frag{
@@ -157,9 +156,6 @@ object Text
      * ~4x from what it originally was, which is a pretty nice speedup
      */
     def writeTo(strb: StringBuilder): Unit = {
-      val builder = new text.Builder()
-      build(builder)
-
       // tag
       strb += '<' ++= tag
 
@@ -191,7 +187,13 @@ object Text
     }
 
     def apply(xs: Modifier*): TypedTag[Output] = {
-      this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
+      var i = 0
+      while(i < xs.length) {
+        xs(i).applyTo(builder)
+        i += 1
+      }
+//      xs.foreach(_.applyTo(builder))
+      this
     }
 
     /**
@@ -204,6 +206,4 @@ object Text
     }
     def render: Output = this.toString.asInstanceOf[Output]
   }
-
-
 }
