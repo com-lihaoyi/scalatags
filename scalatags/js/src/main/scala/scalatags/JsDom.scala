@@ -104,7 +104,7 @@ object JsDom
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
     implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
     def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
-      TypedTag(tag, Nil, void, namespaceConfig)
+      TypedTag(tag, null, void, namespaceConfig)
     }
 
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
@@ -166,7 +166,7 @@ object JsDom
     def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
   }
   case class TypedTag[+Output <: dom.Element](tag: String = "",
-                                              modifiers: List[Seq[Modifier]],
+                                              builder: dom.Element,
                                               void: Boolean = false,
                                               namespace: Namespace)
                                               extends generic.TypedTag[dom.Element, Output, dom.Node]
@@ -176,16 +176,21 @@ object JsDom
     // and so just force this.
     protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
+    private[this] def makeElement() = dom.document.createElementNS(namespace.uri, tag)
     def render: Output = {
-      val elem = dom.document.createElementNS(namespace.uri, tag)
-      build(elem)
-      elem.asInstanceOf[Output]
+      if (builder == null) makeElement().asInstanceOf[Output]
+      else builder.asInstanceOf[Output]
     }
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
     def apply(xs: Modifier*): TypedTag[Output] = {
-      this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
+      val dest =
+        if (builder != null) this
+        else this.copy(builder = makeElement())
+
+      xs.foreach(_.applyTo(dest.builder))
+      dest
     }
     override def toString = render.outerHTML
   }

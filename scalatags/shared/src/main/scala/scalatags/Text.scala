@@ -194,11 +194,7 @@ object Text
         if (builder != null) this
         else this.copy(builder = new Builder())
 
-      var i = 0
-      while(i < xs.length) {
-        xs(i).applyTo(dest.builder)
-        i += 1
-      }
+      xs.foreach(_.applyTo(dest.builder))
       dest
     }
 
