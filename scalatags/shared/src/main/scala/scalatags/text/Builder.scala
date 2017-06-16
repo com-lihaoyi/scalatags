@@ -2,8 +2,8 @@ package scalatags
 package text
 import acyclic.file
 
-import scala.reflect.ClassTag
 import scalatags.generic.Style
+
 
 /**
  * Object to aggregate the modifiers into one coherent data structure
@@ -13,42 +13,34 @@ import scalatags.generic.Style
  * exposes more of its internals than it probably should for performance,
  * so even though the stuff isn't private, don't touch it!
  */
-class Builder(var children: Array[Frag] = new Array(4),
-              var attrs: Array[(String, Builder.ValueSource)] = new Array(4)){
+class Builder(var children: Array[Frag] = null,
+              var attrs: Array[(String, Builder.ValueSource)] = null){
   final var childIndex = 0
   final var attrIndex = 0
 
-  private[this] def incrementChidren(arr: Array[Frag], index: Int) = {
-    if (index >= arr.length){
+  private[this] def incrementChildren(arr: Array[Frag], index: Int): Array[Frag] = {
+    if (children == null) new Array[Frag](4)
+    else if (index < arr.length) children
+    else {
       val newArr = new Array[Frag](arr.length * 2)
-      var i = 0
-      while(i < arr.length){
-        newArr(i) = arr(i)
-        i += 1
-      }
+      System.arraycopy(arr, 0, newArr, 0, arr.length)
       newArr
-    }else{
-      null
     }
   }
 
-  private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int) = {
-    if (index >= arr.length){
+  private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int)
+    : Array[(String, Builder.ValueSource)]= {
+    if (attrs == null) new Array(4)
+    else if (index < arr.length) attrs
+    else {
       val newArr = new Array[(String, Builder.ValueSource)](arr.length * 2)
-      var i = 0
-      while(i < arr.length){
-        newArr(i) = arr(i)
-        i += 1
-      }
+      System.arraycopy(arr, 0, newArr, 0, arr.length)
       newArr
-    }else{
-      null
     }
   }
 
   def addChild(c: Frag) = {
-    val newChildren = incrementChidren(children, childIndex)
-    if (newChildren != null) children = newChildren
+    children = incrementChildren(children, childIndex)
     children(childIndex) = c
     childIndex += 1
   }
@@ -57,8 +49,7 @@ class Builder(var children: Array[Frag] = new Array(4),
 
     attrIndex(k) match{
       case -1 =>
-        val newAttrs = incrementAttr(attrs, attrIndex)
-        if (newAttrs!= null) attrs = newAttrs
+        attrs = incrementAttr(attrs, attrIndex)
 
         attrs(attrIndex) = k -> v
         attrIndex += 1
