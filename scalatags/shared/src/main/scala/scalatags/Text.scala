@@ -77,11 +77,7 @@ object Text
     }
     implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
       def applyTo(c: StyleTree) = {
-//        val b = new Builder()
-//        s.applyTo(b)
-//        val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
-//        c.copy(styles = c.styles.updated(style, value))
-        ???
+        c.copy(styles = c.styles.updated(s.s.cssName, " " + s.v.toString + ";"))
       }
     }
 
@@ -160,11 +156,22 @@ object Text
      * ~4x from what it originally was, which is a pretty nice speedup
      */
     def writeTo(strb: StringBuilder): Unit = {
-      strb.append(builder.children.toString)
-      if (builder == null && void) {
-        // No children - close tag
-        strb ++= " />"
+      if (builder != null) {
+        strb.append(builder.children.toString)
+        if (builder.mode.isDefined && builder.mode.get != ""){
+          // Close any incomplete attributes
+          strb += '"'
+        }
       } else {
+        strb.append("<")
+        strb.append(tag)
+      }
+
+      if (void) strb ++= " />" // No children - close tag
+      else {
+        if (builder == null) strb += '>'
+        else if (builder.mode.isDefined) strb += '>'
+
         // Closing tag
         strb ++= "</" ++= tag += '>'
       }
@@ -181,7 +188,7 @@ object Text
         }
 
       val iter = xs.iterator
-      while(iter.nonEmpty){
+      while(iter.hasNext){
         iter.next().applyTo(dest.builder)
       }
       dest
