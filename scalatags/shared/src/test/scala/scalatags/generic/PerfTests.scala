@@ -89,7 +89,6 @@ trait PerfTests extends TestSuite{
         }
 
         name.padTo(20, ' ') + i + " in " + d
-
       }
     }
   }

@@ -54,7 +54,7 @@ object Text
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
     implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
     def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
-      TypedTag(tag, new Builder(), void)
+      TypedTag(tag, null, void)
     }
     implicit class SeqFrag[A <% Frag](xs: Seq[A]) extends Frag{
       Objects.requireNonNull(xs)
@@ -158,27 +158,30 @@ object Text
     def writeTo(strb: StringBuilder): Unit = {
       // tag
       strb += '<' ++= tag
-
       // attributes
-      var i = 0
-      while (i < builder.attrIndex){
-        val pair = builder.attrs(i)
-        strb += ' ' ++= pair._1 ++= "=\""
-        builder.appendAttrStrings(pair._2,strb)
-        strb += '\"'
-        i += 1
+      if (builder != null){
+        var i = 0
+        while (i < builder.attrIndex){
+          val pair = builder.attrs(i)
+          strb += ' ' ++= pair._1 ++= "=\""
+          builder.appendAttrStrings(pair._2,strb)
+          strb += '\"'
+          i += 1
+        }
       }
 
-      if (builder.childIndex == 0 && void) {
+      if ((builder == null || builder.childIndex == 0) && void) {
         // No children - close tag
         strb ++= " />"
       } else {
         strb += '>'
         // Childrens
-        var i = 0
-        while(i < builder.childIndex){
-          builder.children(i).writeTo(strb)
-          i += 1
+        if (builder != null){
+          var i = 0
+          while(i < builder.childIndex){
+            builder.children(i).writeTo(strb)
+            i += 1
+          }
         }
 
         // Closing tag
@@ -187,13 +190,16 @@ object Text
     }
 
     def apply(xs: Modifier*): TypedTag[Output] = {
+      val dest =
+        if (builder != null) this
+        else this.copy(builder = new Builder())
+
       var i = 0
       while(i < xs.length) {
-        xs(i).applyTo(builder)
+        xs(i).applyTo(dest.builder)
         i += 1
       }
-//      xs.foreach(_.applyTo(builder))
-      this
+      dest
     }
 
     /**
