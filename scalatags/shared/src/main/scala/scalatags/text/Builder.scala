@@ -46,25 +46,13 @@ class Builder(var children: Array[Frag] = new Array(4),
     }
   }
 
-  private[this] def increment[T: ClassTag](arr: Array[T], index: Int) = {
-    if (index >= arr.length){
-      val newArr = new Array[T](arr.length * 2)
-      var i = 0
-      while(i < arr.length){
-        newArr(i) = arr(i)
-        i += 1
-      }
-      newArr
-    }else{
-      null
-    }
-  }
   def addChild(c: Frag) = {
     val newChildren = incrementChidren(children, childIndex)
     if (newChildren != null) children = newChildren
     children(childIndex) = c
     childIndex += 1
   }
+
   def appendAttr(k: String, v: Builder.ValueSource) = {
 
     attrIndex(k) match{
@@ -97,18 +85,17 @@ class Builder(var children: Array[Frag] = new Array(4),
     v.appendAttrValue(sb)
   }
 
-  def attrsString(v: Builder.ValueSource): String = {
-    val sb = new StringBuilder
-    appendAttrStrings(v, sb)
-    sb.toString
-  }
-
-
-
   def attrIndex(k: String): Int = {
-    attrs.indexWhere(x => x != null && x._1 == k)
+    var i = 0
+    var found = -1
+    while(found == -1 && i < attrIndex){
+      if (attrs(i)._1 == k) found = i
+      i += 1
+    }
+    found
   }
 }
+
 object Builder{
 
   /**

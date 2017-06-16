@@ -74,10 +74,7 @@ object Text
     }
     implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
       def applyTo(c: StyleTree) = {
-        val b = new Builder()
-        s.applyTo(b)
-        val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
-        c.copy(styles = c.styles.updated(style, value))
+        c.copy(styles = c.styles.updated(s.s.cssName, " " + s.v.toString + ";"))
       }
     }
 
