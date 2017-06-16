@@ -74,10 +74,11 @@ object Text
     }
     implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
       def applyTo(c: StyleTree) = {
-        val b = new Builder()
-        s.applyTo(b)
-        val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
-        c.copy(styles = c.styles.updated(style, value))
+//        val b = new Builder()
+//        s.applyTo(b)
+//        val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
+//        c.copy(styles = c.styles.updated(style, value))
+        ???
       }
     }
 
@@ -119,7 +120,7 @@ object Text
 
   class GenericAttr[T] extends AttrValue[T] {
     def apply(t: text.Builder, a: Attr, v: T): Unit = {
-      t.setAttr(a.name, Builder.GenericAttrValueSource(v.toString))
+      t.appendAttr(a.name, Builder.GenericAttrValueSource(v.toString))
     }
   }
 
@@ -156,34 +157,12 @@ object Text
      * ~4x from what it originally was, which is a pretty nice speedup
      */
     def writeTo(strb: StringBuilder): Unit = {
-      // tag
-      strb += '<' ++= tag
-      // attributes
-      if (builder != null){
-        var i = 0
-        while (i < builder.attrIndex){
-          val pair = builder.attrs(i)
-          strb += ' ' ++= pair._1 ++= "=\""
-          builder.appendAttrStrings(pair._2,strb)
-          strb += '\"'
-          i += 1
-        }
-      }
+      strb.append(builder.children)
 
-      if ((builder == null || builder.childIndex == 0) && void) {
+      if (builder == null && void) {
         // No children - close tag
         strb ++= " />"
       } else {
-        strb += '>'
-        // Childrens
-        if (builder != null){
-          var i = 0
-          while(i < builder.childIndex){
-            builder.children(i).writeTo(strb)
-            i += 1
-          }
-        }
-
         // Closing tag
         strb ++= "</" ++= tag += '>'
       }
@@ -192,9 +171,13 @@ object Text
     def apply(xs: Modifier*): TypedTag[Output] = {
       val dest =
         if (builder != null) this
-        else this.copy(builder = new Builder())
+        else this.copy(builder = new Builder(new StringBuilder("<" + tag)))
 
-      xs.foreach(_.applyTo(dest.builder))
+      val iter = xs.iterator
+      while(iter.nonEmpty){
+        iter.next().applyTo(dest.builder)
+      }
+
       dest
     }
 
