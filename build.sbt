@@ -1,10 +1,12 @@
+
 scalaVersion := "2.11.8"
 
 crossScalaVersions := Seq("2.11.8", "2.10.6", "2.12.0")
 
 resolvers in ThisBuild += Resolver.sonatypeRepo("releases")
 
-lazy val scalatags = crossProject
+lazy val scalatags = _root_.sbtcrossproject.CrossPlugin.autoImport
+  .crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     organization := "com.lihaoyi",
     name := "scalatags",
@@ -13,8 +15,8 @@ lazy val scalatags = crossProject
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
       "com.lihaoyi" %% "acyclic" % "0.1.5" % "provided",
-      "com.lihaoyi" %%% "utest" % "0.4.4" % "test",
-      "com.lihaoyi" %%% "sourcecode" % "0.1.3",
+      "com.lihaoyi" %%% "utest" % "0.5.3" % "test",
+      "com.lihaoyi" %%% "sourcecode" % "0.1.4",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided"
     ) ++ (
       if (scalaVersion.value startsWith "2.10.")
@@ -23,7 +25,7 @@ lazy val scalatags = crossProject
           compilerPlugin("org.scalamacros" % s"paradise" % "2.1.0" cross CrossVersion.full)
         )
       else Nil
-    ),
+      ),
     unmanagedSourceDirectories in Compile ++= {
       if (scalaVersion.value startsWith "2.12.") Seq(baseDirectory.value / ".."/"shared"/"src"/ "main" / "scala-2.11")
       else Seq()
@@ -72,12 +74,15 @@ lazy val scalatags = crossProject
       s"-P:scalajs:mapSourceURI:$a->$g/${version.value}/scalatags/"
     }))
   )
+  .nativeSettings(
+    nativeLinkStubs := true
+  )
 
 
 // Needed, so sbt finds the projects
 lazy val scalatagsJVM = scalatags.jvm
 lazy val scalatagsJS = scalatags.js
-
+lazy val scalatagsNative = scalatags.native
 
 lazy val example = project.in(file("example"))
   .dependsOn(scalatagsJS)
