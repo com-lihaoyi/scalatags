@@ -169,7 +169,7 @@ case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extend
   "No AttrValue defined for type ${T}; scalatags does not know how to use ${T} as an attribute"
 )
 trait AttrValue[Builder, T]{
-  def apply(t: Builder, a: Attr, v: T)
+  def apply(t: Builder, a: Attr, v: T): Unit
 }
 
 /**

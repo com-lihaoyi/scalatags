@@ -1,5 +1,5 @@
 package example
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.JSExportTopLevel
 import org.scalajs.dom
 class Example[Builder, Output <: FragT, FragT]
              (val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
@@ -188,9 +188,9 @@ class Example[Builder, Output <: FragT, FragT]
     )
   }
 }
-@JSExport
+
+@JSExportTopLevel("ScalaJSExample")
 object ScalaJSExample {
-  @JSExport
   def main(t1: String, t2: String, t3: String, t4: String): Unit = {
     val textExample = new Example(scalatags.Text)
     val jsDomExample = new Example(scalatags.JsDom)
@@ -198,5 +198,6 @@ object ScalaJSExample {
     dom.document.getElementById(t2).innerHTML = textExample.svgFrag.render
     dom.document.getElementById(t3).appendChild(jsDomExample.htmlFrag.render)
     dom.document.getElementById(t4).appendChild(jsDomExample.svgFrag.render)
+    ()
   }
 }
