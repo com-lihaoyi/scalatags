@@ -57,7 +57,7 @@
           <div class="superTypes hiddenContent"><a href="Frag.html" class="extype" name="scalatags.generic.Frag">Frag</a>[<span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span>, <span class="extype" name="scalatags.generic.TypedTag.FragT">FragT</span>], <a href="Modifier.html" class="extype" name="scalatags.generic.Modifier">Modifier</a>[<span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
             <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="../Text$$TypedTag.html" class="extype" name="scalatags.Text.TypedTag">TypedTag</a>, <a href="../JsDom$$TypedTag.html" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a></div>
+            <div class="subClasses hiddenContent"><a href="../JsDom$$TypedTag.html" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a>, <a href="../Text$$TypedTag.html" class="extype" name="scalatags.Text.TypedTag">TypedTag</a></div>
           </div></div>
         
 
@@ -118,7 +118,26 @@
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="scalatags.generic.Modifier#applyTo" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+              <ol><li name="scalatags.generic.TypedTag#apply" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="apply(xs:scalatags.generic.Modifier[Builder]*):TypedTag.this.Self"></a>
+      <a id="apply(Modifier[Builder]*):Self"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="xs">xs: <a href="Modifier.html" class="extype" name="scalatags.generic.Modifier">Modifier</a>[<span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span>]*</span>)</span><span class="result">: <a href="#Self&lt;:scalatags.generic.TypedTag[Builder,Output,FragT]" class="extmbr" name="scalatags.generic.TypedTag.Self">Self</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.TypedTag@apply(xs:scalatags.generic.Modifier[Builder]*):TypedTag.this.Self" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Add the given modifications (e.g.</p><div class="fullcomment"><div class="comment cmt"><p>Add the given modifications (e.g. additional children, or new attributes)
+to the <a href="" class="extype" name="scalatags.generic.TypedTag">TypedTag</a>.
+</p></div></div>
+    </li><li name="scalatags.generic.Modifier#applyTo" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="applyTo(t:Builder):Unit"></a>
       <a id="applyTo(Builder):Unit"></a>
       <h4 class="signature">
@@ -138,57 +157,25 @@
 rendering is complete the effect of adding this modifier can be seen.</p><div class="fullcomment"><div class="comment cmt"><p>Applies this modifier to the specified <span class="extype" name="Builder">Builder</span>, such that when
 rendering is complete the effect of adding this modifier can be seen.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Modifier.html" class="extype" name="scalatags.generic.Modifier">Modifier</a></dd></dl></div>
-    </li><li name="scalatags.generic.TypedTag#builder" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="builder:Builder"></a>
-      <a id="builder:Builder"></a>
+    </li><li name="scalatags.generic.TypedTag#modifiers" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="modifiers:List[Seq[scalatags.generic.Modifier[Builder]]]"></a>
+      <a id="modifiers:List[Seq[Modifier[Builder]]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">builder</span><span class="result">: <span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span></span>
+        <span class="name">modifiers</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="Modifier.html" class="extype" name="scalatags.generic.Modifier">Modifier</a>[<span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span>]]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#scalatags.generic.TypedTag@builder:Builder" title="Permalink" target="_top">
+      <a href="../../index.html#scalatags.generic.TypedTag@modifiers:List[Seq[scalatags.generic.Modifier[Builder]]]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="scalatags.generic.TypedTag#copyWithBuilder" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="copyWithBuilder():scalatags.generic.TypedTag[Builder,Output,FragT]"></a>
-      <a id="copyWithBuilder():TypedTag[Builder,Output,FragT]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">copyWithBuilder</span><span class="params">()</span><span class="result">: <a href="" class="extype" name="scalatags.generic.TypedTag">TypedTag</a>[<span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span>, <span class="extype" name="scalatags.generic.TypedTag.Output">Output</span>, <span class="extype" name="scalatags.generic.TypedTag.FragT">FragT</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#scalatags.generic.TypedTag@copyWithBuilder():scalatags.generic.TypedTag[Builder,Output,FragT]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="scalatags.generic.TypedTag#makeBuilder" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="makeBuilder():Builder"></a>
-      <a id="makeBuilder():Builder"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">makeBuilder</span><span class="params">()</span><span class="result">: <span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#scalatags.generic.TypedTag@makeBuilder():Builder" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
+      <p class="shortcomment cmt">The modifiers that are applied to a TypedTag are kept in this linked-Seq
+(which are actually WrappedArrays) data-structure in order for maximum
+performance.</p>
     </li><li name="scalatags.generic.TypedTag#render" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="render:Output"></a>
       <a id="render:Output"></a>
@@ -281,25 +268,6 @@ rendering is complete the effect of adding this modifier can be seen.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scalatags.generic.TypedTag#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(xs:scalatags.generic.Modifier[Builder]*):scalatags.generic.TypedTag[Builder,Output,FragT]"></a>
-      <a id="apply(Modifier[Builder]*):TypedTag[Builder,Output,FragT]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="xs">xs: <a href="Modifier.html" class="extype" name="scalatags.generic.Modifier">Modifier</a>[<span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span>]*</span>)</span><span class="result">: <a href="" class="extype" name="scalatags.generic.TypedTag">TypedTag</a>[<span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span>, <span class="extype" name="scalatags.generic.TypedTag.Output">Output</span>, <span class="extype" name="scalatags.generic.TypedTag.FragT">FragT</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#scalatags.generic.TypedTag@apply(xs:scalatags.generic.Modifier[Builder]*):scalatags.generic.TypedTag[Builder,Output,FragT]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Add the given modifications (e.g.</p><div class="fullcomment"><div class="comment cmt"><p>Add the given modifications (e.g. additional children, or new attributes)
-to the <a href="" class="extype" name="scalatags.generic.TypedTag">TypedTag</a>.
-</p></div></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -317,6 +285,25 @@ to the <a href="" class="extype" name="scalatags.generic.TypedTag">TypedTag</a>.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scalatags.generic.TypedTag#build" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="build(b:Builder):Unit"></a>
+      <a id="build(Builder):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">build</span><span class="params">(<span name="b">b: <span class="extype" name="scalatags.generic.TypedTag.Builder">Builder</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#scalatags.generic.TypedTag@build(b:Builder):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Walks the <a href="#modifiers:List[Seq[scalatags.generic.Modifier[Builder]]]" class="extmbr" name="scalatags.generic.TypedTag#modifiers">modifiers</a> to apply them to a particular <span class="extype" name="Builder">Builder</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Walks the <a href="#modifiers:List[Seq[scalatags.generic.Modifier[Builder]]]" class="extmbr" name="scalatags.generic.TypedTag#modifiers">modifiers</a> to apply them to a particular <span class="extype" name="Builder">Builder</span>.
+Super sketchy/procedural for max performance.
+</p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>

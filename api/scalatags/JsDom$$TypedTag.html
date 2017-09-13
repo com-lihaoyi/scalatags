@@ -45,7 +45,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">TypedTag</span><span class="tparams">[<span name="Output">+Output &lt;: <span class="extype" name="org.scalajs.dom.Element">Element</span></span>]</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="builder">builder: <span class="extype" name="org.scalajs.dom.Element">Element</span></span>, <span name="void">void: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="namespace">namespace: <a href="generic/Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a></span>)</span><span class="result"> extends <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">generic.TypedTag</a>[<span class="extype" name="org.scalajs.dom.Element">Element</span>, <span class="extype" name="scalatags.JsDom.TypedTag.Output">Output</span>, <span class="extype" name="org.scalajs.dom.Node">Node</span>] with <a href="jsdom/Frag.html" class="extype" name="scalatags.jsdom.Frag">jsdom.Frag</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">TypedTag</span><span class="tparams">[<span name="Output">+Output &lt;: <span class="extype" name="org.scalajs.dom.Element">Element</span></span>]</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="modifiers">modifiers: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="JsDom$.html#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.JsDom.Modifier">JsDom.Modifier</a>]]</span>, <span name="void">void: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="namespace">namespace: <a href="generic/Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a></span>)</span><span class="result"> extends <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">generic.TypedTag</a>[<span class="extype" name="org.scalajs.dom.Element">Element</span>, <span class="extype" name="scalatags.JsDom.TypedTag.Output">Output</span>, <span class="extype" name="org.scalajs.dom.Node">Node</span>] with <a href="jsdom/Frag.html" class="extype" name="scalatags.jsdom.Frag">jsdom.Frag</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -89,7 +89,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="scalatags.JsDom.TypedTag#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(tag:String,builder:org.scalajs.dom.Element,void:Boolean,namespace:scalatags.generic.Namespace):scalatags.JsDom.TypedTag[Output]"></a>
+      <a id="&lt;init&gt;(tag:String,modifiers:List[Seq[scalatags.JsDom.Modifier]],void:Boolean,namespace:scalatags.generic.Namespace):scalatags.JsDom.TypedTag[Output]"></a>
       <a id="&lt;init&gt;:TypedTag[Output]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -97,10 +97,10 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">TypedTag</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="builder">builder: <span class="extype" name="org.scalajs.dom.Element">Element</span></span>, <span name="void">void: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="namespace">namespace: <a href="generic/Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a></span>)</span>
+        <span class="name">TypedTag</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="modifiers">modifiers: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="JsDom$.html#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.JsDom.Modifier">JsDom.Modifier</a>]]</span>, <span name="void">void: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="namespace">namespace: <a href="generic/Namespace.html" class="extype" name="scalatags.generic.Namespace">Namespace</a></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#scalatags.JsDom$$TypedTag@&lt;init&gt;(tag:String,builder:org.scalajs.dom.Element,void:Boolean,namespace:scalatags.generic.Namespace):scalatags.JsDom.TypedTag[Output]" title="Permalink" target="_top">
+      <a href="../index.html#scalatags.JsDom$$TypedTag@&lt;init&gt;(tag:String,modifiers:List[Seq[scalatags.JsDom.Modifier]],void:Boolean,namespace:scalatags.generic.Namespace):scalatags.JsDom.TypedTag[Output]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -185,25 +185,24 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scalatags.generic.TypedTag#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(xs:scalatags.generic.Modifier[Builder]*):scalatags.generic.TypedTag[Builder,Output,FragT]"></a>
-      <a id="apply(generic.Modifier[Element]*):generic.TypedTag[Element,Output,Node]"></a>
+    </li><li name="scalatags.JsDom.TypedTag#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(xs:scalatags.JsDom.Modifier*):scalatags.JsDom.TypedTag[Output]"></a>
+      <a id="apply(JsDom.Modifier*):TypedTag[Output]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="xs">xs: <a href="generic/Modifier.html" class="extype" name="scalatags.generic.Modifier">generic.Modifier</a>[<span class="extype" name="org.scalajs.dom.Element">Element</span>]*</span>)</span><span class="result">: <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">generic.TypedTag</a>[<span class="extype" name="org.scalajs.dom.Element">Element</span>, <span class="extype" name="scalatags.JsDom.TypedTag.Output">Output</span>, <span class="extype" name="org.scalajs.dom.Node">Node</span>]</span>
+        <span class="name">apply</span><span class="params">(<span name="xs">xs: <a href="JsDom$.html#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.JsDom.Modifier">JsDom.Modifier</a>*</span>)</span><span class="result">: <a href="" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a>[<span class="extype" name="scalatags.JsDom.TypedTag.Output">Output</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#scalatags.JsDom$$TypedTag@apply(xs:scalatags.generic.Modifier[Builder]*):scalatags.generic.TypedTag[Builder,Output,FragT]" title="Permalink" target="_top">
+      <a href="../index.html#scalatags.JsDom$$TypedTag@apply(xs:scalatags.JsDom.Modifier*):scalatags.JsDom.TypedTag[Output]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Add the given modifications (e.g.</p><div class="fullcomment"><div class="comment cmt"><p>Add the given modifications (e.g. additional children, or new attributes)
-to the <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a>.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a></dd></dl></div>
+      <p class="shortcomment cmt">Trivial override, not strictly necessary, but it makes IntelliJ happy...</p><div class="fullcomment"><div class="comment cmt"><p>Trivial override, not strictly necessary, but it makes IntelliJ happy...
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a> → <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a></dd></dl></div>
     </li><li name="scalatags.jsdom.Frag#applyTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="applyTo(b:org.scalajs.dom.Element):Unit"></a>
       <a id="applyTo(Element):Unit"></a>
@@ -241,23 +240,25 @@ rendering is complete the effect of adding this modifier can be seen.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.JsDom.TypedTag#builder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="builder:org.scalajs.dom.Element"></a>
-      <a id="builder:Element"></a>
+    </li><li name="scalatags.generic.TypedTag#build" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="build(b:Builder):Unit"></a>
+      <a id="build(Element):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">builder</span><span class="result">: <span class="extype" name="org.scalajs.dom.Element">Element</span></span>
+        <span class="name">build</span><span class="params">(<span name="b">b: <span class="extype" name="org.scalajs.dom.Element">Element</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#scalatags.JsDom$$TypedTag@builder:org.scalajs.dom.Element" title="Permalink" target="_top">
+      <a href="../index.html#scalatags.JsDom$$TypedTag@build(b:Builder):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a> → <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a></dd></dl></div>
+      <p class="shortcomment cmt">Walks the <a href="generic/TypedTag.html#modifiers:List[Seq[scalatags.generic.Modifier[Builder]]]" class="extmbr" name="scalatags.generic.TypedTag#modifiers">modifiers</a> to apply them to a particular <span class="extype" name="Builder">Builder</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Walks the <a href="generic/TypedTag.html#modifiers:List[Seq[scalatags.generic.Modifier[Builder]]]" class="extmbr" name="scalatags.generic.TypedTag#modifiers">modifiers</a> to apply them to a particular <span class="extype" name="Builder">Builder</span>.
+Super sketchy/procedural for max performance.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -281,23 +282,6 @@ rendering is complete the effect of adding this modifier can be seen.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalatags.JsDom.TypedTag#copyWithBuilder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="copyWithBuilder():scalatags.JsDom.TypedTag[Nothing]"></a>
-      <a id="copyWithBuilder():TypedTag[Nothing]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">copyWithBuilder</span><span class="params">()</span><span class="result">: <a href="" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a>[<span class="extype" name="scala.Nothing">Nothing</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#scalatags.JsDom$$TypedTag@copyWithBuilder():scalatags.JsDom.TypedTag[Nothing]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a> → <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -372,23 +356,28 @@ rendering is complete the effect of adding this modifier can be seen.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scalatags.JsDom.TypedTag#makeBuilder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="makeBuilder():org.scalajs.dom.raw.Element"></a>
-      <a id="makeBuilder():Element"></a>
+    </li><li name="scalatags.JsDom.TypedTag#modifiers" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="modifiers:List[Seq[scalatags.JsDom.Modifier]]"></a>
+      <a id="modifiers:List[Seq[JsDom.Modifier]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">makeBuilder</span><span class="params">()</span><span class="result">: <span class="extype" name="org.scalajs.dom.raw.Element">Element</span></span>
+        <span class="name">modifiers</span><span class="result">: <span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="JsDom$.html#Modifier=scalatags.generic.Modifier[Builder]" class="extmbr" name="scalatags.JsDom.Modifier">JsDom.Modifier</a>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#scalatags.JsDom$$TypedTag@makeBuilder():org.scalajs.dom.raw.Element" title="Permalink" target="_top">
+      <a href="../index.html#scalatags.JsDom$$TypedTag@modifiers:List[Seq[scalatags.JsDom.Modifier]]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a> → <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a></dd></dl></div>
+      <p class="shortcomment cmt">The modifiers that are applied to a TypedTag are kept in this linked-Seq
+(which are actually WrappedArrays) data-structure in order for maximum
+performance.</p><div class="fullcomment"><div class="comment cmt"><p>The modifiers that are applied to a TypedTag are kept in this linked-Seq
+(which are actually WrappedArrays) data-structure in order for maximum
+performance.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="scalatags.JsDom.TypedTag">TypedTag</a> → <a href="generic/TypedTag.html" class="extype" name="scalatags.generic.TypedTag">TypedTag</a></dd></dl></div>
     </li><li name="scalatags.JsDom.TypedTag#namespace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="namespace:scalatags.generic.Namespace"></a>
       <a id="namespace:Namespace"></a>
