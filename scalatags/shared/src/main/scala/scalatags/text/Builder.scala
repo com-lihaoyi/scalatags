@@ -2,8 +2,8 @@ package scalatags
 package text
 import acyclic.file
 
-import scala.reflect.ClassTag
 import scalatags.generic.Style
+
 
 /**
  * Object to aggregate the modifiers into one coherent data structure
@@ -13,64 +13,42 @@ import scalatags.generic.Style
  * exposes more of its internals than it probably should for performance,
  * so even though the stuff isn't private, don't touch it!
  */
-class Builder(var children: Array[Frag] = new Array(4),
-              var attrs: Array[(String, Builder.ValueSource)] = new Array(4)){
+class Builder(var children: Array[Frag] = null,
+              var attrs: Array[(String, Builder.ValueSource)] = null){
   final var childIndex = 0
   final var attrIndex = 0
 
-  private[this] def incrementChidren(arr: Array[Frag], index: Int) = {
-    if (index >= arr.length){
+  private[this] def incrementChildren(arr: Array[Frag], index: Int) = {
+    if (children == null) new Array[Frag](4)
+    else if (index < arr.length) children
+    else {
       val newArr = new Array[Frag](arr.length * 2)
-      var i = 0
-      while(i < arr.length){
-        newArr(i) = arr(i)
-        i += 1
-      }
+      System.arraycopy(arr, 0, newArr, 0, arr.length)
       newArr
-    }else{
-      null
     }
   }
 
   private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int) = {
-    if (index >= arr.length){
+    if (attrs == null) new Array[(String, Builder.ValueSource)](4)
+    else if (index < arr.length) attrs
+    else {
       val newArr = new Array[(String, Builder.ValueSource)](arr.length * 2)
-      var i = 0
-      while(i < arr.length){
-        newArr(i) = arr(i)
-        i += 1
-      }
+      System.arraycopy(arr, 0, newArr, 0, arr.length)
       newArr
-    }else{
-      null
     }
   }
 
-  private[this] def increment[T: ClassTag](arr: Array[T], index: Int) = {
-    if (index >= arr.length){
-      val newArr = new Array[T](arr.length * 2)
-      var i = 0
-      while(i < arr.length){
-        newArr(i) = arr(i)
-        i += 1
-      }
-      newArr
-    }else{
-      null
-    }
-  }
   def addChild(c: Frag) = {
-    val newChildren = incrementChidren(children, childIndex)
-    if (newChildren != null) children = newChildren
+    children = incrementChildren(children, childIndex)
     children(childIndex) = c
     childIndex += 1
   }
+
   def appendAttr(k: String, v: Builder.ValueSource) = {
 
     attrIndex(k) match{
       case -1 =>
-        val newAttrs = incrementAttr(attrs, attrIndex)
-        if (newAttrs!= null) attrs = newAttrs
+        attrs = incrementAttr(attrs, attrIndex)
 
         attrs(attrIndex) = k -> v
         attrIndex += 1
@@ -79,36 +57,22 @@ class Builder(var children: Array[Frag] = new Array(4),
         attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
     }
   }
-  def setAttr(k: String, v: Builder.ValueSource) = {
-    attrIndex(k) match{
-      case -1 =>
-        val newAttrs = incrementAttr(attrs, attrIndex)
-        if (newAttrs!= null) attrs = newAttrs
-        attrs(attrIndex) = k -> v
-        attrIndex += 1
-      case n =>
-        val (oldK, oldV) = attrs(n)
-        attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
-    }
-  }
-
 
   def appendAttrStrings(v: Builder.ValueSource, sb: StringBuilder): Unit = {
     v.appendAttrValue(sb)
   }
 
-  def attrsString(v: Builder.ValueSource): String = {
-    val sb = new StringBuilder
-    appendAttrStrings(v, sb)
-    sb.toString
-  }
-
-
-
   def attrIndex(k: String): Int = {
-    attrs.indexWhere(x => x != null && x._1 == k)
+    var i = 0
+    var found = -1
+    while(found == -1 && i < attrIndex){
+      if (attrs(i)._1 == k) found = i
+      i += 1
+    }
+    found
   }
 }
+
 object Builder{
 
   /**
