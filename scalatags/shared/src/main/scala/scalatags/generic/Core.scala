@@ -44,39 +44,6 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
   def tag: String
 
   /**
-   * The modifiers that are applied to a TypedTag are kept in this linked-Seq
-   * (which are actually WrappedArrays) data-structure in order for maximum
-   * performance.
-   */
-  def modifiers: List[Seq[Modifier[Builder]]]
-
-  /**
-   * Walks the [[modifiers]] to apply them to a particular [[Builder]].
-   * Super sketchy/procedural for max performance.
-   */
-  def build(b: Builder): Unit = {
-    var current = modifiers
-    val arr = new Array[Seq[Modifier[Builder]]](modifiers.length)
-
-    var i = 0
-    while(current != Nil){
-      arr(i) = current.head
-      current =  current.tail
-      i += 1
-    }
-
-    var j = arr.length
-    while (j > 0) {
-      j -= 1
-      val frag = arr(j)
-      var i = 0
-      while(i < frag.length){
-        frag(i).applyTo(b)
-        i += 1
-      }
-    }
-  }
-  /**
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[TypedTag]].
    */

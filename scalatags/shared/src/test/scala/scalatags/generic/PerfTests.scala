@@ -8,8 +8,8 @@ class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder,
   import generic.PerfTests._
 
   def para(n: Int, m: generic.Modifier[Builder]*) = p(
-    m,
-    title := ("this is paragraph " + n)
+    title := ("this is paragraph " + n),
+    m
   )
 
   def calc() = {
@@ -89,7 +89,6 @@ trait PerfTests extends TestSuite{
         }
 
         name.padTo(20, ' ') + i + " in " + d
-
       }
     }
   }

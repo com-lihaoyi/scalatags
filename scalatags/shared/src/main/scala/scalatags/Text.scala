@@ -54,11 +54,14 @@ object Text
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
     implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
     def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
-      TypedTag(tag, Nil, void)
+      TypedTag(tag, null, void)
     }
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
+      def applyTo(t: text.Builder) = {
+        val i = xs.iterator
+        while(i.hasNext) i.next().applyTo(t)
+      }
       def render = xs.map(_.render).mkString
     }
   }
@@ -74,10 +77,7 @@ object Text
     }
     implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
       def applyTo(c: StyleTree) = {
-        val b = new Builder()
-        s.applyTo(b)
-        val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
-        c.copy(styles = c.styles.updated(style, value))
+        c.copy(styles = c.styles.updated(s.s.cssName, " " + s.v.toString + ";"))
       }
     }
 
@@ -119,7 +119,7 @@ object Text
 
   class GenericAttr[T] extends AttrValue[T] {
     def apply(t: text.Builder, a: Attr, v: T): Unit = {
-      t.setAttr(a.name, Builder.GenericAttrValueSource(v.toString))
+      t.appendAttr(a.name, Builder.GenericAttrValueSource(v.toString))
     }
   }
 
@@ -138,9 +138,8 @@ object Text
   }
 
 
-
   case class TypedTag[+Output <: String](tag: String = "",
-                                         modifiers: List[Seq[Modifier]],
+                                         builder: Builder,
                                          void: Boolean = false)
                                          extends generic.TypedTag[text.Builder, Output, String]
                                          with text.Frag{
@@ -157,33 +156,21 @@ object Text
      * ~4x from what it originally was, which is a pretty nice speedup
      */
     def writeTo(strb: StringBuilder): Unit = {
-      val builder = new text.Builder()
-      build(builder)
-
-      // tag
-      strb += '<' ++= tag
-
-      // attributes
-      var i = 0
-      while (i < builder.attrIndex){
-        val pair = builder.attrs(i)
-        strb += ' ' ++= pair._1 ++= "=\""
-        builder.appendAttrStrings(pair._2,strb)
-        strb += '\"'
-        i += 1
+      if (builder != null) {
+        strb.append(builder.children.toString)
+        if (builder.mode.isDefined && builder.mode.get != ""){
+          // Close any incomplete attributes
+          strb += '"'
+        }
+      } else {
+        strb.append("<")
+        strb.append(tag)
       }
 
-      if (builder.childIndex == 0 && void) {
-        // No children - close tag
-        strb ++= " />"
-      } else {
-        strb += '>'
-        // Childrens
-        var i = 0
-        while(i < builder.childIndex){
-          builder.children(i).writeTo(strb)
-          i += 1
-        }
+      if (void) strb ++= " />" // No children - close tag
+      else {
+        if (builder == null) strb += '>'
+        else if (builder.mode.isDefined) strb += '>'
 
         // Closing tag
         strb ++= "</" ++= tag += '>'
@@ -191,7 +178,20 @@ object Text
     }
 
     def apply(xs: Modifier*): TypedTag[Output] = {
-      this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
+      val dest =
+        if (builder != null) this
+        else {
+          val b = new StringBuilder()
+          b.append('<')
+          b.append(tag)
+          this.copy(builder = new Builder(b))
+        }
+
+      val iter = xs.iterator
+      while(iter.hasNext){
+        iter.next().applyTo(dest.builder)
+      }
+      dest
     }
 
     /**
@@ -204,6 +204,4 @@ object Text
     }
     def render: Output = this.toString.asInstanceOf[Output]
   }
-
-
 }
