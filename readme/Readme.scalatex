@@ -1104,7 +1104,7 @@
     @sect{0.6.7}
       @ul
         @li
-         Experimental support for Scala.js
+         Experimental support for Scala Native
 
     @sect{0.6.5}
       @ul
