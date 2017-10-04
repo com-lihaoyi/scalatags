@@ -66,7 +66,8 @@ object JsDom
       def applyTo(c: StyleTree) = {
         val b = dom.document.createElement("div")
         s.applyTo(b)
-        val Array(style, value) = b.getAttribute("style").split(":", 2)
+        val Array(style, value) = Option(b.getAttribute("style")).map(_.split(":", 2))
+          .getOrElse(throw new IllegalArgumentException(s"Cannot apply style $s. Does it contain a syntax error?"))
         c.copy(styles = c.styles.updated(style, value))
       }
     }
