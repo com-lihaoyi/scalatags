@@ -1094,7 +1094,7 @@
         @li
           Cross compiles to run on both JVM and Javascript via @lnk("ScalaJS", "https://github.com/scala-js/scala-js"), which is a property few other engines (e.g. @lnk("Mustache", "http://mustache.github.io/")) have.
         @li
-          @lnk("Blazing fast", "#performance")
+          @lnk("Blazing fast", "#Performance")
       @p
         Scalatags is still a work in progress, but I think I've hit most of the pain points I was feeling with the old systems, and hope to continually improve it over time. Pull requests are welcome!
 
