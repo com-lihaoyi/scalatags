@@ -987,6 +987,14 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    * MDN	
    */
    lazy val wrap = attr("wrap")	
+  /**
+    * This Boolean attribute is set to indicate to a browser that the script is
+    * meant to be executed after the document has been parsed, but before firing
+    * DOMContentLoaded
+    *
+    * MDN
+    */
+  lazy val defer = attr("defer").empty
 
 
   /**
