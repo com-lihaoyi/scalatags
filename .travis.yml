@@ -1,25 +1,25 @@
 language: scala
 
 script:
-  - sbt ++2.11.11 readme/run
+  - sbt ++2.11.12 readme/run
   - sbt ++$TRAVIS_SCALA_VERSION scalatagsJVM/test scalatagsJS/test
 
 scala:
-  - 2.10.6
-  - 2.11.11
-  - 2.12.3
+  - 2.10.7
+  - 2.11.12
+  - 2.12.7
 
 jdk:
   - openjdk7
   - oraclejdk8
 
 env:
-  - SCALAJS_VERSION="0.6.19"
-  - SCALAJS_VERSION="1.0.0-M1"
+  - SCALAJS_VERSION="0.6.25"
+  - SCALAJS_VERSION="1.0.0-M5
 
 matrix:
   exclude:
-    - scala: 2.12.3
+    - scala: 2.12.7
       jdk: openjdk7
 
 sudo: false
