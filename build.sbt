@@ -1,8 +1,8 @@
-import sbtcrossproject.{crossProject, CrossType}
+import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.11.12"
 
-crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.3")
+crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.7")
 
 resolvers in ThisBuild += Resolver.sonatypeRepo("releases")
 
@@ -10,7 +10,7 @@ lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .settings(
     organization := "com.lihaoyi",
     name := "scalatags",
-    scalaVersion := "2.11.11",
+    scalaVersion := "2.11.12",
 
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
@@ -83,7 +83,7 @@ lazy val example = project.in(file("example"))
   .dependsOn(scalatagsJS)
   .enablePlugins(ScalaJSPlugin)
   .settings(
-    scalaVersion := "2.11.11",
+    scalaVersion := "2.11.12",
     scalacOptions ++= Seq(
       "-deprecation", // warning and location for usages of deprecated APIs
       "-feature", // warning and location for usages of features that should be imported explicitly
@@ -104,7 +104,7 @@ lazy val readme = scalatex.ScalatexReadme(
   source = "Readme",
   autoResources = Seq("Autocomplete.png", "ErrorHighlighting.png", "InlineDocs.png", "example-opt.js")
 ).settings(
-  scalaVersion := "2.11.11",
+  scalaVersion := "2.11.12",
   (unmanagedSources in Compile) += baseDirectory.value/".."/"project"/"Constants.scala",
   (resources in Compile) += (fullOptJS in (example, Compile)).value.data,
   (resources in Compile) += (doc in (scalatagsJS, Compile)).value,
