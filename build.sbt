@@ -2,7 +2,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 scalaVersion := "2.11.12"
 
-crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.7")
+crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-M5")
 
 resolvers in ThisBuild += Resolver.sonatypeRepo("releases")
 
@@ -14,23 +14,13 @@ lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
 
     autoCompilerPlugins := true,
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %% "acyclic" % "0.1.7" % "provided",
-      "com.lihaoyi" %%% "utest" % "0.5.3" % "test",
-      "com.lihaoyi" %%% "sourcecode" % "0.1.4",
-      "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided"
-    ) ++ (
-      if (scalaVersion.value startsWith "2.10.") Seq(
-          "org.scalamacros" %% s"quasiquotes" % "2.1.0" % "provided",
-          compilerPlugin("org.scalamacros" % s"paradise" % "2.1.0" cross CrossVersion.full)
-      ) else Seq(
-        "org.scala-lang.modules" %% "scala-xml" % "1.0.6" % "test"
-      )
+      "com.lihaoyi" %% "acyclic" % "0.1.8" % "provided",
+      "com.lihaoyi" %%% "utest" % "0.6.6" % "test",
+      "com.lihaoyi" %%% "sourcecode" % "0.1.5",
+      "org.scala-lang" % "scala-reflect" % scalaVersion.value % "provided",
+      "org.scala-lang.modules" %% "scala-xml" % "1.1.1" % "test"
     ),
-    addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.7"),
-    unmanagedSourceDirectories in Compile ++= {
-      if (scalaVersion.value startsWith "2.12.") Seq(baseDirectory.value / ".."/"shared"/"src"/ "main" / "scala-2.11")
-      else Seq()
-    },
+    addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.8"),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     // Sonatype
     version := _root_.scalatags.Constants.version,
@@ -59,7 +49,7 @@ lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .jvmSettings()
   .jsSettings(
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.9.3"
+      "org.scala-js" %%% "scalajs-dom" % "0.9.6"
     ),
     scalaJSStage in Test := FullOptStage,
     jsEnv := new org.scalajs.jsenv.phantomjs.PhantomJSEnv(),

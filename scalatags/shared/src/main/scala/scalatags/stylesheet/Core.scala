@@ -2,7 +2,7 @@ package scalatags.stylesheet
 
 import acyclic.file
 
-import scala.collection.SortedMap
+import scala.collection.immutable.SortedMap
 
 /**
  * A structure representing a set of CSS rules which has not been

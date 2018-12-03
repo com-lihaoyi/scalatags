@@ -1,5 +1,5 @@
 // 0.6.20 breaks Java7 - https://github.com/scala-js/scala-js/issues/3128
-val scalaJSVersion = Option(System.getenv("SCALAJS_VERSION")).getOrElse("0.6.25")
+val scalaJSVersion = Option(System.getenv("SCALAJS_VERSION")).getOrElse("0.6.26")
 
 addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.0")
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % scalaJSVersion)
