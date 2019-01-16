@@ -2,7 +2,7 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 scalaVersion := "2.11.12"
 
-crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-M5")
+crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0-M5")
 
 resolvers in ThisBuild += Resolver.sonatypeRepo("releases")
 
