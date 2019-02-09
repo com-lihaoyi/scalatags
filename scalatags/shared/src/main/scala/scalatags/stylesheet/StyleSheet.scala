@@ -1,8 +1,8 @@
 package scalatags.stylesheet
 import acyclic.file
 import scala.language.experimental.macros
-import scala.collection.SortedMap
-import scalatags.ScalaVersionStubs.Context
+import scala.collection.immutable.SortedMap
+import scala.reflect.macros.Context
 
 
 /**
