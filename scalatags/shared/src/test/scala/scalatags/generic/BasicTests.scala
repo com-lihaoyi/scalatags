@@ -157,6 +157,29 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     'specialChars- {
       * - intercept[java.lang.IllegalArgumentException](div(attr("[(ngModel)]") := "myModel"))
     }
+    'repeatingAttrs- {
+      // #139
+      object Foo extends scalatags.stylesheet.StyleSheet{
+        val myCls = cls(color := "red")
+      }
+      strCheck(
+        div(Foo.myCls, cls := "red"),
+        """<div class="scalatags-generic-BasicTests-Foo-myCls red"></div>"""
+      )
+      strCheck(
+        div(cls := "red", Foo.myCls),
+        """<div class="red scalatags-generic-BasicTests-Foo-myCls"></div>"""
+      )
+      // #169
+      strCheck(
+        input(cls := "a", cls := "b"),
+        """<input class="a b"/>"""
+      )
+      strCheck(
+        input(cls := "a")(cls := "b"),
+        """<input class="a b"/>"""
+      )
+    }
 
   }
 }
