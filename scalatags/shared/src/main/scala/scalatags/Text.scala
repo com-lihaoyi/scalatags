@@ -68,7 +68,6 @@ object Text
       def applyTo(t: text.Builder) = t.appendAttr("class",this)
 
       override def appendAttrValue(sb: StringBuilder): Unit = {
-        sb.append(' ')
         Escaping.escape(s.name, sb)
       }
     }
