@@ -1,4 +1,6 @@
 package scalatags
+import java.lang.{StringBuilder => jStringBuilder}
+
 import acyclic.file
 /**
  * Utility methods related to validating and escaping XML; used internally but
@@ -45,7 +47,7 @@ object Escaping {
   /**
    * Code to escape text HTML nodes. Taken from scala.xml
    */
-  def escape(text: String, s: StringBuilder) = {
+  def escape(text: String, s: jStringBuilder) = {
     // Implemented per XML spec:
     // http://www.w3.org/International/questions/qa-controls
     // imperative code 3x-4x faster than current implementation
@@ -62,8 +64,7 @@ object Escaping {
         case '\n' => s.append('\n')
         case '\r' => s.append('\r')
         case '\t' => s.append('\t')
-        case c if c < ' ' =>
-        case c => s.append(c)
+        case c => if (c >= ' ') s.append(c)
       }
       pos += 1
     }

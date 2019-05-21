@@ -1,5 +1,6 @@
 package scalatags
 import java.util.Objects
+import java.lang.{StringBuilder => jStringBuilder}
 
 import acyclic.file
 
@@ -67,7 +68,7 @@ object Text
     implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with text.Builder.ValueSource{
       def applyTo(t: text.Builder) = t.appendAttr("class",this)
 
-      override def appendAttrValue(sb: StringBuilder): Unit = {
+      override def appendAttrValue(sb: jStringBuilder): Unit = {
         Escaping.escape(s.name, sb)
       }
     }
@@ -102,18 +103,18 @@ object Text
   case class StringFrag(v: String) extends text.Frag{
     Objects.requireNonNull(v)
     def render = {
-      val strb = new StringBuilder()
+      val strb = new jStringBuilder()
       writeTo(strb)
       strb.toString()
     }
-    def writeTo(strb: StringBuilder) = Escaping.escape(v, strb)
+    def writeTo(strb: jStringBuilder) = Escaping.escape(v, strb)
   }
   object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends text.Frag {
     Objects.requireNonNull(v)
     def render = v
-    def writeTo(strb: StringBuilder) = strb ++= v
+    def writeTo(strb: jStringBuilder) = strb.append(v)
   }
 
   class GenericAttr[T] extends AttrValue[T] {
@@ -155,28 +156,28 @@ object Text
      * because I've inlined a whole lot of things to improve the performance of this code
      * ~4x from what it originally was, which is a pretty nice speedup
      */
-    def writeTo(strb: StringBuilder): Unit = {
+    def writeTo(strb: jStringBuilder): Unit = {
       val builder = new text.Builder()
       build(builder)
 
       // tag
-      strb += '<' ++= tag
+      strb.append('<').append(tag)
 
       // attributes
       var i = 0
       while (i < builder.attrIndex){
         val pair = builder.attrs(i)
-        strb += ' ' ++= pair._1 ++= "=\""
+        strb.append(' ').append(pair._1).append("=\"")
         builder.appendAttrStrings(pair._2,strb)
-        strb += '\"'
+        strb.append('"')
         i += 1
       }
 
       if (builder.childIndex == 0 && void) {
         // No children - close tag
-        strb ++= " />"
+        strb.append(" />")
       } else {
-        strb += '>'
+        strb.append('>')
         // Childrens
         var i = 0
         while(i < builder.childIndex){
@@ -185,7 +186,7 @@ object Text
         }
 
         // Closing tag
-        strb ++= "</" ++= tag += '>'
+        strb.append("</").append(tag).append('>')
       }
     }
 
@@ -197,7 +198,7 @@ object Text
      * Converts an ScalaTag fragment into an html string
      */
     override def toString = {
-      val strb = new StringBuilder
+      val strb = new jStringBuilder
       writeTo(strb)
       strb.toString()
     }

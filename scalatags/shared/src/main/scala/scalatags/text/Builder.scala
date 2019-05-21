@@ -1,5 +1,7 @@
 package scalatags
 package text
+import java.lang.{StringBuilder => jStringBuilder}
+
 import acyclic.file
 
 import scala.reflect.ClassTag
@@ -93,12 +95,12 @@ class Builder(var children: Array[Frag] = new Array(4),
   }
 
 
-  def appendAttrStrings(v: Builder.ValueSource, sb: StringBuilder): Unit = {
+  def appendAttrStrings(v: Builder.ValueSource, sb: jStringBuilder): Unit = {
     v.appendAttrValue(sb)
   }
 
   def attrsString(v: Builder.ValueSource): String = {
-    val sb = new StringBuilder
+    val sb = new jStringBuilder
     appendAttrStrings(v, sb)
     sb.toString
   }
@@ -119,34 +121,34 @@ object Builder{
     * string.
     */
   trait ValueSource {
-    def appendAttrValue(strb: StringBuilder): Unit
+    def appendAttrValue(strb: jStringBuilder): Unit
   }
   case class StyleValueSource(s: Style, v: String) extends ValueSource {
-    override def appendAttrValue(strb: StringBuilder): Unit = {
+    override def appendAttrValue(strb: jStringBuilder): Unit = {
       Escaping.escape(s.cssName, strb)
-      strb ++=  ": "
+      strb.append(": ")
       Escaping.escape(v, strb)
-      strb ++= ";"
+      strb.append(';')
     }
   }
 
   case class GenericAttrValueSource(v: String) extends ValueSource {
-    override def appendAttrValue(strb: StringBuilder): Unit = {
+    override def appendAttrValue(strb: jStringBuilder): Unit = {
       Escaping.escape(v, strb)
     }
   }
 
   case class ChainedAttributeValueSource(head: ValueSource, tail: ValueSource) extends ValueSource {
-    override def appendAttrValue(strb: StringBuilder): Unit = {
+    override def appendAttrValue(strb: jStringBuilder): Unit = {
       head.appendAttrValue(strb)
-      strb ++= " "
+      strb.append(' ')
       tail.appendAttrValue(strb)
     }
   }
 }
 
 trait Frag extends generic.Frag[Builder, String]{
-  def writeTo(strb: StringBuilder): Unit
+  def writeTo(strb: jStringBuilder): Unit
   def render: String
   def applyTo(b: Builder) = b.addChild(this)
 }
