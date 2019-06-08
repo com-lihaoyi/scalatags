@@ -10,8 +10,6 @@
 package scalatags
 package generic
 
-import acyclic.file
-
 
 trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
 

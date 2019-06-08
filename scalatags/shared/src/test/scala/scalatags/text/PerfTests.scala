@@ -1,5 +1,4 @@
 package scalatags.text
-import acyclic.file
 import scalatags.generic
 
 

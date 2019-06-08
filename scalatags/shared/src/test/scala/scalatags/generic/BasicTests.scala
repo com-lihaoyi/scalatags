@@ -1,7 +1,6 @@
 package scalatags
 package generic
 
-import acyclic.file
 import utest._
 
 import TestUtil._

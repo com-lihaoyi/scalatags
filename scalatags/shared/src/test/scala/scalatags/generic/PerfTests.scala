@@ -1,6 +1,5 @@
 package scalatags
 package generic
-import acyclic.file
 import utest._
 
 class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT]) extends PerfTests {

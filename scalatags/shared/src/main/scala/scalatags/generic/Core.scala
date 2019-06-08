@@ -3,8 +3,6 @@ package generic
 
 import java.util.Objects.requireNonNull
 
-import acyclic.file
-
 import scala.annotation.implicitNotFound
 
 

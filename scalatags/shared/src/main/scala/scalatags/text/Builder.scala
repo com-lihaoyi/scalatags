@@ -1,6 +1,5 @@
 package scalatags
 package text
-import acyclic.file
 
 import scala.reflect.ClassTag
 import scalatags.generic.Style

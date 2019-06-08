@@ -1,5 +1,4 @@
 package scalatags
-import acyclic.file
 /**
  * Module containing convenient ways of constructing CSS data types
  */

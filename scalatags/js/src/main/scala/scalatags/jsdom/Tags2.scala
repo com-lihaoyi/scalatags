@@ -1,6 +1,5 @@
 package scalatags
 package jsdom
-import acyclic.file
 import org.scalajs.dom
 import org.scalajs.dom.html
 import scalatags.generic.Util

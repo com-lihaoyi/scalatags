@@ -1,6 +1,5 @@
 package scalatags
 package jsdom
-import acyclic.file
 import utest._
 
 

@@ -2,8 +2,6 @@ package scalatags
 package generic
 import java.util.Objects
 
-import acyclic.file
-
 import scala.language.higherKinds
 
 /**

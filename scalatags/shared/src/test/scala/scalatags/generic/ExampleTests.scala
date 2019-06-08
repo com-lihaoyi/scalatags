@@ -3,7 +3,6 @@ package generic
 import utest._
 
 import TestUtil.strCheck
-import acyclic.file
 class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Output, FragT]) extends TestSuite{
 
 

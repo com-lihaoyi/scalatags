@@ -1,17 +1,13 @@
-// 0.6.20 breaks Java7 - https://github.com/scala-js/scala-js/issues/3128
-val scalaJSVersion = Option(System.getenv("SCALAJS_VERSION")).getOrElse("0.6.26")
+addSbtPlugin("com.lihaoyi" % "scalatex-sbt-plugin" % "0.3.11")
 
-addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.0")
+val scalaJSVersion =
+  Option(System.getenv("SCALAJS_VERSION")).getOrElse("0.6.28")
+
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % scalaJSVersion)
-addSbtPlugin("com.typesafe.sbt" % "sbt-twirl" % "1.3.4")
-addSbtPlugin("com.lihaoyi" % "scalatex-sbt-plugin" % "0.3.9")
-addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject"      % "0.6.0")
+
+addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.2.2")
+addSbtPlugin("com.typesafe.sbt" % "sbt-osgi" % "0.9.4")
+addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject" % "0.6.0")
+addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.3.8")
 addSbtPlugin("org.portable-scala" % "sbt-scala-native-crossproject" % "0.6.0")
 
-// PhantomJSEnv
-{
-  if (scalaJSVersion.startsWith("0.6.")) Nil
-  else Seq(addSbtPlugin("org.scala-js" % "sbt-scalajs-env-phantomjs" % "1.0.0-M1"))
-}
-libraryDependencies += "org.eclipse.jetty" % "jetty-server" % "8.1.16.v20140903"
-libraryDependencies += "org.eclipse.jetty" % "jetty-websocket" % "8.1.16.v20140903"

@@ -1,6 +1,5 @@
 package scalatags
 package jsdom
-import acyclic.file
 import org.scalajs.dom
 import scalatags.generic.{Namespace, Util}
 trait SvgTags extends generic.SvgTags[dom.Element, dom.Element, dom.Node] with TagFactory{

@@ -1,6 +1,5 @@
 package scalatags
 package text
-import acyclic.file
 trait Tags2 extends generic.Tags2[Builder, String, String] with TagFactory{
   // Document Metadata
  lazy val title = tag("title")

@@ -1,6 +1,5 @@
 package scalatags
 package jsdom
-import acyclic.file
 import org.scalajs.dom
 
 trait Frag extends generic.Frag[dom.Element, dom.Node]{

@@ -1,6 +1,5 @@
 package scalatags.stylesheet
 
-import acyclic.file
 
 import scala.collection.immutable.SortedMap
 

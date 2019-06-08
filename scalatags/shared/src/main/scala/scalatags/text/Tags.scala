@@ -1,6 +1,5 @@
 package scalatags
 package text
-import acyclic.file
 trait Tags extends generic.Tags[Builder, String, String] with TagFactory{
   // Root Element
   lazy val html = tag("html")

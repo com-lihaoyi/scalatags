@@ -1,7 +1,6 @@
 package scalatags
 import java.util.Objects
 
-import acyclic.file
 import org.scalajs
 import org.scalajs.dom
 

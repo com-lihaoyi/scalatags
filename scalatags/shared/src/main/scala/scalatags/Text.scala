@@ -1,8 +1,6 @@
 package scalatags
 import java.util.Objects
 
-import acyclic.file
-
 import scalatags.generic._
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}

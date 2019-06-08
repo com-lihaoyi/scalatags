@@ -9,7 +9,6 @@
  */
 package scalatags
 package generic
-import acyclic.file
 
 trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
 

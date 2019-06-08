@@ -1,4 +1,3 @@
-import acyclic.file
 import scala.language.implicitConversions
 import scalatags.generic.{Attr, Style}
 import language.experimental.macros

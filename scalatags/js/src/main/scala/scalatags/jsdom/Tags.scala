@@ -1,7 +1,6 @@
 
 package scalatags
 package jsdom
-import acyclic.file
 import org.scalajs.dom
 import scalatags.generic.Util
 trait Tags extends generic.Tags[dom.Element, dom.Element, dom.Node] with TagFactory{
