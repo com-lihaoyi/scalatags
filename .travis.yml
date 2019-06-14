@@ -9,7 +9,9 @@ jdk:
   - oraclejdk8
 
 script:
-  - curl -L -o ~/bin/mill https://github.com/lihaoyi/mill/releases/download/0.4.0/0.4.0-12-102ddf && chmod +x ~/bin/mill
+  - curl -L -o ~/bin/mill https://github.com/lihaoyi/mill/releases/download/0.4.1/0.4.1-4-158d11 && chmod +x ~/bin/mill
   - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
   - export PATH=~/bin/mill:$PATH
-  - mill __.test
+  - mill scalatags.js.__.test.test
+  - mill scalatags.jvm.__.test.test
+  - mill scalatags.native.__.compile
