@@ -71,7 +71,7 @@ span.hljs-tag, span.hljs-symbol{
 </script>
 <a href="https://github.com/lihaoyi/scalatags" style="position: absolute;top: 0px;right: 0px;border: 0;"><img src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" /></a>
 
-<div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="ScalaTags" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">ScalaTags <a class=" scalatex-site-Styles-headerLink" href="#ScalaTags" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /><h2 style="font-weight: 300;color: #ccc;padding: 0px;margin-top: 0px;">0.6.7</h2></div><div class=" scalatex-site-Styles-content">
+<div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="ScalaTags" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">ScalaTags <a class=" scalatex-site-Styles-headerLink" href="#ScalaTags" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /><h2 style="font-weight: 300;color: #ccc;padding: 0px;margin-top: 0px;">0.7.0</h2></div><div class=" scalatex-site-Styles-content">
   <p>
     ScalaTags is a small, <a href="#Performance">fast</a> XML/HTML/CSS construction library for <a href="http://www.scala-lang.org/">Scala</a> that takes fragments in plain Scala code that look like this:
 </p>
@@ -91,7 +91,7 @@ html(
       p(&quot;This is a big paragraph of text&quot;)
     )
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L41-L58" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L40-L57" target="_blank"><i class="fa fa-link "></i></a></pre>
 
   <p>
     And turns them into HTML like this:
@@ -107,7 +107,7 @@ html(
             &lt;p&gt;This is a big paragraph of text&lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L60-L72" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L59-L71" target="_blank"><i class="fa fa-link "></i></a></pre>
 
   <p>
     This document should contain enough to get you started using Scalatags to start generating your HTML, whether on a web-server on in the browser using <a href="#Scala.js">Scala.js</a>. For more information checkout the:
@@ -125,7 +125,7 @@ html(
     <p></p>  
       ScalaTags is hosted on <a href="http://search.maven.org/#search%7Cga%7C1%7Cscalatags">Maven Central</a>; to get started, simply add the following to your <code>build.sbt</code>:
 
-    <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %% &quot;scalatags&quot; % &quot;0.6.7&quot;
+    <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %% &quot;scalatags&quot; % &quot;0.7.0&quot;
 </code></pre>
     <p>
       And you're good to go! Open up a <code>sbt console</code> and you can start working through the <a href="#Examples">Examples</a>, which should just work when copied and pasted into the console.
@@ -135,7 +135,7 @@ html(
       <p>
         To use Scalatags with a ScalaJS project, add the following to the <code>built.sbt</code> of your ScalaJS project:
 </p>
-      <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %%% &quot;scalatags&quot; % &quot;0.6.7&quot;
+      <pre><code class="scala scalatex-site-Styles-highlightMe">libraryDependencies += &quot;com.lihaoyi&quot; %%% &quot;scalatags&quot; % &quot;0.7.0&quot;
 </code></pre>
       <p>
         And you should be good to go generating HTML fragments in the browser! Scalatags has no dependencies, and so all the examples should work right off the bat whether run in Chrome, Firefox or Rhino. Scalatags 0.5.2 is currently only compatibly with ScalaJS 0.5.3+.
@@ -181,7 +181,7 @@ html(
       p(&quot;This is my second paragraph&quot;)
     )
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L75-L87" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L74-L86" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         The core of Scalatags is a way to generate (X)HTML fragments using plain Scala. This is done by values such as <code>head</code>, <code>script</code>, and so on, which are automatically imported into your program when you <code>import scalatags.Text.all._</code>. See <a href="#ManagingImports">below</a> if you want more fine-grained control over what's imported.</p>
@@ -205,7 +205,7 @@ html(
             &lt;p&gt;This is my second paragraph&lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L89-L101" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L88-L100" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         If you want to add a doctype to your HTML fragment, simply add it as a string:
@@ -237,7 +237,7 @@ html(
       )
     )
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L239-L258" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L238-L257" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         In Scalatags, each attribute has an associated value which can be used
@@ -261,7 +261,7 @@ html(
                 I am hidden&lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L280-L297" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L279-L296" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         All the attributes included in HTML are included in the default import.
@@ -286,7 +286,7 @@ html(
       )
     )
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L300-L316" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L299-L315" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
 
@@ -314,7 +314,7 @@ html(
       )
     )
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L317-L333" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L316-L332" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Both the above examples print the same thing:
@@ -332,7 +332,7 @@ html(
         &lt;/a&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L335-L349" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L334-L348" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         A list of the attributes and styles provided by ScalaTags can be found in <a href="https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Attrs.scala">Attrs</a> and <a href="https://github.com/lihaoyi/scalatags/blob/master/scalatags/shared/src/main/scala/scalatags/generic/Styles.scala">Styles</a>. This of course won't include any which you define yourself.
@@ -365,7 +365,7 @@ html(
       )
     )
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L259-L278" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L258-L277" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;html&gt;
     &lt;head&gt;
@@ -383,7 +383,7 @@ html(
                 I am hidden&lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L280-L297" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L279-L296" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         You can also use <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">css(...)</code> to create a custom inline style, if for some reason the style you want isn't available in the default set:
@@ -391,7 +391,7 @@ html(
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">div(
   attr(&quot;data-app-key&quot;) := &quot;YOUR_APP_KEY&quot;,
   css(&quot;background-color&quot;) := &quot;red&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L585-L590" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L584-L589" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         If you wish to, you can also take the result of the <code>attr</code> call and assign it to a variable for you to use later in an identical way.
@@ -403,12 +403,12 @@ html(
     dataAppKey := &quot;YOUR_APP_KEY&quot;,
     customBackgroundColorStyle := &quot;red&quot;
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L591-L599" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L590-L598" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Both the above examples print the same thing:
 </p>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div data-app-key=&quot;YOUR_APP_KEY&quot; style=&quot;background-color: red;&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L601-L602" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div data-app-key=&quot;YOUR_APP_KEY&quot; style=&quot;background-color: red;&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L600-L601" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         You can also create custom tags, using the <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">tag(...)</code> function. For example, if we take the earlier snippet:
@@ -421,7 +421,7 @@ html(
     h1(&quot;This is my title&quot;),
     p(&quot;Hello&quot;)
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L606-L617" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L605-L616" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         And imagine that all these are special XML/HTML tags that aren't included by default, you can still construct them yourself:
@@ -434,7 +434,7 @@ html(
     tag(&quot;h1&quot;)(&quot;This is my title&quot;),
     tag(&quot;p&quot;)(&quot;Hello&quot;)
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L618-L627" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L617-L626" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Both these examples print:
@@ -447,7 +447,7 @@ html(
         &lt;h1&gt;This is my title&lt;/h1&gt;
         &lt;p&gt;Hello&lt;/p&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L629-L638" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L628-L637" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Like custom attributes and styles, custom tag names can be assigned to a <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">val</code> and re-used, or they can just be used in-line.
@@ -490,7 +490,7 @@ html(
     p(&quot;Goooogle&quot;)
   ),
   input(disabled:=true)
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L352-L362" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L351-L361" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Not all attributes and styles take strings; some, like <code>float</code>, have an enumeration of valid values, and can be referenced by <code>float.left</code>, <code>float.right</code>, etc.. Others, like <code>tabindex</code> or <code>disabled</code>, take Ints and Booleans respectively. These are used directly as shown in the example above.</p>
@@ -506,7 +506,7 @@ html(
         &lt;p&gt;Goooogle&lt;/p&gt;
     &lt;/a&gt;
     &lt;input disabled=&quot;true&quot; /&gt;
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L364-L371" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L363-L370" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Passing in numbers to the styles which require a <code>px</code> at the end results in the <code>px</code> being appended automatically:
@@ -520,14 +520,14 @@ html(
       <p>
         Boolean attributes such as <code>readonly</code> can be passed in alone:
 </p>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">div(input(readonly))</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L395-L396" target="_blank"><i class="fa fa-link "></i></a></pre>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;&lt;input readonly=&quot;readonly&quot; /&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L398-L399" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">div(input(readonly))</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L394-L395" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;&lt;input readonly=&quot;readonly&quot; /&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L397-L398" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         And will default to a value with the same name as the attribute. You can still set the value manually with <code>:=</code> if you wish
 </p>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">div(input(readonly:=1))</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L402-L403" target="_blank"><i class="fa fa-link "></i></a></pre>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;&lt;input readonly=&quot;1&quot; /&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L405-L406" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">div(input(readonly:=1))</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L401-L402" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;&lt;input readonly=&quot;1&quot; /&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L404-L405" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <h1 id="Variables" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Variables" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Variables</h1>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">{
@@ -546,7 +546,7 @@ html(
       )
     )
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L104-L121" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L103-L120" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         Variables can be inserted into the templates as Strings, simply by adding them to an element's children. This prints:
 </p>
@@ -561,7 +561,7 @@ html(
             &lt;p&gt;you are the 1023th visitor!&lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L123-L135" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L122-L134" target="_blank"><i class="fa fa-link "></i></a></pre>
     <h1 id="ControlFlow" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#ControlFlow" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Control Flow</h1>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">{
   val numVisitors = 1023
@@ -586,7 +586,7 @@ html(
       else p(&quot;Please post below...&quot;)
     )
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L138-L162" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L137-L161" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
 
         Like most other XML templating languages, ScalaTags contains control flow statements like <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">if</code> and <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">for</code>. Unlike other templating languages which have their own <a href="http://jinja.pocoo.org/docs/templates/#list-of-control-structures">crufty little programming language embedded inside them for control flow</a>, you probably already know how to use ScalaTags' control flow syntax. It's just Scala after all.</p>
@@ -614,7 +614,7 @@ html(
         &lt;/div&gt;
         &lt;p&gt;No more posts!&lt;/p&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L164-L186" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L163-L185" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <h1 id="Functions" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Functions" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Functions</h1>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">{
@@ -638,7 +638,7 @@ html(
       )
     )
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L189-L211" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L188-L210" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
 
         Many other templating systems define <a href="http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials">incredibly</a> <a href="http://jinja.pocoo.org/docs/templates/#macros">roundabout</a> ways of creating re-usable parts of the template. In ScalaTags, we don't need to re-invent the wheel, because Scala has these amazing things called *functions*.
@@ -668,7 +668,7 @@ html(
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L213-L236" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L212-L235" target="_blank"><i class="fa fa-link "></i></a></pre>
     <h1 id="Auto-escapingandunsanitizedInput" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Auto-escapingandunsanitizedInput" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Auto-escaping and unsanitized Input</h1>
 
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">val evilInput1 = &quot;\&quot;&gt;&lt;script&gt;alert('hello!')&lt;/script&gt;&quot;
@@ -685,7 +685,7 @@ html(
     ),
     evilInput2
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L497-L514" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L496-L513" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         By default, any text that's put into the Scalatags templates, whether as a attribute value or a text node, is properly escaped when it is rendered. Thus, when you run the following snippet, you get this:</p>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;html&gt;
@@ -698,7 +698,7 @@ html(
         &lt;/h1&gt;
         &amp;lt;script&amp;gt;alert('hello!')&amp;lt;/script&amp;gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L516-L527" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L515-L526" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         As you can see, the contents of the variables <code>evilInput1</code> and <code>evilInput2</code> have been HTML-escaped, so you do not have to worry about un-escaped user input messing up your DOM or causing XSS injections. Furthermore, the names of the tags (e.g. &quot;html&quot;) and attributes (e.g. &quot;href&quot;) are themselves validated: passing in an invalid name to either of those (e.g. a tag or attribute name with a space inside) will throw an <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">IllegalArgumentException</code>).
 </p>
@@ -715,7 +715,7 @@ html(
     h1(&quot;This is my title&quot;),
     raw(evilInput)
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L531-L543" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L530-L542" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         prints
 </p>
@@ -727,7 +727,7 @@ html(
         &lt;h1&gt;This is my title&lt;/h1&gt;
         &lt;script&gt;alert('hello!')&lt;/script&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L545-L554" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L544-L553" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         As you can see, the <code class="xml scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">&lt;script&gt;</code> tags in <code>evilInput</code> have been passed through to the resultant HTML string unchanged. Although this makes it easy to open up XSS holes (as shown above!), if you know what you're doing, go ahead.</p>
       <p>
@@ -754,7 +754,7 @@ html(
       p(&quot;blah blah blah i am text&quot;)
     )
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L410-L431" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L409-L430" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
 
         Again, this is something that many other templating languages have their own <a href="http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts">special</a> <a href="http://jinja.pocoo.org/docs/templates/#template-inheritance">implementations</a> of. In ScalaTags, this can be done simply by just using functions! The above snippet gives you:
@@ -771,7 +771,7 @@ html(
             &lt;p&gt;blah blah blah i am text&lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L433-L446" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L432-L445" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <h1 id="Inheritance" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Inheritance" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Inheritance</h1>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">{
@@ -801,7 +801,7 @@ html(
 
 
   Child.render
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L450-L478" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L449-L477" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         Most of the time, functions are sufficient to keep things DRY, but if for some reason you want to use inheritance to structure your code, you probably already know how to do so. Again, unlike <a href="http://wsgiarea.pocoo.org/jinja/docs/inheritance.html">other</a> <a href="http://docs.makotemplates.org/en/latest/inheritance.html">frameworks</a> that have implemented complex inheritance systems themselves, Scalatags is just Scala, and it behaves as you'd expect.
 </p>
@@ -816,7 +816,7 @@ html(
             &lt;p&gt;This is my second paragraph&lt;/p&gt;
         &lt;/div&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L480-L492" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L479-L491" target="_blank"><i class="fa fa-link "></i></a></pre>
     <h1 id="DataandAria" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#DataandAria" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Data and Aria</h1>
 
       <p>
@@ -828,14 +828,14 @@ html(
   data.index.number:=&quot;12314&quot;,
   data.parent:=&quot;cars&quot;,
   &quot;...&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L669-L676" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L668-L675" target="_blank"><i class="fa fa-link "></i></a></pre>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div
   id=&quot;electriccars&quot;
   data-columns=&quot;3&quot;
   data-index-number=&quot;12314&quot;
   data-parent=&quot;cars&quot;&gt;
 ...
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L678-L685" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L677-L684" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         Aria attributes work too:
 </p>
@@ -849,7 +849,7 @@ html(
   div(id:=&quot;quizPanel&quot;, role:=&quot;tabpanel&quot;, aria.labelledby:=&quot;quizTab&quot;)(
     &quot;Quiz content goes here&quot;
   )
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L641-L652" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L640-L651" target="_blank"><i class="fa fa-link "></i></a></pre>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;
   &lt;div id=&quot;ch1Panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;ch1Tab&quot;&gt;
     Chapter 1 content goes here
@@ -860,7 +860,7 @@ html(
   &lt;div id=&quot;quizPanel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;quizTab&quot;&gt;
     Quiz content goes here
   &lt;/div&gt;
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L654-L665" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L653-L664" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <h1 id="GroupingFragsandModifiers" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#GroupingFragsandModifiers" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Grouping Frags and Modifiers</h1>
       <p>
@@ -874,7 +874,7 @@ html(
     h1(&quot;Hello&quot;),
     p(&quot;World&quot;)
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L689-L695" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L688-L694" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         These can be
@@ -888,7 +888,7 @@ html(
   div(
     children
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L696-L705" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L695-L704" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Or via the helper method <code>frag(...)</code>, that aggregates it into a
@@ -902,7 +902,7 @@ html(
   div(
     children
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L706-L715" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L705-L714" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         All of these render to the same output:
@@ -910,7 +910,7 @@ html(
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;
     &lt;h1&gt;Hello&lt;/h1&gt;
     &lt;p&gt;World&lt;/p&gt;
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L717-L721" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L716-L720" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Similarly, <code>Modifier</code>s such as <a href="#Attributes">Attributes</a> or
@@ -922,7 +922,7 @@ html(
     cls := &quot;my-bootstrap-class&quot;,
     color := &quot;red&quot;
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L724-L730" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L723-L729" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         We can group them together in a <code>Seq[Modifier]</code> and apply them together:
@@ -935,7 +935,7 @@ html(
   div(
     mods
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L731-L740" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L730-L739" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Or we can aggregate them into a single <code>Modifier</code> using
@@ -949,12 +949,12 @@ html(
   div(
     mods
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L741-L750" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L740-L749" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         All of these generate the same output:
 </p>
-      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div class=&quot;my-bootstrap-class&quot; style=&quot;color: red;&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L752-L753" target="_blank"><i class="fa fa-link "></i></a></pre>
+      <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div class=&quot;my-bootstrap-class&quot; style=&quot;color: red;&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L751-L752" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Any &quot;arbitrary HTML blob&quot; that isn't guaranteed to have
@@ -988,7 +988,7 @@ import bundle.short._
 div(
   p(*.color:=&quot;red&quot;, *.fontSize:=64.pt)(&quot;Big Red Text&quot;),
   img(*.href:=&quot;www.imgur.com/picture.jpg&quot;)
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L11-L18" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L10-L17" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Apart from using <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">import scalatags.Text.all._</code>, it is possible to perform the imports manually, renaming whatever you feel like renaming. The example above provides an example which imports all HTML tags, but imports <code>Attrs</code> and <code>Styles</code> aliased rather than dumping their contents into your global namespace. This helps avoid polluting your namespace with lots of common names (e.g. <code>value</code>, <code>id</code>, etc.) that you may not use.</p>
@@ -1033,7 +1033,7 @@ div(
     p(css.color:=&quot;red&quot;, css.fontSize:=64.pt)(&quot;Big Red Text&quot;),
     img(attr.href:=&quot;www.imgur.com/picture.jpg&quot;)
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L19-L29" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L18-L28" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         Or you can rely on a aggregator like <code>all</code>, which the rest of the examples use, or <code>short</code>. <code>short</code> imports <code>Attrs</code> and <code>Styles</code> as <code>*</code>, making them quick to access without cluttering the global namespace:
@@ -1043,14 +1043,14 @@ import bundle.short._
 div(
   p(*.color:=&quot;red&quot;, *.fontSize:=64.pt)(&quot;Big Red Text&quot;),
   img(*.href:=&quot;www.imgur.com/picture.jpg&quot;)
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L11-L18" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L10-L17" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         Both these examples print:
 </p>
       <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div&gt;
     &lt;p style=&quot;color: red;&quot;&gt;Red Text&lt;/p&gt;
     &lt;img href=&quot;www.imgur.com/picture.jpg&quot; /&gt;
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L31-L35" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L30-L34" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         This custom import object also provides you a place to define your own custom tags that will be imported throughout your project e.g. a <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">js(s: String)</code> tag as shorthand for <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">script(src:=s)</code>. You can even override the default definitions, e.g. making <code>script</code> be a shorthand for <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">script(type:=&quot;javascript&quot;)</code> so that you can never forget to use your own custom version.
 </p>
@@ -1067,7 +1067,7 @@ div(
   p(pageBreakBefore.always, &quot;a long paragraph which should not be broken&quot;),
   address(&quot;500 Memorial Drive, Cambridge MA&quot;),
   svg(stroke:=&quot;#0000ff&quot;)
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L557-L569" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L556-L568" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         This prints:
 </p>
@@ -1077,7 +1077,7 @@ div(
     &lt;/p&gt;
     &lt;address&gt;500 Memorial Drive, Cambridge MA&lt;/address&gt;
     &lt;svg stroke=&quot;#0000ff&quot;&gt;&lt;/svg&gt;
-&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/ExampleTests.scala#L571-L578" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/ExampleTests.scala#L570-L577" target="_blank"><i class="fa fa-link "></i></a></pre>
     <h1 id="CustomBundles" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#CustomBundles" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Custom Bundles</h1>
 
 
@@ -1177,7 +1177,7 @@ elem.appendChild(p(1, &quot;wtf&quot;, &quot;bbq&quot;).render)
 assert(elem.children.length == 1)
 val pElem = elem.children(0).asInstanceOf[Paragraph]
 assert(pElem.childNodes.length == 3)
-assert(pElem.textContent == &quot;1wtfbbq&quot;)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/src/test/scala/scalatags/jsdom/DomTests.scala#L15-L22" target="_blank"><i class="fa fa-link "></i></a></pre>
+assert(pElem.textContent == &quot;1wtfbbq&quot;)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/test/src/scalatags/jsdom/DomTests.scala#L14-L21" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
 
         As you can see, you can manipulate DOM elements directly, calling standard DOM APIs like <code>.children</code>, <code>.appendChild</code>, etc.
@@ -1193,7 +1193,7 @@ val elem = div(
 
 assert(count == 0)
 elem.onclick(null)
-assert(count == 1)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/src/test/scala/scalatags/jsdom/DomTests.scala#L66-L75" target="_blank"><i class="fa fa-link "></i></a></pre>
+assert(count == 1)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/test/src/scalatags/jsdom/DomTests.scala#L65-L74" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         As you can see, the function literal is kept intact rather than being serialized (as you would expect in the Text backend). When called via the attribute of the element, you can see that it functions intact and properly increments the counter.
@@ -1216,7 +1216,7 @@ val box = div(
 
 assert(labelElem.textContent == &quot;Default&quot;)
 inputElem.onfocus(null)
-assert(labelElem.textContent == &quot;&quot;)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/src/test/scala/scalatags/jsdom/DomTests.scala#L77-L93" target="_blank"><i class="fa fa-link "></i></a></pre>
+assert(labelElem.textContent == &quot;&quot;)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/test/src/scalatags/jsdom/DomTests.scala#L76-L92" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         This allows a very convenient direct-binding of behaviors without having to trawl through the DOM with jquery selectors or creating lots of IDs and worrying about collisions.
@@ -1261,7 +1261,7 @@ assert(
   jsVersion.tagName.toLowerCase == &quot;div&quot;,
   jsVersion.textContent == &quot;hello&quot;,
   txtVersion == &quot;&lt;div&gt;hello&lt;/div&gt;&quot;
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/src/test/scala/scalatags/jsdom/DomTests.scala#L101-L117" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/js/test/src/scalatags/jsdom/DomTests.scala#L100-L116" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <p>
       There's a small amount of boilerplate in setting up the generic
@@ -1323,7 +1323,7 @@ assert(
   )
 
   val z = cls(x.splice, y.splice)
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L13-L28" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L13-L28" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <p>
       This generates a stylesheet that looks like
@@ -1339,7 +1339,7 @@ assert(
   background-color: red;
   height: 125px;
   opacity: 0.5;
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L98-L110" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L99-L111" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <p>
       You can then access <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">Simple.styleSheetText</code> in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">style</code> tag.</p>
@@ -1353,8 +1353,8 @@ assert(
     <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">val x = div(
   Simple.x,
   Simple.y
-)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L217-L221" target="_blank"><i class="fa fa-link "></i></a></pre>
-    <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div class=&quot; $pkg-Simple-x $pkg-Simple-y&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L222-L223" target="_blank"><i class="fa fa-link "></i></a></pre>
+)</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L218-L222" target="_blank"><i class="fa fa-link "></i></a></pre>
+    <pre class=" scalatex-site-Styles-hoverContainer"><code class="xml scalatex-site-Styles-highlightMe">&lt;div class=&quot; $pkg-Simple-x $pkg-Simple-y&quot;&gt;&lt;/div&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L223-L224" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <p>
       By default, Scalatag's <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">StyleSheet</code>s have no cascading: you only can define styles for a single class (and it's pseudo-selectors) at a single time. If you want to define styles for multiple tags without a larger HTML fragment, you should define multiple classes. The fact that Scalatag's <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">cls</code> definitions are just normal <code class="scala scalatex-site-Styles-highlightMe" style="display: inline;padding: 0px;margin: 0px;">def</code>s makes managing these classes very easy: you can use standard IDE's or tools to jump-to-definitions, auto-rename them, etc.. Many common mistakes in CSS, such as accidentally mis-spelling a class-name or botching a renaming, become compilation errors.</p>
@@ -1381,7 +1381,7 @@ assert(
     ),
     opacity := 0.5
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L28-L45" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L28-L45" target="_blank"><i class="fa fa-link "></i></a></pre>
 
       <p>
         This generates the stylesheet:
@@ -1397,7 +1397,7 @@ assert(
 }
 .$pkg-Inline-w:hover:active{
   background-color: yellow;
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L118-L130" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L119-L131" target="_blank"><i class="fa fa-link "></i></a></pre>
 
     <h1 id="Cascading" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#Cascading" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>Cascading</h1>
 
@@ -1427,7 +1427,7 @@ assert(
       )
     )
   )
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L45-L71" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L45-L71" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         This generates:
 </p>
@@ -1444,7 +1444,7 @@ assert(
 }
 .$pkg-Cascade-x div:hover div .$pkg-Cascade-y{
   opacity: 0;
-}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/StyleSheetTests.scala#L137-L151" target="_blank"><i class="fa fa-link "></i></a></pre>
+}</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/StyleSheetTests.scala#L138-L152" target="_blank"><i class="fa fa-link "></i></a></pre>
       <p>
         With Scalatags, even cascadin styles must start with a &quot;root&quot; class. However,inside that class, you then have two ways of defining cascades:</p>
       <ul>
@@ -1511,7 +1511,7 @@ assert(
       }
     )
   )
-).toString</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/PerfTests.scala#L15-L40" target="_blank"><i class="fa fa-link "></i></a>
+).toString</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/PerfTests.scala#L14-L39" target="_blank"><i class="fa fa-link "></i></a>
     <pre class=" scalatex-site-Styles-hoverContainer"><code class="scala scalatex-site-Styles-highlightMe">&lt;html&gt;
   &lt;head&gt;
     &lt;script&gt;console.log(1)&lt;/script&gt;
@@ -1530,7 +1530,7 @@ assert(
       &lt;p class=&quot;contentpara&quot; style=&quot;color: red;&quot; title=&quot;this is paragraph 4&quot;&gt;Paragraph 4&lt;/p&gt;
     &lt;/div&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/shared/src/test/scala/scalatags/generic/PerfTests.scala#L50-L69" target="_blank"><i class="fa fa-link "></i></a></pre>
+&lt;/html&gt;</code><a class=" scalatex-site-Styles-headerLink" style="position: absolute;right: 0.5em;top: 0.5em;display: block;font-size: 24px;" href="https://github.com/lihaoyi/scalatags/tree/master/scalatags/test/src/scalatags/generic/PerfTests.scala#L49-L68" target="_blank"><i class="fa fa-link "></i></a></pre>
     <p>
       The rest of the code involved in this micro-benchmark can be found in <a href="shared/test/scala/scalatags/PerfTests.scala">PerfTests.scala</a>
 
@@ -1827,17 +1827,25 @@ block2 = &lt;div&gt;{element_list}&lt;/div&gt;
         <li>
           Cross compiles to run on both JVM and Javascript via <a href="https://github.com/scala-js/scala-js">ScalaJS</a>, which is a property few other engines (e.g. <a href="http://mustache.github.io/">Mustache</a>) have.</li>
         <li>
-          <a href="#performance">Blazing fast</a></li></ul>
+          <a href="#Performance">Blazing fast</a></li></ul>
       <p>
         Scalatags is still a work in progress, but I think I've hit most of the pain points I was feeling with the old systems, and hope to continually improve it over time. Pull requests are welcome!
 
 </p>
   
   <div style="margin: 0px;color: #333;text-align: center;padding: 2.5em 2em 0;border-bottom: 1px solid #eee;display: block;" id="Changelog" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><h1 style="margin: 0.2em 0;font-size: 3em;font-weight: 300;">Changelog<a class=" scalatex-site-Styles-headerLink" href="#Changelog" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a></h1><br /></div>
+    <h1 id="0.7.0" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#0.7.0" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>0.7.0</h1>
+      <ul>
+        <li>
+          Support for Scala 2.13.0 final</li></ul>
+    <h1 id="0.6.8" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#0.6.8" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>0.6.8</h1>
+      <ul>
+        <li>
+          Support for Scala 2.13.0-M5</li></ul>
     <h1 id="0.6.7" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#0.6.7" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>0.6.7</h1>
       <ul>
         <li>
-         Experimental support for Scala.js
+         Experimental support for Scala Native
 </li></ul>
     <h1 id="0.6.5" style="display: block;" class=" scalatex-site-Styles-hoverContainer scalatex-site-Styles-headerTag"><a class=" scalatex-site-Styles-headerLink" href="#0.6.5" style="position: absolute;right: 0px;"><i class="fa fa-link"></i></a>0.6.5</h1>
       <ul>
@@ -2051,7 +2059,7 @@ block2 = &lt;div&gt;{element_list}&lt;/div&gt;
     THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</div>
 </div><script>
     scalatex.scrollspy.Controller().main(
-      [{"value":"ScalaTags ","children":[{"value":"Getting Started","children":[{"value":"Scala.js","children":[]}]},{"value":"Why Scalatags","children":[]},{"value":"Basic Examples","children":[{"value":"Hello World","children":[]},{"value":"Attributes","children":[]},{"value":"Inline Styles & Classes","children":[]},{"value":"Custom Attributes, Styles, Tag Names","children":[]},{"value":"Non-String Attributes and Styles","children":[]},{"value":"Variables","children":[]},{"value":"Control Flow","children":[]},{"value":"Functions","children":[]},{"value":"Auto-escaping and unsanitized Input","children":[]},{"value":"Layouts","children":[]},{"value":"Inheritance","children":[]},{"value":"Data and Aria","children":[]},{"value":"Grouping Frags and Modifiers","children":[]},{"value":"Managing Imports","children":[]},{"value":"Custom Bundles","children":[]}]},{"value":"DOM Backend","children":[{"value":"Using the DOM","children":[]},{"value":"Use Cases","children":[]}]},{"value":"Cross-backend Code","children":[]},{"value":"Live Examples","children":[{"value":"scalatags.Text HTML","children":[]},{"value":"scalatags.Text SVG","children":[]},{"value":"scalatags.JsDom HTML","children":[]},{"value":"scalatags.JsDom SVG","children":[]}]},{"value":"CSS Stylesheets","children":[{"value":"Inline Modifiers","children":[]},{"value":"Cascading","children":[]}]},{"value":"Performance","children":[]},{"value":"Internals","children":[{"value":"Architecture","children":[]},{"value":"Extensibility","children":[]}]},{"value":"Prior Work","children":[{"value":"Old-school Templates","children":[]},{"value":"Razor and Play Templates","children":[]},{"value":"XHP and Pyxl","children":[]},{"value":"Scalatags","children":[]}]},{"value":"Changelog","children":[{"value":"0.6.7","children":[]},{"value":"0.6.5","children":[]},{"value":"0.6.4","children":[]},{"value":"0.6.3","children":[]},{"value":"0.6.2","children":[]},{"value":"0.6.1","children":[]},{"value":"0.6.0","children":[]},{"value":"0.5.5","children":[]},{"value":"0.5.4","children":[]},{"value":"0.5.3","children":[]},{"value":"0.5.2","children":[]},{"value":"0.5.1","children":[]},{"value":"0.5.0","children":[]},{"value":"0.4.6","children":[]},{"value":"0.4.5","children":[]},{"value":"0.4.4","children":[]},{"value":"0.4.2","children":[]},{"value":"0.4.1","children":[]},{"value":"0.4.0","children":[]},{"value":"0.3.9","children":[]},{"value":"0.3.8","children":[]},{"value":"0.3.7","children":[]},{"value":"0.3.6","children":[]},{"value":"0.3.5","children":[]},{"value":"0.3.4","children":[]}]},{"value":"License","children":[]}]}]
+      [{"value":"ScalaTags ","children":[{"value":"Getting Started","children":[{"value":"Scala.js","children":[]}]},{"value":"Why Scalatags","children":[]},{"value":"Basic Examples","children":[{"value":"Hello World","children":[]},{"value":"Attributes","children":[]},{"value":"Inline Styles & Classes","children":[]},{"value":"Custom Attributes, Styles, Tag Names","children":[]},{"value":"Non-String Attributes and Styles","children":[]},{"value":"Variables","children":[]},{"value":"Control Flow","children":[]},{"value":"Functions","children":[]},{"value":"Auto-escaping and unsanitized Input","children":[]},{"value":"Layouts","children":[]},{"value":"Inheritance","children":[]},{"value":"Data and Aria","children":[]},{"value":"Grouping Frags and Modifiers","children":[]},{"value":"Managing Imports","children":[]},{"value":"Custom Bundles","children":[]}]},{"value":"DOM Backend","children":[{"value":"Using the DOM","children":[]},{"value":"Use Cases","children":[]}]},{"value":"Cross-backend Code","children":[]},{"value":"Live Examples","children":[{"value":"scalatags.Text HTML","children":[]},{"value":"scalatags.Text SVG","children":[]},{"value":"scalatags.JsDom HTML","children":[]},{"value":"scalatags.JsDom SVG","children":[]}]},{"value":"CSS Stylesheets","children":[{"value":"Inline Modifiers","children":[]},{"value":"Cascading","children":[]}]},{"value":"Performance","children":[]},{"value":"Internals","children":[{"value":"Architecture","children":[]},{"value":"Extensibility","children":[]}]},{"value":"Prior Work","children":[{"value":"Old-school Templates","children":[]},{"value":"Razor and Play Templates","children":[]},{"value":"XHP and Pyxl","children":[]},{"value":"Scalatags","children":[]}]},{"value":"Changelog","children":[{"value":"0.7.0","children":[]},{"value":"0.6.8","children":[]},{"value":"0.6.7","children":[]},{"value":"0.6.5","children":[]},{"value":"0.6.4","children":[]},{"value":"0.6.3","children":[]},{"value":"0.6.2","children":[]},{"value":"0.6.1","children":[]},{"value":"0.6.0","children":[]},{"value":"0.5.5","children":[]},{"value":"0.5.4","children":[]},{"value":"0.5.3","children":[]},{"value":"0.5.2","children":[]},{"value":"0.5.1","children":[]},{"value":"0.5.0","children":[]},{"value":"0.4.6","children":[]},{"value":"0.4.5","children":[]},{"value":"0.4.4","children":[]},{"value":"0.4.2","children":[]},{"value":"0.4.1","children":[]},{"value":"0.4.0","children":[]},{"value":"0.3.9","children":[]},{"value":"0.3.8","children":[]},{"value":"0.3.7","children":[]},{"value":"0.3.6","children":[]},{"value":"0.3.5","children":[]},{"value":"0.3.4","children":[]}]},{"value":"License","children":[]}]}]
   )</script><script>
     ['DOMContentLoaded', 'load'].forEach(function(ev){
       addEventListener(ev, function(){
@@ -2061,4 +2069,4 @@ block2 = &lt;div&gt;{element_list}&lt;/div&gt;
         );
       })
     })
-  </script></body></html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  </script></body></html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
