@@ -85,6 +85,7 @@ object scalatags extends Module {
     object test extends Tests with CommonTestModule{
       def offset = os.up
       def crossScalaVersion = JSScalatagsModule.this.crossScalaVersion
+      def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.Phantom("phantomjs", Nil, Map.empty, false)
     }
   }
 
