@@ -1,16 +1,16 @@
 @import Main._
-@val exampleTests = wd/'scalatags/'shared/'src/'test/'scala/'scalatags/'generic/"ExampleTests.scala"
+@val exampleTests = wd/'scalatags/'test/'src/'scalatags/'generic/"ExampleTests.scala"
 
 @def exampleIn(name: String) = hl.ref(exampleTests, Seq(name, ""), Seq("  ,"))
 @def exampleIn2(name: String) = hl.ref(exampleTests, Seq(name, "  ,", ""), Seq("  ,"))
 @def exampleIn3(name: String) = hl.ref(exampleTests, Seq(name, "  ,", "  ,", ""), Seq("  ,"))
 @def exampleOut(name: String) = hl.ref(exampleTests, Seq(name, "\"\"\"", ""), Seq("\"\"\""), className = "xml")
 
-@val domTests = wd/'scalatags/'js/'src/'test/'scala/'scalatags/'jsdom/"DomTests.scala"
-@val cssTests = wd/'scalatags/'shared/'src/'test/'scala/'scalatags/'generic/"StyleSheetTests.scala"
+@val domTests = wd/'scalatags/'js/'test/'src/'scalatags/'jsdom/"DomTests.scala"
+@val cssTests = wd/'scalatags/'test/'src/'scalatags/'generic/"StyleSheetTests.scala"
 @def domExample(name: String) = hl.ref(domTests, Seq(name, ""))
 @def lnk(txt: String, src: String) = a(txt, href:=src)
-@val perfTests = wd/'scalatags/'shared/'src/'test/'scala/'scalatags/'generic/"PerfTests.scala"
+@val perfTests = wd/'scalatags/'test/'src/'scalatags/'generic/"PerfTests.scala"
 
 @script
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -1101,6 +1101,10 @@
 
   @def pr(s: Int) = a(s, href:="https://github.com/lihaoyi/scalatags/pull/"+s)
   @sect{Changelog}
+    @sect{0.7.0}
+      @ul
+        @li
+          Support for Scala 2.13.0 final
     @sect{0.6.8}
       @ul
         @li
