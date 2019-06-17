@@ -14,7 +14,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     /**
      * Tests nesting tags in a simple hierarchy
      */
-    'cssChaining-{
+    test("cssChaining"){
       val x = script("")
       strCheck(
         html(
@@ -43,7 +43,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """
       )
     }
-    'cssChaining2-strCheck(
+    test("cssChaining2") - strCheck(
       div(
         float.left,
         color:="red"
@@ -52,7 +52,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     )
 
 
-    'attributeChaining-strCheck(
+    test("attributeChaining") - strCheck(
       div(
         `class`:="thing lol",
         id:="cow"
@@ -61,7 +61,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     )
 
 
-    'mixingAttributesStylesAndChildren-strCheck(
+    test("mixingAttributesStylesAndChildren") - strCheck(
       div(
         id:="cow",
         float.left,
@@ -70,7 +70,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
       """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
     )
 
-    'classStyleAttrOverwriting-{
+    test("classStyleAttrOverwriting"){
       strCheck(
         //class/style after attr appends, but attr after class/style overwrites
         div(
@@ -83,7 +83,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
       )
     }
 
-    'intSeq-strCheck(
+    test("intSeq") - strCheck(
       div(
         h1("Hello"),
         for(i <- 0 until 5) yield i
@@ -91,7 +91,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
       """<div><h1>Hello</h1>01234</div>"""
     )
 
-    'stringArray{
+    test("stringArray"){
       val strArr = Array("hello")
       strCheck(
         div(
@@ -106,7 +106,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<div>lol1<h1>Hello</h1>123hello</div>"""
       )
     }
-    'applyChaining{
+    test("applyChaining"){
       strCheck(
         a(
           tabindex := 1,
@@ -118,7 +118,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
       )
     }
-    'autoPixel{
+    test("autoPixel"){
       strCheck(
         div(width:=100, zIndex:=100, height:=100),
         """
@@ -126,24 +126,24 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """.stripMargin
       )
     }
-    'compileErrors{
-      'niceErrorsForAttributes{
+    test("compileErrors"){
+      test("niceErrorsForAttributes"){
         val msg = compileError("""a(onclick := {() => "lol"})""").msg
         assert(msg.contains("scalatags does not know how to use () => String as an attribute"))
       }
-      'niceErrorsForStyles{
+      test("niceErrorsForStyles"){
         val msg = compileError("""a(opacity:= {() => "lol"})""").msg
         assert(msg.contains("scalatags does not know how to use () => String as an style"))
       }
     }
-    'nulls{
+    test("nulls"){
       val nullString: String = null
       * - intercept[NullPointerException](div(nullString))
       * - intercept[NullPointerException](div(null: Seq[Int]))
       * - intercept[NullPointerException](div(height := nullString))
       * - intercept[NullPointerException](div(opacity := nullString))
     }
-    'rawAttrs-{
+    test("rawAttrs"){
       strCheck(
         button(
           attr("[class.active]", raw = true):= "isActive",
@@ -153,7 +153,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
 
       )
     }
-    'specialChars- {
+    test("specialChars"){
       * - intercept[java.lang.IllegalArgumentException](div(attr("[(ngModel)]") := "myModel"))
     }
 

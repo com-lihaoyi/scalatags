@@ -45,7 +45,7 @@ trait CommonTestModule extends ScalaModule with TestModule {
   def millSourcePath = super.millSourcePath / os.up
   def crossScalaVersion: String
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::utest::0.6.9",
+    ivy"com.lihaoyi::utest::0.7.0",
     ivy"org.scala-lang.modules::scala-xml:1.2.0",
   )
   def offset: os.RelPath = os.rel

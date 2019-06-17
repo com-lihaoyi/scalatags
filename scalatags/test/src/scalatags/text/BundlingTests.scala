@@ -23,7 +23,7 @@ object BundlingTests extends TestSuite{
       object st extends Text.Cap with Text.Styles with Text.Styles2
       object at extends Text.Cap with Text.Attrs
     }
-    'custom {
+    test("custom"){
       import CustomBundle._
       TestUtil.strCheck(
         html(
@@ -45,7 +45,7 @@ object BundlingTests extends TestSuite{
         expected
       )
     }
-    'interop{
+    test("interop"){
       import CustomBundle.{st, at}
       import Text.all._
       TestUtil.strCheck(

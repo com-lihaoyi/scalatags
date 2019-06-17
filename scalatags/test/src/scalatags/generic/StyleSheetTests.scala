@@ -91,8 +91,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     assert(normalize(txt) == normalize(expected))
   }
   val tests = TestSuite{
-    'feature{
-      'hello{
+    test("feature"){
+      test("hello"){
 
         check(
           Simple.styleSheetText,
@@ -113,7 +113,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         )
       }
 
-      'inline{
+      test("inline"){
         check(
           Inline.styleSheetText,
           s"""
@@ -132,7 +132,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
           """.stripMargin
         )
       }
-      'cascade{
+      test("cascade"){
         check(
           Cascade.styleSheetText,
           s"""
@@ -154,7 +154,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         )
       }
     }
-    'customization{
+    test("customization"){
       check(
         Custom.styleSheetText,
         s"""
@@ -168,8 +168,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
          """
       )
     }
-    'failure{
-      'noDirectInstantiation{
+    test("failure"){
+      test("noDirectInstantiation"){
   // This doesn't seem to work, even though that snippet does indeed
   // cause a compilation error. Maybe a bug in uTest?
 
@@ -180,7 +180,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
   //               ^
   //      """, "object creation impossible")
       }
-      'noCascade{
+      test("noCascade"){
         // crashes compiler in 2.10.x
 //        compileError("""
 //          val Cascade1 = Sheet[Cascade1]
@@ -215,7 +215,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 //        """, "type mismatch")
       }
     }
-    'htmlFrag{
+    test("htmlFrag"){
       val x = div(
         Simple.x,
         Simple.y
