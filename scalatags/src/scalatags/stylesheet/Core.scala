@@ -95,7 +95,7 @@ trait PseudoSelectors[T]{
   def left = pseudoExtend("left")
   def link = pseudoExtend("link")
   def onlyChild = pseudoExtend("only-child")
-  def onlyOfType = pseudoExtend("onlyOfType")
+  def onlyOfType = pseudoExtend("only-of-type")
   def optional = pseudoExtend("optional")
   def outOfRange = pseudoExtend("out-of-range")
   def readOnly = pseudoExtend("read-only")
