@@ -4,7 +4,7 @@ import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
 trait ScalatagsPublishModule extends PublishModule {
   def artifactName = "scalatags"
 
-  def publishVersion = "0.7.1"
+  def publishVersion = "0.8.0"
 
   def pomSettings = PomSettings(
     description = artifactName(),
@@ -25,6 +25,7 @@ trait Common extends CrossScalaModule {
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
     ivy"com.lihaoyi::sourcecode::0.1.7",
+    ivy"com.lihaoyi::geny::0.2.0",
   )
   def compileIvyDeps = Agg(
     ivy"org.scala-lang:scala-reflect:${scalaVersion()}",

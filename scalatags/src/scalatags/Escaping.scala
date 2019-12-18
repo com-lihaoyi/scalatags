@@ -44,7 +44,7 @@ object Escaping {
   /**
    * Code to escape text HTML nodes. Taken from scala.xml
    */
-  def escape(text: String, s: StringBuilder) = {
+  def escape(text: String, s: java.io.Writer) = {
     // Implemented per XML spec:
     // http://www.w3.org/International/questions/qa-controls
     // imperative code 3x-4x faster than current implementation
