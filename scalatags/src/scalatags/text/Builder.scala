@@ -144,7 +144,7 @@ object Builder{
   }
 }
 
-trait Frag extends generic.Frag[Builder, String] with geny.Writable{
+trait Frag extends generic.Frag[Builder, String] {
   def writeTo(strb: java.io.Writer): Unit
   def writeBytesTo(out: java.io.OutputStream): Unit = {
     val w = new java.io.OutputStreamWriter(out, java.nio.charset.StandardCharsets.UTF_8)

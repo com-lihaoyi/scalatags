@@ -59,6 +59,23 @@ object Text
       def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
       def render = xs.map(_.render).mkString
     }
+
+    case class doctype(s: String)(content: text.Frag) extends geny.Writable{
+      def writeTo(strb: java.io.Writer): Unit = {
+        strb.write(s"<doctype $s>")
+        content.writeTo(strb)
+      }
+      def writeBytesTo(out: java.io.OutputStream): Unit = {
+        val w = new java.io.OutputStreamWriter(out, java.nio.charset.StandardCharsets.UTF_8)
+        writeTo(w)
+        w.flush()
+      }
+      def render = {
+        val strb = new java.io.StringWriter()
+        writeTo(strb)
+        strb.toString()
+      }
+    }
   }
 
   trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
@@ -140,7 +157,7 @@ object Text
                                          modifiers: List[Seq[Modifier]],
                                          void: Boolean = false)
                                          extends generic.TypedTag[text.Builder, Output, String]
-                                         with text.Frag{
+                                         with text.Frag with geny.Writable{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.

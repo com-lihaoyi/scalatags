@@ -126,8 +126,10 @@
         If you want to add a doctype to your HTML fragment, simply add it as a string:
 
       @hl.scala
-        "<!DOCTYPE html>" + html(
-          ...
+        doctype("html")(
+          html(
+            ...
+          )
         )
 
       @p
@@ -1101,6 +1103,17 @@
 
   @def pr(s: Int) = a(s, href:="https://github.com/lihaoyi/scalatags/pull/"+s)
   @sect{Changelog}
+    @sect{0.8.1}
+      @ul
+        @li
+          @code{scalatags.Text.Tag} now supports the
+          @lnk("geny.Writable", "https://github.com/lihaoyi/geny#writable") interface
+        @li
+          Added the @code{doctype("html")(...)} syntax
+    @sect{0.7.0}
+      @ul
+        @li
+          Support for Scala 2.13.0
     @sect{0.6.8}
       @ul
         @li
