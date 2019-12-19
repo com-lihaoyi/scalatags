@@ -62,7 +62,7 @@ object Text
 
     case class doctype(s: String)(content: text.Frag) extends geny.Writable{
       def writeTo(strb: java.io.Writer): Unit = {
-        strb.write(s"<doctype $s>")
+        strb.write(s"<!DOCTYPE $s>")
         content.writeTo(strb)
       }
       def writeBytesTo(out: java.io.OutputStream): Unit = {
