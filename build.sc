@@ -24,7 +24,7 @@ trait ScalatagsPublishModule extends PublishModule {
 trait Common extends CrossScalaModule {
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::sourcecode::0.1.7",
+    ivy"com.lihaoyi::sourcecode::0.2.0",
     ivy"com.lihaoyi::geny::0.5.0",
   )
   def compileIvyDeps = Agg(
@@ -75,7 +75,7 @@ object scalatags extends Module {
     }
   }
 
-  object js extends Cross[JSScalatagsModule](("2.12.10", "0.6.29"), ("2.13.1", "0.6.29")/*, ("2.12.10", "1.0.0-RC2"), ("2.13.1", "1.0.0-RC2")*/)
+  object js extends Cross[JSScalatagsModule](("2.12.10", "0.6.31"), ("2.13.1", "0.6.31"), ("2.12.10", "1.0.0-RC2"), ("2.13.1", "1.0.0-RC2"))
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
@@ -104,6 +104,6 @@ object scalatags extends Module {
 
 object example extends ScalaJSModule{
   def scalaVersion = "2.12.10"
-  def scalaJSVersion = "0.6.29"
-  def moduleDeps = Seq(scalatags.js("2.12.10", "0.6.29"))
+  def scalaJSVersion = "0.6.31"
+  def moduleDeps = Seq(scalatags.js("2.12.10", "0.6.31"))
 }

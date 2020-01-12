@@ -202,7 +202,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
   }
 
 
-  private[scalatags] class BorderRadius(jsName: String, cssName: String) extends Style(jsName, cssName)
+  private[scalatags] class BorderRadius(jsName: String, cssName: String) extends PixelStyle(jsName, cssName)
 
   private[scalatags] trait MarginAuto extends PixelStyle {
     /**
@@ -1184,7 +1184,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  lazy val borderRadius = new Style("borderRadius", "border-radius")
+  lazy val borderRadius = new PixelStyle("borderRadius", "border-radius")
 
   /**
    * The border-width CSS property sets the width of the border of a box. Using
@@ -2406,7 +2406,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object fontSize extends Style("fontSize", "font-size") {
+  object fontSize extends PixelStyle("fontSize", "font-size") {
     lazy val `xx-small` = this := "xx-small"
     lazy val `x-small` = this := "x-small"
     lazy val small = this := "small"
