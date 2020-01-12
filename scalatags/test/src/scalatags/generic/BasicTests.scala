@@ -106,6 +106,19 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<div>lol1<h1>Hello</h1>123hello</div>"""
       )
     }
+    test("generator"){
+      val strArr = Array("hello")
+      strCheck(
+        div(
+          geny.Generator[String](
+            "Hello",
+            "World",
+            "Moo"
+          )
+        ),
+        """<div>HelloWorldMoo</div>"""
+      )
+    }
     test("applyChaining"){
       strCheck(
         a(

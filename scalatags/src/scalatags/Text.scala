@@ -59,6 +59,11 @@ object Text
       def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
       def render = xs.map(_.render).mkString
     }
+    implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
+      Objects.requireNonNull(xs)
+      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
+      def render = xs.map(_.render).mkString
+    }
 
     case class doctype(s: String)(content: text.Frag) extends geny.Writable{
       def writeTo(strb: java.io.Writer): Unit = {

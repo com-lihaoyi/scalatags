@@ -5,7 +5,7 @@ package scalatags
  */
 object Escaping {
 
-  private[this] val tagRegex = "^[a-z][\\w0-9-]*$".r
+  private[this] val tagRegex = "^[a-z][:\\w0-9-]*$".r
 
   /**
    * Uses a regex to check if something is a valid tag name.

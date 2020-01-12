@@ -91,6 +91,10 @@ trait LowPriUtil[Builder, Output <: FragT, FragT]{
    * Renders an Seq of [[FragT]] into a single [[FragT]]
    */
   implicit def SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag[Builder, FragT]): Frag[Builder, FragT]
+  /**
+   * Renders an Seq of [[FragT]] into a single [[FragT]]
+   */
+  implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag[Builder, FragT]): Frag[Builder, FragT]
 
   /**
    * Renders an Option of [[FragT]] into a single [[FragT]]

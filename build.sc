@@ -4,7 +4,7 @@ import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
 trait ScalatagsPublishModule extends PublishModule {
   def artifactName = "scalatags"
 
-  def publishVersion = "0.8.3"
+  def publishVersion = "0.8.4"
 
   def pomSettings = PomSettings(
     description = artifactName(),
@@ -46,7 +46,7 @@ trait CommonTestModule extends ScalaModule with TestModule {
   def millSourcePath = super.millSourcePath / os.up
   def crossScalaVersion: String
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::utest::0.7.0",
+    ivy"com.lihaoyi::utest::0.7.3",
     ivy"org.scala-lang.modules::scala-xml:1.2.0",
   )
   def offset: os.RelPath = os.rel
@@ -66,7 +66,7 @@ trait CommonTestModule extends ScalaModule with TestModule {
 
 
 object scalatags extends Module {
-  object jvm extends Cross[JvmScalatagsModule]("2.12.8", "2.13.0")
+  object jvm extends Cross[JvmScalatagsModule]("2.12.10", "2.13.1")
   class JvmScalatagsModule(val crossScalaVersion: String)
     extends Common with ScalaModule with ScalatagsPublishModule {
 
@@ -75,12 +75,12 @@ object scalatags extends Module {
     }
   }
 
-  object js extends Cross[JSScalatagsModule](("2.12.8", "0.6.26"), ("2.13.0", "0.6.28"))
+  object js extends Cross[JSScalatagsModule](("2.12.10", "0.6.29"), ("2.13.1", "0.6.29")/*, ("2.12.10", "1.0.0-RC2"), ("2.13.1", "1.0.0-RC2")*/)
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
     def ivyDeps = super.ivyDeps() ++ Agg(
-      ivy"org.scala-js::scalajs-dom::0.9.7"
+      ivy"org.scala-js::scalajs-dom::0.9.8"
     )
     def offset = os.up
     object test extends Tests with CommonTestModule{
@@ -90,20 +90,20 @@ object scalatags extends Module {
     }
   }
 
-  object native extends Cross[NativeScalatagsModule](("2.11.12", "0.3.8"))
-  class NativeScalatagsModule(val crossScalaVersion: String, crossScalaNativeVersion: String)
-    extends Common with ScalaNativeModule with ScalatagsPublishModule {
-    def scalaNativeVersion = crossScalaNativeVersion
-    def offset = os.up
-    object test extends Tests with CommonTestModule{
-      def offset = os.up
-      def crossScalaVersion = NativeScalatagsModule.this.crossScalaVersion
-    }
-  }
+//  object native extends Cross[NativeScalatagsModule](("2.11.12", "0.3.8"))
+//  class NativeScalatagsModule(val crossScalaVersion: String, crossScalaNativeVersion: String)
+//    extends Common with ScalaNativeModule with ScalatagsPublishModule {
+//    def scalaNativeVersion = crossScalaNativeVersion
+//    def offset = os.up
+//    object test extends Tests with CommonTestModule{
+//      def offset = os.up
+//      def crossScalaVersion = NativeScalatagsModule.this.crossScalaVersion
+//    }
+//  }
 }
 
 object example extends ScalaJSModule{
-  def scalaVersion = "2.12.8"
-  def scalaJSVersion = "0.6.26"
-  def moduleDeps = Seq(scalatags.js("2.12.8", "0.6.26"))
+  def scalaVersion = "2.12.10"
+  def scalaJSVersion = "0.6.29"
+  def moduleDeps = Seq(scalatags.js("2.12.10", "0.6.29"))
 }

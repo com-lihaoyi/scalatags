@@ -65,6 +65,10 @@ object TextTests extends TestSuite{
         """<input class="a b" />"""
       )
     }
+    test("namespaced"){
+      val sample = tag("abc:def")(attr("hello:world") := "moo")
+      assert(sample.toString == """<abc:def hello:world="moo"></abc:def>""")
+    }
 
   }
 }

@@ -116,6 +116,15 @@ object JsDom
         frag
       }
     }
+    implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
+      Objects.requireNonNull(xs)
+      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      def render: dom.Node = {
+        val frag = org.scalajs.dom.document.createDocumentFragment()
+        xs.map(_.render).foreach(frag.appendChild)
+        frag
+      }
+    }
   }
 
   object StringFrag extends Companion[StringFrag]
