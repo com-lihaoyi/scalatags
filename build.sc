@@ -90,16 +90,16 @@ object scalatags extends Module {
     }
   }
 
-//  object native extends Cross[NativeScalatagsModule](("2.11.12", "0.3.8"))
-//  class NativeScalatagsModule(val crossScalaVersion: String, crossScalaNativeVersion: String)
-//    extends Common with ScalaNativeModule with ScalatagsPublishModule {
-//    def scalaNativeVersion = crossScalaNativeVersion
-//    def offset = os.up
-//    object test extends Tests with CommonTestModule{
-//      def offset = os.up
-//      def crossScalaVersion = NativeScalatagsModule.this.crossScalaVersion
-//    }
-//  }
+  object native extends Cross[NativeScalatagsModule](("2.11.12", "0.3.8"))
+  class NativeScalatagsModule(val crossScalaVersion: String, crossScalaNativeVersion: String)
+    extends Common with ScalaNativeModule with ScalatagsPublishModule {
+    def scalaNativeVersion = crossScalaNativeVersion
+    def offset = os.up
+    object test extends Tests with CommonTestModule{
+      def offset = os.up
+      def crossScalaVersion = NativeScalatagsModule.this.crossScalaVersion
+    }
+  }
 }
 
 object example extends ScalaJSModule{
