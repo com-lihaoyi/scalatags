@@ -667,6 +667,12 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
    */
   lazy val multiple = attr("multiple").empty
   /**
+   * The minimum allowed length for the input field. This attribute forces the input control
+   * to accept no less than the allowed number of characters. It does not produce any
+   * feedback to the user; you must write Javascript to make that happen.
+   */
+  lazy val minlength = attr("minlength")
+  /**
    * The maximum allowed length for the input field. This attribute forces the input control
    * to accept no more than the allowed number of characters. It does not produce any
    * feedback to the user; you must write Javascript to make that happen.
