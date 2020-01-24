@@ -212,7 +212,7 @@ trait LowPriorityImplicits{
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit class bindNode(e: dom.Node) extends generic.Frag[dom.Element, dom.Node] {
+  implicit class bindNode[T <: dom.Node](e: T) extends generic.Frag[dom.Element, T] {
     def applyTo(t: Element) = t.appendChild(e)
     def render = e
   }
