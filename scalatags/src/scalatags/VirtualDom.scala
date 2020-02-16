@@ -164,7 +164,7 @@ trait VirtualDom[Output <: FragT, FragT]
     def render: O = {
       val builder = makeBuilder
       build(builder)
-      builder.render.asInstanceOf[O]
+      builder.render(tag).asInstanceOf[O]
     }
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
