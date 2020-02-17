@@ -25,7 +25,7 @@ trait VirtualDom[Output <: FragT, FragT]
 
   def stringToFrag(s: String): FragT
   def rawToFrag(s: String): FragT
-  def makeBuilder: vdom.Builder[Output, FragT]
+  def makeBuilder(tag: String): vdom.Builder[Output, FragT]
   object attrs extends Cap with Attrs
   object tags extends Cap with vdom.Tags[Output, FragT]
   object tags2 extends Cap with vdom.Tags2[Output, FragT]
@@ -162,9 +162,9 @@ trait VirtualDom[Output <: FragT, FragT]
     protected[this] type Self = TypedTag[O @uncheckedVariance]
 
     def render: O = {
-      val builder = makeBuilder
+      val builder = makeBuilder(tag)
       build(builder)
-      builder.render(tag).asInstanceOf[O]
+      builder.render().asInstanceOf[O]
     }
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...

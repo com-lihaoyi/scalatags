@@ -5,7 +5,7 @@ trait Builder[Output, FragT]{
   def appendClass(cls: String): Unit
   def appendStyle(cssName: String, value: String): Unit
   def setAttr(name: String, value: String): Unit
-  def render(tag: String): Output
+  def render(): Output
 }
 
 trait Frag[Output, FragT] extends scalatags.generic.Frag[Builder[Output, FragT], FragT]{
