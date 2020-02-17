@@ -7,11 +7,11 @@ import scala.language.higherKinds
 /**
  * Created by haoyi on 6/2/14.
  */
-trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, FragT]{
+trait Util[Builder, Output <: FragT, FragT] {
 
   type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T, FragT]
 
-  def frag(frags: Frag[Builder, FragT]*): Frag[Builder, FragT] = SeqFrag(frags)
+  def frag(frags: Frag[Builder, FragT]*): Frag[Builder, FragT] = ??? //SeqFrag(frags)
   def modifier(mods: Modifier[Builder]*): Modifier[Builder] = SeqNode(mods)
 
   def tag(s: String, void: Boolean = false): TypedTag[Builder, Output, FragT]
@@ -86,28 +86,3 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
 
 }
 
-trait LowPriUtil[Builder, Output <: FragT, FragT]{
-  /**
-   * Renders an Seq of [[FragT]] into a single [[FragT]]
-   */
-  implicit def SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag[Builder, FragT]): Frag[Builder, FragT]
-  /**
-   * Renders an Seq of [[FragT]] into a single [[FragT]]
-   */
-  implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag[Builder, FragT]): Frag[Builder, FragT]
-
-  /**
-   * Renders an Option of [[FragT]] into a single [[FragT]]
-   */
-  implicit def OptionFrag[A](xs: Option[A])(implicit ev: A => Frag[Builder, FragT]) = SeqFrag(xs.toSeq)
-
-  /**
-   * Renders an Seq of [[FragT]] into a single [[FragT]]
-   */
-  implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => Frag[Builder, FragT]) = SeqFrag[A](xs.toSeq)
-
-  /**
-   * Lets you put Unit into a scalatags tree, as a no-op.
-   */
-  implicit def UnitFrag(u: Unit): Frag[Builder, FragT]
-}

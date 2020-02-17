@@ -12,14 +12,14 @@ import scalatags.generic.Style
  * exposes more of its internals than it probably should for performance,
  * so even though the stuff isn't private, don't touch it!
  */
-class Builder(var children: Array[Frag] = new Array(4),
+class Builder(var children: Array[Text.Frag] = new Array(4),
               var attrs: Array[(String, Builder.ValueSource)] = new Array(4)){
   final var childIndex = 0
   final var attrIndex = 0
 
-  private[this] def incrementChidren(arr: Array[Frag], index: Int) = {
+  private[this] def incrementChidren(arr: Array[Text.Frag], index: Int) = {
     if (index >= arr.length){
-      val newArr = new Array[Frag](arr.length * 2)
+      val newArr = new Array[Text.Frag](arr.length * 2)
       var i = 0
       while(i < arr.length){
         newArr(i) = arr(i)
@@ -58,7 +58,7 @@ class Builder(var children: Array[Frag] = new Array(4),
       null
     }
   }
-  def addChild(c: Frag) = {
+  def addChild(c: Text.Frag) = {
     val newChildren = incrementChidren(children, childIndex)
     if (newChildren != null) children = newChildren
     children(childIndex) = c
@@ -142,16 +142,5 @@ object Builder{
       tail.appendAttrValue(strb)
     }
   }
-}
-
-trait Frag extends generic.Frag[Builder, String] {
-  def writeTo(strb: java.io.Writer): Unit
-  def writeBytesTo(out: java.io.OutputStream): Unit = {
-    val w = new java.io.OutputStreamWriter(out, java.nio.charset.StandardCharsets.UTF_8)
-    writeTo(w)
-    w.flush()
-  }
-  def render: String
-  def applyTo(b: Builder) = b.addChild(this)
 }
 

@@ -1,7 +1,9 @@
 package scalatags
+import java.io.Writer
 import java.util.Objects
 
 import scalatags.generic._
+
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder
@@ -12,9 +14,8 @@ import scalatags.text.Builder
  */
 
 
-object Text
-  extends generic.Bundle[text.Builder, String, String]
-  with Aliases[text.Builder, String, String]{
+object Text extends generic.Bundle[text.Builder, String, String] {
+  type FragTypeAlias = Frag
   object attrs extends Text.Cap with Attrs
   object tags extends Text.Cap with text.Tags
   object tags2 extends Text.Cap with text.Tags2
@@ -24,48 +25,45 @@ object Text
   object svgTags extends Text.Cap with text.SvgTags
   object svgAttrs extends Text.Cap with SvgAttrs
 
-  object implicits extends Aggregate with DataConverters
 
   object all
     extends Cap
     with Attrs
     with Styles
     with text.Tags
-    with DataConverters
-    with Aggregate
 
   object short
     extends Cap
     with text.Tags
-    with DataConverters
-    with Aggregate
     with AbstractShort{
 
     object * extends Cap with Attrs with Styles
   }
+  implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => FragTypeAlias) extends Frag{
+    Objects.requireNonNull(xs)
 
+    def writeTo(strb: Writer): Unit = xs.foreach(_.writeTo(strb))
+    def render = xs.map(_.render).mkString
+  }
+  implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => FragTypeAlias) extends Frag{
+    Objects.requireNonNull(xs)
+    def writeTo(strb: Writer): Unit = xs.foreach(_.writeTo(strb))
+    def render = xs.map(_.render).mkString
+  }
+  implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
   trait Cap extends Util with text.TagFactory{ self =>
     type ConcreteHtmlTag[T <: String] = TypedTag[T]
     type BaseTagType = TypedTag[String]
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
-    implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
+
     def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
       TypedTag(tag, Nil, void)
     }
-    implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
-      Objects.requireNonNull(xs)
-      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
-      def render = xs.map(_.render).mkString
-    }
-    implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
-      Objects.requireNonNull(xs)
-      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
-      def render = xs.map(_.render).mkString
-    }
 
-    case class doctype(s: String)(content: text.Frag) extends geny.Writable{
+
+    case class doctype(s: String)(content: Frag) extends geny.Writable{
       def writeTo(strb: java.io.Writer): Unit = {
         strb.write(s"<!DOCTYPE $s>")
         content.writeTo(strb)
@@ -83,43 +81,49 @@ object Text
     }
   }
 
-  trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
-    implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with text.Builder.ValueSource{
-      def applyTo(t: text.Builder) = t.appendAttr("class",this)
+//  trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
+  implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with text.Builder.ValueSource{
+    def applyTo(t: text.Builder) = t.appendAttr("class",this)
 
-      override def appendAttrValue(sb: java.io.Writer): Unit = {
-        Escaping.escape(s.name, sb)
-      }
+    override def appendAttrValue(sb: java.io.Writer): Unit = {
+      Escaping.escape(s.name, sb)
     }
-    implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
-      def applyTo(c: StyleTree) = {
-        val b = new Builder()
-        s.applyTo(b)
-        val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
-        c.copy(styles = c.styles.updated(style, value))
-      }
+  }
+  implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
+    def applyTo(c: StyleTree) = {
+      val b = new Builder()
+      s.applyTo(b)
+      val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
+      c.copy(styles = c.styles.updated(style, value))
     }
+  }
 
-    def genericAttr[T] = new Text.GenericAttr[T]
-    def genericStyle[T] = new Text.GenericStyle[T]
-    def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new Text.GenericPixelStyle[T](ev)
-    def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new Text.GenericPixelStylePx[T](ev)
+  def genericAttr[T] = new Text.GenericAttr[T]
+  def genericStyle[T] = new Text.GenericStyle[T]
+  def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new Text.GenericPixelStyle[T](ev)
+  def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new Text.GenericPixelStylePx[T](ev)
 
-    implicit def stringFrag(v: String) = new Text.StringFrag(v)
+  implicit def stringFrag(v: String) = new Text.StringFrag(v)
 
-    val RawFrag = Text.RawFrag
-    val StringFrag = Text.StringFrag
-    type StringFrag = Text.StringFrag
-    type RawFrag = Text.RawFrag
-    def raw(s: String) = RawFrag(s)
+  def raw(s: String) = RawFrag(s)
 
 
-    val Tag = Text.TypedTag
+  val Tag = Text.TypedTag
+
+
+  trait Frag extends super.Frag {
+    def writeTo(strb: java.io.Writer): Unit
+    def writeBytesTo(out: java.io.OutputStream): Unit = {
+      val w = new java.io.OutputStreamWriter(out, java.nio.charset.StandardCharsets.UTF_8)
+      writeTo(w)
+      w.flush()
+    }
+    def render: String
+    def applyTo(b: Builder) = b.addChild(this)
   }
 
 
-
-  case class StringFrag(v: String) extends text.Frag{
+  case class StringFrag(v: String) extends Frag{
     Objects.requireNonNull(v)
     def render = {
       val strb = new java.io.StringWriter()
@@ -130,7 +134,7 @@ object Text
   }
   object StringFrag extends Companion[StringFrag]
   object RawFrag extends Companion[RawFrag]
-  case class RawFrag(v: String) extends text.Frag {
+  case class RawFrag(v: String) extends Frag {
     Objects.requireNonNull(v)
     def render = v
     def writeTo(strb: java.io.Writer) = strb.append(v)
@@ -158,15 +162,14 @@ object Text
 
 
 
-  case class TypedTag[+Output <: String](tag: String = "",
+  case class TypedTag[+O <: String](tag: String = "",
                                          modifiers: List[Seq[Modifier]],
                                          void: Boolean = false)
-                                         extends generic.TypedTag[text.Builder, Output, String]
-                                         with text.Frag with geny.Writable{
+                                         extends super.TypedTag[O] with Frag with geny.Writable{
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
-    protected[this] type Self = TypedTag[Output @uncheckedVariance]
+    protected[this] type Self = TypedTag[O @uncheckedVariance]
 
     /**
      * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.
@@ -209,7 +212,7 @@ object Text
       }
     }
 
-    def apply(xs: Modifier*): TypedTag[Output] = {
+    def apply(xs: Modifier*): TypedTag[O] = {
       this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
     }
 
@@ -221,7 +224,7 @@ object Text
       writeTo(strb)
       strb.toString()
     }
-    def render: Output = this.toString.asInstanceOf[Output]
+    def render: O = this.toString.asInstanceOf[O]
   }
 
 
