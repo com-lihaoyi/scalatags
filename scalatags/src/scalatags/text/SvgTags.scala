@@ -1,7 +1,6 @@
 package scalatags
 package text
-trait SvgTags extends generic.SvgTags[Builder, String, String]
-              with TagFactory{
+trait SvgTags[TypedTag] extends generic.SvgTags[TypedTag] with TagFactory[TypedTag]{
   lazy val altGlyph = tag("altGlyph")
   lazy val altGlyphDef = tag("altGlyphDef")
   lazy val altGlyphItem = tag("altGlyphItem")

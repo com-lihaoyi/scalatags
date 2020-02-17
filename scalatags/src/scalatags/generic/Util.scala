@@ -9,12 +9,12 @@ import scala.language.higherKinds
  */
 trait Util[Builder, Output <: FragT, FragT] {
 
-  type ConcreteHtmlTag[T <: Output] <: TypedTag[Builder, T, FragT]
+  type ConcreteHtmlTag[T <: Output]
 
   def frag(frags: Frag[Builder, FragT]*): Frag[Builder, FragT] = ??? //SeqFrag(frags)
-  def modifier(mods: Modifier[Builder]*): Modifier[Builder] = SeqNode(mods)
+  def modifier(mods: Modifier[Builder]*): Modifier[Builder] = ??? //SeqNode(mods)
 
-  def tag(s: String, void: Boolean = false): TypedTag[Builder, Output, FragT]
+  def tag(s: String, void: Boolean = false): ConcreteHtmlTag[Output]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: Namespace): ConcreteHtmlTag[T]
   protected[this] implicit def stringAttrX: AttrValue[Builder, String]
   protected[this] implicit def stringStyleX: StyleValue[Builder, String]
@@ -60,29 +60,5 @@ trait Util[Builder, Output <: FragT, FragT] {
     * }}}
     */
   def css(s: String) = Style(camelCase(s), s)
-
-
-  /**
-   * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
-   * objects to its list of children.
-   */
-  implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => Modifier[Builder]) extends Modifier[Builder]{
-    Objects.requireNonNull(xs)
-    def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
-  }
-
-  /**
-   * Allows you to modify a [[ConcreteHtmlTag]] by adding an Option containing other nest-able
-   * objects to its list of children.
-   */
-  implicit def OptionNode[A](xs: Option[A])(implicit ev: A => Modifier[Builder]) = new SeqNode(xs.toSeq)
-
-  /**
-   * Allows you to modify a [[ConcreteHtmlTag]] by adding an Array containing other nest-able
-   * objects to its list of children.
-   */
-  implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => Modifier[Builder]) = new SeqNode[A](xs.toSeq)
-
-
 }
 

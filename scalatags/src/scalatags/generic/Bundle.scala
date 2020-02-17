@@ -28,8 +28,56 @@ import scalatags.text
  */
 trait Bundle[Builder, Output <: FragT, FragT] {
   type FragTypeAlias <: Frag
-  trait Frag extends generic.Frag[Builder, FragT]
-  trait TypedTag[+O <: Output] extends Frag with generic.TypedTag[Builder, O, FragT]
+  type ModifierTypeAlias <: Modifier
+  trait Frag extends generic.Frag[Builder, FragT] with Modifier
+  trait TypedTag[+O <: Output] extends Frag {
+    protected[this] type Self <: TypedTag[O]
+    def tag: String
+
+    /**
+     * The modifiers that are applied to a TypedTag are kept in this linked-Seq
+     * (which are actually WrappedArrays) data-structure in order for maximum
+     * performance.
+     */
+    def modifiers: List[Seq[ModifierTypeAlias]]
+
+    /**
+     * Walks the [[modifiers]] to apply them to a particular [[Builder]].
+     * Super sketchy/procedural for max performance.
+     */
+    def build(b: Builder): Unit = {
+      var current = modifiers
+      val arr = new Array[Seq[ModifierTypeAlias]](modifiers.length)
+
+      var i = 0
+      while(current != Nil){
+        arr(i) = current.head
+        current =  current.tail
+        i += 1
+      }
+
+      var j = arr.length
+      while (j > 0) {
+        j -= 1
+        val frag = arr(j)
+        var i = 0
+        while(i < frag.length){
+          frag(i).applyTo(b)
+          i += 1
+        }
+      }
+    }
+    /**
+     * Add the given modifications (e.g. additional children, or new attributes)
+     * to the [[TypedTag]].
+     */
+    def apply(xs: ModifierTypeAlias*): Self
+
+    /**
+     * Collapses this scalatags tag tree and returns an [[Output]]
+     */
+    def render: Output
+  }
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
@@ -76,24 +124,24 @@ trait Bundle[Builder, Output <: FragT, FragT] {
 
 
   type Attrs = generic.Attrs[Builder, Output, FragT]
-  type Tags = generic.Tags[Builder, Output, FragT]
-  type Tags2 = generic.Tags2[Builder, Output, FragT]
+  type Tags = generic.Tags[TypedTag[Output]]
+  type Tags2 = generic.Tags2[TypedTag[Output]]
   type Styles = generic.Styles[Builder, Output, FragT]
   type Styles2 = generic.Styles2[Builder, Output, FragT]
-  type SvgTags = generic.SvgTags[Builder, Output, FragT]
+  type SvgTags = generic.SvgTags[TypedTag[Output]]
   type SvgAttrs = generic.SvgAttrs[Builder, Output, FragT]
   type Util = generic.Util[Builder, Output, FragT]
   type AttrPair = generic.AttrPair[Builder, FragT]
 
   type Attr = generic.Attr
   type Style = generic.Style
-  type Modifier = generic.Modifier[Builder]
+  trait Modifier extends generic.Modifier[Builder]
 
   type AttrValue[V] = generic.AttrValue[Builder, V]
   type StyleValue[V] = generic.StyleValue[Builder, V]
   type PixelStyleValue[V] = generic.PixelStyleValue[Builder, V]
 
-  type Tag = generic.TypedTag[Builder, Output, FragT]
+  type Tag = TypedTag[Output]
 
   /**
    * A [[Modifier]] which contains a String which will not be escaped.
@@ -178,6 +226,29 @@ trait Bundle[Builder, Output <: FragT, FragT] {
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
   implicit def UnitFrag(u: Unit): Frag
+
+
+  /**
+   * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
+   * objects to its list of children.
+   */
+  implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => ModifierTypeAlias) extends Modifier{
+    java.util.Objects.requireNonNull(xs)
+    def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
+  }
+
+  /**
+   * Allows you to modify a [[ConcreteHtmlTag]] by adding an Option containing other nest-able
+   * objects to its list of children.
+   */
+  implicit def OptionNode[A](xs: Option[A])(implicit ev: A => ModifierTypeAlias) = new SeqNode(xs.toSeq)
+
+  /**
+   * Allows you to modify a [[ConcreteHtmlTag]] by adding an Array containing other nest-able
+   * objects to its list of children.
+   */
+  implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => ModifierTypeAlias) = new SeqNode[A](xs.toSeq)
+
 }
 trait AbstractShort[Builder, Output <: FragT, FragT]{
   val `*`: generic.Attrs[Builder, Output, FragT] with generic.Styles[Builder, Output, FragT]

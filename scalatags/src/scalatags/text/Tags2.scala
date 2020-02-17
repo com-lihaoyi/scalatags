@@ -1,6 +1,6 @@
 package scalatags
 package text
-trait Tags2 extends generic.Tags2[Builder, String, String] with TagFactory{
+trait Tags2[TypedTag] extends generic.Tags2[TypedTag] with TagFactory[TypedTag]{
   // Document Metadata
  lazy val title = tag("title")
  lazy val style = tag("style")

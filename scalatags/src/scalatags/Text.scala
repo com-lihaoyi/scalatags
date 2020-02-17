@@ -16,13 +16,15 @@ import scalatags.text.Builder
 
 object Text extends generic.Bundle[text.Builder, String, String] {
   type FragTypeAlias = Frag
+  type ModifierTypeAlias = Modifier
+  trait Modifier extends super.Modifier
   object attrs extends Text.Cap with Attrs
-  object tags extends Text.Cap with text.Tags
-  object tags2 extends Text.Cap with text.Tags2
+  object tags extends Text.Cap with text.Tags[TypedTag[String]] with Tags
+  object tags2 extends Text.Cap with text.Tags2[TypedTag[String]] with Tags2
   object styles extends Text.Cap with Styles
   object styles2 extends Text.Cap with Styles2
 
-  object svgTags extends Text.Cap with text.SvgTags
+  object svgTags extends Text.Cap with text.SvgTags[TypedTag[String]] with SvgTags
   object svgAttrs extends Text.Cap with SvgAttrs
 
 
@@ -30,11 +32,11 @@ object Text extends generic.Bundle[text.Builder, String, String] {
     extends Cap
     with Attrs
     with Styles
-    with text.Tags
+    with text.Tags[TypedTag[String]] with Tags
 
   object short
     extends Cap
-    with text.Tags
+    with text.Tags[TypedTag[String]] with Tags
     with AbstractShort{
 
     object * extends Cap with Attrs with Styles
@@ -51,7 +53,7 @@ object Text extends generic.Bundle[text.Builder, String, String] {
     def render = xs.map(_.render).mkString
   }
   implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
-  trait Cap extends Util with text.TagFactory{ self =>
+  trait Cap extends Util with text.TagFactory[TypedTag[String]]{ self =>
     type ConcreteHtmlTag[T <: String] = TypedTag[T]
     type BaseTagType = TypedTag[String]
     protected[this] implicit def stringAttrX = new GenericAttr[String]
@@ -212,7 +214,7 @@ object Text extends generic.Bundle[text.Builder, String, String] {
       }
     }
 
-    def apply(xs: Modifier*): TypedTag[O] = {
+    def apply(xs: ModifierTypeAlias*): TypedTag[O] = {
       this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
     }
 
