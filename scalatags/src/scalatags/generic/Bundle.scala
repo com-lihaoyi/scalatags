@@ -27,8 +27,6 @@ import scalatags.text
  *                 `Tag` is being rendered to give a final result.
  */
 trait Bundle[Builder, Output <: FragT, FragT] {
-  type FragTypeAlias <: Frag
-  type ModifierTypeAlias <: Modifier
   trait Frag extends generic.Frag[Builder, FragT] with Modifier
   trait TypedTag[+O <: Output] extends Frag {
     protected[this] type Self <: TypedTag[O]
@@ -39,7 +37,7 @@ trait Bundle[Builder, Output <: FragT, FragT] {
      * (which are actually WrappedArrays) data-structure in order for maximum
      * performance.
      */
-    def modifiers: List[Seq[ModifierTypeAlias]]
+    def modifiers: List[Seq[Modifier]]
 
     /**
      * Walks the [[modifiers]] to apply them to a particular [[Builder]].
@@ -47,7 +45,7 @@ trait Bundle[Builder, Output <: FragT, FragT] {
      */
     def build(b: Builder): Unit = {
       var current = modifiers
-      val arr = new Array[Seq[ModifierTypeAlias]](modifiers.length)
+      val arr = new Array[Seq[Modifier]](modifiers.length)
 
       var i = 0
       while(current != Nil){
@@ -71,7 +69,7 @@ trait Bundle[Builder, Output <: FragT, FragT] {
      * Add the given modifications (e.g. additional children, or new attributes)
      * to the [[TypedTag]].
      */
-    def apply(xs: ModifierTypeAlias*): Self
+    def apply(xs: Modifier*): Self
 
     /**
      * Collapses this scalatags tag tree and returns an [[Output]]
@@ -123,14 +121,14 @@ trait Bundle[Builder, Output <: FragT, FragT] {
   val svgAttrs: SvgAttrs
 
 
-  type Attrs = generic.Attrs[Builder, Output, FragT]
+  type Attrs = generic.Attrs[Builder]
   type Tags = generic.Tags[TypedTag[Output]]
   type Tags2 = generic.Tags2[TypedTag[Output]]
-  type Styles = generic.Styles[Builder, Output, FragT]
-  type Styles2 = generic.Styles2[Builder, Output, FragT]
+  type Styles = generic.Styles[Builder]
+  type Styles2 = generic.Styles2[Builder]
   type SvgTags = generic.SvgTags[TypedTag[Output]]
   type SvgAttrs = generic.SvgAttrs[Builder, Output, FragT]
-  type Util = generic.Util[Builder, Output, FragT]
+  type Util = generic.Util[Output, Modifier, Frag, TypedTag]
   type AttrPair = generic.AttrPair[Builder, FragT]
 
   type Attr = generic.Attr
@@ -206,21 +204,21 @@ trait Bundle[Builder, Output <: FragT, FragT] {
   /**
    * Renders an Seq of [[FragT]] into a single [[FragT]]
    */
-  implicit def SeqFrag[A](xs: Seq[A])(implicit ev: A => FragTypeAlias): Frag
+//  implicit def SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag): Frag
   /**
    * Renders an Seq of [[FragT]] into a single [[FragT]]
    */
-  implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => FragTypeAlias): Frag
+//  implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag): Frag
 
   /**
    * Renders an Option of [[FragT]] into a single [[FragT]]
    */
-  implicit def OptionFrag[A](xs: Option[A])(implicit ev: A => FragTypeAlias) = SeqFrag(xs.toSeq)
+//  implicit def OptionFrag[A](xs: Option[A])(implicit ev: A => Frag) = SeqFrag(xs.toSeq)
 
   /**
    * Renders an Seq of [[FragT]] into a single [[FragT]]
    */
-  implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => FragTypeAlias) = SeqFrag[A](xs.toSeq)
+//  implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => Frag) = SeqFrag[A](xs.toSeq)
 
   /**
    * Lets you put Unit into a scalatags tree, as a no-op.
@@ -232,7 +230,16 @@ trait Bundle[Builder, Output <: FragT, FragT] {
    * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
    */
-  implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => ModifierTypeAlias) extends Modifier{
+  implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => Modifier) extends Modifier{
+    java.util.Objects.requireNonNull(xs)
+    def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
+  }
+
+  /**
+   * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
+   * objects to its list of children.
+   */
+  implicit class GeneratorNode[A](xs: geny.Generator[A])(implicit ev: A => Modifier) extends Modifier{
     java.util.Objects.requireNonNull(xs)
     def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
   }
@@ -241,15 +248,15 @@ trait Bundle[Builder, Output <: FragT, FragT] {
    * Allows you to modify a [[ConcreteHtmlTag]] by adding an Option containing other nest-able
    * objects to its list of children.
    */
-  implicit def OptionNode[A](xs: Option[A])(implicit ev: A => ModifierTypeAlias) = new SeqNode(xs.toSeq)
+  implicit def OptionNode[A](xs: Option[A])(implicit ev: A => Modifier) = new SeqNode(xs.toSeq)
 
   /**
    * Allows you to modify a [[ConcreteHtmlTag]] by adding an Array containing other nest-able
    * objects to its list of children.
    */
-  implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => ModifierTypeAlias) = new SeqNode[A](xs.toSeq)
+  implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => Modifier) = new SeqNode[A](xs.toSeq)
 
 }
 trait AbstractShort[Builder, Output <: FragT, FragT]{
-  val `*`: generic.Attrs[Builder, Output, FragT] with generic.Styles[Builder, Output, FragT]
+  val `*`: generic.Attrs[Builder] with generic.Styles[Builder]
 }

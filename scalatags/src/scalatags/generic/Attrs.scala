@@ -11,17 +11,20 @@ package scalatags
 package generic
 import scala.language.dynamics
 
+trait AttrFactory[Builder]{
+  protected[this] implicit def stringAttrX: AttrValue[Builder, String]
+  def attr(s: String, ns: Namespace = null, raw: Boolean = false) = Attr(s, Option(ns), raw)
+}
 /**
  * A trait for global attributes that are applicable to any HTML5 element. All traits that define Attrs should
  * derive from this trait since all groupings of attributes should include these global ones.
  */
-trait GlobalAttrs[Builder, Output <: FragT, FragT]
-  extends Util[Builder, Output, FragT]{
+trait GlobalAttrs[Builder] extends AttrFactory[Builder]{
 
   /**
    * Specifies a shortcut key to activate/focus an element
    */
-  lazy val accesskey	= attr("accesskey")
+  lazy val accesskey = attr("accesskey")
   /**
    * This attribute is a space-separated list of the classes of the element.
    * Classes allows CSS and Javascript to select and access specific elements
@@ -36,8 +39,8 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
    * Shorthand for the `class` attribute
    */
   lazy val cls = `class`
-  lazy val contenteditable	= attr("contenteditable") // Specifies whether the content of an element is editable or not
-  lazy val contextmenu	= attr("contextmenu") // Specifies a context menu for an element. The context menu appears when a user right-clicks on the element
+  lazy val contenteditable = attr("contenteditable") // Specifies whether the content of an element is editable or not
+  lazy val contextmenu = attr("contextmenu") // Specifies a context menu for an element. The context menu appears when a user right-clicks on the element
   /**
    * This class of attributes, called custom data attributes, allows proprietary
    * information to be exchanged between the HTML and its DOM representation that
@@ -69,18 +72,18 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
   /**
    * Specifies the text direction for the content in an element. The valid values are:
    *
-   * - `ltr`	Default. Left-to-right text direction
+   * - `ltr` Default. Left-to-right text direction
    *
-   * - `rtl`	Right-to-left text direction
+   * - `rtl` Right-to-left text direction
    *
-   * - `auto`	Let the browser figure out the text direction, based on the content,
+   * - `auto` Let the browser figure out the text direction, based on the content,
    *          (only recommended if the text direction is unknown)
    */
-  lazy val dir	= attr("dir")
+  lazy val dir = attr("dir")
   /**
    * A Boolean attribute that specifies whether an element is draggable or not
    */
-  lazy val draggable	= attr("draggable").empty
+  lazy val draggable = attr("draggable").empty
   /**
    * Specifies whether the dragged data is copied, moved, or linked, when dropped
    */
@@ -97,7 +100,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
    *
    * MDN
    */
-  lazy val id	= attr("id")
+  lazy val id = attr("id")
   /**
    * This attribute participates in defining the language of the element, the
    * language that non-editable elements are written in or the language that
@@ -125,7 +128,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
    *
    * MDN
    */
-  lazy val style	= attr("style")
+  lazy val style = attr("style")
   /**
    * This integer attribute indicates if the element can take input focus (is
    * focusable), if it should participate to sequential keyboard navigation, and
@@ -156,10 +159,10 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
   /**
    * Specifies whether the content of an element should be translated or not
    */
-  lazy val translate	= attr("translate").empty
+  lazy val translate = attr("translate").empty
 }
 
-trait SharedEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
+trait SharedEventAttrs[Builder] extends AttrFactory[Builder] {
   /**
    * Script to be run when an error occurs when the file is being loaded
    */
@@ -169,7 +172,7 @@ trait SharedEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Outp
 /**
  * Clipboard Events
  */
-trait ClipboardEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
+trait ClipboardEventAttrs[Builder] extends AttrFactory[Builder] {
   /**
    * Fires when the user copies the content of an element
    */
@@ -189,7 +192,7 @@ trait ClipboardEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, O
  * all HTML elements, but they are most common in media elements, like <audio>,
  * <embed>, <img>, <object>, and <video>.
  */
-trait MediaEventAttrs[Builder, Output<:FragT, FragT] extends SharedEventAttrs[Builder, Output, FragT] {
+trait MediaEventAttrs[Builder] extends AttrFactory[Builder] with SharedEventAttrs[Builder]{
 
   /**
    * Script to be run on abort
@@ -284,7 +287,7 @@ trait MediaEventAttrs[Builder, Output<:FragT, FragT] extends SharedEventAttrs[Bu
 /**
  * Miscellaneous Events
  */
-trait MiscellaneousEventAttrs[Builder, Output<:FragT, FragT] extends SharedEventAttrs[Builder, Output, FragT] {
+trait MiscellaneousEventAttrs[Builder] extends AttrFactory[Builder] with SharedEventAttrs[Builder]{
   /**
    * Fires when a <menu> element is shown as a context menu
    */
@@ -299,7 +302,7 @@ trait MiscellaneousEventAttrs[Builder, Output<:FragT, FragT] extends SharedEvent
  * Window Events
  *
  */
-trait WindowEventAttrs[Builder, Output<:FragT, FragT] extends SharedEventAttrs[Builder, Output, FragT] {
+trait WindowEventAttrs[Builder] extends AttrFactory[Builder] with SharedEventAttrs[Builder]{
   /**
    * The load event fires at the end of the document loading process. At this
    * point, all of the objects in the document are in the DOM, and all the
@@ -366,7 +369,7 @@ trait WindowEventAttrs[Builder, Output<:FragT, FragT] extends SharedEventAttrs[B
  * Form Events that are triggered by actions inside an HTML form. However, these events apply to almost all HTML
  * elements but are most commonly used in form elements.
  */
-trait FormEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
+trait FormEventAttrs[Builder] extends AttrFactory[Builder] {
   /**
    * The blur event is raised when an element loses focus.
    *
@@ -433,7 +436,7 @@ trait FormEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output
 /**
  * Keyboard Events - triggered by user action son the keyboard or similar user actions
  */
-trait KeyboardEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
+trait KeyboardEventAttrs[Builder] extends AttrFactory[Builder] {
   /**
    * The keydown event is raised when the user presses a keyboard key.
    *
@@ -461,7 +464,7 @@ trait KeyboardEventAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Ou
 /**
  * Mouse Events: triggered by a mouse, or similar user actions.
  */
-trait MouseEventAttrs[Builder, Output<: FragT, FragT] extends Util[Builder, Output, FragT] {
+trait MouseEventAttrs[Builder] extends AttrFactory[Builder] {
   /**
    * The click event is raised when the user clicks on an element. The click
    * event will occur after the mousedown and mouseup events.
@@ -555,7 +558,7 @@ trait MouseEventAttrs[Builder, Output<: FragT, FragT] extends Util[Builder, Outp
  * from other groupings. The attributes permitted by the input element are
  * likely the most complex of any element in HTML5.
  */
-trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, Output, FragT] {
+trait InputAttrs[Builder] extends AttrFactory[Builder] with GlobalAttrs[Builder]{
 
   /**
    * The URI of a program that processes the information submitted via the form.
@@ -818,14 +821,14 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
  * mixed in to other objects if needed. This should contain "all" attributes
  * and mix in other traits (defined above) as needed to get full coverage.
  */
-trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output, FragT]
-  with ClipboardEventAttrs[Builder, Output, FragT]
-  with MediaEventAttrs[Builder, Output, FragT]
-  with MiscellaneousEventAttrs[Builder, Output, FragT]
-  with KeyboardEventAttrs[Builder, Output, FragT]
-  with MouseEventAttrs[Builder, Output, FragT]
-  with WindowEventAttrs[Builder, Output, FragT]
-  with FormEventAttrs[Builder, Output, FragT]
+trait Attrs[Builder] extends AttrFactory[Builder] with InputAttrs[Builder]
+  with ClipboardEventAttrs[Builder]
+  with MediaEventAttrs[Builder]
+  with MiscellaneousEventAttrs[Builder]
+  with KeyboardEventAttrs[Builder]
+  with MouseEventAttrs[Builder]
+  with WindowEventAttrs[Builder]
+  with FormEventAttrs[Builder]
 {
   /**
    * This is the single required attribute for anchors defining a hypertext
@@ -964,21 +967,21 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
   lazy val media = attr("media")
   /**
 
-   * This attribute contains a non-negative integer value that indicates for 
-   * how many columns the cell extends. Its default value is 1; if its value 
-   * is set to 0, it extends until the end of the <colgroup>, even if implicitly 
-   * defined, that the cell belongs to. Values higher than 1000 will be considered 
-   * as incorrect and will be set to the default value (1). 
+   * This attribute contains a non-negative integer value that indicates for
+   * how many columns the cell extends. Its default value is 1; if its value
+   * is set to 0, it extends until the end of the <colgroup>, even if implicitly
+   * defined, that the cell belongs to. Values higher than 1000 will be considered
+   * as incorrect and will be set to the default value (1).
    *
    * MDN
    */
   lazy val colspan = attr("colspan")
   /**
-   * This attribute contains a non-negative integer value that indicates for how many 
-   * rows the cell extends. Its default value is 1; if its value is set to 0, it extends 
-   * until the end of the table section (<thead>, <tbody>, <tfoot>, even if implicitly 
+   * This attribute contains a non-negative integer value that indicates for how many
+   * rows the cell extends. Its default value is 1; if its value is set to 0, it extends
+   * until the end of the table section (<thead>, <tbody>, <tfoot>, even if implicitly
    * defined, that the cell belongs to. Values higher than 65534 are clipped down to 65534.
-   * 
+   *
    * MDN
    */
   lazy val rowspan = attr("rowspan")
@@ -989,10 +992,10 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
    * soft: The browser ensures that all line breaks in the value consist of a CR+LF pair, but does not insert any additional line breaks.
    *
    * If this attribute is not specified, soft is its default value.
-   * 
-   * MDN	
+   *
+   * MDN
    */
-   lazy val wrap = attr("wrap")	
+   lazy val wrap = attr("wrap")
   /**
     * This Boolean attribute is set to indicate to a browser that the script is
     * meant to be executed after the document has been parsed, but before firing

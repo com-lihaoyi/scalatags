@@ -11,8 +11,8 @@ package scalatags
 package generic
 
 
-trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
-
+trait SvgAttrs[Builder, Output <: FragT, FragT] {
+  def attr(s: String, ns: Namespace = null, raw: Boolean = false) = Attr(s, Option(ns), raw)
   /**
    * This attribute defines the distance from the origin to the top of accent characters,
    * measured by a distance within the font coordinate system.

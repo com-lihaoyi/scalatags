@@ -10,8 +10,9 @@
 package scalatags
 package generic
 
-trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
-
+trait StyleMisc[Builder]{
+  protected[this] implicit def stringStyleX: StyleValue[Builder, String]
+  protected[this] implicit def stringPixelStyleX: PixelStyleValue[Builder, String]
   /**
    * A Style that takes any value of type T as a parameter and has an auto value
    */
@@ -297,7 +298,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
  * Contains CSS styles which are used less frequently. These are not imported by
  * default to avoid namespace pollution.
  */
-trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT]{
+trait Styles2[Builder] extends StyleMisc[Builder]{
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -787,7 +788,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
  * Trait that contains the contents of the `Styles` object, so they can
  * be mixed in to other objects if needed.
  */
-trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT]{
+trait Styles[Builder] extends StyleMisc[Builder]{
   /**
    * If a background-image is specified, the background-attachment CSS
    * property determines whether that image's position is fixed within

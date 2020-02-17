@@ -15,8 +15,6 @@ import scalatags.text.Builder
 
 
 object Text extends generic.Bundle[text.Builder, String, String] {
-  type FragTypeAlias = Frag
-  type ModifierTypeAlias = Modifier
   trait Modifier extends super.Modifier
   object attrs extends Text.Cap with Attrs
   object tags extends Text.Cap with text.Tags[TypedTag[String]] with Tags
@@ -41,15 +39,15 @@ object Text extends generic.Bundle[text.Builder, String, String] {
 
     object * extends Cap with Attrs with Styles
   }
-  implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => FragTypeAlias) extends Frag{
+  implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
 
-    def writeTo(strb: Writer): Unit = xs.foreach(_.writeTo(strb))
+    def writeTo(strb: Writer): Unit = ??? //xs.foreach(_.writeTo(strb))
     def render = xs.map(_.render).mkString
   }
-  implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => FragTypeAlias) extends Frag{
+  implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
-    def writeTo(strb: Writer): Unit = xs.foreach(_.writeTo(strb))
+    def writeTo(strb: Writer): Unit = ???//xs.foreach(_.writeTo(strb))
     def render = xs.map(_.render).mkString
   }
   implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
@@ -113,7 +111,7 @@ object Text extends generic.Bundle[text.Builder, String, String] {
   val Tag = Text.TypedTag
 
 
-  trait Frag extends super.Frag {
+  trait Frag extends super.Frag with Modifier{
     def writeTo(strb: java.io.Writer): Unit
     def writeBytesTo(out: java.io.OutputStream): Unit = {
       val w = new java.io.OutputStreamWriter(out, java.nio.charset.StandardCharsets.UTF_8)
@@ -214,8 +212,8 @@ object Text extends generic.Bundle[text.Builder, String, String] {
       }
     }
 
-    def apply(xs: ModifierTypeAlias*): TypedTag[O] = {
-      this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
+    def apply(xs: Text.super.Modifier*): TypedTag[O] = {
+      this.copy(tag=tag, void = void, modifiers = ??? /*xs :: modifiers*/)
     }
 
     /**
