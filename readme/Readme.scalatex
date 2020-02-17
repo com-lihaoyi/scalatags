@@ -742,7 +742,7 @@
 
       @hl.ref(cssTests, "$pkg-Cascade", "\"\"\"", className = "css")
       @p
-        With Scalatags, even cascadin styles must start with a "root" class. However,inside that class, you then have two ways of defining cascades:
+        With Scalatags, even cascading styles must start with a "root" class. However,inside that class, you then have two ways of defining cascades:
       @ul
 
         @li
