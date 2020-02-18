@@ -32,7 +32,8 @@ object Text extends generic.Bundle[String, String]{
     with Attrs
     with Styles
     with DataConverters
-    with text.Tags[TypedTag[String]] with Tags
+    with text.Tags[TypedTag[String]]
+    with Tags
 
 //  object short
 //    extends Cap
@@ -56,7 +57,7 @@ object Text extends generic.Bundle[String, String]{
   trait Cap extends Util with text.TagFactory[TypedTag[String]]{ self =>
     def frag(frags: Text.super.Frag*): Frag  = SeqFrag(frags)
     def modifier(mods: Modifier*): Modifier = SeqNode(mods)
-
+    def css(s: String): Style = Style(camelCase(s), s)
     def tag(s: String, void: Boolean = false): TypedTag[String] = TypedTag(s, Nil, void)
     def makeAbstractTypedTag[T <: String](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void)
@@ -65,7 +66,7 @@ object Text extends generic.Bundle[String, String]{
     type Frag = Text.Frag
     type Modifier = Text.Modifier
     type Style = Text.Style
-    def css(s: String): Style = Style(camelCase(s), s)
+
     type ConcreteHtmlTag[T <: String] = TypedTag[T]
     type BaseTagType = TypedTag[String]
     protected[this] implicit def stringAttrX = new GenericAttr[String]

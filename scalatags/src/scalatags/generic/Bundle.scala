@@ -26,9 +26,9 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[FragT0, Output <: FragT0] extends Core with SvgAttrsWrapper with StylesWrapper with AttrsWrapper{
+trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with StylesWrapper with AttrsWrapper{
   type FragT = FragT0
-
+  type Output = Output0
   trait TypedTag[+O <: Output] extends Frag {
     protected[this] type Self <: TypedTag[O]
     def tag: String
