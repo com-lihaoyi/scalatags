@@ -5,7 +5,7 @@ import utest._
 
 import scalatags.stylesheet._
 
-abstract class StyleSheetTests[B <: scalatags.Bundle](val bundle: B) extends TestSuite{
+abstract class StyleSheetTests[F, T <: F](val bundle: Bundle[F, T]) extends TestSuite{
 
   import bundle._, all._
 

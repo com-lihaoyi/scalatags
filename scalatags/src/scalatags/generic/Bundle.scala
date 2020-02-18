@@ -26,7 +26,10 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle extends Core with StylesWrapper with LowPriBundle{
+trait Bundle[FragOutput0, TagOutput0 <: FragOutput0]
+extends Core with StylesWrapper with LowPriBundle[FragOutput0, TagOutput0]{
+  type FragOutput = FragOutput0
+  type TagOutput = TagOutput0
   trait TypedTag[+O <: TagOutput] extends Frag {
     protected[this] type Self <: TypedTag[O]
     def tag: String
@@ -206,7 +209,7 @@ trait Bundle extends Core with StylesWrapper with LowPriBundle{
 
   type Tag = TypedTag[TagOutput]
 }
-trait LowPriBundle{this: Bundle =>
+trait LowPriBundle[FragOutput0, TagOutput0 <: FragOutput0]{this: Bundle[FragOutput0, TagOutput0] =>
   /**
    * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.

@@ -18,9 +18,7 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  * can bind structured objects to the attributes of your `dom.Element` without
  * serializing them first into strings.
  */
-object JsDom extends generic.Bundle with LowPriorityImplicits{
-  type FragOutput = dom.Node
-  type TagOutput = dom.Element
+object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImplicits{
   type TagBuilder = dom.Element
   object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
   object tags extends Api with jsdom.Tags[TypedTag] with Tags

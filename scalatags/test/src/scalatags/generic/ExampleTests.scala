@@ -3,7 +3,7 @@ package generic
 import utest._
 
 import TestUtil.strCheck
-class ExampleTests[B <: scalatags.Bundle](bundle: Bundle) extends TestSuite{
+class ExampleTests[F, T <: F](bundle: Bundle[F, T]) extends TestSuite{
   val tests = TestSuite{
     test("manualImports") - strCheck({
       // bundle is scalatags.Text or scalatags.JsDom

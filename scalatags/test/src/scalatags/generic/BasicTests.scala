@@ -6,8 +6,8 @@ import utest._
 import TestUtil._
 
 
-class BasicTests[B <: scalatags.Bundle](val omg: B) extends TestSuite{
-  import omg._, all._
+class BasicTests[F, T <: F](val bundle: Bundle[F, T]) extends TestSuite{
+  import bundle._, all._
   val tests = TestSuite{
 
     /**

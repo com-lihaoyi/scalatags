@@ -6,5 +6,5 @@ import language.experimental.macros
  * and documentation.
  */
 package object scalatags {
-  type Bundle = scalatags.generic.Bundle
+  type Bundle[FragOutput0, TagOutput0 <: FragOutput0] = scalatags.generic.Bundle[FragOutput0, TagOutput0]
 }
