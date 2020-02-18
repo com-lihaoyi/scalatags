@@ -76,8 +76,6 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     type SvgTag = JsDom.TypedTag[svg.Element]
     val SvgTag = JsDom.TypedTag
 
-    val Tag = JsDom.TypedTag
-
     def frag(frags: JsDom.super.Frag*): JsDom.Frag  = SeqFrag(frags)
     def tag(s: String, void: Boolean = false): TypedTag[dom.Element] = TypedTag(s, Nil, void, implicitly)
     def typedTag[T <: dom.Element](s: String, void: Boolean = false)
