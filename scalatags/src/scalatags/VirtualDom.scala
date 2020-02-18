@@ -18,7 +18,7 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  * it to instantiate any sort of virtual DOM of uniform type: scala.xml trees,
  * Preact/React VDOM nodes in the browser, etc.
  */
-trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Output0] {
+trait VirtualDom extends generic.Bundle {
 
   trait Builder{
     def appendChild(child: FragT): Unit

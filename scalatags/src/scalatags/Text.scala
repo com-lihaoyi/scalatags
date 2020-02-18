@@ -13,8 +13,9 @@ import scala.reflect.ClassTag
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
  * `String`s.
  */
-object Text extends generic.Bundle[String, String]{
-
+object Text extends generic.Bundle{
+  type FragT = String
+  type Output = String
   object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
   object tags extends Api with text.Tags[TypedTag[String]] with Tags
   object tags2 extends Api with text.Tags2[TypedTag[String]] with Tags2

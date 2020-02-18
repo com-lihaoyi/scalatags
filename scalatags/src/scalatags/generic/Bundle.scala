@@ -26,10 +26,7 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[FragT0, Output0 <: FragT0]
-extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
-  protected type FragT = FragT0
-  protected type Output = Output0
+trait Bundle extends Core with StylesWrapper with LowPriBundle{
   trait TypedTag[+O <: Output] extends Frag {
     protected[this] type Self <: TypedTag[O]
     def tag: String
@@ -194,7 +191,7 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
      * un-escaped HTML
      */
     def raw(s: String): Modifier
-    def css(s: String): Style = Style(camelCase(s), s)
+    def css(s: String): Style = Style(scalatags.Util.camelCase(s), s)
     def attr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
     def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
     def AttrPair[T](attr: Attr, v: T, ev: AttrValue[T]) = Bundle.this.AttrPair(attr, v, ev)
@@ -207,7 +204,7 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
     type Frag = Bundle.this.Frag
   }
 }
-trait LowPriBundle[FragT0, Output <: FragT0]{this: Bundle[FragT0, Output] =>
+trait LowPriBundle{this: Bundle =>
   /**
    * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.

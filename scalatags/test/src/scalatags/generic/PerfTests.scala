@@ -2,7 +2,7 @@ package scalatags
 package generic
 import utest._
 
-class ScalatagsPerf[FragT, Output <: FragT](val bundle: Bundle[FragT, Output]) extends PerfTests {
+class ScalatagsPerf[B <: scalatags.Bundle](val bundle: B) extends PerfTests {
   import bundle._, bundle.all._
   import generic.PerfTests._
 

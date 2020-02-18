@@ -124,9 +124,9 @@ object DomTests extends TestSuite{
     }
 
     test("crossTag"){
-      class SharedTemplates[FragT, Output <: FragT](val bundle: scalatags.generic.Bundle[FragT, Output]){
+      class SharedTemplates[B <: scalatags.Bundle](val bundle: B){
         import bundle._, bundle.all._
-        val widget: Tag = div("hello").asInstanceOf[TypedTag[Output]]
+        val widget: Tag = div("hello").asInstanceOf[Tag]
       }
 
       object JsTemplates extends SharedTemplates(scalatags.JsDom)

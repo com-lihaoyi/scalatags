@@ -6,7 +6,7 @@ import utest._
 import TestUtil._
 
 
-class BasicTests[FragT, Output <: FragT](val omg: Bundle[FragT, Output]) extends TestSuite{
+class BasicTests[B <: scalatags.Bundle](val omg: B) extends TestSuite{
   import omg._, all._
   val tests = TestSuite{
 
