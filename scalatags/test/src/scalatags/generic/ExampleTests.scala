@@ -9,22 +9,21 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
   val tests = TestSuite{
     test("manualImports") - strCheck({
       // bundle is scalatags.Text or scalatags.JsDom
-//      import bundle.short._
-//      div(
-//        p(*.color:="red", *.fontSize:=64.pt)("Big Red Text"),
-//        img(*.href:="www.imgur.com/picture.jpg")
-//      )
+      import bundle._, short._
+      div(
+        p(*.color := "red", *.fontSize := 64.pt)("Big Red Text"),
+        img(*.href := "www.imgur.com/picture.jpg")
+      )
     }
     ,
     {
-//      // bundle is scalatags.Text or scalatags.JsDom
-//      import bundle.{attrs => attr, styles => css, _}
-//      import bundle.tags._
-//      import bundle.implicits._
-//      div(
-//        p(css.color:="red", css.fontSize:=64.pt)("Big Red Text"),
-//        img(attr.href:="www.imgur.com/picture.jpg")
-//      )
+      // bundle is scalatags.Text or scalatags.JsDom
+      import bundle.{attrs => attr, styles => css, _}
+      import bundle.tags._, bundle.converters._
+      div(
+        p(css.color := "red", css.fontSize := 64.pt)("Big Red Text"),
+        img(attr.href:="www.imgur.com/picture.jpg")
+      )
     }
     ,
     """
@@ -44,7 +43,7 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
       // import scalatags.JsDom.all._
       html(
         head(
-          script(src:="..."),
+          script(src := "..."),
           script(
             "alert('Hello World')"
           )
@@ -189,7 +188,7 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
     test("functions") - strCheck(
     {
       def imgBox(source: String, text: String) = div(
-        img(src:=source),
+        img(src := source),
         div(
           p(text)
         )
@@ -202,7 +201,7 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
         body(
           h1("This is my title"),
           imgBox("www.mysite.com/imageOne.png", "This is the first image displayed on the site"),
-          div(`class`:="content")(
+          div(`class` := "content")(
             p("blah blah blah i am text"),
             imgBox("www.mysite.com/imageTwo.png", "This image is very interesting")
           )
@@ -244,10 +243,10 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
         body(
           h1("This is my title"),
           div(
-            p(onclick:="... do some js")(
+            p(onclick := "... do some js")(
               "This is my first paragraph"
             ),
-            a(href:="www.google.com")(
+            a(href := "www.google.com")(
               p("Goooogle")
             ),
             p(hidden)(
@@ -264,10 +263,10 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
         body(
           h1("This is my title"),
           div(
-            p(attr("onclick"):="... do some js")(
+            p(attr("onclick") := "... do some js")(
               "This is my first paragraph"
             ),
-            a(attr("href"):="www.google.com")(
+            a(attr("href") := "www.google.com")(
               p("Goooogle")
             ),
             p(attr("hidden").empty)(
@@ -303,12 +302,12 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
           script("some script")
         ),
         body(
-          h1(backgroundColor:="blue", color:="red")("This is my title"),
-          div(backgroundColor:="blue", color:="red")(
+          h1(backgroundColor := "blue", color := "red")("This is my title"),
+          div(backgroundColor := "blue", color := "red")(
             p(cls := "contentpara first")(
               "This is my first paragraph"
             ),
-            a(opacity:=0.9)(
+            a(opacity := 0.9)(
               p(cls := "contentpara")("Goooogle")
             )
           )
@@ -320,12 +319,12 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
           script("some script")
         ),
         body(
-          h1(style:="background-color: blue; color: red;")("This is my title"),
-          div(style:="background-color: blue; color: red;")(
-            p(`class`:="contentpara first")(
+          h1(style := "background-color: blue; color: red;")("This is my title"),
+          div(style := "background-color: blue; color: red;")(
+            p(`class` := "contentpara first")(
               "This is my first paragraph"
             ),
-            a(style:="opacity: 0.9;")(
+            a(style := "opacity: 0.9;")(
               p(cls := "contentpara")("Goooogle")
             )
           )
@@ -355,10 +354,10 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
           "This is my first paragraph"
         ),
 
-        a(tabindex:=10)(
+        a(tabindex := 10)(
           p("Goooogle")
         ),
-        input(disabled:=true)
+        input(disabled := true)
       )
       ,
       """
@@ -373,13 +372,13 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
     )
     test("forceStringifyingAttributesAndStyles") - strCheck(
       div(
-        p(float:="left")(
+        p(float := "left")(
           "This is my first paragraph"
         ),
-        a(tabindex:="10")(
+        a(tabindex := "10")(
           p("Goooogle")
         ),
-        input(disabled:="true")
+        input(disabled := "true")
       )
       ,
       """
@@ -424,7 +423,7 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
         ),
         Seq(
           p("This is the first ", b("image"), " displayed on the ", a("site")),
-          img(src:="www.myImage.com/image.jpg"),
+          img(src := "www.myImage.com/image.jpg"),
           p("blah blah blah i am text")
         )
       )
@@ -504,7 +503,7 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
         ),
         body(
           h1(
-            title:=evilInput1,
+            title := evilInput1,
             "This is my title"
           ),
           evilInput2
@@ -564,7 +563,7 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
       div(
         p(pageBreakBefore.always, "a long paragraph which should not be broken"),
         address("500 Memorial Drive, Cambridge MA"),
-        svg(stroke:="#0000ff")
+        svg(stroke := "#0000ff")
       )
     }
     ,
@@ -579,7 +578,7 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
     """
     )
     test("typesafeCSS") - strCheck(
-      div(zIndex:=10),
+      div(zIndex := 10),
       """<div style="z-index: 10;"></div>"""
     )
     test("customAttributesAndStyles") - strCheck({
@@ -640,13 +639,13 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
     )
     test("aria") - strCheck(
       div(
-        div(id:="ch1Panel", role:="tabpanel", aria.labelledby:="ch1Tab")(
+        div(id := "ch1Panel", role := "tabpanel", aria.labelledby := "ch1Tab")(
           "Chapter 1 content goes here"
         ),
-        div(id:="ch2Panel", role:="tabpanel", aria.labelledby:="ch2Tab")(
+        div(id := "ch2Panel", role := "tabpanel", aria.labelledby := "ch2Tab")(
           "Chapter 2 content goes here"
         ),
-        div(id:="quizPanel", role:="tabpanel", aria.labelledby:="quizTab")(
+        div(id := "quizPanel", role := "tabpanel", aria.labelledby := "quizTab")(
           "Quiz content goes here"
         )
       )
@@ -668,10 +667,10 @@ class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extend
 
     test("data") - strCheck(
       div(
-        id:="electriccars",
-        data.columns:="3",
-        data.index.number:="12314",
-        data.parent:="cars",
+        id := "electriccars",
+        data.columns := "3",
+        data.index.number := "12314",
+        data.parent := "cars",
         "..."
       )
       ,

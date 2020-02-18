@@ -29,19 +29,16 @@ object Text extends generic.Bundle[String, String]{
 
   object all
     extends Cap
-    with Attrs
-    with Styles
-    with DataConverters
+    with AbstractAll
     with text.Tags[TypedTag[String]]
-    with Tags
 
-//  object short
-//    extends Cap
-//    with text.Tags[TypedTag[String]] with Tags
-//    with AbstractShort{
-//
-//    object * extends Cap with Attrs with Styles
-//  }
+  object short
+    extends Cap
+    with text.Tags[TypedTag[String]]
+    with AbstractShort{
+
+    object * extends Cap with Attrs with Styles
+  }
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
 

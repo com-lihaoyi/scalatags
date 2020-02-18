@@ -31,23 +31,16 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
 
   object all
     extends Cap
-    with Attrs
-    with Styles
+    with AbstractAll
     with jsdom.Tags[TypedTag]
-    with DataConverters
 
-    with Tags
+  object short
+    extends Cap
+    with jsdom.Tags
+    with AbstractShort{
 
-//  object short
-//    extends Cap
-//    with jsdom.Tags
-//    with DataConverters
-//    with Aggregate
-//    with AbstractShort
-//    with LowPriorityImplicits{
-//
-//    object * extends Cap with Attrs with Styles
-//  }
+    object * extends Cap with Attrs with Styles
+  }
 
 
 //  trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{

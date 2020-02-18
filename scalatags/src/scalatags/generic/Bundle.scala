@@ -80,16 +80,21 @@ trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with S
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
-  val all: Attrs with Styles with Tags with Util with DataConverters
+  val all: AbstractAll
+  trait AbstractAll extends Attrs with Styles with Tags with Util with DataConverters
+
   /**
    * Convenience object for importing only Scalatags' tags (e.g. `div`, `p`)
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
-//  val short: AbstractShort with Tags
-//
-//  type AbstractShort = generic.AbstractShort[Output, FragT]
+  val short: AbstractShort
 
+  trait AbstractShort extends Tags with Util with DataConverters{
+    val `*`: Attrs with Styles
+  }
+
+  object converters extends DataConverters
 
   /**
    * Common attributes.
@@ -221,7 +226,5 @@ trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with S
    */
   implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => Modifier) = new SeqNode[A](xs.toSeq)
 
+
 }
-//trait AbstractShort[FragT, Output <: FragT]{
-//  val `*`: generic.Attrs[Builder] with generic.Styles[Builder]
-//}

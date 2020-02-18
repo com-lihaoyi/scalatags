@@ -44,23 +44,17 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
 
   object all
     extends Cap
-    with Attrs
-    with Styles
-    with DataConverters
+    with AbstractAll
     with vdom.Tags[TypedTag[Output]]
-    with Tags
-//
-//  object short
-//    extends Cap
-//    with vdom.Tags[Output, FragT]
-//    with AbstractShort{
-//
-//    object * extends Cap with Attrs with Styles
-//  }
 
-//  implicit class ApplyTags(e: Builder){
-//    def applyTags(mods: Modifier*) = mods.foreach(_.applyTo(e))
-//  }
+  object short
+    extends Cap
+    with vdom.Tags[TypedTag[Output]]
+    with AbstractShort{
+
+    object * extends Cap with Attrs with Styles
+  }
+
   implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
     def applyTo(t: Builder) = {
       t.appendClass(s.name)
