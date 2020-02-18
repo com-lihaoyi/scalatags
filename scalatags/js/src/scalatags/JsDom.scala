@@ -29,15 +29,9 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
   object svgAttrs extends Api with SvgAttrs[Attr]
 
 
-  object all
-    extends Api
-    with AbstractAll
-    with jsdom.Tags[TypedTag]
+  object all extends Api with AbstractAll with jsdom.Tags[TypedTag]
 
-  object short
-    extends Api
-    with jsdom.Tags[TypedTag]
-    with AbstractShort{
+  object short extends Api with jsdom.Tags[TypedTag] with AbstractShort{
 
     object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }

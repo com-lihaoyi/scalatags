@@ -42,15 +42,9 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
   object svgTags extends Api with vdom.SvgTags[TypedTag[Output]] with SvgTags
   object svgAttrs extends Api with SvgAttrs[Attr]
 
-  object all
-    extends Api
-    with AbstractAll
-    with vdom.Tags[TypedTag[Output]]
+  object all extends Api with AbstractAll with vdom.Tags[TypedTag[Output]]
 
-  object short
-    extends Api
-    with vdom.Tags[TypedTag[Output]]
-    with AbstractShort{
+  object short extends Api with vdom.Tags[TypedTag[Output]] with AbstractShort{
 
     object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }

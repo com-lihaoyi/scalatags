@@ -24,15 +24,9 @@ object Text extends generic.Bundle[String, String]{
   object svgTags extends Api with text.SvgTags[TypedTag[String]] with SvgTags
   object svgAttrs extends Api with SvgAttrs[Attr]
 
-  object all
-    extends Api
-    with AbstractAll
-    with text.Tags[TypedTag[String]]
+  object all extends Api with AbstractAll with text.Tags[TypedTag[String]]
 
-  object short
-    extends Api
-    with text.Tags[TypedTag[String]]
-    with AbstractShort{
+  object short extends Api with text.Tags[TypedTag[String]] with AbstractShort{
 
     object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
@@ -85,7 +79,7 @@ object Text extends generic.Bundle[String, String]{
     }
   }
 
-//  trait Aggregate extends generic.Aggregate[String, String]{
+
   implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with Builder.ValueSource{
     def applyTo(t: Builder) = t.appendAttr("class",this)
 
