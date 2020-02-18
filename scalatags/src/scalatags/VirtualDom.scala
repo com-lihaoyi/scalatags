@@ -20,37 +20,37 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  */
 trait VirtualDom extends generic.Bundle {
 
-  trait Builder{
-    def appendChild(child: FragT): Unit
+  trait TagBuilder{
+    def appendChild(child: FragOutput): Unit
     def appendClass(cls: String): Unit
     def appendStyle(cssName: String, value: String): Unit
     def setAttr(name: String, value: String): Unit
-    def render(): Output
+    def render(): TagOutput
   }
   trait Frag extends super.Frag {
-    def render: FragT
-    def applyTo(b: Builder) = b.appendChild(this.render)
+    def render: FragOutput
+    def applyTo(b: TagBuilder) = b.appendChild(this.render)
   }
-  def stringToFrag(s: String): FragT
-  def rawToFrag(s: String): FragT
-  def makeBuilder(tag: String): Builder
+  def stringToFrag(s: String): FragOutput
+  def rawToFrag(s: String): FragOutput
+  def makeBuilder(tag: String): TagBuilder
   object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
-  object tags extends Api with vdom.Tags[TypedTag[Output]] with Tags
-  object tags2 extends Api with vdom.Tags2[TypedTag[Output]] with Tags2
+  object tags extends Api with vdom.Tags[TypedTag[TagOutput]] with Tags
+  object tags2 extends Api with vdom.Tags2[TypedTag[TagOutput]] with Tags2
   object styles extends Api with Styles
   object styles2 extends Api with Styles2
-  object svgTags extends Api with vdom.SvgTags[TypedTag[Output]] with SvgTags
+  object svgTags extends Api with vdom.SvgTags[TypedTag[TagOutput]] with SvgTags
   object svgAttrs extends Api with SvgAttrs[Attr]
 
-  object all extends Api with AbstractAll with vdom.Tags[TypedTag[Output]]
+  object all extends Api with AbstractAll with vdom.Tags[TypedTag[TagOutput]]
 
-  object short extends Api with vdom.Tags[TypedTag[Output]] with AbstractShort{
+  object short extends Api with vdom.Tags[TypedTag[TagOutput]] with AbstractShort{
 
     object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
 
   implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
-    def applyTo(t: Builder) = {
+    def applyTo(t: TagBuilder) = {
       t.appendClass(s.name)
 
     }
@@ -74,10 +74,10 @@ trait VirtualDom extends generic.Bundle {
 
   implicit def stringFrag(v: String): Frag = new StringFrag(v)
 
-  trait Api extends super.Api with vdom.TagFactory[TypedTag[Output]]{ self =>
+  trait Api extends super.Api with vdom.TagFactory[TypedTag[TagOutput]]{ self =>
     def frag(frags: VirtualDom.super.Frag*): VirtualDom.this.Frag = SeqFrag(frags)
     def raw(s: String): Frag = new RawFrag(s)
-    def tag(s: String, void: Boolean = false): TypedTag[Output] = TypedTag(s, Nil, void, implicitly)
+    def tag(s: String, void: Boolean = false): TypedTag[TagOutput] = TypedTag(s, Nil, void, implicitly)
     protected[this] implicit def stringAttrX: AttrValue[String] = new GenericAttr[String]
     protected[this] implicit def stringStyleX: StyleValue[String] = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX: PixelStyleValue[String] = new GenericPixelStyle[String](stringStyleX)
@@ -86,22 +86,22 @@ trait VirtualDom extends generic.Bundle {
 
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
-    override def applyTo(t: Builder): Unit = xs.foreach(ev(_).asInstanceOf[Frag].applyTo(t))
-    def render: FragT = {
+    override def applyTo(t: TagBuilder): Unit = xs.foreach(ev(_).asInstanceOf[Frag].applyTo(t))
+    def render: FragOutput = {
       throw new Exception("Rendering of bare arrays of nodes is not supported in virtual dom backend")
     }
   }
   implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
-    override def applyTo(t: Builder): Unit = xs.foreach(ev(_).asInstanceOf[Frag].applyTo(t))
-    def render: FragT = {
+    override def applyTo(t: TagBuilder): Unit = xs.foreach(ev(_).asInstanceOf[Frag].applyTo(t))
+    def render: FragOutput = {
       throw new Exception("Rendering of bare arrays of nodes is not supported in virtual dom backend")
     }
   }
 
   private[this] class StringFrag(v: String) extends Frag{
     Objects.requireNonNull(v)
-    def render: FragT = stringToFrag(v)
+    def render: FragOutput = stringToFrag(v)
   }
 
   private[this] class RawFrag(v: String) extends Frag{
@@ -110,11 +110,11 @@ trait VirtualDom extends generic.Bundle {
   }
 
   private[this] class GenericAttr[T] extends AttrValue[T]{
-    def apply(t: Builder, a: Attr, v: T): Unit = t.setAttr(a.name, v.toString)
+    def apply(t: TagBuilder, a: Attr, v: T): Unit = t.setAttr(a.name, v.toString)
   }
 
   private[this] class GenericStyle[T] extends StyleValue[T]{
-    def apply(t: Builder, s: Style, v: T): Unit = t.appendStyle(s.cssName, v.toString)
+    def apply(t: TagBuilder, s: Style, v: T): Unit = t.appendStyle(s.cssName, v.toString)
   }
   private[this] class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v, ev)
@@ -122,7 +122,7 @@ trait VirtualDom extends generic.Bundle {
   private[this] class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
   }
-  case class TypedTag[+O <: Output](tag: String = "",
+  case class TypedTag[+O <: TagOutput](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
                                               void: Boolean = false,
                                               namespace: scalatags.generic.Namespace)

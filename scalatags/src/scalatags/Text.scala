@@ -14,8 +14,8 @@ import scala.reflect.ClassTag
  * `String`s.
  */
 object Text extends generic.Bundle{
-  type FragT = String
-  type Output = String
+  type FragOutput = String
+  type TagOutput = String
   object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
   object tags extends Api with text.Tags[TypedTag[String]] with Tags
   object tags2 extends Api with text.Tags2[TypedTag[String]] with Tags2
@@ -81,8 +81,8 @@ object Text extends generic.Bundle{
   }
 
 
-  implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with Builder.ValueSource{
-    def applyTo(t: Builder) = t.appendAttr("class",this)
+  implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with TagBuilder.ValueSource{
+    def applyTo(t: TagBuilder) = t.appendAttr("class",this)
 
     override def appendAttrValue(sb: java.io.Writer): Unit = {
       Escaping.escape(s.name, sb)
@@ -90,7 +90,7 @@ object Text extends generic.Bundle{
   }
   implicit class StyleFrag(s: StylePair[_]) extends StyleSheetFrag{
     def applyTo(c: StyleTree) = {
-      val b = new Builder("dummy", false)
+      val b = new TagBuilder("dummy", false)
       s.applyTo(b)
       val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
       c.copy(styles = c.styles.updated(style, value))
@@ -112,7 +112,7 @@ object Text extends generic.Bundle{
       w.flush()
     }
     def render: String
-    def applyTo(b: Builder) = b.addChild(this)
+    def applyTo(b: TagBuilder) = b.addChild(this)
   }
 
   private[this] class StringFrag(v: String) extends Frag{
@@ -132,13 +132,13 @@ object Text extends generic.Bundle{
   }
 
   private[this] class GenericAttr[T] extends AttrValue[T] {
-    def apply(t: Builder, a: Attr, v: T): Unit = {
-      t.setAttr(a.name, Builder.GenericAttrValueSource(v.toString))
+    def apply(t: TagBuilder, a: Attr, v: T): Unit = {
+      t.setAttr(a.name, TagBuilder.GenericAttrValueSource(v.toString))
     }
   }
 
   private[this] class GenericStyle[T] extends StyleValue[T] {
-    def apply(t: Builder, s: Style, v: T): Unit = t.appendAttr("style", Builder.StyleValueSource(s, v.toString))
+    def apply(t: TagBuilder, s: Style, v: T): Unit = t.appendAttr("style", TagBuilder.StyleValueSource(s, v.toString))
   }
   private[this] class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v, ev)
@@ -158,7 +158,7 @@ object Text extends generic.Bundle{
 
 
     def writeTo(strb: java.io.Writer): Unit = {
-      val builder = new Builder(tag, void)
+      val builder = new TagBuilder(tag, void)
       build(builder)
       builder.writeTo(strb)
     }
@@ -179,10 +179,10 @@ object Text extends generic.Bundle{
   }
 
 
-  class Builder(tag: String,
-                void: Boolean,
-                var children: Array[Text.Frag] = new Array(4),
-                var attrs: Array[(String, Builder.ValueSource)] = new Array(4)){
+  class TagBuilder(tag: String,
+                   void: Boolean,
+                   var children: Array[Text.Frag] = new Array(4),
+                   var attrs: Array[(String, TagBuilder.ValueSource)] = new Array(4)){
     final var childIndex = 0
     final var attrIndex = 0
 
@@ -200,9 +200,9 @@ object Text extends generic.Bundle{
       }
     }
 
-    private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int) = {
+    private[this] def incrementAttr(arr: Array[(String, TagBuilder.ValueSource)], index: Int) = {
       if (index >= arr.length){
-        val newArr = new Array[(String, Builder.ValueSource)](arr.length * 2)
+        val newArr = new Array[(String, TagBuilder.ValueSource)](arr.length * 2)
         var i = 0
         while(i < arr.length){
           newArr(i) = arr(i)
@@ -233,7 +233,7 @@ object Text extends generic.Bundle{
       children(childIndex) = c
       childIndex += 1
     }
-    def appendAttr(k: String, v: Builder.ValueSource) = {
+    def appendAttr(k: String, v: TagBuilder.ValueSource) = {
 
       attrIndex(k) match{
         case -1 =>
@@ -244,10 +244,10 @@ object Text extends generic.Bundle{
           attrIndex += 1
         case n =>
           val (oldK, oldV) = attrs(n)
-          attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
+          attrs(n) = (oldK, TagBuilder.ChainedAttributeValueSource(oldV, v))
       }
     }
-    def setAttr(k: String, v: Builder.ValueSource) = {
+    def setAttr(k: String, v: TagBuilder.ValueSource) = {
       attrIndex(k) match{
         case -1 =>
           val newAttrs = incrementAttr(attrs, attrIndex)
@@ -256,16 +256,16 @@ object Text extends generic.Bundle{
           attrIndex += 1
         case n =>
           val (oldK, oldV) = attrs(n)
-          attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
+          attrs(n) = (oldK, TagBuilder.ChainedAttributeValueSource(oldV, v))
       }
     }
 
 
-    def appendAttrStrings(v: Builder.ValueSource, sb: java.io.Writer): Unit = {
+    def appendAttrStrings(v: TagBuilder.ValueSource, sb: java.io.Writer): Unit = {
       v.appendAttrValue(sb)
     }
 
-    def attrsString(v: Builder.ValueSource): String = {
+    def attrsString(v: TagBuilder.ValueSource): String = {
       val sb = new java.io.StringWriter
       appendAttrStrings(v, sb)
       sb.toString
@@ -277,7 +277,7 @@ object Text extends generic.Bundle{
       attrs.indexWhere(x => x != null && x._1 == k)
     }
     /**
-     * Serialize this [[Builder]] and all its children out to the given StringBuilder.
+     * Serialize this [[TagBuilder]] and all its children out to the given StringBuilder.
      *
      * Although the external interface is pretty simple, the internals are a huge mess,
      * because I've inlined a whole lot of things to improve the performance of this code
@@ -315,7 +315,7 @@ object Text extends generic.Bundle{
       }
     }
   }
-  object Builder{
+  object TagBuilder{
 
     /**
      * More-or-less internal trait, used to package up the parts of a textual

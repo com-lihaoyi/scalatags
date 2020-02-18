@@ -27,7 +27,7 @@ import scalatags.text
  *                 `Tag` is being rendered to give a final result.
  */
 trait Bundle extends Core with StylesWrapper with LowPriBundle{
-  trait TypedTag[+O <: Output] extends Frag {
+  trait TypedTag[+O <: TagOutput] extends Frag {
     protected[this] type Self <: TypedTag[O]
     def tag: String
 
@@ -42,7 +42,7 @@ trait Bundle extends Core with StylesWrapper with LowPriBundle{
      * Walks the [[modifiers]] to apply them to a particular [[Builder]].
      * Super sketchy/procedural for max performance.
      */
-    def build(b: Builder): Unit = {
+    def build(b: TagBuilder): Unit = {
       var current = modifiers
       val arr = new Array[Seq[Modifier]](modifiers.length)
 
@@ -71,9 +71,9 @@ trait Bundle extends Core with StylesWrapper with LowPriBundle{
     def apply(xs: Modifier*): Self
 
     /**
-     * Collapses this scalatags tag tree and returns an [[Output]]
+     * Collapses this scalatags tag tree and returns an [[TagOutput]]
      */
-    def render: Output
+    def render: TagOutput
   }
   /**
    * Convenience object for importing all of Scalatags' functionality at once
@@ -127,9 +127,9 @@ trait Bundle extends Core with StylesWrapper with LowPriBundle{
   val svgAttrs: SvgAttrs[Attr]
 
 
-  type Tags = generic.Tags[TypedTag[Output]]
-  type Tags2 = generic.Tags2[TypedTag[Output]]
-  type SvgTags = generic.SvgTags[TypedTag[Output]]
+  type Tags = generic.Tags[TypedTag[TagOutput]]
+  type Tags2 = generic.Tags2[TypedTag[TagOutput]]
+  type SvgTags = generic.SvgTags[TypedTag[TagOutput]]
 
   implicit def StyleFrag(s: StylePair[_]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
@@ -185,7 +185,7 @@ trait Bundle extends Core with StylesWrapper with LowPriBundle{
     def frag(frags: Bundle.this.Frag*): Bundle.this.Frag
     def modifier(mods: Modifier*): Modifier = SeqNode(mods)
 
-    def tag(s: String, void: Boolean = false): TypedTag[Output]
+    def tag(s: String, void: Boolean = false): TypedTag[TagOutput]
     /**
      * Delimits a string that should be included in the result as raw,
      * un-escaped HTML
@@ -198,7 +198,7 @@ trait Bundle extends Core with StylesWrapper with LowPriBundle{
 
     type HtmlTag
     type SvgTag
-    type Tag = TypedTag[Output]
+    type Tag = TypedTag[TagOutput]
     type Modifier = Bundle.this.Modifier
     type Style = Bundle.this.Style
     type Frag = Bundle.this.Frag
@@ -211,7 +211,7 @@ trait LowPriBundle{this: Bundle =>
    */
   implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => Modifier) extends Modifier{
     java.util.Objects.requireNonNull(xs)
-    def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
+    def applyTo(t: TagBuilder) = xs.foreach(_.applyTo(t))
   }
 
   /**
@@ -220,7 +220,7 @@ trait LowPriBundle{this: Bundle =>
    */
   implicit class GeneratorNode[A](xs: geny.Generator[A])(implicit ev: A => Modifier) extends Modifier{
     java.util.Objects.requireNonNull(xs)
-    def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
+    def applyTo(t: TagBuilder) = xs.foreach(_.applyTo(t))
   }
 
   /**

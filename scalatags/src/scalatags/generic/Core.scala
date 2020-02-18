@@ -6,9 +6,9 @@ import java.util.Objects.requireNonNull
 import scala.annotation.implicitNotFound
 
 trait Core {
-  protected type FragT
-  protected type Output <: FragT
-  protected type Builder
+  protected type FragOutput
+  protected type TagOutput <: FragOutput
+  protected type TagBuilder
 
   /**
    * Represents a value that can be nested within a [[scalatags.generic.TypedTag]]. This can be
@@ -21,17 +21,17 @@ trait Core {
      * Applies this modifier to the specified [], such that when
      * rendering is complete the effect of adding this modifier can be seen.
      */
-    def applyTo(t: Builder): Unit
+    def applyTo(t: TagBuilder): Unit
   }
 
   /**
    * Marker sub-type of [[scalatags.generic.Modifier]] which signifies that that type can be
-   * rendered as a standalone fragment of [[FragT]]. This excludes things
+   * rendered as a standalone fragment of [[FragOutput]]. This excludes things
    * like [[scalatags.generic.AttrPair]]s or [[scalatags.generic.StylePair]]s which only make sense as part of
    * a parent fragment
    */
   trait Frag extends Modifier {
-    def render: FragT
+    def render: FragOutput
   }
 
 
@@ -115,7 +115,7 @@ trait Core {
    * An [[Attr]], it's associated value, and an [[AttrValue]] of the correct type
    */
   case class AttrPair[T](a: Attr, v: T, ev: AttrValue[T]) extends Modifier {
-    override def applyTo(t: Builder): Unit = {
+    override def applyTo(t: TagBuilder): Unit = {
       ev.apply(t, a, v)
     }
 
@@ -134,14 +134,14 @@ trait Core {
     "No AttrValue defined for type ${T}; scalatags does not know how to use ${T} as an attribute"
   )
   trait AttrValue[T] {
-    def apply(t: Builder, a: Attr, v: T): Unit
+    def apply(t: TagBuilder, a: Attr, v: T): Unit
   }
 
   /**
    * A [[Style]], it's associated value, and a [[StyleValue]] of the correct type
    */
   case class StylePair[T](s: Style, v: T, ev: StyleValue[T]) extends Modifier {
-    override def applyTo(t: Builder): Unit = {
+    override def applyTo(t: TagBuilder): Unit = {
       ev.apply(t, s, v)
     }
   }
@@ -155,7 +155,7 @@ trait Core {
     "No StyleValue defined for type ${T}; scalatags does not know how to use ${T} as an style"
   )
   trait StyleValue[T] {
-    def apply(t: Builder, s: Style, v: T): Unit
+    def apply(t: TagBuilder, s: Style, v: T): Unit
   }
 
   @implicitNotFound(

@@ -19,9 +19,9 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  * serializing them first into strings.
  */
 object JsDom extends generic.Bundle with LowPriorityImplicits{
-  type FragT = dom.Node
-  type Output = dom.Element
-  type Builder = dom.Element
+  type FragOutput = dom.Node
+  type TagOutput = dom.Element
+  type TagBuilder = dom.Element
   object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
   object tags extends Api with jsdom.Tags[TypedTag] with Tags
   object tags2 extends Api with jsdom.Tags2[TypedTag] with Tags2
@@ -164,18 +164,18 @@ object JsDom extends generic.Bundle with LowPriorityImplicits{
                                               modifiers: List[Seq[Modifier]],
                                               void: Boolean = false,
                                               namespace: Namespace)
-                                              extends super.TypedTag[Output]
+                                              extends super.TypedTag[TagOutput]
                                               with Frag{
 
-    protected[this] type Self = TypedTag[Output]
+    protected[this] type Self = TypedTag[TagOutput]
 
-    def render: Output = {
+    def render: TagOutput = {
       val elem = dom.document.createElementNS(namespace.uri, tag)
       build(elem)
-      elem.asInstanceOf[Output]
+      elem.asInstanceOf[TagOutput]
     }
 
-    def apply(xs: Modifier*): TypedTag[Output] = {
+    def apply(xs: Modifier*): TypedTag[TagOutput] = {
       this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
     override def toString = render.outerHTML
