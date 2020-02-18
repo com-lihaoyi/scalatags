@@ -17,17 +17,17 @@ object Text extends generic.Bundle{
   type FragOutput = String
   type TagOutput = String
   object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
-  object tags extends Api with text.Tags[TypedTag[String]] with Tags
-  object tags2 extends Api with text.Tags2[TypedTag[String]] with Tags2
+  object tags extends Api with text.Tags[TypedTag] with Tags
+  object tags2 extends Api with text.Tags2[TypedTag] with Tags2
   object styles extends Api with Styles
   object styles2 extends Api with Styles2
 
-  object svgTags extends Api with text.SvgTags[TypedTag[String]] with SvgTags
+  object svgTags extends Api with text.SvgTags[TypedTag] with SvgTags
   object svgAttrs extends Api with SvgAttrs[Attr]
 
-  object all extends Api with AbstractAll with text.Tags[TypedTag[String]]
+  object all extends Api with AbstractAll with text.Tags[TypedTag]
 
-  object short extends Api with text.Tags[TypedTag[String]] with AbstractShort{
+  object short extends Api with text.Tags[TypedTag] with AbstractShort{
 
     object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
@@ -52,10 +52,10 @@ object Text extends generic.Bundle{
     def render = xs.map(_.render).mkString
   }
   implicit def UnitFrag(u: Unit): Frag = new StringFrag("")
-  trait Api extends super.Api with text.TagFactory[TypedTag[String]]{ self =>
+  trait Api extends super.Api with text.TagFactory[TypedTag]{ self =>
     def frag(frags: Text.super.Frag*): Text.Frag  = SeqFrag(frags)
 
-    def tag(s: String, void: Boolean = false): TypedTag[String] = TypedTag(s, Nil, void)
+    def tag(s: String, void: Boolean = false): TypedTag = TypedTag(s, Nil, void)
     def raw(s: String): Frag = new RawFrag(s)
 
     protected[this] implicit def stringAttrX: AttrValue[String] = new GenericAttr[String]
@@ -147,14 +147,12 @@ object Text extends generic.Bundle{
     def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
   }
 
+  case class TypedTag(tag: String = "",
+                      modifiers: List[Seq[Modifier]],
+                      void: Boolean = false)
+                      extends super.TypedTag[String] with Frag with geny.Writable{
 
-
-  case class TypedTag[+O <: String](tag: String = "",
-                                         modifiers: List[Seq[Modifier]],
-                                         void: Boolean = false)
-                                         extends super.TypedTag[O] with Frag with geny.Writable{
-
-    protected[this] type Self = TypedTag[O]
+    protected[this] type Self = TypedTag
 
 
     def writeTo(strb: java.io.Writer): Unit = {
@@ -163,7 +161,7 @@ object Text extends generic.Bundle{
       builder.writeTo(strb)
     }
 
-    def apply(xs: Text.super.Modifier*): TypedTag[O] = {
+    def apply(xs: Text.super.Modifier*): TypedTag = {
       this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
     }
 
@@ -175,7 +173,7 @@ object Text extends generic.Bundle{
       writeTo(strb)
       strb.toString()
     }
-    def render: O = this.toString.asInstanceOf[O]
+    def render: String = this.toString
   }
 
 
