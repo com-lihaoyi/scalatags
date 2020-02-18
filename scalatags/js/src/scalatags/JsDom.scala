@@ -8,7 +8,7 @@ import scala.scalajs.js
 import org.scalajs.dom.{Element, html, raw, svg}
 
 
-import scalatags.generic.Namespace
+import scalatags.generic.{Namespace, Attrs, SvgAttrs}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
 
@@ -20,13 +20,13 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  */
 object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImplicits{
   type Builder = dom.Element
-  object attrs extends JsDom.Cap with Attrs
+  object attrs extends JsDom.Cap with Attrs[Attr, AttrValue, AttrPair]
   object tags extends JsDom.Cap with jsdom.Tags[TypedTag] with Tags
   object tags2 extends JsDom.Cap with jsdom.Tags2[TypedTag] with Tags2
   object styles extends JsDom.Cap with Styles
   object styles2 extends JsDom.Cap with Styles2
   object svgTags extends JsDom.Cap with jsdom.SvgTags[TypedTag] with SvgTags
-  object svgAttrs extends JsDom.Cap with SvgAttrs
+  object svgAttrs extends JsDom.Cap with SvgAttrs[Attr]
 
 
   object all
@@ -39,7 +39,7 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     with jsdom.Tags[TypedTag]
     with AbstractShort{
 
-    object * extends Cap with Attrs with Styles
+    object * extends Cap with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
 
   implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
@@ -73,6 +73,9 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
 
+    def attr(s: String, ns: Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
+    def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
+    def AttrPair[T](attr: Attr, v: T, ev: AttrValue[T]) = JsDom.this.AttrPair(attr, v, ev)
     type HtmlTag = JsDom.TypedTag[html.Element]
     val HtmlTag = JsDom.TypedTag
     type SvgTag = JsDom.TypedTag[svg.Element]
