@@ -13,6 +13,7 @@ object DomTests extends TestSuite{
       import scalatags.JsDom.all._
       test("SeqFrag"){
         val t: Tag = h1("hello")
+        t.applyTo(dom.document.createElement("div"))
         val frag1: Frag = Seq(
           h1("Hello"),
           p("World")

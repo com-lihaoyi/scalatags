@@ -53,6 +53,7 @@ object Text extends generic.Bundle{
   }
   implicit def UnitFrag(u: Unit): Frag = new StringFrag("")
   trait Api extends super.Api with text.TagFactory[TypedTag]{ self =>
+    type Tag = TypedTag
     def frag(frags: Text.super.Frag*): Text.Frag  = SeqFrag(frags)
 
     def tag(s: String, void: Boolean = false): TypedTag = TypedTag(s, Nil, void)

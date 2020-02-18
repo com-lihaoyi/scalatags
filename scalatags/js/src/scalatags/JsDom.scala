@@ -66,11 +66,9 @@ object JsDom extends generic.Bundle with LowPriorityImplicits{
     protected[this] implicit def stringPixelStyleX: PixelStyleValue[String] = new GenericPixelStyle[String](stringStyleX)
 
     def raw(s: String): Modifier = new RawFrag(s)
-
+    type Tag = TypedTag[dom.Element]
     type HtmlTag = JsDom.TypedTag[html.Element]
-    val HtmlTag = JsDom.TypedTag
     type SvgTag = JsDom.TypedTag[svg.Element]
-    val SvgTag = JsDom.TypedTag
 
     def frag(frags: JsDom.super.Frag*): JsDom.Frag  = SeqFrag(frags)
     def tag(s: String, void: Boolean = false): TypedTag[dom.Element] = TypedTag(s, Nil, void, implicitly)

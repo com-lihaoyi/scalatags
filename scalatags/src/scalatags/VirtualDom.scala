@@ -19,7 +19,7 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  * Preact/React VDOM nodes in the browser, etc.
  */
 trait VirtualDom extends generic.Bundle {
-
+  type Tag
   trait TagBuilder{
     def appendChild(child: FragOutput): Unit
     def appendClass(cls: String): Unit
@@ -81,6 +81,7 @@ trait VirtualDom extends generic.Bundle {
     protected[this] implicit def stringAttrX: AttrValue[String] = new GenericAttr[String]
     protected[this] implicit def stringStyleX: StyleValue[String] = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX: PixelStyleValue[String] = new GenericPixelStyle[String](stringStyleX)
+    type Tag = TypedTag[TagOutput]
   }
   implicit def UnitFrag(u: Unit): Frag = new StringFrag("")
 

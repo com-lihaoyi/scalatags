@@ -6,7 +6,8 @@ object TextTests extends TestSuite{
   import scalatags.Text.all._
   def tests = TestSuite{
     test("SeqFrag") {
-      val t: Tag = h1("hello")
+      val t: scalatags.Text.TypedTag = h1("hello")
+      t.writeTo(new java.io.StringWriter)
       val frag1: Frag = Seq(
         h1("Hello"),
         p("World")

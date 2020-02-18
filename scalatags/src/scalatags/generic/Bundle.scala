@@ -198,11 +198,13 @@ trait Bundle extends Core with StylesWrapper with LowPriBundle{
 
     type HtmlTag
     type SvgTag
-    type Tag = TypedTag[TagOutput]
+
     type Modifier = Bundle.this.Modifier
     type Style = Bundle.this.Style
     type Frag = Bundle.this.Frag
   }
+
+  type Tag = TypedTag[TagOutput]
 }
 trait LowPriBundle{this: Bundle =>
   /**
