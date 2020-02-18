@@ -160,22 +160,22 @@ object JsDom extends generic.Bundle with LowPriorityImplicits{
   private[this] class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
   }
-  case class TypedTag[+Output <: dom.Element](tag: String = "",
+  case class TypedTag[+O <: dom.Element](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
                                               void: Boolean = false,
                                               namespace: Namespace)
-                                              extends super.TypedTag[TagOutput]
+                                              extends super.TypedTag[O]
                                               with Frag{
 
-    protected[this] type Self = TypedTag[TagOutput]
+    protected[this] type Self = TypedTag[O]
 
-    def render: TagOutput = {
+    def render: O = {
       val elem = dom.document.createElementNS(namespace.uri, tag)
       build(elem)
-      elem.asInstanceOf[TagOutput]
+      elem.asInstanceOf[O]
     }
 
-    def apply(xs: Modifier*): TypedTag[TagOutput] = {
+    def apply(xs: Modifier*): TypedTag[O] = {
       this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
     override def toString = render.outerHTML
