@@ -134,18 +134,6 @@ with LowPriBundle[FragT0, Output0]{
   type SvgTags = generic.SvgTags[TypedTag[Output]]
   type Util = generic.Util[Output0, Modifier, Frag, TypedTag, Style]
 
-  /**
-   * A [[Modifier]] which contains a String which will not be escaped.
-   */
-  protected[this] type RawFrag <: Modifier
-  protected[this] val RawFrag: Companion[RawFrag]
-
-  /**
-   * A [[Modifier]] which contains a String.
-   */
-  protected[this] type StringFrag <: Modifier
-  protected[this] val StringFrag: Companion[StringFrag]
-
   implicit def StyleFrag(s: StylePair[_]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
   def genericAttr[T]: AttrValue[T]
@@ -191,7 +179,7 @@ with LowPriBundle[FragT0, Output0]{
    * Delimits a string that should be included in the result as raw,
    * un-escaped HTML
    */
-  def raw(s: String): RawFrag
+  def raw(s: String): Modifier
 
   /**
    * Lets you put Unit into a scalatags tree, as a no-op.

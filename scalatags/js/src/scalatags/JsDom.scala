@@ -63,7 +63,7 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
 
   implicit def stringFrag(v: String): StringFrag = new JsDom.StringFrag(v)
 
-  def raw(s: String) = RawFrag(s)
+  def raw(s: String) = new RawFrag(s)
 
   implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
   trait Cap extends Util with jsdom.TagFactory[TypedTag]{ self =>
@@ -132,14 +132,12 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     }
   }
 
-  object StringFrag extends Companion[StringFrag]
-  case class StringFrag(v: String) extends Frag{
+  class StringFrag(v: String) extends Frag{
     Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
-  object RawFrag extends Companion[RawFrag]
-  case class RawFrag(v: String) extends Modifier{
+  class RawFrag(v: String) extends Modifier{
     Objects.requireNonNull(v)
     def applyTo(elem: dom.Element): Unit = {
       elem.insertAdjacentHTML("beforeend", v)
@@ -193,9 +191,7 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
       build(elem)
       elem.asInstanceOf[Output]
     }
-    /**
-     * Trivial override, not strictly necessary, but it makes IntelliJ happy...
-     */
+
     def apply(xs: Modifier*): TypedTag[Output] = {
       this.copy(tag = tag, void = void, modifiers = xs :: modifiers)
     }
