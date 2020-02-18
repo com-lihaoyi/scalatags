@@ -34,25 +34,25 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
   def stringToFrag(s: String): FragT
   def rawToFrag(s: String): FragT
   def makeBuilder(tag: String): Builder
-  object attrs extends Cap with Attrs[Attr, AttrValue, AttrPair]
-  object tags extends Cap with vdom.Tags[TypedTag[Output]] with Tags
-  object tags2 extends Cap with vdom.Tags2[TypedTag[Output]] with Tags2
-  object styles extends Cap with Styles
-  object styles2 extends Cap with Styles2
-  object svgTags extends Cap with vdom.SvgTags[TypedTag[Output]] with SvgTags
-  object svgAttrs extends Cap with SvgAttrs[Attr]
+  object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
+  object tags extends Api with vdom.Tags[TypedTag[Output]] with Tags
+  object tags2 extends Api with vdom.Tags2[TypedTag[Output]] with Tags2
+  object styles extends Api with Styles
+  object styles2 extends Api with Styles2
+  object svgTags extends Api with vdom.SvgTags[TypedTag[Output]] with SvgTags
+  object svgAttrs extends Api with SvgAttrs[Attr]
 
   object all
-    extends Cap
+    extends Api
     with AbstractAll
     with vdom.Tags[TypedTag[Output]]
 
   object short
-    extends Cap
+    extends Api
     with vdom.Tags[TypedTag[Output]]
     with AbstractShort{
 
-    object * extends Cap with Attrs[Attr, AttrValue, AttrPair] with Styles
+    object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
 
   implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
@@ -85,18 +85,11 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
   val Tag = TypedTag
 
 
-  trait Cap extends Util with vdom.TagFactory[TypedTag[Output]]{ self =>
+  trait Api extends super.Api with vdom.TagFactory[TypedTag[Output]]{ self =>
     type ConcreteHtmlTag[T <: Output] = TypedTag[T]
     def frag(frags: VirtualDom.super.Frag*): Frag  = SeqFrag(frags)
-    def modifier(mods: Modifier*): Modifier = SeqNode(mods)
-    def css(s: String): Style = Style(camelCase(s), s)
-    def attr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
-    def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
-    def AttrPair[T](attr: Attr, v: T, ev: AttrValue[T]) = VirtualDom.this.AttrPair(attr, v, ev)
+
     def tag(s: String, void: Boolean = false): TypedTag[Output] = TypedTag(s, Nil, void, implicitly)
-    def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: scalatags.generic.Namespace): TypedTag[T] = {
-      TypedTag(tag, Nil, void, namespaceConfig)
-    }
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)

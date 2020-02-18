@@ -1,6 +1,5 @@
 package scalatags
 package vdom
-import scalatags.generic.Util
 
 trait Tags2[TypedTag] extends generic.Tags2[TypedTag] with TagFactory[TypedTag]{
    // Document Metadata

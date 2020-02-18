@@ -2,7 +2,7 @@ package scalatags
 package jsdom
 import org.scalajs.dom
 import org.scalajs.dom.html
-import scalatags.generic.Util
+
 trait Tags2[TypedTag[+_ <: dom.Element]] extends generic.Tags2[TypedTag[dom.Element]] with TagFactory[TypedTag]{
    // Document Metadata
    lazy val title = typedTag[html.Title]("title")

@@ -27,8 +27,7 @@ import scalatags.text
  *                 `Tag` is being rendered to give a final result.
  */
 trait Bundle[FragT0, Output0 <: FragT0]
-extends Core with StylesWrapper
-with LowPriBundle[FragT0, Output0]{
+extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
   protected type FragT = FragT0
   protected type Output = Output0
   trait TypedTag[+O <: Output] extends Frag {
@@ -83,7 +82,7 @@ with LowPriBundle[FragT0, Output0]{
    * Convenience object for importing all of Scalatags' functionality at once
    */
   val all: AbstractAll
-  trait AbstractAll extends Attrs[Attr, AttrValue, AttrPair] with Styles with Tags with Util with DataConverters{
+  trait AbstractAll extends Attrs[Attr, AttrValue, AttrPair] with Styles with Tags with Api with DataConverters{
 
   }
 
@@ -94,7 +93,7 @@ with LowPriBundle[FragT0, Output0]{
    */
   val short: AbstractShort
 
-  trait AbstractShort extends Tags with Util with DataConverters{
+  trait AbstractShort extends Tags with Api with DataConverters{
     val `*`: Attrs[Attr, AttrValue, AttrPair] with Styles
   }
 
@@ -134,7 +133,6 @@ with LowPriBundle[FragT0, Output0]{
   type Tags = generic.Tags[TypedTag[Output]]
   type Tags2 = generic.Tags2[TypedTag[Output]]
   type SvgTags = generic.SvgTags[TypedTag[Output]]
-  type Util = generic.Util[Output0, Modifier, Frag, TypedTag, Style]
 
   implicit def StyleFrag(s: StylePair[_]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
@@ -191,6 +189,22 @@ with LowPriBundle[FragT0, Output0]{
   implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => Frag): Frag
   implicit def SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag): Frag
   implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => super.Frag): Frag
+
+  trait Api {
+    def frag(frags: Frag*): Frag
+    def modifier(mods: Modifier*): Modifier = SeqNode(mods)
+
+    def tag(s: String, void: Boolean = false): TypedTag[Output]
+
+    def css(s: String): Style = Style(camelCase(s), s)
+    def attr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
+    def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
+    def AttrPair[T](attr: Attr, v: T, ev: AttrValue[T]) = Bundle.this.AttrPair(attr, v, ev)
+
+    type HtmlTag
+    type SvgTag
+    type Tag = TypedTag[Output]
+  }
 }
 trait LowPriBundle[FragT0, Output <: FragT0]{this: Bundle[FragT0, Output] =>
   /**

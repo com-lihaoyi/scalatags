@@ -2,8 +2,6 @@
 package scalatags
 package vdom
 
-import scalatags.generic.Util
-
 trait Tags[TypedTag] extends generic.Tags[TypedTag] with TagFactory[TypedTag]{
   // Root Element
   lazy val html = tag("html")

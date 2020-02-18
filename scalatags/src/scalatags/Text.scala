@@ -17,27 +17,27 @@ import scala.reflect.ClassTag
 
 object Text extends generic.Bundle[String, String]{
 
-  object attrs extends Text.Cap with Attrs[Attr, AttrValue, AttrPair]
-  object tags extends Text.Cap with text.Tags[TypedTag[String]] with Tags
-  object tags2 extends Text.Cap with text.Tags2[TypedTag[String]] with Tags2
-  object styles extends Text.Cap with Styles
-  object styles2 extends Text.Cap with Styles2
+  object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
+  object tags extends Api with text.Tags[TypedTag[String]] with Tags
+  object tags2 extends Api with text.Tags2[TypedTag[String]] with Tags2
+  object styles extends Api with Styles
+  object styles2 extends Api with Styles2
 
-  object svgTags extends Text.Cap with text.SvgTags[TypedTag[String]] with SvgTags
-  object svgAttrs extends Text.Cap with SvgAttrs[Attr]
+  object svgTags extends Api with text.SvgTags[TypedTag[String]] with SvgTags
+  object svgAttrs extends Api with SvgAttrs[Attr]
 
 
   object all
-    extends Cap
+    extends Api
     with AbstractAll
     with text.Tags[TypedTag[String]]
 
   object short
-    extends Cap
+    extends Api
     with text.Tags[TypedTag[String]]
     with AbstractShort{
 
-    object * extends Cap with Attrs[Attr, AttrValue, AttrPair] with Styles
+    object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
@@ -60,18 +60,11 @@ object Text extends generic.Bundle[String, String]{
     def render = xs.map(_.render).mkString
   }
   implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
-  trait Cap extends Util with text.TagFactory[TypedTag[String]]{ self =>
+  trait Api extends super.Api with text.TagFactory[TypedTag[String]]{ self =>
     def frag(frags: Text.super.Frag*): Frag  = SeqFrag(frags)
-    def modifier(mods: Modifier*): Modifier = SeqNode(mods)
-    def attr(s: String, ns: Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
-    def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
-    def AttrPair[T](attr: Attr, v: T, ev: AttrValue[T]) = Text.this.AttrPair(attr, v, ev)
-    def css(s: String): Style = Style(camelCase(s), s)
+
     def tag(s: String, void: Boolean = false): TypedTag[String] = TypedTag(s, Nil, void)
-    def makeAbstractTypedTag[T <: String](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
-      TypedTag(tag, Nil, void)
-    }
-//    type Tag = Text.TypedTag[String]
+
     type Frag = Text.Frag
     type Modifier = Text.Modifier
     type Style = Text.Style
@@ -376,7 +369,4 @@ object Text extends generic.Bundle[String, String]{
       }
     }
   }
-
-
-
 }

@@ -20,26 +20,26 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  */
 object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImplicits{
   type Builder = dom.Element
-  object attrs extends JsDom.Cap with Attrs[Attr, AttrValue, AttrPair]
-  object tags extends JsDom.Cap with jsdom.Tags[TypedTag] with Tags
-  object tags2 extends JsDom.Cap with jsdom.Tags2[TypedTag] with Tags2
-  object styles extends JsDom.Cap with Styles
-  object styles2 extends JsDom.Cap with Styles2
-  object svgTags extends JsDom.Cap with jsdom.SvgTags[TypedTag] with SvgTags
-  object svgAttrs extends JsDom.Cap with SvgAttrs[Attr]
+  object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
+  object tags extends Api with jsdom.Tags[TypedTag] with Tags
+  object tags2 extends Api with jsdom.Tags2[TypedTag] with Tags2
+  object styles extends Api with Styles
+  object styles2 extends Api with Styles2
+  object svgTags extends Api with jsdom.SvgTags[TypedTag] with SvgTags
+  object svgAttrs extends Api with SvgAttrs[Attr]
 
 
   object all
-    extends Cap
+    extends Api
     with AbstractAll
     with jsdom.Tags[TypedTag]
 
   object short
-    extends Cap
+    extends Api
     with jsdom.Tags[TypedTag]
     with AbstractShort{
 
-    object * extends Cap with Attrs[Attr, AttrValue, AttrPair] with Styles
+    object * extends Api with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
 
   implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
@@ -56,8 +56,8 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
   }
 
 
-  def genericAttr[T] = new JsDom.GenericAttr[T]
-  def genericStyle[T] = new JsDom.GenericStyle[T]
+  def genericAttr[T] = new GenericAttr[T]
+  def genericStyle[T] = new GenericStyle[T]
   def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new JsDom.GenericPixelStyle[T](ev)
   def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new JsDom.GenericPixelStylePx[T](ev)
 
@@ -66,16 +66,13 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
   def raw(s: String) = new RawFrag(s)
 
   implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
-  trait Cap extends Util with jsdom.TagFactory[TypedTag]{ self =>
+  trait Api extends super.Api with jsdom.TagFactory[TypedTag]{ self =>
     type ConcreteHtmlTag[T <: dom.Element] = TypedTag[T]
 
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
 
-    def attr(s: String, ns: Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
-    def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
-    def AttrPair[T](attr: Attr, v: T, ev: AttrValue[T]) = JsDom.this.AttrPair(attr, v, ev)
     type HtmlTag = JsDom.TypedTag[html.Element]
     val HtmlTag = JsDom.TypedTag
     type SvgTag = JsDom.TypedTag[svg.Element]
@@ -85,18 +82,12 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
 //    type Tag = JsDom.TypedTag[dom.Element]
 
     def frag(frags: JsDom.super.Frag*): Frag  = SeqFrag(frags)
-    def modifier(mods: Modifier*): Modifier = SeqNode(mods)
-    def css(s: String): Style = Style(camelCase(s), s)
     def tag(s: String, void: Boolean = false): TypedTag[dom.Element] = TypedTag(s, Nil, void, implicitly)
     def typedTag[T <: dom.Element](s: String, void: Boolean = false)
                                   (implicit ns: scalatags.generic.Namespace): TypedTag[T] = {
 
-      makeAbstractTypedTag[T](s, void, ns)
+      TypedTag(s, Nil, void, ns)
     }
-    def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
-      TypedTag(tag, Nil, void, namespaceConfig)
-    }
-
   }
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => JsDom.super.Frag) extends Frag{
     Objects.requireNonNull(xs)

@@ -1,7 +1,7 @@
 package scalatags
 package vdom
 
-import scalatags.generic.{Namespace, Util}
+import scalatags.generic.Namespace
 
 trait SvgTags[TypedTag] extends generic.SvgTags[TypedTag] with TagFactory[TypedTag]{
   implicit lazy val svgNamespaceConfig = Namespace.svgNamespaceConfig
