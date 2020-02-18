@@ -136,7 +136,7 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
 
   implicit def StyleFrag(s: StylePair[_]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
-  def genericAttr[T]: AttrValue[T]
+  protected[this] def genericAttr[T]: AttrValue[T]
   implicit val stringAttr = genericAttr[String]
   implicit val booleanAttr = genericAttr[Boolean]
   implicit val byteAttr = genericAttr[Byte]
@@ -146,7 +146,7 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
   implicit val floatAttr = genericAttr[Float]
   implicit val doubleAttr = genericAttr[Double]
 
-  def genericStyle[T]: StyleValue[T]
+  protected[this] def genericStyle[T]: StyleValue[T]
   implicit val stringStyle = genericStyle[String]
   implicit val booleanStyle = genericStyle[Boolean]
   implicit val byteStyle = genericStyle[Byte]
@@ -156,8 +156,8 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
   implicit val floatStyle = genericStyle[Float]
   implicit val doubleStyle = genericStyle[Double]
 
-  def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T]
-  def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T]
+  protected[this] def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T]
+  protected[this] def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T]
   implicit val stringPixelStyle = genericPixelStyle[String]
   implicit val booleanPixelStyle = genericPixelStyle[Boolean]
   implicit val bytePixelStyle = genericPixelStylePx[Byte]

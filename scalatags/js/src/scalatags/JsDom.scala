@@ -56,20 +56,20 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
   }
 
 
-  def genericAttr[T] = new GenericAttr[T]
-  def genericStyle[T] = new GenericStyle[T]
-  def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new JsDom.GenericPixelStyle[T](ev)
-  def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new JsDom.GenericPixelStylePx[T](ev)
+  protected[this] def genericAttr[T]: AttrValue[T] = new GenericAttr[T]
+  protected[this] def genericStyle[T]: StyleValue[T] = new GenericStyle[T]
+  protected[this] def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new GenericPixelStyle[T](ev)
+  protected[this] def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new GenericPixelStylePx[T](ev)
 
-  implicit def stringFrag(v: String): StringFrag = new JsDom.StringFrag(v)
+  implicit def stringFrag(v: String): Frag = new StringFrag(v)
 
-  implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
+  implicit def UnitFrag(u: Unit): Frag = new StringFrag("")
   trait Api extends super.Api with jsdom.TagFactory[TypedTag]{ self =>
-    protected[this] implicit def stringAttrX = new GenericAttr[String]
-    protected[this] implicit def stringStyleX = new GenericStyle[String]
-    protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
+    protected[this] implicit def stringAttrX: AttrValue[String] = new GenericAttr[String]
+    protected[this] implicit def stringStyleX: StyleValue[String] = new GenericStyle[String]
+    protected[this] implicit def stringPixelStyleX: PixelStyleValue[String] = new GenericPixelStyle[String](stringStyleX)
 
-    def raw(s: String) = new RawFrag(s)
+    def raw(s: String): Modifier = new RawFrag(s)
 
     type HtmlTag = JsDom.TypedTag[html.Element]
     val HtmlTag = JsDom.TypedTag
@@ -121,19 +121,17 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     }
   }
 
-  class StringFrag(v: String) extends Frag{
+  private[this] class StringFrag(v: String) extends Frag{
     Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
-  class RawFrag(v: String) extends Modifier{
+  private[this] class RawFrag(v: String) extends Modifier{
     Objects.requireNonNull(v)
-    def applyTo(elem: dom.Element): Unit = {
-      elem.insertAdjacentHTML("beforeend", v)
-    }
+    def applyTo(elem: dom.Element): Unit = elem.insertAdjacentHTML("beforeend", v)
   }
 
-  class GenericAttr[T] extends AttrValue[T]{
+  private[this] class GenericAttr[T] extends AttrValue[T]{
     def apply(t: dom.Element, a: Attr, v: T): Unit = {
       a.namespace match {
         case None =>
@@ -153,17 +151,17 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     }
   }
 
-  class GenericStyle[T] extends StyleValue[T]{
+  private[this] class GenericStyle[T] extends StyleValue[T]{
     def apply(t: dom.Element, s: Style, v: T): Unit = {
       t.asInstanceOf[html.Html]
        .style
        .setProperty(s.cssName, v.toString)
     }
   }
-  class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
+  private[this] class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v, ev)
   }
-  class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
+  private[this] class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
   }
   case class TypedTag[+Output <: dom.Element](tag: String = "",

@@ -73,24 +73,22 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
   }
 
 
-  def genericAttr[T] = new GenericAttr[T]
-  def genericStyle[T] = new GenericStyle[T]
-  def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new GenericPixelStyle[T](ev)
-  def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new GenericPixelStylePx[T](ev)
+  protected def genericAttr[T]: AttrValue[T] = new GenericAttr[T]
+  protected def genericStyle[T]: StyleValue[T] = new GenericStyle[T]
+  protected def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new GenericPixelStyle[T](ev)
+  protected def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new GenericPixelStylePx[T](ev)
 
-  implicit def stringFrag(v: String): StringFrag = new StringFrag(v)
-
-  val Tag = TypedTag
+  implicit def stringFrag(v: String): Frag = new StringFrag(v)
 
   trait Api extends super.Api with vdom.TagFactory[TypedTag[Output]]{ self =>
     def frag(frags: VirtualDom.super.Frag*): VirtualDom.this.Frag = SeqFrag(frags)
-    def raw(s: String) = new RawFrag(s)
+    def raw(s: String): Frag = new RawFrag(s)
     def tag(s: String, void: Boolean = false): TypedTag[Output] = TypedTag(s, Nil, void, implicitly)
-    protected[this] implicit def stringAttrX = new GenericAttr[String]
-    protected[this] implicit def stringStyleX = new GenericStyle[String]
-    protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
+    protected[this] implicit def stringAttrX: AttrValue[String] = new GenericAttr[String]
+    protected[this] implicit def stringStyleX: StyleValue[String] = new GenericStyle[String]
+    protected[this] implicit def stringPixelStyleX: PixelStyleValue[String] = new GenericPixelStyle[String](stringStyleX)
   }
-  implicit def UnitFrag(u: Unit): VirtualDom.this.StringFrag = new StringFrag("")
+  implicit def UnitFrag(u: Unit): Frag = new StringFrag("")
 
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
@@ -107,27 +105,27 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
     }
   }
 
-  class StringFrag(v: String) extends Frag{
+  private[this] class StringFrag(v: String) extends Frag{
     Objects.requireNonNull(v)
     def render: FragT = stringToFrag(v)
   }
 
-  class RawFrag(v: String) extends Frag{
+  private[this] class RawFrag(v: String) extends Frag{
     Objects.requireNonNull(v)
     def render = rawToFrag(v)
   }
 
-  class GenericAttr[T] extends AttrValue[T]{
+  private[this] class GenericAttr[T] extends AttrValue[T]{
     def apply(t: Builder, a: Attr, v: T): Unit = t.setAttr(a.name, v.toString)
   }
 
-  class GenericStyle[T] extends StyleValue[T]{
+  private[this] class GenericStyle[T] extends StyleValue[T]{
     def apply(t: Builder, s: Style, v: T): Unit = t.appendStyle(s.cssName, v.toString)
   }
-  class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
+  private[this] class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v, ev)
   }
-  class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
+  private[this] class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
   }
   case class TypedTag[+O <: Output](tag: String = "",

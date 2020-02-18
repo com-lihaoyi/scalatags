@@ -56,16 +56,16 @@ object Text extends generic.Bundle[String, String]{
     def writeTo(strb: Writer): Unit = xs.foreach(ev(_).asInstanceOf[Frag].writeTo(strb))
     def render = xs.map(_.render).mkString
   }
-  implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
+  implicit def UnitFrag(u: Unit): Frag = new StringFrag("")
   trait Api extends super.Api with text.TagFactory[TypedTag[String]]{ self =>
     def frag(frags: Text.super.Frag*): Text.Frag  = SeqFrag(frags)
 
     def tag(s: String, void: Boolean = false): TypedTag[String] = TypedTag(s, Nil, void)
-    def raw(s: String) = RawFrag(s)
+    def raw(s: String): Frag = new RawFrag(s)
 
-    protected[this] implicit def stringAttrX = new GenericAttr[String]
-    protected[this] implicit def stringStyleX = new GenericStyle[String]
-    protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
+    protected[this] implicit def stringAttrX: AttrValue[String] = new GenericAttr[String]
+    protected[this] implicit def stringStyleX: StyleValue[String] = new GenericStyle[String]
+    protected[this] implicit def stringPixelStyleX: PixelStyleValue[String] = new GenericPixelStyle[String](stringStyleX)
 
     case class doctype(s: String)(content: Text.Frag) extends geny.Writable{
       def writeTo(strb: java.io.Writer): Unit = {
@@ -102,15 +102,12 @@ object Text extends generic.Bundle[String, String]{
     }
   }
 
-  def genericAttr[T] = new Text.GenericAttr[T]
-  def genericStyle[T] = new Text.GenericStyle[T]
-  def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new Text.GenericPixelStyle[T](ev)
-  def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new Text.GenericPixelStylePx[T](ev)
+  protected[this] def genericAttr[T]: AttrValue[T] = new GenericAttr[T]
+  protected[this] def genericStyle[T]: StyleValue[T] = new GenericStyle[T]
+  protected[this] def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new GenericPixelStyle[T](ev)
+  protected[this] def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new GenericPixelStylePx[T](ev)
 
-  implicit def stringFrag(v: String) = new Text.StringFrag(v)
-
-  val Tag = Text.TypedTag
-
+  implicit def stringFrag(v: String): Frag = new StringFrag(v)
 
   trait Frag extends super.Frag with Modifier{
     def writeTo(strb: java.io.Writer): Unit
@@ -123,8 +120,7 @@ object Text extends generic.Bundle[String, String]{
     def applyTo(b: Builder) = b.addChild(this)
   }
 
-
-  case class StringFrag(v: String) extends Frag{
+  private[this] class StringFrag(v: String) extends Frag{
     Objects.requireNonNull(v)
     def render = {
       val strb = new java.io.StringWriter()
@@ -133,32 +129,27 @@ object Text extends generic.Bundle[String, String]{
     }
     def writeTo(strb: java.io.Writer) = Escaping.escape(v, strb)
   }
-  object StringFrag extends Companion[StringFrag]
-  object RawFrag extends Companion[RawFrag]
-  case class RawFrag(v: String) extends Frag {
+
+  private[this] class RawFrag(v: String) extends Frag {
     Objects.requireNonNull(v)
     def render = v
     def writeTo(strb: java.io.Writer) = strb.append(v)
   }
 
-  class GenericAttr[T] extends AttrValue[T] {
+  private[this] class GenericAttr[T] extends AttrValue[T] {
     def apply(t: Builder, a: Attr, v: T): Unit = {
       t.setAttr(a.name, Builder.GenericAttrValueSource(v.toString))
     }
   }
 
-  class GenericStyle[T] extends StyleValue[T] {
-    def apply(t: Builder, s: Style, v: T): Unit = {
-      t.appendAttr("style", Builder.StyleValueSource(s, v.toString))
-    }
+  private[this] class GenericStyle[T] extends StyleValue[T] {
+    def apply(t: Builder, s: Style, v: T): Unit = t.appendAttr("style", Builder.StyleValueSource(s, v.toString))
   }
-  class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
+  private[this] class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = StylePair(s, v, ev)
   }
-  class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
-    def apply(s: Style, v: T) = {
-      StylePair(s, v + "px", ev)
-    }
+  private[this] class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
+    def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
   }
 
 
