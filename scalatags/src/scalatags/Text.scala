@@ -62,7 +62,7 @@ object Text extends generic.Bundle[String, String]{
     def makeAbstractTypedTag[T <: String](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void)
     }
-    type Tag = Text.TypedTag[String]
+//    type Tag = Text.TypedTag[String]
     type Frag = Text.Frag
     type Modifier = Text.Modifier
     type Style = Text.Style

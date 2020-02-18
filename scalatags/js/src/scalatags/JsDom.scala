@@ -92,7 +92,7 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     val SvgTag = JsDom.TypedTag
 
     val Tag = JsDom.TypedTag
-    override type Tag = JsDom.TypedTag[dom.Element]
+//    type Tag = JsDom.TypedTag[dom.Element]
 
     def frag(frags: JsDom.super.Frag*): Frag  = SeqFrag(frags)
     def modifier(mods: Modifier*): Modifier = SeqNode(mods)

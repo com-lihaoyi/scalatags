@@ -10,8 +10,8 @@ import scala.language.higherKinds
 trait Util[Output, Modifier, Frag, TypedTag[_ <: Output], Style] {
 
 
-  def frag(frags: Frag*): Frag //SeqFrag(frags)
-  def modifier(mods: Modifier*): Modifier //SeqNode(mods)
+  def frag(frags: Frag*): Frag
+  def modifier(mods: Modifier*): Modifier
 
   def tag(s: String, void: Boolean = false): TypedTag[Output]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T]

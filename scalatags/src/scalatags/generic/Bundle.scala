@@ -125,7 +125,7 @@ trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with S
   type Tags = generic.Tags[TypedTag[Output]]
   type Tags2 = generic.Tags2[TypedTag[Output]]
   type SvgTags = generic.SvgTags[TypedTag[Output]]
-  type Util = generic.Util[Output, Modifier, Frag, TypedTag, Style]
+  type Util = generic.Util[Output0, Modifier, Frag, TypedTag, Style]
 
   /**
    * A [[Modifier]] which contains a String which will not be escaped.
@@ -186,31 +186,10 @@ trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with S
    */
   def raw(s: String): RawFrag
 
-
-  /**
-   * Renders an Seq of [[FragT]] into a single [[FragT]]
-   */
-//  implicit def SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag): Frag
-  /**
-   * Renders an Seq of [[FragT]] into a single [[FragT]]
-   */
-//  implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag): Frag
-
-  /**
-   * Renders an Option of [[FragT]] into a single [[FragT]]
-   */
-//  implicit def OptionFrag[A](xs: Option[A])(implicit ev: A => Frag) = SeqFrag(xs.toSeq)
-
-  /**
-   * Renders an Seq of [[FragT]] into a single [[FragT]]
-   */
-//  implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => Frag) = SeqFrag[A](xs.toSeq)
-
   /**
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
   implicit def UnitFrag(u: Unit): Frag
-
 
   /**
    * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
