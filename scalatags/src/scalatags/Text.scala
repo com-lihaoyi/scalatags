@@ -89,7 +89,7 @@ object Text extends generic.Bundle[String, String]{
   }
   implicit class StyleFrag(s: StylePair[_]) extends StyleSheetFrag{
     def applyTo(c: StyleTree) = {
-      val b = new Builder()
+      val b = new Builder("dummy", false)
       s.applyTo(b)
       val Array(style, value) = b.attrsString(b.attrs(b.attrIndex("style"))._2).split(":", 2)
       c.copy(styles = c.styles.updated(style, value))
@@ -155,45 +155,11 @@ object Text extends generic.Bundle[String, String]{
 
     protected[this] type Self = TypedTag[O]
 
-    /**
-     * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.
-     *
-     * Although the external interface is pretty simple, the internals are a huge mess,
-     * because I've inlined a whole lot of things to improve the performance of this code
-     * ~4x from what it originally was, which is a pretty nice speedup
-     */
+
     def writeTo(strb: java.io.Writer): Unit = {
-      val builder = new Builder()
+      val builder = new Builder(tag, void)
       build(builder)
-
-      // tag
-      strb.append('<').append(tag)
-
-      // attributes
-      var i = 0
-      while (i < builder.attrIndex){
-        val pair = builder.attrs(i)
-        strb.append(' ').append(pair._1).append("=\"")
-        builder.appendAttrStrings(pair._2,strb)
-        strb.append('\"')
-        i += 1
-      }
-
-      if (builder.childIndex == 0 && void) {
-        // No children - close tag
-        strb.append(" />")
-      } else {
-        strb.append('>')
-        // Childrens
-        var i = 0
-        while(i < builder.childIndex){
-          builder.children(i).writeTo(strb)
-          i += 1
-        }
-
-        // Closing tag
-        strb.append("</").append(tag).append('>')
-      }
+      builder.writeTo(strb)
     }
 
     def apply(xs: Text.super.Modifier*): TypedTag[O] = {
@@ -212,7 +178,9 @@ object Text extends generic.Bundle[String, String]{
   }
 
 
-  class Builder(var children: Array[Text.Frag] = new Array(4),
+  class Builder(tag: String,
+                void: Boolean,
+                var children: Array[Text.Frag] = new Array(4),
                 var attrs: Array[(String, Builder.ValueSource)] = new Array(4)){
     final var childIndex = 0
     final var attrIndex = 0
@@ -306,6 +274,44 @@ object Text extends generic.Bundle[String, String]{
 
     def attrIndex(k: String): Int = {
       attrs.indexWhere(x => x != null && x._1 == k)
+    }
+    /**
+     * Serialize this [[Builder]] and all its children out to the given StringBuilder.
+     *
+     * Although the external interface is pretty simple, the internals are a huge mess,
+     * because I've inlined a whole lot of things to improve the performance of this code
+     * ~4x from what it originally was, which is a pretty nice speedup
+     */
+    def writeTo(strb: java.io.Writer) = {
+
+      // tag
+      strb.append('<').append(tag)
+
+      // attributes
+      var i = 0
+      while (i < attrIndex){
+        val pair = attrs(i)
+        strb.append(' ').append(pair._1).append("=\"")
+        appendAttrStrings(pair._2,strb)
+        strb.append('\"')
+        i += 1
+      }
+
+      if (childIndex == 0 && void) {
+        // No children - close tag
+        strb.append(" />")
+      } else {
+        strb.append('>')
+        // Childrens
+        var i = 0
+        while(i < childIndex){
+          children(i).writeTo(strb)
+          i += 1
+        }
+
+        // Closing tag
+        strb.append("</").append(tag).append('>')
+      }
     }
   }
   object Builder{
