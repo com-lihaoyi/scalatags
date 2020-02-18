@@ -4,7 +4,7 @@ import java.util.Objects
 
 import scalatags.generic._
 
-import scala.annotation.unchecked.uncheckedVariance
+
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
 import scala.reflect.ClassTag
@@ -41,7 +41,16 @@ object Text extends generic.Bundle[String, String]{
   }
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
-
+    def writeTo(strb: Writer): Unit = xs.foreach(ev(_).asInstanceOf[Frag].writeTo(strb))
+    def render = xs.map(_.render).mkString
+  }
+  implicit class OptionFrag[A](xs: Option[A])(implicit ev: A => super.Frag) extends Frag{
+    Objects.requireNonNull(xs)
+    def writeTo(strb: Writer): Unit = xs.foreach(ev(_).asInstanceOf[Frag].writeTo(strb))
+    def render = xs.map(_.render).mkString
+  }
+  implicit class ArrayFrag[A](xs: Array[A])(implicit ev: A => super.Frag) extends Frag{
+    Objects.requireNonNull(xs)
     def writeTo(strb: Writer): Unit = xs.foreach(ev(_).asInstanceOf[Frag].writeTo(strb))
     def render = xs.map(_.render).mkString
   }

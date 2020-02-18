@@ -4,7 +4,7 @@ import java.util.Objects
 
 import scala.language.implicitConversions
 
-import scala.annotation.unchecked.uncheckedVariance
+
 
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 

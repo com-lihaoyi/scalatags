@@ -7,7 +7,7 @@ import scala.language.implicitConversions
 import scala.scalajs.js
 import org.scalajs.dom.{Element, html, raw, svg}
 
-import scala.annotation.unchecked.uncheckedVariance
+
 import scalatags.generic.Namespace
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
@@ -36,14 +36,11 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
 
   object short
     extends Cap
-    with jsdom.Tags
+    with jsdom.Tags[TypedTag]
     with AbstractShort{
 
     object * extends Cap with Attrs with Styles
   }
-
-
-//  trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
 
   implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
     def applyTo(t: dom.Element) = t.classList.add(s.name)
@@ -68,9 +65,6 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
 
   def raw(s: String) = RawFrag(s)
 
-
-
-//  }
   implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
   trait Cap extends Util with jsdom.TagFactory[TypedTag]{ self =>
     type ConcreteHtmlTag[T <: dom.Element] = TypedTag[T]
@@ -100,23 +94,41 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
       TypedTag(tag, Nil, void, namespaceConfig)
     }
 
-    implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => JsDom.super.Frag) extends Frag{
-      Objects.requireNonNull(xs)
-      override def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
-      def render: dom.Node = {
-        val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(ev(_).asInstanceOf[Frag].render).foreach(frag.appendChild)
-        frag
-      }
+  }
+  implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => JsDom.super.Frag) extends Frag{
+    Objects.requireNonNull(xs)
+    override def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+    def render: dom.Node = {
+      val frag = org.scalajs.dom.document.createDocumentFragment()
+      xs.map(ev(_).asInstanceOf[Frag].render).foreach(frag.appendChild)
+      frag
     }
-    implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => JsDom.super.Frag) extends Frag{
-      Objects.requireNonNull(xs)
-      override def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
-      def render: dom.Node = {
-        val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(ev(_).asInstanceOf[Frag].render).foreach(frag.appendChild)
-        frag
-      }
+  }
+  implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => JsDom.super.Frag) extends Frag{
+    Objects.requireNonNull(xs)
+    override def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+    def render: dom.Node = {
+      val frag = org.scalajs.dom.document.createDocumentFragment()
+      xs.map(ev(_).asInstanceOf[Frag].render).foreach(frag.appendChild)
+      frag
+    }
+  }
+  implicit class ArrayFrag[A](xs: Array[A])(implicit ev: A => JsDom.super.Frag) extends Frag{
+    Objects.requireNonNull(xs)
+    override def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+    def render: dom.Node = {
+      val frag = org.scalajs.dom.document.createDocumentFragment()
+      xs.map(ev(_).asInstanceOf[Frag].render).foreach(frag.appendChild)
+      frag
+    }
+  }
+  implicit class OptionFrag[A](xs: Option[A])(implicit ev: A => JsDom.super.Frag) extends Frag{
+    Objects.requireNonNull(xs)
+    override def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+    def render: dom.Node = {
+      val frag = org.scalajs.dom.document.createDocumentFragment()
+      xs.map(ev(_).asInstanceOf[Frag].render).foreach(frag.appendChild)
+      frag
     }
   }
 

@@ -26,7 +26,9 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with StylesWrapper with AttrsWrapper{
+trait Bundle[FragT0, Output0 <: FragT0]
+extends Core with SvgAttrsWrapper with StylesWrapper with AttrsWrapper
+with LowPriBundle[FragT0, Output0]{
   protected type FragT = FragT0
   protected type Output = Output0
   trait TypedTag[+O <: Output] extends Frag {
@@ -195,7 +197,12 @@ trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with S
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
   implicit def UnitFrag(u: Unit): Frag
-
+  implicit def OptionFrag[A](xs: Option[A])(implicit ev: A => Frag): Frag
+  implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => Frag): Frag
+  implicit def SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag): Frag
+  implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => super.Frag): Frag
+}
+trait LowPriBundle[FragT0, Output <: FragT0]{this: Bundle[FragT0, Output] =>
   /**
    * Allows you to modify a [[ConcreteHtmlTag]] by adding a Seq containing other nest-able
    * objects to its list of children.
@@ -225,6 +232,5 @@ trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with S
    * objects to its list of children.
    */
   implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => Modifier) = new SeqNode[A](xs.toSeq)
-
 
 }

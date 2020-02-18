@@ -155,6 +155,30 @@ class BasicTests[FragT, Output <: FragT](val omg: Bundle[FragT, Output]) extends
       * - intercept[NullPointerException](div(height := nullString))
       * - intercept[NullPointerException](div(opacity := nullString))
     }
+    test("SeqFrag"){
+      val frag1: Frag = Seq(
+        h1("Hello"),
+        p("World")
+      )
+      val frag2: Frag = Option(
+        h1("Hello")
+      )
+      val frag3: Frag = Array[Tag](
+        h1("Hello"),
+        p("World")
+      )
+      val mod1: Modifier = Seq(
+        h1("Hello"),
+        p("World")
+      )
+      val mod2: Modifier = Option(
+        h1("Hello")
+      )
+      val mod3: Modifier = Array[Tag](
+        h1("Hello"),
+        p("World")
+      )
+    }
     test("rawAttrs"){
       strCheck(
         button(
