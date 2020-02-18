@@ -156,6 +156,7 @@ class BasicTests[FragT, Output <: FragT](val omg: Bundle[FragT, Output]) extends
       * - intercept[NullPointerException](div(opacity := nullString))
     }
     test("SeqFrag"){
+      val t: Tag = h1("hello")
       val frag1: Frag = Seq(
         h1("Hello"),
         p("World")

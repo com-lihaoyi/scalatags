@@ -80,20 +80,15 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
 
   implicit def stringFrag(v: String): StringFrag = new StringFrag(v)
 
-  def raw(s: String) = new RawFrag(s)
-
   val Tag = TypedTag
 
-
   trait Api extends super.Api with vdom.TagFactory[TypedTag[Output]]{ self =>
-    type ConcreteHtmlTag[T <: Output] = TypedTag[T]
-    def frag(frags: VirtualDom.super.Frag*): Frag  = SeqFrag(frags)
-
+    def frag(frags: VirtualDom.super.Frag*): VirtualDom.this.Frag = SeqFrag(frags)
+    def raw(s: String) = new RawFrag(s)
     def tag(s: String, void: Boolean = false): TypedTag[Output] = TypedTag(s, Nil, void, implicitly)
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
-
   }
   implicit def UnitFrag(u: Unit): VirtualDom.this.StringFrag = new StringFrag("")
 

@@ -13,8 +13,6 @@ import scala.reflect.ClassTag
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
  * `String`s.
  */
-
-
 object Text extends generic.Bundle[String, String]{
 
   object attrs extends Api with Attrs[Attr, AttrValue, AttrPair]
@@ -25,7 +23,6 @@ object Text extends generic.Bundle[String, String]{
 
   object svgTags extends Api with text.SvgTags[TypedTag[String]] with SvgTags
   object svgAttrs extends Api with SvgAttrs[Attr]
-
 
   object all
     extends Api
@@ -61,21 +58,16 @@ object Text extends generic.Bundle[String, String]{
   }
   implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
   trait Api extends super.Api with text.TagFactory[TypedTag[String]]{ self =>
-    def frag(frags: Text.super.Frag*): Frag  = SeqFrag(frags)
+    def frag(frags: Text.super.Frag*): Text.Frag  = SeqFrag(frags)
 
     def tag(s: String, void: Boolean = false): TypedTag[String] = TypedTag(s, Nil, void)
+    def raw(s: String) = RawFrag(s)
 
-    type Frag = Text.Frag
-    type Modifier = Text.Modifier
-    type Style = Text.Style
-
-    type ConcreteHtmlTag[T <: String] = TypedTag[T]
-    type BaseTagType = TypedTag[String]
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
 
-    case class doctype(s: String)(content: Frag) extends geny.Writable{
+    case class doctype(s: String)(content: Text.Frag) extends geny.Writable{
       def writeTo(strb: java.io.Writer): Unit = {
         strb.write(s"<!DOCTYPE $s>")
         content.writeTo(strb)
@@ -116,9 +108,6 @@ object Text extends generic.Bundle[String, String]{
   def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new Text.GenericPixelStylePx[T](ev)
 
   implicit def stringFrag(v: String) = new Text.StringFrag(v)
-
-  def raw(s: String) = RawFrag(s)
-
 
   val Tag = Text.TypedTag
 

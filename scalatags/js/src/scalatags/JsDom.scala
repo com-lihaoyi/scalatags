@@ -63,15 +63,13 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
 
   implicit def stringFrag(v: String): StringFrag = new JsDom.StringFrag(v)
 
-  def raw(s: String) = new RawFrag(s)
-
   implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
   trait Api extends super.Api with jsdom.TagFactory[TypedTag]{ self =>
-    type ConcreteHtmlTag[T <: dom.Element] = TypedTag[T]
-
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
+
+    def raw(s: String) = new RawFrag(s)
 
     type HtmlTag = JsDom.TypedTag[html.Element]
     val HtmlTag = JsDom.TypedTag
@@ -79,9 +77,8 @@ object JsDom extends generic.Bundle[dom.Node, dom.Element] with LowPriorityImpli
     val SvgTag = JsDom.TypedTag
 
     val Tag = JsDom.TypedTag
-//    type Tag = JsDom.TypedTag[dom.Element]
 
-    def frag(frags: JsDom.super.Frag*): Frag  = SeqFrag(frags)
+    def frag(frags: JsDom.super.Frag*): JsDom.Frag  = SeqFrag(frags)
     def tag(s: String, void: Boolean = false): TypedTag[dom.Element] = TypedTag(s, Nil, void, implicitly)
     def typedTag[T <: dom.Element](s: String, void: Boolean = false)
                                   (implicit ns: scalatags.generic.Namespace): TypedTag[T] = {

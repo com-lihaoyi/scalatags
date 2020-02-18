@@ -176,12 +176,6 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
   implicit def stringFrag(v: String): Frag
 
   /**
-   * Delimits a string that should be included in the result as raw,
-   * un-escaped HTML
-   */
-  def raw(s: String): Modifier
-
-  /**
    * Lets you put Unit into a scalatags tree, as a no-op.
    */
   implicit def UnitFrag(u: Unit): Frag
@@ -191,11 +185,15 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
   implicit def GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => super.Frag): Frag
 
   trait Api {
-    def frag(frags: Frag*): Frag
+    def frag(frags: Bundle.this.Frag*): Bundle.this.Frag
     def modifier(mods: Modifier*): Modifier = SeqNode(mods)
 
     def tag(s: String, void: Boolean = false): TypedTag[Output]
-
+    /**
+     * Delimits a string that should be included in the result as raw,
+     * un-escaped HTML
+     */
+    def raw(s: String): Modifier
     def css(s: String): Style = Style(camelCase(s), s)
     def attr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
     def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
@@ -204,6 +202,9 @@ extends Core with StylesWrapper with LowPriBundle[FragT0, Output0]{
     type HtmlTag
     type SvgTag
     type Tag = TypedTag[Output]
+    type Modifier = Bundle.this.Modifier
+    type Style = Bundle.this.Style
+    type Frag = Bundle.this.Frag
   }
 }
 trait LowPriBundle[FragT0, Output <: FragT0]{this: Bundle[FragT0, Output] =>

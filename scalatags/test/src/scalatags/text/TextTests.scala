@@ -5,7 +5,31 @@ object TextTests extends TestSuite{
 
   import scalatags.Text.all._
   def tests = TestSuite{
-
+    test("SeqFrag") {
+      val t: Tag = h1("hello")
+      val frag1: Frag = Seq(
+        h1("Hello"),
+        p("World")
+      )
+      val frag2: Frag = Option(
+        h1("Hello")
+      )
+      val frag3: Frag = Array[Tag](
+        h1("Hello"),
+        p("World")
+      )
+      val mod1: Modifier = Seq(
+        h1("Hello"),
+        p("World")
+      )
+      val mod2: Modifier = Option(
+        h1("Hello")
+      )
+      val mod3: Modifier = Array[Tag](
+        h1("Hello"),
+        p("World")
+      )
+    }
     test("helloWorld"){
       val sample = div("omg")
       assert(sample.toString == "<div>omg</div>")
