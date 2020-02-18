@@ -8,11 +8,5 @@ import scalatags.generic.Namespace
   */
 trait TagFactory[TypedTag] {
 
-  def tag(s: String, void: Boolean = false): TypedTag = ??? /*{
-    if (!Escaping.validTag(s))
-      throw new IllegalArgumentException(
-        s"Illegal tag name: $s is not a valid XML tag name"
-      )
-    makeAbstractTypedTag[String](s, void, Namespace.htmlNamespaceConfig)
-  }*/
+  def tag(s: String, void: Boolean = false): TypedTag
 }

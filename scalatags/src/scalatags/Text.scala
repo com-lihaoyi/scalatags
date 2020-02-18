@@ -17,7 +17,6 @@ import scala.reflect.ClassTag
 
 object Text extends generic.Bundle[String, String]{
 
-  trait Modifier extends super.Modifier
   object attrs extends Text.Cap with Attrs
   object tags extends Text.Cap with text.Tags[TypedTag[String]] with Tags
   object tags2 extends Text.Cap with text.Tags2[TypedTag[String]] with Tags2
@@ -45,26 +44,29 @@ object Text extends generic.Bundle[String, String]{
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
 
-    def writeTo(strb: Writer): Unit = ??? //xs.foreach(_.writeTo(strb))
+    def writeTo(strb: Writer): Unit = xs.foreach(ev(_).asInstanceOf[Frag].writeTo(strb))
     def render = xs.map(_.render).mkString
   }
   implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
-    def writeTo(strb: Writer): Unit = ???//xs.foreach(_.writeTo(strb))
+    def writeTo(strb: Writer): Unit = xs.foreach(ev(_).asInstanceOf[Frag].writeTo(strb))
     def render = xs.map(_.render).mkString
   }
   implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
   trait Cap extends Util with text.TagFactory[TypedTag[String]]{ self =>
+    def frag(frags: Text.super.Frag*): Frag  = SeqFrag(frags)
+    def modifier(mods: Modifier*): Modifier = SeqNode(mods)
+
+    def tag(s: String, void: Boolean = false): TypedTag[String] = TypedTag(s, Nil, void)
+    def makeAbstractTypedTag[T <: String](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
+      TypedTag(tag, Nil, void)
+    }
+    def css(s: String): Style = Style(camelCase(s), s)
     type ConcreteHtmlTag[T <: String] = TypedTag[T]
     type BaseTagType = TypedTag[String]
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
-
-    def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
-      TypedTag(tag, Nil, void)
-    }
-
 
     case class doctype(s: String)(content: Frag) extends geny.Writable{
       def writeTo(strb: java.io.Writer): Unit = {
@@ -216,7 +218,7 @@ object Text extends generic.Bundle[String, String]{
     }
 
     def apply(xs: Text.super.Modifier*): TypedTag[O] = {
-      this.copy(tag=tag, void = void, modifiers = ??? /*xs :: modifiers*/)
+      this.copy(tag=tag, void = void, modifiers = xs :: modifiers)
     }
 
     /**
