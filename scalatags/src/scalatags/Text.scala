@@ -17,14 +17,14 @@ import scala.reflect.ClassTag
 
 object Text extends generic.Bundle[String, String]{
 
-  object attrs extends Text.Cap with Attrs
+  object attrs extends Text.Cap with Attrs[Attr, AttrValue, AttrPair]
   object tags extends Text.Cap with text.Tags[TypedTag[String]] with Tags
   object tags2 extends Text.Cap with text.Tags2[TypedTag[String]] with Tags2
   object styles extends Text.Cap with Styles
   object styles2 extends Text.Cap with Styles2
 
   object svgTags extends Text.Cap with text.SvgTags[TypedTag[String]] with SvgTags
-  object svgAttrs extends Text.Cap with SvgAttrs
+  object svgAttrs extends Text.Cap with SvgAttrs[Attr]
 
 
   object all
@@ -37,7 +37,7 @@ object Text extends generic.Bundle[String, String]{
     with text.Tags[TypedTag[String]]
     with AbstractShort{
 
-    object * extends Cap with Attrs with Styles
+    object * extends Cap with Attrs[Attr, AttrValue, AttrPair] with Styles
   }
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
@@ -63,6 +63,9 @@ object Text extends generic.Bundle[String, String]{
   trait Cap extends Util with text.TagFactory[TypedTag[String]]{ self =>
     def frag(frags: Text.super.Frag*): Frag  = SeqFrag(frags)
     def modifier(mods: Modifier*): Modifier = SeqNode(mods)
+    def attr(s: String, ns: Namespace = null, raw: Boolean = false): Attr = Attr(s, Option(ns), raw)
+    def emptyAttr(s: String, ns: scalatags.generic.Namespace = null, raw: Boolean = false): AttrPair[_] = Attr(s, Option(ns), raw).empty
+    def AttrPair[T](attr: Attr, v: T, ev: AttrValue[T]) = Text.this.AttrPair(attr, v, ev)
     def css(s: String): Style = Style(camelCase(s), s)
     def tag(s: String, void: Boolean = false): TypedTag[String] = TypedTag(s, Nil, void)
     def makeAbstractTypedTag[T <: String](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {

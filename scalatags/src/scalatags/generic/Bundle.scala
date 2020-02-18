@@ -27,7 +27,7 @@ import scalatags.text
  *                 `Tag` is being rendered to give a final result.
  */
 trait Bundle[FragT0, Output0 <: FragT0]
-extends Core with SvgAttrsWrapper with StylesWrapper with AttrsWrapper
+extends Core with StylesWrapper
 with LowPriBundle[FragT0, Output0]{
   protected type FragT = FragT0
   protected type Output = Output0
@@ -83,7 +83,9 @@ with LowPriBundle[FragT0, Output0]{
    * Convenience object for importing all of Scalatags' functionality at once
    */
   val all: AbstractAll
-  trait AbstractAll extends Attrs with Styles with Tags with Util with DataConverters
+  trait AbstractAll extends Attrs[Attr, AttrValue, AttrPair] with Styles with Tags with Util with DataConverters{
+
+  }
 
   /**
    * Convenience object for importing only Scalatags' tags (e.g. `div`, `p`)
@@ -93,7 +95,7 @@ with LowPriBundle[FragT0, Output0]{
   val short: AbstractShort
 
   trait AbstractShort extends Tags with Util with DataConverters{
-    val `*`: Attrs with Styles
+    val `*`: Attrs[Attr, AttrValue, AttrPair] with Styles
   }
 
   object converters extends DataConverters
@@ -101,7 +103,7 @@ with LowPriBundle[FragT0, Output0]{
   /**
    * Common attributes.
    */
-  val attrs: Attrs
+  val attrs: Attrs[Attr, AttrValue, AttrPair]
   /**
    * Common tags
    */
@@ -126,7 +128,7 @@ with LowPriBundle[FragT0, Output0]{
   /**
    * SVG only attributes
    */
-  val svgAttrs: SvgAttrs
+  val svgAttrs: SvgAttrs[Attr]
 
 
   type Tags = generic.Tags[TypedTag[Output]]
