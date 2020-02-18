@@ -1,7 +1,7 @@
 package example
 import scala.scalajs.js.annotation.JSExportTopLevel
 import org.scalajs.dom
-class Example[Builder, Output <: FragT, FragT]
+class Example[Builder, FragT, Output <: FragT]
              (val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
   val htmlFrag = {
     import bundle.all._

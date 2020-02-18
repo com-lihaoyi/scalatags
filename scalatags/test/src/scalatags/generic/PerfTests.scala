@@ -2,11 +2,11 @@ package scalatags
 package generic
 import utest._
 
-class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT]) extends PerfTests {
-  import bundle.all._
+class ScalatagsPerf[FragT, Output <: FragT](val bundle: Bundle[FragT, Output]) extends PerfTests {
+  import bundle._, bundle.all._
   import generic.PerfTests._
 
-  def para(n: Int, m: generic.Modifier[Builder]*) = p(
+  def para(n: Int, m: Modifier*) = p(
     m,
     title := ("this is paragraph " + n)
   )

@@ -2,7 +2,7 @@
 //package vdom
 //import scalatags.generic.Util
 //
-//trait Tags2[Output <: FragT, FragT]
+//trait Tags2[FragT, Output <: FragT]
 //extends generic.Tags2[Builder[Output, FragT], Output, FragT] with TagFactory[Output, FragT]{
 //   // Document Metadata
 //   lazy val title = tag("title")

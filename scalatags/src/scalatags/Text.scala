@@ -6,7 +6,8 @@ import scalatags.generic._
 
 import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
-import scalatags.text.Builder
+
+import scala.reflect.ClassTag
 
 /**
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
@@ -14,7 +15,8 @@ import scalatags.text.Builder
  */
 
 
-object Text extends generic.Bundle[text.Builder, String, String] {
+object Text extends generic.Bundle[String, String]{
+
   trait Modifier extends super.Modifier
   object attrs extends Text.Cap with Attrs
   object tags extends Text.Cap with text.Tags[TypedTag[String]] with Tags
@@ -30,15 +32,16 @@ object Text extends generic.Bundle[text.Builder, String, String] {
     extends Cap
     with Attrs
     with Styles
+    with DataConverters
     with text.Tags[TypedTag[String]] with Tags
 
-  object short
-    extends Cap
-    with text.Tags[TypedTag[String]] with Tags
-    with AbstractShort{
-
-    object * extends Cap with Attrs with Styles
-  }
+//  object short
+//    extends Cap
+//    with text.Tags[TypedTag[String]] with Tags
+//    with AbstractShort{
+//
+//    object * extends Cap with Attrs with Styles
+//  }
   implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => super.Frag) extends Frag{
     Objects.requireNonNull(xs)
 
@@ -81,15 +84,15 @@ object Text extends generic.Bundle[text.Builder, String, String] {
     }
   }
 
-//  trait Aggregate extends generic.Aggregate[text.Builder, String, String]{
-  implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with text.Builder.ValueSource{
-    def applyTo(t: text.Builder) = t.appendAttr("class",this)
+//  trait Aggregate extends generic.Aggregate[String, String]{
+  implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier with Builder.ValueSource{
+    def applyTo(t: Builder) = t.appendAttr("class",this)
 
     override def appendAttrValue(sb: java.io.Writer): Unit = {
       Escaping.escape(s.name, sb)
     }
   }
-  implicit class StyleFrag(s: generic.StylePair[text.Builder, _]) extends StyleSheetFrag{
+  implicit class StyleFrag(s: StylePair[_]) extends StyleSheetFrag{
     def applyTo(c: StyleTree) = {
       val b = new Builder()
       s.applyTo(b)
@@ -141,13 +144,13 @@ object Text extends generic.Bundle[text.Builder, String, String] {
   }
 
   class GenericAttr[T] extends AttrValue[T] {
-    def apply(t: text.Builder, a: Attr, v: T): Unit = {
+    def apply(t: Builder, a: Attr, v: T): Unit = {
       t.setAttr(a.name, Builder.GenericAttrValueSource(v.toString))
     }
   }
 
   class GenericStyle[T] extends StyleValue[T] {
-    def apply(t: text.Builder, s: Style, v: T): Unit = {
+    def apply(t: Builder, s: Style, v: T): Unit = {
       t.appendAttr("style", Builder.StyleValueSource(s, v.toString))
     }
   }
@@ -179,7 +182,7 @@ object Text extends generic.Bundle[text.Builder, String, String] {
      * ~4x from what it originally was, which is a pretty nice speedup
      */
     def writeTo(strb: java.io.Writer): Unit = {
-      val builder = new text.Builder()
+      val builder = new Builder()
       build(builder)
 
       // tag
@@ -226,6 +229,140 @@ object Text extends generic.Bundle[text.Builder, String, String] {
     }
     def render: O = this.toString.asInstanceOf[O]
   }
+
+
+  class Builder(var children: Array[Text.Frag] = new Array(4),
+                var attrs: Array[(String, Builder.ValueSource)] = new Array(4)){
+    final var childIndex = 0
+    final var attrIndex = 0
+
+    private[this] def incrementChidren(arr: Array[Text.Frag], index: Int) = {
+      if (index >= arr.length){
+        val newArr = new Array[Text.Frag](arr.length * 2)
+        var i = 0
+        while(i < arr.length){
+          newArr(i) = arr(i)
+          i += 1
+        }
+        newArr
+      }else{
+        null
+      }
+    }
+
+    private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int) = {
+      if (index >= arr.length){
+        val newArr = new Array[(String, Builder.ValueSource)](arr.length * 2)
+        var i = 0
+        while(i < arr.length){
+          newArr(i) = arr(i)
+          i += 1
+        }
+        newArr
+      }else{
+        null
+      }
+    }
+
+    private[this] def increment[T: ClassTag](arr: Array[T], index: Int) = {
+      if (index >= arr.length){
+        val newArr = new Array[T](arr.length * 2)
+        var i = 0
+        while(i < arr.length){
+          newArr(i) = arr(i)
+          i += 1
+        }
+        newArr
+      }else{
+        null
+      }
+    }
+    def addChild(c: Text.Frag) = {
+      val newChildren = incrementChidren(children, childIndex)
+      if (newChildren != null) children = newChildren
+      children(childIndex) = c
+      childIndex += 1
+    }
+    def appendAttr(k: String, v: Builder.ValueSource) = {
+
+      attrIndex(k) match{
+        case -1 =>
+          val newAttrs = incrementAttr(attrs, attrIndex)
+          if (newAttrs!= null) attrs = newAttrs
+
+          attrs(attrIndex) = k -> v
+          attrIndex += 1
+        case n =>
+          val (oldK, oldV) = attrs(n)
+          attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
+      }
+    }
+    def setAttr(k: String, v: Builder.ValueSource) = {
+      attrIndex(k) match{
+        case -1 =>
+          val newAttrs = incrementAttr(attrs, attrIndex)
+          if (newAttrs!= null) attrs = newAttrs
+          attrs(attrIndex) = k -> v
+          attrIndex += 1
+        case n =>
+          val (oldK, oldV) = attrs(n)
+          attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
+      }
+    }
+
+
+    def appendAttrStrings(v: Builder.ValueSource, sb: java.io.Writer): Unit = {
+      v.appendAttrValue(sb)
+    }
+
+    def attrsString(v: Builder.ValueSource): String = {
+      val sb = new java.io.StringWriter
+      appendAttrStrings(v, sb)
+      sb.toString
+    }
+
+
+
+    def attrIndex(k: String): Int = {
+      attrs.indexWhere(x => x != null && x._1 == k)
+    }
+  }
+  object Builder{
+
+    /**
+     * More-or-less internal trait, used to package up the parts of a textual
+     * attribute or style so that we can append the chunks directly to the
+     * output buffer. Improves perf over immediately combining them into a
+     * string and storing that, since this avoids allocating that intermediate
+     * string.
+     */
+    trait ValueSource {
+      def appendAttrValue(strb: java.io.Writer): Unit
+    }
+    case class StyleValueSource(s: Style, v: String) extends ValueSource {
+      override def appendAttrValue(strb: java.io.Writer): Unit = {
+        Escaping.escape(s.cssName, strb)
+        strb.append(": ")
+        Escaping.escape(v, strb)
+        strb.append(";")
+      }
+    }
+
+    case class GenericAttrValueSource(v: String) extends ValueSource {
+      override def appendAttrValue(strb: java.io.Writer): Unit = {
+        Escaping.escape(v, strb)
+      }
+    }
+
+    case class ChainedAttributeValueSource(head: ValueSource, tail: ValueSource) extends ValueSource {
+      override def appendAttrValue(strb: java.io.Writer): Unit = {
+        head.appendAttrValue(strb)
+        strb.append(" ")
+        tail.appendAttrValue(strb)
+      }
+    }
+  }
+
 
 
 }

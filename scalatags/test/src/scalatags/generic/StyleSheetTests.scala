@@ -5,10 +5,10 @@ import utest._
 
 import scalatags.stylesheet._
 
-abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
-                              (val bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
+abstract class StyleSheetTests[FragT, Output <: FragT]
+                              (val bundle: Bundle[FragT, Output])  extends TestSuite{
 
-  import bundle.all._
+  import bundle._, all._
 
   val pkg = "scalatags-generic-StyleSheetTests"
   object Simple extends StyleSheet {

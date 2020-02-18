@@ -8,7 +8,7 @@
 ///**
 //  * Created by haoyi on 7/9/16.
 //  */
-//trait TagFactory[Output <: FragT, FragT] extends scalatags.generic.Util[Builder[Output, FragT], Output, FragT]{
+//trait TagFactory[FragT, Output <: FragT] extends scalatags.generic.Util[Builder[Output, FragT], Output, FragT]{
 //  def tag(s: String, void: Boolean = false): ConcreteHtmlTag[Output] = {
 //    if (!Escaping.validTag(s))
 //      throw new IllegalArgumentException(

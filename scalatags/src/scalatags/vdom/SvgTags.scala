@@ -3,7 +3,7 @@
 //
 //import scalatags.generic.{Namespace, Util}
 //
-//trait SvgTags[Output <: FragT, FragT]
+//trait SvgTags[FragT, Output <: FragT]
 //extends generic.SvgTags[Builder[Output, FragT], Output, FragT] with TagFactory[Output, FragT]{
 //  implicit lazy val svgNamespaceConfig = Namespace.svgNamespaceConfig
 //  lazy val altGlyph = tag("altGlyph")

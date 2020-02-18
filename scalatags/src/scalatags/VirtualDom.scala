@@ -19,7 +19,7 @@
 // * it to instantiate any sort of virtual DOM of uniform type: scala.xml trees,
 // * Preact/React VDOM nodes in the browser, etc.
 // */
-//trait VirtualDom[Output <: FragT, FragT] extends generic.Bundle[vdom.Builder[Output, FragT], Output, FragT] {
+//trait VirtualDom[FragT, Output <: FragT] extends generic.Bundle[vdom.Builder[Output, FragT], Output, FragT] {
 //
 //  trait Frag extends super.Frag {
 //    def render: FragT

@@ -4,7 +4,7 @@
 //
 //import scalatags.generic.Util
 //
-//trait Tags[Output <: FragT, FragT]
+//trait Tags[FragT, Output <: FragT]
 //extends generic.Tags[Builder[Output, FragT], Output, FragT] with TagFactory[Output, FragT]{
 //  // Root Element
 //  lazy val html = tag("html")

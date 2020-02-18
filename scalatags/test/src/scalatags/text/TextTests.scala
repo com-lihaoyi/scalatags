@@ -3,7 +3,7 @@ import utest._
 
 object TextTests extends TestSuite{
 
-  import scalatags.Text.all._
+  import scalatags.Text._, scalatags.Text.all._
   def tests = TestSuite{
 
     test("helloWorld"){

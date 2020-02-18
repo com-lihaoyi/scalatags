@@ -3,28 +3,28 @@ package generic
 import utest._
 
 import TestUtil.strCheck
-class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Output, FragT]) extends TestSuite{
+class ExampleTests[FragT, Output <: FragT](bundle: Bundle[FragT, Output]) extends TestSuite{
 
 
   val tests = TestSuite{
     test("manualImports") - strCheck({
       // bundle is scalatags.Text or scalatags.JsDom
-      import bundle.short._
-      div(
-        p(*.color:="red", *.fontSize:=64.pt)("Big Red Text"),
-        img(*.href:="www.imgur.com/picture.jpg")
-      )
+//      import bundle.short._
+//      div(
+//        p(*.color:="red", *.fontSize:=64.pt)("Big Red Text"),
+//        img(*.href:="www.imgur.com/picture.jpg")
+//      )
     }
     ,
     {
-      // bundle is scalatags.Text or scalatags.JsDom
-      import bundle.{attrs => attr, styles => css, _}
-      import bundle.tags._
-      import bundle.implicits._
-      div(
-        p(css.color:="red", css.fontSize:=64.pt)("Big Red Text"),
-        img(attr.href:="www.imgur.com/picture.jpg")
-      )
+//      // bundle is scalatags.Text or scalatags.JsDom
+//      import bundle.{attrs => attr, styles => css, _}
+//      import bundle.tags._
+//      import bundle.implicits._
+//      div(
+//        p(css.color:="red", css.fontSize:=64.pt)("Big Red Text"),
+//        img(attr.href:="www.imgur.com/picture.jpg")
+//      )
     }
     ,
     """
@@ -37,6 +37,7 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
 
     // bundle is scalatags.Text or scalatags.JsDom
     import bundle.all._
+    import bundle._
     test("splashExample") - strCheck(
       // import scalatags.Text.all._
       // OR

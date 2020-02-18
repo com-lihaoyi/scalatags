@@ -26,8 +26,9 @@ import scalatags.text
  * @tparam Builder The type to which [[Attr]]s and [[Style]]s are applied to when the
  *                 `Tag` is being rendered to give a final result.
  */
-trait Bundle[Builder, Output <: FragT, FragT] {
-  trait Frag extends generic.Frag[Builder, FragT] with Modifier
+trait Bundle[FragT0, Output <: FragT0] extends Core with SvgAttrsWrapper with StylesWrapper with AttrsWrapper{
+  type FragT = FragT0
+
   trait TypedTag[+O <: Output] extends Frag {
     protected[this] type Self <: TypedTag[O]
     def tag: String
@@ -79,15 +80,15 @@ trait Bundle[Builder, Output <: FragT, FragT] {
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
-  val all: Attrs with Styles with Tags with Util
+  val all: Attrs with Styles with Tags with Util with DataConverters
   /**
    * Convenience object for importing only Scalatags' tags (e.g. `div`, `p`)
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
-  val short: AbstractShort with Tags
-
-  type AbstractShort = generic.AbstractShort[Builder, Output, FragT]
+//  val short: AbstractShort with Tags
+//
+//  type AbstractShort = generic.AbstractShort[Output, FragT]
 
 
   /**
@@ -121,23 +122,10 @@ trait Bundle[Builder, Output <: FragT, FragT] {
   val svgAttrs: SvgAttrs
 
 
-  type Attrs = generic.Attrs[Builder]
   type Tags = generic.Tags[TypedTag[Output]]
   type Tags2 = generic.Tags2[TypedTag[Output]]
-  type Styles = generic.Styles[Builder]
-  type Styles2 = generic.Styles2[Builder]
   type SvgTags = generic.SvgTags[TypedTag[Output]]
-  type SvgAttrs = generic.SvgAttrs[Builder, Output, FragT]
-  type Util = generic.Util[Output, Modifier, Frag, TypedTag]
-  type AttrPair = generic.AttrPair[Builder, FragT]
-
-  type Attr = generic.Attr
-  type Style = generic.Style
-  trait Modifier extends generic.Modifier[Builder]
-
-  type AttrValue[V] = generic.AttrValue[Builder, V]
-  type StyleValue[V] = generic.StyleValue[Builder, V]
-  type PixelStyleValue[V] = generic.PixelStyleValue[Builder, V]
+  type Util = generic.Util[Output, Modifier, Frag, TypedTag, Style]
 
   type Tag = TypedTag[Output]
 
@@ -153,7 +141,7 @@ trait Bundle[Builder, Output <: FragT, FragT] {
   protected[this] type StringFrag <: Modifier
   protected[this] val StringFrag: Companion[StringFrag]
 
-  implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
+  implicit def StyleFrag(s: StylePair[_]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
   def genericAttr[T]: AttrValue[T]
   implicit val stringAttr = genericAttr[String]
@@ -257,6 +245,6 @@ trait Bundle[Builder, Output <: FragT, FragT] {
   implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => Modifier) = new SeqNode[A](xs.toSeq)
 
 }
-trait AbstractShort[Builder, Output <: FragT, FragT]{
-  val `*`: generic.Attrs[Builder] with generic.Styles[Builder]
-}
+//trait AbstractShort[FragT, Output <: FragT]{
+//  val `*`: generic.Attrs[Builder] with generic.Styles[Builder]
+//}
