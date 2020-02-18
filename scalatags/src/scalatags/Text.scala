@@ -62,7 +62,7 @@ object Text extends generic.Bundle[String, String]{
     def makeAbstractTypedTag[T <: String](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void)
     }
-    type Tag = Text.Tag
+    type Tag = Text.TypedTag[String]
     type Frag = Text.Frag
     type Modifier = Text.Modifier
     type Style = Text.Style
@@ -176,10 +176,8 @@ object Text extends generic.Bundle[String, String]{
                                          modifiers: List[Seq[Modifier]],
                                          void: Boolean = false)
                                          extends super.TypedTag[O] with Frag with geny.Writable{
-    // unchecked because Scala 2.10.4 seems to not like this, even though
-    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
-    // and so just force this.
-    protected[this] type Self = TypedTag[O @uncheckedVariance]
+
+    protected[this] type Self = TypedTag[O]
 
     /**
      * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.

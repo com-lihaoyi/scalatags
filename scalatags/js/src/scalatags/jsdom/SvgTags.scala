@@ -2,7 +2,7 @@ package scalatags
 package jsdom
 import org.scalajs.dom
 import scalatags.generic.{Namespace, Util}
-trait SvgTags extends generic.SvgTags[dom.Element, dom.Element, dom.Node] with TagFactory{
+trait SvgTags[TypedTag[+_ <: dom.Element]] extends generic.SvgTags[TypedTag[dom.Element]] with TagFactory[TypedTag]{
   implicit lazy val svgNamespaceConfig = Namespace.svgNamespaceConfig
   lazy val altGlyph = typedTag[dom.svg.Element]("altGlyph")
   lazy val altGlyphDef = typedTag[dom.svg.Element]("altGlyphDef")

@@ -27,8 +27,8 @@ import scalatags.text
  *                 `Tag` is being rendered to give a final result.
  */
 trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with StylesWrapper with AttrsWrapper{
-  type FragT = FragT0
-  type Output = Output0
+  protected type FragT = FragT0
+  protected type Output = Output0
   trait TypedTag[+O <: Output] extends Frag {
     protected[this] type Self <: TypedTag[O]
     def tag: String
@@ -126,8 +126,6 @@ trait Bundle[FragT0, Output0 <: FragT0] extends Core with SvgAttrsWrapper with S
   type Tags2 = generic.Tags2[TypedTag[Output]]
   type SvgTags = generic.SvgTags[TypedTag[Output]]
   type Util = generic.Util[Output, Modifier, Frag, TypedTag, Style]
-
-  type Tag = TypedTag[Output]
 
   /**
    * A [[Modifier]] which contains a String which will not be escaped.

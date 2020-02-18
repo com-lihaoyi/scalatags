@@ -16,5 +16,9 @@ trait Util[Output, Modifier, Frag, TypedTag[_ <: Output], Style] {
   def tag(s: String, void: Boolean = false): TypedTag[Output]
   def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T]
   def css(s: String): Style
+
+  type HtmlTag
+  type SvgTag
+  type Tag = TypedTag[Output]
 }
 

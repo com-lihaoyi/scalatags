@@ -6,10 +6,9 @@ import java.util.Objects.requireNonNull
 import scala.annotation.implicitNotFound
 
 trait Core {
-  type FragT
-  type Output <: FragT
-
-  type Builder
+  protected type FragT
+  protected type Output <: FragT
+  protected type Builder
 
   /**
    * Represents a value that can be nested within a [[scalatags.generic.TypedTag]]. This can be

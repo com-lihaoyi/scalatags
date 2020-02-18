@@ -156,10 +156,8 @@ trait VirtualDom[FragT0, Output0 <: FragT0] extends generic.Bundle[FragT0, Outpu
                                               void: Boolean = false,
                                               namespace: scalatags.generic.Namespace)
                                               extends super.TypedTag[O] with Frag{
-    // unchecked because Scala 2.10.4 seems to not like this, even though
-    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
-    // and so just force this.
-    protected[this] type Self = TypedTag[O @uncheckedVariance]
+
+    protected[this] type Self = TypedTag[O]
 
     def render: O = {
       val builder = makeBuilder(tag)
