@@ -66,6 +66,7 @@ object Text
     }
 
     case class doctype(s: String)(content: text.Frag) extends geny.Writable{
+      override def httpContentType = Some("text/html")
       def writeTo(strb: java.io.Writer): Unit = {
         strb.write(s"<!DOCTYPE $s>")
         content.writeTo(strb)
@@ -163,6 +164,7 @@ object Text
                                          void: Boolean = false)
                                          extends generic.TypedTag[text.Builder, Output, String]
                                          with text.Frag with geny.Writable{
+    override def httpContentType = Some("text/html")
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
