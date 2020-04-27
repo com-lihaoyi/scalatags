@@ -80,7 +80,7 @@ object scalatags extends Module {
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
     def ivyDeps = super.ivyDeps() ++ Agg(
-      ivy"org.scala-js::scalajs-dom::0.9.8"
+      ivy"org.scala-js::scalajs-dom::1.0.0"
     )
     def offset = os.up
     object test extends Tests with CommonTestModule{
