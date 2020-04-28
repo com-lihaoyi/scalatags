@@ -86,7 +86,11 @@ object scalatags extends Module {
     object test extends Tests with CommonTestModule{
       def offset = os.up
       def crossScalaVersion = JSScalatagsModule.this.crossScalaVersion
-      def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.Phantom("phantomjs", Nil, Map.empty, false)
+      val jsDomNodeJs =
+        if(crossJSVersion.startsWith("0.6.")) Agg()
+        else Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs::1.0.0")
+      def ivyDeps = super.ivyDeps() ++ jsDomNodeJs
+      def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.JsDom()
     }
   }
 
