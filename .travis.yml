@@ -1,5 +1,7 @@
 os: linux
 
+dist: bionic
+
 language: scala
 
 addons:
@@ -10,7 +12,7 @@ jdk:
   - openjdk8
 
 script:
-  - curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  - curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
   - sudo apt-get install -y nodejs
   - npm install
   - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
