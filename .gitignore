@@ -10,3 +10,4 @@ readme/target/*
 .idea_modules/*
 *.iml
 out
+/node_modules

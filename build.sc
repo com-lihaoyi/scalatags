@@ -66,7 +66,7 @@ trait CommonTestModule extends ScalaModule with TestModule {
 
 
 object scalatags extends Module {
-  object jvm extends Cross[JvmScalatagsModule]("2.12.10", "2.13.1")
+  object jvm extends Cross[JvmScalatagsModule]("2.12.11", "2.13.2")
   class JvmScalatagsModule(val crossScalaVersion: String)
     extends Common with ScalaModule with ScalatagsPublishModule {
 
@@ -75,7 +75,7 @@ object scalatags extends Module {
     }
   }
 
-  object js extends Cross[JSScalatagsModule](("2.12.10", "0.6.32"), ("2.13.1", "0.6.32"), ("2.12.10", "1.0.0"), ("2.13.1", "1.0.0"))
+  object js extends Cross[JSScalatagsModule](("2.12.11", "0.6.32"), ("2.13.2", "0.6.32"), ("2.12.11", "1.0.1"), ("2.13.2", "1.0.1"))
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
@@ -86,7 +86,11 @@ object scalatags extends Module {
     object test extends Tests with CommonTestModule{
       def offset = os.up
       def crossScalaVersion = JSScalatagsModule.this.crossScalaVersion
-      def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.Phantom("phantomjs", Nil, Map.empty, false)
+      val jsDomNodeJs =
+        if(crossJSVersion.startsWith("0.6.")) Agg()
+        else Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs:1.0.0")
+      def ivyDeps = super.ivyDeps() ++ jsDomNodeJs
+      def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.JsDom()
     }
   }
 
@@ -103,7 +107,7 @@ object scalatags extends Module {
 }
 
 object example extends ScalaJSModule{
-  def scalaVersion = "2.12.10"
+  def scalaVersion = "2.12.11"
   def scalaJSVersion = "0.6.32"
-  def moduleDeps = Seq(scalatags.js("2.12.10", "0.6.32"))
+  def moduleDeps = Seq(scalatags.js("2.12.11", "0.6.32"))
 }

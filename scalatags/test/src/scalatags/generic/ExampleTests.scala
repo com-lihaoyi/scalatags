@@ -492,41 +492,6 @@ class ExampleTests[Builder, Output <: FragT, FragT](bundle: Bundle[Builder, Outp
     """
     )
 
-
-    test("properEscaping") - strCheck({
-      val evilInput1 = "\"><script>alert('hello!')</script>"
-      val evilInput2 = "<script>alert('hello!')</script>"
-
-      html(
-        head(
-          script("some script")
-        ),
-        body(
-          h1(
-            title:=evilInput1,
-            "This is my title"
-          ),
-          evilInput2
-        )
-      )
-
-    }
-    ,
-    """
-        <html>
-            <head>
-                <script>some script</script>
-            </head>
-            <body>
-                <h1 title="&quot;&gt;&lt;script&gt;alert('hello!')&lt;/script&gt;">
-                    This is my title
-                </h1>
-                &lt;script&gt;alert('hello!')&lt;/script&gt;
-            </body>
-        </html>
-    """
-    )
-
     test("unsanitizedInput") - strCheck({
       val evilInput = "<script>alert('hello!')</script>"
 
