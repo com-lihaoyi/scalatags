@@ -75,7 +75,7 @@ object scalatags extends Module {
     }
   }
 
-  object js extends Cross[JSScalatagsModule](("2.12.10", "0.6.32"), ("2.13.1", "0.6.32"), ("2.12.10", "1.0.0"), ("2.13.1", "1.0.0"))
+  object js extends Cross[JSScalatagsModule](("2.12.10", "0.6.32"), ("2.13.1", "0.6.32"), ("2.12.10", "1.0.1"), ("2.13.1", "1.0.1"))
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
@@ -88,7 +88,7 @@ object scalatags extends Module {
       def crossScalaVersion = JSScalatagsModule.this.crossScalaVersion
       val jsDomNodeJs =
         if(crossJSVersion.startsWith("0.6.")) Agg()
-        else Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs::1.0.0")
+        else Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs:1.0.0")
       def ivyDeps = super.ivyDeps() ++ jsDomNodeJs
       def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.JsDom()
     }
