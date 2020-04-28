@@ -4,10 +4,6 @@ dist: bionic
 
 language: scala
 
-addons:
-  apt:
-    update: true
-
 jdk:
   - openjdk8
 
@@ -15,10 +11,8 @@ script:
   - curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
   - sudo apt-get install -y nodejs
   - npm install
-  - curl https://raw.githubusercontent.com/scala-native/scala-native/master/scripts/travis_setup.sh | bash -x
-  - export PATH=~/bin/mill:$PATH
-  - ./mill scalatags.js.__.test.test
-  - ./mill scalatags.jvm.__.test.test
+  - ./mill scalatags.js.__.test
+  - ./mill scalatags.jvm.__.test
   - ./mill scalatags.native.__.compile
 
 cache:
