@@ -37,7 +37,7 @@ trait Frag[Builder, +FragT] extends Modifier[Builder]{
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, FragT]{
+trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output]{
   protected[this] type Self <: TypedTag[Builder, Output, FragT]
   def tag: String
 
