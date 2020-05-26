@@ -134,10 +134,11 @@ object JsDom
   }
 
   object RawFrag extends Companion[RawFrag]
-  case class RawFrag(v: String) extends Modifier{
+  case class RawFrag(v: String) extends jsdom.Frag{
     Objects.requireNonNull(v)
-    def applyTo(elem: dom.Element): Unit = {
-      elem.insertAdjacentHTML("beforeend", v)
+    def render: dom.Node = {
+      // https://davidwalsh.name/convert-html-stings-dom-nodes
+      dom.document.createRange().createContextualFragment(v)
     }
   }
 
