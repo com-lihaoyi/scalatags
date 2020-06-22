@@ -42,29 +42,51 @@ object Escaping {
   }
 
   /**
-   * Code to escape text HTML nodes. Taken from scala.xml
+   * Code to escape text HTML nodes. Based on code from scala.xml
    */
   def escape(text: String, s: java.io.Writer) = {
     // Implemented per XML spec:
     // http://www.w3.org/International/questions/qa-controls
-    // imperative code 3x-4x faster than current implementation
-    // dpp (David Pollak) 2010/02/03
-    val len = text.length
+    // Highly imperative code, ~2-3x faster than the previous implementation (2020-06-11)
+    val charsArray = text.toCharArray
+    val len = charsArray.size
     var pos = 0
-
-    while (pos < len) {
-      text.charAt(pos) match {
-        case '<' => s.append("&lt;")
-        case '>' => s.append("&gt;")
-        case '&' => s.append("&amp;")
-        case '"' => s.append("&quot;")
-        case '\n' => s.append('\n')
-        case '\r' => s.append('\r')
-        case '\t' => s.append('\t')
+    var i = 0
+    while (i < len) {
+      val c = charsArray(i)
+      c match {
+        case '<' =>
+          s.write(charsArray, pos, i - pos)
+          s.write("&lt;")
+          pos = i + 1
+        case '>' =>
+          s.write(charsArray, pos, i - pos)
+          s.write("&gt;")
+          pos = i + 1
+        case '&' =>
+          s.write(charsArray, pos, i - pos)
+          s.write("&amp;")
+          pos = i + 1
+        case '"' =>
+          s.write(charsArray, pos, i - pos)
+          s.write("&quot;")
+          pos = i + 1
+        case '\n' =>
+        case '\r' =>
+        case '\t' =>
         case c if c < ' ' =>
-        case c => s.append(c)
+          s.write(charsArray, pos, i - pos)
+          pos = i + 1
+        case _ =>
       }
-      pos += 1
+      i += 1
+    }
+    // Apparently this isn't technically necessary if (len - pos) == 0 as
+    // it doesn't cause any exception to occur in the JVM.
+    // The problem is that it isn't documented anywhere so I left this if here
+    // to make the error clear.
+    if (pos < len) {
+      s.write(charsArray, pos, len - pos)
     }
   }
 }
