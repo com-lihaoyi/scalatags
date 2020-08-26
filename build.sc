@@ -25,7 +25,7 @@ trait Common extends CrossScalaModule {
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
     ivy"com.lihaoyi::sourcecode::0.2.1",
-    ivy"com.lihaoyi::geny::0.6.0",
+    ivy"com.lihaoyi::geny::0.6.2",
   )
   def compileIvyDeps = Agg(
     ivy"org.scala-lang:scala-reflect:${scalaVersion()}",
