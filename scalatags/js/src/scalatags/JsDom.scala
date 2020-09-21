@@ -146,8 +146,10 @@ object JsDom
     def apply(t: dom.Element, a: Attr, v: T): Unit = {
       a.namespace match {
         case None =>
-          if (!a.raw) t.setAttribute(a.name, v.toString)
-          else {
+          if (!a.raw) {
+            if (a.name == "class") t.classList.add(v.toString)
+            else t.setAttribute(a.name, v.toString)
+          } else {
 
             // Ugly workaround for https://www.w3.org/Bugs/Public/show_bug.cgi?id=27228
             val tmpElm = dom.document.createElement("p")
