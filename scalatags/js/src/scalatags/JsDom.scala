@@ -147,8 +147,11 @@ object JsDom
       a.namespace match {
         case None =>
           if (!a.raw) {
-            if (a.name == "class") t.classList.add(v.toString)
-            else t.setAttribute(a.name, v.toString)
+            if (a.name == "class") {
+              v.toString.split(" ").foreach { cls =>
+                t.classList.add(cls.trim)
+              }
+            } else t.setAttribute(a.name, v.toString)
           } else {
 
             // Ugly workaround for https://www.w3.org/Bugs/Public/show_bug.cgi?id=27228
