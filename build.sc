@@ -36,14 +36,18 @@ trait ScalatagsPublishModule extends PublishModule {
 }
 
 trait Common extends CrossScalaModule {
+  def isDotty = crossScalaVersion.startsWith("0")
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
     ivy"com.lihaoyi::sourcecode::0.2.3",
     ivy"com.lihaoyi::geny::0.6.5",
   )
-  def compileIvyDeps = Agg(
-    ivy"org.scala-lang:scala-reflect:${scalaVersion()}",
-  )
+  def compileIvyDeps = T {
+    if (!isDotty) Agg(
+      ivy"org.scala-lang:scala-reflect:${scalaVersion()}",
+    ) else Agg()
+  }
+
   def offset: os.RelPath = os.rel
   def sources = T.sources(
     super.sources()
@@ -83,6 +87,8 @@ object scalatags extends Module {
   object jvm extends Cross[JvmScalatagsModule](scalaVersions:_*)
   class JvmScalatagsModule(val crossScalaVersion: String)
     extends Common with ScalaModule with ScalatagsPublishModule {
+
+    def scalacOptions = Seq("-language:implicitConversions")
 
     object test extends Tests with CommonTestModule{
       def crossScalaVersion = JvmScalatagsModule.this.crossScalaVersion

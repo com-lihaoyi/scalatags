@@ -207,8 +207,8 @@ trait PixelStyleValue[Builder, T]{
 trait Namespace {
   def uri: String
 }
-object Namespace{
-  implicit val htmlNamespaceConfig = new Namespace {
+object Namespace {
+  implicit val htmlNamespaceConfig: Namespace = new Namespace {
     def uri = "http://www.w3.org/1999/xhtml"
   }
   val svgNamespaceConfig = new Namespace {

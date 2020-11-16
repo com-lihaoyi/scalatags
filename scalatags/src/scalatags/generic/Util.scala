@@ -68,20 +68,20 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
    */
   implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => Modifier[Builder]) extends Modifier[Builder]{
     Objects.requireNonNull(xs)
-    def applyTo(t: Builder) = xs.foreach(_.applyTo(t))
+    def applyTo(t: Builder) = xs.foreach(ev(_).applyTo(t))
   }
 
   /**
    * Allows you to modify a [[ConcreteHtmlTag]] by adding an Option containing other nest-able
    * objects to its list of children.
    */
-  implicit def OptionNode[A](xs: Option[A])(implicit ev: A => Modifier[Builder]) = new SeqNode(xs.toSeq)
+  implicit def OptionNode[A](xs: Option[A])(implicit ev: A => Modifier[Builder]): SeqNode[A] = new SeqNode(xs.toSeq)
 
   /**
    * Allows you to modify a [[ConcreteHtmlTag]] by adding an Array containing other nest-able
    * objects to its list of children.
    */
-  implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => Modifier[Builder]) = new SeqNode[A](xs.toSeq)
+  implicit def ArrayNode[A](xs: Array[A])(implicit ev: A => Modifier[Builder]): SeqNode[A] = new SeqNode[A](xs.toSeq)
 
 
 }
@@ -99,12 +99,12 @@ trait LowPriUtil[Builder, Output <: FragT, FragT]{
   /**
    * Renders an Option of [[FragT]] into a single [[FragT]]
    */
-  implicit def OptionFrag[A](xs: Option[A])(implicit ev: A => Frag[Builder, FragT]) = SeqFrag(xs.toSeq)
+  implicit def OptionFrag[A](xs: Option[A])(implicit ev: A => Frag[Builder, FragT]): Frag[Builder, FragT] = SeqFrag(xs.toSeq)
 
   /**
    * Renders an Seq of [[FragT]] into a single [[FragT]]
    */
-  implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => Frag[Builder, FragT]) = SeqFrag[A](xs.toSeq)
+  implicit def ArrayFrag[A](xs: Array[A])(implicit ev: A => Frag[Builder, FragT]):  Frag[Builder, FragT] = SeqFrag[A](xs.toSeq)
 
   /**
    * Lets you put Unit into a scalatags tree, as a no-op.

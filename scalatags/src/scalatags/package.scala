@@ -1,6 +1,6 @@
 import scala.language.implicitConversions
 import scalatags.generic.{Attr, Style}
-import language.experimental.macros
+//import language.experimental.macros
 /**
  * ScalaTags is a small XML/HTML construction library for Scala. See
  * [[https://github.com/lihaoyi/scalatags the Github page]] for an introduction
