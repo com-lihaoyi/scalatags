@@ -1103,6 +1103,10 @@
 
   @def pr(s: Int) = a(s, href:="https://github.com/lihaoyi/scalatags/pull/"+s)
   @sect{Changelog}
+    @sect{0.9.3}
+      @ul
+        @li
+          Support for Scala Native 0.4.0
     @sect{0.8.1}
       @ul
         @li
