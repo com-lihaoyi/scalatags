@@ -1,7 +1,7 @@
 package scalatags.stylesheet
-import scala.language.experimental.macros
 import scala.collection.immutable.SortedMap
-import scala.reflect.macros.Context
+import scala.quoted.*
+import _root_.javax.swing.text.Style
 
 /** A [[StyleSheet]] which lets you define cascading tag/class
   * selectors. Separate from [[StyleSheet]] because you almost
@@ -86,32 +86,22 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName) {
 
   def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
 }
-class SourceClasses[T](val value: T => Seq[Cls])
+class SourceClasses[T <: StyleSheet](val value: T => Seq[Cls])
 object SourceClasses {
-  inline def apply[T]: SourceClasses[T] = $ { manglerImpl[T] }
-  private def manglerImpl[T: c.WeakTypeTag](c: Context) = {
-    import c.universe._
+  inline def apply[T <: StyleSheet]: SourceClasses[T] = $ { manglerImpl[T] }
 
-    val weakType = weakTypeOf[T]
+  def manglerImpl[T <: StyleSheet: Type](using Quotes): Expr[SourceClasses[T]] = {
+    ' { new SourceClasses[T]((t: T) => ${ Expr.ofSeq(terms('t)) }) }
+  }
 
-    val stylesheetName = newTermName("stylesheet")
-    val names = for {
-      member <- weakType.members.toSeq.reverse
-      // Not sure if there's a better way to capture by-name types
-      if member.typeSignature.toString == "=> scalatags.stylesheet.Cls" ||
-        member.typeSignature.toString == "scalatags.stylesheet.Cls"
-      if member.isPublic
-    } yield q"$stylesheetName.${member.name.toTermName}"
-
-    val res = q"""
-    new scalatags.stylesheet.SourceClasses[$weakType](
-      ($stylesheetName: $weakType) => Seq[scalatags.stylesheet.Cls](..$names)
-    )
-    """
-
-    c.Expr[SourceClasses[T]](res)
+  private def terms[T <: StyleSheet : Type](t: Expr[T])(using ctx: Quotes): Seq[Expr[Cls]] = {
+    import ctx.reflect._
+    val valdefs = TypeRepr.of[T].typeSymbol.memberFields.map(_.tree.asInstanceOf[ValDef])
+    val clsesOnly: Seq[ValDef] = valdefs.filter(_.tpt.tpe =:= TypeRepr.of[Cls])
+    clsesOnly.map(valdef => t.asTerm.select(valdef.symbol).asExprOf[Cls])
   }
 }
+
 
 /** A rendered class; both the class `name` (used when injected into Scalatags
   * fragments) and the `structure` (used when injected into further class definitions)

@@ -2,7 +2,7 @@ import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
-val scalaVersions = "2.12.13" :: "2.13.4" :: dottyVersions
+val scalaVersions = "2.12.13" :: "2.13.4" :: "3.0.0-RC1" :: dottyVersions
 val scala2Versions = scalaVersions.filter(_.startsWith("2."))
 
 val scalaJSVersions = for {
@@ -36,7 +36,7 @@ trait ScalatagsPublishModule extends PublishModule {
 }
 
 trait Common extends CrossScalaModule {
-  def isDotty = crossScalaVersion.startsWith("0")
+  def isDotty = !crossScalaVersion.startsWith("2")
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
     ivy"com.lihaoyi::sourcecode::0.2.3",
@@ -44,7 +44,7 @@ trait Common extends CrossScalaModule {
   )
   def compileIvyDeps = T {
     if (!isDotty) Agg(
-      ivy"org.scala-lang:scala-reflect:${scalaVersion()}",
+      ivy"org.scala-lang:scala-reflect:${crossScalaVersion}",
     ) else Agg()
   }
 
