@@ -14,8 +14,13 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 8
+      - name: Install node and jsdom
+        run: |
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          npm install
       - name: Run tests
-        run: ./mill -i -j $(nproc) __.publishArtifacts __.test
+        run: ./mill -i __.publishArtifacts __.test
 
   publish-sonatype:
     if: github.repository == 'com-lihaoyi/scalatags' && contains(github.ref, 'refs/tags/')
