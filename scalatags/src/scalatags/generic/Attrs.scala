@@ -1001,7 +1001,18 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
     * MDN
     */
   lazy val defer = attr("defer").empty
-
+  /**
+   * This attribute specifies an expected hash for a resource.
+   *
+   * MDN
+   */
+  lazy val integrity = attr("integrity")
+  /**
+   * Indicates if the fetching of the resource must be done using a CORS request.
+   *
+   * MDN
+   */
+  lazy val crossorigin = attr("crossorigin")
 
   /**
    * ARIA is a set of special accessibility attributes which can be added
