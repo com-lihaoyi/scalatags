@@ -1002,6 +1002,17 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
     */
   lazy val defer = attr("defer").empty
 
+  /**
+    * This attribute allows the elimination of parser-blocking JavaScript
+    * where the browser would have to load and evaluate scripts before continuing to parse. defer has a similar effect in this case.
+    *
+    * This is a boolean attribute: the presence of a boolean attribute on an element represents the true value,
+    * and the absence of the attribute represents the false value.
+    *
+    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
+    */
+  lazy val async = attr("async").empty
+
 
   /**
    * ARIA is a set of special accessibility attributes which can be added
