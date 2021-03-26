@@ -813,6 +813,22 @@ trait InputAttrs[Builder, Output <: FragT, FragT] extends GlobalAttrs[Builder, O
   lazy val widthA = attr("width") // TODO: Conflicts with "width" in Styles
 }
 
+trait AnchorElementAttrs[Builder, Output<:FragT, FragT] extends Util[Builder, Output, FragT] {
+  /**
+   * Prompts the user to save the linked URL instead of navigating to it. Can be used with or without a value:
+   *  - Without a value, the browser will suggest a filename/extension, generated from various sources:
+   *    * The Content-Disposition HTTP header
+   *    * The final segment in the URL path
+   *    * The media type (from the (Content-Type header, the start of a data: URL, or Blob.type for a blob: URL)
+   *  - Defining a value suggests it as the filename. / and \ characters are converted to underscores _.
+   *    Filesystems may forbid other characters in filenames, so browsers will adjust the suggested name if necessary.
+   *
+   * MDN
+   */
+  lazy val download = attr("download")
+}
+
+
 /**
  * Trait containing the contents of the [[Attrs]] module, so they can be
  * mixed in to other objects if needed. This should contain "all" attributes
@@ -826,6 +842,7 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
   with MouseEventAttrs[Builder, Output, FragT]
   with WindowEventAttrs[Builder, Output, FragT]
   with FormEventAttrs[Builder, Output, FragT]
+  with AnchorElementAttrs[Builder, Output, FragT]
 {
   /**
    * This is the single required attribute for anchors defining a hypertext
