@@ -20,7 +20,7 @@ jobs:
           sudo apt-get install -y nodejs
           npm install
       - name: Run tests
-        run: ./mill -i __.publishArtifacts __.test
+        run: ./mill -i all __.publishArtifacts __.test
 
   publish-sonatype:
     if: github.repository == 'com-lihaoyi/scalatags' && contains(github.ref, 'refs/tags/')
