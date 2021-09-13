@@ -4,11 +4,11 @@ import de.tobiasroeser.mill.vcs.version.VcsVersion
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
-val scalaVersions = "2.12.13" :: "2.13.4" :: "2.11.12" :: dottyVersions
+val scalaVersions = "2.12.13" :: "2.13.4" :: "2.11.12" :: "3.0.1" :: dottyVersions
 val scala2Versions = scalaVersions.filter(_.startsWith("2."))
 
 val scalaJSVersions = for {
-  scalaV <- scala2Versions
+  scalaV <- scalaVersions
   scalaJSV <- Seq("0.6.33", "1.5.1")
 } yield (scalaV, scalaJSV)
 
@@ -20,16 +20,16 @@ val scalaNativeVersions = for {
 trait ScalatagsPublishModule extends PublishModule {
   def artifactName = "scalatags"
 
-  def publishVersion = VcsVersion.vcsState().format()
+  def publishVersion = "0.9.5-SNAPSHOT"
 
   def pomSettings = PomSettings(
     description = artifactName(),
     organization = "com.lihaoyi",
     url = "https://github.com/lihaoyi/scalatags",
     licenses = Seq(License.MIT),
-    scm = SCM(
-      "git://github.com/lihaoyi/scalatags.git",
-      "scm:git://github.com/lihaoyi/scalatags.git"
+    versionControl = VersionControl(
+      browsableRepository = Some("git://github.com/lihaoyi/scalatags.git"),
+      connection = Some("scm:git://github.com/lihaoyi/scalatags.git")
     ),
     developers = Seq(
       Developer("lihaoyi", "Li Haoyi", "https://github.com/lihaoyi")
@@ -38,14 +38,17 @@ trait ScalatagsPublishModule extends PublishModule {
 }
 
 trait Common extends CrossScalaModule {
+  def isDotty = !crossScalaVersion.startsWith("2")
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::sourcecode::0.2.3",
-    ivy"com.lihaoyi::geny::0.6.7",
+    ivy"com.lihaoyi::sourcecode::0.2.7",
+    ivy"com.lihaoyi::geny::0.6.10",
   )
-  def compileIvyDeps = Agg(
-    ivy"org.scala-lang:scala-reflect:${scalaVersion()}",
-  )
+  def compileIvyDeps = T {
+    if (!isDotty) Agg(
+      ivy"org.scala-lang:scala-reflect:${scalaVersion()}",
+    ) else Agg()
+  }
   def offset: os.RelPath = os.rel
   def sources = T.sources(
     super.sources()
