@@ -2373,7 +2373,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val none = this := "none"
 
     def ~(pairs: (String, String)*) = {
-      this := pairs.flatMap(x => Seq(x._1, x._2)).map('"' + _ + '"').mkString(" ")
+      this := pairs.flatMap(x => Seq(x._1, x._2)).map("\"" + _ + "\"").mkString(" ")
     }
 
   }

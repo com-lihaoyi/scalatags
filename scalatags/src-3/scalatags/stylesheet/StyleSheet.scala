@@ -113,7 +113,7 @@ case class Cls(
 ) {
   lazy val structure = args.foldLeft(
     StyleTree(
-      Seq("." + name + pseudoSelectors.map(':' + _).mkString),
+      Seq("." + name + pseudoSelectors.map(":" + _).mkString),
       SortedMap.empty,
       Nil
     )
