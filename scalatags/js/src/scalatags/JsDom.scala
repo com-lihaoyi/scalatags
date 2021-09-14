@@ -80,8 +80,8 @@ object JsDom
     implicit def stringFrag(v: String): StringFrag = new JsDom.StringFrag(v)
 
 
-    val RawFrag = JsDom.RawFrag
-    val StringFrag = JsDom.StringFrag
+    val RawFragCompanion = JsDom.RawFragCompanion
+    val StringFragCompanion = JsDom.StringFragCompanion
     type StringFrag = JsDom.StringFrag
     type RawFrag = JsDom.RawFrag
     def raw(s: String) = RawFrag(s)
@@ -109,37 +109,49 @@ object JsDom
 
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      lazy val frags = xs map ev
+      def applyTo(t: dom.Element): Unit = frags.foreach(_.applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(_.render).foreach(frag.appendChild)
+        frags.map(_.render).foreach(frag.appendChild)
         frag
       }
     }
     implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      lazy val frags = xs map ev
+      def applyTo(t: dom.Element): Unit = frags.foreach(_.applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(_.render).foreach(frag.appendChild)
+        frags.map(_.render).foreach(frag.appendChild)
         frag
       }
     }
   }
 
-  object StringFrag extends Companion[StringFrag]
-  case class StringFrag(v: String) extends jsdom.Frag{
+  case class StringFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
-  object RawFrag extends Companion[RawFrag]
-  case class RawFrag(v: String) extends jsdom.Frag{
+  case class RawFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Node = {
       // https://davidwalsh.name/convert-html-stings-dom-nodes
       dom.document.createRange().createContextualFragment(v)
     }
+  }
+
+  // Scala 3 behaviour prevents us from using the same name as the case
+  // class for some reason, thus also preventing us from using the
+  // auto-generated companion object.
+  object StringFragCompanion extends Companion[StringFrag] {
+    def apply(target: String): StringFrag = StringFrag(target)
+    def unapply(target: StringFrag): Option[String] = Some(target.v)
+  }
+  object RawFragCompanion extends Companion[RawFrag] {
+    def apply(target: String): RawFrag = RawFrag(target)
+    def unapply(target: RawFrag): Option[String] = Some(target.v)
   }
 
   class GenericAttr[T] extends AttrValue[T]{
@@ -178,7 +190,7 @@ object JsDom
     def apply(s: Style, v: T) = StylePair(s, v, ev)
   }
   class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
-    def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
+    def apply(s: Style, v: T) = StylePair(s, s"${v}px", ev)
   }
   case class TypedTag[+Output <: dom.Element](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
@@ -213,9 +225,9 @@ trait LowPriorityImplicits{
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit def bindJsAnyLike[T](implicit ev: T => js.Any) = new generic.AttrValue[dom.Element, T]{
+  implicit def bindJsAnyLike[T](implicit ev: T => js.Any): generic.AttrValue[dom.Element, T] = new generic.AttrValue[dom.Element, T]{
     def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
-      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
+      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(ev(v))
     }
   }
   implicit class bindNode[T <: dom.Node](e: T) extends generic.Frag[dom.Element, T] {

@@ -102,17 +102,20 @@ trait Aliases[Builder, Output <: FragT, FragT]{
 
   type Tag = generic.TypedTag[Builder, Output, FragT]
 
+  // Scala 3 behaviour prevents us from using the same name as the case
+  // class for some reason.
+
   /**
    * A [[Modifier]] which contains a String which will not be escaped.
    */
   protected[this] type RawFrag <: Modifier
-  protected[this] val RawFrag: Companion[RawFrag]
+  protected[this] val RawFragCompanion: Companion[RawFrag]
 
   /**
    * A [[Modifier]] which contains a String.
    */
   protected[this] type StringFrag <: Modifier
-  protected[this] val StringFrag: Companion[StringFrag]
+  protected[this] val StringFragCompanion: Companion[StringFrag]
 
   type Frag = generic.Frag[Builder, FragT]
 }
@@ -120,35 +123,35 @@ trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output
   implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
   def genericAttr[T]: AttrValue[T]
-  implicit val stringAttr = genericAttr[String]
-  implicit val booleanAttr = genericAttr[Boolean]
-  implicit val byteAttr = genericAttr[Byte]
-  implicit val shortAttr = genericAttr[Short]
-  implicit val intAttr = genericAttr[Int]
-  implicit val longAttr = genericAttr[Long]
-  implicit val floatAttr = genericAttr[Float]
-  implicit val doubleAttr = genericAttr[Double]
+  implicit val stringAttr: AttrValue[String] = genericAttr[String]
+  implicit val booleanAttr: AttrValue[Boolean] = genericAttr[Boolean]
+  implicit val byteAttr: AttrValue[Byte] = genericAttr[Byte]
+  implicit val shortAttr: AttrValue[Short] = genericAttr[Short]
+  implicit val intAttr: AttrValue[Int] = genericAttr[Int]
+  implicit val longAttr: AttrValue[Long] = genericAttr[Long]
+  implicit val floatAttr: AttrValue[Float] = genericAttr[Float]
+  implicit val doubleAttr: AttrValue[Double] = genericAttr[Double]
 
   def genericStyle[T]: StyleValue[T]
-  implicit val stringStyle = genericStyle[String]
-  implicit val booleanStyle = genericStyle[Boolean]
-  implicit val byteStyle = genericStyle[Byte]
-  implicit val shortStyle = genericStyle[Short]
-  implicit val intStyle = genericStyle[Int]
-  implicit val longStyle = genericStyle[Long]
-  implicit val floatStyle = genericStyle[Float]
-  implicit val doubleStyle = genericStyle[Double]
+  implicit val stringStyle: StyleValue[String] = genericStyle[String]
+  implicit val booleanStyle: StyleValue[Boolean] = genericStyle[Boolean]
+  implicit val byteStyle: StyleValue[Byte] = genericStyle[Byte]
+  implicit val shortStyle: StyleValue[Short] = genericStyle[Short]
+  implicit val intStyle: StyleValue[Int] = genericStyle[Int]
+  implicit val longStyle: StyleValue[Long] = genericStyle[Long]
+  implicit val floatStyle: StyleValue[Float] = genericStyle[Float]
+  implicit val doubleStyle: StyleValue[Double] = genericStyle[Double]
 
   def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T]
   def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T]
-  implicit val stringPixelStyle = genericPixelStyle[String]
-  implicit val booleanPixelStyle = genericPixelStyle[Boolean]
-  implicit val bytePixelStyle = genericPixelStylePx[Byte]
-  implicit val shortPixelStyle = genericPixelStylePx[Short]
-  implicit val intPixelStyle = genericPixelStylePx[Int]
-  implicit val longPixelStyle = genericPixelStylePx[Long]
-  implicit val floatPixelStyle = genericPixelStylePx[Float]
-  implicit val doublePixelStyle = genericPixelStylePx[Double]
+  implicit val stringPixelStyle: PixelStyleValue[String] = genericPixelStyle[String]
+  implicit val booleanPixelStyle: PixelStyleValue[Boolean] = genericPixelStyle[Boolean]
+  implicit val bytePixelStyle: PixelStyleValue[Byte] = genericPixelStylePx[Byte]
+  implicit val shortPixelStyle: PixelStyleValue[Short] = genericPixelStylePx[Short]
+  implicit val intPixelStyle: PixelStyleValue[Int] = genericPixelStylePx[Int]
+  implicit val longPixelStyle: PixelStyleValue[Long] = genericPixelStylePx[Long]
+  implicit val floatPixelStyle: PixelStyleValue[Float] = genericPixelStylePx[Float]
+  implicit val doublePixelStyle: PixelStyleValue[Double] = genericPixelStylePx[Double]
 
   implicit def byteFrag(v: Byte): Frag = stringFrag(v.toString)
   implicit def shortFrag(v: Short): Frag = stringFrag(v.toString)

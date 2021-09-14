@@ -85,8 +85,8 @@ trait VirtualDom[Output <: FragT, FragT]
     implicit def stringFrag(v: String): StringFrag = new VirtualDom.this.StringFrag(v)
 
 
-    val RawFrag = VirtualDom.this.RawFrag
-    val StringFrag = VirtualDom.this.StringFrag
+    val RawFragCompanion = VirtualDom.this.RawFragCompanion
+    val StringFragCompanion = VirtualDom.this.StringFragCompanion
     type StringFrag = VirtualDom.this.StringFrag
     type RawFrag = VirtualDom.this.RawFrag
     def raw(s: String) = RawFrag(s)
@@ -101,36 +101,48 @@ trait VirtualDom[Output <: FragT, FragT]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
     implicit def UnitFrag(u: Unit): VirtualDom.this.StringFrag = new VirtualDom.this.StringFrag("")
-    def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
+    def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void, namespaceConfig)
     }
 
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: vdom.Builder[Output, FragT]): Unit = xs.foreach(_.applyTo(t))
+      lazy val frags = xs map ev
+      def applyTo(t: vdom.Builder[Output, FragT]): Unit = frags.foreach(_.applyTo(t))
       def render: FragT = {
         throw new Exception("Rendering of bare arrays of nodes is not supported in virtual dom backend")
       }
     }
     implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: vdom.Builder[Output, FragT]): Unit = xs.foreach(_.applyTo(t))
+      lazy val frags = xs map ev
+      def applyTo(t: vdom.Builder[Output, FragT]): Unit = frags.foreach(_.applyTo(t))
       def render: FragT = {
         throw new Exception("Rendering of bare arrays of nodes is not supported in virtual dom backend")
       }
     }
   }
 
-  object StringFrag extends Companion[StringFrag]
   case class StringFrag(v: String) extends vdom.Frag[Output, FragT]{
     Objects.requireNonNull(v)
     def render: FragT = stringToFrag(v)
   }
 
-  object RawFrag extends Companion[RawFrag]
   case class RawFrag(v: String) extends vdom.Frag[Output, FragT]{
     Objects.requireNonNull(v)
     def render = rawToFrag(v)
+  }
+
+  // Scala 3 behaviour prevents us from using the same name as the case
+  // class for some reason, thus also preventing us from using the
+  // auto-generated companion object.
+  object StringFragCompanion extends Companion[StringFrag] {
+    def apply(target: String): StringFrag = StringFrag(target)
+    def unapply(target: StringFrag): Option[String] = Some(target.v)
+  }
+  object RawFragCompanion extends Companion[RawFrag] {
+    def apply(target: String): RawFrag = RawFrag(target)
+    def unapply(target: RawFrag): Option[String] = Some(target.v)
   }
 
   class GenericAttr[T] extends AttrValue[T]{
@@ -148,7 +160,7 @@ trait VirtualDom[Output <: FragT, FragT]
     def apply(s: Style, v: T) = StylePair(s, v, ev)
   }
   class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
-    def apply(s: Style, v: T) = StylePair(s, v + "px", ev)
+    def apply(s: Style, v: T) = StylePair(s, v.toString + "px", ev)
   }
   case class TypedTag[+O <: Output](tag: String = "",
                                               modifiers: List[Seq[Modifier]],
