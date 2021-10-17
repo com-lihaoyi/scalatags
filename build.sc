@@ -9,7 +9,7 @@ val scala2Versions = scalaVersions.filter(_.startsWith("2."))
 
 val scalaJSVersions = for {
   scalaV <- scala2Versions
-  scalaJSV <- Seq("0.6.33", "1.4.0")
+  scalaJSV <- Seq("0.6.33", "1.5.1")
 } yield (scalaV, scalaJSV)
 
 val scalaNativeVersions = for {
@@ -96,8 +96,9 @@ object scalatags extends Module {
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
-    def ivyDeps = super.ivyDeps() ++ Agg(
-      ivy"org.scala-js::scalajs-dom::1.1.0"
+    def ivyDeps = super.ivyDeps() ++ (
+      if(crossJSVersion.startsWith("0.6.")) Agg(ivy"org.scala-js::scalajs-dom::1.1.0")
+      else Agg(ivy"org.scala-js::scalajs-dom::2.0.0-RC1")
     )
     def offset = os.up
     object test extends Tests with CommonTestModule{
