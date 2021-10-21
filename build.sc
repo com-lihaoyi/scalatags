@@ -98,7 +98,7 @@ object scalatags extends Module {
     def scalaJSVersion = crossJSVersion
     def ivyDeps = super.ivyDeps() ++ (
       if(crossJSVersion.startsWith("0.6.")) Agg(ivy"org.scala-js::scalajs-dom::1.1.0")
-      else Agg(ivy"org.scala-js::scalajs-dom::2.0.0-RC1")
+      else Agg(ivy"org.scala-js::scalajs-dom::2.0.0")
     )
     def offset = os.up
     object test extends Tests with CommonTestModule{
