@@ -11,3 +11,4 @@ readme/target/*
 *.iml
 out
 /node_modules
+/.bsp
