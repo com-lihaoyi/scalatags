@@ -168,7 +168,7 @@ object Text
   }
   class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = {
-      StylePair(s, v.toString + "px", ev)
+      StylePair(s, s"${v}px", ev)
     }
   }
 

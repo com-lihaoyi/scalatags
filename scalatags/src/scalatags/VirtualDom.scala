@@ -160,7 +160,7 @@ trait VirtualDom[Output <: FragT, FragT]
     def apply(s: Style, v: T) = StylePair(s, v, ev)
   }
   class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
-    def apply(s: Style, v: T) = StylePair(s, v.toString + "px", ev)
+    def apply(s: Style, v: T) = StylePair(s, s"${v}px", ev)
   }
   case class TypedTag[+O <: Output](tag: String = "",
                                               modifiers: List[Seq[Modifier]],

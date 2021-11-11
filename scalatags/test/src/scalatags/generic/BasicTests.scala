@@ -151,10 +151,10 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     }
     test("nulls"){
       val nullString: String = null
-      * - intercept[NullPointerException](div(nullString))
-      * - intercept[NullPointerException](div(null: Seq[Int]))
-      * - intercept[NullPointerException](div(height := nullString))
-      * - intercept[NullPointerException](div(opacity := nullString))
+      test("1") { intercept[NullPointerException](div(nullString)) }
+      test("2") { intercept[NullPointerException](div(null: Seq[Int])) }
+      test("3") { intercept[NullPointerException](div(height := nullString)) }
+      test("4") { intercept[NullPointerException](div(opacity := nullString)) }
     }
     test("rawAttrs"){
       strCheck(
