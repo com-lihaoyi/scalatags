@@ -91,7 +91,7 @@ object SourceClasses {
   inline def apply[T <: StyleSheet]: SourceClasses[T] = $ { manglerImpl[T] }
 
   def manglerImpl[T <: StyleSheet: Type](using Quotes): Expr[SourceClasses[T]] = {
-    ' { new SourceClasses[T]((t: T) => ${ Expr.ofSeq(terms('t)) }) }
+    '{ new SourceClasses[T]((t: T) => ${ Expr.ofSeq(terms('t)) }) }
   }
 
   private def terms[T <: StyleSheet : Type](t: Expr[T])(using ctx: Quotes): Seq[Expr[Cls]] = {
