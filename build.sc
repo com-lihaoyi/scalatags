@@ -1,6 +1,11 @@
+import mill.define.Target
 import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
+import $ivy.`com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION`
+import mill.contrib.buildinfo._
 import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version_mill0.9:0.1.1`
 import de.tobiasroeser.mill.vcs.version.VcsVersion
+import $ivy.`com.github.lolgab::mill-mima_mill0.9:0.0.6`
+import com.github.lolgab.mill.mima._
 import mill.scalalib.api.Util.isScala3
 
 val dottyVersions = sys.props.get("dottyVersion").toList
@@ -19,10 +24,12 @@ val scalaNativeVersions = for {
   scalaNativeV <- Seq("0.4.0")
 } yield (scalaV, scalaNativeV)
 
-trait ScalatagsPublishModule extends PublishModule {
+trait ScalatagsPublishModule extends PublishModule with Mima {
   def artifactName = "scalatags"
 
   def publishVersion = VcsVersion.vcsState().format()
+
+  def mimaPreviousVersions = Seq("0.10.0")
 
   def pomSettings = PomSettings(
     description = artifactName(),
@@ -36,6 +43,10 @@ trait ScalatagsPublishModule extends PublishModule {
     developers = Seq(
       Developer("lihaoyi", "Li Haoyi", "https://github.com/lihaoyi")
     )
+  )
+
+  def ivyDeps = super.ivyDeps() ++ Agg(
+    ivy"com.lihaoyi::pprint::0.6.6"
   )
 }
 
@@ -65,7 +76,7 @@ trait Common extends CrossScalaModule {
   )
 }
 
-trait CommonTestModule extends ScalaModule with TestModule.Utest {
+trait CommonTestModule extends ScalaModule with TestModule.Utest with BuildInfo {
   def millSourcePath = super.millSourcePath / os.up
   def crossScalaVersion: String
   val scalaXmlVersion = if(crossScalaVersion.startsWith("2.11.")) "1.3.0" else "2.0.1"
@@ -83,6 +94,10 @@ trait CommonTestModule extends ScalaModule with TestModule.Utest {
         )
       )
       .distinct
+  )
+  override def buildInfoPackageName = Some("scalatags")
+  override def buildInfoMembers = Map(
+    "scalaMajorVersion" -> crossScalaVersion.split('.').head
   )
 }
 

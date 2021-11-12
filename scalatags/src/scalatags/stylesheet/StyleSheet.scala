@@ -1,8 +1,7 @@
 package scalatags.stylesheet
-import scala.language.experimental.macros
-import scala.collection.immutable.SortedMap
-import scala.reflect.macros.Context
 
+import scala.collection.immutable.SortedMap
+import scala.language.implicitConversions
 
 /**
  * A [[StyleSheet]] which lets you define cascading tag/class
@@ -86,39 +85,13 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
 
   def styleSheetText = allClasses.map(_.structure.stringify(Nil)).mkString("\n")
 }
-class SourceClasses[T](val value: T => Seq[Cls])
-object SourceClasses{
-  implicit def apply[T]: SourceClasses[T] = macro manglerImpl[T]
-  def manglerImpl[T: c.WeakTypeTag](c: Context) = {
-    import c.universe._
-
-    val weakType = weakTypeOf[T]
-
-    val stylesheetName = newTermName("stylesheet")
-    val names = for {
-      member <- weakType.members.toSeq.reverse
-      // Not sure if there's a better way to capture by-name types
-      if member.typeSignature.toString == "=> scalatags.stylesheet.Cls" ||
-         member.typeSignature.toString == "scalatags.stylesheet.Cls"
-      if member.isPublic
-    } yield q"$stylesheetName.${member.name.toTermName}"
-
-    val res = q"""
-    new scalatags.stylesheet.SourceClasses[$weakType](
-      ($stylesheetName: $weakType) => Seq[scalatags.stylesheet.Cls](..$names)
-    )
-    """
-
-    c.Expr[SourceClasses[T]](res)
-  }
-}
 
 /**
  * A rendered class; both the class `name` (used when injected into Scalatags
  * fragments) and the `structure` (used when injected into further class definitions)
  */
 case class Cls(name: String, pseudoSelectors: Seq[String], args: Seq[StyleSheetFrag]){
-  lazy val structure = args.foldLeft(StyleTree(Seq("." + name + pseudoSelectors.map(':'+_).mkString), SortedMap.empty, Nil))(
+  lazy val structure = args.foldLeft(StyleTree(Seq(s".$name${pseudoSelectors.map(s => s":$s").mkString}"), SortedMap.empty, Nil))(
     (c, f) => f.applyTo(c)
   )
   def splice = new StyleSheetFrag{
