@@ -149,7 +149,7 @@ object JsDom
           if (!a.raw) {
             if (a.name == "class") {
               v.toString.split(" ").foreach { cls =>
-                t.classList.add(cls.trim)
+                if (cls.trim.nonEmpty) t.classList.add(cls.trim)
               }
             } else t.setAttribute(a.name, v.toString)
           } else {
