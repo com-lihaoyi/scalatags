@@ -1003,6 +1003,19 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
   lazy val defer = attr("defer").empty
 
   /**
+   * This attribute specifies an expected hash for a resource.
+   *
+   * MDN
+   */
+  lazy val integrity = attr("integrity")
+  /**
+   * Indicates if the fetching of the resource must be done using a CORS request.
+   *
+   * MDN
+   */
+  lazy val crossorigin = attr("crossorigin")
+
+  /**
     * This attribute allows the elimination of parser-blocking JavaScript
     * where the browser would have to load and evaluate scripts before continuing to parse. defer has a similar effect in this case.
     *
@@ -1012,7 +1025,6 @@ trait Attrs[Builder, Output <: FragT, FragT] extends InputAttrs[Builder, Output,
     * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
     */
   lazy val async = attr("async").empty
-
 
   /**
    * ARIA is a set of special accessibility attributes which can be added
