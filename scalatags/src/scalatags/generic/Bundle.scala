@@ -3,6 +3,8 @@ package generic
 import scalatags.stylesheet.StyleSheetFrag
 import scalatags.text
 
+import scala.language.implicitConversions
+
 /**
  * An abstract representation of the Scalatags package. This allows you to
  * customize Scalatags to work with different backends, by defining your own
@@ -109,13 +111,13 @@ trait Aliases[Builder, Output <: FragT, FragT]{
    * A [[Modifier]] which contains a String which will not be escaped.
    */
   protected[this] type RawFrag <: Modifier
-  protected[this] val RawFragCompanion: Companion[RawFrag]
+  protected[this] val RawFrag: Companion[RawFrag]
 
   /**
    * A [[Modifier]] which contains a String.
    */
   protected[this] type StringFrag <: Modifier
-  protected[this] val StringFragCompanion: Companion[StringFrag]
+  protected[this] val StringFrag: Companion[StringFrag]
 
   type Frag = generic.Frag[Builder, FragT]
 }

@@ -85,8 +85,8 @@ trait VirtualDom[Output <: FragT, FragT]
     implicit def stringFrag(v: String): StringFrag = new VirtualDom.this.StringFrag(v)
 
 
-    val RawFragCompanion = VirtualDom.this.RawFragCompanion
-    val StringFragCompanion = VirtualDom.this.StringFragCompanion
+    val RawFrag = VirtualDom.this.RawFrag
+    val StringFrag = VirtualDom.this.StringFrag
     type StringFrag = VirtualDom.this.StringFrag
     type RawFrag = VirtualDom.this.RawFrag
     def raw(s: String) = RawFrag(s)
@@ -136,11 +136,11 @@ trait VirtualDom[Output <: FragT, FragT]
   // Scala 3 behaviour prevents us from using the same name as the case
   // class for some reason, thus also preventing us from using the
   // auto-generated companion object.
-  object StringFragCompanion extends Companion[StringFrag] {
+  object StringFrag extends Companion[StringFrag] {
     def apply(target: String): StringFrag = StringFrag(target)
     def unapply(target: StringFrag): Option[String] = Some(target.v)
   }
-  object RawFragCompanion extends Companion[RawFrag] {
+  object RawFrag extends Companion[RawFrag] {
     def apply(target: String): RawFrag = RawFrag(target)
     def unapply(target: RawFrag): Option[String] = Some(target.v)
   }

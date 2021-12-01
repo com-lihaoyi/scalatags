@@ -58,15 +58,13 @@ object Text
     }
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      lazy val frags = xs map ev
-      def applyTo(t: text.Builder) = frags.foreach(_.applyTo(t))
-      def render = frags.map(_.render).mkString
+      def applyTo(t: text.Builder) = xs.foreach(elem => ev(elem).applyTo(t))
+      def render = xs.map(elem => ev(elem).render).mkString
     }
     implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      lazy val frags = xs map ev
-      def applyTo(t: text.Builder) = frags.foreach(_.applyTo(t))
-      def render = frags.map(_.render).mkString
+      def applyTo(t: text.Builder) = xs.foreach(elem => ev(elem).applyTo(t))
+      def render = xs.map(elem => ev(elem).render).mkString
     }
 
     case class doctype(s: String)(content: text.Frag) extends geny.Writable{
@@ -112,8 +110,8 @@ object Text
 
     implicit def stringFrag(v: String) = new Text.StringFrag(v)
 
-    val RawFragCompanion = Text.RawFragCompanion
-    val StringFragCompanion = Text.StringFragCompanion
+    val RawFrag = Text.RawFrag
+    val StringFrag = Text.StringFrag
     type StringFrag = Text.StringFrag
     type RawFrag = Text.RawFrag
     def raw(s: String) = RawFrag(s)
@@ -124,7 +122,7 @@ object Text
 
 
 
-  case class StringFrag(v: String) extends text.Frag {
+  case class StringFrag(v: String) extends text.Frag{
     Objects.requireNonNull(v)
     def render = {
       val strb = new java.io.StringWriter()
@@ -133,7 +131,14 @@ object Text
     }
     def writeTo(strb: java.io.Writer) = Escaping.escape(v, strb)
   }
-
+  object StringFrag extends Companion[StringFrag] {
+    def apply(target: String): StringFrag = StringFrag(target)
+    def unapply(target: StringFrag): Option[String] = Some(target.v)
+  }
+  object RawFrag extends Companion[RawFrag] {
+    def apply(target: String): RawFrag = RawFrag(target)
+    def unapply(target: RawFrag): Option[String] = Some(target.v)
+  }
   case class RawFrag(v: String) extends text.Frag {
     Objects.requireNonNull(v)
     def render = v
@@ -143,14 +148,14 @@ object Text
   // Scala 3 behaviour prevents us from using the same name as the case
   // class for some reason, thus also preventing us from using the
   // auto-generated companion object.
-  object StringFragCompanion extends Companion[StringFrag] {
-    def apply(target: String): StringFrag = StringFrag(target)
-    def unapply(target: StringFrag): Option[String] = Some(target.v)
-  }
-  object RawFragCompanion extends Companion[RawFrag] {
-    def apply(target: String): RawFrag = RawFrag(target)
-    def unapply(target: RawFrag): Option[String] = Some(target.v)
-  }
+  // object StringFragCompanion extends Companion[StringFrag] {
+  //   def apply(target: String): StringFrag = StringFrag(target)
+  //   def unapply(target: StringFrag): Option[String] = Some(target.v)
+  // }
+  // object RawFragCompanion extends Companion[RawFrag] {
+  //   def apply(target: String): RawFrag = RawFrag(target)
+  //   def unapply(target: RawFrag): Option[String] = Some(target.v)
+  // }
 
   class GenericAttr[T] extends AttrValue[T] {
     def apply(t: text.Builder, a: Attr, v: T): Unit = {

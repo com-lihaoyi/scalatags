@@ -10,7 +10,7 @@ import mill.scalalib.api.Util.isScala3
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
-val scalaVersions = "2.12.13" :: "2.13.4" :: "2.11.12" :: "3.0.0" :: dottyVersions
+val scalaVersions = "2.12.13" :: "2.13.4" :: "2.11.12" :: "3.0.2" :: dottyVersions
 val scala2Versions = scalaVersions.filter(_.startsWith("2."))
 
 val scalaJSVersions = for {
