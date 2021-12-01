@@ -137,7 +137,7 @@ object JsDom
   }
 
   object RawFrag extends Companion[RawFrag] {
-    def apply(target: String): RawFrag = RawFrag(target)
+    def apply(target: String): RawFrag = new RawFrag(target)
     def unapply(target: RawFrag): Option[String] = Some(target.v)
   }
   case class RawFrag(v: String) extends jsdom.Frag {
