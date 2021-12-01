@@ -132,9 +132,8 @@ object Text
     }
     def writeTo(strb: java.io.Writer) = Escaping.escape(v, strb)
   }
-  object StringFrag
-  object RawFrag
-  case class RawFrag(v: String) extends text.Frag {
+
+  case class RawFrag(v: String) extends text.Frag{
     Objects.requireNonNull(v)
     def render = v
     def writeTo(strb: java.io.Writer) = strb.append(v)

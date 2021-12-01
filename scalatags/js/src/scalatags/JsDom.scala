@@ -111,8 +111,7 @@ object JsDom
       def applyTo(t: dom.Element): Unit = xs.foreach(elem => ev(elem).applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(elem => ev(elem)
-        .render).foreach(frag.appendChild)
+        xs.map(elem => ev(elem).render).foreach(frag.appendChild)
         frag
       }
     }
@@ -126,15 +125,13 @@ object JsDom
       }
     }
   }
-  
-  object StringFrag
+
   case class StringFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
-  object RawFrag
-  case class RawFrag(v: String) extends jsdom.Frag {
+  case class RawFrag(v: String) extends jsdom.Frag{
     Objects.requireNonNull(v)
     def render: dom.Node = {
       // https://davidwalsh.name/convert-html-stings-dom-nodes

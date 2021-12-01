@@ -132,9 +132,6 @@ trait VirtualDom[Output <: FragT, FragT]
     def render = rawToFrag(v)
   }
 
-  object StringFrag
-  object RawFrag
-
   class GenericAttr[T] extends AttrValue[T]{
     def apply(t: vdom.Builder[Output, FragT], a: Attr, v: T): Unit = {
       t.setAttr(a.name, v.toString)
