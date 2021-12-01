@@ -44,10 +44,6 @@ trait ScalatagsPublishModule extends PublishModule with Mima {
       Developer("lihaoyi", "Li Haoyi", "https://github.com/lihaoyi")
     )
   )
-
-  def ivyDeps = super.ivyDeps() ++ Agg(
-    ivy"com.lihaoyi::pprint::0.6.6"
-  )
 }
 
 trait Common extends CrossScalaModule {
