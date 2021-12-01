@@ -8,6 +8,10 @@ import org.scalajs.dom
 import org.scalajs.dom.html.Paragraph
 
 object DomTests extends TestSuite{
+  class SharedTemplates[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
+    import bundle.all._
+    val widget: Tag = div("hello")
+  }
   def tests = TestSuite{
     test("basic"){
       import scalatags.JsDom.all._
@@ -98,11 +102,6 @@ object DomTests extends TestSuite{
     }
 
     test("crossTag"){
-      class SharedTemplates[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
-        import bundle.all._
-        val widget: Tag = div("hello")
-      }
-
       object JsTemplates extends SharedTemplates(scalatags.JsDom)
       object TextTemplates extends SharedTemplates(scalatags.Text)
 

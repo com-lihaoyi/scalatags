@@ -2,7 +2,6 @@ package scalatags
 import java.util.Objects
 
 import scalatags.generic._
-import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder
 

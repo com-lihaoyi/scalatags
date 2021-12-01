@@ -3,6 +3,7 @@ package generic
 import java.util.Objects
 
 import scala.language.higherKinds
+import scala.language.implicitConversions
 
 /**
  * Created by haoyi on 6/2/14.

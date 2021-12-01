@@ -5,7 +5,6 @@ import java.util.Objects
 
 import scala.language.implicitConversions
 
-import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 

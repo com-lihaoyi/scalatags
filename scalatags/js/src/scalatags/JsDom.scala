@@ -8,7 +8,6 @@ import scala.language.implicitConversions
 import scala.scalajs.js
 import org.scalajs.dom.{Element, html, raw, svg}
 
-import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
@@ -182,11 +181,11 @@ object JsDom
     def apply(s: Style, v: T) = StylePair(s, s"${v}px", ev)
   }
   case class TypedTag[+Output <: dom.Element](tag: String = "",
-                                              modifiers: List[Seq[Modifier]],
-                                              void: Boolean = false,
-                                              namespace: Namespace)
-                                              extends generic.TypedTag[dom.Element, Output, dom.Node]
-                                              with jsdom.Frag{
+                                             modifiers: List[Seq[Modifier]],
+                                             void: Boolean = false,
+                                             namespace: Namespace)
+                                             extends generic.TypedTag[dom.Element, Output, dom.Node]
+                                             with jsdom.Frag{
 
     def render: Output = {
       val elem = dom.document.createElementNS(namespace.uri, tag)
