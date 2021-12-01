@@ -24,7 +24,6 @@ package object scalatags {
   }
 
   trait Companion[V] extends (String => V){
-    def apply(target: String): V
     def unapply(target: V): Option[String]
   }
 

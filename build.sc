@@ -8,15 +8,14 @@ import $ivy.`com.github.lolgab::mill-mima_mill0.9:0.0.6`
 import com.github.lolgab.mill.mima._
 import mill.scalalib.api.Util.isScala3
 
-val dottyVersions = sys.props.get("dottyVersion").toList
-
-val scalaVersions = "2.12.13" :: "2.13.4" :: "2.11.12" :: "3.0.2" :: dottyVersions
-val scala2Versions = scalaVersions.filter(_.startsWith("2."))
+val scala2Versions = List("2.11.12", "2.12.13", "2.13.4")
+val scala3Versions = List("3.0.2")
+val scalaVersions = scala2Versions ++ scala3Versions
 
 val scalaJSVersions = for {
   scalaV <- scalaVersions
   scalaJSV <- Seq("0.6.33", "1.5.1")
-  if scalaV.startsWith("2.") || scalaJSV.startsWith("1.")
+  if scalaJSV.startsWith("1.")
 } yield (scalaV, scalaJSV)
 
 val scalaNativeVersions = for {

@@ -1,17 +1,17 @@
 package scalatags
+
 import java.util.Objects
+
+import scala.language.implicitConversions
+import scala.annotation.unchecked.uncheckedVariance
+import scala.scalajs.js
 
 import org.scalajs
 import org.scalajs.dom
+import org.scalajs.dom.{html, raw, svg}
 
-import scala.language.implicitConversions
-import scala.scalajs.js
-import org.scalajs.dom.{Element, html, raw, svg}
-
-import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
-
 
 /**
  * A Scalatags module that generates `dom.Element`s when the tags are rendered.
@@ -109,31 +109,37 @@ object JsDom
 
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      def applyTo(t: dom.Element): Unit = xs.foreach(ev(_).applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(_.render).foreach(frag.appendChild)
+        xs.map(ev(_).render).foreach(frag.appendChild)
         frag
       }
     }
     implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      def applyTo(t: dom.Element): Unit = xs.foreach(ev(_).applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(_.render).foreach(frag.appendChild)
+        xs.map(ev(_).render).foreach(frag.appendChild)
         frag
       }
     }
   }
   
-  object StringFrag extends Companion[StringFrag]
+  object StringFrag extends Companion[StringFrag] {
+    def apply(target: String): StringFrag = new StringFrag(target)
+    def unapply(target: StringFrag): Option[String] = Some(target.v)
+  }
   case class StringFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
-  object RawFrag extends Companion[RawFrag]
+  object RawFrag extends Companion[RawFrag] {
+    def apply(target: String): RawFrag = RawFrag(target)
+    def unapply(target: RawFrag): Option[String] = Some(target.v)
+  }
   case class RawFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Node = {
@@ -215,11 +221,11 @@ trait LowPriorityImplicits{
   }
   implicit def bindJsAnyLike[T](implicit ev: T => js.Any): generic.AttrValue[dom.Element, T] = new generic.AttrValue[dom.Element, T]{
     def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
-      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
+      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(ev(v))
     }
   }
   implicit class bindNode[T <: dom.Node](e: T) extends generic.Frag[dom.Element, T] {
-    def applyTo(t: Element) = t.appendChild(e)
+    def applyTo(t: dom.Element) = t.appendChild(e)
     def render = e
   }
 }

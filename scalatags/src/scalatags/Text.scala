@@ -121,7 +121,10 @@ object Text
   }
 
 
-
+  object StringFrag extends Companion[StringFrag] {
+    def apply(target: String): StringFrag = new StringFrag(target)
+    def unapply(target: StringFrag): Option[String] = Some(target.v)
+  }
   case class StringFrag(v: String) extends text.Frag{
     Objects.requireNonNull(v)
     def render = {
@@ -131,12 +134,9 @@ object Text
     }
     def writeTo(strb: java.io.Writer) = Escaping.escape(v, strb)
   }
-  object StringFrag extends Companion[StringFrag] {
-    def apply(target: String): StringFrag = StringFrag(target)
-    def unapply(target: StringFrag): Option[String] = Some(target.v)
-  }
+
   object RawFrag extends Companion[RawFrag] {
-    def apply(target: String): RawFrag = RawFrag(target)
+    def apply(target: String): RawFrag = new RawFrag(target)
     def unapply(target: RawFrag): Option[String] = Some(target.v)
   }
   case class RawFrag(v: String) extends text.Frag {
@@ -144,18 +144,6 @@ object Text
     def render = v
     def writeTo(strb: java.io.Writer) = strb.append(v)
   }
-
-  // Scala 3 behaviour prevents us from using the same name as the case
-  // class for some reason, thus also preventing us from using the
-  // auto-generated companion object.
-  // object StringFragCompanion extends Companion[StringFrag] {
-  //   def apply(target: String): StringFrag = StringFrag(target)
-  //   def unapply(target: StringFrag): Option[String] = Some(target.v)
-  // }
-  // object RawFragCompanion extends Companion[RawFrag] {
-  //   def apply(target: String): RawFrag = RawFrag(target)
-  //   def unapply(target: RawFrag): Option[String] = Some(target.v)
-  // }
 
   class GenericAttr[T] extends AttrValue[T] {
     def apply(t: text.Builder, a: Attr, v: T): Unit = {

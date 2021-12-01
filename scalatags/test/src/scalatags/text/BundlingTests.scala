@@ -1,6 +1,7 @@
 package scalatags
 package text
 import utest._
+
 object BundlingTests extends TestSuite{
   val tests = TestSuite{
     val expected = """

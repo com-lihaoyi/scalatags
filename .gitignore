@@ -12,3 +12,8 @@ readme/target/*
 out
 /node_modules
 /.bsp
+
+.vscode/
+null/
+.bloop/
+.metals/
