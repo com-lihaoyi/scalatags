@@ -8,6 +8,8 @@ import scalatags.text.Builder
 
 import sourcecode.Text.generate
 
+import scala.language.implicitConversions
+
 /**
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
  * `String`s.
@@ -131,31 +133,13 @@ object Text
     }
     def writeTo(strb: java.io.Writer) = Escaping.escape(v, strb)
   }
-  object StringFrag extends Companion[StringFrag] {
-    def apply(target: String): StringFrag = StringFrag(target)
-    def unapply(target: StringFrag): Option[String] = Some(target.v)
-  }
-  object RawFrag extends Companion[RawFrag] {
-    def apply(target: String): RawFrag = RawFrag(target)
-    def unapply(target: RawFrag): Option[String] = Some(target.v)
-  }
+  object StringFrag
+  object RawFrag
   case class RawFrag(v: String) extends text.Frag {
     Objects.requireNonNull(v)
     def render = v
     def writeTo(strb: java.io.Writer) = strb.append(v)
   }
-
-  // Scala 3 behaviour prevents us from using the same name as the case
-  // class for some reason, thus also preventing us from using the
-  // auto-generated companion object.
-  // object StringFragCompanion extends Companion[StringFrag] {
-  //   def apply(target: String): StringFrag = StringFrag(target)
-  //   def unapply(target: StringFrag): Option[String] = Some(target.v)
-  // }
-  // object RawFragCompanion extends Companion[RawFrag] {
-  //   def apply(target: String): RawFrag = RawFrag(target)
-  //   def unapply(target: RawFrag): Option[String] = Some(target.v)
-  // }
 
   class GenericAttr[T] extends AttrValue[T] {
     def apply(t: text.Builder, a: Attr, v: T): Unit = {
@@ -185,10 +169,6 @@ object Text
                                          extends generic.TypedTag[text.Builder, Output, String]
                                          with text.Frag with geny.Writable{
     override def httpContentType = Some("text/html")
-    // unchecked because Scala 2.10.4 seems to not like this, even though
-    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
-    // and so just force this.
-    protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
     /**
      * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.

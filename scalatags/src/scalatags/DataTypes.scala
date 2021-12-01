@@ -1,4 +1,7 @@
 package scalatags
+
+import scala.language.implicitConversions
+
 /**
  * Module containing convenient ways of constructing CSS data types
  */

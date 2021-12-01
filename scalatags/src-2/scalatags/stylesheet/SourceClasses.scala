@@ -19,7 +19,6 @@ object SourceClasses{
          member.typeSignature.toString == "scalatags.stylesheet.Cls"
       if member.isPublic
     } yield q"$stylesheetName.${member.name.toTermName}"
-    pprint.pprintln(names)
     val res = q"""
     new scalatags.stylesheet.SourceClasses[$weakType](
       ($stylesheetName: $weakType) => Seq[scalatags.stylesheet.Cls](..$names)

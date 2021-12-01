@@ -111,13 +111,11 @@ trait Aliases[Builder, Output <: FragT, FragT]{
    * A [[Modifier]] which contains a String which will not be escaped.
    */
   protected[this] type RawFrag <: Modifier
-  protected[this] val RawFrag: Companion[RawFrag]
 
   /**
    * A [[Modifier]] which contains a String.
    */
   protected[this] type StringFrag <: Modifier
-  protected[this] val StringFrag: Companion[StringFrag]
 
   type Frag = generic.Frag[Builder, FragT]
 }

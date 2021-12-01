@@ -109,31 +109,32 @@ object JsDom
 
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      def applyTo(t: dom.Element): Unit = xs.foreach(elem => ev(elem).applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(_.render).foreach(frag.appendChild)
+        xs.map(elem => ev(elem)
+        .render).foreach(frag.appendChild)
         frag
       }
     }
     implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: dom.Element): Unit = xs.foreach(_.applyTo(t))
+      def applyTo(t: dom.Element): Unit = xs.foreach(elem => ev(elem).applyTo(t))
       def render: dom.Node = {
         val frag = org.scalajs.dom.document.createDocumentFragment()
-        xs.map(_.render).foreach(frag.appendChild)
+        xs.map(elem => ev(elem).render).foreach(frag.appendChild)
         frag
       }
     }
   }
   
-  object StringFrag extends Companion[StringFrag]
+  object StringFrag
   case class StringFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
-  object RawFrag extends Companion[RawFrag]
+  object RawFrag
   case class RawFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Node = {
@@ -186,10 +187,6 @@ object JsDom
                                               namespace: Namespace)
                                               extends generic.TypedTag[dom.Element, Output, dom.Node]
                                               with jsdom.Frag{
-    // unchecked because Scala 2.10.4 seems to not like this, even though
-    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
-    // and so just force this.
-    protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
     def render: Output = {
       val elem = dom.document.createElementNS(namespace.uri, tag)
@@ -215,11 +212,11 @@ trait LowPriorityImplicits{
   }
   implicit def bindJsAnyLike[T](implicit ev: T => js.Any): generic.AttrValue[dom.Element, T] = new generic.AttrValue[dom.Element, T]{
     def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
-      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
+      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(ev(v))
     }
   }
   implicit class bindNode[T <: dom.Node](e: T) extends generic.Frag[dom.Element, T] {
     def applyTo(t: Element) = t.appendChild(e)
-    def render = e
+    def render: T = e
   }
 }

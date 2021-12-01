@@ -133,17 +133,8 @@ trait VirtualDom[Output <: FragT, FragT]
     def render = rawToFrag(v)
   }
 
-  // Scala 3 behaviour prevents us from using the same name as the case
-  // class for some reason, thus also preventing us from using the
-  // auto-generated companion object.
-  object StringFrag extends Companion[StringFrag] {
-    def apply(target: String): StringFrag = StringFrag(target)
-    def unapply(target: StringFrag): Option[String] = Some(target.v)
-  }
-  object RawFrag extends Companion[RawFrag] {
-    def apply(target: String): RawFrag = RawFrag(target)
-    def unapply(target: RawFrag): Option[String] = Some(target.v)
-  }
+  object StringFrag
+  object RawFrag
 
   class GenericAttr[T] extends AttrValue[T]{
     def apply(t: vdom.Builder[Output, FragT], a: Attr, v: T): Unit = {
@@ -171,7 +162,6 @@ trait VirtualDom[Output <: FragT, FragT]
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
-    protected[this] type Self = TypedTag[O @uncheckedVariance]
 
     def render: O = {
       val builder = makeBuilder(tag)
