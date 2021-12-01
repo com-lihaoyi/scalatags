@@ -104,9 +104,6 @@ trait Aliases[Builder, Output <: FragT, FragT]{
 
   type Tag = generic.TypedTag[Builder, Output, FragT]
 
-  // Scala 3 behaviour prevents us from using the same name as the case
-  // class for some reason.
-
   /**
    * A [[Modifier]] which contains a String which will not be escaped.
    */
