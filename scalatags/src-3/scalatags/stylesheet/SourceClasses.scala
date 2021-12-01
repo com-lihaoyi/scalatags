@@ -12,7 +12,7 @@ object SourceClasses {
 
   private def terms[T: Type](t: Expr[T])(using ctx: Quotes): Seq[Expr[Cls]] = {
     import ctx.reflect._
-    val valdefs = TypeRepr.of[T].typeSymbol.memberFields.map(_.tree.asInstanceOf[ValDef])
+    val valdefs = TypeRepr.of[T].typeSymbol.declaredFields.map(_.tree.asInstanceOf[ValDef])
     val clsesOnly: Seq[ValDef] = valdefs.filter(_.tpt.tpe =:= TypeRepr.of[Cls])
     clsesOnly.map(valdef => t.asTerm.select(valdef.symbol).asExprOf[Cls])
   }
