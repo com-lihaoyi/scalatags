@@ -8,7 +8,7 @@ import $ivy.`com.github.lolgab::mill-mima_mill0.9:0.0.6`
 import com.github.lolgab.mill.mima._
 import mill.scalalib.api.Util.isScala3
 
-val scala2Versions = List("2.11.12", "2.12.13", "2.13.4")
+val scala2Versions = List("2.12.13", "2.13.4")
 val scala3Versions = List("3.0.2")
 val scalaVersions = scala2Versions ++ scala3Versions
 
