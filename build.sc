@@ -15,7 +15,7 @@ val scala2Versions = scalaVersions.filter(_.startsWith("2."))
 val scalaJSVersions = for {
   scalaV <- scalaVersions
   scalaJSV <- Seq("0.6.33", "1.5.1")
-  if scalaV.startsWith("2.") || scalaJSV.startsWith("1.")
+  if !(scalaV.startsWith("3.") && scalaJSV.startsWith("0."))
 } yield (scalaV, scalaJSV)
 
 val scalaNativeVersions = for {
