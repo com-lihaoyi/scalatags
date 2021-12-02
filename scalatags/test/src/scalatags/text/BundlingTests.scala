@@ -20,10 +20,7 @@ object BundlingTests extends TestSuite{
             </body>
         </html>
                    """
-    object CustomBundle extends Text.Cap with text.Tags with text.Tags2 with Text.Aggregate{
-      object st extends Text.Cap with Text.Styles with Text.Styles2
-      object at extends Text.Cap with Text.Attrs
-    }
+    
     test("custom"){
       import CustomBundle._
       TestUtil.strCheck(
@@ -69,5 +66,10 @@ object BundlingTests extends TestSuite{
         expected
       )
     }
+  }
+
+  object CustomBundle extends Text.Cap with text.Tags with text.Tags2 with Text.Aggregate{
+    object st extends Text.Cap with Text.Styles with Text.Styles2
+    object at extends Text.Cap with Text.Attrs
   }
 }

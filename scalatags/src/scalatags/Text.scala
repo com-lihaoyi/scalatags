@@ -122,7 +122,6 @@ object Text
 
 
   object StringFrag extends Companion[StringFrag] {
-    def apply(target: String): StringFrag = new StringFrag(target)
     def unapply(target: StringFrag): Option[String] = Some(target.v)
   }
   case class StringFrag(v: String) extends text.Frag{
@@ -136,7 +135,6 @@ object Text
   }
 
   object RawFrag extends Companion[RawFrag] {
-    def apply(target: String): RawFrag = new RawFrag(target)
     def unapply(target: RawFrag): Option[String] = Some(target.v)
   }
   case class RawFrag(v: String) extends text.Frag {

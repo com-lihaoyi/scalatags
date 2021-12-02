@@ -98,13 +98,7 @@ object DomTests extends TestSuite{
     }
 
     test("crossTag"){
-      class SharedTemplates[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
-        import bundle.all._
-        val widget: Tag = div("hello")
-      }
-
-      object JsTemplates extends SharedTemplates(scalatags.JsDom)
-      object TextTemplates extends SharedTemplates(scalatags.Text)
+      
 
       val jsVersion: dom.Element = JsTemplates.widget.render
       val txtVersion: String = TextTemplates.widget.render
@@ -116,5 +110,13 @@ object DomTests extends TestSuite{
       )
     }
   }
+
+  class SharedTemplates[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
+    import bundle.all._
+    val widget: Tag = div("hello")
+  }
+
+  object JsTemplates extends SharedTemplates(scalatags.JsDom)
+  object TextTemplates extends SharedTemplates(scalatags.Text)
 
 }

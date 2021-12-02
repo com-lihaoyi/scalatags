@@ -12,10 +12,11 @@ val scala2Versions = List("2.12.13", "2.13.4")
 val scala3Versions = List("3.0.2")
 val scalaVersions = scala2Versions ++ scala3Versions
 
-val scalaJSVersions = for {
+val scalaJSVersions = Seq("0.6.33", "1.5.1")
+val scalaAndScalaJSVersions = for {
   scalaV <- scalaVersions
-  scalaJSV <- Seq("0.6.33", "1.5.1")
-  if scalaJSV.startsWith("1.")
+  scalaJSV <- scalaJSVersions
+  if !(scalaV.startsWith("3.") && scalaJSV.startsWith("0."))
 } yield (scalaV, scalaJSV)
 
 val scalaNativeVersions = for {
@@ -111,7 +112,7 @@ object scalatags extends Module {
     }
   }
 
-  object js extends Cross[JSScalatagsModule](scalaJSVersions:_*)
+  object js extends Cross[JSScalatagsModule](scalaAndScalaJSVersions:_*)
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
@@ -144,7 +145,7 @@ object scalatags extends Module {
 }
 
 object example extends ScalaJSModule{
-  val (scalaV, scalaJSV) = scalaJSVersions.head
+  val (scalaV, scalaJSV) = scalaAndScalaJSVersions.head
   def scalaVersion = scalaV
   def scalaJSVersion = scalaJSV
   def moduleDeps = Seq(scalatags.js(scalaV, scalaJSV))

@@ -3,7 +3,9 @@ package scalatags.stylesheet
 import scala.quoted.*
 
 class SourceClasses[T](val value: T => Seq[Cls])
+
 object SourceClasses {
+  
   inline implicit def apply[T]: SourceClasses[T] = ${ manglerImpl[T] }
 
   def manglerImpl[T: Type](using Quotes): Expr[SourceClasses[T]] = {
