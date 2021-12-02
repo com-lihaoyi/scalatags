@@ -5,7 +5,7 @@ import scalatags.generic.{Namespace, Util}
 
 trait SvgTags[Output <: FragT, FragT]
 extends generic.SvgTags[Builder[Output, FragT], Output, FragT] with TagFactory[Output, FragT]{
-  implicit lazy val svgNamespaceConfig = Namespace.svgNamespaceConfig
+  implicit lazy val svgNamespaceConfig: Namespace = Namespace.svgNamespaceConfig
   lazy val altGlyph = tag("altGlyph")
   lazy val altGlyphDef = tag("altGlyphDef")
   lazy val altGlyphItem = tag("altGlyphItem")

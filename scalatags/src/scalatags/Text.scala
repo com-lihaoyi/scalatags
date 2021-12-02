@@ -6,6 +6,8 @@ import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder
 
+import scala.language.implicitConversions
+
 /**
  * A Scalatags module that works with a text back-end, i.e. it creates HTML
  * `String`s.
@@ -51,18 +53,18 @@ object Text
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
     implicit def UnitFrag(u: Unit) = new Text.StringFrag("")
-    def makeAbstractTypedTag[T](tag: String, void: Boolean, namespaceConfig: Namespace) = {
+    def makeAbstractTypedTag[T <: String](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void)
     }
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
-      def render = xs.map(_.render).mkString
+      def applyTo(t: text.Builder) = xs.foreach(elem => ev(elem).applyTo(t))
+      def render = xs.map(elem => ev(elem).render).mkString
     }
     implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      def applyTo(t: text.Builder) = xs.foreach(_.applyTo(t))
-      def render = xs.map(_.render).mkString
+      def applyTo(t: text.Builder) = xs.foreach(elem => ev(elem).applyTo(t))
+      def render = xs.map(elem => ev(elem).render).mkString
     }
 
     case class doctype(s: String)(content: text.Frag) extends geny.Writable{
@@ -129,9 +131,8 @@ object Text
     }
     def writeTo(strb: java.io.Writer) = Escaping.escape(v, strb)
   }
-  object StringFrag extends Companion[StringFrag]
-  object RawFrag extends Companion[RawFrag]
-  case class RawFrag(v: String) extends text.Frag {
+
+  case class RawFrag(v: String) extends text.Frag{
     Objects.requireNonNull(v)
     def render = v
     def writeTo(strb: java.io.Writer) = strb.append(v)
@@ -153,7 +154,7 @@ object Text
   }
   class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
     def apply(s: Style, v: T) = {
-      StylePair(s, v + "px", ev)
+      StylePair(s, s"${v}px", ev)
     }
   }
 

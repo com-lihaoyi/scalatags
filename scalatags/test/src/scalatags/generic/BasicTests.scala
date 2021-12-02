@@ -140,21 +140,22 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
       )
     }
     test("compileErrors"){
+      def writeType(tpe: String) = if(BuildInfo.scalaMajorVersion == "3") s"($tpe)" else tpe
       test("niceErrorsForAttributes"){
         val msg = compileError("""a(onclick := {() => "lol"})""").msg
-        assert(msg.contains("scalatags does not know how to use () => String as an attribute"))
+        assert(msg.contains(s"scalatags does not know how to use ${writeType("() => String")} as an attribute"))
       }
       test("niceErrorsForStyles"){
         val msg = compileError("""a(opacity:= {() => "lol"})""").msg
-        assert(msg.contains("scalatags does not know how to use () => String as an style"))
+        assert(msg.contains(s"scalatags does not know how to use ${writeType("() => String")} as an style"))
       }
     }
     test("nulls"){
       val nullString: String = null
-      * - intercept[NullPointerException](div(nullString))
-      * - intercept[NullPointerException](div(null: Seq[Int]))
-      * - intercept[NullPointerException](div(height := nullString))
-      * - intercept[NullPointerException](div(opacity := nullString))
+      test("1") { intercept[NullPointerException](div(nullString)) }
+      test("2") { intercept[NullPointerException](div(null: Seq[Int])) }
+      test("3") { intercept[NullPointerException](div(height := nullString)) }
+      test("4") { intercept[NullPointerException](div(opacity := nullString)) }
     }
     test("rawAttrs"){
       strCheck(
