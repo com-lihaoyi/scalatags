@@ -6,8 +6,6 @@ import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder
 
-import sourcecode.Text.generate
-
 import scala.language.implicitConversions
 
 /**
