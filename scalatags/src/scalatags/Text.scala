@@ -2,7 +2,7 @@ package scalatags
 import java.util.Objects
 
 import scalatags.generic._
- import scala.annotation.unchecked.uncheckedVariance
+import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder
 
@@ -167,8 +167,11 @@ object Text
                                          void: Boolean = false)
                                          extends generic.TypedTag[text.Builder, Output, String]
                                          with text.Frag with geny.Writable{
-    protected[this] type Self = TypedTag[Output @uncheckedVariance]
     override def httpContentType = Some("text/html")
+    // unchecked because Scala 2.10.4 seems to not like this, even though
+    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
+    // and so just force this.
+    protected[this] type Self = TypedTag[Output @uncheckedVariance]
 
     /**
      * Serialize this [[TypedTag]] and all its children out to the given StringBuilder.

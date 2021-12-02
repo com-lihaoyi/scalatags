@@ -187,8 +187,8 @@ object JsDom
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
-
     protected[this] type Self = TypedTag[Output @uncheckedVariance]
+
     def render: Output = {
       val elem = dom.document.createElementNS(namespace.uri, tag)
       build(elem)
