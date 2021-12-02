@@ -20,7 +20,9 @@ jobs:
           sudo apt-get install -y nodejs
           npm install
       - name: Run tests
-        run: ./mill -i --disable-ticker all __.publishArtifacts __.test
+        run: |
+          ./mill -i --disable-ticker __.resolvedIvyDeps
+          ./mill -i --disable-ticker -j 0 all __.publishArtifacts __.test
   check-binary-compatibility:
     runs-on: ubuntu-latest
     steps:
