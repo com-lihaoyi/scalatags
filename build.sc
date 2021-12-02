@@ -1,4 +1,3 @@
-import mill.define.Target
 import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
 import $ivy.`com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION`
 import mill.contrib.buildinfo._
