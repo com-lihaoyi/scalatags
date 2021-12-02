@@ -2,12 +2,11 @@ package scalatags
 
 import java.util.Objects
 
-
-import scala.language.implicitConversions
-
 import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
+import scala.annotation.unchecked.uncheckedVariance
+import scala.language.implicitConversions
 
 /**
  * A Scalatags module that can be configured to construct arbitrary virtual DOM
@@ -156,6 +155,7 @@ trait VirtualDom[Output <: FragT, FragT]
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
+    protected[this] type Self = TypedTag[O @uncheckedVariance]
 
     def render: O = {
       val builder = makeBuilder(tag)

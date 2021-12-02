@@ -85,7 +85,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 
 
   def check(txt: String, expected: String) = {
-    def normalize(s: String) = s.linesIterator.map(_.trim).mkString
+    // augmentString = work around scala/bug#11125 on JDK 11
+    def normalize(s: String) = Predef.augmentString(s).lines.map(_.trim).mkString
 
     assert(normalize(txt) == normalize(expected))
   }

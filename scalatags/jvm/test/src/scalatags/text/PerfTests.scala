@@ -1,8 +1,7 @@
-/*
 package scalatags
 package text
 
-import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
+/*import org.fusesource.scalate.{DefaultRenderContext, RenderContext, TemplateSource, TemplateEngine}
 import java.io.{StringWriter, PrintWriter}
 
 case object JadePerf extends generic.PerfTest{

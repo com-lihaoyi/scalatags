@@ -8,6 +8,7 @@ import scala.language.implicitConversions
 import scala.scalajs.js
 import org.scalajs.dom.{Element, html, raw, svg}
 
+import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
@@ -183,7 +184,11 @@ object JsDom
                                              namespace: Namespace)
                                              extends generic.TypedTag[dom.Element, Output, dom.Node]
                                              with jsdom.Frag{
+    // unchecked because Scala 2.10.4 seems to not like this, even though
+    // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
+    // and so just force this.
 
+    protected[this] type Self = TypedTag[Output @uncheckedVariance]
     def render: Output = {
       val elem = dom.document.createElementNS(namespace.uri, tag)
       build(elem)
@@ -213,6 +218,6 @@ trait LowPriorityImplicits{
   }
   implicit class bindNode[T <: dom.Node](e: T) extends generic.Frag[dom.Element, T] {
     def applyTo(t: Element) = t.appendChild(e)
-    def render: T = e
+    def render = e
   }
 }

@@ -2,6 +2,7 @@ package scalatags
 import java.util.Objects
 
 import scalatags.generic._
+ import scala.annotation.unchecked.uncheckedVariance
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 import scalatags.text.Builder
 
@@ -166,6 +167,7 @@ object Text
                                          void: Boolean = false)
                                          extends generic.TypedTag[text.Builder, Output, String]
                                          with text.Frag with geny.Writable{
+    protected[this] type Self = TypedTag[Output @uncheckedVariance]
     override def httpContentType = Some("text/html")
 
     /**

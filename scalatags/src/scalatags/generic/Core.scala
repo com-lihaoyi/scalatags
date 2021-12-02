@@ -38,6 +38,7 @@ trait Frag[Builder, +FragT] extends Modifier[Builder]{
  *           associated with that tag name.
  */
 trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output]{
+  protected[this] type Self <: TypedTag[Builder, Output, FragT]
   def tag: String
 
   /**
@@ -77,7 +78,7 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output]{
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[TypedTag]].
    */
-  def apply(xs: Modifier[Builder]*): TypedTag[Builder, Output, FragT]
+  def apply(xs: Modifier[Builder]*): Self
 
   /**
    * Collapses this scalatags tag tree and returns an [[Output]]

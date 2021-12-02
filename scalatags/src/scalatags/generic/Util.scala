@@ -69,7 +69,7 @@ trait Util[Builder, Output <: FragT, FragT] extends LowPriUtil[Builder, Output, 
    */
   implicit class SeqNode[A](xs: Seq[A])(implicit ev: A => Modifier[Builder]) extends Modifier[Builder]{
     Objects.requireNonNull(xs)
-    def applyTo(t: Builder) = (xs map ev).foreach(_.applyTo(t))
+    def applyTo(t: Builder) = xs.foreach(elem => ev(elem).applyTo(t))
   }
 
   /**
