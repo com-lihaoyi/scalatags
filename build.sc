@@ -28,7 +28,7 @@ trait ScalatagsPublishModule extends PublishModule with Mima {
 
   def publishVersion = VcsVersion.vcsState().format()
 
-  def mimaPreviousVersions = Seq("0.10.0")
+  def mimaPreviousVersions = Seq("0.11.0")
 
   def pomSettings = PomSettings(
     description = artifactName(),
