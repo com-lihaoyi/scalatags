@@ -106,16 +106,14 @@ trait VirtualDom[Output <: FragT, FragT]
 
     implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      lazy val frags = xs map ev
-      def applyTo(t: vdom.Builder[Output, FragT]): Unit = frags.foreach(_.applyTo(t))
+      def applyTo(t: vdom.Builder[Output, FragT]): Unit = xs.foreach(elem => ev(elem).applyTo(t))
       def render: FragT = {
         throw new Exception("Rendering of bare arrays of nodes is not supported in virtual dom backend")
       }
     }
     implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
       Objects.requireNonNull(xs)
-      lazy val frags = xs map ev
-      def applyTo(t: vdom.Builder[Output, FragT]): Unit = frags.foreach(_.applyTo(t))
+      def applyTo(t: vdom.Builder[Output, FragT]): Unit = xs.foreach(elem => ev(elem).applyTo(t))
       def render: FragT = {
         throw new Exception("Rendering of bare arrays of nodes is not supported in virtual dom backend")
       }
