@@ -64,6 +64,7 @@ trait GlobalAttrs[Builder, Output <: FragT, FragT]
     def selectDynamic(s: String) = new DataAttribute(s :: sections)
     def :=[T](v: T)(implicit ev: AttrValue[Builder, T]) =
       AttrPair(Attr(sections.reverse.mkString("-")), v, ev)
+    def apply[T](v: T)(implicit ev: AttrValue[Builder, T]) = :=(v)(ev)
   }
   def data(suffix: String) = Attr("data-" + suffix)
   /**
