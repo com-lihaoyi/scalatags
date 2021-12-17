@@ -1,4 +1,5 @@
-package scalatags.text
+package scalatags
+package text
 import scalatags.generic
 
 
