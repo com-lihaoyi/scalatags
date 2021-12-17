@@ -46,6 +46,9 @@ object TextTests extends TestSuite{
       val sample = tag("abc:def")(attr("hello:world") := "moo")
       assert(sample.toString == """<abc:def hello:world="moo"></abc:def>""")
     }
-
+    test("doctype"){
+      // Just make sure that this compiles.
+      val example = doctype("html")(html())
+    }
   }
 }
