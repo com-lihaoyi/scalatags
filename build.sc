@@ -1,27 +1,19 @@
 import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
 import $ivy.`com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION`
 import mill.contrib.buildinfo._
-import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version_mill0.9:0.1.1`
+import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.1.4`
 import de.tobiasroeser.mill.vcs.version.VcsVersion
-import $ivy.`com.github.lolgab::mill-mima_mill0.9:0.0.6`
+import $ivy.`com.github.lolgab::mill-mima::0.0.10`
 import com.github.lolgab.mill.mima._
 import mill.scalalib.api.Util.isScala3
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
-val scalaVersions = "2.12.13" :: "2.13.4" :: "2.11.12" :: "3.0.2" :: dottyVersions
+val scalaVersions = "2.12.16" :: "2.13.8" :: "2.11.12" :: "3.1.3" :: dottyVersions
 val scala2Versions = scalaVersions.filter(_.startsWith("2."))
 
-val scalaJSVersions = for {
-  scalaV <- scalaVersions
-  scalaJSV <- Seq("0.6.33", "1.5.1")
-  if !(scalaV.startsWith("3.") && scalaJSV.startsWith("0."))
-} yield (scalaV, scalaJSV)
-
-val scalaNativeVersions = for {
-  scalaV <- scala2Versions
-  scalaNativeV <- Seq("0.4.0")
-} yield (scalaV, scalaNativeV)
+val scalaJSVersions = scalaVersions.map((_, "1.10.1"))
+val scalaNativeVersions = scalaVersions.map((_, "0.4.5"))
 
 trait ScalatagsPublishModule extends PublishModule with Mima {
   def artifactName = "scalatags"
@@ -33,11 +25,11 @@ trait ScalatagsPublishModule extends PublishModule with Mima {
   def pomSettings = PomSettings(
     description = artifactName(),
     organization = "com.lihaoyi",
-    url = "https://github.com/lihaoyi/scalatags",
+    url = "https://github.com/com-lihaoyi/scalatags",
     licenses = Seq(License.MIT),
     versionControl = VersionControl(
-      browsableRepository = Some("git://github.com/lihaoyi/scalatags.git"),
-      connection = Some("scm:git://github.com/lihaoyi/scalatags.git")
+      browsableRepository = Some("git://github.com/com-lihaoyi/scalatags.git"),
+      connection = Some("scm:git://github.com/com-lihaoyi/scalatags.git")
     ),
     developers = Seq(
       Developer("lihaoyi", "Li Haoyi", "https://github.com/lihaoyi")
@@ -48,8 +40,8 @@ trait ScalatagsPublishModule extends PublishModule with Mima {
 trait Common extends CrossScalaModule {
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::sourcecode::0.2.7",
-    ivy"com.lihaoyi::geny::0.6.10",
+    ivy"com.lihaoyi::sourcecode::0.2.8",
+    ivy"com.lihaoyi::geny::0.7.1",
   )
   def compileIvyDeps = T { super.compileIvyDeps() ++
     (
@@ -74,9 +66,9 @@ trait Common extends CrossScalaModule {
 trait CommonTestModule extends ScalaModule with TestModule.Utest with BuildInfo {
   def millSourcePath = super.millSourcePath / os.up
   def crossScalaVersion: String
-  val scalaXmlVersion = if(crossScalaVersion.startsWith("2.11.")) "1.3.0" else "2.0.1"
+  val scalaXmlVersion = if(crossScalaVersion.startsWith("2.11.")) "1.3.0" else "2.1.0"
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::utest::0.7.10",
+    ivy"com.lihaoyi::utest::0.7.11",
     ivy"org.scala-lang.modules::scala-xml:$scalaXmlVersion"
   )
   def offset: os.RelPath = os.rel
@@ -111,18 +103,12 @@ object scalatags extends Module {
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
-    def ivyDeps = super.ivyDeps() ++ (
-      if(crossJSVersion.startsWith("0.6.")) Agg(ivy"org.scala-js::scalajs-dom::1.1.0")
-      else Agg(ivy"org.scala-js::scalajs-dom::2.0.0")
-    )
+    def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-dom::2.2.0")
     def offset = os.up
     object test extends Tests with CommonTestModule{
       def offset = os.up
       def crossScalaVersion = JSScalatagsModule.this.crossScalaVersion
-      val jsDomNodeJs =
-        if(crossJSVersion.startsWith("0.6.")) Agg()
-        else Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs:1.1.0").map(_.withDottyCompat(crossScalaVersion))
-      def ivyDeps = super.ivyDeps() ++ jsDomNodeJs
+      def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs:1.1.0").map(_.withDottyCompat(crossScalaVersion))
       def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.JsDom()
     }
   }
