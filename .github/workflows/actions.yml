@@ -13,29 +13,34 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['8', '17']
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
-          java-version: 8
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+
       - name: Install node and jsdom
-        run: |
-          curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-          npm install
+        run: npm install
+
       - name: Run tests
         run: |
           ./mill -i --disable-ticker __.resolvedIvyDeps
           ./mill -i --disable-ticker -j 0 all __.publishArtifacts __.test
+
   check-binary-compatibility:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v3
         with:
-          java-version: 8
+          distribution: 'temurin'
+          java-version: 17
       - name: Check Binary Compatibility
         run: ./mill -i --disable-ticker __.mimaReportBinaryIssues
 
@@ -52,9 +57,10 @@ jobs:
       LC_MESSAGES: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: 8
       - name: Publish to Maven Central
         run: |
