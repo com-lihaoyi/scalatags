@@ -15,12 +15,22 @@ val scala2Versions = scalaVersions.filter(_.startsWith("2."))
 val scalaJSVersions = scalaVersions.map((_, "1.10.1"))
 val scalaNativeVersions = scalaVersions.map((_, "0.4.5"))
 
-trait ScalatagsPublishModule extends PublishModule with Mima {
+trait MimaCheck extends Mima {
+  def mimaPreviousVersions = Seq("0.11.0", "0.11.1")
+}
+
+trait ScalatagsPublishModule extends PublishModule with MimaCheck {
   def artifactName = "scalatags"
+
 
   def publishVersion = VcsVersion.vcsState().format()
 
-  def mimaPreviousVersions = Seq("0.11.0")
+  def crossScalaVersion: String
+
+  // Temporary until the next version of Mima gets released with
+  // https://github.com/lightbend/mima/issues/693 included in the release.
+  def mimaPreviousArtifacts =
+    if(isScala3(crossScalaVersion)) Agg.empty[Dep] else super.mimaPreviousArtifacts()
 
   def pomSettings = PomSettings(
     description = artifactName(),
