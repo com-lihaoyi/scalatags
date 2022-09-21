@@ -3,7 +3,7 @@ import $ivy.`com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION`
 import mill.contrib.buildinfo._
 import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.1.4`
 import de.tobiasroeser.mill.vcs.version.VcsVersion
-import $ivy.`com.github.lolgab::mill-mima::0.0.10`
+import $ivy.`com.github.lolgab::mill-mima::0.0.13`
 import com.github.lolgab.mill.mima._
 import mill.scalalib.api.Util.isScala3
 
@@ -26,11 +26,6 @@ trait ScalatagsPublishModule extends PublishModule with MimaCheck {
   def publishVersion = VcsVersion.vcsState().format()
 
   def crossScalaVersion: String
-
-  // Temporary until the next version of Mima gets released with
-  // https://github.com/lightbend/mima/issues/693 included in the release.
-  def mimaPreviousArtifacts =
-    if(isScala3(crossScalaVersion)) Agg.empty[Dep] else super.mimaPreviousArtifacts()
 
   def pomSettings = PomSettings(
     description = artifactName(),
@@ -127,6 +122,8 @@ object scalatags extends Module {
   class NativeScalatagsModule(val crossScalaVersion: String, crossScalaNativeVersion: String)
     extends Common with ScalaNativeModule with ScalatagsPublishModule {
     def scalaNativeVersion = crossScalaNativeVersion
+    // No released Scala Native Scala 3 version yet
+    def mimaPreviousArtifacts = if(isScala3(crossScalaVersion)) Agg.empty[Dep] else super.mimaPreviousArtifacts()
     def offset = os.up
     object test extends Tests with CommonTestModule{
       def offset = os.up
