@@ -122,6 +122,8 @@ object scalatags extends Module {
   class NativeScalatagsModule(val crossScalaVersion: String, crossScalaNativeVersion: String)
     extends Common with ScalaNativeModule with ScalatagsPublishModule {
     def scalaNativeVersion = crossScalaNativeVersion
+    // No released Scala Native Scala 3 version yet
+    def mimaPreviousArtifacts = if(isScala3(crossScalaVersion)) Agg.empty[Dep] else super.mimaPreviousArtifacts()
     def offset = os.up
     object test extends Tests with CommonTestModule{
       def offset = os.up
