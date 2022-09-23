@@ -45,8 +45,8 @@ trait ScalatagsPublishModule extends PublishModule with MimaCheck {
 trait Common extends CrossScalaModule {
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::sourcecode::0.2.8",
-    ivy"com.lihaoyi::geny::0.7.1",
+    ivy"com.lihaoyi::sourcecode::0.3.0",
+    ivy"com.lihaoyi::geny::1.0.0",
   )
   def compileIvyDeps = T { super.compileIvyDeps() ++
     (
@@ -73,7 +73,7 @@ trait CommonTestModule extends ScalaModule with TestModule.Utest with BuildInfo 
   def crossScalaVersion: String
   val scalaXmlVersion = if(crossScalaVersion.startsWith("2.11.")) "1.3.0" else "2.1.0"
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::utest::0.7.11",
+    ivy"com.lihaoyi::utest::0.8.1",
     ivy"org.scala-lang.modules::scala-xml:$scalaXmlVersion"
   )
   def offset: os.RelPath = os.rel
@@ -108,7 +108,7 @@ object scalatags extends Module {
   class JSScalatagsModule(val crossScalaVersion: String, crossJSVersion: String)
     extends Common with ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = crossJSVersion
-    def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-dom::2.2.0")
+    def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-dom::2.3.0")
     def offset = os.up
     object test extends Tests with CommonTestModule{
       def offset = os.up
