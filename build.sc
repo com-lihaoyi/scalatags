@@ -16,7 +16,7 @@ val scalaJSVersions = scalaVersions.map((_, "1.10.1"))
 val scalaNativeVersions = scalaVersions.map((_, "0.4.5"))
 
 trait MimaCheck extends Mima {
-  def mimaPreviousVersions = Seq("0.11.0", "0.11.1")
+  def mimaPreviousVersions = Seq("0.11.0", "0.11.1", "0.12.0")
 }
 
 trait ScalatagsPublishModule extends PublishModule with MimaCheck {
