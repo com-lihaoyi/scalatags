@@ -1,6 +1,6 @@
 {
   "name": "scalatags",
   "devDependencies": {
-    "jsdom": "^20.0.0"
+    "jsdom": "^20.0.2"
   }
 }
