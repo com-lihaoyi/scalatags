@@ -100,8 +100,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
           None: Option[String],
           h1("Hello"),
           Array(1, 2, 3),
-          strArr,
-          ()
+          strArr
         ),
         """<div>lol1<h1>Hello</h1>123hello</div>"""
       )
