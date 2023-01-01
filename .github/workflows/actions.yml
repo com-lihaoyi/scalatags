@@ -44,6 +44,20 @@ jobs:
       - name: Check Binary Compatibility
         run: ./mill -i --disable-ticker __.mimaReportBinaryIssues
 
+  check-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - run: ./mill -i -k __.checkFormat
+
   publish-sonatype:
     if: github.repository == 'com-lihaoyi/scalatags' && contains(github.ref, 'refs/tags/')
     needs: test

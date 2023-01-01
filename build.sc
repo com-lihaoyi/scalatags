@@ -6,6 +6,7 @@ import de.tobiasroeser.mill.vcs.version.VcsVersion
 import $ivy.`com.github.lolgab::mill-mima::0.0.13`
 import com.github.lolgab.mill.mima._
 import mill.scalalib.api.Util.isScala3
+import mill.scalalib.scalafmt._
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
@@ -41,7 +42,7 @@ trait ScalatagsPublishModule extends PublishModule with MimaCheck {
   )
 }
 
-trait Common extends CrossScalaModule {
+trait Common extends CrossScalaModule with ScalafmtModule {
   def millSourcePath = super.millSourcePath / offset
   def ivyDeps = Agg(
     ivy"com.lihaoyi::sourcecode::0.3.0",

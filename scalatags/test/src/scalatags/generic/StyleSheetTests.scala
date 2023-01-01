@@ -182,8 +182,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT](val bundle: Bund
          """
       )
     }
-<<<<<<< HEAD
-    test("defs"){
+
+    test("defs") {
       check(
         Defs.styleSheetText,
         s"""
@@ -197,16 +197,10 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT](val bundle: Bund
          """
       )
     }
-    test("failure"){
-      test("noDirectInstantiation"){
-  // This doesn't seem to work, even though that snippet does indeed
-  // cause a compilation error. Maybe a bug in uTest?
-=======
     test("failure") {
       test("noDirectInstantiation") {
         // This doesn't seem to work, even though that snippet does indeed
         // cause a compilation error. Maybe a bug in uTest?
->>>>>>> 7a32dde (chore(format): format all the things)
 
         //      compileError("""
         //        object Funky extends StyleSheet
