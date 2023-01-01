@@ -2,20 +2,22 @@ package scalatags
 package jsdom
 import utest._
 
-
-
 import org.scalajs.dom
 import org.scalajs.dom.html.Paragraph
 
-object DomTests extends TestSuite{
-  class SharedTemplates[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
+object DomTests extends TestSuite {
+  class SharedTemplates[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[
+    Builder,
+    Output,
+    FragT
+  ]) {
     import bundle.all._
     val widget: Tag = div("hello")
   }
-  def tests = TestSuite{
-    test("basic"){
+  def tests = TestSuite {
+    test("basic") {
       import scalatags.JsDom.all._
-      test("children"){
+      test("children") {
         val elem = div.render
         assert(elem.children.length == 0)
         elem.appendChild(p(1, "wtf", "bbq").render)
@@ -25,7 +27,7 @@ object DomTests extends TestSuite{
         assert(pElem.textContent == "1wtfbbq")
       }
 
-      test("attributes"){
+      test("attributes") {
         val url = "https://www.google.com/"
         val elem = a(
           href := url,
@@ -39,7 +41,7 @@ object DomTests extends TestSuite{
         assert(textNode.textContent == "Google")
       }
 
-      test("styles"){
+      test("styles") {
         val elem = div(
           color := "red",
           float.left,
@@ -55,9 +57,9 @@ object DomTests extends TestSuite{
         )
       }
     }
-    test("fancy"){
+    test("fancy") {
       import scalatags.JsDom.all._
-      test("fragSeqsAreFrags"){
+      test("fragSeqsAreFrags") {
         val rendered = Seq(
           h1("titless"),
           div("lol")
@@ -66,10 +68,10 @@ object DomTests extends TestSuite{
         val wrapped = div(rendered).toString
         assert(wrapped == "<div><h1>titless</h1><div>lol</div></div>")
       }
-      test("boundAttributes"){
+      test("boundAttributes") {
         var count = 0
         val elem = div(
-          onclick := { () => count += 1},
+          onclick := { () => count += 1 },
           tabindex := 1
         ).render
 
@@ -77,12 +79,12 @@ object DomTests extends TestSuite{
         elem.onclick(null)
         assert(count == 1)
       }
-      test("triggers"){
+      test("triggers") {
         val labelElem = label("Default").render
 
         val inputElem = input(
-          `type`:="text",
-          onfocus := { () => labelElem.textContent = ""}
+          `type` := "text",
+          onfocus := { () => labelElem.textContent = "" }
         ).render
 
         val box = div(
@@ -96,12 +98,12 @@ object DomTests extends TestSuite{
 
       }
     }
-    test("tagType"){
+    test("tagType") {
       import scalatags.JsDom.all._
       val thing: Tag = div
     }
 
-    test("crossTag"){
+    test("crossTag") {
       object JsTemplates extends SharedTemplates(scalatags.JsDom)
       object TextTemplates extends SharedTemplates(scalatags.Text)
 

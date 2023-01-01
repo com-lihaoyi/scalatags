@@ -1,4 +1,5 @@
 package scalatags
+
 /**
  * Utility methods related to validating and escaping XML; used internally but
  * potentially useful outside of Scalatags.
@@ -20,20 +21,20 @@ object Escaping {
     // original regex - ^[a-zA-Z_:][-a-zA-Z0-9_:.]*$
     // n.b. I know its ugly, but its fast
     val len = s.length
-    if(len == 0)
+    if (len == 0)
       return false
 
     val sc = s.charAt(0)
-    val startCharValid = (sc >= 'a' && sc <='z') || (sc >= 'A' && sc <='Z') || sc ==':'
-    if(!startCharValid)
+    val startCharValid = (sc >= 'a' && sc <= 'z') || (sc >= 'A' && sc <= 'Z') || sc == ':'
+    if (!startCharValid)
       return false
 
     var pos = 1
     while (pos < len) {
       val c = s.charAt(pos)
-      val valid = (c >= 'a' && c <='z') || (c >= 'A' && c <='Z') || (c >= '0' && c <='9') ||
-        c == '-' || c ==':' || c =='.' || c == '_'
-      if(!valid)
+      val valid = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') ||
+        c == '-' || c == ':' || c == '.' || c == '_'
+      if (!valid)
         return false
       pos += 1
     }

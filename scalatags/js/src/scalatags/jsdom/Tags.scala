@@ -1,9 +1,8 @@
-
 package scalatags
 package jsdom
 import org.scalajs.dom
 import scalatags.generic.Util
-trait Tags extends generic.Tags[dom.Element, dom.Element, dom.Node] with TagFactory{
+trait Tags extends generic.Tags[dom.Element, dom.Element, dom.Node] with TagFactory {
   // Root Element
   lazy val html: ConcreteHtmlTag[dom.html.Html] = typedTag[dom.html.Html]("html")
   // Document Metadata
@@ -64,14 +63,16 @@ trait Tags extends generic.Tags[dom.Element, dom.Element, dom.Node] with TagFact
   lazy val param: ConcreteHtmlTag[dom.html.Param] = typedTag[dom.html.Param]("param", void = true)
   lazy val video: ConcreteHtmlTag[dom.html.Video] = typedTag[dom.html.Video]("video")
   lazy val audio: ConcreteHtmlTag[dom.html.Audio] = typedTag[dom.html.Audio]("audio")
-  lazy val source: ConcreteHtmlTag[dom.html.Source] = typedTag[dom.html.Source]("source", void = true)
+  lazy val source: ConcreteHtmlTag[dom.html.Source] =
+    typedTag[dom.html.Source]("source", void = true)
   lazy val track: ConcreteHtmlTag[dom.html.Track] = typedTag[dom.html.Track]("track", void = true)
   lazy val canvas: ConcreteHtmlTag[dom.html.Canvas] = typedTag[dom.html.Canvas]("canvas")
   lazy val map: ConcreteHtmlTag[dom.html.Map] = typedTag[dom.html.Map]("map")
   lazy val area: ConcreteHtmlTag[dom.html.Area] = typedTag[dom.html.Area]("area", void = true)
   // Tabular data
   lazy val table: ConcreteHtmlTag[dom.html.Table] = typedTag[dom.html.Table]("table")
-  lazy val caption: ConcreteHtmlTag[dom.html.TableCaption] = typedTag[dom.html.TableCaption]("caption")
+  lazy val caption: ConcreteHtmlTag[dom.html.TableCaption] =
+    typedTag[dom.html.TableCaption]("caption")
   lazy val colgroup: ConcreteHtmlTag[dom.html.TableCol] = typedTag[dom.html.TableCol]("colgroup")
   lazy val col: ConcreteHtmlTag[dom.html.TableCol] = typedTag[dom.html.TableCol]("col", void = true)
   lazy val tbody: ConcreteHtmlTag[dom.html.TableSection] = typedTag[dom.html.TableSection]("tbody")

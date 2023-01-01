@@ -2,7 +2,8 @@ package scalatags
 package generic
 import utest._
 
-class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT]) extends PerfTests {
+class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT])
+    extends PerfTests {
   import bundle.all._
   import generic.PerfTests._
 
@@ -19,15 +20,13 @@ class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder,
       body(
         h1(color := "red")(titleString),
         div(backgroundColor := "blue")(
-          para(0,
-            cls := contentpara + " " + first,
-            firstParaString
-          ),
+          para(0, cls := contentpara + " " + first, firstParaString),
           a(href := "www.google.com")(
             p("Goooogle")
           ),
           for (i <- 0 until 5) yield {
-            para(i,
+            para(
+              i,
               cls := contentpara,
               color := (if (i % 2 == 0) "red" else "green"),
               "Paragraph ",
@@ -40,7 +39,7 @@ class ScalatagsPerf[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder,
   }
 
 }
-object PerfTests{
+object PerfTests {
   val titleString = "This is my title"
   val firstParaString = "This is my first paragraph"
   val contentpara = "contentpara"
@@ -68,21 +67,21 @@ object PerfTests{
       </html>
     """
 }
-trait PerfTests extends TestSuite{
+trait PerfTests extends TestSuite {
 
   def calc(): String
   def name: String = this.toString
-  def tests = TestSuite{
-    test("correctness"){
+  def tests = TestSuite {
+    test("correctness") {
 
       TestUtil.strCheck(calc(), PerfTests.expected)
-      test("performance"){
+      test("performance") {
         println("Benchmarking " + this.name)
         val start = System.currentTimeMillis()
         var i = 0
         val d = 10000
 
-        while(System.currentTimeMillis() - start < d){
+        while (System.currentTimeMillis() - start < d) {
           i += 1
           calc()
         }

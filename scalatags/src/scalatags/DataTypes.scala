@@ -7,23 +7,23 @@ import scala.language.implicitConversions
  */
 object DataConverters extends DataConverters
 
-
 /**
  * Trait containing the contents of the [[DataConverters]] module, so it can be
  * mixed in to other objects as needed.
  */
-trait DataConverters{
+trait DataConverters {
   implicit def Int2CssNumber(x: Int): CssNumber[Int] = new CssNumber(x)
   implicit def Double2CssNumber(x: Double): CssNumber[Double] = new CssNumber(x)
   implicit def Float2CssNumber(x: Float): CssNumber[Float] = new CssNumber(x)
   implicit def Long2CssNumber(x: Long): CssNumber[Long] = new CssNumber(x)
   implicit def Short2CssNumber(x: Short): CssNumber[Short] = new CssNumber(x)
   implicit def Byte2CssNumber(x: Byte): CssNumber[Byte] = new CssNumber(x)
+
   /**
    * Extends numbers to provide a bunch of useful methods, allowing you to write
    * CSS-lengths in a nice syntax without resorting to strings.
    */
-  class CssNumber[T: Numeric](x: T){
+  class CssNumber[T: Numeric](x: T) {
 
     /**
      * Relative to the viewing device. For screen display, typically one device
@@ -71,6 +71,7 @@ trait DataConverters{
      * MDN
      */
     def pc = s"${x}pc"
+
     /**
      * This unit represents the calculated font-size of the element. If used on
      * the font-size property itself, it represents the inherited font-size
@@ -141,6 +142,3 @@ trait DataConverters{
     def pct = s"${x}%"
   }
 }
-
-
-

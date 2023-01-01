@@ -4,7 +4,8 @@ package scalatags.generic
  * Contains Tags which are only used for SVG. These are not imported by
  * default to avoid namespace pollution.
  */
-trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT]{
+trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
+
   /**
    * The altGlyph element allows sophisticated selection of the glyphs used to
    * render its child character data.
@@ -12,6 +13,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def altGlyph: TypedTag[Builder, Output, FragT]
+
   /**
    * The altGlyphDef element defines a substitution representation for glyphs.
    *
@@ -26,6 +28,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def altGlyphItem: TypedTag[Builder, Output, FragT]
+
   /**
    * The animate element is put inside a shape element and defines how an
    * attribute of an element changes over the animation
@@ -33,6 +36,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def animate: TypedTag[Builder, Output, FragT]
+
   /**
    * The animateMotion element causes a referenced element to move along a
    * motion path.
@@ -40,6 +44,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def animateMotion: TypedTag[Builder, Output, FragT]
+
   /**
    * The animateTransform element animates a transformation attribute on a target
    * element, thereby allowing animations to control translation, scaling,
@@ -48,6 +53,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def animateTransform: TypedTag[Builder, Output, FragT]
+
   /**
    * The circle element is an SVG basic shape, used to create circles based on a
    * center point and a radius.
@@ -55,6 +61,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def circle: TypedTag[Builder, Output, FragT]
+
   /**
    * The clipping path restricts the region to which paint can be applied.
    * Conceptually, any parts of the drawing that lie outside of the region
@@ -63,12 +70,14 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def clipPath: TypedTag[Builder, Output, FragT]
+
   /**
    * The element allows describing the color profile used for the image.
    *
    * MDN
    */
   def `color-profile`: TypedTag[Builder, Output, FragT]
+
   /**
    * The cursor element can be used to define a platform-independent custom
    * cursor. A recommended approach for defining a platform-independent custom
@@ -79,6 +88,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def cursor: TypedTag[Builder, Output, FragT]
+
   /**
    * SVG allows graphical objects to be defined for later reuse. It is
    * recommended that, wherever possible, referenced elements be defined inside
@@ -91,6 +101,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def defs: TypedTag[Builder, Output, FragT]
+
   /**
    * Each container element or graphics element in an SVG drawing can supply a
    * desc description string where the description is text-only. When the
@@ -103,6 +114,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def desc: TypedTag[Builder, Output, FragT]
+
   /**
    * The ellipse element is an SVG basic shape, used to create ellipses based
    * on a center coordinate, and both their x and y radius.
@@ -114,6 +126,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def ellipse: TypedTag[Builder, Output, FragT]
+
   /**
    * The feBlend filter composes two objects together ruled by a certain blending
    * mode. This is similar to what is known from image editing software when
@@ -122,6 +135,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feBlend: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter changes colors based on a transformation matrix. Every pixel's
    * color value (represented by an [R,G,B,A] vector) is matrix multiplied to
@@ -130,6 +144,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feColorMatrix: TypedTag[Builder, Output, FragT]
+
   /**
    * The color of each pixel is modified by changing each channel (R, G, B, and
    * A) to the result of what the children feFuncR, feFuncB, feFuncG,
@@ -138,6 +153,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feComponentTransfer: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive performs the combination of two input images pixel-wise
    * in image space using one of the Porter-Duff compositing operations: over,
@@ -147,6 +163,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feComposite: TypedTag[Builder, Output, FragT]
+
   /**
    * the feConvolveMatrix element applies a matrix convolution filter effect.
    * A convolution combines pixels in the input image with neighboring pixels
@@ -157,6 +174,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feConvolveMatrix: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive lights an image using the alpha channel as a bump map.
    * The resulting image, which is an RGBA opaque image, depends on the light
@@ -165,6 +183,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feDiffuseLighting: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive uses the pixels values from the image from in2 to
    * spatially displace the image from in.
@@ -172,6 +191,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feDisplacementMap: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive define a distant light source that can be used
    * within a lighting filter primitive: feDiffuseLighting or
@@ -180,6 +200,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feDistantLighting: TypedTag[Builder, Output, FragT]
+
   /**
    * The filter fills the filter subregion with the color and opacity defined by
    * flood-color and flood-opacity.
@@ -187,6 +208,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feFlood: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive defines the transfer function for the alpha component
    * of the input graphic of its parent feComponentTransfer element.
@@ -194,6 +216,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feFuncA: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive defines the transfer function for the blue component
    * of the input graphic of its parent feComponentTransfer element.
@@ -201,6 +224,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feFuncB: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive defines the transfer function for the green component
    * of the input graphic of its parent feComponentTransfer element.
@@ -208,6 +232,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feFuncG: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive defines the transfer function for the red component
    * of the input graphic of its parent feComponentTransfer element.
@@ -215,6 +240,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feFuncR: TypedTag[Builder, Output, FragT]
+
   /**
    * The filter blurs the input image by the amount specified in stdDeviation,
    * which defines the bell-curve.
@@ -249,6 +275,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feMergeNode: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter is used to erode or dilate the input image. It's usefulness
    * lies especially in fattening or thinning effects.
@@ -256,6 +283,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feMorphology: TypedTag[Builder, Output, FragT]
+
   /**
    * The input image as a whole is offset by the values specified in the dx
    * and dy attributes. It's used in creating drop-shadows.
@@ -264,6 +292,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    */
   def feOffset: TypedTag[Builder, Output, FragT]
   def fePointLight: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive lights a source graphic using the alpha channel as a
    * bump map. The resulting image is an RGBA image based on the light color.
@@ -276,10 +305,11 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feSpecularLighting: TypedTag[Builder, Output, FragT]
+
   /**
-   *
    */
   def feSpotlight: TypedTag[Builder, Output, FragT]
+
   /**
    * An input image is tiled and the result used to fill a target. The effect
    * is similar to the one of a pattern.
@@ -287,6 +317,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feTile: TypedTag[Builder, Output, FragT]
+
   /**
    * This filter primitive creates an image using the Perlin turbulence
    * function. It allows the synthesis of artificial textures like clouds or
@@ -295,6 +326,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def feTurbulance: TypedTag[Builder, Output, FragT]
+
   /**
    * The filter element serves as container for atomic filter operations. It is
    * never rendered directly. A filter is referenced by using the filter
@@ -303,12 +335,14 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def filter: TypedTag[Builder, Output, FragT]
+
   /**
    * The font element defines a font to be used for text layout.
    *
    * MDN
    */
   def font: TypedTag[Builder, Output, FragT]
+
   /**
    * The font-face element corresponds to the CSS @font-face declaration. It
    * defines a font's outer properties.
@@ -316,6 +350,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def `font-face`: TypedTag[Builder, Output, FragT]
+
   /**
    * The font-face-format element describes the type of font referenced by its
    * parent font-face-uri.
@@ -323,6 +358,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def `font-face-format`: TypedTag[Builder, Output, FragT]
+
   /**
    * The font-face-name element points to a locally installed copy of this font,
    * identified by its name.
@@ -330,6 +366,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def `font-face-name`: TypedTag[Builder, Output, FragT]
+
   /**
    * The font-face-src element corresponds to the src property in CSS @font-face
    * descriptions. It serves as container for font-face-name, pointing to
@@ -339,12 +376,14 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def `font-face-src`: TypedTag[Builder, Output, FragT]
+
   /**
    * The font-face-uri element points to a remote definition of the current font.
    *
    * MDN
    */
   def `font-face-uri`: TypedTag[Builder, Output, FragT]
+
   /**
    * The foreignObject element allows for inclusion of a foreign XML namespace
    * which has its graphical content drawn by a different user agent. The
@@ -354,6 +393,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def foreignObject: TypedTag[Builder, Output, FragT]
+
   /**
    * The g element is a container used to group objects. Transformations applied
    * to the g element are performed on all of its child elements. Attributes
@@ -363,12 +403,14 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def g: TypedTag[Builder, Output, FragT]
+
   /**
    * A glyph defines a single glyph in an SVG font.
    *
    * MDN
    */
   def glyph: TypedTag[Builder, Output, FragT]
+
   /**
    * The glyphRef element provides a single possible glyph to the referencing
    * altGlyph substitution.
@@ -376,6 +418,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def glyphRef: TypedTag[Builder, Output, FragT]
+
   /**
    * The horizontal distance between two glyphs can be fine-tweaked with an
    * hkern Element. This process is known as Kerning.
@@ -383,6 +426,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def hkern: TypedTag[Builder, Output, FragT]
+
   /**
    * The SVG Image Element (image) allows a raster image into be included in
    * an SVG document.
@@ -390,6 +434,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def image: TypedTag[Builder, Output, FragT]
+
   /**
    * The line element is an SVG basic shape, used to create a line connecting
    * two points.
@@ -397,6 +442,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def line: TypedTag[Builder, Output, FragT]
+
   /**
    * linearGradient lets authors define linear gradients to fill or stroke
    * graphical elements.
@@ -404,6 +450,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def linearGradient: TypedTag[Builder, Output, FragT]
+
   /**
    * The marker element defines the graphics that is to be used for drawing
    * arrowheads or polymarkers on a given path, line, polyline or
@@ -412,6 +459,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def marker: TypedTag[Builder, Output, FragT]
+
   /**
    * In SVG, you can specify that any other graphics object or g element can
    * be used as an alpha mask for compositing the current object into the
@@ -421,6 +469,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def mask: TypedTag[Builder, Output, FragT]
+
   /**
    * Metadata is structured data about data. Metadata which is included with SVG
    * content should be specified within metadata elements. The contents of the
@@ -430,6 +479,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def metadata: TypedTag[Builder, Output, FragT]
+
   /**
    * The missing-glyph's content is rendered, if for a given character the font
    * doesn't define an appropriate glyph.
@@ -437,6 +487,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def `missing-glyph`: TypedTag[Builder, Output, FragT]
+
   /**
    * the mpath sub-element for the animateMotion element provides the ability
    * to reference an external path element as the definition of a motion path.
@@ -444,11 +495,13 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def mpath: TypedTag[Builder, Output, FragT]
+
   /**
    * The path element is the generic element to define a shape. All the basic
    * shapes can be created with a path element.
    */
   def path: TypedTag[Builder, Output, FragT]
+
   /**
    * A pattern is used to fill or stroke an object using a pre-defined graphic
    * object which can be replicated ("tiled") at fixed intervals in x and y to
@@ -460,6 +513,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def pattern: TypedTag[Builder, Output, FragT]
+
   /**
    * The polygon element defines a closed shape consisting of a set of connected
    * straight line segments.
@@ -467,6 +521,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def polygon: TypedTag[Builder, Output, FragT]
+
   /**
    * The polyline element is an SVG basic shape, used to create a series of
    * straight lines connecting several points. Typically a polyline is used to
@@ -475,6 +530,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def polyline: TypedTag[Builder, Output, FragT]
+
   /**
    * radialGradient lets authors define radial gradients to fill or stroke
    * graphical elements.
@@ -482,6 +538,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def radialGradient: TypedTag[Builder, Output, FragT]
+
   /**
    * The rect element is an SVG basic shape, used to create rectangles based on
    * the position of a corner and their width and height. It may also be used to
@@ -490,6 +547,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def rect: TypedTag[Builder, Output, FragT]
+
   /**
    * The set element provides a simple means of just setting the value of an
    * attribute for a specified duration. It supports all attribute types,
@@ -500,6 +558,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def set: TypedTag[Builder, Output, FragT]
+
   /**
    * The ramp of colors to use on a gradient is defined by the stop elements
    * that are child elements to either the lineargradient element or the
@@ -508,6 +567,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def stop: TypedTag[Builder, Output, FragT]
+
   /**
    * When it is not the root element, the svg element can be used to nest a
    * standalone SVG fragment inside the current document (which can be an HTML
@@ -517,6 +577,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def svg: TypedTag[Builder, Output, FragT]
+
   /**
    * The switch element evaluates the requiredFeatures, requiredExtensions and
    * systemLanguage attributes on its direct child elements in order, and then
@@ -528,6 +589,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def switch: TypedTag[Builder, Output, FragT]
+
   /**
    * The symbol element is used to define graphical template objects which can
    * be instantiated by a use element. The use of symbol elements for
@@ -541,6 +603,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def symbol: TypedTag[Builder, Output, FragT]
+
   /**
    * The text element defines a graphics element consisting of text. Note that
    * it is possible to apply a gradient, pattern, clipping path, mask or filter
@@ -549,6 +612,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def text: TypedTag[Builder, Output, FragT]
+
   /**
    * In addition to text drawn in a straight line, SVG also includes the
    * ability to place text along the shape of a path element. To specify that
@@ -559,6 +623,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def textPath: TypedTag[Builder, Output, FragT]
+
   /**
    * The textual content for a text can be either character data directly
    * embedded within the text element or the character data content of a
@@ -567,6 +632,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def tref: TypedTag[Builder, Output, FragT]
+
   /**
    * Within a text element, text and font properties and the current text
    * position can be adjusted with absolute or relative coordinate values by
@@ -575,6 +641,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def tspan: TypedTag[Builder, Output, FragT]
+
   /**
    * The use element takes nodes from within the SVG document, and duplicates
    * them somewhere else. The effect is the same as if the nodes were deeply
@@ -587,6 +654,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def use: TypedTag[Builder, Output, FragT]
+
   /**
    * A view is a defined way to view the image, like a zoom level or a detail
    * view.
@@ -594,6 +662,7 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def view: TypedTag[Builder, Output, FragT]
+
   /**
    * The vertical distance between two glyphs in top-to-bottom fonts can be
    * fine-tweaked with an vkern Element. This process is known as Kerning.
@@ -601,6 +670,5 @@ trait SvgTags[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fra
    * MDN
    */
   def vkern: TypedTag[Builder, Output, FragT]
-
 
 }

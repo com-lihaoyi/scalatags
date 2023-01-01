@@ -1,11 +1,10 @@
-
 package scalatags
 package vdom
 
 import scalatags.generic.Util
 
 trait Tags[Output <: FragT, FragT]
-extends generic.Tags[Builder[Output, FragT], Output, FragT] with TagFactory[Output, FragT]{
+    extends generic.Tags[Builder[Output, FragT], Output, FragT] with TagFactory[Output, FragT] {
   // Root Element
   lazy val html = tag("html")
   // Document Metadata

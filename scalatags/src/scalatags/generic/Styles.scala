@@ -15,40 +15,43 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
   /**
    * A Style that takes any value of type T as a parameter and has an auto value
    */
-  private[scalatags]
-  class AutoStyle(jsName: String, cssName: String)
-  extends Style(jsName, cssName) {
+  private[scalatags] class AutoStyle(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
     lazy val auto = this := "auto"
   }
 
-  private[scalatags]
-  class PixelAutoStyle(jsName: String, cssName: String)
-  extends PixelStyle(jsName, cssName) {
+  private[scalatags] class PixelAutoStyle(jsName: String, cssName: String)
+      extends PixelStyle(jsName, cssName) {
     lazy val auto = this := "auto"
   }
-
 
   /**
    * A Style that takes any value of type T as a parameter and has an none value
    */
-  private[scalatags] class NoneOpenStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class NoneOpenStyle(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
     lazy val none = this := "none"
   }
 
   /**
    * A Style that takes any value of type T as a parameter and has an normal value
    */
-  private[scalatags] class NormalOpenStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class NormalOpenStyle(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
     lazy val normal = this := "normal"
   }
 
-  private[scalatags] class MultiImageStyle(jsName: String, cssName: String) extends Style(jsName, cssName)
+  private[scalatags] class MultiImageStyle(jsName: String, cssName: String)
+      extends Style(jsName, cssName)
 
-  private[scalatags] class CurrentColor(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class CurrentColor(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
     lazy val currentColor = this -> "currentColor"
   }
 
-  private[scalatags] class OutlineStyle(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class OutlineStyle(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
+
     /**
      * Displays a series of rounded dots. The spacing of the dots are not
      * defined by the specification and are implementation-specific. The radius
@@ -57,6 +60,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val dotted = this := "dotted"
+
     /**
      * Displays a series of short square-ended dashes or line segments. The exact
      * size and Length of the segments are not defined by the specification and
@@ -65,12 +69,14 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val dashed = this := "dashed"
+
     /**
      * Displays a single, straight, solid line.
      *
      * MDN
      */
     lazy val solid = this := "solid"
+
     /**
      * Displays two straight lines that add up to the pixel amount defined as
      * border-width or border-right-width.
@@ -78,12 +84,14 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val double = this := "double"
+
     /**
      * Displays a border leading to a carved effect. It is the opposite of ridge.
      *
      * MDN
      */
     lazy val groove = this := "groove"
+
     /**
      * Displays a border with a 3D effect, like if it is coming out of the page.
      * It is the opposite of groove.
@@ -91,6 +99,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val ridge = this := "ridge"
+
     /**
      * Displays a border that makes the box appear embedded. It is the opposite
      * of outset. When applied to a table cell with border-collapse set to
@@ -99,6 +108,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val inset = this := "inset"
+
     /**
      * Displays a border that makes the box appear in 3D, embossed. It is the
      * opposite of inset. When applied to a table cell with border-collapse set
@@ -109,7 +119,9 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
     lazy val outset = this := "outset"
   }
 
-  private[scalatags] class BorderStyle(jsName: String, cssName: String) extends OutlineStyle(jsName, cssName) {
+  private[scalatags] class BorderStyle(jsName: String, cssName: String)
+      extends OutlineStyle(jsName, cssName) {
+
     /**
      * Like for the hidden keyword, displays no border. In that case, except if
      * a background image is set, the calculated values of border-right-width
@@ -121,6 +133,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * Like for the none keyword, displays no border. In that case, except if a
      * background image is set, the calculated values of border-right-width will
@@ -134,7 +147,9 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
 
   }
 
-  private[scalatags] class Overflow(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class Overflow(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
+
     /**
      * Default value. Content is not clipped, it may be rendered outside the
      * content box.
@@ -142,12 +157,14 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val visible = this := "visible"
+
     /**
      * The content is clipped and no scrollbars are provided.
      *
      * MDN
      */
     lazy val hidden = this := "hidden"
+
     /**
      * The content is clipped and desktop browsers use scrollbars, whether or
      * not any content is clipped. This avoids any problem with scrollbars
@@ -157,6 +174,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val scroll = this := "scroll"
+
     /**
      * Depends on the user agent. Desktop browsers like Firefox provide
      * scrollbars if content overflows.
@@ -166,25 +184,30 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
     lazy val auto = this := "auto"
   }
 
-  private[scalatags] class PageBreak(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class PageBreak(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
+
     /**
      * Initial value. Automatic page breaks (neither forced nor forbidden).
      *
      * MDN
      */
     lazy val auto = this := "auto"
+
     /**
      * Always force page breaks.
      *
      * MDN
      */
     lazy val always = this := "always"
+
     /**
      * Avoid page breaks.
      *
      * MDN
      */
     lazy val avoid = this := "avoid"
+
     /**
      * Force page breaks so that the next page is formatted
      * as a left page.
@@ -192,6 +215,7 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
      * MDN
      */
     lazy val left = this := "left"
+
     /**
      * Force page breaks so that the next page is formatted
      * as a right page.
@@ -201,10 +225,11 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
     lazy val right = this := "right"
   }
 
-
-  private[scalatags] class BorderRadius(jsName: String, cssName: String) extends PixelStyle(jsName, cssName)
+  private[scalatags] class BorderRadius(jsName: String, cssName: String)
+      extends PixelStyle(jsName, cssName)
 
   private[scalatags] trait MarginAuto extends PixelStyle {
+
     /**
      * auto is replaced by some suitable value, e.g. it can be used for
      * centering of blocks.
@@ -215,15 +240,18 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
 
   }
 
-  private[scalatags] class BorderWidth(jsName: String, cssName: String) extends Style(jsName, cssName) {
+  private[scalatags] class BorderWidth(jsName: String, cssName: String)
+      extends Style(jsName, cssName) {
     lazy val thin = this := "thin"
     lazy val medium = this := "medium"
     lazy val thick = this := "thick"
   }
 
-  private[scalatags] class MultiTimeStyle(jsName: String, cssName: String) extends Style(jsName, cssName)
+  private[scalatags] class MultiTimeStyle(jsName: String, cssName: String)
+      extends Style(jsName, cssName)
 
-  private[scalatags] class MinLengthStyle(jsName: String, cssName: String) extends PixelAutoStyle(jsName, cssName){
+  private[scalatags] class MinLengthStyle(jsName: String, cssName: String)
+      extends PixelAutoStyle(jsName, cssName) {
 
     /**
      * The intrinsic preferred length.
@@ -254,7 +282,8 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
     lazy val fillAvailable = this := "fill-available"
   }
 
-  private[scalatags] class MaxLengthStyle(jsName: String, cssName: String) extends PixelStyle(jsName, cssName){
+  private[scalatags] class MaxLengthStyle(jsName: String, cssName: String)
+      extends PixelStyle(jsName, cssName) {
 
     /**
      * The length has no maximum value.
@@ -293,11 +322,12 @@ trait StyleMisc[Builder, Output <: FragT, FragT] extends Util[Builder, Output, F
   }
 
 }
+
 /**
  * Contains CSS styles which are used less frequently. These are not imported by
  * default to avoid namespace pollution.
  */
-trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT]{
+trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT] {
 
   /**
    * The animation-direction CSS property indicates whether the animation should
@@ -341,8 +371,8 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    *
    * MDN
    */
-  lazy val animationIterationCount = new Style("animationIterationCount", "animation-iteration-count")
-
+  lazy val animationIterationCount =
+    new Style("animationIterationCount", "animation-iteration-count")
 
   /**
    * The animation-delay CSS property specifies when the animation should start.
@@ -383,8 +413,8 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    *
    * MDN
    */
-  lazy val animationTimingFunction = new Style("animationTimingFunction", "animation-timing-function")
-
+  lazy val animationTimingFunction =
+    new Style("animationTimingFunction", "animation-timing-function")
 
   /**
    * The animation-play-state CSS property determines whether an animation is
@@ -399,6 +429,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   lazy val animationPlayState = new Style("animationPlayState", "animation-play-state")
+
   /**
    * The animation CSS property is a shorthand property for animation-name,
    * animation-duration, animation-timing-function, animation-delay,
@@ -407,7 +438,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   lazy val animation = new Style("animation", "animation")
-
 
   /**
    * The CSS backface-visibility property determines whether or not the back
@@ -418,12 +448,14 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   object backfaceVisibility extends Style("backfaceVisibility", "backface-visibility") {
+
     /**
      * The back face is visible.
      *
      * MDN
      */
     lazy val visible = this := "visible"
+
     /**
      * The back face is not visible.
      *
@@ -431,8 +463,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
      */
     lazy val hidden = this := "hidden"
   }
-
-
 
   /**
    * The columns CSS property is a shorthand property allowing to set both the
@@ -460,6 +490,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   object columnFill extends Style("columnFill", "column-fill") {
+
     /**
      * Is a keyword indicating that columns are filled sequentially.
      *
@@ -501,12 +532,14 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   object columnSpan extends Style("columnSpan", "column-span") {
+
     /**
      * The element does not span multiple columns.
      *
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * The element spans across all columns. Content in the normal flow that
      * appears before the element is automatically balanced across all columns
@@ -517,7 +550,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
      */
     lazy val all = this := "all"
   }
-
 
   /**
    * The column-width CSS property suggests an optimal column width. This is not
@@ -559,10 +591,9 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   object columnRuleStyle
-    extends OutlineStyle("columnRuleStyle", "column-rule-style"){
+      extends OutlineStyle("columnRuleStyle", "column-rule-style") {
     lazy val hidden = this := "hidden"
   }
-
 
   /**
    * The content CSS property is used with the ::before and ::after pseudo-elements
@@ -590,7 +621,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    */
   lazy val counterReset = new Style("counterReset", "counter-reset")
 
-
   /**
    * The orphans CSS property refers to the minimum number of lines in a block
    * container that must be left at the bottom of the page. This property is
@@ -599,7 +629,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   lazy val orphans = new Style("orphans", "orphans")
-
 
   /**
    * The widows CSS property defines how many minimum lines must be left on top
@@ -612,7 +641,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   lazy val widows = new Style("widows", "widows")
-
 
   /**
    * The page-break-after CSS property adjusts page breaks after the current
@@ -630,7 +658,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    */
   lazy val pageBreakInside = new PageBreak("pageBreakInside", "page-break-inside")
 
-
   /**
    * The page-break-before CSS property adjusts page breaks before the current
    * element.
@@ -641,7 +668,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   lazy val pageBreakBefore = new PageBreak("pageBreakBefore", "page-break-before")
-
 
   /**
    * The perspective CSS property determines the distance between the z=0 plane
@@ -662,7 +688,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    */
   lazy val perspectiveOrigin = new Style("perspectiveOrigin", "perspective-origin")
 
-
   /**
    * The CSS transform property lets you modify the coordinate space of the CSS
    * visual formatting model. Using it, elements can be translated, rotated,
@@ -676,7 +701,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    */
   lazy val transform = new Style("transform", "transform")
 
-
   /**
    * The transform-origin CSS property lets you modify the origin for
    * transformations of an element. For example, the transform-origin of the
@@ -689,6 +713,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   lazy val transformOrigin = new Style("transformOrigin", "transform-origin")
+
   /**
    * The transform-style CSS property determines if the children of the element
    * are positioned in the 3D-space or are flattened in the plane of the element.
@@ -696,6 +721,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   object transformStyle extends Style("transformStyle", "transform-style") {
+
     /**
      * Indicates that the children of the element should be positioned in the
      * 3D-space.
@@ -703,6 +729,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
      * MDN
      */
     lazy val `preserve-3d` = this := "preserve-3d"
+
     /**
      * Indicates that the children of the element are lying in the plane of the
      * element itself.
@@ -723,6 +750,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   object unicodeBidi extends Style("unicodeBidi", "unicode-bidi") {
+
     /**
      * The element does not offer a additional level of embedding with respect
      * to the bidirectional algorithm. For inline elements implicit reordering
@@ -731,6 +759,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
      * MDN
      */
     lazy val normal = this := "normal"
+
     /**
      * If the element is inline, this value opens an additional level of
      * embedding with respect to the bidirectional algorithm. The direction of
@@ -739,6 +768,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
      * MDN
      */
     lazy val embed = this := "embed"
+
     /**
      * For inline elements this creates an override. For block container elements
      * this creates an override for inline-level descendants not within another
@@ -751,8 +781,6 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
     lazy val `bidi-override` = this := "bidi-override"
   }
 
-
-
   /**
    * The word-break CSS property is used to specify how (or if) to break lines
    * within words.
@@ -760,12 +788,14 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    * MDN
    */
   object wordBreak extends Style("wordBreak", "word-break") {
+
     /**
      * Use the default line break rule.
      *
      * MDN
      */
     lazy val normal = this := "normal"
+
     /**
      * Word breaks may be inserted between any character for non-CJK
      * (Chinese/Japanese/Korean) text.
@@ -773,6 +803,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
      * MDN
      */
     lazy val `break-all` = this := "break-all"
+
     /**
      * Don't allow word breaks for CJK text.  Non-CJK text behavior is same
      * as normal.
@@ -787,7 +818,8 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
  * Trait that contains the contents of the `Styles` object, so they can
  * be mixed in to other objects if needed.
  */
-trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT]{
+trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output, FragT] {
+
   /**
    * If a background-image is specified, the background-attachment CSS
    * property determines whether that image's position is fixed within
@@ -796,6 +828,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object backgroundAttachment extends Style("backgroundAttachment", "background-attachment") {
+
     /**
      * This keyword means that the background image will scroll within the
      * viewport along with the block the image is contained within.
@@ -803,6 +836,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val scroll = this := "scroll"
+
     /**
      * This keyword means that the background image will not scroll with its
      * containing element, instead remaining stationary within the viewport.
@@ -810,6 +844,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val fixed = this := "fixed"
+
     /**
      * This keyword means that the background image will not scroll with its
      * containing element, but will scroll when the element's content scrolls:
@@ -819,7 +854,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val local = this := "local"
   }
-
 
   /**
    * The background CSS property is a shorthand for setting the individual
@@ -845,7 +879,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val backgroundRepeat = new Style("backgroundRepeat", "background-repeat")
 
-
   /**
    * The background-position CSS property sets the initial position, relative to
    * the background position layer defined by background-origin for each defined
@@ -863,7 +896,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val backgroundColor = new Style("backgroundColor", "background-color")
 
-
   /**
    * The background-origin CSS property determines the background positioning
    * area, that is the position of the origin of an image specified using the
@@ -874,6 +906,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object backgroundOrigin extends Style("backgroundOrigin", "background-origin") {
+
     /**
      * The background extends to the outside edge of the border (but underneath
      * the border in z-ordering).
@@ -881,6 +914,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `border-box` = this := "border-box"
+
     /**
      * No background is drawn below the border (background extends to the
      * outside edge of the padding).
@@ -888,6 +922,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `padding-box` = this := "border-box"
+
     /**
      * The background is painted within (clipped to) the content box.
      *
@@ -907,6 +942,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object backgroundClip extends Style("backgroundClip", "background-clip") {
+
     /**
      * The background extends to the outside edge of the border (but underneath
      * the border in z-ordering).
@@ -914,6 +950,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `border-box` = this := "border-box"
+
     /**
      * No background is drawn below the border (background extends to the
      * outside edge of the padding).
@@ -921,6 +958,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `padding-box` = this := "padding-box"
+
     /**
      * The background is painted within (clipped to) the content box.
      *
@@ -928,6 +966,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val `content-box` = this := "content-box"
   }
+
   /**
    * The background-size CSS property specifies the size of the background
    * images. The size of the image can be fully constrained or only partially in
@@ -936,6 +975,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object backgroundSize extends Style("backgroundSize", "background-size") {
+
     /**
      * The auto keyword that scales the background image in the corresponding
      * direction such that its intrinsic proportion is maintained.
@@ -943,6 +983,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val auto = this := "auto"
+
     /**
      * This keyword specifies that the background image should be scaled to be
      * as small as possible while ensuring both its dimensions are greater than
@@ -952,6 +993,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val cover = this := "cover"
+
     /**
      * This keyword specifies that the background image should be scaled to be
      * as large as possible while ensuring both its dimensions are less than or
@@ -961,6 +1003,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val contain = this := "contain"
   }
+
   /**
    * The CSS background-image property sets one or several background images for
    * an element. The images are drawn on successive stacking context layers, with
@@ -971,7 +1014,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val backgroundImage = new MultiImageStyle("backgroundImage", "background-image")
-
 
   /**
    * The border-top-color CSS property sets the color of the top border of an
@@ -997,7 +1039,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val borderTopStyle = new BorderStyle("borderTopStyle", "border-top-style")
 
-
   /**
    * The border-right-style CSS property sets the line style of the right border
    * of a box.
@@ -1021,7 +1062,8 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  lazy val borderTopRightRadius = new BorderRadius("borderTopRightRadius", "border-top-right-radius")
+  lazy val borderTopRightRadius =
+    new BorderRadius("borderTopRightRadius", "border-top-right-radius")
 
   /**
    * The border-bottom-left-radius CSS property sets the rounding of the
@@ -1031,7 +1073,8 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  lazy val borderBottomLeftRadius = new BorderRadius("borderBottomLeftRadius", "border-bottom-left-radius")
+  lazy val borderBottomLeftRadius =
+    new BorderRadius("borderBottomLeftRadius", "border-bottom-left-radius")
 
   /**
    * The border-right-color CSS property sets the color of the top border of an
@@ -1050,6 +1093,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val borderBottom = new Style("borderBottom", "border-bottom")
+
   /**
    * The border CSS property is a shorthand property for setting the individual
    * border property values in a single place in the style sheet. border can be
@@ -1059,7 +1103,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val border = new Style("border", "border")
-
 
   /**
    * The border-bottom-width CSS property sets the width of the bottom border of
@@ -1094,6 +1137,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object borderCollapse extends Style("borderCollapse", "border-collapse") {
+
     /**
      * Is a keyword requesting the use of the separated-border table rendering
      * model. It is the default value.
@@ -1101,6 +1145,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val separate = this := "separate"
+
     /**
      * Is a keyword requesting the use of the collapsed-border table rendering
      * model.
@@ -1109,6 +1154,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val collapse = this := "collapse"
   }
+
   /**
    * The border-left CSS property is a shorthand that sets the values of
    * border-left-color, border-left-style, and border-left-width. These
@@ -1120,6 +1166,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val borderLeft = new Style("borderLeft", "border-left")
+
   /**
    * The border-left-style CSS property sets the line style of the left border
    * of a box.
@@ -1144,18 +1191,21 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val borderBottomStyle = new BorderStyle("borderBottomStyle", "border-bottom-style")
+
   /**
    * The border-left-width CSS property sets the width of the left border of a box.
    *
    * MDN
    */
   lazy val borderLeftWidth = new BorderWidth("borderLeftWidth", "border-left-width")
+
   /**
    * The border-top-width CSS property sets the width of the top border of a box.
    *
    * MDN
    */
   lazy val borderTopWidth = new BorderWidth("borderTopWidth", "border-top-width")
+
   /**
    * The border-top CSS property is a shorthand that sets the values of
    * border-top-color, border-top-style, and border-top-width. These
@@ -1164,6 +1214,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val borderTop = new Style("borderTop", "border-top")
+
   /**
    * The border-spacing CSS property specifies the distance between the borders
    * of adjacent cells (only for the separated borders model). This is equivalent
@@ -1173,9 +1224,9 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
-    def :=(horizontal: String, vertical: String): StylePair[Builder, String] = this := s"$horizontal $vertical"
+    def :=(horizontal: String, vertical: String): StylePair[Builder, String] =
+      this := s"$horizontal $vertical"
   }
-
 
   /**
    * The border-radius CSS property allows Web authors to define how rounded
@@ -1202,7 +1253,8 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  lazy val borderBottomRightRadius = new BorderRadius("borderBottomRightRadius", "border-bottom-right-radius")
+  lazy val borderBottomRightRadius =
+    new BorderRadius("borderBottomRightRadius", "border-bottom-right-radius")
 
   /**
    * The border-top-left-radius CSS property sets the rounding of the
@@ -1232,6 +1284,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object boxSizing extends Style("boxSizing", "box-sizing") {
+
     /**
      * This is the default style as specified by the CSS standard. The width and
      * height properties are measured including only the content, but not the
@@ -1240,6 +1293,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `content-box` = this := "content-box"
+
     /**
      * The width and height properties include the padding and border, but not
      * the margin. This is the box model used by Internet Explorer when the
@@ -1258,7 +1312,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object color extends CurrentColor("color", "color"){
+  object color extends CurrentColor("color", "color") {
     lazy val black = this := "black"
     lazy val silver = this := "silver"
     lazy val gray = this := "gray"
@@ -1277,8 +1331,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val aqua = this := "aqua"
   }
 
-
-
   /**
    * The clip CSS property defines what portion of an element is visible. The
    * clip property applies only to elements with position:absolute.
@@ -1291,7 +1343,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
 
     def auto = this := "auto"
   }
-
 
   /**
    * The cursor CSS property specifies the mouse cursor displayed when the mouse
@@ -1308,36 +1359,42 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val auto = this := "auto"
+
     /**
      * Default cursor, typically an arrow.
      *
      * MDN
      */
     lazy val default = this := "default"
+
     /**
      * No cursor is rendered.
      *
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * A context menu is available under the cursor.
      *
      * MDN
      */
     lazy val `context-menu` = this := "context-menu"
+
     /**
      * Indicating help is available.
      *
      * MDN
      */
     lazy val help = this := "help"
+
     /**
      * E.g. used when hovering over links, typically a hand.
      *
      * MDN
      */
     lazy val pointer = this := "pointer"
+
     /**
      * The program is busy in the background but the user can still interact
      * with the interface (unlike for wait).
@@ -1345,72 +1402,84 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val progress = this := "progress"
+
     /**
      * The program is busy (sometimes an hourglass or a watch).
      *
      * MDN
      */
     lazy val cssWait = this := "wait"
+
     /**
      * Indicating that cells can be selected.
      *
      * MDN
      */
     lazy val cell = this := "cell"
+
     /**
      * Cross cursor, often used to indicate selection in a bitmap.
      *
      * MDN
      */
     lazy val crosshair = this := "crosshair"
+
     /**
      * Indicating text can be selected, typically an I-beam.
      *
      * MDN
      */
     lazy val text = this := "text"
+
     /**
      * Indicating that vertical text can be selected, typically a sideways I-beam
      *
      * MDN
      */
     lazy val `vertical-text` = this := "vertical-text"
+
     /**
      * Indicating an alias or shortcut is to be created.
      *
      * MDN
      */
     lazy val alias = this := "alias"
+
     /**
      * Indicating that something can be copied
      *
      * MDN
      */
     lazy val copy = this := "copy"
+
     /**
      * The hoevered object may be moved.
      *
      * MDN
      */
     lazy val move = this := "move"
+
     /**
      * Cursor showing that a drop is not allowed at the current location.
      *
      * MDN
      */
     lazy val `no-drop` = this := "no-drop"
+
     /**
      * Cursor showing that something cannot be done.
      *
      * MDN
      */
     lazy val `not-allowed` = this := "not-allowed"
+
     /**
      * Cursor showing that something can be scrolled in any direction (panned).
      *
      * MDN
      */
     lazy val `all-scroll` = this := "all-scroll"
+
     /**
      * The item/column can be resized horizontally. Often rendered as arrows
      * pointing left and right with a vertical separating.
@@ -1418,6 +1487,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `col-resize` = this := "col-resize"
+
     /**
      * The item/row can be resized vertically. Often rendered as arrows pointing
      * up and down with a horizontal bar separating them.
@@ -1425,48 +1495,56 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `row-resize` = this := "row-resize"
+
     /**
      * The top edge is to be moved.
      *
      * MDN
      */
     lazy val `n-resize` = this := "n-resize"
+
     /**
      * The right edge is to be moved.
      *
      * MDN
      */
     lazy val `e-resize` = this := "e-resize"
+
     /**
      * The bottom edge is to be moved.
      *
      * MDN
      */
     lazy val `s-resize` = this := "s-resize"
+
     /**
      * The left edge is to be moved.
      *
      * MDN
      */
     lazy val `w-resize` = this := "w-resize"
+
     /**
      * The top-right corner is to be moved.
      *
      * MDN
      */
     lazy val `ne-resize` = this := "ne-resize"
+
     /**
      * The top-left corner is to be moved.
      *
      * MDN
      */
     lazy val `nw-resize` = this := "nw-resize"
+
     /**
      * The bottom-right corner is to be moved.
      *
      * MDN
      */
     lazy val `se-resize` = this := "se-resize"
+
     /**
      * The bottom-left corner is to be moved.
      *
@@ -1485,18 +1563,21 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `zoom-in` = this := "zoom-in"
+
     /**
      * Indicates that something can be zoomed (magnified) out.
      *
      * MDN
      */
     lazy val `zoom-out` = this := "zoom-out"
+
     /**
      * Indicates that something can be grabbed (dragged to be moved).
      *
      * MDN
      */
     lazy val grab = this := "grab"
+
     /**
      * Indicates that something can be grabbed (dragged to be moved).
      *
@@ -1504,7 +1585,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val grabbing = this := "grabbing"
   }
-
 
   /**
    * The float CSS property specifies that an element should be taken from the
@@ -1515,6 +1595,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object float extends Style("cssFloat", "float") {
+
     /**
      * Is a keyword indicating that the element must float on the left side of
      * its containing block.
@@ -1522,6 +1603,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val left = this := "left"
+
     /**
      * Is a keyword indicating that the element must float on the right side of
      * its containing block.
@@ -1529,6 +1611,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val right = this := "right"
+
     /**
      * Is a keyword indicating that the element must not float
      *
@@ -1536,7 +1619,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val none = this := "none"
   }
-
 
   /**
    * Set the direction CSS property to match the direction of the text: rtl for
@@ -1560,6 +1642,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object direction extends Style("direction", "direction") {
+
     /**
      * The initial value of direction (that is, if not otherwise specified). Text
      * and other elements go from left to right.
@@ -1567,6 +1650,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val ltr = this := "ltr"
+
     /**
      * Text and other elements go from right to left
      *
@@ -1589,6 +1673,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object display extends Style("display", "display") {
+
     /**
      * Turns off the display of an element (it has no effect on layout); all
      * descendant elements also have their display turned off. The document is
@@ -1600,18 +1685,21 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * The element generates one or more inline element boxes.
      *
      * MDN
      */
     lazy val inline = this := "inline"
+
     /**
      * The element generates a block element box.
      *
      * MDN
      */
     lazy val block = this := "block"
+
     /**
      * The element generates a block box for the content and a separate
      * list-item inline box.
@@ -1619,6 +1707,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `list-item` = this := "list-item"
+
     /**
      * The element generates a block element box that will be flowed with
      * surrounding content as if it were a single inline box.
@@ -1626,6 +1715,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `inline-block` = this := "inline-block"
+
     /**
      * The inline-table value does not have a direct mapping in HTML. It behaves
      * like a table HTML element, but as an inline box, rather than a
@@ -1634,60 +1724,70 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `inline-table` = this := "inline-table"
+
     /**
      * Behaves like the table HTML element. It defines a block-level box.
      *
      * MDN
      */
     lazy val table = this := "table"
+
     /**
      * Behaves like the caption HTML element.
      *
      * MDN
      */
     lazy val `table-caption` = this := "table-caption"
+
     /**
      * Behaves like the td HTML element
      *
      * MDN
      */
     lazy val `table-cell` = this := "table-cell"
+
     /**
      * These elements behave like the corresponding col HTML elements.
      *
      * MDN
      */
     lazy val `table-column` = this := "table-column"
+
     /**
      * These elements behave like the corresponding colgroup HTML elements.
      *
      * MDN
      */
     lazy val `table-column-group` = this := "table-column-group"
+
     /**
      * These elements behave like the corresponding tfoot HTML elements
      *
      * MDN
      */
     lazy val `table-footer-group` = this := "table-footer-group"
+
     /**
      * These elements behave like the corresponding thead HTML elements
      *
      * MDN
      */
     lazy val `table-header-group` = this := "table-header-group"
+
     /**
      * Behaves like the tr HTML element
      *
      * MDN
      */
     lazy val `table-row` = this := "table-row"
+
     /**
      * These elements behave like the corresponding tbody HTML elements
      *
      * MDN
      */
     lazy val `table-row-group` = this := "table-row-group"
+
     /**
      * The element behaves like a block element and lays out its content according
      * to the flexbox model.
@@ -1695,6 +1795,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val flex = this := "flex"
+
     /**
      * The element behaves like an inline element and lays out its content
      * according to the flexbox model.
@@ -1703,8 +1804,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val `inline-flex` = this := "inline-flex"
   }
-
-
 
   /**
    * The CSS property pointer-events allows authors to control under what
@@ -1719,6 +1818,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object pointerEvents extends Style("pointerEvents", "pointer-events") {
+
     /**
      * The element behaves as it would if the pointer-events property was not
      * specified. In SVG content, this value and the value visiblePainted have
@@ -1727,6 +1827,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val auto = this := "auto"
+
     /**
      * The element is never the target of mouse events; however, mouse events
      * may target its descendant elements if those descendants have pointer-events
@@ -1737,6 +1838,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * visibility property is set to visible and when the mouse cursor is over
@@ -1748,6 +1850,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val visiblePainted = this := "visiblePainted"
+
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * visibility property is set to visible and when the mouse cursor is over
@@ -1757,6 +1860,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val visibleFill = this := "visibleFill"
+
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * visibility property is set to visible and when the mouse cursor is over
@@ -1766,6 +1870,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val visibleStroke = this := "visibleStroke"
+
     /**
      * SVG only. The element can be the target of a mouse event when the
      * visibility property is set to visible and the mouse cursor is over either
@@ -1775,6 +1880,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val visible = this := "visible"
+
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * mouse cursor is over the interior (i.e., 'fill') of the element and the
@@ -1786,6 +1892,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val painted = this := "painted"
+
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * pointer is over the interior (i.e., fill) of the element. The values of
@@ -1794,6 +1901,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val fill = this := "fill"
+
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * pointer is over the perimeter (i.e., stroke) of the element. The values
@@ -1802,6 +1910,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val stroke = this := "stroke"
+
     /**
      * SVG only. The element can only be the target of a mouse event when the
      * pointer is over the interior (i.e., fill) or the perimeter (i.e., stroke)
@@ -1813,7 +1922,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val all = this := "all"
   }
 
-
   /**
    * The list-style-image CSS property sets the image that will be used as the
    * list item marker. It is often more convenient to use the shorthand
@@ -1821,11 +1929,10 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object listStyleImage extends Style("listStyleImage", "list-style-image"){
+  object listStyleImage extends Style("listStyleImage", "list-style-image") {
 
     def none = this := "none"
   }
-
 
   /**
    * The list-style-position CSS property specifies the position of the marker
@@ -1835,12 +1942,14 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object listStylePosition extends Style("listStylePosition", "list-style-position") {
+
     /**
      * The marker box is outside the principal block box.
      *
      * MDN
      */
     lazy val outside = this := "outside"
+
     /**
      * The marker box is the first inline box in the principal block box, after
      * which the element's content flows.
@@ -1851,12 +1960,14 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
   }
 
   object wordWrap extends Style("wordWrap", "word-wrap") {
+
     /**
      * Indicates that lines may only break at normal word break points.
      *
      * MDN
      */
     lazy val normal = this := "normal"
+
     /**
      * Indicates that normally unbreakable words may be broken at arbitrary
      * points if there are no otherwise acceptable break points in the line.
@@ -1865,7 +1976,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val `break-word` = this := "break-word"
   }
-
 
   /**
    * The opacity CSS property specifies the transparency of an element, that is,
@@ -1884,7 +1994,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val opacity = new Style("opacity", "opacity")
 
-
   /**
    * The max-width CSS property is used to set the maximum width of a given
    * element. It prevents the used value of the width property from becoming
@@ -1896,7 +2005,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val maxWidth = new MaxLengthStyle("maxWidth", "max-width")
 
-
   /**
    * The vertical-align CSS property specifies the vertical alignment of an
    * inline or table-cell box.
@@ -1904,6 +2012,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object verticalAlign extends Style("verticalAlign", "vertical-align") {
+
     /**
      * Aligns the baseline of the element with the baseline of its parent. The
      * baseline of some replaced elements, like textarea is not specified by
@@ -1913,6 +2022,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val baseline = this := "baseline"
+
     /**
      * Align the bottom of the element and its descendants with the bottom of
      * the entire line.
@@ -1920,6 +2030,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val bottom = this := "bottom"
+
     /**
      * Aligns the baseline of the element with the subscript-baseline of its
      * parent.
@@ -1927,6 +2038,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val sub = this := "sub"
+
     /**
      * Aligns the baseline of the element with the superscript-baseline of its
      * parent.
@@ -1934,12 +2046,14 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `super` = this := "super"
+
     /**
      * Aligns the top of the element with the top of the parent element's font.
      *
      * MDN
      */
     lazy val `text-top` = this := "text-top"
+
     /**
      * Aligns the bottom of the element with the bottom of the parent element's
      * font.
@@ -1947,6 +2061,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `text-bottom` = this := "text-bottom"
+
     /**
      * Align the top of the element and its descendants with the top of the
      * entire line.
@@ -1954,6 +2069,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val top = this := "top"
+
     /**
      * Aligns the middle of the element with the middle of lowercase letters in
      * the parent.
@@ -1962,7 +2078,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val middle = this := "middle"
   }
-
 
   /**
    * The overflow CSS property specifies whether to clip content, render scroll
@@ -1984,8 +2099,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     def uri(s: String) = this := s"uri($s)"
   }
 
-
-
   /**
    * he empty-cells CSS property specifies how user agents should render borders
    * and backgrounds around cells that have no visible content.
@@ -1993,6 +2106,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object emptyCells extends Style("emptyCells", "empty-cells") {
+
     /**
      * Is a keyword indicating that borders and backgrounds should be drawn like
      * in a normal cells.
@@ -2000,6 +2114,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val show = this := "show"
+
     /**
      * Is a keyword indicating that no border or backgrounds should be drawn.
      *
@@ -2007,7 +2122,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val hide = this := "hide"
   }
-
 
   /**
    * The height CSS property specifies the height of the content area of an
@@ -2019,7 +2133,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val height = new PixelAutoStyle("height", "height")
-
 
   /**
    * The padding-right CSS property of an element sets the padding space
@@ -2092,8 +2205,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val right = new PixelAutoStyle("right", "right")
 
-
-
   /**
    * On block level elements, the line-height CSS property specifies the minimal
    * height of line boxes within the element.
@@ -2118,12 +2229,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val left = new PixelAutoStyle("left", "left")
 
-
-
-
-
-
-
   /**
    * The list-style-type CSS property specifies appearance of a list item element.
    * As it is the only one who defaults to display:list-item, this is usually a
@@ -2132,114 +2237,133 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object listStyleType extends Style("listStyleType", "list-style-type") {
+
     /**
      * No item marker is shown
      *
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * A filled circle (default value)
      *
      * MDN
      */
     lazy val disc = this := "disc"
+
     /**
      * A hollow circle
      *
      * MDN
      */
     lazy val circle = this := "circle"
+
     /**
      * A filled square
      *
      * MDN
      */
     lazy val square = this := "square"
+
     /**
      * Decimal numbers begining with 1
      *
      * MDN
      */
     lazy val decimal = this := "decimal"
+
     /**
      * Han decimal numbers
      *
      * MDN
      */
     lazy val `cjk-decimal` = this := "cjk-decimal"
+
     /**
      * Decimal numbers padded by initial zeros
      *
      * MDN
      */
     lazy val `decimal-leading-zero` = this := "decimal-leading-zero"
+
     /**
      * Lowercase roman numerals
      *
      * MDN
      */
     lazy val `lower-roman` = this := "lower-roman"
+
     /**
      * Uppercase roman numerals
      *
      * MDN
      */
     lazy val `upper-roman` = this := "upper-roman"
+
     /**
      * Lowercase classical greek
      *
      * MDN
      */
     lazy val `lower-greek` = this := "lower-greek"
+
     /**
      * Lowercase ASCII letters
      *
      * MDN
      */
     lazy val `lower-alpha` = this := "lower-alpha"
+
     /**
      * Lowercase ASCII letters
      *
      * MDN
      */
     lazy val `lower-latin` = this := "lower-latin"
+
     /**
      * Uppercase ASCII letters
      *
      * MDN
      */
     lazy val `upper-alpha` = this := "upper-alpha"
+
     /**
      * Uppercase ASCII letters
      *
      * MDN
      */
     lazy val `upper-latin` = this := "upper-latin"
+
     /**
      * Traditional Armenian numbering
      *
      * MDN
      */
     lazy val armenian = this := "armenian"
+
     /**
      * Traditional Georgian numbering
      *
      * MDN
      */
     lazy val georgian = this := "georgian"
+
     /**
      * Traditional Hebrew numbering
      *
      * MDN
      */
     lazy val hebrew = this := "hebrew"
+
     /**
      * Japanese Hiragana
      *
      * MDN
      */
     lazy val hiragana = this := "hiragana"
+
     /**
      * Japanese Hiragana
      *
@@ -2248,12 +2372,14 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `hiragana-iroha` = this := "hiragana-iroha"
+
     /**
      * Japanese Katakana
      *
      * MDN
      */
     lazy val katakana = this := "katakana"
+
     /**
      * Japanese Katakana
      *
@@ -2263,8 +2389,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val `katakana-iroha` = this := "katakana-iroha"
   }
-
-
 
   /**
    * The list-style CSS property is a shorthand property for setting
@@ -2290,12 +2414,14 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object captionSide extends Style("captionSide", "caption-side") {
+
     /**
      * The caption box will be above the table.
      *
      * MDN
      */
     lazy val top = this := "top"
+
     /**
      * The caption box will be below the table.
      *
@@ -2316,7 +2442,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val boxShadow = new Style("boxShadow", "box-shadow")
 
-
   /**
    * The position CSS property chooses alternative rules for positioning elements,
    * designed to be useful for scripted animation effects.
@@ -2324,6 +2449,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object position extends Style("position", "position") {
+
     /**
      * This keyword let the element use the normal behavior, that is it is laid
      * out in its current position in the flow.  The top, right, bottom, and left
@@ -2332,6 +2458,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val static = this := "static"
+
     /**
      * This keyword lays out all elements as though the element were not
      * positioned, and then adjust the element's position, without changing
@@ -2343,6 +2470,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val relative = this := "relative"
+
     /**
      * Do not leave space for the element. Instead, position it at a specified
      * position relative to its closest positioned ancestor or to the containing
@@ -2352,6 +2480,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val absolute = this := "absolute"
+
     /**
      * Do not leave space for the element. Instead, position it at a specified
      * position relative to the screen's viewport and doesn't move when scrolled.
@@ -2362,8 +2491,8 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val fixed = this := "fixed"
   }
 
-
   object quotes extends Style("quotes", "quotes") {
+
     /**
      * The open-quote and close-quote values of the content property produce no
      * quotation marks.
@@ -2379,6 +2508,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
   }
 
   object tableLayout extends Style("tableLayout", "table-layout") {
+
     /**
      * An automatic table layout algorithm is commonly used by most browsers for
      * table layout. The width of the table and its cells depends on the content
@@ -2387,6 +2517,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val auto = this := "auto"
+
     /**
      * Table and column widths are set by the widths of table and col elements
      * or by the width of the first row of cells. Cells in subsequent rows do
@@ -2396,7 +2527,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val fixed = this := "fixed"
   }
-
 
   /**
    * The font-size CSS property specifies the size of the font – specifically
@@ -2414,6 +2544,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val large = this := "large"
     lazy val `x-large` = this := "x-large"
     lazy val `xx-large` = this := "xx-large"
+
     /**
      * Larger than the parent element's font size, by roughly the ratio used to
      * separate the absolute size keywords above.
@@ -2421,6 +2552,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val larger = this := "larger"
+
     /**
      * Smaller than the parent element's font size, by roughly the ratio used to
      * separate the absolute size keywords above.
@@ -2429,7 +2561,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val smaller = this := "smaller"
   }
-
 
   /**
    * The font-size-adjust CSS property specifies that font size should be chosen
@@ -2458,7 +2589,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val fontFamily = new Style("fontFamily", "font-family")
 
-
   /**
    * The font-weight CSS property specifies the weight or boldness of the font.
    * However, some fonts are not available in all weights; some are available
@@ -2475,18 +2605,21 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object fontWeight extends Style("fontWeight", "font-weight") {
+
     /**
      * Normal font weight. Same as 400.
      *
      * MDN
      */
     lazy val normal = this := "normal"
+
     /**
      * Bold font weight. Same as 700.
      *
      * MDN
      */
     lazy val bold = this := "bold"
+
     /**
      * One font weight lighter than the parent element (among the available
      * weights of the font).
@@ -2494,6 +2627,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val lighter = this := "lighter"
+
     /**
      * One font weight darker than the parent element (among the available
      * weights of the font)
@@ -2527,19 +2661,22 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  object fontStyle extends Style("fontStyle", "font-style"){
+  object fontStyle extends Style("fontStyle", "font-style") {
+
     /**
      * Selects a font that is classified as normal within a font-family
      *
      * MDN
      */
     lazy val normal = this := "normal"
+
     /**
      * Selects a font that is labeled italic, if that is not available, one labeled oblique
      *
      * MDN
      */
     lazy val italic = this := "italic"
+
     /**
      * Selects a font that is labeled oblique
      *
@@ -2557,24 +2694,28 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object clear extends Style("clear", "clear") {
+
     /**
      * The element is not moved down to clear past floating elements.
      *
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * The element is moved down to clear past left floats.
      *
      * MDN
      */
     lazy val left = this := "left"
+
     /**
      * The element is moved down to clear past right floats.
      *
      * MDN
      */
     lazy val right = this := "right"
+
     /**
      * The element is moved down to clear past both left and right floats.
      *
@@ -2599,7 +2740,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val marginRight = new PixelStyle("marginRight", "margin-right") with MarginAuto
 
-
   /**
    * The margin-top CSS property of an element sets the margin space required on
    * the top of an element. A negative value is also allowed.
@@ -2607,7 +2747,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val marginTop = new PixelStyle("marginTop", "margin-top") with MarginAuto
-
 
   /**
    * The margin-left CSS property of an element sets the margin space required
@@ -2620,6 +2759,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val marginLeft = new PixelStyle("marginLeft", "margin-left") with MarginAuto
+
   /**
    * The margin CSS property sets the margin for all four sides. It is a
    * shorthand to avoid setting each side separately with the other margin
@@ -2630,6 +2770,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object margin extends PixelStyle("margin", "margin") {
+
     /**
      * auto is replaced by some suitable value, e.g. it can be used for
      * centering of blocks.
@@ -2639,7 +2780,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val auto = this := "auto"
 
   }
-
 
   /**
    * The top CSS property specifies part of the position of positioned elements.
@@ -2659,7 +2799,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val top = new PixelAutoStyle("top", "top")
-
 
   /**
    * The width CSS property specifies the width of the content area of an element.
@@ -2698,7 +2837,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val letterSpacing = new NormalOpenStyle("letterSpacing", "letter-spacing")
 
-
   /**
    * The max-height CSS property is used to set the maximum height of a given
    * element. It prevents the used value of the height property from becoming
@@ -2721,7 +2859,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val minWidth = new MinLengthStyle("minWidth", "min-width")
 
-
   /**
    * The min-height CSS property is used to set the minimum height of a given
    * element. It prevents the used value of the height property from becoming
@@ -2732,7 +2869,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val minHeight = new MinLengthStyle("minHeight", "min-height")
-
 
   /**
    * The CSS outline property is a shorthand property for setting one or more of
@@ -2763,18 +2899,21 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object outlineWidth extends Style("outlineWidth", "outline-width") {
+
     /**
      * Typically 1px in desktop browsers like Firefox.
      *
      * MDN
      */
     lazy val thin = this := "thin"
+
     /**
      * Typically 3px in desktop browsers like Firefox.
      *
      * MDN
      */
     lazy val medium = this := "medium"
+
     /**
      * Typically 5px in desktop browsers like Firefox.
      *
@@ -2791,6 +2930,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object outlineColor extends Style("outlineColor", "outline-color") {
+
     /**
      * To ensure the outline is visible, performs a color inversion of the
      * background. This makes the focus border more salient, regardless of the
@@ -2802,7 +2942,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val invert = this := "invert"
   }
 
-
   /**
    * The overflow-x CSS property specifies whether to clip content, render a
    * scroll bar or display overflow content of a block-level element, when it
@@ -2812,7 +2951,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val overflowX = new Overflow("overflowX", "overflow-x")
 
-
   /**
    * The text-align-last CSS property describes how the last line of a block or
    * a line, right before a forced line break, is aligned.
@@ -2820,7 +2958,8 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val textAlignLast = new Style("textAlignLast", "text-align-last") with TextAlign
-  trait TextAlign extends Style{
+  trait TextAlign extends Style {
+
     /**
      * The same as left if direction is left-to-right and right if direction is
      * right-to-left.
@@ -2828,6 +2967,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val start = this := "start"
+
     /**
      * The same as right if direction is left-to-right and left if direction is
      * right-to-left.
@@ -2835,24 +2975,28 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val end = this := "end"
+
     /**
      * The inline contents are aligned to the left edge of the line box.
      *
      * MDN
      */
     lazy val left = this := "left"
+
     /**
      * The inline contents are aligned to the right edge of the line box.
      *
      * MDN
      */
     lazy val right = this := "right"
+
     /**
      * The inline contents are centered within the line box.
      *
      * MDN
      */
     lazy val center = this := "center"
+
     /**
      * The text is justified. Text should line up their left and right edges to
      * the left and right content edges of the paragraph.
@@ -2861,6 +3005,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val justify = this := "justify"
   }
+
   /**
    * The text-align CSS property describes how inline content like text is
    * aligned in its parent block element. text-align does not control the
@@ -2869,6 +3014,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val textAlign = new Style("textAlign", "text-align") with TextAlign
+
   /**
    * The text-decoration CSS property is used to set the text formatting to
    * underline, overline, line-through or blink.
@@ -2876,24 +3022,28 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object textDecoration extends Style("textDecoration", "text-decoration") {
+
     /**
      * Produces no text decoration.
      *
      * MDN
      */
     lazy val none = this := "none"
+
     /**
      * Each line of text is underlined.
      *
      * MDN
      */
     lazy val underline = this := "underline"
+
     /**
      * Each line of text has a line above it.
      *
      * MDN
      */
     lazy val overline = this := "overline"
+
     /**
      * Each line of text has a line through the middle.
      *
@@ -2920,6 +3070,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object textOverflow extends Style("textOverflow", "text-overflow") {
+
     /**
      * This keyword value indicates to truncate the text at the limit of the
      * content area, therefore the truncation can happen in the middle of a
@@ -2930,6 +3081,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val clip = this := "clip"
+
     /**
      * This keyword value indicates to display an ellipsis ('…', U+2026 HORIZONTAL
      * ELLIPSIS) to represent clipped text. The ellipsis is displayed inside the
@@ -2940,6 +3092,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val ellipsis = this := "ellipsis"
   }
+
   /**
    * The CSS text-underline-position property specifies the position of the
    * underline which is set using the text-decoration property underline value.
@@ -2950,6 +3103,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object textUnderlinePosition extends Style("textUnderlinePosition", "text-underline-position") {
+
     /**
      * This keyword allows the browser to use an algorithm to choose between
      * under and alphabetic.
@@ -2957,6 +3111,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val auto = this := "auto"
+
     /**
      * This keyword forces the line to be set below the alphabetic baseline, at
      * a position where it won't cross any descender. This is useful to prevent
@@ -2966,6 +3121,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val under = this := "under"
+
     /**
      * In vertical writing-modes, this keyword forces the line to be placed on
      * the left of the characters. In horizontal writing-modes, it is a synonym
@@ -2974,6 +3130,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val left = this := "left"
+
     /**
      * In vertical writing-modes, this keyword forces the line to be placed on
      * the right of the characters. In horizontal writing-modes, it is a synonym
@@ -2985,6 +3142,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val `under left` = this := "under left"
     lazy val `under right` = this := "under right"
   }
+
   /**
    * The text-transform CSS property specifies how to capitalize an element's
    * text. It can be used to make text appear in all-uppercase or all-lowercase,
@@ -2993,6 +3151,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object textTransform extends Style("textTransform", "text-transform") {
+
     /**
      * Forces the first letter of each word to be converted to
      * uppercase. Other characters are unchanged.
@@ -3000,18 +3159,21 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val capitalize = this := "capitalize"
+
     /**
      * Forces all characters to be converted to uppercase.
      *
      * MDN
      */
     lazy val uppercase = this := "uppercase"
+
     /**
      * Forces all characters to be converted to lowercase.
      *
      * MDN
      */
     lazy val lowercase = this := "lowercase"
+
     /**
      * Prevents the case of all characters from being changed
      *
@@ -3019,7 +3181,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val none = this := "none"
   }
-
 
   /**
    * The text-shadow CSS property adds shadows to text. It accepts a comma-separated
@@ -3034,7 +3195,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val textShadow = new NoneOpenStyle("textShadow", "text-shadow")
-
 
   /**
    * The transition-delay CSS property specifies the amount of time to wait
@@ -3077,7 +3237,8 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    *
    * MDN
    */
-  lazy val transitionTimingFunction = new Style("transitionTimingFunction", "transition-timing-function")
+  lazy val transitionTimingFunction =
+    new Style("transitionTimingFunction", "transition-timing-function")
 
   /**
    * The transition-duration CSS property specifies the number of seconds or
@@ -3103,14 +3264,15 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   lazy val transitionProperty = new Style("transitionProperty", "transition-property")
 
-
   object visibility extends Style("visibility", "visibility") {
+
     /**
      * Default value, the box is visible
      *
      * MDN
      */
     lazy val visible = this := "visible"
+
     /**
      * The box is invisible (fully transparent, nothing is drawn), but still
      * affects layout.  Descendants of the element will be visible if they have
@@ -3119,6 +3281,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val hidden = this := "hidden"
+
     /**
      * For table rows, columns, column groups, and row groups the row(s) or
      * column(s) are hidden and the space they would have occupied is (as if
@@ -3129,15 +3292,14 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val collapse = this := "collapse"
   }
 
-
-
   /**
    * The white-space CSS property is used to to describe how whitespace inside
    * the element is handled.
    *
    * MDN
    */
-  object whiteSpace extends Style("whiteSpace", "white-space"){
+  object whiteSpace extends Style("whiteSpace", "white-space") {
+
     /**
      * Sequences of whitespace are collapsed. Newline characters in the source
      * are handled as other whitespace. Breaks lines as necessary to fill line
@@ -3146,6 +3308,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val normal = this := "normal"
+
     /**
      * Collapses whitespace as for normal, but suppresses line breaks (text
      * wrapping) within text.
@@ -3153,6 +3316,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val nowrap = this := "nowrap"
+
     /**
      * Sequences of whitespace are preserved, lines are only broken at newline
      * characters in the source and at br elements.
@@ -3160,6 +3324,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val pre = this := "pre"
+
     /**
      * Sequences of whitespace are preserved. Lines are broken at newline
      * characters, at br, and as necessary to fill line boxes.
@@ -3167,6 +3332,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      * MDN
      */
     lazy val `pre-wrap` = this := "pre-wrap"
+
     /**
      * Sequences of whitespace are collapsed. Lines are broken at newline
      * characters, at br, and as necessary to fill line boxes.
@@ -3175,6 +3341,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
      */
     lazy val `pre-line` = this := "pre-line"
   }
+
   /**
    * The word-spacing CSS property specifies spacing behavior between tags and
    * words.
@@ -3182,6 +3349,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val wordSpacing = new NormalOpenStyle("wordSpacing", "word-spacing")
+
   /**
    * The z-index CSS property specifies the z-order of an element and its
    * descendants. When elements overlap, z-order determines which one covers the
@@ -3191,8 +3359,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   lazy val zIndex = new AutoStyle("zIndex", "z-index")
-
-
 
   /**
    * The flex CSS property is a shorthand property specifying the ability of a flex item to alter its dimensions to
@@ -3290,6 +3456,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    * MDN
    */
   object alignSelf extends Style("alignSelf", "align-self") {
+
     /**
      * Computes to parent's align-items value or stretch if the element has no parent.
      *
@@ -3417,7 +3584,6 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
 
   }
 
-
   /**
    * The CSS justify-content property defines how a browser distributes available space between and around elements
    * when aligning flex items in the main-axis of the current line. The alignment is done after the lengths and auto
@@ -3515,6 +3681,5 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val rowReverse = this := "row-reverse"
 
   }
-
 
 }

@@ -12,49 +12,51 @@ import scalatags.generic.Style
  * exposes more of its internals than it probably should for performance,
  * so even though the stuff isn't private, don't touch it!
  */
-class Builder(var children: Array[Frag] = new Array(4),
-              var attrs: Array[(String, Builder.ValueSource)] = new Array(4)){
+class Builder(
+    var children: Array[Frag] = new Array(4),
+    var attrs: Array[(String, Builder.ValueSource)] = new Array(4)
+) {
   final var childIndex = 0
   final var attrIndex = 0
 
   private[this] def incrementChidren(arr: Array[Frag], index: Int) = {
-    if (index >= arr.length){
+    if (index >= arr.length) {
       val newArr = new Array[Frag](arr.length * 2)
       var i = 0
-      while(i < arr.length){
+      while (i < arr.length) {
         newArr(i) = arr(i)
         i += 1
       }
       newArr
-    }else{
+    } else {
       null
     }
   }
 
   private[this] def incrementAttr(arr: Array[(String, Builder.ValueSource)], index: Int) = {
-    if (index >= arr.length){
+    if (index >= arr.length) {
       val newArr = new Array[(String, Builder.ValueSource)](arr.length * 2)
       var i = 0
-      while(i < arr.length){
+      while (i < arr.length) {
         newArr(i) = arr(i)
         i += 1
       }
       newArr
-    }else{
+    } else {
       null
     }
   }
 
   private[this] def increment[T: ClassTag](arr: Array[T], index: Int) = {
-    if (index >= arr.length){
+    if (index >= arr.length) {
       val newArr = new Array[T](arr.length * 2)
       var i = 0
-      while(i < arr.length){
+      while (i < arr.length) {
         newArr(i) = arr(i)
         i += 1
       }
       newArr
-    }else{
+    } else {
       null
     }
   }
@@ -66,10 +68,10 @@ class Builder(var children: Array[Frag] = new Array(4),
   }
   def appendAttr(k: String, v: Builder.ValueSource) = {
 
-    attrIndex(k) match{
+    attrIndex(k) match {
       case -1 =>
         val newAttrs = incrementAttr(attrs, attrIndex)
-        if (newAttrs!= null) attrs = newAttrs
+        if (newAttrs != null) attrs = newAttrs
 
         attrs(attrIndex) = k -> v
         attrIndex += 1
@@ -79,10 +81,10 @@ class Builder(var children: Array[Frag] = new Array(4),
     }
   }
   def setAttr(k: String, v: Builder.ValueSource) = {
-    attrIndex(k) match{
+    attrIndex(k) match {
       case -1 =>
         val newAttrs = incrementAttr(attrs, attrIndex)
-        if (newAttrs!= null) attrs = newAttrs
+        if (newAttrs != null) attrs = newAttrs
         attrs(attrIndex) = k -> v
         attrIndex += 1
       case n =>
@@ -90,7 +92,6 @@ class Builder(var children: Array[Frag] = new Array(4),
         attrs(n) = (oldK, Builder.ChainedAttributeValueSource(oldV, v))
     }
   }
-
 
   def appendAttrStrings(v: Builder.ValueSource, sb: java.io.Writer): Unit = {
     v.appendAttrValue(sb)
@@ -102,21 +103,19 @@ class Builder(var children: Array[Frag] = new Array(4),
     sb.toString
   }
 
-
-
   def attrIndex(k: String): Int = {
     attrs.indexWhere(x => x != null && x._1 == k)
   }
 }
-object Builder{
+object Builder {
 
   /**
-    * More-or-less internal trait, used to package up the parts of a textual
-    * attribute or style so that we can append the chunks directly to the
-    * output buffer. Improves perf over immediately combining them into a
-    * string and storing that, since this avoids allocating that intermediate
-    * string.
-    */
+   * More-or-less internal trait, used to package up the parts of a textual
+   * attribute or style so that we can append the chunks directly to the
+   * output buffer. Improves perf over immediately combining them into a
+   * string and storing that, since this avoids allocating that intermediate
+   * string.
+   */
   trait ValueSource {
     def appendAttrValue(strb: java.io.Writer): Unit
   }
@@ -154,4 +153,3 @@ trait Frag extends generic.Frag[Builder, String] {
   def render: String
   def applyTo(b: Builder) = b.addChild(this)
 }
-
