@@ -83,6 +83,19 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 
   }
 
+  object Defs extends CascadingStyleSheet{
+    initStyleSheet()
+
+    def x = cls(
+      backgroundColor := "red",
+      height := 125
+    )
+
+    def y = cls.hover(
+      opacity := 0.5
+    )
+  }
+
 
   def check(txt: String, expected: String) = {
     // augmentString = work around scala/bug#11125 on JDK 11
@@ -163,6 +176,20 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
             height: 125px;
           }
           .CuStOm-y:hover{
+            opacity: 0.5;
+          }
+         """
+      )
+    }
+    test("defs"){
+      check(
+        Defs.styleSheetText,
+        s"""
+          .$pkg-Defs-x{
+            background-color: red;
+            height: 125px;
+          }
+          .$pkg-Defs-y:hover{
             opacity: 0.5;
           }
          """

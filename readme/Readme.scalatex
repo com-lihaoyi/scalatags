@@ -706,7 +706,7 @@
     @p
       You can then access @hl.scala{Simple.styleSheetText} in order to do things with the generated stylesheet text. Exactly what you want to do is up to you: In Scala-JVM you will likely want to save it to a file (to be served later) or inlined into some HTML fragment, while in Scala.js you may insert it into the page directly via a @hl.scala{style} tag.
     @p
-      Only @hl.scala{cls}s defined on @hl.scala{trait Simple} are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names @hl.scala{$pkg-$class-$val}. You can override @hl.scala{customSheetName} to replace the @hl.scala{pkg-$class} part with something else.
+      Only @hl.scala{cls}s defined on @hl.scala{trait Simple} are gathered up as part of the generated stylesheet. By default, the name of each class is constructed via the names @hl.scala{$pkg-$class-$val} or @hl.scala{$pkg-$class-$def}. You can override @hl.scala{customSheetName} to replace the @hl.scala{pkg-$class} part with something else.
     @p
       Once the stylesheet is defined, you can then immediately start using styles within your Scalatags fragments, just like any other @hl.scala{Modifier}:
 
@@ -716,7 +716,7 @@
     @hl.ref(cssTests, Seq("htmlFrag", "val expected", ""), "\"\"\"", className = "xml")
 
     @p
-      By default, Scalatag's @hl.scala{StyleSheet}s have no cascading: you only can define styles for a single class (and it's pseudo-selectors) at a single time. If you want to define styles for multiple tags without a larger HTML fragment, you should define multiple classes. The fact that Scalatag's @hl.scala{cls} definitions are just normal @hl.scala{val}s makes managing these classes very easy: you can use standard IDE's or tools to jump-to-definitions, auto-rename them, etc.. Many common mistakes in CSS, such as accidentally mis-spelling a class-name or botching a renaming, become compilation errors.
+      By default, Scalatag's @hl.scala{StyleSheet}s have no cascading: you only can define styles for a single class (and it's pseudo-selectors) at a single time. If you want to define styles for multiple tags without a larger HTML fragment, you should define multiple classes. The fact that Scalatag's @hl.scala{cls} definitions are just normal @hl.scala{val}s or @hl.scala{def}s makes managing these classes very easy: you can use standard IDE's or tools to jump-to-definitions, auto-rename them, etc.. Many common mistakes in CSS, such as accidentally mis-spelling a class-name or botching a renaming, become compilation errors.
     @p
       Since Scalatags @hl.scala{StyleSheet}s are just Scala, you can feel free to use normal Scala techniques (constants, functions, traits, etc.) to DRY up your code without having to learn any special Scalatags-specific mechanisms.
 
