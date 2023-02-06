@@ -98,7 +98,6 @@ trait VirtualDom[Output <: FragT, FragT]
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
-    implicit def UnitFrag(u: Unit): VirtualDom.this.StringFrag = new VirtualDom.this.StringFrag("")
     def makeAbstractTypedTag[T <: Output](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void, namespaceConfig)
     }

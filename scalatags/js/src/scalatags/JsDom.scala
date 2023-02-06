@@ -102,7 +102,6 @@ object JsDom
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
-    implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
     def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
       TypedTag(tag, Nil, void, namespaceConfig)
     }
