@@ -1,6 +1,5 @@
 package scalatags.stylesheet
 
-
 import scala.collection.immutable.SortedMap
 
 /**
@@ -20,11 +19,13 @@ import scala.collection.immutable.SortedMap
  * .cls1 .cls2:hover
  * .cls1:hover .cls2
  */
-case class StyleTree(selectors: Seq[String],
-                     styles: SortedMap[String, String],
-                     children: Seq[StyleTree]){
+case class StyleTree(
+    selectors: Seq[String],
+    styles: SortedMap[String, String],
+    children: Seq[StyleTree]
+) {
   def stringify(prefix: Seq[String]): String = {
-    val body = styles.map{case (k, v) => s"  $k:$v"}.mkString("\n")
+    val body = styles.map { case (k, v) => s"  $k:$v" }.mkString("\n")
     val (first +: rest) = prefix ++ selectors
     val all = (first +: rest.map(x => if (x(0) == ':') x else " " + x)).mkString("")
     val ours =
@@ -35,24 +36,21 @@ case class StyleTree(selectors: Seq[String],
   }
 }
 
-object StyleTree{
+object StyleTree {
   def build(start: Seq[String], args: Seq[StyleSheetFrag]) = {
-    args.foldLeft(StyleTree(start, SortedMap.empty, Nil))(
-      (c, f) => f.applyTo(c)
-    )
+    args.foldLeft(StyleTree(start, SortedMap.empty, Nil))((c, f) => f.applyTo(c))
   }
 }
-
 
 /**
  * Something which can be used as part of a [[StyleSheet]]
  */
-trait StyleSheetFrag{
+trait StyleSheetFrag {
 
   def applyTo(c: StyleTree): StyleTree
 }
-object StyleSheetFrag{
-  implicit class StyleTreeFrag(st: StyleTree) extends StyleSheetFrag{
+object StyleSheetFrag {
+  implicit class StyleTreeFrag(st: StyleTree) extends StyleSheetFrag {
     def applyTo(c: StyleTree) = {
       new StyleTree(
         c.selectors,
@@ -70,7 +68,7 @@ object StyleSheetFrag{
  * define `extend` to tell it what each of these properties
  * returns
  */
-trait PseudoSelectors[T]{
+trait PseudoSelectors[T] {
 
   def pseudoExtend(s: String): T
   // Pseudo-selectors
@@ -109,15 +107,14 @@ trait PseudoSelectors[T]{
   def visited = pseudoExtend("visited")
 }
 
-
 /**
  * Lets you chain pseudo-selectors e.g. `hover.visited` and have it properly
  * translate into `:hover:visited` when rendered.
  */
-class Selector(val built: Seq[String] = Nil) extends PseudoSelectors[Selector]{ b =>
+class Selector(val built: Seq[String] = Nil) extends PseudoSelectors[Selector] { b =>
   def pseudoExtend(s: String) = {
-    if(b.built == Nil) new Selector(Seq(":"+s))
-    else new Selector(b.built.init :+ (b.built.last + ":"+s))
+    if (b.built == Nil) new Selector(Seq(":" + s))
+    else new Selector(b.built.init :+ (b.built.last + ":" + s))
   }
 
   /**
@@ -140,14 +137,15 @@ class Selector(val built: Seq[String] = Nil) extends PseudoSelectors[Selector]{ 
   def >(other: Selector) = new Selector(built ++ Seq(">") ++ other.built)
 }
 
-object Selector{
+object Selector {
   def apply(s: String) = new Selector(Seq(s))
 }
+
 /**
  * Provides a strongly-typed list of all the HTML tags that can be
  * used as [[Selector]]s.
  */
-trait StyleSheetTags{
+trait StyleSheetTags {
 
   // Root Element
   protected[this] val html = Selector("html")

@@ -5,8 +5,11 @@ import utest._
 
 import scalatags.stylesheet._
 
-abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
-                              (val bundle: Bundle[Builder, Output, FragT])  extends TestSuite{
+abstract class StyleSheetTests[Builder, Output <: FragT, FragT](val bundle: Bundle[
+  Builder,
+  Output,
+  FragT
+]) extends TestSuite {
 
   import bundle.all._
 
@@ -25,8 +28,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     val z = cls(x.splice, y.splice)
   }
 
-
-  object Inline extends StyleSheet{
+  object Inline extends StyleSheet {
     initStyleSheet()
 
     val w = cls(
@@ -43,7 +45,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     )
   }
 
-  object Cascade extends CascadingStyleSheet{
+  object Cascade extends CascadingStyleSheet {
     initStyleSheet()
 
     val y = cls()
@@ -69,7 +71,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     )
   }
 
-  object Custom extends CascadingStyleSheet{
+  object Custom extends CascadingStyleSheet {
     initStyleSheet()
 
     override def customSheetName = Some("CuStOm")
@@ -83,7 +85,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 
   }
 
-  object Defs extends CascadingStyleSheet{
+  object Defs extends CascadingStyleSheet {
     initStyleSheet()
 
     def x = cls(
@@ -96,16 +98,15 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     )
   }
 
-
   def check(txt: String, expected: String) = {
     // augmentString = work around scala/bug#11125 on JDK 11
     def normalize(s: String) = Predef.augmentString(s).linesIterator.map(_.trim).mkString
 
     assert(normalize(txt) == normalize(expected))
   }
-  val tests = TestSuite{
-    test("feature"){
-      test("hello"){
+  val tests = TestSuite {
+    test("feature") {
+      test("hello") {
 
         check(
           Simple.styleSheetText,
@@ -126,7 +127,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         )
       }
 
-      test("inline"){
+      test("inline") {
         check(
           Inline.styleSheetText,
           s"""
@@ -145,7 +146,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
           """.stripMargin
         )
       }
-      test("cascade"){
+      test("cascade") {
         check(
           Cascade.styleSheetText,
           s"""
@@ -167,7 +168,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
         )
       }
     }
-    test("customization"){
+    test("customization") {
       check(
         Custom.styleSheetText,
         s"""
@@ -181,7 +182,8 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
          """
       )
     }
-    test("defs"){
+
+    test("defs") {
       check(
         Defs.styleSheetText,
         s"""
@@ -195,19 +197,19 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
          """
       )
     }
-    test("failure"){
-      test("noDirectInstantiation"){
-  // This doesn't seem to work, even though that snippet does indeed
-  // cause a compilation error. Maybe a bug in uTest?
+    test("failure") {
+      test("noDirectInstantiation") {
+        // This doesn't seem to work, even though that snippet does indeed
+        // cause a compilation error. Maybe a bug in uTest?
 
-  //      compileError("""
-  //        object Funky extends StyleSheet
-  //      """).check("""
-  //        object Funky extends StyleSheet
-  //               ^
-  //      """, "object creation impossible")
+        //      compileError("""
+        //        object Funky extends StyleSheet
+        //      """).check("""
+        //        object Funky extends StyleSheet
+        //               ^
+        //      """, "object creation impossible")
       }
-      test("noCascade"){
+      test("noCascade") {
         // crashes compiler in 2.10.x
 //        compileError("""
 //          val Cascade1 = Sheet[Cascade1]
@@ -242,7 +244,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
 //        """, "type mismatch")
       }
     }
-    test("htmlFrag"){
+    test("htmlFrag") {
       val x = div(
         Simple.x,
         Simple.y
@@ -252,7 +254,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
       """
       assert(
         x.toString.replaceAll("\\s", "") ==
-        expected.replaceAll("\\s", "")
+          expected.replaceAll("\\s", "")
       )
     }
   }

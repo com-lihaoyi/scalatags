@@ -29,16 +29,20 @@ import scala.language.implicitConversions
  *                 `Tag` is being rendered to give a final result.
  */
 trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT] {
+
   /**
    * Convenience object for importing all of Scalatags' functionality at once
    */
-  val all: Attrs with Styles with Tags with DataConverters with Util with Aggregate[Builder, Output, FragT]
+  val all: Attrs with Styles with Tags with DataConverters with Util
+    with Aggregate[Builder, Output, FragT]
+
   /**
    * Convenience object for importing only Scalatags' tags (e.g. `div`, `p`)
    * into the local namespace, while leaving Styles and Attributes accessible
    * via the `*` object
    */
   val short: AbstractShort with Tags with DataConverters with Aggregate[Builder, Output, FragT]
+
   /**
    * Convenience object for only importing Scalatag's implicits, without importing
    * any of the tags, styles or attributes themselves. This includes conversions to
@@ -49,27 +53,31 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, F
 
   type AbstractShort = generic.AbstractShort[Builder, Output, FragT]
 
-
   /**
    * Common attributes.
    */
   val attrs: Attrs
+
   /**
    * Common tags
    */
   val tags: Tags
+
   /**
    * Less common tags
    */
   val tags2: Tags2
+
   /**
    * Common styles
    */
   val styles: Styles
+
   /**
    * Less common styles
    */
   val styles2: Styles2
+
   /**
    * SVG only tags
    */
@@ -80,10 +88,9 @@ trait Bundle[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, F
    */
   val svgAttrs: SvgAttrs
 
-
 }
 
-trait Aliases[Builder, Output <: FragT, FragT]{
+trait Aliases[Builder, Output <: FragT, FragT] {
   type Attrs = generic.Attrs[Builder, Output, FragT]
   type Tags = generic.Tags[Builder, Output, FragT]
   type Tags2 = generic.Tags2[Builder, Output, FragT]
@@ -116,7 +123,7 @@ trait Aliases[Builder, Output <: FragT, FragT]{
 
   type Frag = generic.Frag[Builder, FragT]
 }
-trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT]{
+trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output, FragT] {
   implicit def StyleFrag(s: StylePair[Builder, _]): StyleSheetFrag
   implicit def ClsModifier(s: stylesheet.Cls): Modifier
   def genericAttr[T]: AttrValue[T]
@@ -164,6 +171,6 @@ trait Aggregate[Builder, Output <: FragT, FragT] extends Aliases[Builder, Output
    */
   def raw(s: String): RawFrag
 }
-trait AbstractShort[Builder, Output <: FragT, FragT]{
+trait AbstractShort[Builder, Output <: FragT, FragT] {
   val `*`: generic.Attrs[Builder, Output, FragT] with generic.Styles[Builder, Output, FragT]
 }

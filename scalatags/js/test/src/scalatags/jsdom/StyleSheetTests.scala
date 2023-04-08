@@ -4,5 +4,4 @@ import scalatags.JsDom.all._
 import utest._
 
 object StyleSheetTests
-  extends generic.StyleSheetTests(scalatags.JsDom)
-
+    extends generic.StyleSheetTests(scalatags.JsDom)

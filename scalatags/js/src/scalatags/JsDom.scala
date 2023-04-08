@@ -12,7 +12,6 @@ import scala.annotation.unchecked.uncheckedVariance
 import scalatags.generic.{Aliases, Namespace, StylePair}
 import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
 
-
 /**
  * A Scalatags module that generates `dom.Element`s when the tags are rendered.
  * This provides some additional flexibility over the [[Text]] backend, as you
@@ -20,8 +19,8 @@ import scalatags.stylesheet.{StyleSheetFrag, StyleTree}
  * serializing them first into strings.
  */
 object JsDom
-  extends generic.Bundle[dom.Element, dom.Element, dom.Node]
-  with Aliases[dom.Element, dom.Element, dom.Node]{
+    extends generic.Bundle[dom.Element, dom.Element, dom.Node]
+    with Aliases[dom.Element, dom.Element, dom.Node] {
 
   object attrs extends JsDom.Cap with Attrs
   object tags extends JsDom.Cap with jsdom.Tags
@@ -34,51 +33,52 @@ object JsDom
   object implicits extends Aggregate with DataConverters
 
   object all
-    extends Cap
-    with Attrs
-    with Styles
-    with jsdom.Tags
-    with DataConverters
-    with Aggregate
-    with LowPriorityImplicits
+      extends Cap
+      with Attrs
+      with Styles
+      with jsdom.Tags
+      with DataConverters
+      with Aggregate
+      with LowPriorityImplicits
 
   object short
-    extends Cap
-    with jsdom.Tags
-    with DataConverters
-    with Aggregate
-    with AbstractShort
-    with LowPriorityImplicits{
+      extends Cap
+      with jsdom.Tags
+      with DataConverters
+      with Aggregate
+      with AbstractShort
+      with LowPriorityImplicits {
 
     object * extends Cap with Attrs with Styles
   }
 
-
-  trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node]{
-    implicit class ApplyTags(e: dom.Element){
+  trait Aggregate extends generic.Aggregate[dom.Element, dom.Element, dom.Node] {
+    implicit class ApplyTags(e: dom.Element) {
       def applyTags(mods: Modifier*) = mods.foreach(_.applyTo(e))
     }
-    implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier{
+    implicit def ClsModifier(s: stylesheet.Cls): Modifier = new Modifier {
       def applyTo(t: dom.Element) = t.classList.add(s.name)
     }
-    implicit class StyleFrag(s: generic.StylePair[dom.Element, _]) extends StyleSheetFrag{
+    implicit class StyleFrag(s: generic.StylePair[dom.Element, _]) extends StyleSheetFrag {
       def applyTo(c: StyleTree) = {
         val b = dom.document.createElement("div")
         s.applyTo(b)
         val Array(style, value) = Option(b.getAttribute("style")).map(_.split(":", 2))
-          .getOrElse(throw new IllegalArgumentException(s"Cannot apply style $s. Does it contain a syntax error?"))
+          .getOrElse(throw new IllegalArgumentException(
+            s"Cannot apply style $s. Does it contain a syntax error?"
+          ))
         c.copy(styles = c.styles.updated(style, value))
       }
     }
 
-
     def genericAttr[T] = new JsDom.GenericAttr[T]
     def genericStyle[T] = new JsDom.GenericStyle[T]
-    def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] = new JsDom.GenericPixelStyle[T](ev)
-    def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] = new JsDom.GenericPixelStylePx[T](ev)
+    def genericPixelStyle[T](implicit ev: StyleValue[T]): PixelStyleValue[T] =
+      new JsDom.GenericPixelStyle[T](ev)
+    def genericPixelStylePx[T](implicit ev: StyleValue[String]): PixelStyleValue[T] =
+      new JsDom.GenericPixelStylePx[T](ev)
 
     implicit def stringFrag(v: String): StringFrag = new JsDom.StringFrag(v)
-
 
     val RawFrag = JsDom.RawFrag
     val StringFrag = JsDom.StringFrag
@@ -93,21 +93,24 @@ object JsDom
 
     val Tag = JsDom.TypedTag
 
-
   }
 
-  trait Cap extends Util with jsdom.TagFactory{ self =>
+  trait Cap extends Util with jsdom.TagFactory { self =>
     type ConcreteHtmlTag[T <: dom.Element] = TypedTag[T]
 
     protected[this] implicit def stringAttrX = new GenericAttr[String]
     protected[this] implicit def stringStyleX = new GenericStyle[String]
     protected[this] implicit def stringPixelStyleX = new GenericPixelStyle[String](stringStyleX)
     implicit def UnitFrag(u: Unit): JsDom.StringFrag = new JsDom.StringFrag("")
-    def makeAbstractTypedTag[T <: dom.Element](tag: String, void: Boolean, namespaceConfig: Namespace): TypedTag[T] = {
+    def makeAbstractTypedTag[T <: dom.Element](
+        tag: String,
+        void: Boolean,
+        namespaceConfig: Namespace
+    ): TypedTag[T] = {
       TypedTag(tag, Nil, void, namespaceConfig)
     }
 
-    implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag{
+    implicit class SeqFrag[A](xs: Seq[A])(implicit ev: A => Frag) extends Frag {
       Objects.requireNonNull(xs)
       def applyTo(t: dom.Element): Unit = xs.foreach(elem => ev(elem).applyTo(t))
       def render: dom.Node = {
@@ -116,7 +119,7 @@ object JsDom
         frag
       }
     }
-    implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag{
+    implicit class GeneratorFrag[A](xs: geny.Generator[A])(implicit ev: A => Frag) extends Frag {
       Objects.requireNonNull(xs)
       def applyTo(t: dom.Element): Unit = xs.foreach(elem => ev(elem).applyTo(t))
       def render: dom.Node = {
@@ -132,7 +135,7 @@ object JsDom
     def render: dom.Text = dom.document.createTextNode(v)
   }
 
-  case class RawFrag(v: String) extends jsdom.Frag{
+  case class RawFrag(v: String) extends jsdom.Frag {
     Objects.requireNonNull(v)
     def render: dom.Node = {
       // https://davidwalsh.name/convert-html-stings-dom-nodes
@@ -140,7 +143,7 @@ object JsDom
     }
   }
 
-  class GenericAttr[T] extends AttrValue[T]{
+  class GenericAttr[T] extends AttrValue[T] {
     def apply(t: dom.Element, a: Attr, v: T): Unit = {
       a.namespace match {
         case None =>
@@ -165,25 +168,26 @@ object JsDom
     }
   }
 
-  class GenericStyle[T] extends StyleValue[T]{
+  class GenericStyle[T] extends StyleValue[T] {
     def apply(t: dom.Element, s: Style, v: T): Unit = {
       t.asInstanceOf[html.Html]
-       .style
-       .setProperty(s.cssName, v.toString)
+        .style
+        .setProperty(s.cssName, v.toString)
     }
   }
-  class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T]{
+  class GenericPixelStyle[T](ev: StyleValue[T]) extends PixelStyleValue[T] {
     def apply(s: Style, v: T) = StylePair(s, v, ev)
   }
-  class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T]{
+  class GenericPixelStylePx[T](ev: StyleValue[String]) extends PixelStyleValue[T] {
     def apply(s: Style, v: T) = StylePair(s, s"${v}px", ev)
   }
-  case class TypedTag[+Output <: dom.Element](tag: String = "",
-                                              modifiers: List[Seq[Modifier]],
-                                              void: Boolean = false,
-                                              namespace: Namespace)
-                                              extends generic.TypedTag[dom.Element, Output, dom.Node]
-                                              with jsdom.Frag{
+  case class TypedTag[+Output <: dom.Element](
+      tag: String = "",
+      modifiers: List[Seq[Modifier]],
+      void: Boolean = false,
+      namespace: Namespace
+  ) extends generic.TypedTag[dom.Element, Output, dom.Node]
+      with jsdom.Frag {
     // unchecked because Scala 2.10.4 seems to not like this, even though
     // 2.11.1 works just fine. I trust that 2.11.1 is more correct than 2.10.4
     // and so just force this.
@@ -194,6 +198,7 @@ object JsDom
       build(elem)
       elem.asInstanceOf[Output]
     }
+
     /**
      * Trivial override, not strictly necessary, but it makes IntelliJ happy...
      */
@@ -205,17 +210,18 @@ object JsDom
 
 }
 
-trait LowPriorityImplicits{
-  implicit object bindJsAny extends generic.AttrValue[dom.Element, js.Any]{
+trait LowPriorityImplicits {
+  implicit object bindJsAny extends generic.AttrValue[dom.Element, js.Any] {
     def apply(t: dom.Element, a: generic.Attr, v: js.Any): Unit = {
       t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(v)
     }
   }
-  implicit def bindJsAnyLike[T](implicit ev: T => js.Any): generic.AttrValue[dom.Element, T] = new generic.AttrValue[dom.Element, T]{
-    def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
-      t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(ev(v))
+  implicit def bindJsAnyLike[T](implicit ev: T => js.Any): generic.AttrValue[dom.Element, T] =
+    new generic.AttrValue[dom.Element, T] {
+      def apply(t: dom.Element, a: generic.Attr, v: T): Unit = {
+        t.asInstanceOf[js.Dynamic].updateDynamic(a.name)(ev(v))
+      }
     }
-  }
   implicit class bindNode[T <: dom.Node](e: T) extends generic.Frag[dom.Element, T] {
     def applyTo(t: Element) = t.appendChild(e)
     def render = e

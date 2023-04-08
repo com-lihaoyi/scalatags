@@ -1,12 +1,12 @@
 package scalatags
 package text
 import utest._
-object BundlingTests extends TestSuite{
-  object CustomBundle extends Text.Cap with text.Tags with text.Tags2 with Text.Aggregate{
+object BundlingTests extends TestSuite {
+  object CustomBundle extends Text.Cap with text.Tags with text.Tags2 with Text.Aggregate {
     object st extends Text.Cap with Text.Styles with Text.Styles2
     object at extends Text.Cap with Text.Attrs
   }
-  val tests = TestSuite{
+  val tests = TestSuite {
     val expected = """
         <html>
             <head>
@@ -23,7 +23,7 @@ object BundlingTests extends TestSuite{
             </body>
         </html>
                    """
-    test("custom"){
+    test("custom") {
       import CustomBundle._
       TestUtil.strCheck(
         html(
@@ -31,12 +31,12 @@ object BundlingTests extends TestSuite{
             script("some script")
           ),
           body(
-            h1(st.backgroundColor:="blue", st.color:="red")("This is my title"),
-            div(st.backgroundColor:="blue", st.color:="red")(
+            h1(st.backgroundColor := "blue", st.color := "red")("This is my title"),
+            div(st.backgroundColor := "blue", st.color := "red")(
               p(at.cls := "contentpara first")(
                 "This is my first paragraph"
               ),
-              a(st.opacity:=0.9)(
+              a(st.opacity := 0.9)(
                 p(at.cls := "contentpara")("Goooogle")
               )
             )
@@ -45,7 +45,7 @@ object BundlingTests extends TestSuite{
         expected
       )
     }
-    test("interop"){
+    test("interop") {
       import CustomBundle.{st, at}
       import Text.all._
       TestUtil.strCheck(
@@ -54,12 +54,12 @@ object BundlingTests extends TestSuite{
             script("some script")
           ),
           CustomBundle.body(
-            h1(backgroundColor:="blue", st.color:="red")("This is my title"),
-            div(st.backgroundColor:="blue", color:="red")(
+            h1(backgroundColor := "blue", st.color := "red")("This is my title"),
+            div(st.backgroundColor := "blue", color := "red")(
               p(cls := "contentpara first")(
                 "This is my first paragraph"
               ),
-              CustomBundle.a(st.opacity:=0.9)(
+              CustomBundle.a(st.opacity := 0.9)(
                 p(at.cls := "contentpara")("Goooogle")
               )
             )

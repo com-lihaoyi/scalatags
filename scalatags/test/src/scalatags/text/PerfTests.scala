@@ -2,7 +2,6 @@ package scalatags
 package text
 import scalatags.generic
 
-
 case object ScalatagsPerf extends generic.ScalatagsPerf(scalatags.Text)
 
 //

@@ -10,7 +10,6 @@
 package scalatags
 package generic
 
-
 trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, FragT] {
 
   /**
@@ -68,7 +67,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val alignmentBaseline = attr("alignment-baseline")
 
-
   /**
    * This attribute defines the maximum unaccented depth of the font
    * within the font coordinate system. If the attribute is not specified,
@@ -81,7 +79,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val ascent = attr("ascent")
 
-
   /**
    * This attribute indicates the name of the attribute in the parent element
    * that is going to be changed during an animation.
@@ -92,7 +89,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val attributeName = attr("attributeName")
 
-
   /**
    * This attribute specifies the namespace in which the target attribute
    * and its associated values are defined.
@@ -102,7 +98,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val attributeType = attr("attributeType")
-
 
   /**
    * The azimuth attribute represent the direction angle for the light
@@ -115,7 +110,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val azimuth = attr("azimuth")
-
 
   /**
    * The baseFrequency attribute represent The base frequencies parameter
@@ -133,7 +127,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val baseFrequency = attr("baseFrequency")
 
-
   /**
    * The baseline-shift attribute allows repositioning of the dominant-baseline
    * relative to the dominant-baseline of the parent text content element.
@@ -146,7 +139,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val baselineShift = attr("baseline-shift")
-
 
   /**
    * This attribute defines when an animation should begin.
@@ -162,7 +154,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val begin = attr("begin")
 
-
   /**
    * The bias attribute shifts the range of the filter. After applying the kernelMatrix
    * of the <feConvolveMatrix> element to the input image to yield a number and applied
@@ -176,7 +167,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val bias = attr("bias")
 
-
   /**
    * This attribute specifies the interpolation mode for the animation. The default
    * mode is linear, however if the attribute does not support linear interpolation
@@ -187,7 +177,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val calcMode = attr("calcMode")
-
 
   /**
    * Assigns a class name or set of class names to an element. You may assign the same
@@ -205,7 +194,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val `class` = attr("class")
 
-
   /**
    * The clip attribute has the same parameter values as defined for the css clip property.
    * Unitless values, which indicate current user coordinates, are permitted on the coordinate
@@ -219,7 +207,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val clip = attr("clip")
-
 
   /**
    * The clip-path attribute bind the element is applied to with a given <clipPath> element
@@ -269,7 +256,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val color = attr("color")
 
-
   /**
    * The color-interpolation attribute specifies the color space for gradient interpolations,
    * color animations and alpha compositing.When a child element is blended into a background,
@@ -289,7 +275,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val colorInterpolation = attr("color-interpolation")
 
-
   /**
    * The color-interpolation-filters attribute specifies the color space for imaging operations
    * performed via filter effects. Note that color-interpolation-filters has a different
@@ -306,7 +291,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val colorInterpolationFilters = attr("color-interpolation-filters")
 
-
   /**
    * The color-profile attribute is used to define which color profile a raster image
    * included through the <image> element should use. As a presentation attribute, it
@@ -318,7 +302,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val colorProfile = attr("color-profile")
-
 
   /**
    * The color-rendering attribute provides a hint to the SVG user agent about how to
@@ -337,7 +320,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val colorRendering = attr("color-rendering")
 
-
   /**
    * The contentScriptType attribute on the <svg> element specifies the default scripting
    * language for the given document fragment.
@@ -352,7 +334,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val contentScriptType = attr("contentScriptType")
 
-
   /**
    * This attribute specifies the style sheet language for the given document fragment.
    * The contentStyleType is specified on the <svg> element. By default, if it's not defined,
@@ -363,7 +344,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val contentStyleType = attr("contentStyleType")
-
 
   /**
    * The cursor attribute specifies the mouse cursor displayed when the mouse pointer
@@ -379,7 +359,6 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    * MDN
    */
   lazy val cursor = attr("cursor")
-
 
   /**
    * For the <circle> and the <ellipse> element, this attribute define the x-axis coordinate
@@ -411,274 +390,172 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val cy = attr("cy")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val d = attr("d")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val diffuseConstant = attr("diffuseConstant")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val direction = attr("direction")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val display = attr("display")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val divisor = attr("divisor")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val dominantBaseline = attr("dominant-baseline")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val dur = attr("dur")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val dx = attr("dx")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val dy = attr("dy")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val edgeMode = attr("edgeMode")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val elevation = attr("elevation")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val end = attr("end")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val externalResourcesRequired = attr("externalResourcesRequired")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fill = attr("fill")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fillOpacity = attr("fill-opacity")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fillRule = attr("fill-rule")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val filter = attr("filter")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val filterRes = attr("filterRes")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val filterUnits = attr("filterUnits")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val floodColor = attr("flood-color")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val floodOpacity = attr("flood-opacity")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fontFamily = attr("font-family")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fontSize = attr("font-size")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fontSizeAdjust = attr("font-size-adjust")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fontStretch = attr("font-stretch")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fontVariant = attr("font-variant")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val fontWeight = attr("font-weight")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val from = attr("from")
 
-
   /**
-    *
-    *
-    * MDN
-    */
+   * MDN
+   */
   lazy val fx = attr("fx")
 
-
   /**
-    *
-    *
-    * MDN
-    */
+   * MDN
+   */
   lazy val fy = attr("fy")
 
-  
   /**
-   *
-   *
    * MDN
    */
   lazy val gradientTransform = attr("gradientTransform")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val gradientUnits = attr("gradientUnits")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val height = attr("height")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val imageRendering = attr("imageRendering")
@@ -686,710 +563,431 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
   lazy val id = attr("id")
 
   /**
-   *
-   *
    * MDN
    */
   lazy val in = attr("in")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val in2 = attr("in2")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val k1 = attr("k1")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val k2 = attr("k2")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val k3 = attr("k3")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val k4 = attr("k4")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val kernelMatrix = attr("kernelMatrix")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val kernelUnitLength = attr("kernelUnitLength")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val kerning = attr("kerning")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val keySplines = attr("keySplines")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val keyTimes = attr("keyTimes")
 
-
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val letterSpacing = attr("letter-spacing")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val lightingColor = attr("lighting-color")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val limitingConeAngle = attr("limitingConeAngle")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val local = attr("local")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val markerEnd = attr("marker-end")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val markerMid = attr("marker-mid")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val markerStart = attr("marker-start")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val markerHeight = attr("markerHeight")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val markerUnits = attr("markerUnits")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val markerWidth = attr("markerWidth")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val maskContentUnits = attr("maskContentUnits")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val maskUnits = attr("maskUnits")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val mask = attr("mask")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val max = attr("max")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val min = attr("min")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val mode = attr("mode")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val numOctaves = attr("numOctaves")
 
-
   lazy val offset = attr("offset")
 
   /**
-    * The ‘orient’ attribute indicates how the marker is rotated when it is placed at its position on the markable element.
-    *
-    * W3C
-    */
+   * The ‘orient’ attribute indicates how the marker is rotated when it is placed at its position on the markable element.
+   *
+   * W3C
+   */
   lazy val orient = attr("orient")
 
   /**
-   *
-   *
    * MDN
    */
   lazy val opacity = attr("opacity")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val operator = attr("operator")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val order = attr("order")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val overflow = attr("overflow")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val paintOrder = attr("paint-order")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val pathLength = attr("pathLength")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val patternContentUnits = attr("patternContentUnits")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val patternTransform = attr("patternTransform")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val patternUnits = attr("patternUnits")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val pointerEvents = attr("pointer-events")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val points = attr("points")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val pointsAtX = attr("pointsAtX")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val pointsAtY = attr("pointsAtY")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val pointsAtZ = attr("pointsAtZ")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val preserveAlpha = attr("preserveAlpha")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val preserveAspectRatio = attr("preserveAspectRatio")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val primitiveUnits = attr("primitiveUnits")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val r = attr("r")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val radius = attr("radius")
 
-
   /**
-    * The ‘refX’ attribute defines the reference point of the marker which is to be placed exactly at
-    * the marker's position on the markable element. It is interpreted as being in the coordinate system of
-    * the marker contents, after application of the ‘viewBox’ and ‘preserveAspectRatio’ attributes.
-    *
-    *  W3C
-    */
+   * The ‘refX’ attribute defines the reference point of the marker which is to be placed exactly at
+   * the marker's position on the markable element. It is interpreted as being in the coordinate system of
+   * the marker contents, after application of the ‘viewBox’ and ‘preserveAspectRatio’ attributes.
+   *
+   *  W3C
+   */
   lazy val refX = attr("refX")
 
   /**
-    * The ‘refY’ attribute defines the reference point of the marker which is to be placed exactly at
-    * the marker's position on the markable element. It is interpreted as being in the coordinate system of
-    * the marker contents, after application of the ‘viewBox’ and ‘preserveAspectRatio’ attributes.
-    *
-    *  W3C
-    */
+   * The ‘refY’ attribute defines the reference point of the marker which is to be placed exactly at
+   * the marker's position on the markable element. It is interpreted as being in the coordinate system of
+   * the marker contents, after application of the ‘viewBox’ and ‘preserveAspectRatio’ attributes.
+   *
+   *  W3C
+   */
   lazy val refY = attr("refY")
 
   /**
-   *
-   *
    * MDN
    */
   lazy val repeatCount = attr("repeatCount")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val repeatDur = attr("repeatDur")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val requiredFeatures = attr("requiredFeatures")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val restart = attr("restart")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val result = attr("result")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val rx = attr("rx")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val ry = attr("ry")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val scale = attr("scale")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val seed = attr("seed")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val shapeRendering = attr("shape-rendering")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val specularConstant = attr("specularConstant")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val specularExponent = attr("specularExponent")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val spreadMethod = attr("spreadMethod")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val stdDeviation = attr("stdDeviation")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val stitchTiles = attr("stitchTiles")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val stopColor = attr("stop-color")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val stopOpacity = attr("stop-opacity")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val stroke = attr("stroke")
 
-
   /**
-   *
-   *
    * MDN
    */
-  lazy val strokeDasharray= attr("stroke-dasharray")
-
+  lazy val strokeDasharray = attr("stroke-dasharray")
 
   /**
-   *
-   *
    * MDN
    */
   lazy val strokeDashoffset = attr("stroke-dashoffset")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val strokeLinecap = attr("stroke-linecap")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val strokeLinejoin = attr("stroke-linejoin")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val strokeMiterlimit = attr("stroke-miterlimit")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val strokeOpacity = attr("stroke-opacity")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val strokeWidth = attr("stroke-width")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val style = attr("style")
 
-
-
   /**
-   *
-   *
    * MDN
    */
   lazy val surfaceScale = attr("surfaceScale")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val targetX = attr("targetX")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val targetY = attr("targetY")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val textAnchor = attr("text-anchor")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val textDecoration = attr("text-decoration")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val textRendering = attr("text-rendering")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val to = attr("to")
-
 
   /*
    *
@@ -1398,14 +996,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val transform = attr("transform")
 
-
   /*
    *
    *
    * MDN
    */
-  lazy val `type`= attr("type")
-
+  lazy val `type` = attr("type")
 
   /*
    *
@@ -1414,14 +1010,10 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val values = attr("values")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val viewBox = attr("viewBox")
-
 
   /*
    *
@@ -1430,14 +1022,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val visibility = attr("visibility")
 
-
   /*
    *
    *
    * MDN
    */
   lazy val width = attr("width")
-
 
   /*
    *
@@ -1453,14 +1043,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val writingMode = attr("writing-mode")
 
-
   /*
    *
    *
    * MDN
    */
   lazy val x = attr("x")
-
 
   /*
    *
@@ -1469,14 +1057,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val x1 = attr("x1")
 
-
   /*
    *
    *
    * MDN
    */
   lazy val x2 = attr("x2")
-
 
   /*
    *
@@ -1485,14 +1071,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val xChannelSelector = attr("xChannelSelector")
 
-
   /*
    *
    *
    * MDN
    */
-  lazy val xLinkHref= attr("xlink:href", ns = Namespace.svgXlinkNamespaceConfig)
-
+  lazy val xLinkHref = attr("xlink:href", ns = Namespace.svgXlinkNamespaceConfig)
 
   /*
    *
@@ -1501,14 +1085,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val xLink = attr("xlink:role")
 
-
   /*
    *
    *
    * MDN
    */
   lazy val xLinkTitle = attr("xlink:title")
-
 
   /*
    *
@@ -1517,22 +1099,15 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val xmlSpace = attr("xml:space")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val xmlns = attr("xmlns")
 
-
   /**
-   *
-   *
    * MDN
    */
   lazy val xmlnsXlink = attr("xmlns:xlink")
-
 
   /*
    *
@@ -1541,14 +1116,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val y = attr("y")
 
-
   /*
    *
    *
    * MDN
    */
   lazy val y1 = attr("y1")
-
 
   /*
    *
@@ -1557,14 +1130,12 @@ trait SvgAttrs[Builder, Output <: FragT, FragT] extends Util[Builder, Output, Fr
    */
   lazy val y2 = attr("y2")
 
-
   /*
    *
    *
    * MDN
    */
   lazy val yChannelSelector = attr("yChannelSelector")
-
 
   /*
    *

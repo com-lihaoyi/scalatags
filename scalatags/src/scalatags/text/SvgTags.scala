@@ -1,7 +1,7 @@
 package scalatags
 package text
 trait SvgTags extends generic.SvgTags[Builder, String, String]
-              with TagFactory{
+    with TagFactory {
   lazy val altGlyph: ConcreteHtmlTag[String] = tag("altGlyph")
   lazy val altGlyphDef: ConcreteHtmlTag[String] = tag("altGlyphDef")
   lazy val altGlyphItem: ConcreteHtmlTag[String] = tag("altGlyphItem")
@@ -78,4 +78,3 @@ trait SvgTags extends generic.SvgTags[Builder, String, String]
   lazy val view: ConcreteHtmlTag[String] = tag("view")
   lazy val vkern: ConcreteHtmlTag[String] = tag("vkern")
 }
-

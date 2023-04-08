@@ -5,16 +5,16 @@ import utest._
 
 import TestUtil._
 
-
-class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT]) extends TestSuite{
+class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, FragT])
+    extends TestSuite {
   import omg.all._
   private[this] type Omg = Attrs
-  val tests = TestSuite{
+  val tests = TestSuite {
 
     /**
      * Tests nesting tags in a simple hierarchy
      */
-    test("cssChaining"){
+    test("cssChaining") {
       val x = script("")
       strCheck(
         html(
@@ -46,36 +46,34 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     test("cssChaining2") - strCheck(
       div(
         float.left,
-        color:="red"
+        color := "red"
       ),
       """<div style="float: left; color: red;"></div>"""
     )
 
-
     test("attributeChaining") - strCheck(
       div(
-        `class`:="thing lol",
-        id:="cow"
+        `class` := "thing lol",
+        id := "cow"
       ),
       """<div class="thing lol" id="cow"></div>"""
     )
 
-
     test("mixingAttributesStylesAndChildren") - strCheck(
       div(
-        id:="cow",
+        id := "cow",
         float.left,
         p("i am a cow")
       ),
       """<div id="cow" style="float: left;"><p>i am a cow</p></div>"""
     )
 
-    test("classStyleAttrOverwriting"){
+    test("classStyleAttrOverwriting") {
       strCheck(
-        //class/style after attr appends, but attr after class/style overwrites
+        // class/style after attr appends, but attr after class/style overwrites
         div(
-          cls:="my-class",
-          style:="background-color: red;",
+          cls := "my-class",
+          style := "background-color: red;",
           float.left,
           p("i am a cow")
         ),
@@ -86,12 +84,12 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
     test("intSeq") - strCheck(
       div(
         h1("Hello"),
-        for(i <- 0 until 5) yield i
+        for (i <- 0 until 5) yield i
       ),
       """<div><h1>Hello</h1>01234</div>"""
     )
 
-    test("stringArray"){
+    test("stringArray") {
       val strArr = Array("hello")
       strCheck(
         div(
@@ -106,7 +104,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<div>lol1<h1>Hello</h1>123hello</div>"""
       )
     }
-    test("generator"){
+    test("generator") {
       val strArr = Array("hello")
       strCheck(
         div(
@@ -119,7 +117,7 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<div>HelloWorldMoo</div>"""
       )
     }
-    test("applyChaining"){
+    test("applyChaining") {
       strCheck(
         a(
           tabindex := 1,
@@ -131,69 +129,71 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
       )
     }
-    test("autoPixel"){
+    test("autoPixel") {
       strCheck(
-        div(width:=100, zIndex:=100, height:=100),
+        div(width := 100, zIndex := 100, height := 100),
         """
           |<div style="width: 100px; z-index: 100; height: 100px;"></div>
         """.stripMargin
       )
     }
-    test("compileErrors"){
-      def writeType(tpe: String) = if(BuildInfo.scalaMajorVersion == "3") s"($tpe)" else tpe
-      test("niceErrorsForAttributes"){
+    test("compileErrors") {
+      def writeType(tpe: String) = if (BuildInfo.scalaMajorVersion == "3") s"($tpe)" else tpe
+      test("niceErrorsForAttributes") {
         val msg = compileError("""a(onclick := {() => "lol"})""").msg
-        assert(msg.contains(s"scalatags does not know how to use ${writeType("() => String")} as an attribute"))
+        assert(msg.contains(
+          s"scalatags does not know how to use ${writeType("() => String")} as an attribute"
+        ))
       }
-      test("niceErrorsForStyles"){
+      test("niceErrorsForStyles") {
         val msg = compileError("""a(opacity:= {() => "lol"})""").msg
-        assert(msg.contains(s"scalatags does not know how to use ${writeType("() => String")} as an style"))
+        assert(msg.contains(
+          s"scalatags does not know how to use ${writeType("() => String")} as an style"
+        ))
       }
     }
-    test("nulls"){
+    test("nulls") {
       val nullString: String = null
       test("1") { intercept[NullPointerException](div(nullString)) }
       test("2") { intercept[NullPointerException](div(null: Seq[Int])) }
       test("3") { intercept[NullPointerException](div(height := nullString)) }
       test("4") { intercept[NullPointerException](div(opacity := nullString)) }
     }
-    test("rawAttrs"){
+    test("rawAttrs") {
       strCheck(
         button(
-          attr("[class.active]", raw = true):= "isActive",
+          attr("[class.active]", raw = true) := "isActive",
           attr("(click)", raw = true) := "myEvent()"
         ),
         """<button [class.active]="isActive" (click)="myEvent()"></button>"""
-
       )
     }
-    test("specialChars"){
+    test("specialChars") {
       * - intercept[java.lang.IllegalArgumentException](div(attr("[(ngModel)]") := "myModel"))
     }
-    test("repeatingAttrs"){
+    test("repeatingAttrs") {
       // #139
-      object Foo extends scalatags.stylesheet.StyleSheet{
+      object Foo extends scalatags.stylesheet.StyleSheet {
         val myCls = cls(color := "red")
       }
       strCheck(
         div(Foo.myCls, cls := "red").render ==
-        """<div class="scalatags-text-TextTests-Foo-myCls red"></div>"""
+          """<div class="scalatags-text-TextTests-Foo-myCls red"></div>"""
       )
       strCheck(
         div(cls := "red", Foo.myCls).render ==
-        """<div class="red scalatags-text-TextTests-Foo-myCls"></div>"""
+          """<div class="red scalatags-text-TextTests-Foo-myCls"></div>"""
       )
       // #169
       strCheck(
         input(cls := "a", cls := "b").render ==
-        """<input class="a b" />"""
+          """<input class="a b" />"""
       )
       strCheck(
         input(cls := "a")(cls := "b").render ==
-        """<input class="a b" />"""
+          """<input class="a b" />"""
       )
     }
 
   }
 }
-

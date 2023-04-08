@@ -1,8 +1,11 @@
 package example
 import scala.scalajs.js.annotation.JSExportTopLevel
 import org.scalajs.dom
-class Example[Builder, Output <: FragT, FragT]
-             (val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
+class Example[Builder, Output <: FragT, FragT](val bundle: scalatags.generic.Bundle[
+  Builder,
+  Output,
+  FragT
+]) {
   val htmlFrag = {
     import bundle.all._
     div(
@@ -18,20 +21,34 @@ class Example[Builder, Output <: FragT, FragT]
         "text inside. You can have lots and lots of ",
         "text"
       ),
-      b("bold"), " ",
-      i("italic"), " ",
-      s("strikethrough"), " ",
-      u("underlined"), " ",
-      em("emphasis"), " ",
-      strong("strong"), " ",
-      sub("sub"), " ",
-      sup("sup"), " ",
-      code("code"), " ",
-      a("a-link"), " ",
-      small("small"), " ",
-      cite("cite"), " ",
-      ins("ins"), " ",
-      del("del"), " ",
+      b("bold"),
+      " ",
+      i("italic"),
+      " ",
+      s("strikethrough"),
+      " ",
+      u("underlined"),
+      " ",
+      em("emphasis"),
+      " ",
+      strong("strong"),
+      " ",
+      sub("sub"),
+      " ",
+      sup("sup"),
+      " ",
+      code("code"),
+      " ",
+      a("a-link"),
+      " ",
+      small("small"),
+      " ",
+      cite("cite"),
+      " ",
+      ins("ins"),
+      " ",
+      del("del"),
+      " ",
       hr,
       ol(
         li("Ordered List Item 1"),
@@ -89,7 +106,8 @@ class Example[Builder, Output <: FragT, FragT]
         )
       ),
       hr,
-      label("input"), input,
+      label("input"),
+      input,
       br,
       label("select"),
       select(
@@ -113,14 +131,18 @@ class Example[Builder, Output <: FragT, FragT]
         strokeWidth := "3"
       ),
       line(
-        x1 := 175, y1 := 100,
-        x2 := 275, y2 := 0,
+        x1 := 175,
+        y1 := 100,
+        x2 := 275,
+        y2 := 0,
         stroke := "rgb(255,0,0)",
         strokeWidth := 10
       ),
       rect(
-        x := 300, y := 10,
-        rx := 20, ry := 20,
+        x := 300,
+        y := 10,
+        rx := 20,
+        ry := 20,
         width := 100,
         height := 100,
         fill := "rgb(0,0,255)",
@@ -130,15 +152,18 @@ class Example[Builder, Output <: FragT, FragT]
         strokeOpacity := "0.5"
       ),
       circle(
-        cx := 30, cy := 250,
+        cx := 30,
+        cy := 250,
         r := 10,
         stroke := "black",
         strokeWidth := 3,
         fill := "red"
       ),
       ellipse(
-        cx := 150, cy := 250,
-        rx := 100, ry := 50,
+        cx := 150,
+        cy := 250,
+        rx := 100,
+        ry := 50,
         fill := "yellow",
         stroke := "purple",
         strokeWidth := 4
@@ -153,7 +178,8 @@ class Example[Builder, Output <: FragT, FragT]
         d := "M100 300 L25 500 L175 500 Z"
       ),
       text(
-        x := 350, y := 250,
+        x := 350,
+        y := 250,
         fill := "red",
         transform := "rotate(30 20, 40)",
         "I love SVG!"
@@ -181,8 +207,10 @@ class Example[Builder, Output <: FragT, FragT]
         )
       ),
       ellipse(
-        cx := 100, cy := 590,
-        rx := 85, ry := 55,
+        cx := 100,
+        cy := 590,
+        rx := 85,
+        ry := 55,
         fill := "url(#grad1)"
       )
     )

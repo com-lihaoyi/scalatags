@@ -9,7 +9,8 @@ import scala.language.implicitConversions
  * never need these things, so it's good to make it explicit
  * when you do to prevent accidental cascading.
  */
-abstract class CascadingStyleSheet(implicit sourceName: sourcecode.FullName) extends StyleSheet with StyleSheetTags{
+abstract class CascadingStyleSheet(implicit sourceName: sourcecode.FullName) extends StyleSheet
+    with StyleSheetTags {
   protected[this] implicit def clsSelector(c: Cls): Selector = new Selector(Seq("." + c.name))
 }
 
@@ -18,7 +19,8 @@ abstract class CascadingStyleSheet(implicit sourceName: sourcecode.FullName) ext
  * styles which get serialized to a `String`. Does not allow the use
  * of cascading tag/class selectors; use [[CascadingStyleSheet]] for that.
  */
-abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
+abstract class StyleSheet(implicit sourceName: sourcecode.FullName) {
+
   /**
    * The name of this CSS stylesheet. Defaults to the name of the trait,
    * but you can override
@@ -30,7 +32,9 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
    * any applicable pseudo-selectors into the name of the CSS class.
    */
   protected[this] def nameFor(memberName: String, pseudoSelectors: String) = {
-    customSheetName.getOrElse(defaultSheetName.replace(".", "-")) + "-" + memberName + pseudoSelectors
+    customSheetName.getOrElse(
+      defaultSheetName.replace(".", "-")
+    ) + "-" + memberName + pseudoSelectors
   }
 
   /**
@@ -49,7 +53,7 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
    * styles associated with it.
    */
   protected[this] object cls extends Creator(Nil)
-  protected[this] class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator]{
+  protected[this] class Creator(selectors: Seq[String]) extends PseudoSelectors[Creator] {
     def pseudoExtend(s: String): Creator = new Creator(selectors :+ s)
 
     /**
@@ -66,6 +70,7 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
    * The default name of a stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
   protected[this] def defaultSheetName = sourceName.value.replace(' ', '.').replace('#', '.')
+
   /**
    * All classes defined in this stylesheet, filled in with the [[StyleSheet]] implicit macro
    */
@@ -76,7 +81,6 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
   def allClasses = allClasses0 match {
     case Some(f) => f()
     case None =>
-
       throw new Exception(
         "No CSS classes found on stylesheet " + this +
           ". Did you forget to call `initStyleSheet()` in the body of the style sheet?"
@@ -90,11 +94,13 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
  * A rendered class; both the class `name` (used when injected into Scalatags
  * fragments) and the `structure` (used when injected into further class definitions)
  */
-case class Cls(name: String, pseudoSelectors: Seq[String], args: Seq[StyleSheetFrag]){
-  lazy val structure = args.foldLeft(StyleTree(Seq(s".$name${pseudoSelectors.map(s => s":$s").mkString}"), SortedMap.empty, Nil))(
-    (c, f) => f.applyTo(c)
-  )
-  def splice = new StyleSheetFrag{
+case class Cls(name: String, pseudoSelectors: Seq[String], args: Seq[StyleSheetFrag]) {
+  lazy val structure = args.foldLeft(StyleTree(
+    Seq(s".$name${pseudoSelectors.map(s => s":$s").mkString}"),
+    SortedMap.empty,
+    Nil
+  ))((c, f) => f.applyTo(c))
+  def splice = new StyleSheetFrag {
     def applyTo(st: StyleTree) = {
       new StyleTree(
         st.selectors,

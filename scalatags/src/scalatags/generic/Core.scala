@@ -5,7 +5,6 @@ import java.util.Objects.requireNonNull
 
 import scala.annotation.implicitNotFound
 
-
 /**
  * Represents a value that can be nested within a [[scalatags.generic.TypedTag]]. This can be
  * another [[scalatags.generic.Modifier]], but can also be a CSS style or HTML attribute binding,
@@ -13,6 +12,7 @@ import scala.annotation.implicitNotFound
  * `children` list.
  */
 trait Modifier[Builder] {
+
   /**
    * Applies this modifier to the specified [[Builder]], such that when
    * rendering is complete the effect of adding this modifier can be seen.
@@ -26,7 +26,7 @@ trait Modifier[Builder] {
  * like [[scalatags.generic.AttrPair]]s or [[scalatags.generic.StylePair]]s which only make sense as part of
  * a parent fragment
  */
-trait Frag[Builder, +FragT] extends Modifier[Builder]{
+trait Frag[Builder, +FragT] extends Modifier[Builder] {
   def render: FragT
 }
 
@@ -37,7 +37,7 @@ trait Frag[Builder, +FragT] extends Modifier[Builder]{
  *           `Nothing`, while on ScalaJS this could be the `dom.XXXElement`
  *           associated with that tag name.
  */
-trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output]{
+trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output] {
   protected[this] type Self <: TypedTag[Builder, Output, FragT]
   def tag: String
 
@@ -57,9 +57,9 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output]{
     val arr = new Array[Seq[Modifier[Builder]]](modifiers.length)
 
     var i = 0
-    while(current != Nil){
+    while (current != Nil) {
       arr(i) = current.head
-      current =  current.tail
+      current = current.tail
       i += 1
     }
 
@@ -68,12 +68,13 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output]{
       j -= 1
       val frag = arr(j)
       var i = 0
-      while(i < frag.length){
+      while (i < frag.length) {
         frag(i).applyTo(b)
         i += 1
       }
     }
   }
+
   /**
    * Add the given modifications (e.g. additional children, or new attributes)
    * to the [[TypedTag]].
@@ -87,15 +88,15 @@ trait TypedTag[Builder, +Output <: FragT, +FragT] extends Frag[Builder, Output]{
 }
 
 /**
-  * Wraps up a HTML attribute in a value which isn't a string.
-  *
-  * @param name the name of this particular attribute
-  * @param namespace an XML [[Namespace]] that this attribute lives in
-  * @param raw all [[Attr]]s are checked to fail fast if their names are
-  *            invalid XML attrs; flagging them as [[raw]] disables the checks
-  *            in the few cases you actually want invalid XML attrs
-  *            (e.g. AngularJS)
-  */
+ * Wraps up a HTML attribute in a value which isn't a string.
+ *
+ * @param name the name of this particular attribute
+ * @param namespace an XML [[Namespace]] that this attribute lives in
+ * @param raw all [[Attr]]s are checked to fail fast if their names are
+ *            invalid XML attrs; flagging them as [[raw]] disables the checks
+ *            in the few cases you actually want invalid XML attrs
+ *            (e.g. AngularJS)
+ */
 case class Attr(name: String, namespace: Option[Namespace] = None, raw: Boolean = false) {
 
   if (!raw && !Escaping.validAttrName(name)) {
@@ -103,6 +104,7 @@ case class Attr(name: String, namespace: Option[Namespace] = None, raw: Boolean 
       s"Illegal attribute name: $name is not a valid XML attribute name"
     )
   }
+
   /**
    * Creates an [[AttrPair]] from an [[Attr]] and a value of type [[T]], if
    * there is an [[AttrValue]] of the correct type.
@@ -119,6 +121,7 @@ case class Attr(name: String, namespace: Option[Namespace] = None, raw: Boolean 
  * Wraps up a CSS style in a value.
  */
 case class Style(jsName: String, cssName: String) {
+
   /**
    * Creates an [[StylePair]] from an [[Style]] and a value of type [[T]], if
    * there is an [[StyleValue]] of the correct type.
@@ -128,11 +131,13 @@ case class Style(jsName: String, cssName: String) {
     StylePair(this, v, ev)
   }
 }
+
 /**
  * Wraps up a CSS style in a value.
  */
 case class PixelStyle(jsName: String, cssName: String) {
   val realStyle = Style(jsName, cssName)
+
   /**
    * Creates an [[StylePair]] from an [[Style]] and a value of type [[T]], if
    * there is an [[StyleValue]] of the correct type.
@@ -143,13 +148,15 @@ case class PixelStyle(jsName: String, cssName: String) {
   }
 
 }
-trait StyleProcessor{
+trait StyleProcessor {
   def apply[T](t: T): String
 }
+
 /**
  * An [[Attr]], it's associated value, and an [[AttrValue]] of the correct type
  */
-case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extends Modifier[Builder] {
+case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T])
+    extends Modifier[Builder] {
   override def applyTo(t: Builder): Unit = {
     ev.apply(t, a, v)
   }
@@ -158,6 +165,7 @@ case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extend
     AttrPair(a, v, ev)
   }
 }
+
 /**
  * Used to specify how to handle a particular type [[T]] when it is used as
  * the value of a [[Attr]]. Only types with a specified [[AttrValue]] may
@@ -166,14 +174,15 @@ case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extend
 @implicitNotFound(
   "No AttrValue defined for type ${T}; scalatags does not know how to use ${T} as an attribute"
 )
-trait AttrValue[Builder, T]{
+trait AttrValue[Builder, T] {
   def apply(t: Builder, a: Attr, v: T): Unit
 }
 
 /**
  * A [[Style]], it's associated value, and a [[StyleValue]] of the correct type
  */
-case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) extends Modifier[Builder]{
+case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T])
+    extends Modifier[Builder] {
   override def applyTo(t: Builder): Unit = {
     ev.apply(t, s, v)
   }
@@ -187,14 +196,14 @@ case class StylePair[Builder, T](s: Style, v: T, ev: StyleValue[Builder, T]) ext
 @implicitNotFound(
   "No StyleValue defined for type ${T}; scalatags does not know how to use ${T} as an style"
 )
-trait StyleValue[Builder, T]{
+trait StyleValue[Builder, T] {
   def apply(t: Builder, s: Style, v: T): Unit
 }
 
 @implicitNotFound(
   "No PixelStyleValue defined for type ${T}; scalatags does not know how to use ${T} as an style"
 )
-trait PixelStyleValue[Builder, T]{
+trait PixelStyleValue[Builder, T] {
   def apply(s: Style, v: T): StylePair[Builder, _]
 }
 
@@ -207,7 +216,7 @@ trait PixelStyleValue[Builder, T]{
 trait Namespace {
   def uri: String
 }
-object Namespace{
+object Namespace {
   implicit val htmlNamespaceConfig: Namespace = new Namespace {
     def uri = "http://www.w3.org/1999/xhtml"
   }
