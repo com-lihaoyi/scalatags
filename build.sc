@@ -12,7 +12,21 @@ val dottyVersions = sys.props.get("dottyVersion").toList
 
 val scalaVersions = List("2.12.17", "2.13.10", "2.11.12", "3.1.3") ++ dottyVersions
 
-trait ScalatagsPublishModule extends Common with PublishModule with PlatformScalaModule with Mima{
+trait ScalatagsPublishModule extends CrossScalaModule with PublishModule with PlatformScalaModule with Mima{
+  def ivyDeps = Agg(
+    ivy"com.lihaoyi::sourcecode::0.3.0",
+    ivy"com.lihaoyi::geny::1.0.0",
+  )
+
+  def compileIvyDeps = T {
+    super.compileIvyDeps() ++
+      (
+        if (isScala3(crossScalaVersion)) Agg()
+        else Agg(
+          ivy"org.scala-lang:scala-reflect:${scalaVersion()}"
+        )
+        )
+  }
 
   def publishVersion = VcsVersion.vcsState().format()
   def pomSettings = PomSettings(
@@ -30,22 +44,6 @@ trait ScalatagsPublishModule extends Common with PublishModule with PlatformScal
   )
 
   def mimaPreviousVersions = Seq("0.11.0", "0.11.1", "0.12.0")
-}
-
-trait Common extends CrossScalaModule {
-  def ivyDeps = Agg(
-    ivy"com.lihaoyi::sourcecode::0.3.0",
-    ivy"com.lihaoyi::geny::1.0.0",
-  )
-
-  def compileIvyDeps = T { super.compileIvyDeps() ++
-    (
-      if (isScala3(crossScalaVersion)) Agg()
-      else Agg(
-        ivy"org.scala-lang:scala-reflect:${scalaVersion()}"
-      )
-    )
-  }
 }
 
 trait CommonTestModule extends ScalaModule with TestModule.Utest with BuildInfo {
@@ -66,9 +64,7 @@ object scalatags extends Module {
   trait JvmScalatagsModule
     extends ScalatagsPublishModule {
 
-    object test extends Tests with CommonTestModule{
-      def crossScalaVersion = JvmScalatagsModule.this.crossScalaVersion
-    }
+    object test extends Tests with CommonTestModule
   }
 
   object js extends Cross[JSScalatagsModule](scalaVersions)
@@ -88,9 +84,7 @@ object scalatags extends Module {
     def scalaNativeVersion = "0.4.5"
     // No released Scala Native Scala 3 version yet
     def mimaPreviousArtifacts = if(isScala3(crossScalaVersion)) Agg.empty[Dep] else super.mimaPreviousArtifacts()
-    object test extends Tests with CommonTestModule{
-      def crossScalaVersion = NativeScalatagsModule.this.crossScalaVersion
-    }
+    object test extends Tests with CommonTestModule
   }
 }
 
