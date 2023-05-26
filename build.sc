@@ -1,6 +1,6 @@
 import mill.{BuildInfo => _, _}, scalalib._, scalajslib._, scalanativelib._, publish._
-import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.3.1-6-e80da7`
-import $ivy.`com.github.lolgab::mill-mima::0.0.20`
+import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.3.1-8-37c08a`
+import $ivy.`com.github.lolgab::mill-mima::0.0.21`
 import $ivy.`com.lihaoyi::mill-contrib-buildinfo:`
 import mill.contrib.buildinfo._
 import de.tobiasroeser.mill.vcs.version.VcsVersion
