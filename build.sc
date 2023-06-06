@@ -1,6 +1,6 @@
 import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
-import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.3.1-8-37c08a`
-import $ivy.`com.github.lolgab::mill-mima::0.0.21`
+import $ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.3.1-14-7e2bd2`
+import $ivy.`com.github.lolgab::mill-mima::0.0.22`
 import $ivy.`com.lihaoyi::mill-contrib-buildinfo:`
 import mill.contrib.buildinfo._
 import de.tobiasroeser.mill.vcs.version.VcsVersion
@@ -64,7 +64,7 @@ object scalatags extends Module {
   trait JvmScalatagsModule
     extends ScalatagsPublishModule {
 
-    object test extends Tests with CommonTestModule
+    object test extends ScalaModuleTests with CommonTestModule
   }
 
   object js extends Cross[JSScalatagsModule](scalaVersions)
@@ -73,7 +73,7 @@ object scalatags extends Module {
     def scalaJSVersion = "1.10.1"
     def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-dom::2.3.0")
 
-    object test extends Tests with CommonTestModule{
+    object test extends ScalaJSModuleTests with CommonTestModule{
       def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs:1.1.0").map(_.withDottyCompat(crossScalaVersion))
       def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.JsDom()
     }
@@ -84,7 +84,7 @@ object scalatags extends Module {
     def scalaNativeVersion = "0.4.5"
     // No released Scala Native Scala 3 version yet
     def mimaPreviousArtifacts = if(isScala3(crossScalaVersion)) Agg.empty[Dep] else super.mimaPreviousArtifacts()
-    object test extends Tests with CommonTestModule
+    object test extends ScalaNativeModuleTests with CommonTestModule
   }
 }
 
