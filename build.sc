@@ -72,6 +72,20 @@ object scalatags extends Module {
     extends ScalaJSModule with ScalatagsPublishModule {
     def scalaJSVersion = "1.10.1"
     def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-dom::2.3.0")
+    private def sourceMapOptions = T.task {
+      val vcsState = VcsVersion.vcsState()
+      vcsState.lastTag.collect {
+        case tag if vcsState.commitsSinceLastTag == 0 =>
+          val baseUrl =
+            pomSettings().url.replace("github.com", "raw.githubusercontent.com")
+          val sourcesOptionName =
+            if (isScala3(crossScalaVersion))
+              "-scalajs-mapSourceURI"
+            else "-P:scalajs:mapSourceURI"
+          s"$sourcesOptionName:${T.workspace.toIO.toURI}->$baseUrl/$tag/"
+      }
+    }
+    override def scalacOptions = super.scalacOptions() ++ sourceMapOptions()
 
     object test extends ScalaJSTests with CommonTestModule{
       def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs:1.1.0").map(_.withDottyCompat(crossScalaVersion))
