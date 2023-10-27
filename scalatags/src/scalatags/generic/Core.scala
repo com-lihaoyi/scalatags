@@ -111,6 +111,7 @@ case class Attr(name: String, namespace: Option[Namespace] = None, raw: Boolean 
     requireNonNull(v)
     AttrPair(this, v, ev)
   }
+  def apply[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = :=(v)(ev)
 
   def empty[Builder](implicit ev: AttrValue[Builder, String]) = this := name
 }
@@ -127,6 +128,7 @@ case class Style(jsName: String, cssName: String) {
     requireNonNull(v)
     StylePair(this, v, ev)
   }
+  def apply[Builder, T](v: T)(implicit ev: StyleValue[Builder, T]) = :=(v)(ev)
 }
 /**
  * Wraps up a CSS style in a value.
@@ -141,6 +143,7 @@ case class PixelStyle(jsName: String, cssName: String) {
     requireNonNull(v)
     ev(realStyle, v)
   }
+  def apply[Builder, T](v: T)(implicit ev: PixelStyleValue[Builder, T]) = :=(v)(ev)
 
 }
 trait StyleProcessor{
@@ -157,6 +160,7 @@ case class AttrPair[Builder, T](a: Attr, v: T, ev: AttrValue[Builder, T]) extend
     requireNonNull(v)
     AttrPair(a, v, ev)
   }
+  def apply[Builder, T](v: T)(implicit ev: AttrValue[Builder, T]) = :=(v)(ev)
 }
 /**
  * Used to specify how to handle a particular type [[T]] when it is used as
