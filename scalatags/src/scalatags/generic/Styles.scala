@@ -1266,7 +1266,8 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
     lazy val maroon = this := "maroon"
     lazy val red = this := "red"
     lazy val purple = this := "purple"
-    lazy val fuschia = this := "fuschia"
+    lazy val fuchsia = this := "fuchsia"
+    @deprecated def fuschia = fuchsia // typo, for compatibility
     lazy val green = this := "green"
     lazy val lime = this := "lime"
     lazy val olive = this := "olive"
