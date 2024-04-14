@@ -10,12 +10,12 @@ import mill.scalalib.api.ZincWorkerUtil.isScala3
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
-val scalaVersions = List("2.12.17", "2.13.10", "2.11.12", "3.1.3") ++ dottyVersions
+val scalaVersions = List("2.12.17", "2.13.10", "3.3.1") ++ dottyVersions
 
 trait ScalatagsPublishModule extends CrossScalaModule with PublishModule with PlatformScalaModule with Mima{
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::sourcecode::0.3.0",
-    ivy"com.lihaoyi::geny::1.0.0",
+    ivy"com.lihaoyi::sourcecode::0.4.0",
+    ivy"com.lihaoyi::geny::1.1.0",
   )
 
   def compileIvyDeps = T {
@@ -48,7 +48,7 @@ trait ScalatagsPublishModule extends CrossScalaModule with PublishModule with Pl
 
 trait CommonTestModule extends ScalaModule with TestModule.Utest with BuildInfo {
   def ivyDeps = Agg(
-    ivy"com.lihaoyi::utest::0.8.1",
+    ivy"com.lihaoyi::utest::0.8.3",
     ivy"org.scala-lang.modules::scala-xml:${if(scalaVersion().startsWith("2.11.")) "1.3.0" else "2.1.0"}"
   )
 
@@ -70,7 +70,7 @@ object scalatags extends Module {
   object js extends Cross[JSScalatagsModule](scalaVersions)
   trait JSScalatagsModule
     extends ScalaJSModule with ScalatagsPublishModule {
-    def scalaJSVersion = "1.10.1"
+    def scalaJSVersion = "1.12.0"
     def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-dom::2.3.0")
     private def sourceMapOptions = T.task {
       val vcsState = VcsVersion.vcsState()
@@ -95,7 +95,7 @@ object scalatags extends Module {
 
   object native extends Cross[NativeScalatagsModule](scalaVersions)
   trait NativeScalatagsModule extends ScalaNativeModule with ScalatagsPublishModule {
-    def scalaNativeVersion = "0.4.5"
+    def scalaNativeVersion = "0.5.0"
     // No released Scala Native Scala 3 version yet
     def mimaPreviousArtifacts = if(isScala3(crossScalaVersion)) Agg.empty[Dep] else super.mimaPreviousArtifacts()
     object test extends ScalaNativeTests with CommonTestModule
@@ -104,6 +104,6 @@ object scalatags extends Module {
 
 object example extends ScalaJSModule{
   def scalaVersion = scalaVersions.head
-  def scalaJSVersion = "1.10.1"
+  def scalaJSVersion = "1.12.0"
   def moduleDeps = Seq(scalatags.js(scalaVersions.head))
 }
