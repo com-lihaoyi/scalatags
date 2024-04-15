@@ -1103,6 +1103,14 @@
 
   @def pr(s: Int) = a(s, href:="https://github.com/lihaoyi/scalatags/pull/"+s)
   @sect{Changelog}
+    @sect{0.10.0}
+      @ul
+        @li
+          Support for Scala Native 0.5.0
+        @li
+          Dropped Scala 2.11.x support
+        @li
+          Minimum version of Scala 3 increased to 3.3.1
     @sect{0.9.3}
       @ul
         @li
