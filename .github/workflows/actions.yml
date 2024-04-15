@@ -27,7 +27,9 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: ./mill -i __.publishArtifacts + __.test
+        run: |
+          ./mill -i --disable-ticker __.resolvedIvyDeps
+          ./mill -i --disable-ticker -j 0 __.publishArtifacts __.test
 
   check-binary-compatibility:
     runs-on: ubuntu-latest

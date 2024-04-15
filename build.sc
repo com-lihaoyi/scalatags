@@ -10,7 +10,7 @@ import mill.scalalib.api.ZincWorkerUtil.isScala3
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
-val scalaVersions = List("2.12.18", "2.13.13", "3.3.1") ++ dottyVersions
+val scalaVersions = List("2.12.17", "2.13.10", "3.3.1") ++ dottyVersions
 
 trait ScalatagsPublishModule extends CrossScalaModule with PublishModule with PlatformScalaModule with Mima{
   def ivyDeps = Agg(
@@ -93,7 +93,7 @@ object scalatags extends Module {
 
     object test extends ScalaJSTests with CommonTestModule{
       def ivyDeps = super.ivyDeps() ++ Agg(ivy"org.scala-js::scalajs-env-jsdom-nodejs:1.1.0").map(_.withDottyCompat(crossScalaVersion))
-      override def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.JsDom()
+      def jsEnvConfig = mill.scalajslib.api.JsEnvConfig.JsDom()
     }
   }
 
