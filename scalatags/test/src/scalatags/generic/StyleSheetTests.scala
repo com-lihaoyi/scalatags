@@ -19,7 +19,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
       height := 125
     )
     val y = cls.hover(
-      opacity := 0.5
+      opacity(0.5)
     )
 
     val z = cls(x.splice, y.splice)
