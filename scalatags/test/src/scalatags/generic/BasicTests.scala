@@ -140,14 +140,13 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
       )
     }
     test("compileErrors"){
-      def writeType(tpe: String) = if(BuildInfo.scalaMajorVersion == "3") s"($tpe)" else tpe
       test("niceErrorsForAttributes"){
         val msg = compileError("""a(onclick := {() => "lol"})""").msg
-        assert(msg.contains(s"scalatags does not know how to use ${writeType("() => String")} as an attribute"))
+        assert(msg.contains(s"scalatags does not know how to use () => String as an attribute"))
       }
       test("niceErrorsForStyles"){
         val msg = compileError("""a(opacity:= {() => "lol"})""").msg
-        assert(msg.contains(s"scalatags does not know how to use ${writeType("() => String")} as an style"))
+        assert(msg.contains(s"scalatags does not know how to use () => String as an style"))
       }
     }
     test("nulls"){
