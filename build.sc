@@ -43,6 +43,10 @@ trait ScalatagsPublishModule extends CrossScalaModule with PublishModule with Pl
     )
   )
 
+  def mimaReportBinaryIssues() =
+    if (this.isInstanceOf[ScalaNativeModule] || this.isInstanceOf[ScalaJSModule]) T.command()
+    else super.mimaReportBinaryIssues()
+
   def mimaPreviousVersions = Seq("0.11.0", "0.11.1", "0.12.0")
 }
 
