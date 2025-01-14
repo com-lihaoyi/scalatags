@@ -94,8 +94,18 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
     def y = cls.hover(
       opacity := 0.5
     )
+
   }
 
+  object CustomEmpty extends CascadingStyleSheet{
+    initStyleSheet()
+
+    override def customSheetName = Some("")
+    val x = cls(
+      backgroundColor := "red",
+      height := 125
+    )
+  }
 
   def check(txt: String, expected: String) = {
     // augmentString = work around scala/bug#11125 on JDK 11
@@ -181,6 +191,7 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
          """
       )
     }
+
     test("defs"){
       check(
         Defs.styleSheetText,
@@ -192,9 +203,22 @@ abstract class StyleSheetTests[Builder, Output <: FragT, FragT]
           .$pkg-Defs-y:hover{
             opacity: 0.5;
           }
+        """
+      )
+    }
+
+    test("customEmpty"){
+      check(
+        CustomEmpty.styleSheetText,
+        s"""
+          .x{
+            background-color: red;
+            height: 125px;
+          }
          """
       )
     }
+
     test("failure"){
       test("noDirectInstantiation"){
   // This doesn't seem to work, even though that snippet does indeed
