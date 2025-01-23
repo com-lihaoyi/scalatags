@@ -131,6 +131,18 @@ class BasicTests[Builder, Output <: FragT, FragT](omg: Bundle[Builder, Output, F
         """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
       )
     }
+    test("apply instead of :="){
+      strCheck(
+        a(
+          tabindex(1),
+          onclick("lol")
+        )(
+          href("boo"),
+          alt("g")
+        ),
+        """<a tabindex="1" onclick="lol" href="boo" alt="g"></a>"""
+      )
+    }
     test("autoPixel"){
       strCheck(
         div(width:=100, zIndex:=100, height:=100),

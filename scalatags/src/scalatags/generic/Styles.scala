@@ -442,6 +442,7 @@ trait Styles2[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output
    */
   object columns extends Style("columns", "columns") {
     def :=(number: Int, width: String): StylePair[Builder, String] = this := s"$number $width"
+    def apply(number: Int, width: String): StylePair[Builder, String] = this.:=(number, width)
   }
 
   /**
@@ -1174,6 +1175,7 @@ trait Styles[Builder, Output <: FragT, FragT] extends StyleMisc[Builder, Output,
    */
   object borderSpacing extends Style("borderSpacing", "border-spacing") {
     def :=(horizontal: String, vertical: String): StylePair[Builder, String] = this := s"$horizontal $vertical"
+    def apply(horizontal: String, vertical: String): StylePair[Builder, String] = this.:=(horizontal, vertical)
   }
 
 
