@@ -1,7 +1,7 @@
 //| mill-version: 1.0.0-RC1-24-d74b52
 //| mvnDeps:
 //| - com.github.lolgab::mill-mima_mill1.0.0-RC1:0.2.0-M1
-//| - "com.lihaoyi::mill-contrib-buildinfo:"
+//| - "com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION"
 package build
 import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
 import mill.contrib.buildinfo._
