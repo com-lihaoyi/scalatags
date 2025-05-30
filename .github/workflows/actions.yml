@@ -28,7 +28,7 @@ jobs:
 
       - name: Run tests
         run: |
-          ./mill -i --disable-ticker __.resolvedIvyDeps
+          ./mill -i --disable-ticker __.resolvedMvnDeps
           ./mill -i --disable-ticker -j 0 __.publishArtifacts __.test
 
   check-binary-compatibility:
