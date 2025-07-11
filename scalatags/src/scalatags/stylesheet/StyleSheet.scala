@@ -21,7 +21,7 @@ abstract class CascadingStyleSheet(implicit sourceName: sourcecode.FullName) ext
 abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
   /**
    * The name of this CSS stylesheet. Defaults to the name of the trait,
-   * but you can override
+   * but you can override.
    */
   def customSheetName: Option[String] = None
 
@@ -30,7 +30,12 @@ abstract class StyleSheet(implicit sourceName: sourcecode.FullName){
    * any applicable pseudo-selectors into the name of the CSS class.
    */
   protected[this] def nameFor(memberName: String, pseudoSelectors: String) = {
-    customSheetName.getOrElse(defaultSheetName.replace(".", "-")) + "-" + memberName + pseudoSelectors
+    val baseSuffix = memberName + pseudoSelectors
+    customSheetName match {
+      case Some("") => baseSuffix
+      case Some(value) => value + "-" + baseSuffix
+      case None => defaultSheetName.replace(".", "-") + "-" + baseSuffix
+    }
   }
 
   /**
