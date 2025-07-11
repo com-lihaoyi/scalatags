@@ -1,14 +1,14 @@
-//| mill-version: 1.0.0-RC1-24-d74b52
+//| mill-version: 1.0.0
 //| mvnDeps:
-//| - com.github.lolgab::mill-mima_mill1.0.0-RC1:0.2.0-M1
+//| - com.github.lolgab::mill-mima_mill1:0.2.0
 //| - "com.lihaoyi::mill-contrib-buildinfo:$MILL_VERSION"
 package build
 import mill._, scalalib._, scalajslib._, scalanativelib._, publish._
 import mill.contrib.buildinfo._
-import mill.main.VcsVersion
+import mill.util.VcsVersion
 
 import com.github.lolgab.mill.mima._
-import mill.scalalib.api.JvmWorkerUtil.isScala3
+import mill.javalib.api.JvmWorkerUtil.isScala3
 
 val dottyVersions = sys.props.get("dottyVersion").toList
 
@@ -87,7 +87,7 @@ object scalatags extends Module {
             if (isScala3(crossScalaVersion))
               "-scalajs-mapSourceURI"
             else "-P:scalajs:mapSourceURI"
-          s"$sourcesOptionName:${Task.workspace.toIO.toURI}->$baseUrl/$tag/"
+          s"$sourcesOptionName:${mill.api.BuildCtx.workspaceRoot.toIO.toURI}->$baseUrl/$tag/"
       }
     }
     override def scalacOptions = super.scalacOptions() ++ sourceMapOptions()
